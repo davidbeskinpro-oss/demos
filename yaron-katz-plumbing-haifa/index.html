@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0d0f10">
+<meta name="color-scheme" content="dark">
+<title>ירון כץ אינסטלציה · חיפה</title>
+<script>document.documentElement.classList.add('js');</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/propane-torch-soldering-copper-pipe.jpg" fetchpriority="high">
+<style>
+:root {
+  --bg: #121416;
+  --bg2: #191c1f;
+  --bg3: #22262a;
+  --ink: #ece6dc;
+  --muted: #a59d91;
+  --copper: #c27a45;
+  --copper-hi: #eab184;
+  --copper-lo: #7d4523;
+  --brass: #c9a45c;
+  --water: #4fb3e3;
+  --water-deep: #1f6f99;
+  --line: rgba(236, 230, 220, .12);
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-head: clamp(2.4rem, 1.5rem + 3.6vw, 4.6rem);
+  --step-display: clamp(68px, 10.6vw, 176px);
+  --m: max(clamp(16px, 2.6vw, 40px), env(safe-area-inset-left), env(safe-area-inset-right));
+  --pipe-x: clamp(20px, 4.2vw, 64px);
+  --gutter: clamp(52px, 10vw, 156px);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --r: 3px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; background: var(--bg); }
+body { font-family: 'Heebo', system-ui, sans-serif; font-size: var(--step-body); line-height: 1.6; background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; }
+html[lang="he"] body [lang="en"], html[lang="en"] body [lang="he"] { display: none !important; }
+a { color: inherit; }
+img, svg { display: block; }
+img { max-width: 100%; height: auto; }
+button, a, [role="button"], label.chip { touch-action: manipulation; }
+button, .btn, label.chip, .dock a { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+:focus-visible { outline: 3px solid var(--copper-hi); outline-offset: 3px; }
+h1, h2, h3 { text-wrap: balance; }
+[id] { scroll-margin-top: 16px; }
+.num { direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+.skip { position: absolute; inset-inline-start: 8px; top: -60px; z-index: 50; background: var(--ink); color: var(--bg); padding: 10px 16px; text-decoration: none; }
+.skip:focus { top: 8px; }
+
+.concept { background: #0d0f10; color: var(--muted); font-size: var(--step-small); padding: calc(8px + env(safe-area-inset-top)) var(--m) 8px; text-align: center; }
+
+/* buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 0 28px; background: var(--copper); color: #141110; font: inherit; font-weight: 700; text-decoration: none; border: 0; border-radius: var(--r); cursor: pointer; transition: transform 140ms var(--ease-out), background-color 180ms ease; }
+.btn.line { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px rgba(236,230,220,.45); } /* taste-skill-ignore: outline drawn with an inset ring, not a resting shadow */
+.btn:active { transform: scale(0.97); }
+.btn svg { width: 20px; height: 20px; flex: none; }
+.link { font-weight: 500; text-underline-offset: 5px; transition: opacity 120ms ease; }
+.link:active, .maplinks a:active, .foot a:active { opacity: .7; }
+
+/* hero */
+.hero { position: relative; display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100svh - 38px); background: var(--bg); overflow: hidden; }
+.hero .copy { position: relative; z-index: 2; display: flex; flex-direction: column; padding: 24px var(--m) clamp(40px, 6vh, 72px); }
+.top { display: flex; align-items: center; gap: 24px; font-weight: 500; }
+.mono { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--copper); color: #141110; text-decoration: none; font-weight: 900; font-size: 17px; letter-spacing: -0.02em; }
+.top nav { margin-inline-start: auto; display: flex; gap: 22px; align-items: center; color: var(--muted); }
+.top nav a { text-decoration: none; }
+.lang { font: inherit; background: none; border: 0; color: var(--ink); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; padding: 6px 0; }
+.hero-text { margin-top: auto; padding-top: 48px; }
+.name { font-weight: 900; letter-spacing: -0.035em; line-height: 0.9; font-size: var(--step-display); }
+html[lang="en"] .name { font-size: clamp(54px, 7.6vw, 128px); text-transform: uppercase; letter-spacing: -0.02em; }
+.name .line { display: block; overflow: hidden; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+.name [data-line] { display: block; }
+.name .l2 { color: var(--copper); }
+.lead { font-size: var(--step-lead); line-height: 1.45; max-width: 31ch; margin-top: 28px; color: var(--ink); }
+.status { margin-top: 18px; font-weight: 500; color: var(--ink); }
+.status .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--muted); margin-inline-end: 9px; vertical-align: 1px; }
+.status.open .dot { background: var(--water); }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 30px; }
+.hero .photo { position: relative; margin: 0; }
+.hero .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 40% 50%; }
+.hero .photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to left, rgba(18,20,22,0) 55%, rgba(18,20,22,.92)); } /* taste-skill-ignore: scrim that blends the photo into the page */
+html[dir="ltr"] .hero .photo::after { background: linear-gradient(to right, rgba(18,20,22,0) 55%, rgba(18,20,22,.92)); } /* taste-skill-ignore: scrim */
+.hero .photo figcaption { position: absolute; top: 18px; inset-inline-end: var(--m); z-index: 2; font-size: var(--step-small); color: rgba(236,230,220,.8); }
+
+/* spec plate */
+.specs { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--bg2); }
+.specs div { padding: clamp(22px, 3vw, 40px) var(--m); }
+@media (min-width: 901px) {
+  .specs div + div { box-shadow: inset 1px 0 0 var(--line); } /* taste-skill-ignore: divider between plate cells */
+  html[dir="rtl"] .specs div + div { box-shadow: inset -1px 0 0 var(--line); } /* taste-skill-ignore: divider */
+}
+.specs b { display: block; font-weight: 900; font-size: clamp(30px, 3.4vw, 54px); line-height: 1; letter-spacing: -0.03em; color: var(--brass); }
+.specs > div > span { display: block; margin-top: 8px; color: var(--muted); }
+
+/* the pipe that carries the story */
+.story { position: relative; padding-inline-end: var(--gutter); }
+.pipe { position: absolute; top: 0; bottom: 120px; inset-inline-end: var(--pipe-x); width: 30px; z-index: 1; }
+.pipe .wall { position: absolute; inset: 0; border-radius: 15px; background: linear-gradient(90deg, #5e3017 0%, #a8653a 18%, #f0c29c 38%, #c27a45 58%, #8a4c27 80%, #4f2812 100%); } /* taste-skill-ignore: rendered copper, the subject's own material */
+.pipe .bore { position: absolute; inset: 8px 8px; border-radius: 7px; background: #07090a; overflow: hidden; }
+.pipe .flow { position: absolute; inset: 0; transform-origin: top; transform: scaleY(0); background: linear-gradient(90deg, #135a80, #4fb3e3 45%, #a9e2f8 55%, #2c8fc1); } /* taste-skill-ignore: rendered water */
+.story-intro { position: relative; padding: clamp(80px, 9vw, 150px) var(--m) clamp(24px, 3vw, 48px); }
+.story-intro p { font-size: var(--step-lead); font-weight: 500; line-height: 1.4; max-width: 30ch; }
+.ch { position: relative; display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 5vw, 96px); align-items: center; padding: clamp(72px, 8vw, 140px) var(--m); }
+.ch.flip .media { order: -1; }
+.ch.alt { background: var(--bg2); }
+.joint { position: absolute; top: calc(clamp(72px, 8vw, 140px) + 6px); inset-inline-end: calc(-1 * var(--gutter) + var(--pipe-x) - 11px); width: 52px; height: 52px; z-index: 2; display: grid; place-items: center; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #f6e2a8, #c9a45c 45%, #6d5320 100%); color: #1b1608; font-weight: 900; font-size: 18px; outline: 4px solid transparent; transition: outline-color 400ms ease; } /* taste-skill-ignore: rendered brass coupling */
+.joint::before { content: ""; position: absolute; top: 20px; inset-inline-end: 100%; width: calc(var(--gutter) - var(--pipe-x) - 52px); height: 12px; background: linear-gradient(180deg, #5e3017, #e6ad80 40%, #c27a45 60%, #5e3017); } /* taste-skill-ignore: copper branch */
+.joint.wet { outline-color: rgba(79,179,227,.6); }
+.ch h2 { font-weight: 900; letter-spacing: -0.03em; line-height: 1; font-size: var(--step-head); max-width: 13ch; }
+.ch .body { margin-top: 22px; max-width: 42ch; color: var(--ink); }
+.ch blockquote { margin-top: 36px; padding-inline-start: 22px; box-shadow: inset -3px 0 0 var(--copper); max-width: 34ch; } /* taste-skill-ignore: quote bar */
+html[dir="ltr"] .ch blockquote { box-shadow: inset 3px 0 0 var(--copper); } /* taste-skill-ignore: quote bar */
+.ch blockquote p { font-size: var(--step-lead); line-height: 1.4; font-weight: 500; }
+.ch blockquote footer { margin-top: 10px; color: var(--muted); font-size: var(--step-body); }
+.ch blockquote + blockquote { margin-top: 26px; }
+.media { margin: 0; position: relative; }
+.media img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: var(--r); }
+.media figcaption { margin-top: 10px; font-size: var(--step-small); color: var(--muted); }
+.media > svg { width: 100%; height: auto; }
+.fact { margin-top: 32px; padding: 22px 24px; background: var(--bg3); border-radius: var(--r); max-width: 40ch; }
+.fact strong { font-weight: 700; }
+
+/* composer */
+.ask fieldset { border: 0; margin-top: 26px; }
+.ask legend { font-weight: 700; margin-bottom: 12px; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip input { position: absolute; opacity: 0; pointer-events: none; }
+.chip > span { display: inline-flex; align-items: center; min-height: 48px; padding: 0 18px; background: var(--bg3); border-radius: var(--r); cursor: pointer; transition: background-color 150ms ease, color 150ms ease, transform 120ms var(--ease-out); }
+.chip input:checked + span { background: var(--copper); color: #141110; font-weight: 700; }
+.chip input:focus-visible + span { outline: 3px solid var(--copper-hi); outline-offset: 2px; }
+.chip > span:active { transform: scale(0.96); }
+.where { display: block; margin-top: 26px; font-weight: 700; }
+.where input { display: block; width: 100%; max-width: 440px; margin-top: 10px; font: inherit; font-size: 16px; font-weight: 400; padding: 14px 16px; background: var(--bg3); border: 0; border-radius: var(--r); color: var(--ink); }
+.where input::placeholder { color: #7d766c; }
+.phonemock { width: min(340px, 88%); margin-inline: auto; background: #050606; padding: 11px; border-radius: 46px; box-shadow: 0 0 0 2px #3a3f44, 0 40px 80px rgba(0,0,0,.55); } /* taste-skill-ignore: a device floating above the page */
+.phonemock .scr { background: #0b141a; border-radius: 36px; overflow: hidden; min-height: 500px; display: flex; flex-direction: column; }
+.phonemock .bar { background: #1f2c34; color: #e9edef; padding: 22px 16px 14px; display: flex; align-items: center; gap: 12px; }
+.phonemock .av { width: 40px; height: 40px; border-radius: 50%; background: var(--copper); color: #141110; display: grid; place-items: center; font-weight: 900; font-size: 15px; flex: none; }
+.phonemock .who b { display: block; font-weight: 500; font-size: 16px; line-height: 1.2; }
+.phonemock .who span { font-size: 13px; color: #8696a0; }
+.phonemock .chat { flex: 1; padding: 18px 12px; display: flex; flex-direction: column; justify-content: flex-end; background: #0b141a; }
+.phonemock .bub { align-self: flex-end; background: #005c4b; color: #e9edef; padding: 9px 12px 22px; border-radius: 10px; max-width: 86%; font-size: 15.5px; line-height: 1.45; position: relative; overflow-wrap: anywhere; }
+.phonemock .bub time { position: absolute; inset-inline-end: 10px; bottom: 4px; font-size: 13px; color: #9fc3bb; }
+.phonemock .send { padding: 10px 12px 16px; background: #0b141a; }
+.phonemock .send .btn { width: 100%; background: #25d366; color: #0b141a; border-radius: 999px; }
+
+/* quote band */
+.band { position: relative; min-height: 82svh; display: grid; align-items: end; overflow: hidden; }
+.band img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.band::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,12,14,.92) 0%, rgba(10,12,14,.35) 55%, rgba(10,12,14,.15)); } /* taste-skill-ignore: scrim under text on a photograph */
+.band blockquote { position: relative; z-index: 2; padding: 0 var(--m) clamp(48px, 7vw, 110px); padding-inline-end: var(--gutter); }
+.band blockquote p { font-weight: 900; letter-spacing: -0.03em; line-height: 1.02; font-size: clamp(34px, 5.4vw, 88px); max-width: 16ch; }
+.band blockquote footer { margin-top: 18px; color: rgba(236,230,220,.85); }
+
+/* contact card */
+.card { width: min(360px, 92%); margin-inline: auto; background: #1c1f22; border-radius: 22px; padding: 30px 22px 22px; text-align: center; box-shadow: 0 0 0 1px #2c3136, 0 40px 80px rgba(0,0,0,.5); } /* taste-skill-ignore: a card floating above the page */
+.card .av { width: 92px; height: 92px; margin: 0 auto; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle at 35% 30%, #f0c29c, #c27a45 55%, #6e3a1c); color: #1a120c; font-weight: 900; font-size: 32px; } /* taste-skill-ignore: copper avatar */
+.card h3 { margin-top: 16px; font-size: 24px; font-weight: 700; }
+.card .sub { color: var(--muted); font-size: 15px; }
+.card .acts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 20px; }
+.card .acts a { display: grid; justify-items: center; gap: 4px; padding: 10px 0; background: #26292d; border-radius: 12px; color: var(--water); font-size: 13px; text-decoration: none; }
+.card .acts svg { width: 22px; height: 22px; }
+.card dl { margin-top: 12px; background: #26292d; border-radius: 12px; text-align: start; }
+.card dl div { padding: 12px 14px; }
+.card dl div + div { box-shadow: inset 0 1px 0 #34383d; } /* taste-skill-ignore: list divider inside a device UI */
+.card dt { font-size: 13px; color: var(--muted); }
+.card dd { color: var(--water); font-size: 16px; }
+
+/* closing: gauge + hours */
+.end { display: grid; grid-template-columns: 5fr 7fr; gap: clamp(40px, 6vw, 112px); padding: clamp(80px, 9vw, 150px) var(--m); padding-inline-end: calc(var(--gutter) + var(--m)); align-items: start; background: var(--bg2); }
+.gauge { max-width: 380px; }
+.end h2 { font-weight: 900; letter-spacing: -0.03em; line-height: 1.05; font-size: var(--step-head); margin-top: 28px; max-width: 12ch; }
+.end .body { margin-top: 18px; max-width: 38ch; color: var(--muted); }
+.hours h3 { font-weight: 700; font-size: var(--step-lead); }
+.hours table { width: 100%; border-collapse: collapse; margin-top: 14px; }
+.hours td { padding: 11px 0; border-bottom: 1px solid var(--line); }
+.hours td:last-child { text-align: end; }
+.hours tr.today td { color: var(--copper-hi); font-weight: 700; }
+.map { width: 100%; height: 300px; border: 0; margin-top: 28px; border-radius: var(--r); background: var(--bg3); filter: invert(.9) hue-rotate(180deg) saturate(.55) brightness(.92); }
+.maplinks { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 14px; font-weight: 500; }
+
+/* gauge needle */
+.needle { transform-box: view-box; transform-origin: 180px 180px; transform: rotate(-135deg); }
+.gauge.in .needle { transform: rotate(var(--to, 135deg)); transition: transform 1600ms cubic-bezier(0.34, 1.25, 0.64, 1) 200ms; }
+
+/* footer */
+.foot { background: #0d0f10; padding: 80px var(--m) 32px; overflow: hidden; }
+.foot .wm { font-weight: 900; letter-spacing: -0.045em; line-height: 0.85; font-size: clamp(72px, 18vw, 290px); white-space: nowrap; color: var(--copper); }
+html[lang="en"] .foot .wm { text-transform: uppercase; font-size: clamp(56px, 13.6vw, 230px); }
+.foot .cols { display: grid; grid-template-columns: 5fr 7fr; gap: var(--m); margin-top: 56px; }
+.foot .places a { display: block; font-size: var(--step-lead); font-weight: 500; text-decoration: none; line-height: 1.55; }
+.foot .small { color: var(--muted); max-width: 62ch; }
+.foot .small p + p { margin-top: 14px; }
+.foot .small a { color: var(--ink); }
+.foot .legal { display: flex; justify-content: space-between; gap: 16px; margin-top: 72px; font-size: var(--step-small); color: var(--muted); }
+
+.dock { display: none; }
+
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { background: var(--copper-hi); }
+  .btn.line:hover { background: rgba(236,230,220,.08); }
+  .phonemock .send .btn:hover { background: #4ae082; }
+  .chip > span:hover { background: #2c3136; }
+  .chip input:checked + span:hover { background: var(--copper-hi); }
+  .top nav a:hover, .link:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 5px; }
+  .card .acts a:hover { background: #2e3236; }
+}
+
+@media (max-width: 900px) {
+  :root { --gutter: 46px; --pipe-x: 12px; }
+  .top nav a { display: none; }
+  .hero { grid-template-columns: 1fr; min-height: 0; }
+  .hero .photo { order: -1; height: 46svh; }
+  .hero .photo::after, html[dir="ltr"] .hero .photo::after { background: linear-gradient(to top, rgba(18,20,22,1) 0%, rgba(18,20,22,0) 45%); } /* taste-skill-ignore: scrim */
+  .hero .copy { padding-top: 0; margin-top: -84px; }
+  .top { position: absolute; top: calc(-46svh + 100px); inset-inline: var(--m); }
+  .hero-text { padding-top: 0; }
+  .hero .photo figcaption { top: 86px; }
+  .name { font-size: 18vw; }
+  html[lang="en"] .name { font-size: 12.4vw; }
+  .specs { grid-template-columns: 1fr 1fr; }
+  .specs div:nth-child(even) { background: var(--bg3); }
+  .pipe { width: 18px; }
+  .pipe .wall { border-radius: 9px; }
+  .pipe .bore { inset: 5px; border-radius: 4px; }
+  .ch, .end { grid-template-columns: 1fr; }
+  .ch .media, .ch.flip .media { order: 2; }
+  .joint { width: 36px; height: 36px; font-size: 14px; inset-inline-end: calc(-1 * var(--gutter) + var(--pipe-x) - 9px); }
+  .joint::before { display: none; }
+  .band blockquote p { font-size: 9vw; }
+  .end { padding-inline-end: calc(var(--gutter) + 8px); }
+  .foot .cols { grid-template-columns: 1fr; gap: 40px; }
+  .foot { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+  html { scroll-padding-bottom: 80px; }
+  .dock { display: grid; grid-template-columns: 1fr 1fr; position: fixed; inset-inline: 0; bottom: 0; z-index: 30; background: #0d0f10; padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 -8px 24px rgba(0,0,0,.45); transition: transform 320ms var(--ease-out); } /* taste-skill-ignore: sticky bar floats over content */
+  .dock.away { transform: translateY(110%); }
+  .dock a { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 58px; color: var(--ink); font-weight: 700; text-decoration: none; }
+  .dock a:first-child { background: var(--copper); color: #141110; }
+  .dock a:active { opacity: .8; }
+  .dock svg { width: 20px; height: 20px; }
+}
+
+/* motion */
+@media (prefers-reduced-motion: no-preference) {
+  .js .name [data-line] { transform: translateY(105%); animation: line-up 900ms var(--ease-out) forwards; animation-delay: calc(var(--i) * 110ms + 120ms); }
+  .js .hero-text > *:not(h1) { opacity: 0; transform: translateY(12px); animation: fade-up 500ms var(--ease-out) forwards; animation-delay: calc(200ms + var(--d, 0) * 60ms); }
+  .js .hero .photo img { animation: settle 1400ms var(--ease-out) both; }
+  .js [data-reveal] > * { opacity: 0; transform: translateY(24px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); transition-delay: calc(var(--d, 0) * 70ms); }
+  .js [data-reveal].in > * { opacity: 1; transform: none; }
+  .js .media img { clip-path: inset(0 0 100% 0); transition: clip-path 900ms var(--ease-out); }
+  .js .media.in img { clip-path: inset(0 0 0 0); }
+  .band img { transform: scale(1.08); transition: transform 2400ms var(--ease-out); }
+  .band.in img { transform: scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gauge .needle { transform: rotate(var(--to, 135deg)); }
+}
+@keyframes line-up { to { transform: none; } }
+@keyframes fade-up { to { opacity: 1; transform: none; } }
+@keyframes settle { from { transform: scale(1.08); opacity: .4; } to { transform: none; opacity: 1; } }
+</style>
+</head>
+<body>
+<a class="skip" href="#story"><span lang="he">דלגו לתוכן</span><span lang="en">Skip to content</span></a>
+
+<div class="concept" data-concept>
+  <span lang="he">קונספט לדוגמה שנבנה עבור ירון כץ אינסטלציה · זה אינו האתר הרשמי של העסק</span>
+  <span lang="en">Concept preview built for Yaron Katz Plumbing · this is not the business's official website</span>
+</div>
+
+<header class="hero" id="top">
+  <div class="copy">
+    <div class="top">
+      <a class="mono" href="#top" translate="no" aria-label="ירון כץ אינסטלציה">י.כ</a>
+      <nav>
+        <a href="#story"><span lang="he">איך זה עובד</span><span lang="en">How it works</span></a>
+        <a href="#message"><span lang="he">שליחת הודעה</span><span lang="en">Message</span></a>
+        <a href="#hours"><span lang="he">שעות</span><span lang="en">Hours</span></a>
+        <button class="lang" type="button" data-set-lang><span lang="he">English</span><span lang="en">עברית</span></button>
+      </nav>
+    </div>
+    <div class="hero-text">
+      <h1 class="name" translate="no">
+        <span lang="he"><span class="line"><span data-line style="--i:0">ירון כץ</span></span><span class="line"><span data-line class="l2" style="--i:1">אינסטלציה</span></span></span>
+        <span lang="en"><span class="line"><span data-line style="--i:0">Yaron Katz</span></span><span class="line"><span data-line class="l2" style="--i:1">Plumbing</span></span></span>
+      </h1>
+      <p class="lead" style="--d:0"><span lang="he">אינסטלטור בשדרות מוריה 55, על הכרמל בחיפה. 6 לקוחות דירגו אותו בגוגל, ו-6 נתנו 5 כוכבים.</span><span lang="en">Plumber at 55 Moriah Boulevard, on the Carmel in Haifa. 6 customers rated him on Google, and all 6 gave 5 stars.</span></p>
+      <p class="status" data-status style="--d:1"><span class="dot"></span><span lang="he">א׳–ה׳ 9:00–19:00 · ו׳ 9:00–15:00 · שבת 9:00–14:00</span><span lang="en">Sun–Thu 9:00–19:00 · Fri 9:00–15:00 · Sat 9:00–14:00</span></p>
+      <div class="actions" style="--d:2">
+        <a class="btn" href="#message">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>
+          <span lang="he">שלחו לירון הודעה</span><span lang="en">Message Yaron</span>
+        </a>
+        <a class="btn line" href="tel:+972526298897"><span lang="he">חייגו </span><span lang="en">Call </span><span class="num">052-629-8897</span></a>
+      </div>
+    </div>
+  </div>
+  <figure class="photo">
+    <img src="img/propane-torch-soldering-copper-pipe.jpg" width="1800" height="1200" alt="הלחמת צינור נחושת בלהבה כחולה" fetchpriority="high" decoding="async">
+    <figcaption><span lang="he">תמונה להמחשה</span><span lang="en">Illustrative photo</span></figcaption>
+  </figure>
+</header>
+
+<section class="specs" aria-label="עובדות">
+  <div><b class="num">5.0</b><span><span lang="he">דירוג בגוגל</span><span lang="en">Google rating</span></span></div>
+  <div><b class="num">6/6</b><span><span lang="he">ביקורות של 5 כוכבים</span><span lang="en">five-star reviews</span></span></div>
+  <div><b><span lang="he">שבת</span><span lang="en">Sat</span></b><span><span lang="he">פתוח <span class="num">9:00–14:00</span></span><span lang="en">open <span class="num">9:00–14:00</span></span></span></div>
+  <div><b><span lang="he">מוריה 55</span><span lang="en">Moriah 55</span></b><span><span lang="he">הכרמל, חיפה</span><span lang="en">Carmel, Haifa</span></span></div>
+</section>
+
+<main class="story" id="story">
+  <div class="pipe" aria-hidden="true"><div class="wall"></div><div class="bore"><div class="flow"></div></div></div>
+
+  <div class="story-intro">
+    <p><span lang="he">ככה נראית עבודה עם ירון: מהטפטוף הראשון, ועד שהמספר שלו נשמר אצלכם בטלפון.</span><span lang="en">Here's what a job with Yaron looks like, from the first drip to his number saved in your phone.</span></p>
+  </div>
+
+  <section class="ch">
+    <span class="joint" aria-hidden="true">1</span>
+    <div data-reveal>
+      <h2 style="--d:0"><span lang="he">משהו דולף.</span><span lang="en">Something's leaking.</span></h2>
+      <p class="body" style="--d:1"><span lang="he">נזילה מתחת לכיור, אסלה שלא מפסיקה למלא, מים חמים שנגמרים באמצע מקלחת. זה אף פעם לא קורה בזמן נוח.</span><span lang="en">A leak under the sink, a toilet that won't stop filling, hot water that runs out mid-shower. It never happens at a good time.</span></p>
+      <div class="fact" style="--d:2">
+        <p><strong><span lang="he">ירון עובד כל השבוע, וגם בשבת עד 14:00.</span><span lang="en">Yaron works all week, and on Saturdays until 14:00.</span></strong></p>
+        <p class="status" data-status><span class="dot"></span></p>
+      </div>
+    </div>
+    <figure class="media" data-media>
+      <img src="img/tap-and-window-bessengue-unsplash.jpg" width="1800" height="1200" alt="ברז שזורם מול חלון חשוך" loading="lazy" decoding="async">
+      <figcaption><span lang="he">תמונה להמחשה</span><span lang="en">Illustrative photo</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="ch alt ask flip" id="message">
+    <span class="joint" aria-hidden="true">2</span>
+    <div data-reveal>
+      <h2 style="--d:0"><span lang="he">שולחים לו הודעה.</span><span lang="en">You send him a message.</span></h2>
+      <p class="body" style="--d:1"><span lang="he">בחרו מה קרה ומתי. ההודעה לירון נכתבת כאן בשבילכם, ונשאר רק ללחוץ שלח.</span><span lang="en">Pick what happened and when. The message to Yaron writes itself here, and all that's left is pressing send.</span></p>
+      <form id="composer" style="--d:2" onsubmit="return false">
+        <fieldset>
+          <legend><span lang="he">מה קרה?</span><span lang="en">What happened?</span></legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="p" value="leak" checked><span><span lang="he">נזילה</span><span lang="en">A leak</span></span></label>
+            <label class="chip"><input type="radio" name="p" value="drain"><span><span lang="he">סתימה</span><span lang="en">A blockage</span></span></label>
+            <label class="chip"><input type="radio" name="p" value="heater"><span><span lang="he">דוד / מים חמים</span><span lang="en">Hot water</span></span></label>
+            <label class="chip"><input type="radio" name="p" value="tap"><span><span lang="he">ברז</span><span lang="en">A tap</span></span></label>
+            <label class="chip"><input type="radio" name="p" value="toilet"><span><span lang="he">אסלה</span><span lang="en">The toilet</span></span></label>
+            <label class="chip"><input type="radio" name="p" value="other"><span><span lang="he">משהו אחר</span><span lang="en">Something else</span></span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend><span lang="he">מתי?</span><span lang="en">When?</span></legend>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="w" value="today" checked><span><span lang="he">היום</span><span lang="en">Today</span></span></label>
+            <label class="chip"><input type="radio" name="w" value="tomorrow"><span><span lang="he">מחר</span><span lang="en">Tomorrow</span></span></label>
+            <label class="chip"><input type="radio" name="w" value="week"><span><span lang="he">השבוע</span><span lang="en">This week</span></span></label>
+            <label class="chip"><input type="radio" name="w" value="any"><span><span lang="he">לא דחוף</span><span lang="en">No rush</span></span></label>
+          </div>
+        </fieldset>
+        <label class="where"><span lang="he">איפה? שכונה או רחוב (לא חובה)</span><span lang="en">Where? Neighbourhood or street (optional)</span>
+          <input type="text" name="where" autocomplete="address-level3" enterkeyhint="done" data-ph-he="למשל: אחוזה, רחוב חורב…" data-ph-en="e.g. Ahuza, Horev St…" placeholder="למשל: אחוזה, רחוב חורב…">
+        </label>
+      </form>
+    </div>
+    <div class="media" data-ui>
+      <div class="phonemock">
+        <div class="scr">
+          <div class="bar"><span class="av" translate="no">י.כ</span><span class="who"><b><span lang="he">ירון כץ אינסטלציה</span><span lang="en">Yaron Katz Plumbing</span></b><span data-status-short></span></span></div>
+          <div class="chat" aria-live="polite"><p class="bub" dir="auto"><span data-preview>שלום ירון, הגעתי דרך האתר. יש לי נזילה. אפשר להגיע היום?</span><time class="num" data-clock>9:41</time></p></div>
+          <div class="send">
+            <a class="btn" href="https://wa.me/972526298897" data-send>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>
+              <span lang="he">שלחו בוואטסאפ</span><span lang="en">Send on WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ch">
+    <span class="joint" aria-hidden="true">3</span>
+    <div data-reveal>
+      <h2 style="--d:0"><span lang="he">ירון מגיע.</span><span lang="en">Yaron arrives.</span></h2>
+      <p class="body" style="--d:1"><span lang="he">לפני שמדברים על הכלים, הלקוחות שלו מתארים קודם כל את האדם שנכנס הביתה.</span><span lang="en">Before anyone mentions tools, his customers describe the person who walks through the door.</span></p>
+      <blockquote style="--d:2"><p lang="he">"איש מקצועי מאוד, נעים הליכות, ישר הוגן והגון."</p><p lang="en">“Very professional, pleasant, honest and fair.”</p><footer><span lang="he">יורם הורוביץ, ביקורת בגוגל</span><span lang="en">Yoram Horowitz, Google review (translated)</span></footer></blockquote>
+      <blockquote style="--d:3"><p lang="he">"אמין, אדיב, מקצועי, והכי חשוב בנאדם טוב."</p><p lang="en">“Reliable, courteous, professional, and most of all a good person.”</p><footer><span lang="he">Almog Turjman, ביקורת בגוגל</span><span lang="en">Almog Turjman, Google review (translated)</span></footer></blockquote>
+    </div>
+    <figure class="media" data-media>
+      <img src="img/pipe-wrench.jpg" width="1800" height="1148" alt="מפתחות צינורות על רצפת בטון" loading="lazy" decoding="async">
+      <figcaption><span lang="he">תמונה להמחשה</span><span lang="en">Illustrative photo</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="ch alt flip">
+    <span class="joint" aria-hidden="true">4</span>
+    <div data-reveal>
+      <h2 style="--d:0"><span lang="he">עבודה נקייה.</span><span lang="en">Clean work.</span></h2>
+      <p class="body" style="--d:1"><span lang="he">התיקון נגמר, והבית נשאר מסודר. זה מה שלקוחות זוכרים אחרי שהמים חוזרים לזרום.</span><span lang="en">The fix is done and the house stays tidy. That's what customers remember once the water runs again.</span></p>
+      <blockquote style="--d:2"><p lang="he">"שירות מקצועי ואמין, עובדים נקי ומסודר. ממליץ בחום רב."</p><p lang="en">“Professional, reliable service. Clean, tidy work. Highly recommended.”</p><footer><span lang="he">Erez, ביקורת בגוגל</span><span lang="en">Erez, Google review (translated)</span></footer></blockquote>
+    </div>
+    <figure class="media" data-media>
+      <img src="img/copper-water-pipes-and-water-line-shutoff.jpg" width="1800" height="1350" alt="צנרת נחושת מסודרת עם ברז ניתוק" loading="lazy" decoding="async">
+      <figcaption><span lang="he">תמונה להמחשה</span><span lang="en">Illustrative photo</span></figcaption>
+    </figure>
+  </section>
+
+  <section class="band" data-band>
+    <img src="img/water-drop-impact-on-a-water-surface.jpg" width="1800" height="1200" alt="" loading="lazy" decoding="async">
+    <blockquote>
+      <p lang="he">"אין הרבה בעלי מקצוע כמו ירון."</p>
+      <p lang="en">“There aren't many tradesmen like Yaron.”</p>
+      <footer><span lang="he">Almog Turjman, ביקורת בגוגל</span><span lang="en">Almog Turjman, Google review (translated)</span></footer>
+    </blockquote>
+  </section>
+
+  <section class="ch">
+    <span class="joint" aria-hidden="true">5</span>
+    <div data-reveal>
+      <h2 style="--d:0"><span lang="he">מחיר הוגן.</span><span lang="en">A fair price.</span></h2>
+      <p class="body" style="--d:1"><span lang="he">אל תסמכו על המילה של האתר. הנה מה שכתבו הלקוחות:</span><span lang="en">Don't take the website's word for it. Here's what his customers wrote:</span></p>
+      <blockquote style="--d:2"><p lang="he">"עושה עבודה מעולה, מגדיל ראש, ומחיר מצויין."</p><p lang="en">“Excellent work, goes the extra mile, and a great price.”</p><footer><span lang="he">yura amirov, ביקורת בגוגל</span><span lang="en">yura amirov, Google review (translated)</span></footer></blockquote>
+      <blockquote style="--d:3"><p lang="he">"מקצוען ברמה גבוהה מאוד, והכי חשוב בן אדם ישר ואמין מאוד."</p><p lang="en">“A true professional, and most importantly a very honest, reliable person.”</p><footer><span lang="he">Shadi Break, ביקורת בגוגל</span><span lang="en">Shadi Break, Google review (translated)</span></footer></blockquote>
+    </div>
+    <div class="media" aria-hidden="true" data-media>
+      <!-- brass ball valve, elevation: the right part, fitted once -->
+      <svg viewBox="0 0 560 340">
+        <defs>
+          <linearGradient id="cu" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5e3017"/><stop offset=".28" stop-color="#eab184"/><stop offset=".5" stop-color="#c27a45"/><stop offset=".82" stop-color="#7d4523"/><stop offset="1" stop-color="#4f2812"/></linearGradient>
+          <linearGradient id="br" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5a4318"/><stop offset=".25" stop-color="#f6e2a8"/><stop offset=".5" stop-color="#c9a45c"/><stop offset=".8" stop-color="#7a5c22"/><stop offset="1" stop-color="#4a3712"/></linearGradient>
+          <linearGradient id="red" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e5584c"/><stop offset=".5" stop-color="#b52a20"/><stop offset="1" stop-color="#6d140f"/></linearGradient>
+          <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e6e7e8"/><stop offset=".5" stop-color="#9aa0a6"/><stop offset="1" stop-color="#4b5056"/></linearGradient>
+          <radialGradient id="shade" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+        </defs>
+        <ellipse cx="280" cy="300" rx="250" ry="18" fill="url(#shade)"/>
+        <rect x="0" y="166" width="560" height="54" fill="url(#cu)"/>
+        <g fill="url(#br)">
+          <rect x="128" y="150" width="20" height="86" rx="3"/><rect x="148" y="140" width="46" height="106" rx="4"/>
+          <rect x="412" y="150" width="20" height="86" rx="3"/><rect x="366" y="140" width="46" height="106" rx="4"/>
+          <rect x="194" y="128" width="172" height="130" rx="34"/>
+          <rect x="262" y="84" width="36" height="48" rx="4"/>
+        </g>
+        <g fill="#000" opacity=".22"><rect x="162" y="140" width="3" height="106"/><rect x="178" y="140" width="3" height="106"/><rect x="380" y="140" width="3" height="106"/><rect x="396" y="140" width="3" height="106"/></g>
+        <rect x="196" y="134" width="168" height="8" rx="4" fill="#fff6d8" opacity=".35"/>
+        <text x="280" y="214" text-anchor="middle" font-family="Heebo, sans-serif" font-weight="900" font-size="22" fill="#5a4318" opacity=".75" direction="ltr">PN 25 · ½"</text>
+        <rect x="266" y="66" width="28" height="22" rx="3" fill="url(#steel)"/>
+        <rect x="150" y="44" width="250" height="28" rx="14" fill="url(#red)"/>
+        <circle cx="280" cy="58" r="11" fill="url(#steel)"/>
+        <rect x="160" y="48" width="230" height="5" rx="2.5" fill="#fff" opacity=".22"/>
+        <rect x="0" y="174" width="560" height="6" fill="#fff" opacity=".18"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="ch alt flip">
+    <span class="joint" aria-hidden="true">6</span>
+    <div data-reveal>
+      <h2 style="--d:0"><span lang="he">והמספר נשמר בטלפון.</span><span lang="en">And his number stays in your phone.</span></h2>
+      <p class="body" style="--d:1"><span lang="he">כי כשמוצאים אינסטלטור טוב, מפסיקים לחפש.</span><span lang="en">Because once you find a good plumber, you stop looking.</span></p>
+      <blockquote style="--d:2"><p lang="he">"איש ישר ומקצועי. עוזר לי כבר 5 שנים עם בעיות אינסטלציה כאלה ואחרות."</p><p lang="en">“An honest professional. He's been helping me for 5 years with all kinds of plumbing problems.”</p><footer><span lang="he">yura amirov, ביקורת בגוגל</span><span lang="en">yura amirov, Google review (translated)</span></footer></blockquote>
+      <div class="actions" style="--d:3">
+        <a class="btn" download="yaron-katz-plumbing.vcf" href="data:text/vcard;charset=utf-8,BEGIN%3AVCARD%0AVERSION%3A3.0%0AN%3A%D7%9B%D7%A5%3B%D7%99%D7%A8%D7%95%D7%9F%3B%3B%3B%0AFN%3A%D7%99%D7%A8%D7%95%D7%9F%20%D7%9B%D7%A5%20%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%9C%D7%A6%D7%99%D7%94%0AORG%3A%D7%99%D7%A8%D7%95%D7%9F%20%D7%9B%D7%A5%20%D7%90%D7%99%D7%A0%D7%A1%D7%98%D7%9C%D7%A6%D7%99%D7%94%0ATEL%3BTYPE%3DCELL%3A%2B972526298897%0AADR%3BTYPE%3DWORK%3A%3B%3B%D7%A9%D7%93%D7%A8%D7%95%D7%AA%20%D7%9E%D7%95%D7%A8%D7%99%D7%94%2055%3B%D7%97%D7%99%D7%A4%D7%94%3B%3B%3B%D7%99%D7%A9%D7%A8%D7%90%D7%9C%0AEND%3AVCARD%0A">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+          <span lang="he">שמרו את ירון באנשי הקשר</span><span lang="en">Save Yaron to your contacts</span>
+        </a>
+      </div>
+    </div>
+    <div class="media" data-ui>
+      <div class="card">
+        <div class="av" translate="no">י.כ</div>
+        <h3 translate="no"><span lang="he">ירון כץ</span><span lang="en">Yaron Katz</span></h3>
+        <p class="sub"><span lang="he">אינסטלציה · חיפה</span><span lang="en">Plumbing · Haifa</span></p>
+        <div class="acts">
+          <a href="https://wa.me/972526298897"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
+          <a href="tel:+972526298897"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg><span lang="he">חיוג</span><span lang="en">Call</span></a>
+          <a href="https://waze.com/ul?q=%D7%A9%D7%93%D7%A8%D7%95%D7%AA%20%D7%9E%D7%95%D7%A8%D7%99%D7%94%2055%20%D7%97%D7%99%D7%A4%D7%94"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg><span lang="he">ניווט</span><span lang="en">Directions</span></a>
+        </div>
+        <dl>
+          <div><dt><span lang="he">נייד</span><span lang="en">mobile</span></dt><dd class="num">052-629-8897</dd></div>
+          <div><dt><span lang="he">כתובת</span><span lang="en">address</span></dt><dd><span lang="he">שדרות מוריה 55, חיפה</span><span lang="en">55 Moriah Blvd, Haifa</span></dd></div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section class="end" id="hours">
+    <div data-reveal>
+      <div class="gauge" style="--d:0" role="img" aria-label="דירוג 5.0 מתוך 5 בגוגל">
+        <svg viewBox="0 0 360 360">
+          <defs>
+            <radialGradient id="bezel" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#f4f4f4"/><stop offset=".45" stop-color="#9ea3a8"/><stop offset=".8" stop-color="#3d4146"/><stop offset="1" stop-color="#1c1f22"/></radialGradient>
+            <radialGradient id="face" cx=".5" cy=".4" r=".7"><stop offset="0" stop-color="#f7f2e7"/><stop offset="1" stop-color="#d9d0bf"/></radialGradient>
+            <radialGradient id="cap" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="#f6e2a8"/><stop offset=".5" stop-color="#c9a45c"/><stop offset="1" stop-color="#5a4318"/></radialGradient>
+          </defs>
+          <circle cx="180" cy="180" r="176" fill="url(#bezel)"/>
+          <circle cx="180" cy="180" r="152" fill="url(#face)"/>
+          <path d="M316.3 158.4 A138 138 0 0 1 277.6 277.6" fill="none" stroke="#c27a45" stroke-width="10"/>
+          <line x1="78.2" y1="281.8" x2="92.3" y2="267.7" stroke="#1c1f22" stroke-width="4" stroke-linecap="round"/>
+          <text x="106.5" y="261.5" text-anchor="middle" font-family="Heebo, sans-serif" font-weight="700" font-size="22" fill="#1c1f22">0</text>
+          <line x1="57.2" y1="255.2" x2="65.7" y2="250.0" stroke="#1c1f22" stroke-width="2" stroke-linecap="round"/>
+          <line x1="43.0" y1="224.5" x2="52.6" y2="221.4" stroke="#1c1f22" stroke-width="2" stroke-linecap="round"/>
+          <line x1="36.4" y1="191.3" x2="46.4" y2="190.5" stroke="#1c1f22" stroke-width="2" stroke-linecap="round"/>
+          <line x1="37.8" y1="157.5" x2="57.5" y2="160.6" stroke="#1c1f22" stroke-width="4" stroke-linecap="round"/>
+          <text x="77.3" y="171.7" text-anchor="middle" font-family="Heebo, sans-serif" font-weight="700" font-size="22" fill="#1c1f22">1</text>
+          <line x1="47.0" y1="124.9" x2="56.2" y2="128.7" stroke="#1c1f22" stroke-width="2" stroke-linecap="round"/>
+          <line x1="63.5" y1="95.4" x2="71.6" y2="101.2" stroke="#1c1f22" stroke-width="2" stroke-linecap="round"/>
+          <line x1="86.5" y1="70.5" x2="93.0" y2="78.1" stroke="#1c1f22" stroke-width="2" stroke-linecap="round"/>
+          <line x1="114.6" y1="51.7" x2="123.7" y2="69.5" stroke="#1c1f22" stroke-width="4" stroke-linecap="round"/>
+          <text x="132.8" y="95.3" text-anchor="middle" font-family="Heebo, sans-serif" font-weight="700" font-size="22" fill="#1c1f22">2</text>
+          <line x1="146.4" y1="40.0" x2="148.7" y2="49.7" stroke="#1c1f22" stroke-width="2" stroke-linecap="round"/>
+          <line x1="180.0" y1="36.0" x2="180.0" y2="46.0" stroke="#1c1f22" stroke-width="2" stroke-linecap="round"/>
+          <line x1="213.6" y1="40.0" x2="211.3" y2="49.7" stroke="#1c1f22" stroke-width="2" stroke-linecap="round"/>
+          <line x1="245.4" y1="51.7" x2="236.3" y2="69.5" stroke="#1c1f22" stroke-width="4" stroke-linecap="round"/>
+          <text x="227.2" y="95.3" text-anchor="middle" font-family="Heebo, sans-serif" font-weight="700" font-size="22" fill="#1c1f22">3</text>
+          <line x1="273.5" y1="70.5" x2="267.0" y2="78.1" stroke="#1c1f22" stroke-width="2" stroke-linecap="round"/>
+          <line x1="296.5" y1="95.4" x2="288.4" y2="101.2" stroke="#1c1f22" stroke-width="2" stroke-linecap="round"/>
+          <line x1="313.0" y1="124.9" x2="303.8" y2="128.7" stroke="#1c1f22" stroke-width="2" stroke-linecap="round"/>
+          <line x1="322.2" y1="157.5" x2="302.5" y2="160.6" stroke="#1c1f22" stroke-width="4" stroke-linecap="round"/>
+          <text x="282.7" y="171.7" text-anchor="middle" font-family="Heebo, sans-serif" font-weight="700" font-size="22" fill="#1c1f22">4</text>
+          <line x1="323.6" y1="191.3" x2="313.6" y2="190.5" stroke="#1c1f22" stroke-width="2" stroke-linecap="round"/>
+          <line x1="317.0" y1="224.5" x2="307.4" y2="221.4" stroke="#1c1f22" stroke-width="2" stroke-linecap="round"/>
+          <line x1="302.8" y1="255.2" x2="294.3" y2="250.0" stroke="#1c1f22" stroke-width="2" stroke-linecap="round"/>
+          <line x1="281.8" y1="281.8" x2="267.7" y2="267.7" stroke="#1c1f22" stroke-width="4" stroke-linecap="round"/>
+          <text x="253.5" y="261.5" text-anchor="middle" font-family="Heebo, sans-serif" font-weight="700" font-size="22" fill="#1c1f22">5</text>
+          <text x="180" y="148" text-anchor="middle" font-family="Heebo, sans-serif" font-weight="900" font-size="34" fill="#1c1f22">5.0</text>
+          <text x="180" y="290" text-anchor="middle" font-family="Heebo, sans-serif" font-weight="700" font-size="14" letter-spacing="2" fill="#5d564b">GOOGLE</text>
+          <g class="needle" style="--to:135deg">
+            <path d="M176 182 L180 52 L184 182 Z" fill="#b52a20"/>
+            <rect x="177" y="178" width="6" height="34" rx="3" fill="#b52a20"/>
+          </g>
+          <circle cx="180" cy="180" r="16" fill="url(#cap)"/>
+        </svg>
+      </div>
+      <h2 style="--d:1"><span lang="he">6 מתוך 6 נתנו 5 כוכבים</span><span lang="en">6 out of 6 gave 5 stars</span></h2>
+      <p class="body" style="--d:2"><span lang="he">כל הביקורות בעמוד הזה נלקחו מדף העסק של ירון בגוגל, כמו שהלקוחות כתבו אותן.</span><span lang="en">Every review on this page comes from Yaron's Google listing, as his customers wrote it (English versions are translations).</span></p>
+      <div class="actions" style="--d:3">
+        <a class="btn" href="https://wa.me/972526298897"><span lang="he">וואטסאפ לירון</span><span lang="en">WhatsApp Yaron</span></a>
+        <a class="link" href="tel:+972526298897"><span lang="he">או חייגו </span><span lang="en">or call </span><span class="num">052-629-8897</span></a>
+      </div>
+    </div>
+    <div class="hours" data-reveal>
+      <h3 style="--d:0"><span lang="he">שעות פעילות</span><span lang="en">Opening hours</span></h3>
+      <p class="status" data-status style="--d:1"><span class="dot"></span></p>
+      <table style="--d:2">
+        <tbody>
+          <tr data-day="0"><td><span lang="he">ראשון</span><span lang="en">Sunday</span></td><td class="num">9:00–19:00</td></tr>
+          <tr data-day="1"><td><span lang="he">שני</span><span lang="en">Monday</span></td><td class="num">9:00–19:00</td></tr>
+          <tr data-day="2"><td><span lang="he">שלישי</span><span lang="en">Tuesday</span></td><td class="num">9:00–19:00</td></tr>
+          <tr data-day="3"><td><span lang="he">רביעי</span><span lang="en">Wednesday</span></td><td class="num">9:00–19:00</td></tr>
+          <tr data-day="4"><td><span lang="he">חמישי</span><span lang="en">Thursday</span></td><td class="num">9:00–19:00</td></tr>
+          <tr data-day="5"><td><span lang="he">שישי</span><span lang="en">Friday</span></td><td class="num">9:00–15:00</td></tr>
+          <tr data-day="6"><td><span lang="he">שבת</span><span lang="en">Saturday</span></td><td class="num">9:00–14:00</td></tr>
+        </tbody>
+      </table>
+      <iframe class="map" style="--d:3" title="שדרות מוריה 55, חיפה" loading="lazy" src="https://www.google.com/maps?q=%D7%A9%D7%93%D7%A8%D7%95%D7%AA%20%D7%9E%D7%95%D7%A8%D7%99%D7%94%2055%2C%20%D7%97%D7%99%D7%A4%D7%94&output=embed&hl=he"></iframe>
+      <div class="maplinks" style="--d:4">
+        <a href="https://waze.com/ul?q=%D7%A9%D7%93%D7%A8%D7%95%D7%AA%20%D7%9E%D7%95%D7%A8%D7%99%D7%94%2055%20%D7%97%D7%99%D7%A4%D7%94">Waze</a>
+        <a href="https://maps.google.com/?cid=4917036316285996274"><span lang="he">גוגל מפות</span><span lang="en">Google Maps</span></a>
+        <a href="https://www.facebook.com/profile.php?id=100045672942847"><span lang="he">פייסבוק</span><span lang="en">Facebook</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="wm" aria-hidden="true" translate="no"><span lang="he">ירון כץ</span><span lang="en">Yaron Katz</span></p>
+  <div class="cols">
+    <div class="places">
+      <a href="tel:+972526298897" class="num">052-629-8897</a>
+      <a href="https://wa.me/972526298897"><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
+      <a href="https://maps.google.com/?cid=4917036316285996274"><span lang="he">שדרות מוריה 55, חיפה</span><span lang="en">55 Moriah Blvd, Haifa</span></a>
+    </div>
+    <div class="small">
+      <p><span lang="he">התמונות באתר הן תמונות להמחשה של עבודות אינסטלציה, ואינן עבודות של העסק. הביקורות מתוך דף העסק בגוגל.</span><span lang="en">Photos are illustrative pictures of plumbing work, not jobs by this business. Reviews are from the business's Google listing.</span></p>
+      <p>Pictures: <a href="https://commons.wikimedia.org/w/index.php?curid=50017388">“Propane torch soldering copper pipe”</a> by neffk, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>; “Tap and window” by Edouard Tamba, CC0; “Pipe Wrench” by Jayess, public domain; <a href="https://commons.wikimedia.org/w/index.php?curid=160083731">“Copper Water Pipes and Water Line Shutoff”</a> by Tony Webster, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>; “Water drop impact on a water-surface” by Davide Restivo, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>; all via Wikimedia Commons.</p>
+    </div>
+  </div>
+  <div class="legal">
+    <span>© 2026 <span lang="he">ירון כץ אינסטלציה</span><span lang="en">Yaron Katz Plumbing</span></span>
+    <a href="#top"><span lang="he">חזרה למעלה</span><span lang="en">Back to top</span></a>
+  </div>
+</footer>
+
+<nav class="dock away" aria-label="Quick contact">
+  <a href="https://wa.me/972526298897"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
+  <a href="tel:+972526298897"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg><span lang="he">חייגו</span><span lang="en">Call</span></a>
+</nav>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  function setLang(l) {
+    root.lang = l; root.dir = l === 'he' ? 'rtl' : 'ltr';
+    document.title = l === 'he' ? 'ירון כץ אינסטלציה · חיפה' : 'Yaron Katz Plumbing · Haifa';
+    try { localStorage.setItem('lang', l); } catch (e) {}
+    var w = document.querySelector('[name=where]'); if (w) w.placeholder = w.dataset['ph' + (l === 'he' ? 'He' : 'En')];
+    write(); status(); fitWm(); pipe();
+  }
+  document.querySelectorAll('[data-set-lang]').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(root.lang === 'he' ? 'en' : 'he'); });
+  });
+
+  // composer: builds the WhatsApp message from the visitor's choices
+  var T = {
+    he: { p: { leak: 'נזילה', drain: 'סתימה', heater: 'בעיה בדוד / במים החמים', tap: 'ברז שצריך תיקון או החלפה', toilet: 'בעיה באסלה', other: 'בעיית אינסטלציה' },
+          w: { today: 'אפשר להגיע היום?', tomorrow: 'אפשר לתאם למחר?', week: 'אפשר לתאם השבוע?', any: 'לא דחוף, מתי נוח לך?' },
+          hi: 'שלום ירון, הגעתי דרך האתר. יש לי ', at: ' ב' },
+    en: { p: { leak: 'a leak', drain: 'a blockage', heater: 'a problem with the hot water', tap: 'a tap that needs fixing or replacing', toilet: 'a problem with the toilet', other: 'a plumbing problem' },
+          w: { today: 'Could you come today?', tomorrow: 'Could we book tomorrow?', week: 'Could we book this week?', any: 'No rush, when suits you?' },
+          hi: 'Hi Yaron, I found you through your website. I have ', at: ' in ' }
+  };
+  var form = document.getElementById('composer');
+  var preview = document.querySelector('[data-preview]');
+  var bubble = document.querySelector('.bub');
+  var send = document.querySelector('[data-send]');
+  var calm = matchMedia('(prefers-reduced-motion: reduce)');
+  function message() {
+    var t = T[root.lang] || T.he, f = new FormData(form);
+    var where = (f.get('where') || '').trim();
+    return t.hi + t.p[f.get('p')] + (where ? t.at + where : '') + '. ' + t.w[f.get('w')];
+  }
+  function write() {
+    var m = message();
+    preview.textContent = m;
+    send.href = 'https://wa.me/972526298897?text=' + encodeURIComponent(m);
+  }
+  form.addEventListener('change', function () {
+    write();
+    if (bubble.animate && !calm.matches) bubble.animate([{ transform: 'translateY(6px) scale(0.98)', opacity: 0.6 }, { transform: 'none', opacity: 1 }], { duration: 220, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+  });
+  form.addEventListener('input', function (e) { if (e.target.name === 'where') write(); });
+
+  // live opening status, in Haifa time. null = closed that day, [0, 24] = open all day
+  var H = { 0: [9, 19], 1: [9, 19], 2: [9, 19], 3: [9, 19], 4: [9, 19], 5: [9, 15], 6: [9, 14] };
+  var dayHe = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'];
+  var dayEn = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  function haifaNow() {
+    var p = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Jerusalem', weekday: 'short', hour: 'numeric', minute: '2-digit', hour12: false }).formatToParts(new Date());
+    var o = {}; p.forEach(function (x) { o[x.type] = x.value; });
+    var hh = (+o.hour) % 24;
+    return { d: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(o.weekday), h: hh + (+o.minute) / 60, clock: hh + ':' + o.minute };
+  }
+  function status() {
+    var n = haifaNow(), he = root.lang === 'he', today = H[n.d] || [0, 0], txt, short, open = false;
+    if (today[0] === 0 && today[1] === 24) {
+      open = true; txt = he ? 'פתוח עכשיו · 24 שעות' : 'Open now · 24 hours'; short = he ? 'זמין עכשיו' : 'available now';
+    } else if (n.h >= today[0] && n.h < today[1]) {
+      open = true; txt = he ? 'פתוח עכשיו · עד ' + today[1] + ':00' : 'Open now · until ' + today[1] + ':00'; short = he ? 'זמין עכשיו' : 'available now';
+    } else if (H[n.d] && n.h < today[0]) {
+      txt = he ? 'סגור עכשיו · נפתח היום ב-' + today[0] + ':00' : 'Closed now · opens today at ' + today[0] + ':00'; short = he ? 'נפתח ב-' + today[0] + ':00' : 'opens at ' + today[0] + ':00';
+    } else {
+      var nd = (n.d + 1) % 7, k = 0;
+      while (!H[nd] && k++ < 6) nd = (nd + 1) % 7;
+      txt = he ? 'סגור עכשיו · נפתח ביום ' + dayHe[nd] + ' ב-' + H[nd][0] + ':00' : 'Closed now · opens ' + dayEn[nd] + ' at ' + H[nd][0] + ':00';
+      short = he ? 'נפתח ביום ' + dayHe[nd] + ' ב-' + H[nd][0] + ':00' : 'opens ' + dayEn[nd] + ' ' + H[nd][0] + ':00';
+    }
+    document.querySelectorAll('[data-status]').forEach(function (el) { el.classList.toggle('open', open); el.innerHTML = '<span class="dot"></span>' + txt; });
+    document.querySelectorAll('[data-status-short]').forEach(function (el) { el.textContent = short; });
+    document.querySelectorAll('[data-clock]').forEach(function (el) { el.textContent = n.clock; });
+    document.querySelectorAll('tr[data-day]').forEach(function (tr) { tr.classList.toggle('today', +tr.dataset.day === n.d); });
+  }
+
+  // entrances, once: text blocks, photos (clip reveal), the band, the gauge needle
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -12% 0px' }) : null;
+  document.querySelectorAll('[data-reveal], [data-media], [data-band], .gauge').forEach(function (el) { io ? io.observe(el) : el.classList.add('in'); });
+
+  // the pipe fills with water as the story is read; each coupling turns wet when the water reaches it
+  var flow = document.querySelector('.pipe .flow'), pipeEl = document.querySelector('.pipe');
+  var joints = [].slice.call(document.querySelectorAll('.joint')), ticking = false;
+  function pipe() {
+    ticking = false;
+    var r = pipeEl.getBoundingClientRect(), mark = innerHeight * 0.62;
+    var p = Math.max(0, Math.min(1, (mark - r.top) / r.height));
+    flow.style.transform = 'scaleY(' + p.toFixed(4) + ')';
+    var level = r.top + r.height * p;
+    joints.forEach(function (j) { j.classList.toggle('wet', j.getBoundingClientRect().top + 20 < level); });
+  }
+  addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(pipe); } }, { passive: true });
+  addEventListener('resize', pipe);
+
+  // the phone dock steps aside while the hero or the footer is in view
+  var dock = document.querySelector('.dock'), seen = new Set();
+  if ('IntersectionObserver' in window) {
+    var dio = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { e.isIntersecting ? seen.add(e.target) : seen.delete(e.target); });
+      dock.classList.toggle('away', seen.size > 0);
+    });
+    document.querySelectorAll('.hero, .foot').forEach(function (el) { dio.observe(el); });
+  } else { dock.classList.remove('away'); }
+
+  // the footer name always fits its line, whatever the name and language
+  var wm = document.querySelector('.foot .wm');
+  function fitWm() {
+    wm.style.fontSize = '';
+    var room = wm.clientWidth, need = wm.scrollWidth;
+    if (need > room) wm.style.fontSize = (parseFloat(getComputedStyle(wm).fontSize) * room / need * 0.98) + 'px';
+  }
+  if (document.fonts) document.fonts.ready.then(fitWm);
+  addEventListener('resize', fitWm);
+
+  var q = new URLSearchParams(location.search).get('lang'), saved = null;
+  try { saved = localStorage.getItem('lang'); } catch (e) {}
+  setLang(q === 'en' || q === 'he' ? q : (saved === 'en' ? 'en' : 'he'));
+  setInterval(status, 60000);
+})();
+</script>
+</body>
+</html>

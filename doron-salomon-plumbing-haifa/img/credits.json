@@ -1,0 +1,48 @@
+[
+ {
+  "file": "img/bathroom-ceiling-with-vent.jpg",
+  "media": "image",
+  "ref": "commons:8267210",
+  "title": "Bathroom ceiling with vent",
+  "creator": "Tomwsulcer",
+  "creatorUrl": null,
+  "date": "2009-10-25",
+  "license": "public domain",
+  "licenseCode": "pd",
+  "licenseUrl": "https://creativecommons.org/publicdomain/mark/1.0/",
+  "creditRequired": false,
+  "page": "https://commons.wikimedia.org/wiki/File:Bathroom_ceiling_with_vent.jpg",
+  "via": "Wikimedia Commons",
+  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Bathroom_ceiling_with_vent.jpg/1920px-Bathroom_ceiling_with_vent.jpg",
+  "width": 1920,
+  "height": 1440,
+  "bytes": 399591,
+  "credit": "\"Bathroom ceiling with vent\" by Tomwsulcer, public domain, via Wikimedia Commons",
+  "notes": [],
+  "saved": "2026-10-18T15:26:24.947Z"
+ },
+ {
+  "file": "img/water-damage.jpg",
+  "media": "image",
+  "ref": "commons:125644341",
+  "title": "Water Damage",
+  "creator": "Ed! ( Photography Gallery )",
+  "creatorUrl": null,
+  "date": "1 August 2009",
+  "license": "CC BY-SA 3.0",
+  "licenseCode": "by-sa",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "creditRequired": true,
+  "page": "https://commons.wikimedia.org/wiki/File:Water_Damage.JPG",
+  "via": "Wikimedia Commons",
+  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/71/Water_Damage.JPG/1920px-Water_Damage.JPG",
+  "width": 1920,
+  "height": 1440,
+  "bytes": 1021409,
+  "credit": "\"Water Damage\" by Ed! ( Photography Gallery ), CC BY-SA 3.0, via Wikimedia Commons",
+  "notes": [
+   "Share-alike: an altered version (recoloured, combined with other pictures) must be shared under the same licence."
+  ],
+  "saved": "2026-10-18T15:26:29.042Z"
+ }
+]
