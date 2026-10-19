@@ -81,7 +81,7 @@ function wetMaterial(mat, kind) {
   return mat;
 }
 
-export function initLeak3D(host, labelsHost) {
+export function initLeak3D(host, labelsHost, opts) {
   const canvas = document.createElement('canvas');
   host.appendChild(canvas);
   let renderer;
@@ -216,11 +216,15 @@ export function initLeak3D(host, labelsHost) {
     return [posCurve.getPoint(u), tgtCurve.getPoint(u)];
   }
 
-  let P = 0, inView = false, raf = 0, last = 0, w = 0, h = 0;
-  const calm = matchMedia('(prefers-reduced-motion: reduce)');
+  let P = 0, inView = false, raf = 0, last = 0, w = 0, h = 0, paused = false;
+  const calm = (opts && opts.calm) || (() => matchMedia('(prefers-reduced-motion: reduce)').matches);
   function resize() {
     const r = host.getBoundingClientRect(); w = Math.max(1, r.width); h = Math.max(1, r.height);
-    renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix();
+    renderer.setSize(w, h, false); camera.aspect = w / h;
+    // the keyframes were framed at 16:11; on taller stages keep that width of view instead of cropping the sides
+    const ref = 16 / 11, base = 42 * Math.PI / 180;
+    camera.fov = camera.aspect >= ref ? 42 : Math.min(62, 2 * Math.atan(Math.tan(base / 2) * ref / camera.aspect) * 180 / Math.PI);
+    camera.updateProjectionMatrix();
     if (typeof kick === 'function') kick();
   }
   new ResizeObserver(resize).observe(host); resize();
@@ -234,7 +238,7 @@ export function initLeak3D(host, labelsHost) {
   function frame(ts) {
     raf = 0; if (!inView) return;
     const dt = last ? Math.min(0.05, (ts - last) / 1000) : 0.016; last = ts;
-    const p = P, motion = !calm.matches;
+    const p = P, motion = !calm();
     // camera: smooth along the path; with reduced motion, jump between stages
     const cp = motion ? p : [0.06, 0.24, 0.4, 0.62, 0.84][p < 0.16 ? 0 : p < 0.32 ? 1 : p < 0.5 ? 2 : p < 0.72 ? 3 : 4];
     const [cpos, ctgt] = camAt(cp); camera.position.copy(cpos); camera.lookAt(ctgt);
@@ -271,15 +275,15 @@ export function initLeak3D(host, labelsHost) {
       fallDrop(d, (d.userData.t + i / ceilDrops.length) % 1, cFrom, -L.floor2 + L.ceiling - 0.02, 2.1);
     });
     puddle2.scale.setScalar(Math.max(0.001, 0.2 * (p < 0.86 ? span(p, 0.64, 0.8) : 1 - span(p, 0.86, 0.96))));
-    // the fix: valve lever turns 90°, a soldering flame flickers, the joint comes back bright
-    lever.rotation.z = -Math.PI / 2 * smooth(T.valve(p));
+    // the fix: a ball valve is open with its lever along the pipe and closed across it; a soldering flame flickers, the joint comes back bright
+    lever.rotation.z = -Math.PI / 2 * (1 - smooth(T.valve(p)));
     const sol = T.solder(p);
     flame.intensity = sol ? (motion ? 2.2 + 1.4 * Math.sin(ts * 0.03) + Math.random() * 0.8 : 2.5) : 0;
     joint.material = T.fixed(p) ? M.brassNew : M.brass;
     // labels
     const show = {
       tile: p > 0.17 && p < 0.52, screed: p > 0.17 && p < 0.52, concrete: p > 0.28 && p < 0.52, plaster: p > 0.3 && p < 0.56,
-      f3: p > 0.74, f2: p > 0.5, joint: p < 0.16, solder: p > 0.79 && p < 0.88, valve: p > 0.74 && p < 0.82,
+      f3: p > 0.74, f2: p > 0.5 && (p < 0.74 || p > 0.88), joint: p < 0.16, solder: p > 0.79 && p < 0.88, valve: p > 0.74 && p < 0.82,
     };
     const v = new THREE.Vector3();
     labels.forEach((l) => {
@@ -291,10 +295,13 @@ export function initLeak3D(host, labelsHost) {
     renderer.render(scene, camera);
     if (inView && (motion || flame.intensity > 0)) raf = requestAnimationFrame(frame);
   }
-  function kick() { if (!raf && inView) raf = requestAnimationFrame(frame); }
+  function kick() { if (!raf && inView && !paused) raf = requestAnimationFrame(frame); }
   new IntersectionObserver((es) => { inView = es[0].isIntersecting; last = 0; kick(); }).observe(host);
   return {
     set(p) { P = p; kick(); },
     redraw: kick,
+    // animations switched off at runtime: stop drawing and hide the canvas; resume picks up at the current scroll
+    pause() { paused = true; if (raf) cancelAnimationFrame(raf); raf = 0; canvas.style.visibility = 'hidden'; labelsHost.style.visibility = 'hidden'; },
+    resume() { paused = false; canvas.style.visibility = ''; labelsHost.style.visibility = ''; last = 0; kick(); },
   };
 }

@@ -15,7 +15,7 @@ export const TL = {
   thermal: (p) => (p < 0.46 ? span(p, 0.18, 0.28) : p < 0.72 ? 1 - span(p, 0.46, 0.52) : p < 0.86 ? span(p, 0.72, 0.76) : 1 - span(p, 0.86, 0.92)),
   leak: (p) => (p < 0.66 ? 0.3 + 0.7 * span(p, 0.2, 0.5) : 1 - span(p, 0.66, 0.76)),
   cool: (p) => (p < 0.82 ? span(p, 0.68, 0.8) : 1 - span(p, 0.86, 0.98)),
-  open: (p) => (p < 0.84 ? span(p, 0.52, 0.62) : 1 - span(p, 0.86, 0.95)),
+  open: (p) => (p < 0.84 ? span(p, 0.52, 0.61) : 1 - span(p, 0.86, 0.95)),
   swap: (p) => span(p, 0.62, 0.68),
   solder: (p) => p >= 0.62 && p < 0.68,
   patch: (p) => span(p, 0.8, 0.85),
@@ -162,7 +162,17 @@ export function initWall3D(host) {
   const horiz = add(new THREE.CylinderGeometry(0.011, 0.011, LEAK.x - 0.0, 16), M.copper, LEAK.x / 2, LEAK.y, pipeZ); horiz.rotation.z = Math.PI / 2;
   const fitOld = add(new THREE.SphereGeometry(0.02, 18, 14), M.fittingOld, LEAK.x, LEAK.y, pipeZ);
   const fitNew = add(new THREE.SphereGeometry(0.02, 18, 14), M.fittingNew, LEAK.x, LEAK.y, pipeZ); fitNew.visible = false;
-  const wetStreak = add(new THREE.PlaneGeometry(0.03, 0.34), cm(new THREE.MeshPhysicalMaterial({ color: 0x6f6658, roughness: 0.1, transparent: true, opacity: 0, clearcoat: 1 }), { key: 'streak' }), LEAK.x + 0.004, LEAK.y - 0.19, -depth + 0.001, false);
+  // the wet run below the fitting: soft, uneven edges, widest under the drip, fading out lower down
+  const streakMask = (() => {
+    const c = document.createElement('canvas'); c.width = 64; c.height = 256; const g = c.getContext('2d'), img = g.createImageData(64, 256);
+    for (let y = 0; y < 256; y++) {
+      const v = y / 255, w = 0.16 + 0.22 * Math.min(1, v * 2.2) + 0.05 * Math.sin(v * 23) + 0.03 * Math.sin(v * 61 + 1), cx = 0.5 + 0.04 * Math.sin(v * 9 + 2);
+      const fade = (1 - Math.pow(v, 2.4)) * Math.min(1, v * 14);
+      for (let x = 0; x < 64; x++) { const d = Math.abs(x / 63 - cx) / w; const a = Math.max(0, 1 - d * d) * fade; const i = (y * 64 + x) * 4; img.data[i] = img.data[i + 1] = img.data[i + 2] = 255 * a; img.data[i + 3] = 255; }
+    }
+    g.putImageData(img, 0, 0); return new THREE.CanvasTexture(c);
+  })();
+  const wetStreak = add(new THREE.PlaneGeometry(0.07, 0.4), cm(new THREE.MeshStandardMaterial({ color: 0x24170a, roughness: 1, transparent: true, opacity: 0, alphaMap: streakMask, depthWrite: false, envMapIntensity: 0 }), { key: 'streak' }), LEAK.x + 0.004, LEAK.y - 0.21, -depth + 0.001, false);
   // tiles: 15 x 15 cm ceramic, 3 mm grout, each slightly different, as real tiles are
   const T = 0.15, G = 0.003, PITCH = T + G, TH = 0.008;
   const tileGeo = new THREE.BoxGeometry(T, T, TH);
@@ -209,15 +219,16 @@ export function initWall3D(host) {
   const ps = KEYS.map((k) => k[0]);
   const camAt = (p) => { let i = 0; while (i < ps.length - 2 && p > ps[i + 1]) i++; const u = (i + smooth(span(p, ps[i], ps[i + 1]))) / (ps.length - 1); return [posC.getPoint(u), tgtC.getPoint(u)]; };
 
-  let P = 0, inView = false, raf = 0, last = 0, clock = 0;
-  const calm = matchMedia('(prefers-reduced-motion: reduce)');
+  let P = 0, inView = false, raf = 0, last = 0, clock = 0, paused = false, snapping = false;
+  // motion follows the page's animations switch (html.still), not only the OS setting
+  const still = () => document.documentElement.classList.contains('still');
   function resize() { const r = host.getBoundingClientRect(); renderer.setSize(Math.max(1, r.width), Math.max(1, r.height), false); camera.aspect = r.width / Math.max(1, r.height); camera.updateProjectionMatrix(); kick(); }
 
   function frame(ts) {
-    raf = 0; if (!inView) return;
+    raf = 0; if ((!inView && !snapping) || paused) return;
     const dt = last ? Math.min(0.05, (ts - last) / 1000) : 0.016; last = ts; clock += dt;
-    const p = P, motion = !calm.matches;
-    const cp = motion ? p : [0.08, 0.36, 0.66, 0.95][p < 0.22 ? 0 : p < 0.5 ? 1 : p < 0.86 ? 2 : 3];
+    const p = P, motion = !still() && !snapping;
+    const cp = motion || snapping ? p : [0.08, 0.36, 0.66, 0.95][p < 0.22 ? 0 : p < 0.5 ? 1 : p < 0.86 ? 2 : 3];
     const [pos, tgt] = camAt(cp);
     if (motion) { pos.x += Math.sin(clock * 0.9) * 0.006; pos.y += Math.sin(clock * 1.3 + 1) * 0.005; tgt.x += Math.sin(clock * 0.7 + 2) * 0.004; }
     camera.position.copy(pos); camera.lookAt(tgt);
@@ -241,8 +252,9 @@ export function initWall3D(host) {
     // the chase: old fitting drips, is swapped with a soldering flash, the patch closes
     const sw = TL.swap(p); fitOld.visible = sw < 0.5; fitNew.visible = sw >= 0.5;
     flame.intensity = TL.solder(p) ? (motion ? 0.7 + 0.6 * Math.abs(Math.sin(clock * 31)) + 0.3 * Math.random() : 0.9) : 0;
+    if (snapping) drops.forEach((d, i) => { d.userData.t = 0.2 + i * 0.27; });
     torch.intensity = O > 0.1 ? 2.2 * O : 0;
-    wetStreak.material.opacity = sw < 0.5 ? 0.75 * clamp(L * 1.4) * clamp(O * 3) : 0.75 * (1 - span(p, 0.68, 0.84));
+    wetStreak.material.opacity = sw < 0.5 ? 0.85 * clamp(L * 1.4) * clamp(O * 3) : 0.85 * (1 - span(p, 0.68, 0.84));
     const dripping = O > 0.2 && sw < 0.5 && L > 0.2;
     drops.forEach((d, i) => {
       if (!dripping) { d.position.y = -9; return; }
@@ -253,10 +265,19 @@ export function initWall3D(host) {
     });
     M.patch.opacity = TL.patch(p);
     renderer.render(scene, camera);
-    if (inView && (motion || flame.intensity > 0)) raf = requestAnimationFrame(frame);
+    if (inView && !snapping && (motion || flame.intensity > 0)) raf = requestAnimationFrame(frame);
   }
-  function kick() { if (!raf && inView) raf = requestAnimationFrame(frame); }
+  function kick() { if (!raf && inView && !paused) raf = requestAnimationFrame(frame); }
   new ResizeObserver(resize).observe(host); resize();
   new IntersectionObserver((es) => { inView = es[0].isIntersecting; last = 0; kick(); }).observe(host);
-  return { set(p) { P = p; kick(); }, tempAt: (p) => tempAt(LEAK.x, LEAK.y - 0.12, TL.leak(p), TL.cool(p)) };
+  return {
+    set(p) { P = p; snapping = false; kick(); },
+    // the animations switch: stop drawing and free the GPU loop, or pick up again
+    pause() { paused = true; if (raf) cancelAnimationFrame(raf); raf = 0; canvas.style.visibility = 'hidden'; },
+    resume() { paused = false; canvas.style.visibility = ''; last = 0; resize(); },
+    // one exact frame at p without camera sway (used to render the still images)
+    // holds that frame until the next set()
+    snap(p) { P = p; snapping = true; resize(); if (raf) cancelAnimationFrame(raf); raf = 0; frame(performance.now()); },
+    tempAt: (p) => tempAt(LEAK.x, LEAK.y - 0.12, TL.leak(p), TL.cool(p)),
+  };
 }

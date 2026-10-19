@@ -7,10 +7,24 @@
 <meta name="theme-color" content="#0b0d0c">
 <meta name="color-scheme" content="dark">
 <title>חיים האינסטלטור · חיפה · 24/7</title>
-<script>document.documentElement.classList.add('js');</script>
+<script>
+document.documentElement.classList.add('js');
+// animations switch: a saved choice wins; otherwise start without motion on devices that ask for less
+(function () {
+  var r = document.documentElement, s = null; try { s = localStorage.getItem('motion'); } catch (e) {}
+  var c = navigator.connection || {}, why = '';
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) why = 'reduce';
+  else if (c.saveData) why = 'data';
+  else if (/2g|3g/.test(c.effectiveType || '')) why = 'slow';
+  else if ((navigator.deviceMemory > 0 && navigator.deviceMemory <= 2) || (navigator.hardwareConcurrency > 0 && navigator.hardwareConcurrency <= 2)) why = 'device';
+  var off = s ? s === 'off' : !!why;
+  r.classList.toggle('still', off);
+  if (!s && why) r.dataset.motionAuto = why;
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@400;500;700&family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="img/opened-wall.jpg" fetchpriority="high">
 <style>
 :root {
@@ -22,7 +36,11 @@
   --rec: #ff3b30;
   --hot: #fbb61a;
   --hot2: #ed6925;
-  --cool: #4aa3e0;
+  --ok: #34c759;
+  --paper: #eeece7;
+  --ink: #1d1c19;
+  --ink2: #5d594f;
+  --pen: #2340a0;
   --line: rgba(242, 244, 241, .2);
   --step-small: clamp(0.875rem, 0.85rem + 0.1vw, 0.9375rem);
   --step-body: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
@@ -39,8 +57,8 @@ html[lang="he"] body [lang="en"], html[lang="en"] body [lang="he"] { display: no
 a { color: inherit; }
 img, svg { display: block; }
 img { max-width: 100%; height: auto; }
-button, a, label.chip { touch-action: manipulation; }
-button, .btn, label.chip, .dock a { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+button, a, label { touch-action: manipulation; }
+button, .btn, .box, .fab a { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 :focus-visible { outline: 3px solid var(--hot); outline-offset: 3px; }
 h1, h2, h3 { text-wrap: balance; }
 [id] { scroll-margin-top: 16px; }
@@ -50,11 +68,11 @@ h1, h2, h3 { text-wrap: balance; }
 .concept { background: #000; color: var(--dim); font-size: var(--step-small); padding: calc(8px + env(safe-area-inset-top)) var(--m) 8px; text-align: center; }
 
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 0 24px; background: var(--hot); color: #1a1205; font: inherit; font-weight: 700; text-decoration: none; border: 0; border-radius: 4px; cursor: pointer; transition: transform 140ms var(--ease-out), background-color 180ms ease; }
-.btn.line { background: transparent; color: var(--hud); box-shadow: inset 0 0 0 1.5px var(--line); } /* taste-skill-ignore: outline button */
+.btn.line { background: transparent; color: var(--hud); border: 1.5px solid var(--line); }
 .btn:active { transform: scale(0.97); }
 .btn svg { width: 20px; height: 20px; flex: none; }
 
-/* viewfinder chrome, reused by the hero and the scan */
+/* viewfinder chrome, used by the hero, the player and the location feed */
 .vf { position: absolute; inset: clamp(12px, 2vw, 28px); pointer-events: none; z-index: 3; }
 .vf i { position: absolute; width: clamp(22px, 3vw, 40px); height: clamp(22px, 3vw, 40px); border-color: var(--hud); border-style: solid; border-width: 0; }
 .vf i:nth-child(1) { top: 0; left: 0; border-top-width: 3px; border-left-width: 3px; }
@@ -64,29 +82,51 @@ h1, h2, h3 { text-wrap: balance; }
 .hudbar { position: absolute; z-index: 4; top: clamp(20px, 2.6vw, 40px); inset-inline: clamp(28px, 4vw, 64px); display: flex; align-items: center; gap: 18px; font-size: 15px; font-weight: 500; letter-spacing: .02em; }
 .rec { display: inline-flex; align-items: center; gap: 8px; }
 .rec b { width: 12px; height: 12px; border-radius: 50%; background: var(--rec); }
-@media (prefers-reduced-motion: no-preference) { .rec b { animation: rec 1.2s steps(1) 8; } }
+html:not(.still) .rec b { animation: rec 1.2s steps(1) 8; }
 @keyframes rec { 50% { opacity: .15; } }
 .hudbar .stamp { margin-inline-start: auto; }
 .batt { display: inline-block; width: 26px; height: 13px; border: 2px solid var(--hud); border-radius: 3px; position: relative; } /* taste-skill-ignore: battery glyph */
 .batt::after { content: ""; position: absolute; inset: 2px; inset-inline-end: 6px; background: var(--hud); }
 
-/* hero */
+/* hero: the camera's live view, with the facts as on-screen data */
 .hero { position: relative; min-height: calc(100svh - 38px); display: grid; align-items: end; overflow: hidden; }
 .hero > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; filter: saturate(.85) contrast(1.05); }
-.hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(11,13,12,.96) 0%, rgba(11,13,12,.55) 45%, rgba(11,13,12,.25) 100%); } /* taste-skill-ignore: scrim under text on a photograph */
-.hot-spot { position: absolute; z-index: 2; left: 56%; top: 30%; width: clamp(160px, 22vw, 320px); aspect-ratio: 1; transform: translate(-50%, -50%); }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: 1; background: linear-gradient(to top, rgba(11,13,12,.96) 0%, rgba(11,13,12,.55) 45%, rgba(11,13,12,.3) 100%); } /* taste-skill-ignore: scrim under text on a photograph */
+.hot-spot { position: absolute; z-index: 2; left: 56%; top: 34%; width: clamp(160px, 22vw, 320px); aspect-ratio: 1; transform: translate(-50%, -50%); }
 .hot-spot .heat { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle, rgba(252,255,164,.85) 0%, rgba(251,182,26,.75) 22%, rgba(237,105,37,.55) 45%, rgba(120,28,109,.3) 68%, rgba(27,12,65,0) 80%); mix-blend-mode: screen; } /* taste-skill-ignore: thermal heat bloom, the camera's own output */
 .hot-spot .box { position: absolute; inset: 22%; border: 2px solid var(--hud); } /* taste-skill-ignore: detection box */
 .hot-spot .box::before, .hot-spot .box::after { content: ""; position: absolute; background: var(--hud); }
 .hot-spot .box::before { left: 50%; top: 30%; bottom: 30%; width: 2px; transform: translateX(-50%); }
 .hot-spot .box::after { top: 50%; left: 30%; right: 30%; height: 2px; transform: translateY(-50%); }
 .hot-spot .tag { position: absolute; top: calc(22% - 30px); inset-inline-start: 22%; background: var(--hot); color: #1a1205; font-size: 14px; font-weight: 700; padding: 2px 8px; border-radius: 2px; white-space: nowrap; }
-@media (prefers-reduced-motion: no-preference) {
-  .hot-spot .heat { animation: bloom 2.4s ease-in-out 3 alternate; }
-  .js .hot-spot .box { animation: lock 900ms var(--ease-out) 600ms both; }
-}
+html:not(.still) .hot-spot .heat { animation: bloom 2.4s ease-in-out 3 alternate; }
+html.js:not(.still) .hot-spot .box { animation: lock 900ms var(--ease-out) 600ms both; }
 @keyframes bloom { from { transform: scale(.82); opacity: .75; } to { transform: scale(1.06); opacity: 1; } }
 @keyframes lock { from { transform: scale(1.5); opacity: 0; } to { transform: none; opacity: 1; } }
+
+/* the camera menu: sections, language, the animations switch */
+.menu { position: absolute; z-index: 5; top: clamp(54px, 5.6vw, 84px); inset-inline: clamp(28px, 4vw, 64px); display: flex; align-items: center; gap: 22px; justify-content: flex-end; flex-wrap: wrap; color: var(--dim); font-size: 15px; font-weight: 500; }
+.menu a { text-decoration: none; }
+.lang, .motion { font: inherit; background: none; border: 0; color: var(--hud); cursor: pointer; min-height: 40px; }
+.lang { text-decoration: underline; text-underline-offset: 4px; }
+.motion { display: inline-flex; align-items: center; gap: 8px; padding: 0 10px; border-radius: 3px; background: rgba(11,13,12,.62); border: 1.5px solid var(--line); }
+.motion .ico { width: 18px; height: 18px; flex: none; }
+.motion .ico .pause { display: none; }
+html.still .motion .ico .play { display: none; }
+html.still .motion .ico .pause { display: block; }
+.motion b { color: var(--ok); font-weight: 700; }
+html.still .motion b { color: var(--hot); }
+.st-off, html.still .st-on { display: none; }
+html.still .st-off { display: inline; }
+.auto-note { flex-basis: 100%; text-align: end; font-size: 13px; color: var(--dim); display: none; }
+html.still[data-motion-auto] .auto-note { display: block; }
+
+.osd { list-style: none; position: absolute; z-index: 4; inset-inline-end: clamp(28px, 4vw, 64px); bottom: clamp(44px, 7vh, 84px); display: grid; gap: 14px; text-align: end; font-weight: 500; }
+.osd li { display: grid; }
+.osd b { font-size: clamp(26px, 2.6vw, 40px); font-weight: 700; line-height: 1; color: var(--hud); }
+.osd b.y { color: var(--hot); display: inline-flex; align-items: center; gap: 4px; justify-content: flex-end; }
+.osd .star { width: .8em; height: .8em; }
+.osd li > span { font-size: 13px; color: var(--dim); letter-spacing: .02em; margin-top: 4px; }
 .hero-copy { position: relative; z-index: 4; padding: 0 clamp(28px, 4vw, 64px) clamp(44px, 7vh, 84px); max-width: 980px; }
 .hero h1 { font-weight: 700; font-size: var(--step-display); line-height: .95; letter-spacing: -0.02em; }
 html[lang="en"] .hero h1 { font-size: clamp(48px, 6.6vw, 112px); }
@@ -95,60 +135,66 @@ html[lang="en"] .hero h1 { font-size: clamp(48px, 6.6vw, 112px); }
 .hero h1 [data-line] { display: block; }
 .lead { margin-top: 20px; font-size: var(--step-lead); line-height: 1.45; max-width: 34ch; }
 .open247 { display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; font-weight: 700; }
-.open247 b { width: 11px; height: 11px; border-radius: 50%; background: #34c759; }
+.open247 b { width: 11px; height: 11px; border-radius: 50%; background: var(--ok); }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
-.top-links { position: absolute; z-index: 4; top: clamp(58px, 6vw, 84px); inset-inline: clamp(28px, 4vw, 64px); display: flex; gap: 20px; justify-content: flex-end; color: var(--dim); font-weight: 500; }
-.top-links a { text-decoration: none; }
-.lang { font: inherit; background: none; border: 0; color: var(--hud); text-decoration: underline; text-underline-offset: 4px; cursor: pointer; }
 
-/* readouts strip */
-.readout { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: var(--panel); }
-.readout div { padding: clamp(20px, 2.6vw, 36px) var(--m); }
-.readout b { display: block; font-size: clamp(28px, 3.2vw, 50px); font-weight: 700; line-height: 1; color: var(--hot); }
-.readout span { display: block; margin-top: 8px; color: var(--dim); }
-
-/* the scan: thermal camera finds the leak, then it's fixed (scroll-driven) */
-.scan-track { position: relative; height: 340svh; }
-.scan-stick { position: sticky; top: 0; height: 100svh; display: grid; grid-template-columns: 7fr 5fr; gap: clamp(20px, 3vw, 56px); align-items: center; padding: 20px var(--m); }
-.feed { position: relative; background: #000; border-radius: 6px; overflow: hidden; }
-.feed svg { width: 100%; height: auto; }
-.wall3d { position: absolute; inset: 0; z-index: 1; display: none; }
+/* the player: the scan plays like a recording, the scroll is the playhead */
+.player { padding: clamp(56px, 6vw, 96px) 0 0; }
+.player-track { position: relative; height: 380svh; }
+.player-stick { position: sticky; top: 0; height: 100svh; display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 18px var(--m); }
+.p-title { display: flex; align-items: baseline; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; width: min(100%, calc((100svh - 230px) * 16 / 9)); margin-inline: auto; }
+.p-title h2 { font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.6rem); line-height: 1.1; font-weight: 700; }
+.p-title p { color: var(--dim); font-size: var(--step-small); }
+.screen { position: relative; width: min(100%, calc((100svh - 230px) * 16 / 9)); margin-inline: auto; }
+.frame { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 6px; overflow: hidden; }
+.frame .vf { inset: 14px; }
+.frame .vf i { width: 26px; height: 26px; }
+.frame .hudbar { top: 26px; inset-inline: 34px; font-size: 13px; }
+.frame .hudbar > span:not(.mode) { background: rgba(11,13,12,.62); padding: 2px 8px; border-radius: 2px; }
+.frame .vf i { filter: drop-shadow(0 0 1.5px rgba(0,0,0,.55)); } /* taste-skill-ignore: viewfinder corners must read on white tiles */
+.mode { padding: 2px 8px; border-radius: 2px; background: rgba(11,13,12,.62); }
+.mode.thermal { background: var(--hot); color: #1a1205; }
+.wall3d, .stills { position: absolute; inset: 0; z-index: 1; }
+.wall3d { display: none; }
 .wall3d canvas { width: 100%; height: 100%; display: block; }
-.feed.has3d .wall3d { display: block; }
-.feed.has3d > svg { visibility: hidden; }
-.xhair { position: absolute; z-index: 4; left: 50%; top: 50%; width: 56px; height: 56px; transform: translate(-50%, -50%); pointer-events: none; display: none; }
-.feed.has3d .xhair { display: block; }
+.frame.has3d .wall3d { display: block; }
+.frame.has3d .stills { display: none; }
+.stills img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; visibility: hidden; }
+.stills img.on { visibility: visible; }
+.xhair { position: absolute; z-index: 4; left: 50%; top: 50%; width: 56px; height: 56px; transform: translate(-50%, -50%); pointer-events: none; }
 .xhair i { position: absolute; inset: 0; border: 2px solid rgba(242,244,241,.85); border-radius: 50%; } /* taste-skill-ignore: camera crosshair */
 .xhair i::before, .xhair i::after { content: ""; position: absolute; background: rgba(242,244,241,.85); }
 .xhair i::before { left: 50%; top: -10px; bottom: -10px; width: 2px; transform: translateX(-50%); }
 .xhair i::after { top: 50%; left: -10px; right: -10px; height: 2px; transform: translateY(-50%); }
 .xhair b { position: absolute; top: calc(100% + 14px); left: 50%; transform: translateX(-50%); font-size: 13px; font-weight: 700; background: rgba(11,13,12,.75); padding: 2px 8px; border-radius: 3px; white-space: nowrap; }
-.feed .hudbar { top: 16px; inset-inline: 24px; font-size: 13px; }
-.feed .mode { padding: 2px 8px; border-radius: 2px; background: rgba(242,244,241,.15); }
-.feed .mode.thermal { background: var(--hot); color: #1a1205; }
-.legend { position: absolute; z-index: 4; bottom: 16px; inset-inline: 24px; display: flex; align-items: center; gap: 10px; font-size: 13px; transition: opacity 300ms ease; }
-.legend i { flex: 1; height: 8px; border-radius: 4px; background: linear-gradient(90deg, #1b0c41, #781c6d, #ed6925, #fbb61a, #fcffa4); } /* taste-skill-ignore: thermal colour scale */
-html[dir="rtl"] .legend i { background: linear-gradient(270deg, #1b0c41, #781c6d, #ed6925, #fbb61a, #fcffa4); } /* taste-skill-ignore: thermal colour scale */
-.scan-copy h2 { font-size: clamp(1.9rem, 1.3rem + 2.2vw, 3.3rem); line-height: 1.05; font-weight: 700; }
-.scan-copy .note { margin-top: 8px; color: var(--dim); font-size: var(--step-small); }
-.stages { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-.stages button { font: inherit; font-weight: 700; font-size: 15px; min-height: 44px; padding: 0 14px; border-radius: 4px; border: 0; background: var(--panel2); color: var(--hud); cursor: pointer; transition: background-color 180ms ease, color 180ms ease, transform 120ms var(--ease-out); }
-.stages button[aria-pressed="true"] { background: var(--hud); color: var(--black); }
-.stages button:active { transform: scale(0.96); }
-.stage-copy { margin-top: 20px; min-height: 8.6em; }
-.stage-copy h3 { font-size: clamp(1.4rem, 1.15rem + 0.9vw, 2rem); line-height: 1.2; font-weight: 700; }
-.stage-copy p { margin-top: 8px; color: var(--dim); max-width: 40ch; }
-.meters { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 14px; max-width: 440px; }
-.meters div { background: var(--panel); border-radius: 4px; padding: 12px 14px; }
-.meters small { display: block; color: var(--dim); font-size: 13px; }
-.meters b { display: block; font-size: 26px; font-weight: 700; line-height: 1.2; }
-.meters b.alert { color: var(--hot2); }
-.meters b.ok { color: #34c759; }
-.tile-o { transform-box: fill-box; transform-origin: 50% 0; }
+.status { position: absolute; z-index: 4; top: 58px; left: 34px; display: grid; gap: 4px; font-size: 13px; font-weight: 700; }
+.status span { background: rgba(11,13,12,.7); padding: 2px 8px; border-radius: 2px; justify-self: start; }
+.status .alert { color: var(--hot2); }
+.status .ok { color: var(--ok); }
+/* thermal cameras keep the colour scale on the right edge, whatever the language */
+.scale { position: absolute; z-index: 4; right: 28px; top: 58px; bottom: 60px; width: 34px; display: grid; grid-template-rows: auto 1fr auto; justify-items: center; gap: 6px; font-size: 13px; font-weight: 700; transition: opacity 300ms ease; }
+.scale i { width: 8px; border-radius: 4px; background: linear-gradient(to top, #1b0c41, #781c6d, #ed6925, #fbb61a, #fcffa4); } /* taste-skill-ignore: thermal colour scale */
+.subs { position: absolute; z-index: 5; bottom: 22px; left: 50%; transform: translateX(-50%); width: min(92%, 64ch); text-align: center; }
+.subs p { display: inline; background: rgba(0,0,0,.78); box-decoration-break: clone; -webkit-box-decoration-break: clone; padding: 3px 10px; line-height: 1.75; font-size: clamp(15px, 1vw + 6px, 19px); }
+.subs p b { color: var(--hot); }
+.scrub { width: min(100%, calc((100svh - 230px) * 16 / 9)); margin-inline: auto; display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 14px; }
+.scrub .tc { font-size: 14px; font-weight: 500; color: var(--dim); min-width: 4.4em; }
+.bar { position: relative; height: 44px; }
+.bar .rail { position: absolute; inset-inline: 0; top: 14px; height: 6px; border-radius: 3px; background: var(--panel2); overflow: hidden; }
+.bar .fill { position: absolute; inset-block: 0; inset-inline-start: 0; width: calc(var(--p, 0) * 100%); background: var(--hot); }
+.bar .knob { position: absolute; top: 9px; inset-inline-start: calc(var(--p, 0) * 100%); width: 16px; height: 16px; margin-inline-start: -8px; border-radius: 50%; background: var(--hud); pointer-events: none; }
+.bar input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; margin: 0; cursor: pointer; }
+.chapters { position: absolute; inset: 0; pointer-events: none; }
+.chapters button { pointer-events: auto; position: absolute; top: 24px; inset-inline-start: calc(var(--at) * 100%); transform: translateX(var(--shift, 0)); font: inherit; font-size: 13px; font-weight: 700; color: var(--dim); background: none; border: 0; padding: 4px 0 4px; cursor: pointer; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+html[dir="rtl"] .chapters button { --shift: 0; }
+.chapters button::before { content: ""; position: absolute; top: -12px; inset-inline-start: 0; width: 2px; height: 10px; background: var(--dim); }
+.chapters button[aria-pressed="true"] { color: var(--hud); }
+.chapters button[aria-pressed="true"]::before { background: var(--hot); }
+.scrub .gap { height: 22px; }
 
-/* before/after-style slider of two real jobs */
+/* compare slider */
 .compare { padding: clamp(80px, 9vw, 150px) var(--m); display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 5vw, 96px); align-items: center; }
-.compare h2, .log h2, .roofs h2, .report h2 { font-size: var(--step-head); line-height: 1.02; font-weight: 700; max-width: 14ch; }
+.compare h2, .log h2, .roll h2, .report h2 { font-size: var(--step-head); line-height: 1.02; font-weight: 700; max-width: 14ch; }
 .compare .body { margin-top: 18px; color: var(--dim); max-width: 40ch; }
 .slider { position: relative; aspect-ratio: 3 / 4; max-height: 82svh; width: 100%; max-width: 560px; margin-inline: auto; border-radius: 6px; overflow: hidden; background: #000; touch-action: pan-y; }
 .slider img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -163,110 +209,177 @@ html[dir="rtl"] .slider .handle { left: auto; right: var(--x, 50%); transform: t
 .slider input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; }
 .compare .cap { margin-top: 10px; font-size: var(--step-small); color: var(--dim); text-align: center; }
 
-/* call log */
+/* call log: one row per call, like the phone's recents list */
 .log { padding: clamp(80px, 9vw, 150px) var(--m); background: var(--panel); }
 .log .sub { margin-top: 14px; color: var(--dim); max-width: 46ch; }
-.entries { list-style: none; margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 14px; }
-.entries li { background: var(--black); border-radius: 6px; padding: 22px; display: flex; flex-direction: column; gap: 12px; }
-.entries .when { display: flex; justify-content: space-between; gap: 10px; color: var(--dim); font-size: 14px; }
-.entries .what { font-weight: 700; color: var(--hot); }
-.entries blockquote { font-size: 18px; line-height: 1.5; flex: 1; }
-.entries .who { color: var(--dim); font-size: 15px; }
-.entries li.big { grid-column: span 2; }
-.entries li.big blockquote { font-size: clamp(20px, 1.6vw, 26px); }
+.calls { list-style: none; margin-top: 40px; border-top: 1px solid var(--line); } /* taste-skill-ignore: a recents list: one record per row */
+.calls li { display: grid; grid-template-columns: 40px 9.5em 13em minmax(0, 1fr) 13em; gap: 8px 24px; align-items: baseline; padding: 22px 0; border-bottom: 1px solid var(--line); } /* taste-skill-ignore: a recents list: one record per row */
+.calls .in { width: 22px; height: 22px; color: var(--ok); align-self: center; }
+.calls .ago { color: var(--dim); font-size: 15px; }
+.calls .what { font-weight: 700; color: var(--hot); }
+.calls blockquote { font-size: 19px; line-height: 1.5; }
+.calls .who { color: var(--dim); font-size: 15px; }
 
-/* rooftops */
-.roofs { padding: clamp(80px, 9vw, 150px) var(--m); }
-.roof-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-top: 36px; }
-.roof-grid figure { position: relative; margin: 0; border-radius: 6px; overflow: hidden; }
-.roof-grid img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; }
-.roof-grid figcaption { position: absolute; bottom: 0; inset-inline: 0; padding: 30px 14px 12px; background: linear-gradient(to top, rgba(11,13,12,.85), rgba(11,13,12,0)); font-size: 14px; } /* taste-skill-ignore: caption scrim on a photo */
+/* camera roll: a viewer and the files beside it */
+.roll { padding: clamp(80px, 9vw, 150px) var(--m); display: grid; grid-template-columns: 5fr 6fr; gap: clamp(32px, 5vw, 96px); align-items: start; }
+.roll .sub { margin-top: 14px; color: var(--dim); max-width: 40ch; }
+.files { list-style: none; margin-top: 32px; display: grid; gap: 10px; }
+.files button { width: 100%; display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: center; text-align: start; font: inherit; color: var(--hud); background: var(--panel); border: 0; border-radius: 6px; padding: 8px; cursor: pointer; transition: background-color 160ms ease, transform 120ms var(--ease-out); }
+.files button:active { transform: scale(0.98); }
+.files button[aria-current="true"] { background: var(--panel2); outline: 2px solid var(--hot); outline-offset: -2px; }
+.files img { width: 64px; height: 64px; object-fit: cover; border-radius: 3px; }
+.files small { display: block; color: var(--dim); font-size: 13px; }
+.viewer { position: relative; margin: 0; border-radius: 6px; overflow: hidden; background: #000; aspect-ratio: 3 / 4; max-height: 86svh; width: 100%; max-width: 620px; justify-self: center; }
+.viewer img { width: 100%; height: 100%; object-fit: cover; }
+.viewer .vf { inset: 14px; }
+.viewer .vf i { width: 24px; height: 24px; }
+.viewer figcaption { position: absolute; z-index: 4; top: 24px; inset-inline: 30px; display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; }
+.viewer figcaption span { background: rgba(11,13,12,.7); padding: 2px 8px; border-radius: 2px; }
 
-/* report a fault (WhatsApp composer) + contact */
-.report { padding: clamp(80px, 9vw, 150px) var(--m); background: var(--panel); display: grid; grid-template-columns: 7fr 5fr; gap: clamp(32px, 5vw, 96px); }
+/* the service ticket: a paper form that writes the WhatsApp message */
+.report { padding: clamp(80px, 9vw, 150px) var(--m); background: var(--panel); display: grid; grid-template-columns: 7fr 5fr; gap: clamp(32px, 5vw, 96px); align-items: start; }
 .report .sub { margin-top: 14px; color: var(--dim); max-width: 44ch; }
-.report fieldset { border: 0; margin-top: 24px; }
-.report legend { font-weight: 700; margin-bottom: 10px; }
-.chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.chip input { position: absolute; opacity: 0; pointer-events: none; }
-.chip > span { display: inline-flex; align-items: center; min-height: 46px; padding: 0 16px; background: var(--panel2); border-radius: 4px; cursor: pointer; transition: background-color 150ms ease, color 150ms ease, transform 120ms var(--ease-out); }
-.chip input:checked + span { background: var(--hot); color: #1a1205; font-weight: 700; }
-.chip input:focus-visible + span { outline: 3px solid var(--hot); outline-offset: 2px; }
-.chip > span:active { transform: scale(0.96); }
-.where { display: block; margin-top: 22px; font-weight: 700; }
-.where input { display: block; width: 100%; max-width: 440px; margin-top: 8px; font: inherit; font-size: 16px; font-weight: 400; padding: 13px 14px; background: var(--panel2); border: 0; border-radius: 4px; color: var(--hud); }
-.where input::placeholder { color: #737c77; }
-.msg { margin-top: 22px; background: var(--black); border-radius: 6px; padding: 16px 18px; max-width: 520px; }
-.msg small { display: block; color: var(--dim); font-size: 13px; margin-bottom: 4px; }
-.msg p { overflow-wrap: anywhere; }
-.report .btn { margin-top: 18px; }
-.contact-card { background: var(--black); border-radius: 6px; padding: 28px; align-self: start; }
-.contact-card .big247 { font-size: clamp(64px, 8vw, 120px); font-weight: 700; line-height: .9; color: var(--hot); }
-.contact-card p { margin-top: 12px; }
-.contact-card .clock { font-size: 28px; font-weight: 700; margin-top: 18px; }
-.contact-card .row { display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
-.map { width: 100%; height: 260px; border: 0; margin-top: 22px; border-radius: 6px; filter: invert(.9) hue-rotate(180deg) saturate(.5); background: var(--panel2); }
+.ticket { margin-top: 32px; max-width: 620px; background: var(--paper); color: var(--ink); border-radius: 3px; position: relative; }
+.t-head { display: flex; justify-content: space-between; gap: 16px; padding: 22px 26px 16px; border-bottom: 3px solid var(--ink); }
+.t-head b { display: block; font-size: 22px; line-height: 1.2; }
+.t-head span { font-size: 14px; color: var(--ink2); }
+.t-no { text-align: end; font-size: 14px; color: var(--ink2); line-height: 1.5; }
+.t-no b { font-size: 16px; color: var(--ink); display: inline; }
+.t-row { border: 0; padding: 16px 26px 18px; border-bottom: 1px solid #cfc8b6; } /* taste-skill-ignore: printed form lines on a paper ticket */
+.t-row legend, .t-where > span { float: inline-start; width: 100%; font-size: 14px; font-weight: 700; color: var(--ink2); margin-bottom: 10px; }
+.boxes { clear: both; display: flex; flex-wrap: wrap; gap: 6px 22px; }
+.box { display: inline-flex; align-items: center; gap: 10px; min-height: 40px; cursor: pointer; font-weight: 500; }
+.box input { position: absolute; opacity: 0; pointer-events: none; }
+.box i { position: relative; width: 22px; height: 22px; border: 2px solid var(--ink); border-radius: 2px; flex: none; }
+.box i svg { position: absolute; left: -4px; top: -9px; width: 32px; height: 32px; overflow: visible; }
+.box i path { fill: none; stroke: var(--pen); stroke-width: 3.4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 40; stroke-dashoffset: 40; }
+.box input:checked + i path { stroke-dashoffset: 0; }
+html:not(.still) .box input:checked + i path { transition: stroke-dashoffset 220ms var(--ease-out); }
+.box input:focus-visible + i { outline: 3px solid var(--pen); outline-offset: 3px; }
+.box:active i { transform: scale(0.92); }
+.t-where { display: block; }
+.t-where input { clear: both; display: block; width: 100%; font-family: 'Amatic SC', 'IBM Plex Sans Hebrew', sans-serif; font-weight: 700; font-size: 28px; line-height: 1.2; color: var(--pen); background: transparent; border: 0; border-bottom: 1.5px dashed var(--ink2); border-radius: 0; padding: 2px 2px 4px; }
+.t-where input::placeholder { color: #a39c8b; }
+.t-where input:focus-visible { outline: none; border-bottom: 2px solid var(--pen); }
+.t-msg { padding: 16px 26px 20px; }
+.t-msg small { display: block; font-size: 14px; font-weight: 700; color: var(--ink2); margin-bottom: 6px; }
+.t-msg p { font-size: 17px; overflow-wrap: anywhere; }
+.t-send { position: relative; display: flex; align-items: center; justify-content: center; gap: 10px; min-height: 64px; padding: 0 20px; background: var(--ink); color: var(--paper); font-weight: 700; text-decoration: none; border-top: 3px dotted #8a8473; transition: background-color 180ms ease; }
+.t-send::before, .t-send::after { content: ""; position: absolute; top: -12px; width: 22px; height: 22px; border-radius: 50%; background: var(--panel); }
+.t-send::before { left: -11px; }
+.t-send::after { right: -11px; }
+.t-send svg { width: 22px; height: 22px; flex: none; color: #25d366; }
+.t-send:active { background: #33312b; }
+.line-side { background: var(--black); border-radius: 6px; padding: 28px; align-self: start; }
+.line-side h3 { font-size: clamp(1.5rem, 1.2rem + 1vw, 2.2rem); line-height: 1.1; }
+.line-side p { margin-top: 10px; color: var(--dim); }
+.line-side .clock { font-size: 26px; font-weight: 700; margin-top: 16px; color: var(--hud); }
+.line-side .btn { margin-top: 18px; width: 100%; }
+.loc { position: relative; margin-top: 22px; border-radius: 6px; overflow: hidden; background: var(--panel2); }
+.loc .vf { inset: 10px; z-index: 2; }
+.loc .vf i { width: 20px; height: 20px; }
+.map { display: block; width: 100%; height: 260px; border: 0; filter: invert(.9) hue-rotate(180deg) saturate(.5); }
+.loc .tag { position: absolute; z-index: 2; top: 20px; inset-inline-start: 24px; font-size: 13px; font-weight: 700; background: rgba(11,13,12,.8); padding: 2px 8px; border-radius: 2px; }
 .maplinks { display: flex; gap: 20px; margin-top: 12px; font-weight: 700; }
 
-.foot { padding: 64px var(--m) 30px; }
-.foot .wm { font-weight: 700; font-size: clamp(52px, 11vw, 190px); line-height: .9; white-space: nowrap; letter-spacing: -0.02em; }
-.foot .wm span.h { color: var(--hot); }
-.foot .cols { display: grid; grid-template-columns: 5fr 7fr; gap: var(--m); margin-top: 36px; }
-.foot .places a { display: block; font-size: var(--step-lead); font-weight: 700; text-decoration: none; line-height: 1.6; }
-.foot .small { color: var(--dim); max-width: 62ch; }
-.foot .legal { display: flex; justify-content: space-between; gap: 16px; margin-top: 56px; font-size: var(--step-small); color: var(--dim); }
+/* end of recording */
+.end { min-height: 92svh; display: grid; place-items: center; padding: 72px var(--m) calc(56px + env(safe-area-inset-bottom)); background: #000; position: relative; }
+.end .vf { position: absolute; }
+.end-in { width: min(100%, 760px); }
+.stop { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 700; letter-spacing: .08em; color: var(--dim); }
+.stop b { width: 12px; height: 12px; background: var(--hud); }
+.saved { margin-top: 14px; font-size: var(--step-head); line-height: 1.02; font-weight: 700; }
+.saved span.h { color: var(--hot); }
+.meta { margin-top: 36px; border-top: 1px solid var(--line); } /* taste-skill-ignore: file metadata table */
+.meta div { display: grid; grid-template-columns: 9em minmax(0, 1fr); gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); } /* taste-skill-ignore: file metadata table */
+.meta dt { color: var(--dim); font-size: 15px; }
+.meta dd a { font-weight: 700; }
+.meta dd.credit { color: var(--dim); font-size: 15px; }
+.end-row { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 28px; color: var(--dim); font-size: var(--step-small); }
+.replay { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--hud); font-weight: 700; text-decoration: none; }
+.replay svg { width: 18px; height: 18px; }
 
-.dock { display: none; }
+/* phone: floating camera controls instead of a bar */
+.fab { display: none; }
 
 @media (hover: hover) and (pointer: fine) {
   .btn:hover { background: #ffc94a; }
   .btn.line:hover { background: rgba(242,244,241,.08); }
-  .chip > span:hover, .stages button:hover { background: #262b29; }
-  .chip input:checked + span:hover { background: #ffc94a; }
-  .stages button[aria-pressed="true"]:hover { background: var(--hud); }
-  .top-links a:hover { color: var(--hud); }
+  .menu a:hover, .chapters button:hover { color: var(--hud); }
+  .motion:hover { background: rgba(29,33,31,.9); }
+  .files button:hover { background: var(--panel2); }
+  .t-send:hover { background: #33312b; }
+  .replay:hover { color: var(--hot); }
 }
 
 @media (max-width: 900px) {
-  .top-links a { display: none; }
-  .hot-spot { left: 50%; top: 32%; width: 56vw; }
+  .menu { gap: 14px; }
+  .menu a { display: none; }
+  .hot-spot { left: 64%; top: 40%; width: 44vw; }
+  .osd { top: calc(clamp(54px, 5.6vw, 84px) + 52px); bottom: auto; gap: 6px; }
+  html[data-motion-auto].still .osd { top: calc(clamp(54px, 5.6vw, 84px) + 96px); }
+  .osd li { display: flex; align-items: baseline; justify-content: flex-end; gap: 6px; }
+  .osd b { font-size: 16px; }
+  .osd li > span { font-size: 13px; margin-top: 0; }
+  .osd { background: rgba(11,13,12,.62); padding: 8px 10px; border-radius: 3px; }
   .hero h1 { font-size: 13vw; }
   html[lang="en"] .hero h1 { font-size: 10.4vw; }
-  .readout { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .scan-track { height: 300svh; }
-  .scan-stick { grid-template-columns: 1fr; grid-template-rows: auto 1fr; align-content: start; gap: 8px; padding-top: 14px; }
-  .scan-copy h2 { font-size: 1.5rem; }
-  .stage-copy { margin-top: 10px; min-height: 7.4em; }
-  .stage-copy p, .scan-copy .note { font-size: 15px; }
-  .stages { margin-top: 10px; }
-  .stages button { min-height: 40px; padding: 0 10px; font-size: 14px; }
-  .meters { margin-top: 8px; }
-  .meters b { font-size: 20px; }
-  .compare, .report, .foot .cols { grid-template-columns: 1fr; }
-  .entries li.big { grid-column: auto; }
-  .roof-grid { grid-template-columns: 1fr 1fr; }
-  .roof-grid figure:nth-child(3) { grid-column: 1 / -1; }
-  .roof-grid figure:nth-child(3) img { aspect-ratio: 4 / 3; }
-  .foot { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
-  html { scroll-padding-bottom: 80px; }
-  .dock { display: grid; grid-template-columns: 1fr 1fr; position: fixed; inset-inline: 0; bottom: 0; z-index: 30; background: #000; padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 -8px 24px rgba(0,0,0,.5); transition: transform 320ms var(--ease-out); } /* taste-skill-ignore: sticky bar floats over content */
-  .dock.away { transform: translateY(110%); }
-  .dock a { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 58px; color: var(--hud); font-weight: 700; text-decoration: none; }
-  .dock a:first-child { background: var(--hot); color: #1a1205; }
-  .dock a:active { opacity: .85; }
-  .dock svg { width: 20px; height: 20px; }
+  .player-track { height: 330svh; }
+  .player-stick { justify-content: center; gap: 10px; padding-top: 16px; padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+  .p-title, .screen, .scrub { width: 100%; }
+  .p-title h2 { font-size: 1.45rem; }
+  .p-title p { font-size: 14px; }
+  .frame { aspect-ratio: 4 / 3; }
+  .frame .hudbar { top: 22px; inset-inline: 28px; gap: 8px; font-size: 13px; }
+  .status { top: 54px; left: 28px; font-size: 13px; }
+  .scale { right: 22px; top: 54px; bottom: 26px; width: 30px; font-size: 13px; }
+  .xhair { width: 44px; height: 44px; }
+  .screen { display: contents; }
+  .scrub { order: 2; }
+  .subs { order: 3; position: static; transform: none; width: 100%; text-align: center; margin-top: 4px; min-height: 10.5em; }
+  .subs p { display: block; background: none; padding: 0; font-size: 15px; line-height: 1.55; }
+  .subs p b { display: block; font-size: 17px; margin-bottom: 2px; }
+  .compare, .report, .roll { grid-template-columns: 1fr; }
+  .calls li { grid-template-columns: 30px minmax(0, 1fr); gap: 4px 12px; }
+  .calls .in { grid-row: span 4; align-self: start; margin-top: 2px; }
+  .calls blockquote { font-size: 17px; }
+  .calls .ago { font-size: 14px; }
+  .roll .viewer { order: -1; }
+  .roll { gap: 24px; }
+  .files { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 20px; }
+  .files button { grid-template-columns: 1fr; gap: 6px; padding: 6px; font-size: 14px; }
+  .files img { width: 100%; height: auto; aspect-ratio: 1; }
+  .files small { display: none; }
+  .t-head, .t-row, .t-msg { padding-inline: 18px; }
+  .meta div { grid-template-columns: 6.5em minmax(0, 1fr); gap: 12px; }
+  .end { padding-bottom: calc(110px + env(safe-area-inset-bottom)); }
+  html { scroll-padding-bottom: 96px; }
+  .fab { display: flex; flex-direction: column; align-items: center; gap: 12px; position: fixed; z-index: 30; inset-inline-end: max(16px, env(safe-area-inset-left), env(safe-area-inset-right)); bottom: calc(16px + env(safe-area-inset-bottom)); transition: transform 320ms var(--ease-out), opacity 200ms ease; }
+  .fab.away { transform: translateY(160%); opacity: 0; pointer-events: none; }
+  .fab a { display: grid; place-items: center; border-radius: 50%; text-decoration: none; color: var(--hud); }
+  .fab .wa { width: 48px; height: 48px; background: rgba(11,13,12,.9); border: 1.5px solid var(--line); }
+  .fab .wa svg { width: 22px; height: 22px; color: #25d366; }
+  .fab .shutter { width: 68px; height: 68px; background: rgba(11,13,12,.7); border: 4px solid var(--hud); }
+  .fab .shutter span { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--hot); color: #1a1205; transition: transform 140ms var(--ease-out); }
+  .fab .shutter:active span { transform: scale(0.88); }
+  .fab .shutter svg { width: 22px; height: 22px; }
+}
+@media (max-width: 900px) and (max-height: 700px) {
+  .p-title p { display: none; }
+  .subs p { font-size: 14px; }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .js .hero h1 [data-line] { transform: translateY(105%); animation: rise 900ms var(--ease-out) forwards; animation-delay: calc(var(--i) * 110ms + 150ms); }
-  .js .hero-copy > *:not(h1) { opacity: 0; transform: translateY(12px); animation: fade 500ms var(--ease-out) forwards; animation-delay: calc(220ms + var(--d, 0) * 60ms); }
-  .js .hero > img { animation: focus 1300ms var(--ease-out) both; }
-  .js [data-reveal] > * { opacity: 0; transform: translateY(24px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); transition-delay: calc(var(--d, 0) * 70ms); }
-  .js [data-reveal].in > * { opacity: 1; transform: none; }
-}
+/* entrances, only with animations on */
+html.js:not(.still) .hero h1 [data-line] { transform: translateY(105%); animation: rise 900ms var(--ease-out) forwards; animation-delay: calc(var(--i) * 110ms + 150ms); }
+html.js:not(.still) .hero-copy > *:not(h1), html.js:not(.still) .osd > * { opacity: 0; transform: translateY(12px); animation: fade 500ms var(--ease-out) forwards; animation-delay: calc(220ms + var(--d, 0) * 60ms); }
+html.js:not(.still) .hero > img { animation: focus 1300ms var(--ease-out) both; }
+html.js:not(.still) [data-reveal] > * { opacity: 0; transform: translateY(24px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); transition-delay: calc(var(--d, 0) * 70ms); }
+html.js:not(.still) [data-reveal].in > * { opacity: 1; transform: none; }
 @keyframes rise { to { transform: none; } }
 @keyframes fade { to { opacity: 1; transform: none; } }
 @keyframes focus { from { filter: blur(10px) saturate(.4); transform: scale(1.06); } to { filter: saturate(.85) contrast(1.05); transform: none; } }
+/* animations off: nothing moves, everything is already in its final place */
+html.still *, html.still *::before, html.still *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 </style>
 </head>
 <body>
@@ -281,81 +394,79 @@ html[dir="rtl"] .slider .handle { left: auto; right: var(--x, 50%); transform: t
   <img src="img/opened-wall.jpg" width="1125" height="1500" alt="קיר אריחים פתוח במקום שבו אותרה נזילה" fetchpriority="high" decoding="async">
   <div class="vf" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
   <div class="hudbar" aria-hidden="true"><span class="rec"><b></b>REC</span><span>CAM 01</span><span class="stamp num" data-stamp>--:--:--</span><span class="batt"></span></div>
-  <div class="top-links">
+  <nav class="menu" aria-label="תפריט">
     <a href="#scan"><span lang="he">איך מאתרים</span><span lang="en">How we find it</span></a>
     <a href="#log"><span lang="he">יומן קריאות</span><span lang="en">Call log</span></a>
-    <a href="#report"><span lang="he">דיווח תקלה</span><span lang="en">Report a fault</span></a>
+    <a href="#report"><span lang="he">כרטיס תקלה</span><span lang="en">Fault ticket</span></a>
     <button class="lang" type="button" data-set-lang><span lang="he">English</span><span lang="en">עברית</span></button>
-  </div>
+    <button class="motion" type="button" role="switch" aria-checked="true" data-motion>
+      <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path class="play" d="M7 4.5v15l12-7.5z" fill="currentColor"/><g class="pause" fill="currentColor"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></g></svg>
+      <span lang="he">אנימציות: <b class="st-on">פועלות</b><b class="st-off">כבויות</b></span><span lang="en">Animations: <b class="st-on">on</b><b class="st-off">off</b></span>
+    </button>
+    <p class="auto-note" data-auto-note></p>
+  </nav>
   <div class="hot-spot" aria-hidden="true"><span class="heat"></span><span class="box"></span><span class="tag"><span lang="he">חשד לנזילה</span><span lang="en">Possible leak</span></span></div>
+  <ul class="osd" aria-label="נתונים מגוגל">
+    <li style="--d:1"><b class="num y">4.8<svg class="star" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.6l2.9 6 6.5.8-4.8 4.5 1.2 6.5L12 17.2l-5.8 3.2 1.2-6.5L2.6 9.4l6.5-.8z"/></svg></b><span><span lang="he">דירוג בגוגל</span><span lang="en">Google rating</span></span></li>
+    <li style="--d:2"><b class="num">38</b><span><span lang="he">ביקורות בגוגל</span><span lang="en">Google reviews</span></span></li>
+    <li style="--d:3"><b class="num">24/7</b><span><span lang="he">פתוח, כל שעה</span><span lang="en">open, every hour</span></span></li>
+    <li style="--d:4"><b><span lang="he">30 דק׳</span><span lang="en">30 min</span></b><span><span lang="he">סתימת לילה, לפי ביקורת</span><span lang="en">night blockage, per a review</span></span></li>
+  </ul>
   <div class="hero-copy">
     <h1 translate="no">
       <span lang="he"><span class="line"><span data-line style="--i:0">חיים</span></span><span class="line"><span data-line class="l2" style="--i:1">האינסטלטור</span></span></span>
       <span lang="en"><span class="line"><span data-line style="--i:0">Chaim</span></span><span class="line"><span data-line class="l2" style="--i:1">the Plumber</span></span></span>
     </h1>
-    <p class="lead" style="--d:0"><span lang="he">אינסטלטור בחיפה, ברחוב דיזראלי 16. מגיע עם מצלמה, מוצא את הנזילה. 38 לקוחות דירגו אותו בגוגל, בממוצע 4.8.</span><span lang="en">A Haifa plumber at 16 Disraeli St. He comes with a camera and finds the leak. Rated 4.8 on Google by 38 customers.</span></p>
+    <p class="lead" style="--d:0"><span lang="he">אינסטלטור בחיפה, ברחוב דיזראלי 16. מגיע עם מצלמה, מוצא את הנזילה.</span><span lang="en">A Haifa plumber at 16 Disraeli St. He comes with a camera and finds the leak.</span></p>
     <p class="open247" style="--d:1"><b></b><span lang="he">פתוח עכשיו · 24 שעות, 7 ימים</span><span lang="en">Open now · 24 hours, 7 days</span></p>
     <div class="actions" style="--d:2">
       <a class="btn" href="tel:+972527865833"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg><span lang="he">חייגו </span><span lang="en">Call </span><span class="num">052-786-5833</span></a>
-      <a class="btn line" href="#report"><span lang="he">דווחו על תקלה בוואטסאפ</span><span lang="en">Report it on WhatsApp</span></a>
+      <a class="btn line" href="#report"><span lang="he">מלאו כרטיס תקלה</span><span lang="en">Fill in a fault ticket</span></a>
     </div>
   </div>
 </header>
 
-<section class="readout" aria-label="נתונים">
-  <div><b class="num">4.8</b><span><span lang="he">דירוג בגוגל</span><span lang="en">Google rating</span></span></div>
-  <div><b class="num">38</b><span><span lang="he">ביקורות בגוגל</span><span lang="en">Google reviews</span></span></div>
-  <div><b class="num">24/7</b><span><span lang="he">פתוח כל יום, כל שעה</span><span lang="en">open every day, every hour</span></span></div>
-  <div><b><span lang="he">30 דק׳</span><span lang="en">30 min</span></b><span><span lang="he">סתימת לילה, לפי ביקורת</span><span lang="en">night blockage, per a review</span></span></div>
-</section>
-
 <main>
-  <section class="scan" id="scan" aria-labelledby="scan-h">
-    <div class="scan-track" data-scan>
-      <div class="scan-stick">
-        <div class="feed" data-ui>
+  <section class="player" id="scan" aria-labelledby="scan-h">
+    <div class="player-track" data-scan>
+      <div class="player-stick">
+        <div class="p-title">
+          <h2 id="scan-h"><span lang="he">המצלמה רואה מה שהעין לא.</span><span lang="en">The camera sees what the eye can't.</span></h2>
+          <p><span lang="he">המחשה של איתור נזילה בקיר · גללו, או לחצו על פרק</span><span lang="en">An illustration of finding a leak in a wall · scroll, or tap a chapter</span></p>
+        </div>
+        <div class="screen">
+        <div class="frame" data-frame>
           <div class="vf" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
           <div class="hudbar" aria-hidden="true"><span class="rec"><b></b>REC</span><span class="mode" data-mode>RGB</span><span class="stamp num" data-stamp>--:--:--</span></div>
+          <div class="status" aria-hidden="true"><span><span lang="he">נקודה </span><span lang="en">Spot </span><span class="num" data-temp>19.8°C</span></span><span data-leak-word class="alert"></span></div>
           <div class="wall3d" data-wall3d></div>
+          <div class="stills" data-stills>
+            <img data-src-d="img/still-d-1.jpg" data-src-m="img/still-m-1.jpg" alt="קיר אריחים במקלחת, כתם רטוב ליד הרובה">
+            <img data-src-d="img/still-d-2.jpg" data-src-m="img/still-m-2.jpg" alt="המצלמה במצב תרמי: הצינור בתוך הקיר ונקודה חמה במקום הנזילה">
+            <img data-src-d="img/still-d-3.jpg" data-src-m="img/still-m-3.jpg" alt="שישה אריחים הוסרו, המחבר הישן מטפטף בתוך החריץ">
+            <img data-src-d="img/still-d-4.jpg" data-src-m="img/still-m-4.jpg" alt="הלחמה של מחבר חדש בתוך הקיר">
+            <img data-src-d="img/still-d-5.jpg" data-src-m="img/still-m-5.jpg" alt="בדיקה תרמית חוזרת: המקום התקרר">
+            <img data-src-d="img/still-d-6.jpg" data-src-m="img/still-m-6.jpg" alt="אריחים חדשים, הקיר סגור ויבש">
+          </div>
           <div class="xhair" aria-hidden="true"><i></i><b class="num" data-xtemp>--</b></div>
-          <svg viewBox="0 0 800 560" aria-hidden="true" data-scan-svg>
-            <defs>
-              <radialGradient id="cold" cx=".5" cy=".5" r=".75"><stop offset="0" stop-color="#2b1b6b"/><stop offset="1" stop-color="#0d0a2b"/></radialGradient>
-              <radialGradient id="heat" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#fcffa4"/><stop offset=".25" stop-color="#fbb61a"/><stop offset=".5" stop-color="#ed6925"/><stop offset=".75" stop-color="#781c6d" stop-opacity=".8"/><stop offset="1" stop-color="#781c6d" stop-opacity="0"/></radialGradient>
-              <radialGradient id="coolspot" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#7fd0ff"/><stop offset=".5" stop-color="#3a7bd5" stop-opacity=".7"/><stop offset="1" stop-color="#3a7bd5" stop-opacity="0"/></radialGradient>
-              <linearGradient id="cu" x1="0" x2="1"><stop offset="0" stop-color="#7d4523"/><stop offset=".45" stop-color="#eab184"/><stop offset="1" stop-color="#7d4523"/></linearGradient>
-            </defs>
-            <rect width="800" height="560" fill="url(#cold)"/>
-            <g data-thermal style="opacity:0">
-              <path d="M-10 430 H330 V140 H810" fill="none" stroke="#ed6925" stroke-width="16" opacity=".55"/>
-              <ellipse data-heat cx="330" cy="290" rx="180" ry="150" fill="url(#heat)" style="transform-box: fill-box; transform-origin: center; transform: scale(.3)"/>
-              <ellipse data-coolspot cx="330" cy="290" rx="150" ry="120" fill="url(#coolspot)" style="opacity:0"/>
-            </g>
-            <rect data-newpipe x="320" y="200" width="20" height="180" fill="url(#cu)" style="opacity:0"/>
-            <g data-tiles></g>
-            <rect data-damp x="250" y="300" width="150" height="90" rx="40" fill="#b9a77e" style="opacity:.0"/>
-            <g data-target style="opacity:0">
-              <rect x="240" y="200" width="180" height="180" fill="none" stroke="#f2f4f1" stroke-width="3"/>
-              <path d="M330 255 V325 M295 290 H365" stroke="#f2f4f1" stroke-width="3"/>
-            </g>
-            <g data-done style="opacity:0"><circle cx="680" cy="110" r="34" fill="#34c759"/><path d="M663 110 l12 12 l22 -24" stroke="#0b0d0c" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>
-          </svg>
-          <div class="legend" data-legend style="opacity:0"><span class="num">16°</span><i></i><span class="num">34°</span></div>
+          <div class="scale" data-legend aria-hidden="true" style="opacity:0"><span class="num">34°</span><i></i><span class="num">16°</span></div>
         </div>
-        <div class="scan-copy">
-          <h2 id="scan-h"><span lang="he">המצלמה רואה מה שהעין לא.</span><span lang="en">The camera sees what the eye can't.</span></h2>
-          <p class="note"><span lang="he">המחשה של איתור נזילה בקיר. גללו, או לחצו על שלב.</span><span lang="en">An illustration of finding a leak in a wall. Scroll, or tap a stage.</span></p>
-          <div class="stages" role="group" aria-label="שלבים">
-            <button type="button" data-go="0.1" aria-pressed="true"><span lang="he">1 · כתם</span><span lang="en">1 · Damp</span></button>
-            <button type="button" data-go="0.4" aria-pressed="false"><span lang="he">2 · סריקה</span><span lang="en">2 · Scan</span></button>
-            <button type="button" data-go="0.66" aria-pressed="false"><span lang="he">3 · תיקון</span><span lang="en">3 · Fix</span></button>
-            <button type="button" data-go="0.94" aria-pressed="false"><span lang="he">4 · סגור</span><span lang="en">4 · Closed</span></button>
+        <div class="subs" aria-live="polite"><p><b data-stage-title></b> <span data-stage-text></span></p></div>
+        </div>
+        <div class="scrub">
+          <span class="tc num" data-tc>0:00</span>
+          <div class="bar" data-bar style="--p:0">
+            <div class="rail"><div class="fill"></div></div>
+            <span class="knob"></span>
+            <input type="range" min="0" max="1000" value="0" step="1" aria-label="ציר זמן של ההמחשה" data-scrub>
+            <div class="chapters" role="group" aria-label="פרקים">
+              <button type="button" data-go="0.1" data-at="0" style="--at:0" aria-pressed="true"><span lang="he">כתם</span><span lang="en">Damp</span></button>
+              <button type="button" data-go="0.4" data-at="0.22" style="--at:.22" aria-pressed="false"><span lang="he">סריקה</span><span lang="en">Scan</span></button>
+              <button type="button" data-go="0.66" data-at="0.5" style="--at:.5" aria-pressed="false"><span lang="he">תיקון</span><span lang="en">Fix</span></button>
+              <button type="button" data-go="0.94" data-at="0.86" style="--at:.86" aria-pressed="false"><span lang="he">סגור</span><span lang="en">Closed</span></button>
+            </div>
           </div>
-          <div class="stage-copy" aria-live="polite"><h3 data-stage-title></h3><p data-stage-text></p></div>
-          <div class="meters">
-            <div><small><span lang="he">טמפ׳ בנקודה</span><span lang="en">Spot temp.</span></small><b class="num" data-temp>19.8°</b></div>
-            <div><small><span lang="he">נזילה</span><span lang="en">Leak</span></small><b data-leak-word></b></div>
-          </div>
+          <span class="tc num" style="text-align:end">0:48</span>
         </div>
       </div>
     </div>
@@ -382,109 +493,155 @@ html[dir="rtl"] .slider .handle { left: auto; right: var(--x, 50%); transform: t
   <section class="log" id="log" aria-labelledby="log-h">
     <div data-reveal>
       <h2 id="log-h" style="--d:0"><span lang="he">יומן קריאות.</span><span lang="en">Call log.</span></h2>
-      <p class="sub" style="--d:1"><span lang="he">ככה זה נראה מהצד של הלקוחות, במילים שלהם מגוגל.</span><span lang="en">What it looks like from the customer's side, in their own words from Google.</span></p>
+      <p class="sub" style="--d:1"><span lang="he">ככה זה נראה מהצד של הלקוחות, במילים שלהם מגוגל. 38 ביקורות, ממוצע 4.8.</span><span lang="en">What it looks like from the customer's side, in their own words from Google. 38 reviews, 4.8 on average.</span></p>
     </div>
-    <ol class="entries" data-reveal>
-      <li class="big" style="--d:0"><p class="when"><span class="what"><span lang="he">קריאת לילה · סתימה במטבח</span><span lang="en">Night call · blocked kitchen</span></span><span><span lang="he">לפני שנה</span><span lang="en">a year ago</span></span></p>
-        <blockquote><p lang="he">"חיים האינסטלטור מחיפה הגיע בלילה עקב סתימה במטבח, הגיע עם מכונה לפתיחת סתימות, תיקן את התקלה תוך 30 דקות, לקח מחיר הוגן אפילו שבא בלילה."</p><p lang="en">“Chaim the plumber from Haifa came at night for a kitchen blockage, brought a drain-clearing machine, fixed it within 30 minutes, and charged a fair price even though it was night.”</p></blockquote><p class="who">Dor · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></p></li>
-      <li style="--d:1"><p class="when"><span class="what"><span lang="he">נזילה בקיר · מצלמה</span><span lang="en">Leak in the wall · camera</span></span><span><span lang="he">לפני שנה</span><span lang="en">a year ago</span></span></p>
-        <blockquote><p lang="he">"הזמנתי את חיים האינסטלטור לתקן נזילה בקיר. הגיע עם מצלמה, מצא את הנזילה ותיקן את הצנרת מיד."</p><p lang="en">“I called Chaim the plumber to fix a leak in the wall. He came with a camera, found the leak and fixed the pipe right away.”</p></blockquote><p class="who">שילה מסס · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></p></li>
-      <li style="--d:2"><p class="when"><span class="what"><span lang="he">נזילה בצינור מים</span><span lang="en">Leaking water pipe</span></span><span><span lang="he">לפני שנתיים</span><span lang="en">2 years ago</span></span></p>
-        <blockquote><p lang="he">"הגיע מיד, תיקן הכל במהירות, מחיר סביר ונחמד."</p><p lang="en">“Came right away, fixed everything quickly, a reasonable price and pleasant.”</p></blockquote><p class="who">טלצו טל צו · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></p></li>
-      <li style="--d:3"><p class="when"><span class="what"><span lang="he">הגיע בזמן</span><span lang="en">On time</span></span><span><span lang="he">לפני 3 חודשים</span><span lang="en">3 months ago</span></span></p>
-        <blockquote><p lang="he">"מומלץ, הגיע בזמן, מקצועי, מחיר הוגן. מומלץ מאוד."</p><p lang="en">“Recommended: on time, professional, a fair price. Highly recommended.”</p></blockquote><p class="who">ליאנה שטאשוילי · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></p></li>
-      <li style="--d:4"><p class="when"><span class="what"><span lang="he">מקצועי ונחמד</span><span lang="en">Professional and kind</span></span><span><span lang="he">לפני 4 חודשים</span><span lang="en">4 months ago</span></span></p>
-        <blockquote><p lang="he">"מומלץ, מקצועי, הגיע בזמן. איש נחמד."</p><p lang="en">“Recommended, professional, on time. A nice man.”</p></blockquote><p class="who">Nelli Tsirulnikov · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></p></li>
+    <ol class="calls" data-reveal data-ui>
+      <li style="--d:0"><svg class="in" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M16 2v6h6M22 2l-6 6"/><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg>
+        <span class="ago"><span lang="he">לפני שנה</span><span lang="en">a year ago</span></span><span class="what"><span lang="he">קריאת לילה · סתימה במטבח</span><span lang="en">Night call · blocked kitchen</span></span>
+        <blockquote><p lang="he">"חיים האינסטלטור מחיפה הגיע בלילה עקב סתימה במטבח, הגיע עם מכונה לפתיחת סתימות, תיקן את התקלה תוך 30 דקות, לקח מחיר הוגן אפילו שבא בלילה."</p><p lang="en">“Chaim the plumber from Haifa came at night for a kitchen blockage, brought a drain-clearing machine, fixed it within 30 minutes, and charged a fair price even though it was night.”</p></blockquote><span class="who">Dor · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></span></li>
+      <li style="--d:1"><svg class="in" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M16 2v6h6M22 2l-6 6"/><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg>
+        <span class="ago"><span lang="he">לפני שנה</span><span lang="en">a year ago</span></span><span class="what"><span lang="he">נזילה בקיר · מצלמה</span><span lang="en">Leak in the wall · camera</span></span>
+        <blockquote><p lang="he">"הזמנתי את חיים האינסטלטור לתקן נזילה בקיר. הגיע עם מצלמה, מצא את הנזילה ותיקן את הצנרת מיד."</p><p lang="en">“I called Chaim the plumber to fix a leak in the wall. He came with a camera, found the leak and fixed the pipe right away.”</p></blockquote><span class="who">שילה מסס · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></span></li>
+      <li style="--d:2"><svg class="in" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M16 2v6h6M22 2l-6 6"/><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg>
+        <span class="ago"><span lang="he">לפני שנתיים</span><span lang="en">2 years ago</span></span><span class="what"><span lang="he">נזילה בצינור מים</span><span lang="en">Leaking water pipe</span></span>
+        <blockquote><p lang="he">"הגיע מיד, תיקן הכל במהירות, מחיר סביר ונחמד."</p><p lang="en">“Came right away, fixed everything quickly, a reasonable price and pleasant.”</p></blockquote><span class="who">טלצו טל צו · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></span></li>
+      <li style="--d:3"><svg class="in" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M16 2v6h6M22 2l-6 6"/><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg>
+        <span class="ago"><span lang="he">לפני 3 חודשים</span><span lang="en">3 months ago</span></span><span class="what"><span lang="he">הגיע בזמן</span><span lang="en">On time</span></span>
+        <blockquote><p lang="he">"מומלץ, הגיע בזמן, מקצועי, מחיר הוגן. מומלץ מאוד."</p><p lang="en">“Recommended: on time, professional, a fair price. Highly recommended.”</p></blockquote><span class="who">ליאנה שטאשוילי · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></span></li>
+      <li style="--d:4"><svg class="in" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M16 2v6h6M22 2l-6 6"/><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg>
+        <span class="ago"><span lang="he">לפני 4 חודשים</span><span lang="en">4 months ago</span></span><span class="what"><span lang="he">מקצועי ונחמד</span><span lang="en">Professional and kind</span></span>
+        <blockquote><p lang="he">"מומלץ, מקצועי, הגיע בזמן. איש נחמד."</p><p lang="en">“Recommended, professional, on time. A nice man.”</p></blockquote><span class="who">Nelli Tsirulnikov · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></span></li>
     </ol>
   </section>
 
-  <section class="roofs" aria-labelledby="roofs-h">
-    <div data-reveal><h2 id="roofs-h" style="--d:0"><span lang="he">וגם על הגג.</span><span lang="en">And up on the roof.</span></h2></div>
-    <div class="roof-grid" data-reveal>
-      <figure style="--d:0"><img src="img/roof-sea.jpg" width="1125" height="1500" alt="קולטי שמש על גג עם נוף לים" loading="lazy" decoding="async"><figcaption><span lang="he">קולטים, עם הים ברקע</span><span lang="en">Solar collectors, the sea behind</span></figcaption></figure>
-      <figure style="--d:1"><img src="img/roof-street.jpg" width="1125" height="1500" alt="דוד מים על גג מעל רחוב בחיפה" loading="lazy" decoding="async"><figcaption><span lang="he">דוד על גג בחיפה</span><span lang="en">A water tank on a Haifa roof</span></figcaption></figure>
-      <figure style="--d:2"><img src="img/mid-work.jpg" width="1125" height="1500" alt="חדר רחצה באמצע עבודה" loading="lazy" decoding="async"><figcaption><span lang="he">חדר רחצה באמצע עבודה</span><span lang="en">A bathroom mid-job</span></figcaption></figure>
+  <section class="roll" aria-labelledby="roll-h">
+    <div data-reveal>
+      <h2 id="roll-h" style="--d:0"><span lang="he">וגם על הגג.</span><span lang="en">And up on the roof.</span></h2>
+      <p class="sub" style="--d:1"><span lang="he">מהמצלמה של חיים: תמונות מדף העסק שלו בגוגל. לחצו על קובץ כדי לפתוח.</span><span lang="en">From Chaim's camera: photos from his Google listing. Tap a file to open it.</span></p>
+      <ul class="files" style="--d:2">
+        <li><button type="button" aria-current="true" data-show="0"><img src="img/roof-sea.jpg" width="1125" height="1500" alt="" loading="lazy" decoding="async"><span><span lang="he">קולטים, עם הים ברקע</span><span lang="en">Solar collectors, the sea behind</span><small>IMG_01.JPG</small></span></button></li>
+        <li><button type="button" aria-current="false" data-show="1"><img src="img/roof-street.jpg" width="1125" height="1500" alt="" loading="lazy" decoding="async"><span><span lang="he">דוד על גג בחיפה</span><span lang="en">A water tank on a Haifa roof</span><small>IMG_02.JPG</small></span></button></li>
+        <li><button type="button" aria-current="false" data-show="2"><img src="img/mid-work.jpg" width="1125" height="1500" alt="" loading="lazy" decoding="async"><span><span lang="he">חדר רחצה באמצע עבודה</span><span lang="en">A bathroom mid-job</span><small>IMG_03.JPG</small></span></button></li>
+      </ul>
     </div>
+    <figure class="viewer" data-viewer>
+      <img src="img/roof-sea.jpg" width="1125" height="1500" alt="קולטי שמש על גג עם נוף לים" loading="lazy" decoding="async" data-view>
+      <div class="vf" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <figcaption aria-hidden="true"><span class="num" data-view-name>IMG_01.JPG</span><span class="num" data-view-count>1/3</span></figcaption>
+    </figure>
   </section>
 
   <section class="report" id="report" aria-labelledby="rep-h">
     <div data-reveal>
-      <h2 id="rep-h" style="--d:0"><span lang="he">דווחו על התקלה.</span><span lang="en">Report the fault.</span></h2>
-      <p class="sub" style="--d:1"><span lang="he">בחרו מה קרה ומתי, והודעה מוכנה תישלח לחיים בוואטסאפ. גם באמצע הלילה.</span><span lang="en">Pick what happened and when, and a ready message goes to Chaim on WhatsApp. Even in the middle of the night.</span></p>
-      <form id="composer" style="--d:2" onsubmit="return false">
-        <fieldset><legend><span lang="he">מה קרה?</span><span lang="en">What happened?</span></legend>
-          <div class="chips">
-            <label class="chip"><input type="radio" name="p" value="wall" checked><span><span lang="he">נזילה בקיר</span><span lang="en">Leak in a wall</span></span></label>
-            <label class="chip"><input type="radio" name="p" value="drain"><span><span lang="he">סתימה</span><span lang="en">Blockage</span></span></label>
-            <label class="chip"><input type="radio" name="p" value="pipe"><span><span lang="he">צינור דולף</span><span lang="en">Leaking pipe</span></span></label>
-            <label class="chip"><input type="radio" name="p" value="heater"><span><span lang="he">דוד / מים חמים</span><span lang="en">Hot water</span></span></label>
-            <label class="chip"><input type="radio" name="p" value="other"><span><span lang="he">משהו אחר</span><span lang="en">Something else</span></span></label>
+      <h2 id="rep-h" style="--d:0"><span lang="he">כרטיס תקלה.</span><span lang="en">Fault ticket.</span></h2>
+      <p class="sub" style="--d:1"><span lang="he">סמנו מה קרה ומתי, והכרטיס נשלח לחיים בוואטסאפ כהודעה מוכנה. גם באמצע הלילה.</span><span lang="en">Tick what happened and when, and the ticket goes to Chaim on WhatsApp as a ready message. Even in the middle of the night.</span></p>
+      <form class="ticket" id="composer" style="--d:2" onsubmit="return false" data-ui>
+        <div class="t-head">
+          <div><b><span lang="he">חיים האינסטלטור</span><span lang="en">Chaim the Plumber</span></b><span><span lang="he">קריאת שירות · 24/7</span><span lang="en">Service call · 24/7</span></span></div>
+          <p class="t-no"><span lang="he">מס׳ </span><span lang="en">No. </span><b class="num" data-ticket-no>------</b><br><span class="num" data-ticket-date></span></p>
+        </div>
+        <fieldset class="t-row"><legend><span lang="he">1. מה קרה?</span><span lang="en">1. What happened?</span></legend>
+          <div class="boxes">
+            <label class="box"><input type="radio" name="p" value="wall" checked><i><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l6 7L27 5"/></svg></i><span><span lang="he">נזילה בקיר</span><span lang="en">Leak in a wall</span></span></label>
+            <label class="box"><input type="radio" name="p" value="drain"><i><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l6 7L27 5"/></svg></i><span><span lang="he">סתימה</span><span lang="en">Blockage</span></span></label>
+            <label class="box"><input type="radio" name="p" value="pipe"><i><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l6 7L27 5"/></svg></i><span><span lang="he">צינור דולף</span><span lang="en">Leaking pipe</span></span></label>
+            <label class="box"><input type="radio" name="p" value="heater"><i><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l6 7L27 5"/></svg></i><span><span lang="he">דוד / מים חמים</span><span lang="en">Hot water</span></span></label>
+            <label class="box"><input type="radio" name="p" value="other"><i><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l6 7L27 5"/></svg></i><span><span lang="he">משהו אחר</span><span lang="en">Something else</span></span></label>
           </div></fieldset>
-        <fieldset><legend><span lang="he">מתי?</span><span lang="en">When?</span></legend>
-          <div class="chips">
-            <label class="chip"><input type="radio" name="w" value="now" checked><span><span lang="he">עכשיו</span><span lang="en">Now</span></span></label>
-            <label class="chip"><input type="radio" name="w" value="today"><span><span lang="he">היום</span><span lang="en">Today</span></span></label>
-            <label class="chip"><input type="radio" name="w" value="week"><span><span lang="he">השבוע</span><span lang="en">This week</span></span></label>
+        <fieldset class="t-row"><legend><span lang="he">2. מתי?</span><span lang="en">2. When?</span></legend>
+          <div class="boxes">
+            <label class="box"><input type="radio" name="w" value="now" checked><i><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l6 7L27 5"/></svg></i><span><span lang="he">עכשיו</span><span lang="en">Now</span></span></label>
+            <label class="box"><input type="radio" name="w" value="today"><i><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l6 7L27 5"/></svg></i><span><span lang="he">היום</span><span lang="en">Today</span></span></label>
+            <label class="box"><input type="radio" name="w" value="week"><i><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 17l6 7L27 5"/></svg></i><span><span lang="he">השבוע</span><span lang="en">This week</span></span></label>
           </div></fieldset>
-        <label class="where"><span lang="he">איפה? שכונה או רחוב (לא חובה)</span><span lang="en">Where? Neighbourhood or street (optional)</span>
+        <label class="t-row t-where"><span><span lang="he">3. איפה? שכונה או רחוב (לא חובה)</span><span lang="en">3. Where? Neighbourhood or street (optional)</span></span>
           <input type="text" name="where" autocomplete="address-level3" enterkeyhint="done" data-ph-he="למשל: בת גלים, רחוב יפו…" data-ph-en="e.g. Bat Galim, Jaffa St…" placeholder="למשל: בת גלים, רחוב יפו…">
         </label>
+        <div class="t-msg" aria-live="polite"><small><span lang="he">נוסח ההודעה לחיים</span><span lang="en">The message to Chaim</span></small><p data-preview dir="auto"></p></div>
+        <a class="t-send" href="https://wa.me/972527865833" data-send><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg><span lang="he">שלחו את הכרטיס לחיים בוואטסאפ</span><span lang="en">Send the ticket to Chaim on WhatsApp</span></a>
       </form>
-      <div class="msg" aria-live="polite" style="--d:3"><small><span lang="he">ההודעה לחיים</span><span lang="en">Message to Chaim</span></small><p data-preview dir="auto"></p></div>
-      <a class="btn" href="https://wa.me/972527865833" data-send style="--d:4"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg><span lang="he">שלחו לחיים בוואטסאפ</span><span lang="en">Send to Chaim on WhatsApp</span></a>
     </div>
-    <div class="contact-card" data-reveal>
-      <p class="big247 num" style="--d:0">24/7</p>
+    <aside class="line-side" data-reveal aria-labelledby="line-h">
+      <h3 id="line-h" style="--d:0"><span lang="he">מעדיפים לדבר?</span><span lang="en">Rather talk?</span></h3>
       <p style="--d:1"><span lang="he">פתוח כל יום, כל שעה, לפי דף העסק בגוגל.</span><span lang="en">Open every day, every hour, per his Google listing.</span></p>
       <p class="clock num" style="--d:2" data-clock-big>--:--</p>
-      <div class="row" style="--d:3">
-        <a class="btn" href="tel:+972527865833"><span lang="he">חייגו </span><span lang="en">Call </span><span class="num">052-786-5833</span></a>
+      <a class="btn" style="--d:3" href="tel:+972527865833"><span lang="he">חייגו </span><span lang="en">Call </span><span class="num">052-786-5833</span></a>
+      <div class="loc" style="--d:4">
+        <div class="vf" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <span class="tag" aria-hidden="true"><span lang="he">דיזראלי 16, חיפה</span><span lang="en">16 Disraeli St, Haifa</span></span>
+        <iframe class="map" title="דיזראלי 16, חיפה" loading="lazy" src="https://www.google.com/maps?q=%D7%93%D7%99%D7%96%D7%A8%D7%90%D7%9C%D7%99%2016%2C%20%D7%97%D7%99%D7%A4%D7%94&output=embed&hl=he"></iframe>
       </div>
-      <iframe class="map" style="--d:4" title="דיזראלי 16, חיפה" loading="lazy" src="https://www.google.com/maps?q=%D7%93%D7%99%D7%96%D7%A8%D7%90%D7%9C%D7%99%2016%2C%20%D7%97%D7%99%D7%A4%D7%94&output=embed&hl=he"></iframe>
       <div class="maplinks" style="--d:5"><a href="https://waze.com/ul?q=%D7%93%D7%99%D7%96%D7%A8%D7%90%D7%9C%D7%99%2016%20%D7%97%D7%99%D7%A4%D7%94">Waze</a><a href="https://maps.google.com/?cid=11768994281890261837"><span lang="he">גוגל מפות</span><span lang="en">Google Maps</span></a></div>
-    </div>
+    </aside>
   </section>
 </main>
 
-<footer class="foot">
-  <p class="wm" aria-hidden="true" translate="no"><span lang="he">חיים <span class="h">האינסטלטור</span></span><span lang="en">Chaim <span class="h">the Plumber</span></span></p>
-  <div class="cols">
-    <div class="places">
-      <a href="tel:+972527865833" class="num">052-786-5833</a>
-      <a href="https://wa.me/972527865833"><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
-      <a href="https://maps.google.com/?cid=11768994281890261837"><span lang="he">דיזראלי 16, חיפה</span><span lang="en">16 Disraeli St, Haifa</span></a>
-    </div>
-    <div class="small"><p><span lang="he">התמונות מתוך דף העסק של חיים בגוגל מפות. הביקורות מאותו דף, כמו שהלקוחות כתבו אותן. אנימציית הסריקה והטמפרטורות הן המחשה, על מודל תלת-ממדי עם טקסטורות של Poly Haven (CC0).</span><span lang="en">Photos are from Chaim's Google Maps listing. Reviews are from the same listing, as customers wrote them (English versions are translations). The scan animation and temperatures are an illustration, on a 3D model with Poly Haven textures (CC0).</span></p></div>
+<footer class="end" aria-labelledby="end-h">
+  <div class="vf" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <div class="end-in">
+    <p class="stop"><b></b>STOP · <span class="num" data-stamp>--:--:--</span></p>
+    <h2 class="saved" id="end-h"><span lang="he">ההקלטה נשמרה. <span class="h">חיים זמין.</span></span><span lang="en">Recording saved. <span class="h">Chaim's available.</span></span></h2>
+    <dl class="meta" data-ui>
+      <div><dt><span lang="he">קובץ</span><span lang="en">File</span></dt><dd class="num">CHAIM_THE_PLUMBER_HAIFA.REC</dd></div>
+      <div><dt><span lang="he">אינסטלטור</span><span lang="en">Plumber</span></dt><dd translate="no"><span lang="he">חיים האינסטלטור</span><span lang="en">Chaim the Plumber</span></dd></div>
+      <div><dt><span lang="he">טלפון</span><span lang="en">Phone</span></dt><dd><a href="tel:+972527865833" class="num">052-786-5833</a></dd></div>
+      <div><dt><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></dt><dd><a href="https://wa.me/972527865833"><span lang="he">שלחו הודעה</span><span lang="en">Send a message</span></a></dd></div>
+      <div><dt><span lang="he">מיקום</span><span lang="en">Location</span></dt><dd><a href="https://maps.google.com/?cid=11768994281890261837"><span lang="he">דיזראלי 16, חיפה</span><span lang="en">16 Disraeli St, Haifa</span></a> · <a href="https://waze.com/ul?q=%D7%93%D7%99%D7%96%D7%A8%D7%90%D7%9C%D7%99%2016%20%D7%97%D7%99%D7%A4%D7%94">Waze</a></dd></div>
+      <div><dt><span lang="he">זמינות</span><span lang="en">Hours</span></dt><dd><span lang="he">24/7 · כל יום, כל שעה</span><span lang="en">24/7 · every day, every hour</span></dd></div>
+      <div><dt><span lang="he">מקורות</span><span lang="en">Sources</span></dt><dd class="credit"><span lang="he">התמונות מתוך דף העסק של חיים בגוגל מפות. הביקורות מאותו דף, כמו שהלקוחות כתבו אותן. אנימציית הסריקה והטמפרטורות הן המחשה, על מודל תלת-ממדי עם טקסטורות של Poly Haven (CC0).</span><span lang="en">Photos are from Chaim's Google Maps listing. Reviews are from the same listing, as customers wrote them (English versions are translations). The scan animation and temperatures are an illustration, on a 3D model with Poly Haven textures (CC0).</span></dd></div>
+    </dl>
+    <div class="end-row"><a class="replay" href="#top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg><span lang="he">חזרה להתחלה</span><span lang="en">Back to the start</span></a><span>© 2026 <span lang="he">חיים האינסטלטור</span><span lang="en">Chaim the Plumber</span></span></div>
   </div>
-  <div class="legal"><span>© 2026 <span lang="he">חיים האינסטלטור</span><span lang="en">Chaim the Plumber</span></span><a href="#top"><span lang="he">חזרה למעלה</span><span lang="en">Back to top</span></a></div>
 </footer>
 
-<nav class="dock away" aria-label="Quick contact">
-  <a href="tel:+972527865833"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg><span lang="he">חייגו 24/7</span><span lang="en">Call 24/7</span></a>
-  <a href="https://wa.me/972527865833"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
+<nav class="fab away" aria-label="יצירת קשר מהירה">
+  <a class="wa" href="https://wa.me/972527865833" aria-label="וואטסאפ לחיים" data-aria-en="WhatsApp Chaim"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg></a>
+  <a class="shutter" href="tel:+972527865833" aria-label="חייגו לחיים, 24/7" data-aria-en="Call Chaim, 24/7"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg></span></a>
 </nav>
 
 <script>
 (function () {
-  var root = document.documentElement, WA = '972527865833', calm = matchMedia('(prefers-reduced-motion: reduce)');
+  var root = document.documentElement, WA = '972527865833';
+  var still = function () { return root.classList.contains('still'); };
+  var ariaHe = {};
   function setLang(l) {
     root.lang = l; root.dir = l === 'he' ? 'rtl' : 'ltr';
     document.title = l === 'he' ? 'חיים האינסטלטור · חיפה · 24/7' : 'Chaim the Plumber · Haifa · 24/7';
     try { localStorage.setItem('lang', l); } catch (e) {}
     var w = document.querySelector('[name=where]'); if (w) w.placeholder = w.dataset['ph' + (l === 'he' ? 'He' : 'En')];
-    write(); if (window.__scan) window.__scan(true); slide(); fitWm();
+    document.querySelectorAll('[data-aria-en]').forEach(function (el, i) { if (!(i in ariaHe)) ariaHe[i] = el.getAttribute('aria-label'); el.setAttribute('aria-label', l === 'he' ? ariaHe[i] : el.dataset.ariaEn); });
+    write(); note(); tick(); if (window.__scan) window.__scan(true); slide();
   }
   document.querySelectorAll('[data-set-lang]').forEach(function (b) { b.addEventListener('click', function () { setLang(root.lang === 'he' ? 'en' : 'he'); }); });
 
-  // live Haifa time for the camera timestamps and the 24/7 clock
-  function tick() {
-    var f = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Jerusalem', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(new Date());
-    document.querySelectorAll('[data-stamp]').forEach(function (el) { el.textContent = f; });
-    var c = document.querySelector('[data-clock-big]'); if (c) c.textContent = (root.lang === 'he' ? 'עכשיו ' : 'Now ') + f.slice(0, 5) + (root.lang === 'he' ? ' · פתוח' : ' · open');
-  }
-  tick(); setInterval(tick, 1000);
+  // the animations switch
+  var mBtn = document.querySelector('[data-motion]'), noteEl = document.querySelector('[data-auto-note]');
+  var WHY = { he: { reduce: 'כובו אוטומטית: המכשיר מוגדר לפחות תנועה', data: 'כובו אוטומטית: מצב חיסכון בנתונים', slow: 'כובו אוטומטית: החיבור איטי', device: 'כובו אוטומטית: מכשיר עם מעט זיכרון' },
+              en: { reduce: 'Turned off automatically: your device asks for less motion', data: 'Turned off automatically: data saver is on', slow: 'Turned off automatically: slow connection', device: 'Turned off automatically: a low-memory device' } };
+  function note() { var w = root.dataset.motionAuto; noteEl.textContent = w ? WHY[root.lang === 'en' ? 'en' : 'he'][w] : ''; mBtn.setAttribute('aria-checked', still() ? 'false' : 'true'); }
+  mBtn.addEventListener('click', function () {
+    var off = !still();
+    root.classList.toggle('still', off); delete root.dataset.motionAuto;
+    try { localStorage.setItem('motion', off ? 'off' : 'on'); } catch (e) {}
+    note();
+    if (window.__motion) window.__motion(!off);
+    if (window.__scan) window.__scan(true);
+  });
 
-  // WhatsApp fault report
+  // live Haifa time for the camera timestamps, the ticket and the 24/7 line
+  var fmt = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Jerusalem', year: '2-digit', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+  var ticketNo = document.querySelector('[data-ticket-no]'), ticketDate = document.querySelector('[data-ticket-date]'), clockBig = document.querySelector('[data-clock-big]');
+  function tick() {
+    var parts = {}; fmt.formatToParts(new Date()).forEach(function (x) { parts[x.type] = x.value; });
+    var hms = parts.hour + ':' + parts.minute + ':' + parts.second, he = root.lang === 'he';
+    document.querySelectorAll('[data-stamp]').forEach(function (el) { el.textContent = hms; });
+    clockBig.textContent = (he ? 'עכשיו ' : 'Now ') + parts.hour + ':' + parts.minute + (he ? ' · פתוח' : ' · open');
+    ticketNo.textContent = parts.year + parts.month + parts.day + '-' + parts.hour + parts.minute;
+    ticketDate.textContent = parts.day + '.' + parts.month + '.' + parts.year + ' · ' + parts.hour + ':' + parts.minute;
+  }
+  setInterval(tick, 1000);
+
+  // the ticket writes the WhatsApp message
   var T = {
     he: { p: { wall: 'נזילה בקיר', drain: 'סתימה', pipe: 'צינור שדולף', heater: 'בעיה בדוד / במים החמים', other: 'בעיית אינסטלציה' },
           w: { now: 'אפשר להגיע עכשיו?', today: 'אפשר להגיע היום?', week: 'אפשר לתאם השבוע?' }, hi: 'שלום חיים, הגעתי דרך האתר. יש לי ', at: ' ב' },
@@ -500,27 +657,19 @@ html[dir="rtl"] .slider .handle { left: auto; right: var(--x, 50%); transform: t
   form.addEventListener('change', write);
   form.addEventListener('input', function (e) { if (e.target.name === 'where') write(); });
 
-  // entrances, once
+  // entrances, once (ignored by the CSS when animations are off)
   var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
     es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { rootMargin: '0px 0px -12% 0px' }) : null;
   document.querySelectorAll('[data-reveal]').forEach(function (el) { io ? io.observe(el) : el.classList.add('in'); });
 
-  // the scan: tiles, thermal view, the hot spot, opening, fixing, closing
+  // the player: scroll position is the playhead
   (function () {
-    var track = document.querySelector('[data-scan]'), svg = track.querySelector('[data-scan-svg]');
-    var tilesG = svg.querySelector('[data-tiles]'), NS = 'http://www.w3.org/2000/svg', tiles = [], open = [];
-    for (var r = 0; r < 7; r++) for (var c = 0; c < 10; c++) {
-      var t = document.createElementNS(NS, 'rect');
-      t.setAttribute('x', c * 80 + 2); t.setAttribute('y', r * 80 + 2); t.setAttribute('width', 76); t.setAttribute('height', 76); t.setAttribute('rx', 3);
-      t.setAttribute('fill', (r + c) % 2 ? '#e6eae8' : '#eef1ef');
-      tilesG.appendChild(t); tiles.push(t);
-      if (c >= 3 && c <= 4 && r >= 2 && r <= 4) { t.setAttribute('class', 'tile-o'); open.push(t); }
-    }
+    var track = document.querySelector('[data-scan]'), frameEl = track.querySelector('[data-frame]');
     var q = function (s) { return track.querySelector(s); };
-    var thermal = q('[data-thermal]'), heat = q('[data-heat]'), coolspot = q('[data-coolspot]'), newpipe = q('[data-newpipe]'), damp = q('[data-damp]');
-    var target = q('[data-target]'), done = q('[data-done]'), legend = q('[data-legend]'), mode = q('[data-mode]'), tempEl = q('[data-temp]'), leakWord = q('[data-leak-word]');
-    var title = q('[data-stage-title]'), text = q('[data-stage-text]'), chips = [].slice.call(track.querySelectorAll('[data-go]'));
+    var legend = q('[data-legend]'), mode = q('[data-mode]'), tempEl = q('[data-temp]'), leakWord = q('[data-leak-word]'), xt = q('[data-xtemp]');
+    var title = q('[data-stage-title]'), text = q('[data-stage-text]'), bar = q('[data-bar]'), scrub = q('[data-scrub]'), tc = q('[data-tc]');
+    var chips = [].slice.call(track.querySelectorAll('[data-go]')), stills = [].slice.call(track.querySelectorAll('[data-stills] img'));
     var S = {
       he: [['קיר רגיל. כתם קטן ליד הרובה.', 'מבחוץ רואים רק רטיבות. איפה בדיוק הצינור דולף? אם מנחשים, שוברים חצי חדר.'],
            ['המצלמה רואה מה שהעין לא.', 'במצב תרמי הצינור שבתוך הקיר נחשף, והנקודה החמה מסמנת את הנזילה. לקוחה של חיים כתבה: "הגיע עם מצלמה, מצא את הנזילה".'],
@@ -531,50 +680,53 @@ html[dir="rtl"] .slider .handle { left: auto; right: var(--x, 50%); transform: t
            ['Open where the camera pointed.', 'Back to the normal camera: six tiles come off, the old fitting is replaced and soldered, and the chase is closed with mortar. A second thermal check shows the spot has cooled, even below the wall while it dries.'],
            ['Closed. Dry.', 'New tiles are pressed into fresh adhesive, row by row, and the wall stops getting wet.']]
     };
-    var words = { he: ['חשד', 'מאותרת', 'בתיקון', 'תוקנה'], en: ['Suspected', 'Located', 'Fixing', 'Fixed'] };
+    var words = { he: ['נזילה: חשד', 'נזילה: אותרה', 'נזילה: בתיקון', 'נזילה: תוקנה'], en: ['Leak: suspected', 'Leak: located', 'Leak: fixing', 'Leak: fixed'] };
+    // the still frames, rendered from the same 3D scene: [from, to, the p each one shows]
+    var SHOTS = [[0, 0.22, 0.17], [0.22, 0.5, 0.38], [0.5, 0.64, 0.615], [0.64, 0.72, 0.655], [0.72, 0.86, 0.79], [0.86, 1.01, 0.97]];
     var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; }, span = function (p, a, b) { return clamp((p - a) / (b - a)); };
-    var shown = -1, ticking = false;
+    var thermalAt = function (p) { return p < 0.46 ? span(p, 0.18, 0.28) : p < 0.72 ? 1 - span(p, 0.46, 0.52) : p < 0.86 ? span(p, 0.72, 0.76) : 1 - span(p, 0.86, 0.92); };
+    var small = matchMedia('(max-width: 900px)');
+    var shown = -1, shot = -1, ticking = false, dragging = false;
+    function loadShot(i) { var im = stills[i]; if (!im) return; var src = im.dataset[small.matches ? 'srcM' : 'srcD']; if (im.getAttribute('src') !== src) im.src = src; }
     function render(force) {
       var rr = track.getBoundingClientRect(), p = clamp(-rr.top / (rr.height - innerHeight)), he = root.lang === 'he';
-      var T = p < 0.46 ? span(p, 0.18, 0.28) : p < 0.72 ? 1 - span(p, 0.46, 0.52) : p < 0.86 ? span(p, 0.72, 0.76) : 1 - span(p, 0.86, 0.92);
-      var L = p < 0.66 ? 0.3 + 0.7 * span(p, 0.24, 0.5) : 1 - span(p, 0.66, 0.76);
-      var C = p < 0.82 ? span(p, 0.68, 0.8) : 1 - span(p, 0.82, 0.92);
-      var O = p < 0.84 ? span(p, 0.52, 0.62) : 1 - span(p, 0.84, 0.94);
-      thermal.style.opacity = T.toFixed(3);
-      tilesG.style.opacity = (1 - 0.82 * T).toFixed(3);
-      heat.style.transform = 'scale(' + (0.3 + 0.7 * L).toFixed(3) + ')';
-      heat.style.opacity = L.toFixed(3);
-      coolspot.style.opacity = C.toFixed(3);
-      newpipe.style.opacity = span(p, 0.6, 0.68).toFixed(3) * (1 - span(p, 0.86, 0.94));
-      damp.style.opacity = (p < 0.7 ? 0.35 + 0.4 * span(p, 0.05, 0.3) : 0.75 * (1 - span(p, 0.7, 0.9))).toFixed(3);
-      target.style.opacity = p > 0.3 && p < 0.7 ? 1 : 0;
-      done.style.opacity = p >= 0.92 ? 1 : 0;
-      legend.style.opacity = T.toFixed(3);
-      open.forEach(function (t, i) {
-        var k = calm.matches ? (O > 0.5 ? 1 : 0) : O;
-        t.style.opacity = (1 - k).toFixed(3);
-        t.style.transform = 'translateY(' + (k * (60 + i * 14)).toFixed(1) + 'px) rotate(' + (k * (i % 2 ? 14 : -12)).toFixed(1) + 'deg)';
-      });
-      var isT = T > 0.5; mode.textContent = isT ? 'THERMAL' : 'RGB'; mode.classList.toggle('thermal', isT);
-      var temp = window.__wall3d ? window.__wall3d.tempAt(p) : 19.8 + 11.6 * (p < 0.66 ? span(p, 0.2, 0.5) : 1 - span(p, 0.66, 0.8));
-      tempEl.textContent = temp.toFixed(1) + '°';
-      var xt = document.querySelector('[data-xtemp]'); if (xt) { xt.textContent = temp.toFixed(1) + '°C'; xt.style.opacity = T > 0.5 ? 1 : 0; }
-      if (window.__wall3d) window.__wall3d.set(p);
-      var sg = p < 0.22 ? 0 : p < 0.5 ? 1 : p < 0.86 ? 2 : 3;
-      var wi = p >= 0.76 ? 3 : p >= 0.55 ? 2 : p >= 0.3 ? 1 : 0;
+      var show3d = frameEl.classList.contains('has3d');
+      var k = 0; while (k < SHOTS.length - 1 && p >= SHOTS[k][1]) k++;
+      // without the 3D the readouts follow the still that is on screen
+      var v = show3d ? p : SHOTS[k][2];
+      if (!show3d && (still() || window.__no3d) && (k !== shot || force)) {
+        shot = k; loadShot(k); loadShot(k + 1); loadShot(k - 1);
+        stills.forEach(function (im, i) { im.classList.toggle('on', i === k); });
+      }
+      var T = thermalAt(v), isT = T > 0.5;
+      legend.style.opacity = show3d ? T.toFixed(3) : (isT ? 1 : 0);
+      mode.textContent = isT ? 'THERMAL' : 'RGB'; mode.classList.toggle('thermal', isT);
+      var temp = window.__wall3d ? window.__wall3d.tempAt(v) : 21.5 + 10 * (v < 0.66 ? 0.3 + 0.7 * span(v, 0.2, 0.5) : 1 - span(v, 0.66, 0.76)) - 2.6 * (v < 0.82 ? span(v, 0.68, 0.8) : 1 - span(v, 0.86, 0.98));
+      tempEl.textContent = temp.toFixed(1) + '°C';
+      xt.textContent = temp.toFixed(1) + '°C'; xt.style.opacity = isT ? 1 : 0;
+      if (window.__wall3d && show3d) window.__wall3d.set(p);
+      var sg = v < 0.22 ? 0 : v < 0.5 ? 1 : v < 0.86 ? 2 : 3;
+      var wi = v >= 0.76 ? 3 : v >= 0.55 ? 2 : v >= 0.3 ? 1 : 0;
       leakWord.textContent = words[he ? 'he' : 'en'][wi];
       leakWord.className = wi === 3 ? 'ok' : 'alert';
+      bar.style.setProperty('--p', p.toFixed(4));
+      if (!dragging) scrub.value = Math.round(p * 1000);
+      var secs = Math.round(p * 48); tc.textContent = Math.floor(secs / 60) + ':' + ('0' + secs % 60).slice(-2);
       if (sg !== shown || force) {
         shown = sg; var s = S[he ? 'he' : 'en'][sg]; title.textContent = s[0]; text.textContent = s[1];
         chips.forEach(function (c, i) { c.setAttribute('aria-pressed', i === sg ? 'true' : 'false'); });
       }
     }
-    addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; render(false); }); } }, { passive: true });
-    addEventListener('resize', function () { render(false); });
-    chips.forEach(function (c) { c.addEventListener('click', function () {
+    function seek(p) {
       var rr = track.getBoundingClientRect();
-      scrollTo({ top: scrollY + rr.top + parseFloat(c.dataset.go) * (rr.height - innerHeight), behavior: calm.matches ? 'auto' : 'smooth' });
-    }); });
+      scrollTo({ top: scrollY + rr.top + p * (rr.height - innerHeight), behavior: still() || dragging ? 'auto' : 'smooth' });
+    }
+    addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; render(false); }); } }, { passive: true });
+    addEventListener('resize', function () { render(true); });
+    chips.forEach(function (c) { c.addEventListener('click', function () { seek(parseFloat(c.dataset.go)); }); });
+    scrub.addEventListener('input', function () { dragging = true; seek(scrub.value / 1000); });
+    scrub.addEventListener('change', function () { dragging = false; });
+    ['pointerup', 'blur'].forEach(function (ev) { scrub.addEventListener(ev, function () { dragging = false; }); });
     window.__scan = render;
     render(true);
   })();
@@ -584,17 +736,22 @@ html[dir="rtl"] .slider .handle { left: auto; right: var(--x, 50%); transform: t
   function slide() { var v = range.value; slider.style.setProperty('--cut', v + '%'); slider.style.setProperty('--x', v + '%'); }
   range.addEventListener('input', slide);
 
-  // phone dock steps aside over the hero and footer
-  var dock = document.querySelector('.dock'), seen = new Set();
-  if ('IntersectionObserver' in window) {
-    var dio = new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? seen.add(e.target) : seen.delete(e.target); }); dock.classList.toggle('away', seen.size > 0); });
-    document.querySelectorAll('.hero, .foot, .report').forEach(function (el) { dio.observe(el); });
-  } else { dock.classList.remove('away'); }
+  // camera roll
+  var view = document.querySelector('[data-view]'), files = [].slice.call(document.querySelectorAll('[data-show]'));
+  var vName = document.querySelector('[data-view-name]'), vCount = document.querySelector('[data-view-count]');
+  var ALT = ['קולטי שמש על גג עם נוף לים', 'דוד מים על גג מעל רחוב בחיפה', 'חדר רחצה באמצע עבודה'];
+  files.forEach(function (b) { b.addEventListener('click', function () {
+    var i = +b.dataset.show; view.src = b.querySelector('img').getAttribute('src'); view.alt = ALT[i];
+    vName.textContent = 'IMG_0' + (i + 1) + '.JPG'; vCount.textContent = (i + 1) + '/3';
+    files.forEach(function (f) { f.setAttribute('aria-current', f === b ? 'true' : 'false'); });
+  }); });
 
-  var wm = document.querySelector('.foot .wm');
-  function fitWm() { wm.style.fontSize = ''; var room = wm.clientWidth, need = wm.scrollWidth; if (need > room) wm.style.fontSize = (parseFloat(getComputedStyle(wm).fontSize) * room / need * 0.98) + 'px'; }
-  if (document.fonts) document.fonts.ready.then(fitWm);
-  addEventListener('resize', fitWm);
+  // camera controls step aside over the hero, the ticket and the end screen
+  var fab = document.querySelector('.fab'), seen = new Set();
+  if ('IntersectionObserver' in window) {
+    var dio = new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? seen.add(e.target) : seen.delete(e.target); }); fab.classList.toggle('away', seen.size > 0); });
+    document.querySelectorAll('.hero, .end, .report').forEach(function (el) { dio.observe(el); });
+  } else { fab.classList.remove('away'); }
 
   var qs = new URLSearchParams(location.search).get('lang'), saved = null;
   try { saved = localStorage.getItem('lang'); } catch (e) {}
@@ -603,13 +760,29 @@ html[dir="rtl"] .slider .handle { left: auto; right: var(--x, 50%); transform: t
 </script>
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.min.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.163.0/examples/jsm/" } }</script>
 <script type="module">
-  import { initWall3D } from './wall3d.js';
-  const feed = document.querySelector('.feed'), host = document.querySelector('[data-wall3d]');
-  try {
-    feed.classList.add('has3d');   // show the stage first, so the canvas is measured at its real size
-    const api = host && initWall3D(host);
-    if (api) { window.__wall3d = api; if (window.__scan) window.__scan(true); } else feed.classList.remove('has3d');
-  } catch (e) { feed.classList.remove('has3d'); console.warn('3D view unavailable, using the drawing', e); }
+  // the 3D scan only loads with animations on; with them off the player shows still frames of the same scene
+  const root = document.documentElement, frame = document.querySelector('[data-frame]'), host = document.querySelector('[data-wall3d]');
+  let api = null, loading = null;
+  async function start() {
+    if (api) { api.resume(); frame.classList.add('has3d'); window.__scan && window.__scan(true); return; }
+    if (loading) return loading;
+    loading = (async () => {
+      try {
+        const { initWall3D } = await import('./wall3d.js');
+        if (root.classList.contains('still')) return;   // switched off while it was loading
+        frame.classList.add('has3d');   // show the stage first, so the canvas is measured at its real size
+        api = initWall3D(host);
+        if (api) { window.__wall3d = api; } else { frame.classList.remove('has3d'); window.__no3d = true; }
+      } catch (e) { frame.classList.remove('has3d'); window.__no3d = true; console.warn('3D view unavailable, showing still frames', e); }
+      loading = null; window.__scan && window.__scan(true);
+    })();
+    return loading;
+  }
+  window.__motion = (on) => {
+    if (on) start();
+    else { if (api) api.pause(); frame.classList.remove('has3d'); window.__scan && window.__scan(true); }
+  };
+  if (!root.classList.contains('still')) start();
 </script>
 </body>
 </html>

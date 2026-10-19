@@ -7,7 +7,8 @@
 <meta name="theme-color" content="#0d0f10">
 <meta name="color-scheme" content="dark">
 <title>ירון כץ אינסטלציה · חיפה</title>
-<script>document.documentElement.classList.add('js');</script>
+<script>document.documentElement.classList.add('js');
+(function(){var r=document.documentElement,s=null;try{s=localStorage.getItem('motion')}catch(e){}var c=navigator.connection||{},auto=matchMedia('(prefers-reduced-motion: reduce)').matches||!!c.saveData||/2g|3g/.test(c.effectiveType||'')||(navigator.deviceMemory>0&&navigator.deviceMemory<=2)||(navigator.hardwareConcurrency>0&&navigator.hardwareConcurrency<=2);var off=s?s==='off':auto;r.classList.toggle('still',off);if(!s&&auto)r.dataset.motionAuto='1';})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -34,6 +35,7 @@
   --m: max(clamp(16px, 2.6vw, 40px), env(safe-area-inset-left), env(safe-area-inset-right));
   --pipe-x: clamp(20px, 4.2vw, 64px);
   --gutter: clamp(52px, 10vw, 156px);
+  --T: 30px;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --r: 3px;
 }
@@ -44,8 +46,8 @@ html[lang="he"] body [lang="en"], html[lang="en"] body [lang="he"] { display: no
 a { color: inherit; }
 img, svg { display: block; }
 img { max-width: 100%; height: auto; }
-button, a, [role="button"], label.chip { touch-action: manipulation; }
-button, .btn, label.chip, .dock a { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+button, a, label { touch-action: manipulation; }
+button, .btn, .fx, .wtag, .ln a, .br { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 :focus-visible { outline: 3px solid var(--copper-hi); outline-offset: 3px; }
 h1, h2, h3 { text-wrap: balance; }
 [id] { scroll-margin-top: 16px; }
@@ -88,23 +90,46 @@ html[lang="en"] .name { font-size: clamp(54px, 7.6vw, 128px); text-transform: up
 html[dir="ltr"] .hero .photo::after { background: linear-gradient(to right, rgba(18,20,22,0) 55%, rgba(18,20,22,.92)); } /* taste-skill-ignore: scrim */
 .hero .photo figcaption { position: absolute; top: 18px; inset-inline-end: var(--m); z-index: 2; font-size: var(--step-small); color: rgba(236,230,220,.8); }
 
-/* spec plate */
-.specs { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--bg2); }
-.specs div { padding: clamp(22px, 3vw, 40px) var(--m); }
-@media (min-width: 901px) {
-  .specs div + div { box-shadow: inset 1px 0 0 var(--line); } /* taste-skill-ignore: divider between plate cells */
-  html[dir="rtl"] .specs div + div { box-shadow: inset -1px 0 0 var(--line); } /* taste-skill-ignore: divider */
-}
-.specs b { display: block; font-weight: 900; font-size: clamp(30px, 3.4vw, 54px); line-height: 1; letter-spacing: -0.03em; color: var(--brass); }
-.specs > div > span { display: block; margin-top: 8px; color: var(--muted); }
+/* motion switch: a ball valve, seen from above. Lever along the pipe = open (animations on), across = shut */
+.valve-sw { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0; font: inherit; font-size: 15px; font-weight: 500; color: var(--ink); background: none; border: 0; cursor: pointer; }
+.valve-sw .v { position: relative; width: 58px; height: 30px; flex: none; }
+.valve-sw .v::before { content: ""; position: absolute; inset-inline: 0; top: 10px; height: 10px; background: linear-gradient(180deg, #4f2812, #eab184 35%, #c27a45 60%, #4f2812); } /* taste-skill-ignore: rendered copper */
+.valve-sw .bd { position: absolute; left: 50%; top: 4px; width: 24px; height: 22px; margin-left: -12px; border-radius: 6px; background: linear-gradient(180deg, #5a4318, #f6e2a8 30%, #c9a45c 58%, #6d5320); } /* taste-skill-ignore: rendered brass */
+.valve-sw .lv { position: absolute; left: 50%; top: 12px; width: 30px; height: 6px; margin-left: -3px; border-radius: 3px; background: linear-gradient(180deg, #e5584c, #b52a20 55%, #6d140f); transform-origin: 3px 3px; transition: transform 420ms var(--ease-out); } /* taste-skill-ignore: red valve lever */
+.valve-sw .lv::before { content: ""; position: absolute; left: -2px; top: -2px; width: 10px; height: 10px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #f4f4f4, #8a9096 60%, #3d4146); } /* taste-skill-ignore: stem nut */
+.valve-sw[aria-checked="false"] .lv { transform: rotate(-90deg); }
+.valve-sw b { font-weight: 700; color: var(--water); }
+.valve-sw[aria-checked="false"] b { color: var(--muted); }
+.top { flex-wrap: wrap; row-gap: 6px; }
+.motion-note { display: none; flex-basis: 100%; max-width: 44ch; margin-inline-start: auto; padding: 6px 10px; border-radius: 4px; background: rgba(13, 15, 16, .78); font-size: var(--step-small); line-height: 1.45; color: var(--ink); text-align: end; }
+html.still[data-motion-auto] .motion-note { display: block; }
+
+/* the main line under the hero: brass tags hang from it, then it elbows down into the story pipe */
+.mains { position: relative; padding: calc(36px + var(--T)) var(--m) 8px; padding-inline-end: calc(var(--gutter) + var(--m)); background: var(--bg); }
+.mains .run, .mains .elbow, .mains .drop { position: absolute; display: block; }
+.mains .run { top: 36px; height: var(--T); inset-inline-start: 0; inset-inline-end: calc(var(--pipe-x) + 2 * var(--T) - 1px); background: linear-gradient(0deg, #5e3017 0%, #a8653a 18%, #f0c29c 38%, #c27a45 58%, #8a4c27 80%, #4f2812 100%); } /* taste-skill-ignore: rendered copper */
+.mains .elbow { top: 36px; inset-inline-end: var(--pipe-x); width: calc(2 * var(--T)); height: calc(2 * var(--T)); background: radial-gradient(circle at 0 100%, transparent calc(var(--T) - 0.5px), #5e3017 var(--T), #a8653a calc(var(--T) * 1.18), #f0c29c calc(var(--T) * 1.38), #c27a45 calc(var(--T) * 1.58), #8a4c27 calc(var(--T) * 1.8), #4f2812 calc(var(--T) * 2 - 1px), transparent calc(var(--T) * 2)); } /* taste-skill-ignore: rendered copper elbow */
+html[dir="rtl"] .mains .elbow { background: radial-gradient(circle at 100% 100%, transparent calc(var(--T) - 0.5px), #5e3017 var(--T), #a8653a calc(var(--T) * 1.18), #f0c29c calc(var(--T) * 1.38), #c27a45 calc(var(--T) * 1.58), #8a4c27 calc(var(--T) * 1.8), #4f2812 calc(var(--T) * 2 - 1px), transparent calc(var(--T) * 2)); } /* taste-skill-ignore: rendered copper elbow */
+.mains .drop { top: calc(36px + 2 * var(--T) - 1px); bottom: 0; inset-inline-end: var(--pipe-x); width: var(--T); }
+.mains .drop, .pipe .wall, .foot .riser { background: linear-gradient(90deg, #5e3017 0%, #a8653a 18%, #f0c29c 38%, #c27a45 58%, #8a4c27 80%, #4f2812 100%); } /* taste-skill-ignore: rendered copper, the subject's own material */
+html[dir="rtl"] .mains .drop, html[dir="rtl"] .pipe .wall, html[dir="rtl"] .foot .riser { background: linear-gradient(270deg, #5e3017 0%, #a8653a 18%, #f0c29c 38%, #c27a45 58%, #8a4c27 80%, #4f2812 100%); } /* taste-skill-ignore: rendered copper */
+.tags { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 200px)); justify-content: space-around; gap: 12px; align-items: start; }
+.tag { position: relative; margin-top: var(--chain); transform: rotate(var(--tilt, 0deg)); transform-origin: 50% calc(-1 * var(--chain)); }
+.tag::before { content: ""; position: absolute; left: 50%; bottom: calc(100% - 14px); width: 8px; height: calc(var(--chain) + 14px); margin-left: -4px; background: radial-gradient(ellipse 3px 4.6px at 50% 50%, transparent 1.5px, #e8cf8c 1.9px, #8a6a2a 3px, transparent 3.3px) 0 0 / 8px 8px repeat-y; } /* taste-skill-ignore: brass chain */
+.tag .tg { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; padding: 34px 12px 18px; border-radius: 10px 10px 14px 14px; background: linear-gradient(160deg, #f6e2a8 0%, #d4b06a 22%, #b8913f 48%, #e3c47e 66%, #8f6c28 100%); color: #3d2c0c; box-shadow: inset 0 0 0 2px rgba(255, 240, 200, .35), inset 0 -3px 0 rgba(60, 40, 8, .35); } /* taste-skill-ignore: rendered brass tag with a stamped edge */
+.tag .tg::before { content: ""; position: absolute; top: 9px; left: 50%; width: 14px; height: 14px; margin-left: -7px; border-radius: 50%; background: radial-gradient(circle, #0d0f10 55%, #5a4318 62%, #f6e2a8 80%, #8f6c28); } /* taste-skill-ignore: punched hole with its ring */
+.tag .num { white-space: nowrap; }
+.tag b { display: block; max-width: 100%; white-space: nowrap; }
+.tag b { font-weight: 900; font-size: clamp(26px, 3.6vw, 56px); line-height: 1; letter-spacing: -0.02em; }
+.tag .tg > span { font-size: 16px; font-weight: 700; line-height: 1.25; color: #4a3712; }
 
 /* the pipe that carries the story */
 .story { position: relative; padding-inline-end: var(--gutter); }
-.pipe { position: absolute; top: 0; bottom: 120px; inset-inline-end: var(--pipe-x); width: 30px; z-index: 1; }
-.pipe .wall { position: absolute; inset: 0; border-radius: 15px; background: linear-gradient(90deg, #5e3017 0%, #a8653a 18%, #f0c29c 38%, #c27a45 58%, #8a4c27 80%, #4f2812 100%); } /* taste-skill-ignore: rendered copper, the subject's own material */
+.pipe { position: absolute; top: 0; bottom: 0; inset-inline-end: var(--pipe-x); width: var(--T); z-index: 1; }
+.pipe .wall { position: absolute; inset: 0; }
 .pipe .bore { position: absolute; inset: 8px 8px; border-radius: 7px; background: #07090a; overflow: hidden; }
 .pipe .flow { position: absolute; inset: 0; transform-origin: top; transform: scaleY(0); background: linear-gradient(90deg, #135a80, #4fb3e3 45%, #a9e2f8 55%, #2c8fc1); } /* taste-skill-ignore: rendered water */
-.story-intro { position: relative; padding: clamp(80px, 9vw, 150px) var(--m) clamp(24px, 3vw, 48px); }
+.story-intro { position: relative; padding: clamp(20px, 2.4vw, 40px) var(--m) clamp(24px, 3vw, 48px); }
 .story-intro p { font-size: var(--step-lead); font-weight: 500; line-height: 1.4; max-width: 30ch; }
 .ch { position: relative; display: grid; grid-template-columns: 5fr 7fr; gap: clamp(32px, 5vw, 96px); align-items: center; padding: clamp(72px, 8vw, 140px) var(--m); }
 .ch.flip .media { order: -1; }
@@ -127,14 +152,47 @@ html[dir="ltr"] .ch blockquote { box-shadow: inset 3px 0 0 var(--copper); } /* t
 .fact strong { font-weight: 700; }
 
 /* composer */
-.ask fieldset { border: 0; margin-top: 26px; }
+.ch.ask { grid-template-columns: 7fr 5fr; align-items: start; }
+.ask .phone-col { position: sticky; top: 24px; }
+.ask fieldset { border: 0; margin-top: 26px; min-width: 0; }
 .ask legend { font-weight: 700; margin-bottom: 12px; }
-.chips { display: flex; flex-wrap: wrap; gap: 10px; }
-.chip input { position: absolute; opacity: 0; pointer-events: none; }
-.chip > span { display: inline-flex; align-items: center; min-height: 48px; padding: 0 18px; background: var(--bg3); border-radius: var(--r); cursor: pointer; transition: background-color 150ms ease, color 150ms ease, transform 120ms var(--ease-out); }
-.chip input:checked + span { background: var(--copper); color: #141110; font-weight: 700; }
-.chip input:focus-visible + span { outline: 3px solid var(--copper-hi); outline-offset: 2px; }
-.chip > span:active { transform: scale(0.96); }
+.ask input[type="radio"] { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+/* the home's water line, drawn in copper: tap the fixture that's in trouble */
+.plan { position: relative; width: 100%; max-width: 640px; }
+.plan svg { width: 100%; height: auto; }
+.fx { position: absolute; cursor: pointer; border-radius: 6px; }
+.fx .nm { position: absolute; left: 50%; top: var(--ny, 0%); transform: translate(-50%, -100%); white-space: nowrap; padding: 3px 9px; border-radius: 4px; font-size: 14px; font-weight: 700; line-height: 1.3; background: linear-gradient(170deg, #f1d99c, #c9a45c 55%, #a07f3a); color: #2e2208; transition: background-color 150ms ease, transform 140ms var(--ease-out); } /* taste-skill-ignore: brass name tag */
+.fx:active .nm { transform: translate(-50%, -100%) scale(0.96); }
+.fx input:checked ~ .nm { background: var(--water); color: #04202e; }
+.fx input:focus-visible ~ .nm { outline: 3px solid var(--copper-hi); outline-offset: 2px; }
+.plan .fxg { transition: filter 200ms ease; }
+.plan[data-sel="main"] .fxg[data-fx="main"], .plan[data-sel="heater"] .fxg[data-fx="heater"], .plan[data-sel="shower"] .fxg[data-fx="shower"],
+.plan[data-sel="toilet"] .fxg[data-fx="toilet"], .plan[data-sel="sink"] .fxg[data-fx="sink"], .plan[data-sel="drain"] .fxg[data-fx="drain"] { filter: drop-shadow(0 0 5px rgba(79, 179, 227, .9)) drop-shadow(0 0 14px rgba(79, 179, 227, .45)); } /* taste-skill-ignore: selection glow on the chosen fixture */
+.plan .drip, .plan .pool, .plan .clog { opacity: 0; }
+.plan[data-sel="main"] [data-for="main"], .plan[data-sel="heater"] [data-for="heater"], .plan[data-sel="shower"] [data-for="shower"],
+.plan[data-sel="toilet"] [data-for="toilet"], .plan[data-sel="sink"] [data-for="sink"], .plan[data-sel="drain"] [data-for="drain"] { opacity: 1; }
+.plan .drip { transform-box: fill-box; transform-origin: 50% 0; }
+html:not(.still) .plan[data-sel="main"] .drip[data-for="main"], html:not(.still) .plan[data-sel="heater"] .drip[data-for="heater"], html:not(.still) .plan[data-sel="shower"] .drip[data-for="shower"],
+html:not(.still) .plan[data-sel="toilet"] .drip[data-for="toilet"], html:not(.still) .plan[data-sel="sink"] .drip[data-for="sink"] { animation: drip 1300ms cubic-bezier(.55, 0, 1, .45) 5; }
+@keyframes drip { 0%, 30% { transform: scale(.4, .5); opacity: 1; } 55% { transform: scale(.9, 1); opacity: 1; } 99% { transform: translateY(var(--fall, 30px)) scale(.75, 1.35); opacity: 1; } 100% { transform: translateY(var(--fall, 30px)); opacity: 0; } }
+/* a leak anywhere downstream keeps the meter turning with every tap shut */
+.plan .mneedle { transform-box: view-box; transform-origin: 58px 352px; }
+html:not(.still) .plan:not([data-sel="drain"]):not([data-sel="other"]) .mneedle { animation: meter 2400ms cubic-bezier(.3, 0, .7, 1) 3; }
+@keyframes meter { to { transform: rotate(360deg); } }
+.plan-cap { margin-top: 10px; font-size: var(--step-small); color: var(--muted); }
+.fx-other { display: inline-flex; align-items: center; gap: 10px; margin-top: 12px; min-height: 44px; cursor: pointer; font-weight: 500; text-decoration: underline; text-underline-offset: 5px; text-decoration-color: rgba(236,230,220,.4); }
+.fx-other input:checked ~ span { color: var(--water); text-decoration-color: var(--water); }
+.fx-other input:focus-visible ~ span { outline: 3px solid var(--copper-hi); outline-offset: 3px; }
+/* when: brass tags hanging from a rod; the chosen one swings forward, polished */
+.rod { position: relative; display: flex; gap: 12px; padding-top: 22px; }
+.rod::before { content: ""; position: absolute; top: 0; inset-inline: -6px; height: 8px; border-radius: 4px; background: linear-gradient(180deg, #5a4318, #f6e2a8 35%, #c9a45c 60%, #5a4318); } /* taste-skill-ignore: brass rod */
+.wtag { position: relative; flex: 1 1 0; max-width: 128px; cursor: pointer; }
+.wtag::before { content: ""; position: absolute; top: -18px; left: 50%; width: 12px; height: 22px; margin-left: -6px; border-radius: 6px; box-shadow: inset 0 0 0 2.5px #b8913f; } /* taste-skill-ignore: split ring */
+.wtag > span { position: relative; display: flex; align-items: center; justify-content: center; min-height: 52px; padding: 14px 6px 8px; text-align: center; border-radius: 6px 6px 9px 9px; font-weight: 700; line-height: 1.2; color: #3a3326; background: linear-gradient(165deg, #9d927a, #6f6754 55%, #857b63); transform-origin: 50% -16px; transform: rotate(var(--t, 0deg)); transition: transform 300ms var(--ease-out), background-color 200ms ease, color 200ms ease; } /* taste-skill-ignore: weathered brass tag */
+.wtag > span::before { content: ""; position: absolute; top: 5px; left: 50%; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: #0d0f10; }
+.wtag input:checked + span { background: linear-gradient(165deg, #f6e2a8, #c9a45c 50%, #e3c47e 70%, #8f6c28); color: #2e2208; transform: rotate(0deg) translateY(2px); } /* taste-skill-ignore: polished brass tag */
+.wtag input:focus-visible + span { outline: 3px solid var(--copper-hi); outline-offset: 3px; }
+.wtag:active > span { transform: rotate(0deg) scale(0.97); }
 .where { display: block; margin-top: 26px; font-weight: 700; }
 .where input { display: block; width: 100%; max-width: 440px; margin-top: 10px; font: inherit; font-size: 16px; font-weight: 400; padding: 14px 16px; background: var(--bg3); border: 0; border-radius: var(--r); color: var(--ink); }
 .where input::placeholder { color: #7d766c; }
@@ -189,25 +247,47 @@ html[dir="ltr"] .ch blockquote { box-shadow: inset 3px 0 0 var(--copper); } /* t
 .needle { transform-box: view-box; transform-origin: 180px 180px; transform: rotate(-135deg); }
 .gauge.in .needle { transform: rotate(var(--to, 135deg)); transition: transform 1600ms cubic-bezier(0.34, 1.25, 0.64, 1) 200ms; }
 
-/* footer */
-.foot { background: #0d0f10; padding: 80px var(--m) 32px; overflow: hidden; }
-.foot .wm { font-weight: 900; letter-spacing: -0.045em; line-height: 0.85; font-size: clamp(72px, 18vw, 290px); white-space: nowrap; color: var(--copper); }
-html[lang="en"] .foot .wm { text-transform: uppercase; font-size: clamp(56px, 13.6vw, 230px); }
-.foot .cols { display: grid; grid-template-columns: 5fr 7fr; gap: var(--m); margin-top: 56px; }
-.foot .places a { display: block; font-size: var(--step-lead); font-weight: 500; text-decoration: none; line-height: 1.55; }
-.foot .small { color: var(--muted); max-width: 62ch; }
-.foot .small p + p { margin-top: 14px; }
+/* footer: the line ends in a brass manifold; each branch valve is one way to reach Yaron */
+.foot { position: relative; display: grid; grid-template-columns: 5fr 7fr; gap: clamp(44px, 6vw, 112px); align-items: end; background: #0d0f10; padding: clamp(72px, 8vw, 130px) var(--m) calc(44px + env(safe-area-inset-bottom)); padding-inline-end: calc(var(--pipe-x) + var(--T) + 8px); overflow: hidden; }
+.foot .riser { position: absolute; top: 0; bottom: calc(84px + env(safe-area-inset-bottom)); inset-inline-end: var(--pipe-x); width: var(--T); }
+.plate { position: relative; padding: clamp(26px, 3vw, 40px) clamp(26px, 3vw, 44px); border-radius: 6px; color: #3d2c0c; max-width: 560px;
+  background: radial-gradient(circle at 16px 16px, #f6e2a8 2px, #6d5320 5px, transparent 6px), radial-gradient(circle at calc(100% - 16px) 16px, #f6e2a8 2px, #6d5320 5px, transparent 6px), radial-gradient(circle at 16px calc(100% - 16px), #f6e2a8 2px, #6d5320 5px, transparent 6px), radial-gradient(circle at calc(100% - 16px) calc(100% - 16px), #f6e2a8 2px, #6d5320 5px, transparent 6px), linear-gradient(160deg, #f1d99c 0%, #c9a45c 34%, #e3c47e 58%, #a07f3a 100%); /* taste-skill-ignore: brass plate with four screws */
+  box-shadow: inset 0 0 0 2px rgba(255, 240, 200, .35), inset 0 -4px 0 rgba(60, 40, 8, .3); } /* taste-skill-ignore: a screwed-on brass nameplate */
+.plate .nm { display: block; font-weight: 900; font-size: clamp(38px, 4.8vw, 74px); line-height: 1; letter-spacing: -0.03em; overflow-wrap: anywhere; text-wrap: balance; }
+.plate .tr { display: block; margin-top: 10px; font-weight: 700; font-size: var(--step-lead); color: #4a3712; }
+.foot .small { margin-top: 28px; color: var(--muted); font-size: var(--step-small); max-width: 62ch; }
+.foot .small p + p { margin-top: 12px; }
 .foot .small a { color: var(--ink); }
-.foot .legal { display: flex; justify-content: space-between; gap: 16px; margin-top: 72px; font-size: var(--step-small); color: var(--muted); }
+.mf { position: relative; list-style: none; display: grid; gap: 14px; padding-block: 18px; margin-inline-end: calc(-1 * (var(--T) + 8px)); padding-inline-end: calc(var(--T) + 8px); }
+.mf::before { content: ""; position: absolute; top: 0; bottom: 0; inset-inline-end: -8px; width: calc(var(--T) + 16px); border-radius: 8px; background: linear-gradient(90deg, #5a4318, #f6e2a8 30%, #c9a45c 55%, #8f6c28 80%, #4a3712); box-shadow: inset 0 3px 0 rgba(255, 240, 200, .35), inset 0 -3px 0 rgba(30, 20, 4, .5); } /* taste-skill-ignore: brass manifold bar */
+.br { display: flex; align-items: center; min-height: 66px; text-decoration: none; color: var(--ink); }
+.br .lb { flex: none; max-width: 62%; display: grid; }
+.br .lb b { font-size: var(--step-lead); font-weight: 700; line-height: 1.2; }
+.br .lb > span { color: var(--muted); font-size: var(--step-small); }
+.br .dn, .br .up { position: relative; height: 14px; background: linear-gradient(180deg, #4f2812, #eab184 32%, #c27a45 60%, #4f2812); } /* taste-skill-ignore: copper branch */
+.br .dn { flex: 1; min-width: 28px; margin-inline-start: 14px; }
+.br .up { flex: none; width: clamp(36px, 7vw, 120px); }
+.br .dn::after, .br .up::after { content: ""; position: absolute; inset: 4px 0; background: linear-gradient(180deg, #1f6f99, #a9e2f8 50%, #2c8fc1); } /* taste-skill-ignore: water in the bore */
+.br .dn::after { background: #07090a; }
+.br .dn i { position: absolute; inset: 4px 0; z-index: 1; background: linear-gradient(180deg, #1f6f99, #a9e2f8 50%, #2c8fc1); transform: scaleX(0); transform-origin: left; transition: transform 380ms cubic-bezier(.4, 0, .2, 1) 160ms; } /* taste-skill-ignore: water reaching the outlet */
+html[dir="ltr"] .br .dn i { transform-origin: right; }
+.br .bv { position: relative; flex: none; width: 34px; height: 30px; border-radius: 8px; background: linear-gradient(180deg, #5a4318, #f6e2a8 30%, #c9a45c 58%, #6d5320); } /* taste-skill-ignore: brass valve body */
+.br .bv i { position: absolute; left: 50%; top: 50%; width: 36px; height: 7px; margin: -3.5px 0 0 -4px; border-radius: 4px; background: linear-gradient(180deg, #e5584c, #b52a20 55%, #6d140f); transform-origin: 4px 3.5px; transform: rotate(90deg); transition: transform 300ms var(--ease-out); } /* taste-skill-ignore: lever, across the pipe = shut */
+.br:focus-visible .bv i, .br:active .bv i { transform: rotate(0deg); }
+.br:focus-visible .dn i, .br:active .dn i { transform: scaleX(1); }
+.br:focus-visible { outline-offset: 6px; }
 
-.dock { display: none; }
+.ln { display: none; }
 
 @media (hover: hover) and (pointer: fine) {
   .btn:hover { background: var(--copper-hi); }
   .btn.line:hover { background: rgba(236,230,220,.08); }
   .phonemock .send .btn:hover { background: #4ae082; }
-  .chip > span:hover { background: #2c3136; }
-  .chip input:checked + span:hover { background: var(--copper-hi); }
+  .fx:hover .nm { background: #f6e2a8; }
+  .fx input:checked ~ .nm, .fx:hover input:checked ~ .nm { background: var(--water); }
+  .br:hover .bv i { transform: rotate(0deg); }
+  .br:hover .dn i { transform: scaleX(1); }
+  .wtag:hover > span { transform: rotate(0deg); }
   .top nav a:hover, .link:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 5px; }
   .card .acts a:hover { background: #2e3236; }
 }
@@ -222,45 +302,59 @@ html[lang="en"] .foot .wm { text-transform: uppercase; font-size: clamp(56px, 13
   .top { position: absolute; top: calc(-46svh + 100px); inset-inline: var(--m); }
   .hero-text { padding-top: 0; }
   .hero .photo figcaption { top: 86px; }
+  html.still[data-motion-auto] .hero .photo figcaption { top: 158px; }
   .name { font-size: 18vw; }
   html[lang="en"] .name { font-size: 12.4vw; }
-  .specs { grid-template-columns: 1fr 1fr; }
-  .specs div:nth-child(even) { background: var(--bg3); }
-  .pipe { width: 18px; }
-  .pipe .wall { border-radius: 9px; }
+  :root { --T: 18px; }
+  .tags { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+  .tag .tg { padding: 26px 4px 12px; border-radius: 8px 8px 11px 11px; }
+  .tag .tg::before { top: 7px; width: 11px; height: 11px; margin-left: -5.5px; }
+  .tag b { font-size: 22px; }
+  .tag .tg > span { font-size: 13px; }
   .pipe .bore { inset: 5px; border-radius: 4px; }
+  .ch.ask { grid-template-columns: 1fr; }
+  .ask .phone-col { position: static; }
+  .phonemock .scr { min-height: 300px; }
+  .fx .nm { font-size: 13px; padding: 2px 6px; }
+  .rod { gap: 8px; }
+  .wtag > span { font-size: 15px; padding-inline: 4px; }
   .ch, .end { grid-template-columns: 1fr; }
   .ch .media, .ch.flip .media { order: 2; }
   .joint { width: 36px; height: 36px; font-size: 14px; inset-inline-end: calc(-1 * var(--gutter) + var(--pipe-x) - 9px); }
   .joint::before { display: none; }
   .band blockquote p { font-size: 9vw; }
   .end { padding-inline-end: calc(var(--gutter) + 8px); }
-  .foot .cols { grid-template-columns: 1fr; gap: 40px; }
-  .foot { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
-  html { scroll-padding-bottom: 80px; }
-  .dock { display: grid; grid-template-columns: 1fr 1fr; position: fixed; inset-inline: 0; bottom: 0; z-index: 30; background: #0d0f10; padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 -8px 24px rgba(0,0,0,.45); transition: transform 320ms var(--ease-out); } /* taste-skill-ignore: sticky bar floats over content */
-  .dock.away { transform: translateY(110%); }
-  .dock a { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 58px; color: var(--ink); font-weight: 700; text-decoration: none; }
-  .dock a:first-child { background: var(--copper); color: #141110; }
-  .dock a:active { opacity: .8; }
-  .dock svg { width: 20px; height: 20px; }
+  .foot { grid-template-columns: 1fr; gap: 36px; }
+  html { scroll-padding-bottom: 90px; }
+  /* sticky: a copper line with the call valve and a WhatsApp union on it */
+  .ln { display: flex; align-items: center; position: fixed; inset-inline: 0; bottom: 0; z-index: 30; padding: 16px 0 calc(10px + env(safe-area-inset-bottom)); background: #0d0f10; box-shadow: 0 -8px 24px rgba(0,0,0,.45); transition: transform 320ms var(--ease-out); } /* taste-skill-ignore: sticky bar floats over content */
+  .ln::before { content: ""; position: absolute; inset-inline: 0; top: 34px; height: 14px; background: linear-gradient(180deg, #4f2812, #eab184 32%, #c27a45 60%, #4f2812); } /* taste-skill-ignore: copper line */
+  .ln.away { transform: translateY(115%); }
+  .ln a { position: relative; display: flex; align-items: center; justify-content: center; text-decoration: none; color: #2e2208; font-weight: 800; transition: transform 120ms var(--ease-out); }
+  .ln a:active { transform: scale(0.96); }
+  .ln .call { flex: 1; max-width: 250px; gap: 10px; min-height: 50px; margin-inline-start: 22px; border-radius: 10px; background: linear-gradient(180deg, #5a4318 0%, #f6e2a8 22%, #c9a45c 56%, #8f6c28 88%, #4a3712); } /* taste-skill-ignore: brass valve body */
+  .ln .call::before { content: ""; position: absolute; top: -7px; inset-inline-start: 30%; width: 40%; height: 7px; border-radius: 4px 4px 0 0; background: linear-gradient(180deg, #e5584c, #b52a20 60%, #6d140f); } /* taste-skill-ignore: lever along the line = open */
+  .ln .wa { flex: none; width: 52px; height: 52px; margin-inline: auto 22px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #f6e2a8, #c9a45c 50%, #6d5320 100%); border: 5px solid #8f6c28; } /* taste-skill-ignore: brass union nut */
+  .ln svg { width: 21px; height: 21px; flex: none; }
 }
 
-/* motion */
-@media (prefers-reduced-motion: no-preference) {
-  .js .name [data-line] { transform: translateY(105%); animation: line-up 900ms var(--ease-out) forwards; animation-delay: calc(var(--i) * 110ms + 120ms); }
-  .js .hero-text > *:not(h1) { opacity: 0; transform: translateY(12px); animation: fade-up 500ms var(--ease-out) forwards; animation-delay: calc(200ms + var(--d, 0) * 60ms); }
-  .js .hero .photo img { animation: settle 1400ms var(--ease-out) both; }
-  .js [data-reveal] > * { opacity: 0; transform: translateY(24px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); transition-delay: calc(var(--d, 0) * 70ms); }
-  .js [data-reveal].in > * { opacity: 1; transform: none; }
-  .js .media img { clip-path: inset(0 0 100% 0); transition: clip-path 900ms var(--ease-out); }
-  .js .media.in img { clip-path: inset(0 0 0 0); }
-  .band img { transform: scale(1.08); transition: transform 2400ms var(--ease-out); }
-  .band.in img { transform: scale(1); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .gauge .needle { transform: rotate(var(--to, 135deg)); }
-}
+/* motion: everything below runs only while the valve is open (html:not(.still)) */
+html.js:not(.still) .name [data-line] { transform: translateY(105%); animation: line-up 900ms var(--ease-out) forwards; animation-delay: calc(var(--i) * 110ms + 120ms); }
+html.js:not(.still) .hero-text > *:not(h1) { opacity: 0; transform: translateY(12px); animation: fade-up 500ms var(--ease-out) forwards; animation-delay: calc(200ms + var(--d, 0) * 60ms); }
+html.js:not(.still) .hero .photo img { animation: settle 1400ms var(--ease-out) both; }
+html.js:not(.still) [data-reveal] > * { opacity: 0; transform: translateY(24px); transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); transition-delay: calc(var(--d, 0) * 70ms); }
+html.js:not(.still) [data-reveal].in > * { opacity: 1; transform: none; }
+html.js:not(.still) .media img { clip-path: inset(0 0 100% 0); transition: clip-path 900ms var(--ease-out); }
+html.js:not(.still) .media.in img { clip-path: inset(0 0 0 0); }
+html:not(.still) .band img { transform: scale(1.08); transition: transform 2400ms var(--ease-out); }
+html:not(.still) .band.in img { transform: scale(1); }
+html.js:not(.still) .mains.in .tag { animation: swing 2200ms cubic-bezier(.3, 0, .3, 1) both; animation-delay: calc(var(--d, 0) * 120ms); }
+@keyframes swing { 0% { transform: rotate(14deg); } 22% { transform: rotate(-8deg); } 42% { transform: rotate(4.5deg); } 62% { transform: rotate(-2deg); } 80% { transform: rotate(calc(var(--tilt, 0deg) + 0.8deg)); } 100% { transform: rotate(var(--tilt, 0deg)); } }
+/* still: no keyframes, no transitions, every reveal shown, the pipe full */
+html.still *, html.still *::before, html.still *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+html.still .gauge .needle { transform: rotate(var(--to, 135deg)); }
+html.still .pipe .flow { transform: scaleY(1); }
+html.still .joint { outline-color: rgba(79,179,227,.6); }
 @keyframes line-up { to { transform: none; } }
 @keyframes fade-up { to { opacity: 1; transform: none; } }
 @keyframes settle { from { transform: scale(1.08); opacity: .4; } to { transform: none; opacity: 1; } }
@@ -282,8 +376,10 @@ html[lang="en"] .foot .wm { text-transform: uppercase; font-size: clamp(56px, 13
         <a href="#story"><span lang="he">איך זה עובד</span><span lang="en">How it works</span></a>
         <a href="#message"><span lang="he">שליחת הודעה</span><span lang="en">Message</span></a>
         <a href="#hours"><span lang="he">שעות</span><span lang="en">Hours</span></a>
+        <button class="valve-sw" type="button" role="switch" aria-checked="true" data-motion><span class="v" aria-hidden="true"><span class="bd"></span><span class="lv"></span></span><span><span lang="he">אנימציות: <b data-motion-word>פועלות</b></span><span lang="en">Animations: <b data-motion-word>on</b></span></span></button>
         <button class="lang" type="button" data-set-lang><span lang="he">English</span><span lang="en">עברית</span></button>
       </nav>
+      <p class="motion-note" data-motion-note></p>
     </div>
     <div class="hero-text">
       <h1 class="name" translate="no">
@@ -307,11 +403,14 @@ html[lang="en"] .foot .wm { text-transform: uppercase; font-size: clamp(56px, 13
   </figure>
 </header>
 
-<section class="specs" aria-label="עובדות">
-  <div><b class="num">5.0</b><span><span lang="he">דירוג בגוגל</span><span lang="en">Google rating</span></span></div>
-  <div><b class="num">6/6</b><span><span lang="he">ביקורות של 5 כוכבים</span><span lang="en">five-star reviews</span></span></div>
-  <div><b><span lang="he">שבת</span><span lang="en">Sat</span></b><span><span lang="he">פתוח <span class="num">9:00–14:00</span></span><span lang="en">open <span class="num">9:00–14:00</span></span></span></div>
-  <div><b><span lang="he">מוריה 55</span><span lang="en">Moriah 55</span></b><span><span lang="he">הכרמל, חיפה</span><span lang="en">Carmel, Haifa</span></span></div>
+<section class="mains" aria-label="עובדות על העסק" data-mains>
+  <span class="run" aria-hidden="true"></span><span class="elbow" aria-hidden="true"></span><span class="drop" aria-hidden="true"></span>
+  <ul class="tags">
+    <li class="tag" style="--chain:18px;--tilt:-2deg;--d:0"><span class="tg"><b class="num">5.0</b><span><span lang="he">דירוג בגוגל</span><span lang="en">Google rating</span></span></span></li>
+    <li class="tag" style="--chain:40px;--tilt:1.5deg;--d:1"><span class="tg"><b class="num">6/6</b><span><span lang="he">ביקורות 5 כוכבים</span><span lang="en">five-star reviews</span></span></span></li>
+    <li class="tag" style="--chain:26px;--tilt:-1deg;--d:2"><span class="tg"><b><span lang="he">שבת</span><span lang="en">Sat</span></b><span><span lang="he">פתוח</span><span lang="en">open</span> <span class="num">9:00–14:00</span></span></span></li>
+    <li class="tag" style="--chain:46px;--tilt:2.5deg;--d:3"><span class="tg"><b class="num">55</b><span><span lang="he">שד׳ מוריה, הכרמל</span><span lang="en">Moriah Blvd, Carmel</span></span></span></li>
+  </ul>
 </section>
 
 <main class="story" id="story">
@@ -337,30 +436,33 @@ html[lang="en"] .foot .wm { text-transform: uppercase; font-size: clamp(56px, 13
     </figure>
   </section>
 
-  <section class="ch alt ask flip" id="message">
+  <section class="ch alt ask" id="message">
     <span class="joint" aria-hidden="true">2</span>
     <div data-reveal>
       <h2 style="--d:0"><span lang="he">שולחים לו הודעה.</span><span lang="en">You send him a message.</span></h2>
-      <p class="body" style="--d:1"><span lang="he">בחרו מה קרה ומתי. ההודעה לירון נכתבת כאן בשבילכם, ונשאר רק ללחוץ שלח.</span><span lang="en">Pick what happened and when. The message to Yaron writes itself here, and all that's left is pressing send.</span></p>
+      <p class="body" style="--d:1"><span lang="he">לחצו בשרטוט על המקום שבו יש בעיה, ובחרו מתי. ההודעה לירון נכתבת כאן בשבילכם, ונשאר רק ללחוץ שלח.</span><span lang="en">Tap the spot in the drawing where the trouble is, then pick when. The message to Yaron writes itself, and all that's left is pressing send.</span></p>
       <form id="composer" style="--d:2" onsubmit="return false">
         <fieldset>
-          <legend><span lang="he">מה קרה?</span><span lang="en">What happened?</span></legend>
-          <div class="chips">
-            <label class="chip"><input type="radio" name="p" value="leak" checked><span><span lang="he">נזילה</span><span lang="en">A leak</span></span></label>
-            <label class="chip"><input type="radio" name="p" value="drain"><span><span lang="he">סתימה</span><span lang="en">A blockage</span></span></label>
-            <label class="chip"><input type="radio" name="p" value="heater"><span><span lang="he">דוד / מים חמים</span><span lang="en">Hot water</span></span></label>
-            <label class="chip"><input type="radio" name="p" value="tap"><span><span lang="he">ברז</span><span lang="en">A tap</span></span></label>
-            <label class="chip"><input type="radio" name="p" value="toilet"><span><span lang="he">אסלה</span><span lang="en">The toilet</span></span></label>
-            <label class="chip"><input type="radio" name="p" value="other"><span><span lang="he">משהו אחר</span><span lang="en">Something else</span></span></label>
+          <legend><span lang="he">איפה הבעיה?</span><span lang="en">Where's the problem?</span></legend>
+          <div class="plan" data-plan data-ui data-sel="sink">
+            <svg viewBox="0 0 600 400" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="enamel" x1="0" x2="1"><stop offset="0" stop-color="#8d949a"/><stop offset=".35" stop-color="#f1f3f4"/><stop offset=".7" stop-color="#d3d7da"/><stop offset="1" stop-color="#7c8389"/></linearGradient><linearGradient id="chrome" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#f4f6f7"/><stop offset=".5" stop-color="#9aa0a6"/><stop offset="1" stop-color="#4b5056"/></linearGradient><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 V8" stroke="#3a3f44" stroke-width="2"/></pattern></defs><rect x="0" y="30" width="600" height="290" fill="#1e2226"/><path d="M0 30 H600" stroke="#3a3f44" stroke-width="2" stroke-dasharray="6 6"/><rect x="0" y="320" width="600" height="16" fill="url(#hatch)"/><path d="M0 320 H600" stroke="#5a6066" stroke-width="2"/><g class="fxg" data-fx="drain"><path d="M300 320 V374" stroke="#4b5056" stroke-width="13"/><path d="M300 320 V374" stroke="#8b9196" stroke-width="10"/><path d="M300 320 V374" stroke="#c3c8cc" stroke-width="2" transform="translate(-1 -1)" opacity=".7"/><path d="M407 320 V379" stroke="#4b5056" stroke-width="13"/><path d="M407 320 V379" stroke="#8b9196" stroke-width="10"/><path d="M407 320 V379" stroke="#c3c8cc" stroke-width="2" transform="translate(-1 -1)" opacity=".7"/><path d="M568 258 V386" stroke="#4b5056" stroke-width="13"/><path d="M568 258 V386" stroke="#8b9196" stroke-width="10"/><path d="M568 258 V386" stroke="#c3c8cc" stroke-width="2" transform="translate(-1 -1)" opacity=".7"/><path d="M292 374 L600 388" stroke="#4b5056" stroke-width="15"/><path d="M292 374 L600 388" stroke="#8b9196" stroke-width="12"/><path d="M292 374 L600 388" stroke="#c3c8cc" stroke-width="2" transform="translate(-1 -1)" opacity=".7"/></g><ellipse class="clog" data-for="drain" cx="478" cy="383" rx="16" ry="6" fill="#6b4a2a" stroke="#3a2614" stroke-width="2"/><path d="M0 352 H568" stroke="#4f2812" stroke-width="11"/><path d="M0 352 H568" stroke="#c27a45" stroke-width="8"/><path d="M0 352 H568" stroke="#f0c29c" stroke-width="2.0" transform="translate(-1 -1)" opacity=".8"/><path d="M180 352 V292" stroke="#4f2812" stroke-width="9"/><path d="M180 352 V292" stroke="#c27a45" stroke-width="6"/><path d="M180 352 V292" stroke="#f0c29c" stroke-width="1.5" transform="translate(-1 -1)" opacity=".8"/><path d="M282 352 V232" stroke="#4f2812" stroke-width="9"/><path d="M282 352 V232" stroke="#c27a45" stroke-width="6"/><path d="M282 352 V232" stroke="#f0c29c" stroke-width="1.5" transform="translate(-1 -1)" opacity=".8"/><path d="M436 352 V264" stroke="#4f2812" stroke-width="9"/><path d="M436 352 V264" stroke="#c27a45" stroke-width="6"/><path d="M436 352 V264" stroke="#f0c29c" stroke-width="1.5" transform="translate(-1 -1)" opacity=".8"/><path d="M556 352 V278" stroke="#4f2812" stroke-width="9"/><path d="M556 352 V278" stroke="#c27a45" stroke-width="6"/><path d="M556 352 V278" stroke="#f0c29c" stroke-width="1.5" transform="translate(-1 -1)" opacity=".8"/><path d="M180 120 V88 H574 V278" stroke="#4f2812" stroke-width="10"/><path d="M180 120 V88 H574 V278" stroke="#c27a45" stroke-width="7"/><path d="M180 120 V88 H574 V278" stroke="#f0c29c" stroke-width="1.75" transform="translate(-1 -1)" opacity=".8"/><path d="M298 88 V206" stroke="#4f2812" stroke-width="9"/><path d="M298 88 V206" stroke="#c27a45" stroke-width="6"/><path d="M298 88 V206" stroke="#f0c29c" stroke-width="1.5" transform="translate(-1 -1)" opacity=".8"/><rect x="240" y="83" width="6" height="10" fill="#b52a20"/><rect x="360" y="83" width="6" height="10" fill="#b52a20"/><rect x="470" y="83" width="6" height="10" fill="#b52a20"/><rect x="569" y="150" width="10" height="6" fill="#b52a20"/><g class="fxg" data-fx="main"><rect x="18" y="330" width="108" height="44" rx="4" stroke="#5a6066" stroke-width="1.5" stroke-dasharray="4 4"/><circle cx="58" cy="352" r="19" fill="#c9a45c" stroke="#5a4318" stroke-width="2"/><circle cx="58" cy="352" r="13" fill="#f1ede3"/><path class="mneedle" d="M58 352 L58 342" stroke="#b52a20" stroke-width="2.5"/><circle cx="58" cy="352" r="2" fill="#1c1f22"/><rect x="96" y="343" width="18" height="18" rx="3" fill="#c9a45c" stroke="#5a4318" stroke-width="1.5"/><rect x="92" y="336" width="30" height="6" rx="3" fill="#b52a20"/></g><path class="drip" data-for="main" style="--fall:22px" d="M80 360 q-4.5 7 -4.5 10 a4.5 4.5 0 0 0 9 0 q0 -3 -4.5 -10Z" fill="#7fd0ff" stroke="#e8f8ff" stroke-width=".8"/><g class="fxg" data-fx="heater"><rect x="144" y="134" width="8" height="10" fill="#5a6066"/><rect x="144" y="262" width="8" height="10" fill="#5a6066"/><rect x="150" y="120" width="60" height="174" rx="26" fill="url(#enamel)" stroke="#4b5056" stroke-width="1.5"/><rect x="166" y="200" width="28" height="18" rx="3" fill="#dfe3e6" stroke="#9aa0a6"/><circle cx="180" cy="250" r="3.5" fill="#e5584c"/><rect x="208" y="138" width="12" height="8" rx="2" fill="#c9a45c"/></g><path class="drip" data-for="heater" style="--fall:20px" d="M194 296 q-4.5 7 -4.5 10 a4.5 4.5 0 0 0 9 0 q0 -3 -4.5 -10Z" fill="#7fd0ff" stroke="#e8f8ff" stroke-width=".8"/><g class="fxg" data-fx="shower"><path d="M346 120 V306" stroke="#9fc3d0" stroke-width="2" opacity=".35"/><rect x="244" y="306" width="100" height="14" rx="3" fill="#d9dde0" stroke="#7c8389"/><path d="M290 206 V140 Q290 130 300 130 H318" stroke="#4f2812" stroke-width="8"/><path d="M290 206 V140 Q290 130 300 130 H318" stroke="#c27a45" stroke-width="5"/><path d="M290 206 V140 Q290 130 300 130 H318" stroke="#f0c29c" stroke-width="1.5" transform="translate(-1 -1)" opacity=".8"/><path d="M310 125 H334 L341 139 H303 Z" fill="url(#chrome)" stroke="#4b5056" stroke-width="1.2"/><rect x="274" y="206" width="32" height="26" rx="5" fill="url(#chrome)" stroke="#4b5056" stroke-width="1.2"/><rect x="286" y="198" width="22" height="6" rx="3" fill="#cfd4d8" stroke="#4b5056"/></g><path class="drip" data-for="shower" style="--fall:62px" d="M284 236 q-4.5 7 -4.5 10 a4.5 4.5 0 0 0 9 0 q0 -3 -4.5 -10Z" fill="#7fd0ff" stroke="#e8f8ff" stroke-width=".8"/><rect class="pool" data-for="drain" x="248" y="300" width="92" height="7" rx="3" fill="#4fb3e3" opacity=".85"/><g class="fxg" data-fx="toilet"><rect x="404" y="204" width="50" height="58" rx="5" fill="#e8ebed" stroke="#7c8389"/><rect x="422" y="198" width="14" height="6" rx="2" fill="#cfd4d8" stroke="#7c8389"/><rect x="414" y="262" width="10" height="8" fill="#cfd4d8"/><path d="M374 270 H448 Q448 298 428 306 L424 320 H390 L386 306 Q366 296 374 270 Z" fill="#e8ebed" stroke="#7c8389"/><rect x="370" y="265" width="82" height="6" rx="3" fill="#cfd4d8" stroke="#7c8389"/></g><path class="drip" data-for="toilet" style="--fall:48px" d="M450 268 q-4.5 7 -4.5 10 a4.5 4.5 0 0 0 9 0 q0 -3 -4.5 -10Z" fill="#7fd0ff" stroke="#e8f8ff" stroke-width=".8"/><g class="fxg" data-fx="sink"><rect x="478" y="246" width="106" height="74" rx="2" fill="#23272b" fill-opacity=".55" stroke="#4b5056" stroke-dasharray="5 4"/><path d="M531 246 V262 Q531 278 545 278 Q559 278 559 262 V256 H568" stroke="#4b5056" stroke-width="10"/><path d="M531 246 V262 Q531 278 545 278 Q559 278 559 262 V256 H568" stroke="#8b9196" stroke-width="7"/><path d="M531 246 V262 Q531 278 545 278 Q559 278 559 262 V256 H568" stroke="#c3c8cc" stroke-width="2" transform="translate(-1 -1)" opacity=".7"/><circle cx="556" cy="278" r="4" fill="url(#chrome)"/><circle cx="574" cy="278" r="4" fill="url(#chrome)"/><path d="M556 274 Q560 258 574 246 M574 274 Q578 260 580 246" stroke="#9aa0a6" stroke-width="2.5"/><rect x="470" y="236" width="120" height="10" rx="2" fill="#cfd4d8" stroke="#7c8389"/><path d="M492 236 Q492 214 512 214 H552 Q570 214 570 236 Z" fill="#e8ebed" stroke="#7c8389"/><path d="M580 236 V196 Q580 184 568 184 H548 V192" stroke="url(#chrome)" stroke-width="5"/></g><path class="drip" data-for="sink" style="--fall:16px" d="M548 196 q-4.5 7 -4.5 10 a4.5 4.5 0 0 0 9 0 q0 -3 -4.5 -10Z" fill="#7fd0ff" stroke="#e8f8ff" stroke-width=".8"/></svg>
+            <label class="fx" style="left:1.67%;top:81.5%;width:19.33%;height:18%;--ny:0%"><input type="radio" name="p" value="main"><span class="nm"><span lang="he">שעון וברז ראשי</span><span lang="en">Meter &amp; main</span></span></label>
+            <label class="fx" style="left:23.33%;top:24%;width:13.67%;height:51%;--ny:56%"><input type="radio" name="p" value="heater"><span class="nm"><span lang="he">דוד</span><span lang="en">Heater</span></span></label>
+            <label class="fx" style="left:39.67%;top:30.5%;width:18.33%;height:50%;--ny:33%"><input type="radio" name="p" value="shower"><span class="nm"><span lang="he">מקלחת</span><span lang="en">Shower</span></span></label>
+            <label class="fx" style="left:60.33%;top:49%;width:16%;height:32%;--ny:0%"><input type="radio" name="p" value="toilet"><span class="nm"><span lang="he">אסלה</span><span lang="en">Toilet</span></span></label>
+            <label class="fx" style="left:77.67%;top:44.5%;width:22%;height:36.5%;--ny:0%"><input type="radio" name="p" value="sink" checked><span class="nm"><span lang="he">כיור וברז</span><span lang="en">Sink &amp; tap</span></span></label>
+            <label class="fx" style="left:48.33%;top:89%;width:51.67%;height:11%;--ny:100%"><input type="radio" name="p" value="drain"><span class="nm"><span lang="he">ניקוז · סתימה</span><span lang="en">Drain · blockage</span></span></label>
           </div>
+          <p class="plan-cap"><span lang="he">שרטוט להמחשה של קו המים בבית: נחושת למים, אפור לניקוז.</span><span lang="en">An illustrative drawing of a home's water line: copper for water, grey for drains.</span></p>
+          <label class="fx-other"><input type="radio" name="p" value="other"><span><span lang="he">לא בטוחים איפה? משהו אחר</span><span lang="en">Not sure where? Something else</span></span></label>
         </fieldset>
         <fieldset>
           <legend><span lang="he">מתי?</span><span lang="en">When?</span></legend>
-          <div class="chips">
-            <label class="chip"><input type="radio" name="w" value="today" checked><span><span lang="he">היום</span><span lang="en">Today</span></span></label>
-            <label class="chip"><input type="radio" name="w" value="tomorrow"><span><span lang="he">מחר</span><span lang="en">Tomorrow</span></span></label>
-            <label class="chip"><input type="radio" name="w" value="week"><span><span lang="he">השבוע</span><span lang="en">This week</span></span></label>
-            <label class="chip"><input type="radio" name="w" value="any"><span><span lang="he">לא דחוף</span><span lang="en">No rush</span></span></label>
+          <div class="rod">
+            <label class="wtag" style="--t:-4deg"><input type="radio" name="w" value="today" checked><span><span lang="he">היום</span><span lang="en">Today</span></span></label>
+            <label class="wtag" style="--t:3deg"><input type="radio" name="w" value="tomorrow"><span><span lang="he">מחר</span><span lang="en">Tomorrow</span></span></label>
+            <label class="wtag" style="--t:-2deg"><input type="radio" name="w" value="week"><span><span lang="he">השבוע</span><span lang="en">This week</span></span></label>
+            <label class="wtag" style="--t:4deg"><input type="radio" name="w" value="any"><span><span lang="he">לא דחוף</span><span lang="en">No rush</span></span></label>
           </div>
         </fieldset>
         <label class="where"><span lang="he">איפה? שכונה או רחוב (לא חובה)</span><span lang="en">Where? Neighbourhood or street (optional)</span>
@@ -368,7 +470,7 @@ html[lang="en"] .foot .wm { text-transform: uppercase; font-size: clamp(56px, 13
         </label>
       </form>
     </div>
-    <div class="media" data-ui>
+    <div class="media phone-col" data-ui>
       <div class="phonemock">
         <div class="scr">
           <div class="bar"><span class="av" translate="no">י.כ</span><span class="who"><b><span lang="he">ירון כץ אינסטלציה</span><span lang="en">Yaron Katz Plumbing</span></b><span data-status-short></span></span></div>
@@ -568,28 +670,27 @@ html[lang="en"] .foot .wm { text-transform: uppercase; font-size: clamp(56px, 13
   </section>
 </main>
 
-<footer class="foot">
-  <p class="wm" aria-hidden="true" translate="no"><span lang="he">ירון כץ</span><span lang="en">Yaron Katz</span></p>
-  <div class="cols">
-    <div class="places">
-      <a href="tel:+972526298897" class="num">052-629-8897</a>
-      <a href="https://wa.me/972526298897"><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
-      <a href="https://maps.google.com/?cid=4917036316285996274"><span lang="he">שדרות מוריה 55, חיפה</span><span lang="en">55 Moriah Blvd, Haifa</span></a>
-    </div>
+<footer class="foot" id="contact">
+  <span class="riser" aria-hidden="true"></span>
+  <div>
+    <p class="plate" translate="no"><span class="nm"><span lang="he">ירון כץ</span><span lang="en">Yaron Katz</span></span><span class="tr"><span lang="he">אינסטלציה · חיפה</span><span lang="en">Plumbing · Haifa</span></span></p>
     <div class="small">
       <p><span lang="he">התמונות באתר הן תמונות להמחשה של עבודות אינסטלציה, ואינן עבודות של העסק. הביקורות מתוך דף העסק בגוגל.</span><span lang="en">Photos are illustrative pictures of plumbing work, not jobs by this business. Reviews are from the business's Google listing.</span></p>
       <p>Pictures: <a href="https://commons.wikimedia.org/w/index.php?curid=50017388">“Propane torch soldering copper pipe”</a> by neffk, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>; “Tap and window” by Edouard Tamba, CC0; “Pipe Wrench” by Jayess, public domain; <a href="https://commons.wikimedia.org/w/index.php?curid=160083731">“Copper Water Pipes and Water Line Shutoff”</a> by Tony Webster, <a href="https://creativecommons.org/licenses/by/2.0/">CC BY 2.0</a>; “Water drop impact on a water-surface” by Davide Restivo, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>; all via Wikimedia Commons.</p>
+      <p>© 2026 <span lang="he">ירון כץ אינסטלציה</span><span lang="en">Yaron Katz Plumbing</span> · <a href="#top"><span lang="he">חזרה למעלה</span><span lang="en">Back to top</span></a></p>
     </div>
   </div>
-  <div class="legal">
-    <span>© 2026 <span lang="he">ירון כץ אינסטלציה</span><span lang="en">Yaron Katz Plumbing</span></span>
-    <a href="#top"><span lang="he">חזרה למעלה</span><span lang="en">Back to top</span></a>
-  </div>
+  <ul class="mf" aria-label="דרכים להגיע לירון">
+      <li><a class="br" href="tel:+972526298897"><span class="lb"><b><span lang="he">חיוג</span><span lang="en">Call</span></b><span><span class="num">052-629-8897</span></span></span><span class="dn" aria-hidden="true"><i></i></span><span class="bv" aria-hidden="true"><i></i></span><span class="up" aria-hidden="true"></span></a></li>
+      <li><a class="br" href="https://wa.me/972526298897"><span class="lb"><b><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></b><span><span lang="he">הודעה ישירה</span><span lang="en">a direct message</span></span></span><span class="dn" aria-hidden="true"><i></i></span><span class="bv" aria-hidden="true"><i></i></span><span class="up" aria-hidden="true"></span></a></li>
+      <li><a class="br" href="https://waze.com/ul?q=%D7%A9%D7%93%D7%A8%D7%95%D7%AA%20%D7%9E%D7%95%D7%A8%D7%99%D7%94%2055%20%D7%97%D7%99%D7%A4%D7%94"><span class="lb"><b><span lang="he">ניווט</span><span lang="en">Directions</span></b><span><span lang="he">שדרות מוריה 55, חיפה</span><span lang="en">55 Moriah Blvd, Haifa</span></span></span><span class="dn" aria-hidden="true"><i></i></span><span class="bv" aria-hidden="true"><i></i></span><span class="up" aria-hidden="true"></span></a></li>
+      <li><a class="br" href="https://maps.google.com/?cid=4917036316285996274"><span class="lb"><b><span lang="he">גוגל מפות</span><span lang="en">Google Maps</span></b><span><span lang="he">5.0 · 6 ביקורות</span><span lang="en">5.0 · 6 reviews</span></span></span><span class="dn" aria-hidden="true"><i></i></span><span class="bv" aria-hidden="true"><i></i></span><span class="up" aria-hidden="true"></span></a></li>
+  </ul>
 </footer>
 
-<nav class="dock away" aria-label="Quick contact">
-  <a href="https://wa.me/972526298897"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
-  <a href="tel:+972526298897"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg><span lang="he">חייגו</span><span lang="en">Call</span></a>
+<nav class="ln away" aria-label="Quick contact">
+  <a class="call" href="tel:+972526298897"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg><span lang="he">חייגו לירון</span><span lang="en">Call Yaron</span></a>
+  <a class="wa" href="https://wa.me/972526298897" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg></a>
 </nav>
 
 <script>
@@ -600,7 +701,7 @@ html[lang="en"] .foot .wm { text-transform: uppercase; font-size: clamp(56px, 13
     document.title = l === 'he' ? 'ירון כץ אינסטלציה · חיפה' : 'Yaron Katz Plumbing · Haifa';
     try { localStorage.setItem('lang', l); } catch (e) {}
     var w = document.querySelector('[name=where]'); if (w) w.placeholder = w.dataset['ph' + (l === 'he' ? 'He' : 'En')];
-    write(); status(); fitWm(); pipe();
+    write(); status(); pipe(); motionUI(); fitTags();
   }
   document.querySelectorAll('[data-set-lang]').forEach(function (b) {
     b.addEventListener('click', function () { setLang(root.lang === 'he' ? 'en' : 'he'); });
@@ -608,10 +709,10 @@ html[lang="en"] .foot .wm { text-transform: uppercase; font-size: clamp(56px, 13
 
   // composer: builds the WhatsApp message from the visitor's choices
   var T = {
-    he: { p: { leak: 'נזילה', drain: 'סתימה', heater: 'בעיה בדוד / במים החמים', tap: 'ברז שצריך תיקון או החלפה', toilet: 'בעיה באסלה', other: 'בעיית אינסטלציה' },
+    he: { p: { main: 'נזילה ליד שעון המים או הברז הראשי', heater: 'בעיה בדוד / במים החמים', shower: 'בעיה במקלחת', toilet: 'בעיה באסלה', sink: 'נזילה בכיור או בברז', drain: 'סתימה בניקוז', other: 'בעיית אינסטלציה' },
           w: { today: 'אפשר להגיע היום?', tomorrow: 'אפשר לתאם למחר?', week: 'אפשר לתאם השבוע?', any: 'לא דחוף, מתי נוח לך?' },
           hi: 'שלום ירון, הגעתי דרך האתר. יש לי ', at: ' ב' },
-    en: { p: { leak: 'a leak', drain: 'a blockage', heater: 'a problem with the hot water', tap: 'a tap that needs fixing or replacing', toilet: 'a problem with the toilet', other: 'a plumbing problem' },
+    en: { p: { main: 'a leak by the water meter or the main valve', heater: 'a problem with the water heater / hot water', shower: 'a problem in the shower', toilet: 'a problem with the toilet', sink: 'a leaking sink or tap', drain: 'a blocked drain', other: 'a plumbing problem' },
           w: { today: 'Could you come today?', tomorrow: 'Could we book tomorrow?', week: 'Could we book this week?', any: 'No rush, when suits you?' },
           hi: 'Hi Yaron, I found you through your website. I have ', at: ' in ' }
   };
@@ -619,7 +720,8 @@ html[lang="en"] .foot .wm { text-transform: uppercase; font-size: clamp(56px, 13
   var preview = document.querySelector('[data-preview]');
   var bubble = document.querySelector('.bub');
   var send = document.querySelector('[data-send]');
-  var calm = matchMedia('(prefers-reduced-motion: reduce)');
+  var plan = document.querySelector('[data-plan]');
+  function still() { return root.classList.contains('still'); }
   function message() {
     var t = T[root.lang] || T.he, f = new FormData(form);
     var where = (f.get('where') || '').trim();
@@ -630,9 +732,10 @@ html[lang="en"] .foot .wm { text-transform: uppercase; font-size: clamp(56px, 13
     preview.textContent = m;
     send.href = 'https://wa.me/972526298897?text=' + encodeURIComponent(m);
   }
-  form.addEventListener('change', function () {
+  form.addEventListener('change', function (e) {
     write();
-    if (bubble.animate && !calm.matches) bubble.animate([{ transform: 'translateY(6px) scale(0.98)', opacity: 0.6 }, { transform: 'none', opacity: 1 }], { duration: 220, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+    if (e.target.name === 'p') plan.dataset.sel = e.target.value;
+    if (bubble.animate && !still()) bubble.animate([{ transform: 'translateY(6px) scale(0.98)', opacity: 0.6 }, { transform: 'none', opacity: 1 }], { duration: 220, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
   });
   form.addEventListener('input', function (e) { if (e.target.name === 'where') write(); });
 
@@ -670,13 +773,14 @@ html[lang="en"] .foot .wm { text-transform: uppercase; font-size: clamp(56px, 13
   var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
     es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { rootMargin: '0px 0px -12% 0px' }) : null;
-  document.querySelectorAll('[data-reveal], [data-media], [data-band], .gauge').forEach(function (el) { io ? io.observe(el) : el.classList.add('in'); });
+  document.querySelectorAll('[data-reveal], [data-media], [data-band], .gauge, [data-mains]').forEach(function (el) { io ? io.observe(el) : el.classList.add('in'); });
 
   // the pipe fills with water as the story is read; each coupling turns wet when the water reaches it
   var flow = document.querySelector('.pipe .flow'), pipeEl = document.querySelector('.pipe');
   var joints = [].slice.call(document.querySelectorAll('.joint')), ticking = false;
   function pipe() {
     ticking = false;
+    if (still()) { flow.style.transform = ''; joints.forEach(function (j) { j.classList.add('wet'); }); return; }
     var r = pipeEl.getBoundingClientRect(), mark = innerHeight * 0.62;
     var p = Math.max(0, Math.min(1, (mark - r.top) / r.height));
     flow.style.transform = 'scaleY(' + p.toFixed(4) + ')';
@@ -686,8 +790,19 @@ html[lang="en"] .foot .wm { text-transform: uppercase; font-size: clamp(56px, 13
   addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(pipe); } }, { passive: true });
   addEventListener('resize', pipe);
 
-  // the phone dock steps aside while the hero or the footer is in view
-  var dock = document.querySelector('.dock'), seen = new Set();
+  // a stamped value always fits its tag, however long the number
+  function fitTags() {
+    document.querySelectorAll('.tag b').forEach(function (b) {
+      b.style.fontSize = '';
+      var room = b.clientWidth, need = b.scrollWidth;
+      if (need > room) b.style.fontSize = (parseFloat(getComputedStyle(b).fontSize) * room / need * 0.96) + 'px';
+    });
+  }
+  if (document.fonts) document.fonts.ready.then(fitTags);
+  addEventListener('resize', fitTags);
+
+  // the copper line steps aside while the hero or the footer is in view
+  var dock = document.querySelector('.ln'), seen = new Set();
   if ('IntersectionObserver' in window) {
     var dio = new IntersectionObserver(function (es) {
       es.forEach(function (e) { e.isIntersecting ? seen.add(e.target) : seen.delete(e.target); });
@@ -696,15 +811,29 @@ html[lang="en"] .foot .wm { text-transform: uppercase; font-size: clamp(56px, 13
     document.querySelectorAll('.hero, .foot').forEach(function (el) { dio.observe(el); });
   } else { dock.classList.remove('away'); }
 
-  // the footer name always fits its line, whatever the name and language
-  var wm = document.querySelector('.foot .wm');
-  function fitWm() {
-    wm.style.fontSize = '';
-    var room = wm.clientWidth, need = wm.scrollWidth;
-    if (need > room) wm.style.fontSize = (parseFloat(getComputedStyle(wm).fontSize) * room / need * 0.98) + 'px';
+  // the animations valve: open = motion, shut = a still page. Remembered; starts shut on slow or reduced-motion devices
+  var sw = document.querySelector('[data-motion]'), note = document.querySelector('[data-motion-note]');
+  var WHY = { he: ['המכשיר מוגדר להפחתת תנועה', 'מצב חיסכון בנתונים פעיל', 'החיבור איטי', 'המכשיר חלש יחסית'],
+              en: ['your device asks for reduced motion', 'Data Saver is on', 'the connection is slow', 'this device is on the slower side'] };
+  function why() {
+    var c = navigator.connection || {};
+    return matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : c.saveData ? 1 : /2g|3g/.test(c.effectiveType || '') ? 2 : 3;
   }
-  if (document.fonts) document.fonts.ready.then(fitWm);
-  addEventListener('resize', fitWm);
+  function motionUI() {
+    var off = still(), he = root.lang === 'he';
+    sw.setAttribute('aria-checked', off ? 'false' : 'true');
+    document.querySelectorAll('[data-motion-word]').forEach(function (b) { b.textContent = b.closest('[lang="he"]') ? (off ? 'כבויות' : 'פועלות') : (off ? 'off' : 'on'); });
+    note.textContent = he ? 'כיבינו אנימציות אוטומטית: ' + WHY.he[why()] + '. פתחו את הברז כדי להדליק.' : 'Animations were turned off automatically: ' + WHY.en[why()] + '. Open the valve to turn them on.';
+  }
+  sw.addEventListener('click', function () {
+    var off = !still();
+    root.classList.toggle('still', off);
+    delete root.dataset.motionAuto;
+    try { localStorage.setItem('motion', off ? 'off' : 'on'); } catch (e) {}
+    if (off) document.querySelectorAll('[data-reveal], [data-media], [data-band], .gauge, [data-mains]').forEach(function (el) { el.classList.add('in'); });
+    motionUI(); pipe();
+  });
+  if (still()) document.querySelectorAll('[data-reveal], [data-media], [data-band], .gauge, [data-mains]').forEach(function (el) { el.classList.add('in'); });
 
   var q = new URLSearchParams(location.search).get('lang'), saved = null;
   try { saved = localStorage.getItem('lang'); } catch (e) {}
