@@ -236,7 +236,7 @@ html[dir="rtl"] .slider .handle { left: auto; right: var(--x, 50%); transform: t
 .viewer figcaption { position: absolute; z-index: 4; top: 24px; inset-inline: 30px; display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; }
 .viewer figcaption span { background: rgba(11,13,12,.7); padding: 2px 8px; border-radius: 2px; }
 
-/* the service ticket: a paper form that writes the WhatsApp message */
+/* the service ticket: a paper form that writes the SMS (Chaim has no WhatsApp) */
 .report { padding: clamp(80px, 9vw, 150px) var(--m); background: var(--panel); display: grid; grid-template-columns: 7fr 5fr; gap: clamp(32px, 5vw, 96px); align-items: start; }
 .report .sub { margin-top: 14px; color: var(--dim); max-width: 44ch; }
 .ticket { margin-top: 32px; max-width: 620px; background: var(--paper); color: var(--ink); border-radius: 3px; position: relative; }
@@ -358,7 +358,7 @@ html:not(.still) .box input:checked + i path { transition: stroke-dashoffset 220
   .fab.away { transform: translateY(160%); opacity: 0; pointer-events: none; }
   .fab a { display: grid; place-items: center; border-radius: 50%; text-decoration: none; color: var(--hud); }
   .fab .wa { width: 48px; height: 48px; background: rgba(11,13,12,.9); border: 1.5px solid var(--line); }
-  .fab .wa svg { width: 22px; height: 22px; color: #25d366; }
+  .fab .wa svg { width: 22px; height: 22px; color: var(--hud); }
   .fab .shutter { width: 68px; height: 68px; background: rgba(11,13,12,.7); border: 4px solid var(--hud); }
   .fab .shutter span { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; background: var(--hot); color: #1a1205; transition: transform 140ms var(--ease-out); }
   .fab .shutter:active span { transform: scale(0.88); }
@@ -534,7 +534,7 @@ html.still *, html.still *::before, html.still *::after { animation: none !impor
   <section class="report" id="report" aria-labelledby="rep-h">
     <div data-reveal>
       <h2 id="rep-h" style="--d:0"><span lang="he">כרטיס תקלה.</span><span lang="en">Fault ticket.</span></h2>
-      <p class="sub" style="--d:1"><span lang="he">סמנו מה קרה ומתי, והכרטיס נשלח לחיים בוואטסאפ כהודעה מוכנה. גם באמצע הלילה.</span><span lang="en">Tick what happened and when, and the ticket goes to Chaim on WhatsApp as a ready message. Even in the middle of the night.</span></p>
+      <p class="sub" style="--d:1"><span lang="he">סמנו מה קרה ומתי, והכרטיס נשלח לחיים ב-SMS כהודעה מוכנה. גם באמצע הלילה.</span><span lang="en">Tick what happened and when, and the ticket goes to Chaim by text message, ready to send. Even in the middle of the night.</span></p>
       <form class="ticket" id="composer" style="--d:2" onsubmit="return false" data-ui>
         <div class="t-head">
           <div><b><span lang="he">חיים האינסטלטור</span><span lang="en">Chaim the Plumber</span></b><span><span lang="he">קריאת שירות · 24/7</span><span lang="en">Service call · 24/7</span></span></div>
@@ -558,7 +558,7 @@ html.still *, html.still *::before, html.still *::after { animation: none !impor
           <input type="text" name="where" autocomplete="address-level3" enterkeyhint="done" data-ph-he="למשל: בת גלים, רחוב יפו…" data-ph-en="e.g. Bat Galim, Jaffa St…" placeholder="למשל: בת גלים, רחוב יפו…">
         </label>
         <div class="t-msg" aria-live="polite"><small><span lang="he">נוסח ההודעה לחיים</span><span lang="en">The message to Chaim</span></small><p data-preview dir="auto"></p></div>
-        <a class="t-send" href="https://wa.me/972527865833" data-send><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg><span lang="he">שלחו את הכרטיס לחיים בוואטסאפ</span><span lang="en">Send the ticket to Chaim on WhatsApp</span></a>
+        <a class="t-send" href="sms:+972527865833" data-send><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9l-5 4v-4H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"/><path d="M7.5 9h9M7.5 12.5h6"/></svg><span lang="he">שלחו את הכרטיס לחיים ב-SMS</span><span lang="en">Text the ticket to Chaim</span></a>
       </form>
     </div>
     <aside class="line-side" data-reveal aria-labelledby="line-h">
@@ -585,7 +585,7 @@ html.still *, html.still *::before, html.still *::after { animation: none !impor
       <div><dt><span lang="he">קובץ</span><span lang="en">File</span></dt><dd class="num">CHAIM_THE_PLUMBER_HAIFA.REC</dd></div>
       <div><dt><span lang="he">אינסטלטור</span><span lang="en">Plumber</span></dt><dd translate="no"><span lang="he">חיים האינסטלטור</span><span lang="en">Chaim the Plumber</span></dd></div>
       <div><dt><span lang="he">טלפון</span><span lang="en">Phone</span></dt><dd><a href="tel:+972527865833" class="num">052-786-5833</a></dd></div>
-      <div><dt><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></dt><dd><a href="https://wa.me/972527865833"><span lang="he">שלחו הודעה</span><span lang="en">Send a message</span></a></dd></div>
+      <div><dt><span lang="he">הודעה</span><span lang="en">Text</span></dt><dd><a href="sms:+972527865833"><span lang="he">שלחו SMS</span><span lang="en">Send an SMS</span></a></dd></div>
       <div><dt><span lang="he">מיקום</span><span lang="en">Location</span></dt><dd><a href="https://maps.google.com/?cid=11768994281890261837"><span lang="he">דיזראלי 16, חיפה</span><span lang="en">16 Disraeli St, Haifa</span></a> · <a href="https://waze.com/ul?q=%D7%93%D7%99%D7%96%D7%A8%D7%90%D7%9C%D7%99%2016%20%D7%97%D7%99%D7%A4%D7%94">Waze</a></dd></div>
       <div><dt><span lang="he">זמינות</span><span lang="en">Hours</span></dt><dd><span lang="he">24/7 · כל יום, כל שעה</span><span lang="en">24/7 · every day, every hour</span></dd></div>
       <div><dt><span lang="he">מקורות</span><span lang="en">Sources</span></dt><dd class="credit"><span lang="he">התמונות מתוך דף העסק של חיים בגוגל מפות. הביקורות מאותו דף, כמו שהלקוחות כתבו אותן. אנימציית הסריקה והטמפרטורות הן המחשה, על מודל תלת-ממדי עם טקסטורות של Poly Haven (CC0).</span><span lang="en">Photos are from Chaim's Google Maps listing. Reviews are from the same listing, as customers wrote them (English versions are translations). The scan animation and temperatures are an illustration, on a 3D model with Poly Haven textures (CC0).</span></dd></div>
@@ -595,13 +595,13 @@ html.still *, html.still *::before, html.still *::after { animation: none !impor
 </footer>
 
 <nav class="fab away" aria-label="יצירת קשר מהירה">
-  <a class="wa" href="https://wa.me/972527865833" aria-label="וואטסאפ לחיים" data-aria-en="WhatsApp Chaim"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg></a>
+  <a class="wa" href="sms:+972527865833" aria-label="הודעת SMS לחיים" data-aria-en="Text Chaim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16a1 1 0 0 1 1 1v11a1 1 0 0 1-1 1H9l-5 4v-4H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"/><path d="M7.5 9h9M7.5 12.5h6"/></svg></a>
   <a class="shutter" href="tel:+972527865833" aria-label="חייגו לחיים, 24/7" data-aria-en="Call Chaim, 24/7"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2Z"/></svg></span></a>
 </nav>
 
 <script>
 (function () {
-  var root = document.documentElement, WA = '972527865833';
+  var root = document.documentElement, TEL = '+972527865833';
   var still = function () { return root.classList.contains('still'); };
   var ariaHe = {};
   function setLang(l) {
@@ -641,7 +641,7 @@ html.still *, html.still *::before, html.still *::after { animation: none !impor
   }
   setInterval(tick, 1000);
 
-  // the ticket writes the WhatsApp message
+  // the ticket writes the SMS
   var T = {
     he: { p: { wall: 'נזילה בקיר', drain: 'סתימה', pipe: 'צינור שדולף', heater: 'בעיה בדוד / במים החמים', other: 'בעיית אינסטלציה' },
           w: { now: 'אפשר להגיע עכשיו?', today: 'אפשר להגיע היום?', week: 'אפשר לתאם השבוע?' }, hi: 'שלום חיים, הגעתי דרך האתר. יש לי ', at: ' ב' },
@@ -652,7 +652,7 @@ html.still *, html.still *::before, html.still *::after { animation: none !impor
   function write() {
     var t = T[root.lang] || T.he, f = new FormData(form), where = (f.get('where') || '').trim();
     var m = t.hi + t.p[f.get('p')] + (where ? t.at + where : '') + '. ' + t.w[f.get('w')];
-    preview.textContent = m; send.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(m);
+    preview.textContent = m; send.href = 'sms:' + TEL + (/iPhone|iPad|Mac/.test(navigator.userAgent) ? '&' : '?') + 'body=' + encodeURIComponent(m);
   }
   form.addEventListener('change', write);
   form.addEventListener('input', function (e) { if (e.target.name === 'where') write(); });
