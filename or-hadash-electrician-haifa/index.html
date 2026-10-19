@@ -1,0 +1,881 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#f8f8f7">
+<title>אור חדש · סאלח, חשמלאי בחיפה</title>
+<meta name="description" content="קונספט לדוגמה עבור אור חדש, חשמלאי בחיפה ובקריות. 5.0 בגוגל מ-89 ביקורות.">
+<script>document.documentElement.classList.add('js');
+// animations on/off: the visitor's choice wins; otherwise off for reduced motion, data saver, slow networks and weak devices
+(function(){var r=document.documentElement,s=null;try{s=localStorage.getItem('motion')}catch(e){}var c=navigator.connection||{},why=matchMedia('(prefers-reduced-motion: reduce)').matches?'reduce':c.saveData?'data':/2g|3g/.test(c.effectiveType||'')?'slow':((navigator.deviceMemory>0&&navigator.deviceMemory<=2)||(navigator.hardwareConcurrency>0&&navigator.hardwareConcurrency<=2))?'device':'';var off=s?s==='off':!!why;r.classList.toggle('still',off);if(!s&&why)r.dataset.motionAuto=why;
+var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage.getItem('lang')}catch(e){}l=q==='en'||q==='he'?q:(l==='en'?'en':'he');r.lang=l;r.dir=l==='he'?'rtl':'ltr';})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/room-lit.jpg">
+<style>
+:root {
+  --step-h3: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+  --bg: #f8f8f7; --surface: #ececea; --surface-2: #e0e0dd; --ink: #121212; --muted: #55554f;
+  --accent: #1f4fd8; --accent-ink: #ffffff; --accent-deep: #1638a3;
+  --live: #6b3f1f; --live-ink: #ffffff; --earth-g: #2f8f3a; --earth-y: #e8c02a;
+  --field: #121212; --field-ink: #f2f2f2; --field-muted: #b9b8b0;
+  --step: 14px; --step-s: 6px;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1); --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  --t-press: 140ms; --t-hover: 180ms; --t-ui: 240ms; --t-reveal: 760ms;
+  --m: clamp(16px, 3vw, 32px);
+  --step-small: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --step-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --step-lead: clamp(1.25rem, 1.1rem + 0.7vw, 1.625rem);
+  --step-head: clamp(2rem, 1.3rem + 3.2vw, 4rem);
+  --f: 'Rubik', system-ui, sans-serif;
+}
+html[lang="en"] { --f: 'Bricolage Grotesque', 'Rubik', system-ui, sans-serif; }
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--f); font-size: var(--step-body); line-height: 1.5; -webkit-font-smoothing: antialiased; overflow-x: clip; -webkit-tap-highlight-color: transparent; }
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+::selection { background: var(--earth-y); color: var(--ink); }
+html[lang="he"] [lang="en"], html[lang="en"] [lang="he"] { display: none !important; }
+.skip { position: absolute; inset-inline-start: 12px; top: -60px; z-index: 50; background: var(--ink); color: #fff; padding: 10px 16px; text-decoration: none; }
+.skip:focus { top: 12px; }
+[id] { scroll-margin-top: 16px; }
+a, button, select, input { touch-action: manipulation; }
+.rail button, .lever, .plateSw a, .btn, .mswitch { -webkit-user-select: none; user-select: none; }
+.sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.wrap { padding-inline: var(--m); max-width: 1440px; margin-inline: auto; }
+h1, h2, h3 { font-weight: 600; letter-spacing: -0.02em; line-height: 1.02; margin: 0; text-wrap: balance; }
+html[lang="en"] h1, html[lang="en"] h2, html[lang="en"] h3 { letter-spacing: -0.04em; line-height: 0.95; }
+p { margin: 0; }
+/* the motif: the stepped profile of a DIN top-hat rail, cut into every corner that would otherwise be a rounded rectangle */
+.din { clip-path: polygon(0 var(--step), var(--step) var(--step), var(--step) 0, calc(100% - var(--step)) 0, calc(100% - var(--step)) var(--step), 100% var(--step), 100% 100%, 0 100%); }
+.din-s { --step: var(--step-s); }
+
+/* concept bar */
+.concept { background: var(--ink); color: var(--field-ink); font-size: var(--step-small); padding: 7px var(--m); text-align: center; }
+
+/* header */
+.top { display: flex; align-items: center; gap: 12px 20px; padding: 14px var(--m); max-width: 1440px; margin-inline: auto; flex-wrap: wrap; }
+.mark { font-weight: 600; font-size: var(--step-lead); letter-spacing: -0.02em; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
+.mark i { width: 12px; height: 22px; background: var(--ink); clip-path: polygon(0 4px, 3px 4px, 3px 0, 9px 0, 9px 4px, 12px 4px, 12px 100%, 0 100%); }
+.top nav { display: flex; gap: 22px; margin-inline-start: auto; }
+.top nav a { text-decoration: none; font-size: var(--step-body); padding: 6px 0; position: relative; }
+.top nav a::after { content: ""; position: absolute; inset-inline: 0; bottom: 0; height: 2px; background: currentColor; transform: scaleX(0); transform-origin: var(--o, right); transition: transform var(--t-hover) var(--ease-out); }
+.top .tools { display: flex; align-items: center; gap: 10px; }
+.lang { border: 0; background: var(--surface); padding: 9px 14px; font-size: var(--step-small); cursor: pointer; transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease; }
+.lang:active { transform: scale(0.96); }
+/* the animations switch is a miniature breaker */
+.mswitch { display: inline-flex; align-items: center; gap: 8px; border: 0; background: transparent; cursor: pointer; padding: 4px; font-size: var(--step-small); }
+.mswitch .brk { width: 22px; height: 34px; background: var(--surface-2); position: relative; clip-path: polygon(0 5px, 4px 5px, 4px 0, 18px 0, 18px 5px, 22px 5px, 22px 100%, 0 100%); }
+.mswitch .brk::after { content: ""; position: absolute; left: 6px; right: 6px; top: 8px; height: 10px; background: var(--ink); transition: transform var(--t-ui) var(--ease-out); }
+.mswitch[aria-checked="false"] .brk::after { transform: translateY(10px); background: var(--muted); }
+.mswitch .flag { width: 6px; height: 6px; background: #d42a1e; }
+.mswitch[aria-checked="false"] .flag { background: var(--earth-g); }
+.mswitch:active .brk { transform: scale(0.95); }
+.mswitch .brk { transition: transform var(--t-press) var(--ease-out); }
+.motion-why { display: none; font-size: var(--step-small); color: var(--muted); padding: 0 var(--m) 8px; max-width: 1440px; margin-inline: auto; }
+html[data-motion-auto] .motion-why { display: block; }
+.motion-why [data-why] { display: none; }
+html[data-motion-auto="reduce"] [data-why="reduce"], html[data-motion-auto="data"] [data-why="data"], html[data-motion-auto="slow"] [data-why="slow"], html[data-motion-auto="device"] [data-why="device"] { display: inline; }
+.btn { --step: var(--step-s); display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 52px; padding: 0 26px; background: var(--accent); color: var(--accent-ink); text-decoration: none; font-weight: 500; border: 0; cursor: pointer; transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease; }
+.btn svg { width: 20px; height: 20px; flex: none; }
+.btn:active { transform: scale(0.97); }
+.btn.ghost { background: var(--surface); color: var(--ink); }
+.btn.dark { background: var(--ink); color: var(--field-ink); }
+.top .btn { min-height: 44px; padding: 0 18px; font-size: var(--step-body); }
+@media (hover: hover) {
+  .top nav a:hover::after { transform: scaleX(1); }
+  .btn:hover { background: var(--accent-deep); }
+  .btn.ghost:hover { background: var(--surface-2); }
+  .btn.dark:hover { background: #2a2a2a; }
+  .lang:hover { background: var(--surface-2); }
+}
+
+/* hero: the printed card beside the room, which is dark until the breaker goes up */
+.hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; padding: 0 12px 12px; }
+.card { min-width: 0; background: var(--surface); display: flex; flex-direction: column; align-items: center; text-align: center; min-height: calc(100svh - 120px); padding-bottom: 28px; }
+.stripe { align-self: stretch; min-width: 0; height: 56px; display: flex; overflow: hidden; }
+.stripe i { flex: 0 0 28px; height: 100%; background: var(--earth-g); }
+.stripe i:nth-child(even) { background: var(--earth-y); }
+.card .word { margin-top: clamp(28px, 7vh, 72px); font-size: clamp(54px, 6vw, 92px); font-weight: 600; letter-spacing: -0.03em; line-height: 0.9; }
+.card h1 { margin-top: 22px; font-size: var(--step-h3); font-weight: 500; max-width: 15ch; }
+html[lang="en"] .card h1 { max-width: 17ch; font-size: var(--step-h3); }
+.card .sub { margin-top: 18px; max-width: 36ch; font-size: var(--step-body); }
+.card .status { margin-top: 14px; font-size: var(--step-small); display: inline-flex; align-items: center; gap: 8px; color: var(--muted); }
+.status .dot { width: 9px; height: 9px; background: var(--muted); }
+.status.open .dot { background: var(--earth-g); }
+.card .act { margin-top: 26px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.card .links { margin-top: auto; padding-top: 28px; display: flex; gap: 22px; flex-wrap: wrap; justify-content: center; font-size: var(--step-small); }
+.card .links a { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.room { position: sticky; top: 12px; height: calc(100svh - 24px); max-height: 980px; overflow: hidden; background: #0b0b0c; }
+.room img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.room .dark { filter: brightness(0.16) saturate(0.5) contrast(1.1); }
+.room .lit { opacity: 0; transition: opacity 1.6s ease; }
+.room.on .lit { opacity: 1; }
+.room .cap { position: absolute; inset-inline-start: 14px; bottom: 14px; background: rgba(18,18,18,.72); color: #fff; font-size: var(--step-small); padding: 5px 10px; }
+/* the live thing: the breaker on the card puts the room's light on and off */
+.lever { margin-top: 26px; display: inline-flex; align-items: center; gap: 14px; border: 0; background: transparent; cursor: pointer; padding: 6px; }
+.lever .body { width: 46px; height: 74px; background: var(--bg); position: relative; clip-path: polygon(0 10px, 8px 10px, 8px 0, 38px 0, 38px 10px, 46px 10px, 46px 100%, 0 100%); transition: transform var(--t-press) var(--ease-out); }
+.lever .body::before { content: ""; position: absolute; left: 12px; right: 12px; top: 16px; height: 42px; background: var(--surface-2); }
+.lever .body::after { content: ""; position: absolute; left: 14px; right: 14px; top: 18px; height: 18px; background: var(--ink); transition: transform var(--t-ui) var(--ease-out); transform: translateY(20px); }
+.lever[aria-pressed="true"] .body::after { transform: none; }
+.lever:active .body { transform: scale(0.96); }
+.lever .lab { font-size: var(--step-body); text-align: start; }
+.lever .lab b { display: block; font-weight: 500; }
+
+/* intro statement with inline frames */
+.intro { padding: clamp(96px, 20vh, 200px) var(--m); display: flex; justify-content: center; }
+.intro p { max-width: 64vw; font-size: var(--step-h3); line-height: 1.22; font-weight: 500; text-align: center; letter-spacing: -0.01em; }
+.intro .fr { --step: 0.12em; display: inline-block; height: 0.9em; width: 1.25em; vertical-align: -0.12em; margin-inline: 0.12em; overflow: hidden; background: var(--surface); }
+.intro .fr img { width: 100%; height: 100%; object-fit: cover; }
+
+/* the short circuit, a 3D cutaway the scroll drives */
+.short { background: var(--field); color: var(--field-ink); position: relative; }
+.short-head { padding: clamp(80px, 14vh, 160px) var(--m) 40px; max-width: 1440px; margin-inline: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 24px 48px; align-items: end; }
+.short-head h2 { font-size: var(--step-head); }
+.short-head p { color: var(--field-muted); max-width: 44ch; }
+.short-head p b { color: var(--field-ink); font-weight: 500; }
+.track { height: 640svh; position: relative; }
+.stage { position: sticky; top: 0; height: 100svh; overflow: hidden; }
+.stage [data-3d] { position: absolute; inset: 0; }
+.stage canvas { width: 100% !important; height: 100% !important; display: block; }
+.stage .stillimg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #1a1918; display: none; }
+html.still .stage .stillimg, .stage.no3d .stillimg { display: block; }
+html.still .stage canvas, .stage.no3d canvas { visibility: hidden; }
+.l3d-host, .slabels { position: absolute; inset: 0; pointer-events: none; }
+.l3d { position: absolute; left: 0; top: 0; background: var(--bg); color: var(--ink); font-size: var(--step-small); line-height: 1.25; padding: 5px 9px; white-space: nowrap; transition: opacity var(--t-ui) ease; margin: -14px 0 0 12px; }
+html[dir="rtl"] .l3d { margin: -14px 0 0 0; translate: calc(-100% - 12px) 0; }
+html.still .l3d-host { display: none; }
+html:not(.still) .stage:not(.no3d) .slabels { display: none; }
+/* the panel card: what is happening, written on the label you'd find inside a panel door */
+.plate { position: absolute; top: calc(16px + env(safe-area-inset-top)); inset-inline-start: var(--m); width: min(420px, calc(100% - 2 * var(--m) - 150px)); background: var(--bg); color: var(--ink); padding: 18px 20px 20px; }
+.plate h3 { font-size: var(--step-h3); font-weight: 500; }
+.plate p { margin-top: 8px; font-size: var(--step-body); }
+.plate .note { margin-top: 10px; font-size: var(--step-small); color: var(--muted); }
+/* the tester: one instrument, its LCD follows the scene */
+.meter { position: absolute; top: calc(16px + env(safe-area-inset-top)); inset-inline-end: var(--m); width: 132px; background: #e8b81c; color: #111; padding: 10px 10px 14px; --step: 10px; }
+.meter .lcd { background: #c9d3b9; padding: 6px 8px 4px; text-align: end; direction: ltr; }
+.meter .val { font-size: var(--step-h3); line-height: 1; font-weight: 500; font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+.meter .unit { font-size: var(--step-small); }
+.meter .mode { margin-top: 8px; display: flex; justify-content: space-between; font-size: var(--step-small); direction: ltr; }
+.meter .mode span { opacity: .45; }
+.meter .mode span.on { opacity: 1; font-weight: 600; }
+.meter .dial { width: 54px; height: 54px; margin: 10px auto 0; background: #1b1b1b; border-radius: 50%; position: relative; }
+.meter .dial::after { content: ""; position: absolute; left: 50%; top: 6px; width: 6px; height: 22px; margin-left: -3px; background: #e8b81c; transform-origin: 50% 21px; transform: rotate(var(--dial, -40deg)); transition: transform var(--t-ui) var(--ease-out); }
+.meter .what { margin-top: 8px; font-size: var(--step-small); text-align: center; line-height: 1.25; }
+/* the stage controls are breakers on a DIN rail */
+.rail { position: absolute; bottom: calc(14px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); display: flex; gap: 2px; padding: 10px 10px 0; background: #b9bcc0; max-width: calc(100% - 2 * var(--m)); }
+.rail button { --step: 6px; width: clamp(54px, 7vw, 92px); background: var(--bg); color: var(--ink); border: 0; cursor: pointer; padding: 10px 4px 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: var(--step-small); line-height: 1.15; transition: transform var(--t-press) var(--ease-out); }
+.rail button:active { transform: scale(0.96); }
+.rail .tg { width: 16px; height: 30px; background: var(--surface-2); position: relative; }
+.rail .tg::after { content: ""; position: absolute; left: 3px; right: 3px; top: 3px; height: 11px; background: var(--muted); transform: translateY(13px); transition: transform var(--t-ui) var(--ease-out), background-color var(--t-ui) ease; }
+.rail button[aria-pressed="true"] .tg::after { transform: none; background: var(--ink); }
+.rail button[aria-pressed="true"] { background: #fff6cc; }
+.rail .tx { min-height: 2.3em; text-align: center; }
+.short .mini { position: absolute; bottom: calc(14px + env(safe-area-inset-bottom)); inset-inline-end: var(--m); }
+.short-foot { padding: 64px var(--m) clamp(96px, 16vh, 180px); max-width: 1440px; margin-inline: auto; display: grid; grid-template-columns: 5fr 7fr; gap: 32px 64px; }
+.short-foot blockquote { margin: 0; font-size: var(--step-lead); line-height: 1.25; max-width: 30ch; }
+.short-foot cite { display: block; margin-top: 16px; font-style: normal; font-size: var(--step-body); color: var(--field-muted); }
+.short-foot .why { color: var(--field-muted); max-width: 52ch; }
+.short-foot .why b { color: var(--field-ink); font-weight: 500; }
+
+/* tiles that grow: open wall, closed wall, light */
+.grow { padding: clamp(110px, 18vh, 200px) var(--m); max-width: 1440px; margin-inline: auto; }
+.grow .row { display: grid; grid-template-columns: 3fr 4fr 5fr; gap: 10px; align-items: end; }
+.grow h2 { font-size: var(--step-head); grid-column: 1 / 3; align-self: start; max-width: 14ch; }
+.grow .tile { overflow: hidden; background: var(--surface); }
+.grow .tile img { width: 100%; height: 100%; object-fit: cover; }
+.grow .t1 { height: 30vh; } .grow .t2 { height: 44vh; } .grow .t3 { height: 60vh; }
+.grow .row > div:nth-of-type(1) { grid-column: 1; grid-row: 2; } .grow .row > div:nth-of-type(2) { grid-column: 2; grid-row: 2; } .grow .t3w { grid-column: 3; grid-row: 1 / 3; align-self: end; } .grow .row > div { min-width: 0; }
+.grow .names { display: grid; grid-template-columns: 3fr 4fr 5fr; gap: 10px; margin-top: 18px; }
+.grow .names b { display: block; font-size: var(--step-lead); font-weight: 500; }
+.grow .names p { font-size: var(--step-body); color: var(--muted); max-width: 32ch; margin-top: 4px; }
+.grow .src { margin-top: 26px; font-size: var(--step-small); color: var(--muted); }
+
+/* folders: one per kind of job, each with the review that proves it */
+.folders { padding-bottom: clamp(100px, 16vh, 180px); }
+.folders > h2 { font-size: var(--step-h3); padding: 0 var(--m) 28px; max-width: 1440px; margin-inline: auto; }
+.folder { position: sticky; top: calc(var(--i) * 64px); padding-top: 44px; }
+.folder .tab { position: absolute; top: 0; inset-inline-start: var(--m); height: 44px; display: flex; align-items: center; padding: 0 22px; font-size: var(--step-lead); font-weight: 500; min-width: 220px; clip-path: polygon(0 100%, 0 12px, 12px 0, calc(100% - 12px) 0, 100% 12px, 100% 100%); }
+.folder .band { min-height: 80svh; padding: 22px var(--m) 48px; display: grid; grid-template-columns: 7fr 5fr; gap: 24px 48px; align-content: start; }
+.folder .kind { grid-column: 1 / -1; text-align: end; font-size: var(--step-small); height: 20px; }
+.folder .pic { aspect-ratio: 16 / 10; overflow: hidden; background: rgba(0,0,0,.1); }
+.folder .pic img { width: 100%; height: 100%; object-fit: cover; }
+.folder .txt h3 { font-size: var(--step-h3); max-width: 16ch; }
+.folder .txt p { margin-top: 14px; max-width: 40ch; }
+.folder blockquote { margin: 26px 0 0; font-size: var(--step-lead); line-height: 1.35; max-width: 34ch; }
+.folder blockquote footer { margin-top: 10px; font-size: var(--step-small); opacity: .8; }
+.f1 .band { background: var(--accent); color: #fff; } .f1 .tab { background: var(--earth-y); color: var(--ink); }
+.f2 .band { background: var(--live); color: var(--live-ink); } .f2 .tab { background: var(--bg); color: var(--ink); }
+.f3 .band { background: var(--surface-2); color: var(--ink); } .f3 .tab { background: var(--ink); color: #fff; }
+.timer { width: 100%; height: 100%; background: #cfd3c8; display: grid; place-items: center; }
+.timer svg { width: min(70%, 360px); height: auto; }
+
+/* testimonial: the hands at work, the quotation offset beside them */
+.voice { padding: clamp(110px, 18vh, 200px) var(--m); max-width: 1440px; margin-inline: auto; display: grid; grid-template-columns: repeat(12, 1fr); gap: 0 20px; }
+.voice .por { grid-column: 2 / 6; height: 70svh; overflow: hidden; }
+.voice .por img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 70%; }
+.voice .q { grid-column: 7 / 13; padding-top: 120px; }
+.voice blockquote { margin: 0; font-size: var(--step-lead); line-height: 1.2; max-width: 26ch; font-weight: 400; }
+.voice cite { display: block; margin-top: 32px; font-style: normal; font-size: var(--step-body); }
+.voice .small { grid-column: 10 / 12; margin-top: 96px; aspect-ratio: 1; overflow: hidden; }
+.voice .small img { width: 100%; height: 100%; object-fit: cover; }
+
+/* the full-width band: Haifa's lights */
+.city { position: relative; background: #0b0b0b; color: #fff; }
+.city img { width: 100%; height: clamp(320px, 70svh, 760px); object-fit: cover; }
+.city p { position: absolute; inset-inline-start: var(--m); bottom: 22px; max-width: 46ch; font-size: var(--step-body); background: rgba(0,0,0,.66); padding: 10px 14px; }
+
+/* proof board */
+.proof { padding: clamp(110px, 18vh, 200px) var(--m); max-width: 1440px; margin-inline: auto; }
+.board { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+.board .t b { overflow-wrap: anywhere; }
+.board .t { aspect-ratio: 3 / 2; background: var(--surface); padding: 24px; display: flex; flex-direction: column; justify-content: space-between; }
+.board .t b { font-size: var(--step-h3); font-weight: 600; letter-spacing: -0.02em; line-height: 1.05; }
+.board .t > span { font-size: var(--step-body); color: var(--muted); }
+.board .head { grid-column: span 2; aspect-ratio: auto; background: var(--accent); color: #fff; flex-direction: row; align-items: stretch; gap: 20px; }
+.board .head h2 { font-size: var(--step-head); max-width: 9ch; }
+.board .head p { font-size: var(--step-body); margin-top: 10px; }
+.board .head .gauge { flex: 1; min-width: 0; display: grid; place-items: center; }
+.gauge svg { width: 100%; max-width: 320px; height: auto; }
+.gauge .needle { transform-origin: 160px 150px; transform: rotate(-60deg); transition: transform 1.2s var(--ease-out) .2s; }
+.gauge.in .needle, html.still .gauge .needle { transform: rotate(60deg); }
+.board .t.y { background: var(--earth-y); } .board .t.y > span { color: var(--ink); }
+.board .t.k { background: var(--ink); color: #fff; } .board .t.k > span { color: var(--field-muted); }
+
+/* the coupon: the WhatsApp message is filled in here */
+.contact { padding: 120px var(--m); max-width: 1440px; margin-inline: auto; }
+.coupon { --step: 14px; margin-inline: auto; width: min(100%, 1180px); background: var(--live); color: var(--live-ink); display: grid; grid-template-columns: 46fr 54fr; position: relative;
+  -webkit-mask: radial-gradient(circle 14px at 46% 0, #0000 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle 14px at 46% 100%, #0000 98%, #000) bottom / 100% 51% no-repeat; /* taste-skill-ignore: functional (underline / coupon notch mask / chevron / floating plate) */
+          mask: radial-gradient(circle 14px at 46% 0, #0000 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle 14px at 46% 100%, #0000 98%, #000) bottom / 100% 51% no-repeat; } /* taste-skill-ignore: functional (underline / coupon notch mask / chevron / floating plate) */
+html[dir="rtl"] .coupon { -webkit-mask: radial-gradient(circle 14px at 54% 0, #0000 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle 14px at 54% 100%, #0000 98%, #000) bottom / 100% 51% no-repeat; mask: radial-gradient(circle 14px at 54% 0, #0000 98%, #000) top / 100% 51% no-repeat, radial-gradient(circle 14px at 54% 100%, #0000 98%, #000) bottom / 100% 51% no-repeat; } /* taste-skill-ignore: functional (underline / coupon notch mask / chevron / floating plate) */
+.coupon .l { padding: 48px; display: flex; flex-direction: column; justify-content: space-between; gap: 28px; border-inline-end: 5px dotted var(--bg); }
+.coupon h2 { font-size: var(--step-h3); max-width: 12ch; }
+.coupon .l p { font-size: var(--step-body); max-width: 34ch; }
+.coupon form { padding: 40px 48px; display: flex; flex-direction: column; gap: 10px; }
+.coupon select { padding-inline-end: 44px !important; }
+.coupon select, .coupon input { width: 100%; height: 52px; background: #845435; color: var(--live-ink); border: 0; padding: 0 16px; font-size: var(--step-body); border-radius: 0; -webkit-appearance: none; appearance: none; }
+.coupon select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M0 0h12L6 8z' fill='%23fff'/%3E%3C/svg%3E"); background-size: 12px 8px; background-repeat: no-repeat; background-position: left 16px center; } /* taste-skill-ignore: functional (underline / coupon notch mask / chevron / floating plate) */
+html[dir="ltr"] .coupon select { background-position: right 16px center; }
+.coupon input::placeholder { color: #e8d4c2; }
+.coupon .prev { font-size: var(--step-small); min-height: 3.2em; color: #f1dfcf; }
+.coupon .send { --step: 0; height: 56px; background: var(--ink); color: #fff; justify-content: center; }
+@media (hover: hover) { .coupon .send:hover { background: #2a2a2a; } }
+.coupon .caret { display: inline-block; width: 2px; height: 1em; background: currentColor; vertical-align: -0.15em; margin-inline-start: 1px; }
+.where { margin-top: 64px; display: grid; grid-template-columns: 5fr 7fr; gap: 24px 48px; align-items: start; }
+.where h3 { font-size: var(--step-h3); }
+.where dl { margin: 20px 0 0; display: grid; grid-template-columns: auto 1fr; gap: 10px 22px; font-size: var(--step-body); }
+.where dt { color: var(--muted); }
+.where dd { margin: 0; }
+.where .map { aspect-ratio: 16 / 10; background: var(--surface); }
+.where iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* footer: the circuit schedule glued inside a panel door */
+.earth { height: 8px; display: flex; overflow: hidden; }
+.earth i { flex: 0 0 28px; background: var(--earth-g); } .earth i:nth-child(even) { background: var(--earth-y); }
+footer.site { background: var(--field); color: var(--field-ink); padding: 72px var(--m) calc(120px + env(safe-area-inset-bottom)); }
+footer.site .in { max-width: 1440px; margin-inline: auto; display: grid; grid-template-columns: 7fr 5fr; gap: 40px 64px; }
+.sched { background: var(--bg); color: var(--ink); padding: 26px 26px 18px; }
+.sched h2 { font-size: var(--step-h3); }
+.sched table { width: 100%; border-collapse: collapse; margin-top: 18px; font-size: var(--step-body); }
+.sched th, .sched td { text-align: start; padding: 11px 10px; border-top: 1px solid #c9c8c0; vertical-align: top; }
+.sched th { font-weight: 500; color: var(--muted); font-size: var(--step-small); }
+.sched td:first-child { width: 3.2em; font-variant-numeric: tabular-nums; color: var(--muted); }
+.sched a { text-underline-offset: 3px; }
+.credits { font-size: var(--step-small); color: var(--field-muted); line-height: 1.55; }
+.credits p + p { margin-top: 12px; }
+.credits a { color: var(--field-ink); }
+.credits .mswitch { color: var(--field-ink); margin-top: 18px; }
+.credits .mswitch .brk { background: #3a3a3a; }
+.credits .mswitch .brk::after { background: var(--field-ink); }
+
+/* the floating wall plate: two rockers, call and WhatsApp (phones only) */
+.plateSw { position: fixed; z-index: 30; bottom: calc(14px + env(safe-area-inset-bottom)); inset-inline-end: 14px; display: none; gap: 3px; padding: 7px; background: var(--bg); box-shadow: 0 6px 22px rgba(0,0,0,.22); transition: transform var(--t-ui) var(--ease-out), opacity var(--t-ui) ease; } /* taste-skill-ignore: functional (underline / coupon notch mask / chevron / floating plate) */
+.plateSw a { width: 60px; height: 76px; background: var(--surface); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-decoration: none; font-size: var(--step-small); transition: transform var(--t-press) var(--ease-out); }
+.plateSw a:active { transform: scale(0.94); }
+.plateSw a.wa { background: var(--accent); color: #fff; }
+.plateSw svg { width: 24px; height: 24px; }
+.plateSw.away { transform: translateY(140%); opacity: 0; pointer-events: none; }
+
+/* entrances */
+html.js:not(.still) [data-r] > * { opacity: 0; transform: translateY(22px); transition: opacity var(--t-reveal) var(--ease-out), transform var(--t-reveal) var(--ease-out); }
+html.js:not(.still) [data-r].in > * { opacity: 1; transform: none; }
+html.js:not(.still) [data-r].in > :nth-child(2) { transition-delay: 80ms; } html.js:not(.still) [data-r].in > :nth-child(3) { transition-delay: 160ms; } html.js:not(.still) [data-r].in > :nth-child(4) { transition-delay: 240ms; } html.js:not(.still) [data-r].in > :nth-child(5) { transition-delay: 320ms; } html.js:not(.still) [data-r].in > :nth-child(6) { transition-delay: 400ms; } html.js:not(.still) [data-r].in > :nth-child(7) { transition-delay: 480ms; } html.js:not(.still) [data-r].in > :nth-child(8) { transition-delay: 560ms; }
+html.js:not(.still) [data-open] img { clip-path: inset(0 0 100% 0); transition: clip-path 1s var(--ease-out); }
+html.js:not(.still) [data-open].in img { clip-path: inset(0 0 0 0); }
+html.still *, html.still *::before, html.still *::after { transition-duration: 0s !important; animation: none !important; }
+
+/* phones */
+@media (max-width: 900px) {
+  .top nav { display: none; }
+  .top .tools { margin-inline-start: auto; }
+  .top .btn.callh { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 0 12px; }
+  .room { position: relative; top: 0; height: 34svh; order: -1; }
+  .room .cap { display: none; }
+  .card { margin-top: -24px; position: relative; min-height: 0; }
+  .stripe { height: 40px; }
+  .card .word { margin-top: 18px; font-size: 14vw; }
+  .card h1 { margin-top: 12px; }
+  .card .sub { margin-top: 12px; }
+  .card .act { margin-top: 16px; }
+  .card h1 { font-size: var(--step-h3); }
+  html[lang="en"] .card h1 { font-size: var(--step-h3); }
+  .intro { padding: 96px 20px; justify-content: flex-start; }
+  .intro p { max-width: none; text-align: start; font-size: var(--step-lead); line-height: 1.25; }
+  .short-head { grid-template-columns: 1fr; }
+  .plate { width: auto; inset-inline-end: calc(var(--m) + 104px); padding: 12px 14px 14px; }
+  .plate h3 { font-size: var(--step-lead); }
+  .plate p { font-size: var(--step-small); }
+  .plate .note { display: none; }
+  .meter { width: 96px; padding: 7px 7px 10px; }
+  .meter .val { font-size: var(--step-lead); }
+  .meter .dial { width: 38px; height: 38px; margin-top: 6px; }
+  .meter .dial::after { top: 4px; height: 15px; width: 5px; margin-left: -2.5px; transform-origin: 50% 15px; }
+  .meter .mode { font-size: var(--step-small); }
+  .meter .what { font-size: var(--step-small); }
+  .rail { left: var(--m); right: var(--m); transform: none; justify-content: center; padding: 6px 6px 0; gap: 2px; }
+  .rail button { width: auto; flex: 1 1 0; min-width: 0; font-size: var(--step-small); padding: 8px 2px 10px; gap: 6px; }
+  .rail .tg { width: 14px; height: 24px; } .rail .tg::after { height: 8px; transform: translateY(11px); }
+  .short .mini { display: none; }
+  .short-foot { grid-template-columns: 1fr; }
+  .grow h2 { font-size: var(--step-h3); margin-bottom: 18px; }
+  .grow .row, .grow .names { display: block; }
+  .grow .row > .tile { height: auto; margin-bottom: 0; }
+  .grow .row > .gstage > .tile { height: auto; width: 100%; }
+  .grow .t1 { aspect-ratio: 1 / 0.34; } .grow .t2 { aspect-ratio: 1 / 0.46; } .grow .t3 { aspect-ratio: 1 / 0.62; }
+  .gstage { margin-bottom: 28px; }
+  .gstage b { display: block; font-size: var(--step-body); font-weight: 500; margin-top: 12px; }
+  .gstage p { font-size: var(--step-body); color: var(--muted); }
+  .folder { position: relative; top: 0; padding-top: 40px; }
+  .folder .tab { height: 40px; font-size: var(--step-lead); min-width: 0; }
+  .folder .band { grid-template-columns: 1fr; min-height: 0; padding: 18px 20px 40px; }
+  .folder .kind { text-align: start; }
+  .folder .pic { aspect-ratio: 4 / 3; }
+  .voice { display: block; }
+  .voice .por { width: 72%; height: auto; aspect-ratio: 3 / 4; }
+  .voice .q { padding-top: 32px; }
+  .voice blockquote { font-size: var(--step-lead); }
+  .voice .small { width: 44%; margin-inline-start: auto; margin-top: 48px; }
+  .board { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; }
+  .board .head { grid-column: 1 / -1; flex-direction: column; }
+  .board .t { padding: 16px; }
+  .board .t b { font-size: var(--step-lead); }
+  .board .t span { font-size: var(--step-small); }
+  .contact { padding: 96px 12px; }
+  .coupon, html[dir="rtl"] .coupon { grid-template-columns: 1fr; -webkit-mask: radial-gradient(circle 14px at 0 var(--cut, 46%), #0000 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 14px at 100% var(--cut, 46%), #0000 98%, #000) right / 51% 100% no-repeat; mask: radial-gradient(circle 14px at 0 var(--cut, 46%), #0000 98%, #000) left / 51% 100% no-repeat, radial-gradient(circle 14px at 100% var(--cut, 46%), #0000 98%, #000) right / 51% 100% no-repeat; } /* taste-skill-ignore: functional (underline / coupon notch mask / chevron / floating plate) */
+  .coupon .l { border-inline-end: 0; border-bottom: 5px dotted var(--bg); padding: 32px 24px; }
+  .coupon form { padding: 28px 24px 32px; }
+  .coupon select, .coupon input, .coupon .send { height: 54px; }
+  .where { grid-template-columns: 1fr; }
+  footer.site .in { grid-template-columns: 1fr; }
+  .sched { padding: 20px 16px 12px; }
+  .sched th, .sched td { padding: 10px 6px; }
+  .plateSw { display: flex; }
+}
+@media (min-width: 901px) { .gstage b, .gstage p { display: none; } }
+@media (max-width: 380px) { .rail .tx { font-size: var(--step-small); } }
+</style>
+</head>
+<body>
+<a class="skip" href="#main"><span lang="he">דלגו לתוכן</span><span lang="en">Skip to content</span></a>
+<div class="concept" data-concept>
+  <span lang="he">קונספט לדוגמה שנבנה עבור אור חדש · זה אינו האתר הרשמי של העסק</span>
+  <span lang="en">A sample concept built for Or Hadash · This is not the business's official website</span>
+</div>
+
+<header class="top">
+  <a class="mark" href="#top" id="top" translate="no"><i aria-hidden="true"></i><span lang="he">אור חדש</span><span lang="en">Or Hadash</span></a>
+  <nav aria-label="ניווט">
+    <a href="#short"><span lang="he">איך נראה קצר</span><span lang="en">Inside a short</span></a>
+    <a href="#work"><span lang="he">עבודות</span><span lang="en">Work</span></a>
+    <a href="#proof"><span lang="he">ביקורות</span><span lang="en">Reviews</span></a>
+    <a href="#contact"><span lang="he">יצירת קשר</span><span lang="en">Contact</span></a>
+  </nav>
+  <div class="tools">
+    <button class="mswitch" type="button" role="switch" aria-checked="true" data-motion-toggle><span class="brk" aria-hidden="true"></span><span class="flag" aria-hidden="true"></span><span lang="he">אנימציות</span><span lang="en">Animations</span></button>
+    <button class="lang" type="button" data-set-lang><span lang="he">English</span><span lang="en">עברית</span></button>
+    <a class="btn callh din" href="tel:+972542514004"><span lang="he">התקשרו לסאלח</span><span lang="en">Call Salah</span></a>
+  </div>
+</header>
+<p class="motion-why" data-motion-why>
+  <span lang="he"><span data-why="reduce">האנימציות כבויות כי המכשיר שלכם מבקש פחות תנועה.</span><span data-why="data">האנימציות כבויות כי חיסכון בנתונים פועל.</span><span data-why="slow">האנימציות כבויות כי החיבור איטי.</span><span data-why="device">האנימציות כבויות כדי שהמכשיר יישאר מהיר.</span> אפשר להדליק אותן במתג למעלה.</span>
+  <span lang="en"><span data-why="reduce">Animations are off because your device asks for reduced motion.</span><span data-why="data">Animations are off because data saver is on.</span><span data-why="slow">Animations are off because the connection is slow.</span><span data-why="device">Animations are off to keep this device fast.</span> You can turn them on with the switch above.</span>
+</p>
+
+<main id="main">
+<section class="hero" aria-labelledby="h1">
+  <div class="card">
+    <div class="stripe" aria-hidden="true" data-stripe></div>
+    <p class="word"><span lang="he">אור חדש</span><span lang="en">Or Hadash</span></p>
+    <h1 id="h1"><span lang="he">סאלח, חשמלאי מוסמך בחיפה ובקריות</span><span lang="en">Salah, a licensed electrician in Haifa</span></h1>
+    <p class="sub"><span lang="he">אור חדש, החשמלאי של סאלח: לוחות חשמל, קצרים, שקעים, תאורה ושעון לדוד. 5.0 בגוגל מ-89 ביקורות.</span><span lang="en">Or Hadash is Salah's electrical business: panels, short circuits, sockets, lighting and water-heater timers. Rated 5.0 on Google from 89 reviews.</span></p>
+    <p class="status" data-status><span class="dot"></span></p>
+    <div class="act">
+      <a class="btn din" href="tel:+972542514004"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8Z"/></svg><span lang="he">התקשרו לסאלח</span><span lang="en">Call Salah</span></a>
+      <a class="btn ghost din" href="https://wa.me/972542514004" data-wa-plain><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
+    </div>
+    <button class="lever" type="button" aria-pressed="false" data-lever>
+      <span class="body" aria-hidden="true"></span>
+      <span class="lab"><b><span lang="he" data-lever-he>הרימו את המפסק</span><span lang="en" data-lever-en>Flip the breaker up</span></b><span lang="he">והאור בחדר נדלק</span><span lang="en">and the room lights up</span></span>
+    </button>
+    <p class="links">
+      <a href="#short"><span lang="he">מה קורה בקיר כשיש קצר</span><span lang="en">What happens in the wall</span></a>
+      <a href="#proof"><span lang="he">מה הלקוחות כותבים</span><span lang="en">What customers write</span></a>
+      <a href="#contact"><span lang="he">חירם 181, חיפה</span><span lang="en">181 Hiram St, Haifa</span></a>
+    </p>
+  </div>
+  <figure class="room din" data-room style="margin:0">
+    <img class="dark" src="img/room-lit.jpg" width="960" height="720" alt="" aria-hidden="true">
+    <img class="lit" src="img/room-lit.jpg" width="960" height="720" fetchpriority="high" alt="חדר עם תאורה שקועה ותאורת קיר, מעבודות אור חדש">
+    <figcaption class="cap"><span lang="he">מעבודות אור חדש · מתוך הפרופיל בגוגל</span><span lang="en">Or Hadash's work · from their Google profile</span></figcaption>
+  </figure>
+</section>
+
+<section class="intro" aria-label="על העבודה">
+  <p data-r><span><span lang="he">מהשרוול <span class="fr din" aria-hidden="true"><img src="img/conduits.jpg" alt="" width="900" height="936" loading="lazy"></span> בקיר הפתוח, דרך הלוח <span class="fr din" aria-hidden="true"><img src="img/panel-test.jpg" alt="" width="720" height="1600" loading="lazy" style="object-position:50% 20%"></span> ועד המנורה <span class="fr din" aria-hidden="true"><img src="img/fan-view.jpg" alt="" width="860" height="1146" loading="lazy" style="object-position:50% 40%"></span> בתקרה: סאלח עושה את כל המעגל, ובודק אותו לפני שהוא סוגר.</span><span lang="en">From the conduit <span class="fr din" aria-hidden="true"><img src="img/conduits.jpg" alt="" width="900" height="936" loading="lazy"></span> in the open wall, through the panel <span class="fr din" aria-hidden="true"><img src="img/panel-test.jpg" alt="" width="720" height="1600" loading="lazy" style="object-position:50% 20%"></span> to the lamp <span class="fr din" aria-hidden="true"><img src="img/fan-view.jpg" alt="" width="860" height="1146" loading="lazy" style="object-position:50% 40%"></span> on the ceiling, Salah does the whole circuit, and tests it before he closes up.</span></span></p>
+</section>
+
+<section class="short" id="short" aria-labelledby="short-h">
+  <div class="short-head" data-r>
+    <h2 id="short-h"><span lang="he">מה קורה בקיר כשיש קצר</span><span lang="en">What a short does inside the wall</span></h2>
+    <p><span lang="he"><b>המחשה, לא עבודה אמיתית:</b> חיבור אחד בקופסת הסתעפות, שזור ומלופף בסלוטייפ במקום מחבר. גללו למטה, או לחצו על המפסקים שבתחתית.</span><span lang="en"><b>An illustration, not a real job:</b> one joint in a junction box, twisted and taped instead of properly connected. Scroll down, or press the breakers at the bottom.</span></p>
+  </div>
+  <div class="track" data-track>
+    <div class="stage" data-stage>
+      <div data-3d><div class="l3d-host"></div></div>
+      <img class="stillimg" data-still alt="" width="1200" height="1000" src="img/still-1.jpg" loading="lazy">
+      <div class="slabels" data-slabels></div>
+      <div class="plate din" aria-live="polite">
+        <h3 data-st-title></h3>
+        <p data-st-text></p>
+        <p class="note"><span lang="he">המחשה בתלת-ממד. טקסטורות: Poly Haven (CC0)</span><span lang="en">3D illustration. Textures: Poly Haven (CC0)</span></p>
+      </div>
+      <div class="meter din" aria-hidden="true">
+        <div class="lcd"><span class="val" data-val>0.0</span> <span class="unit" data-unit>A</span></div>
+        <div class="mode"><span data-mode="A">A</span><span data-mode="C">°C</span><span data-mode="M">MΩ</span></div>
+        <div class="dial" data-dial></div>
+        <p class="what" data-what></p>
+      </div>
+      <div class="rail" role="group" data-rail>
+        <button type="button" data-go="0.07" aria-pressed="true"><span class="tg din din-s" aria-hidden="true"></span><span class="tx"><span lang="he">תנור דולק</span><span lang="en">Heater on</span></span></button>
+        <button type="button" data-go="0.28" aria-pressed="false"><span class="tg din din-s" aria-hidden="true"></span><span class="tx"><span lang="he">מתחמם</span><span lang="en">Heating</span></span></button>
+        <button type="button" data-go="0.42" aria-pressed="false"><span class="tg din din-s" aria-hidden="true"></span><span class="tx"><span lang="he">קצר</span><span lang="en">Short</span></span></button>
+        <button type="button" data-go="0.565" aria-pressed="false"><span class="tg din din-s" aria-hidden="true"></span><span class="tx"><span lang="he">המפסק קפץ</span><span lang="en">Tripped</span></span></button>
+        <button type="button" data-go="0.8" aria-pressed="false"><span class="tg din din-s" aria-hidden="true"></span><span class="tx"><span lang="he">איתור ותיקון</span><span lang="en">Test, fix</span></span></button>
+        <button type="button" data-go="0.985" aria-pressed="false"><span class="tg din din-s" aria-hidden="true"></span><span class="tx"><span lang="he">אור חוזר</span><span lang="en">Light back</span></span></button>
+      </div>
+      <button class="mswitch mini" type="button" role="switch" aria-checked="true" data-motion-toggle style="color:#f2f2f2"><span class="brk" aria-hidden="true" style="background:#3a3a3a"></span><span class="flag" aria-hidden="true"></span><span lang="he">אנימציות</span><span lang="en">Animations</span></button>
+    </div>
+  </div>
+  <div class="short-foot" data-r>
+    <blockquote><p lang="he">"החליף לי לוח חשמל שלם, איתר כמה קצרים בבית ותיקן הכל תוך פחות משעתיים. עבודה נקייה, מקצועית וברמה גבוהה מאוד."</p><p lang="en">“He replaced a whole electrical panel for me, found several short circuits in the house and fixed everything in under two hours. Clean, professional, very high-standard work.”</p><cite>יוחאי שטרסברג · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></cite></blockquote>
+    <p class="why"><span lang="he"><b>למה המפסק קפץ, ולא הקיר נשרף?</b> חיבור רופף מתחמם כי הזרם עובר דרך מגע קטן. כשהבידוד נמס והפאזה נוגעת באפס, הזרם קופץ בבת אחת, והמפסק מנתק תוך שבריר שנייה. זה התפקיד שלו. התיקון הוא לא להרים אותו שוב, אלא למצוא את החיבור, לחתוך את החלק השרוף, לחבר במחברים תקינים ולבדוק לפני שמחזירים זרם.</span><span lang="en"><b>Why did the breaker trip, and the wall not burn?</b> A loose joint heats up because the current squeezes through a tiny contact. When the insulation melts and live touches neutral, the current jumps at once and the breaker cuts it in a fraction of a second. That is its job. The fix is not to flip it back up, but to find the joint, cut out the burnt part, reconnect with proper connectors and test before the power goes back on.</span></p>
+  </div>
+</section>
+
+<section class="grow" aria-labelledby="grow-h">
+  <div class="row" data-r>
+    <h2 id="grow-h"><span lang="he">קיר פתוח, קיר סגור, אור.</span><span lang="en">Open wall, closed wall, light.</span></h2>
+    <div class="gstage"><div class="tile t1 din" data-open><img src="img/conduits.jpg" alt="שרוולים וקופסאות על קיר בלוקים לפני הטיח" width="900" height="936" loading="lazy"></div><b lang="he">משחילים</b><b lang="en">Run it</b><p lang="he">שרוולים וקופסאות על הבלוקים, לפני הטיח.</p><p lang="en">Conduits and boxes on the blocks, before the plaster.</p></div>
+    <div class="gstage"><div class="tile t2 din" data-open><img src="img/channels.jpg" alt="תעלות סגורות בטיח עם קופסאות מוכנות" width="820" height="1093" loading="lazy"></div><b lang="he">סוגרים</b><b lang="en">Close it</b><p lang="he">התעלות נסגרות בטיח, הקופסאות מחכות לאביזרים.</p><p lang="en">The chases are plastered, the boxes wait for fittings.</p></div>
+    <div class="gstage t3w"><div class="tile t3 din" data-open><img src="img/pergola.jpg" alt="פרגולה עם גוף תאורה עגול ומאוורר תקרה" width="820" height="1456" loading="lazy"></div><b lang="he">מדליקים</b><b lang="en">Switch on</b><p lang="he">גוף תאורה ומאוורר בפרגולה, דולקים.</p><p lang="en">A light and a ceiling fan on a pergola, on.</p></div>
+  </div>
+  <div class="names" aria-hidden="true">
+    <div><b lang="he">משחילים</b><b lang="en">Run it</b><p lang="he">שרוולים וקופסאות על הבלוקים, לפני הטיח.</p><p lang="en">Conduits and boxes on the blocks, before the plaster.</p></div>
+    <div><b lang="he">סוגרים</b><b lang="en">Close it</b><p lang="he">התעלות נסגרות בטיח, הקופסאות מחכות לאביזרים.</p><p lang="en">The chases are plastered, the boxes wait for fittings.</p></div>
+    <div><b lang="he">מדליקים</b><b lang="en">Switch on</b><p lang="he">גוף תאורה ומאוורר בפרגולה, דולקים.</p><p lang="en">A light and a ceiling fan on a pergola, on.</p></div>
+  </div>
+  <p class="src"><span lang="he">תמונות מעבודות שונות של אור חדש, מתוך הפרופיל בגוגל.</span><span lang="en">Photos from different Or Hadash jobs, from their Google profile.</span></p>
+</section>
+
+<section class="folders" id="work" aria-labelledby="work-h">
+  <h2 id="work-h"><span lang="he">מה מזמינים מסאלח</span><span lang="en">What people call Salah for</span></h2>
+  <article class="folder f1" style="--i:0">
+    <div class="tab din-s"><span lang="he">שקעים ותאורה</span><span lang="en">Sockets, lights</span></div>
+    <div class="band">
+      <p class="kind"><span lang="he">דירה שלמה</span><span lang="en">A whole flat</span></p>
+      <div class="pic din" data-open><img src="img/fan-view.jpg" alt="מאוורר תקרה עם גוף תאורה מעל מרפסת סגורה בזכוכית ונוף של בניינים" width="860" height="1146" loading="lazy" style="object-position:50% 30%"></div>
+      <div class="txt" data-r>
+        <h3><span lang="he">כל השקעים, המתגים והמנורות</span><span lang="en">Every socket, switch and lamp</span></h3>
+        <p><span lang="he">החלפה של כל האביזרים בבית בבת אחת, וגופי תאורה ומאווררים בתקרה.</span><span lang="en">Changing every fitting in the home in one go, plus ceiling lights and fans.</span></p>
+        <blockquote><p lang="he">"עשה אצלי עבודה לא קטנה של החלפת כל השקעים והמתגים וכל גופי התאורה. תקשורתי ואמין, גם תיקן דברים מעבר ולא גבה תשלום. עמד בזמנים שהתחייב."</p><p lang="en">“He did quite a big job for me, replacing all the sockets, switches and light fittings. Communicative and reliable, he even fixed extra things and didn't charge for them. He kept to the times he promised.”</p><footer>רינת שאבי · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></footer></blockquote>
+      </div>
+    </div>
+  </article>
+  <article class="folder f2" style="--i:1">
+    <div class="tab din-s"><span lang="he">שעון לדוד</span><span lang="en">Heater timer</span></div>
+    <div class="band">
+      <p class="kind"><span lang="he">דוד חשמלי</span><span lang="en">Electric water heater</span></p>
+      <div class="pic din timer" data-r>
+        <svg viewBox="0 0 360 360" role="img" aria-label="שעון לדוד: מפסק דו-קוטבי עם חוגת זמן ונורית">
+          <rect x="40" y="40" width="280" height="280" fill="#f6f5f1"/>
+          <rect x="58" y="58" width="244" height="244" fill="#ecebe5"/>
+          <circle cx="180" cy="190" r="86" fill="#f6f5f1"/>
+          <g fill="#121212" font-family="Rubik, sans-serif" font-size="15" text-anchor="middle">
+            <text x="180" y="122">0</text><text x="249" y="152">30</text><text x="262" y="226">60</text><text x="214" y="281">90</text><text x="132" y="281">120</text>
+          </g>
+          <g stroke="#121212" stroke-width="3">
+            <line x1="180" y1="128" x2="180" y2="138"/><line x1="233" y1="155" x2="226" y2="161"/><line x1="246" y1="212" x2="236" y2="210"/><line x1="208" y1="258" x2="203" y2="250"/><line x1="146" y1="258" x2="151" y2="250"/>
+          </g>
+          <g data-knob style="transform-origin:180px 190px;transform:rotate(55deg);transition:transform 1.4s cubic-bezier(.22,1,.36,1)">
+            <circle cx="180" cy="190" r="48" fill="#1b1b1b"/>
+            <rect x="174" y="146" width="12" height="40" fill="#e8c02a"/>
+          </g>
+          <circle cx="180" cy="86" r="9" fill="#d42a1e" data-lamp/>
+          <text x="180" y="72" fill="#55554f" font-family="Rubik, sans-serif" font-size="13" text-anchor="middle">ON</text>
+          <rect x="88" y="300" width="184" height="10" fill="#d9d8d1"/>
+        </svg>
+      </div>
+      <div class="txt" data-r>
+        <h3><span lang="he">השעון לדוד, מותקן נקי</span><span lang="en">The heater timer, fitted cleanly</span></h3>
+        <p><span lang="he">מפסק עם חוגת זמן לדוד, שמכבה אותו לבד. ציור להמחשה.</span><span lang="en">A timer switch that turns the water heater off on its own. Drawing for illustration.</span></p>
+        <blockquote><p lang="he">"הגיע בזמן, עבד במהירות ובמקצועיות, מאוד מסודר ונקי בעבודה שלו, ואדיב ונעים בהתנהלות. התקין את השעון לדוד בצורה מושלמת."</p><p lang="en">“Arrived on time, worked quickly and professionally, very tidy and clean in his work, and courteous and pleasant to deal with. He installed the water-heater timer perfectly.”</p><footer>Rafael Fiszbajn · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></footer></blockquote>
+      </div>
+    </div>
+  </article>
+  <article class="folder f3" style="--i:2">
+    <div class="tab din-s"><span lang="he">חוזרים אליו</span><span lang="en">Called again</span></div>
+    <div class="band">
+      <p class="kind"><span lang="he">תיקונים</span><span lang="en">Repairs</span></p>
+      <div class="pic din" data-open><img src="img/channels.jpg" alt="קיר בלוקים עם תעלות חשמל סגורות בטיח וקופסאות" width="820" height="1093" loading="lazy" style="object-position:50% 45%"></div>
+      <div class="txt" data-r>
+        <h3><span lang="he">אותו חשמלאי, כמה פעמים</span><span lang="en">The same electrician, again and again</span></h3>
+        <p><span lang="he">כשמשהו נשרף, מתקצר או מפסיק לעבוד, מתקשרים שוב למי שבא בפעם הקודמת.</span><span lang="en">When something burns out, shorts or stops working, people call the one who came last time.</span></p>
+        <blockquote><p lang="he">"סאלח חשמלאי מצוין! תיקן אצלי כמה פעמים. תמיד מגיע בזמן, עושה עבודה מצוינת ומחיר הגון. ממליצה בחום."</p><p lang="en">“Salah is an excellent electrician! He has done repairs for me several times. Always on time, does excellent work at an honest price. Warmly recommended.”</p><footer>Shirley Aharonov · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></footer></blockquote>
+      </div>
+    </div>
+  </article>
+</section>
+
+<section class="voice" aria-label="ביקורת">
+  <div class="por din" data-open><img src="img/panel-test.jpg" alt="ידיים בודקות לוח חשמל עם מכשיר בדיקה" width="720" height="1600" loading="lazy"></div>
+  <div class="q" data-r>
+    <blockquote><p lang="he">"סלאח מאור חדש, הוא מקסים, סופר מקצועי, מגיע מתי שהוא אומר, אם יש לו עיכוב הוא מעדכן. העבודה שלו נהדרת והגישה שלו מאוד נעימה."</p><p lang="en">“Salah from Or Hadash is lovely and super professional. He comes when he says he will, and if he's running late he lets you know. His work is great and he's very pleasant to deal with.”</p></blockquote>
+    <cite>Adi Lotem · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></cite>
+  </div>
+  <div class="small din" data-open><img src="img/conduits.jpg" alt="שרוולים ירוקים וקופסאות על קיר בלוקים" width="900" height="936" loading="lazy"></div>
+</section>
+
+<figure class="city" style="margin:0">
+  <img src="img/haifa-1930s.jpg" alt="חיפה בלילה מהכרמל, האורות של העיר והמפרץ, שנות ה-30" width="1400" height="981" loading="lazy">
+  <p><span lang="he">חיפה בלילה מהכרמל, 1934–1939. כל נקודת אור היא בית, עם לוח משלו. צילום: אוסף מטסון, ספריית הקונגרס.</span><span lang="en">Haifa at night from the Carmel, 1934–1939. Every point of light is a home with its own panel. Photo: Matson Collection, Library of Congress.</span></p>
+</figure>
+
+<section class="proof" id="proof" aria-labelledby="proof-h">
+  <div class="board" data-r>
+    <div class="t head din">
+      <div>
+        <h2 id="proof-h"><span lang="he">5.0 בגוגל</span><span lang="en">5.0 on Google</span></h2>
+        <p><span lang="he">מ-89 ביקורות</span><span lang="en">from 89 reviews</span></p>
+      </div>
+      <div class="gauge" data-gauge>
+        <svg viewBox="0 0 320 180" role="img" aria-label="מד שמראה 5.0 מתוך 5">
+          <path d="M40 150 A120 120 0 0 1 280 150" fill="none" stroke="#ffffff" stroke-opacity=".28" stroke-width="16"/>
+          <path d="M220 46 A120 120 0 0 1 280 150" fill="none" stroke="#e8c02a" stroke-width="16"/>
+          <g fill="#fff" font-family="Rubik, sans-serif" font-size="15" text-anchor="middle">
+            <text x="40" y="174">0</text><text x="58" y="94">1</text><text x="116" y="44">2</text><text x="204" y="44">3</text><text x="262" y="94">4</text><text x="280" y="174">5</text>
+          </g>
+          <g class="needle"><rect x="157" y="44" width="6" height="108" fill="#ffffff"/></g>
+          <circle cx="160" cy="150" r="12" fill="#121212"/>
+        </svg>
+      </div>
+    </div>
+    <div class="t"><b>Shirley Aharonov</b><span><span lang="he">"תמיד מגיע בזמן"</span><span lang="en">“Always on time”</span></span></div>
+    <div class="t y"><b>Adi Lotem</b><span><span lang="he">"סופר מקצועי"</span><span lang="en">“Super professional”</span></span></div>
+    <div class="t"><b>יוחאי שטרסברג</b><span><span lang="he">"עבודה נקייה"</span><span lang="en">“Clean work”</span></span></div>
+    <div class="t k"><b>Rafael Fiszbajn</b><span><span lang="he">"מסודר ונקי"</span><span lang="en">“Tidy and clean”</span></span></div>
+    <div class="t"><b>רינת שאבי</b><span><span lang="he">"תקשורתי ואמין"</span><span lang="en">“Communicative, reliable”</span></span></div>
+    <div class="t"><b><span lang="he">24 שעות</span><span lang="en">24 hours</span></b><span><span lang="he">כל ימות השבוע, לפי גוגל</span><span lang="en">Every day, per Google</span></span></div>
+  </div>
+</section>
+
+<section class="contact" id="contact" aria-labelledby="contact-h">
+  <div class="coupon" data-coupon>
+    <div class="l">
+      <h2 id="contact-h"><span lang="he">ספרו לסאלח מה קרה</span><span lang="en">Tell Salah what happened</span></h2>
+      <p><span lang="he">בחרו, וההודעה נכתבת כאן. היא נשלחת מהוואטסאפ שלכם, ואפשר לשנות אותה לפני השליחה.</span><span lang="en">Choose, and the message writes itself here. It goes from your own WhatsApp, and you can edit it before sending.</span></p>
+    </div>
+    <form id="composer" onsubmit="return false">
+      <label class="sr" for="c-p"><span lang="he">מה הבעיה</span><span lang="en">What's wrong</span></label>
+      <select id="c-p" name="p">
+        <option value="short" data-he="קצר / המפסק קופץ" data-en="A short / the breaker keeps tripping">קצר / המפסק קופץ</option>
+        <option value="nopower" data-he="אין חשמל בחלק מהבית" data-en="No power in part of the home">אין חשמל בחלק מהבית</option>
+        <option value="panel" data-he="החלפת לוח חשמל" data-en="Replacing the electrical panel">החלפת לוח חשמל</option>
+        <option value="fittings" data-he="שקעים, מתגים ותאורה" data-en="Sockets, switches and lights">שקעים, מתגים ותאורה</option>
+        <option value="boiler" data-he="שעון לדוד" data-en="A water-heater timer">שעון לדוד</option>
+        <option value="other" data-he="משהו אחר בחשמל" data-en="Something else electrical">משהו אחר בחשמל</option>
+      </select>
+      <label class="sr" for="c-w"><span lang="he">איפה</span><span lang="en">Where</span></label>
+      <input id="c-w" name="where" type="text" autocomplete="address-level2" data-ph-he="שכונה או עיר, למשל הדר…" data-ph-en="Neighbourhood or town, e.g. Hadar…" placeholder="שכונה או עיר, למשל הדר…">
+      <label class="sr" for="c-t"><span lang="he">מתי</span><span lang="en">When</span></label>
+      <select id="c-t" name="w">
+        <option value="now" data-he="עכשיו, זה דחוף" data-en="Now, it's urgent">עכשיו, זה דחוף</option>
+        <option value="today" data-he="היום" data-en="Today">היום</option>
+        <option value="week" data-he="השבוע" data-en="This week">השבוע</option>
+        <option value="any" data-he="לא דחוף" data-en="No rush">לא דחוף</option>
+      </select>
+      <label class="sr" for="c-n"><span lang="he">שם</span><span lang="en">Name</span></label>
+      <input id="c-n" name="name" type="text" autocomplete="given-name" data-ph-he="השם שלכם, לא חובה…" data-ph-en="Your name, optional…" placeholder="השם שלכם, לא חובה…">
+      <p class="prev" data-preview aria-live="polite"></p>
+      <a class="btn send" href="https://wa.me/972542514004" data-send><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg><span lang="he">שלחו לסאלח בוואטסאפ</span><span lang="en">Send to Salah on WhatsApp</span></a>
+    </form>
+  </div>
+  <div class="where">
+    <div data-r>
+      <h3><span lang="he">איפה ומתי</span><span lang="en">Where and when</span></h3>
+      <dl>
+        <dt><span lang="he">כתובת</span><span lang="en">Address</span></dt><dd><span lang="he">חירם 181, חיפה</span><span lang="en">181 Hiram St, Haifa</span></dd>
+        <dt><span lang="he">אזור</span><span lang="en">Area</span></dt><dd><span lang="he">חיפה והקריות</span><span lang="en">Haifa and the Krayot</span></dd>
+        <dt><span lang="he">שעות</span><span lang="en">Hours</span></dt><dd><span lang="he">24 שעות, כל ימות השבוע</span><span lang="en">24 hours, every day</span></dd>
+        <dt><span lang="he">עכשיו</span><span lang="en">Now</span></dt><dd class="status" data-status><span class="dot"></span></dd>
+        <dt><span lang="he">טלפון</span><span lang="en">Phone</span></dt><dd><a href="tel:+972542514004" dir="ltr">054-251-4004</a></dd>
+      </dl>
+    </div>
+    <div class="map din"><iframe title="מפה: חירם 181, חיפה" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=%D7%97%D7%99%D7%A8%D7%9D%20181%2C%20%D7%97%D7%99%D7%A4%D7%94&output=embed"></iframe></div>
+  </div>
+</section>
+</main>
+
+<div class="earth" aria-hidden="true" data-stripe></div>
+<footer class="site">
+  <div class="in">
+    <div class="sched din">
+      <h2><span lang="he">לוח מעגלים · אור חדש</span><span lang="en">Circuit schedule · Or Hadash</span></h2>
+      <table>
+        <thead><tr><th scope="col"><span lang="he">מעגל</span><span lang="en">Circuit</span></th><th scope="col"><span lang="he">מה</span><span lang="en">What</span></th><th scope="col"><span lang="he">איפה</span><span lang="en">Where</span></th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><span lang="he">טלפון</span><span lang="en">Phone</span></td><td><a href="tel:+972542514004" dir="ltr">054-251-4004</a></td></tr>
+          <tr><td>2</td><td><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></td><td><a href="https://wa.me/972542514004" data-wa-plain><span lang="he">הודעה לסאלח</span><span lang="en">Message Salah</span></a></td></tr>
+          <tr><td>3</td><td><span lang="he">כתובת</span><span lang="en">Address</span></td><td><span lang="he">חירם 181, חיפה</span><span lang="en">181 Hiram St, Haifa</span></td></tr>
+          <tr><td>4</td><td><span lang="he">שעות</span><span lang="en">Hours</span></td><td><span lang="he">24/7, לפי גוגל</span><span lang="en">24/7, per Google</span></td></tr>
+          <tr><td>5</td><td><span lang="he">ביקורות</span><span lang="en">Reviews</span></td><td><a href="https://maps.google.com/?cid=14084775805220384212" target="_blank" rel="noopener"><span lang="he">5.0 מ-89, בגוגל</span><span lang="en">5.0 from 89, on Google</span></a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="credits">
+      <p><span lang="he">אור חדש, חשמלאי מוסמך בחיפה ובקריות (כפי שמופיע בגוגל).</span><span lang="en">Or Hadash, licensed electrician in Haifa and the Krayot (as listed on Google).</span></p>
+      <p><span lang="he">צילומי העבודות: מתוך הפרופיל של אור חדש במפות Google (תורמי Google Maps). חיפה בלילה, 1934–1939: אוסף G. Eric and Edith Matson, ספריית הקונגרס, נחלת הכלל, דרך Wikimedia Commons. טקסטורות התלת-ממד: Poly Haven, CC0. השעון לדוד והמד: ציורים להמחשה.</span><span lang="en">Work photos: from Or Hadash's Google Maps profile (Google Maps contributors). Haifa at night, 1934–1939: G. Eric and Edith Matson Collection, Library of Congress, public domain, via Wikimedia Commons. 3D textures: Poly Haven, CC0. The heater timer and the meter are illustrations.</span></p>
+      <p><span lang="he">קונספט לדוגמה. זה אינו האתר הרשמי של העסק.</span><span lang="en">A sample concept. This is not the business's official website.</span></p>
+      <button class="mswitch" type="button" role="switch" aria-checked="true" data-motion-toggle><span class="brk" aria-hidden="true"></span><span class="flag" aria-hidden="true"></span><span lang="he">אנימציות</span><span lang="en">Animations</span></button>
+    </div>
+  </div>
+</footer>
+
+<div class="plateSw away" data-plate aria-label="יצירת קשר מהירה">
+  <a href="tel:+972542514004"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8Z"/></svg><span lang="he">חייגו</span><span lang="en">Call</span></a>
+  <a class="wa" href="https://wa.me/972542514004" data-wa-plain><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
+</div>
+
+<script>
+(function () {
+  var root = document.documentElement, WA = '972542514004';
+  var still = function () { return root.classList.contains('still'); };
+  var $ = function (s, c) { return (c || document).querySelector(s); }, $$ = function (s, c) { return [].slice.call((c || document).querySelectorAll(s)); };
+
+  // the earth-wire stripes: as many bars as the width needs
+  $$('[data-stripe]').forEach(function (s) { var n = Math.ceil(Math.max(screen.width, innerWidth, 2560) / 28) + 2, h = ''; for (var i = 0; i < n; i++) h += '<i></i>'; s.innerHTML = h; });
+
+  function setLang(l) {
+    root.lang = l; root.dir = l === 'he' ? 'rtl' : 'ltr';
+    document.title = l === 'he' ? 'אור חדש · סאלח, חשמלאי בחיפה' : 'Or Hadash · Salah, electrician in Haifa';
+    try { localStorage.setItem('lang', l); } catch (e) {}
+    $$('[data-ph-he]').forEach(function (i) { i.placeholder = i.dataset[l === 'he' ? 'phHe' : 'phEn']; });
+    $$('option[data-he]').forEach(function (o) { o.textContent = o.dataset[l]; });
+    $('[data-plate]').setAttribute('aria-label', l === 'he' ? 'יצירת קשר מהירה' : 'Quick contact');
+    $('[data-rail]').setAttribute('aria-label', l === 'he' ? 'שלבי הקצר' : 'Short-circuit stages');
+    $('.top nav').setAttribute('aria-label', l === 'he' ? 'ניווט' : 'Navigation');
+    write(); status(); if (window.__shortRender) window.__shortRender();
+  }
+  $$('[data-set-lang]').forEach(function (b) { b.addEventListener('click', function () { setLang(root.lang === 'he' ? 'en' : 'he'); }); });
+
+  // animations on/off (the small breakers), remembered for next time
+  var switches = $$('[data-motion-toggle]');
+  function motionUI() { switches.forEach(function (b) { b.setAttribute('aria-checked', still() ? 'false' : 'true'); }); }
+  switches.forEach(function (b) { b.addEventListener('click', function () {
+    var on = still();
+    root.classList.toggle('still', !on); delete root.dataset.motionAuto;
+    try { localStorage.setItem('motion', on ? 'on' : 'off'); } catch (e) {}
+    motionUI(); write();
+    if (!on) lights(true);
+    if (window.__motion3d) window.__motion3d(on);
+    if (window.__shortRender) window.__shortRender();
+  }); });
+  motionUI();
+
+  // the hero breaker: the room is dark until it goes up; with animations on it goes up by itself once
+  var room = $('[data-room]'), lever = $('[data-lever]');
+  function lights(on) {
+    room.classList.toggle('on', on); lever.setAttribute('aria-pressed', on ? 'true' : 'false');
+    $('[data-lever-he]').textContent = on ? 'הורידו את המפסק' : 'הרימו את המפסק';
+    $('[data-lever-en]').textContent = on ? 'Flip the breaker down' : 'Flip the breaker up';
+  }
+  lever.addEventListener('click', function () { lights(!room.classList.contains('on')); });
+  if (still()) lights(true); else setTimeout(function () { lights(true); }, 650);
+
+  // the coupon writes the WhatsApp message
+  var T = {
+    he: { p: { short: 'יש לי קצר, המפסק קופץ', nopower: 'אין חשמל בחלק מהבית', panel: 'אני צריך/ה להחליף לוח חשמל', fittings: 'אני צריך/ה עבודה בשקעים, מתגים ותאורה', boiler: 'אני צריך/ה שעון לדוד', other: 'יש לי עבודת חשמל' },
+          w: { now: 'זה דחוף, אפשר עכשיו?', today: 'אפשר היום?', week: 'אפשר לתאם השבוע?', any: 'לא דחוף, מתי נוח לך?' }, hi: 'שלום סאלח, הגעתי דרך האתר. ', me: 'שמי ', at: ' ב' },
+    en: { p: { short: 'I have a short, the breaker keeps tripping', nopower: 'part of my home has no power', panel: 'I need my electrical panel replaced', fittings: 'I need work on sockets, switches and lights', boiler: 'I need a water-heater timer', other: 'I have an electrical job' },
+          w: { now: "It's urgent, could you come now?", today: 'Could you come today?', week: 'Could we book this week?', any: 'No rush, when suits you?' }, hi: 'Hi Salah, I found you through your website. ', me: 'My name is ', at: ', in ' }
+  };
+  var form = $('#composer'), preview = $('[data-preview]'), send = $('[data-send]'), typeT = 0;
+  function write() {
+    var t = T[root.lang] || T.he, f = new FormData(form), where = (f.get('where') || '').trim(), name = (f.get('name') || '').trim();
+    var m = t.hi + (name ? t.me + name + '. ' : '') + t.p[f.get('p')] + (where ? t.at + where : '') + '. ' + t.w[f.get('w')];
+    send.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(m);
+    clearInterval(typeT);
+    if (still()) { preview.textContent = m; return; }
+    var i = 0; preview.innerHTML = '<span class="caret"></span>';
+    typeT = setInterval(function () { i = Math.min(m.length, i + 2); preview.textContent = m.slice(0, i); preview.insertAdjacentHTML('beforeend', '<span class="caret"></span>'); if (i >= m.length) { clearInterval(typeT); preview.textContent = m; } }, 16);
+  }
+  form.addEventListener('change', write);
+  form.addEventListener('input', function (e) { if (e.target.tagName === 'INPUT') write(); });
+
+  // live status in Haifa time. null = closed that day; [0, 24] = open all day
+  var H = { 0: [0, 24], 1: [0, 24], 2: [0, 24], 3: [0, 24], 4: [0, 24], 5: [0, 24], 6: [0, 24] };
+  var dayHe = ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'], dayEn = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  function now() {
+    var o = {}; new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Jerusalem', weekday: 'short', hour: 'numeric', minute: '2-digit', hour12: false }).formatToParts(new Date()).forEach(function (x) { o[x.type] = x.value; });
+    return { d: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].indexOf(o.weekday), h: (+o.hour) % 24 + (+o.minute) / 60 };
+  }
+  function hh(x) { var h = Math.floor(x), m = Math.round((x - h) * 60); return h + ':' + (m < 10 ? '0' : '') + m; }
+  function status() {
+    var n = window.__now || now(), he = root.lang === 'he', t = H[n.d], txt, open = false;
+    if (t && t[0] === 0 && t[1] === 24) { open = true; txt = he ? 'פתוח עכשיו · 24 שעות' : 'Open now · 24 hours'; }
+    else if (t && n.h >= t[0] && n.h < t[1]) { open = true; txt = he ? 'פתוח עכשיו · עד ' + hh(t[1]) : 'Open now · until ' + hh(t[1]); }
+    else if (t && n.h < t[0]) { txt = he ? 'סגור עכשיו · נפתח היום ב-' + hh(t[0]) : 'Closed now · opens today at ' + hh(t[0]); }
+    else { var nd = (n.d + 1) % 7, k = 0; while (!H[nd] && k++ < 6) nd = (nd + 1) % 7;
+      txt = H[nd] ? (he ? 'סגור עכשיו · נפתח ביום ' + dayHe[nd] + ' ב-' + hh(H[nd][0]) : 'Closed now · opens ' + dayEn[nd] + ' at ' + hh(H[nd][0])) : (he ? 'סגור עכשיו' : 'Closed now'); }
+    $$('[data-status]').forEach(function (el) { el.classList.toggle('open', open); el.innerHTML = '<span class="dot"></span>' + txt; });
+  }
+  window.__status = status;
+
+  // entrances, once
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -10% 0px' }) : null;
+  $$('[data-r], [data-open], [data-gauge]').forEach(function (el) { io ? io.observe(el) : el.classList.add('in'); });
+  // the heater timer's knob turns to 60 minutes when its folder opens
+  var knob = $('[data-knob]');
+  if (io) new IntersectionObserver(function (es) { if (es[0].isIntersecting) knob.style.transform = 'rotate(150deg)'; }, { threshold: 0.5 }).observe(knob.closest('svg'));
+  if (still() || !io) knob.style.transform = 'rotate(150deg)';
+
+  // the wall plate steps aside where the page has its own buttons
+  var plate = $('[data-plate]'), seen = new Set();
+  if (io) {
+    var pio = new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? seen.add(e.target) : seen.delete(e.target); }); plate.classList.toggle('away', seen.size > 0); });
+    $$('.hero, .stage, .coupon, footer.site').forEach(function (el) { pio.observe(el); });
+  } else plate.classList.remove('away');
+
+  // the short circuit: scroll drives the 3D scene (or, with animations off, swaps stills rendered from it)
+  (function () {
+    var track = $('[data-track]'), stage = $('[data-stage]');
+    var el = { still: $('[data-still]'), title: $('[data-st-title]'), text: $('[data-st-text]'), val: $('[data-val]'), unit: $('[data-unit]'), dial: $('[data-dial]'), what: $('[data-what]'), slab: $('[data-slabels]') };
+    var chips = $$('[data-go]', track), modes = $$('[data-mode]', track);
+    var S = {
+      he: [['תקע אחד, תנור אחד.', 'תנור של 2,000 וואט מושך כ-9 אמפר דרך השקע בסלון. הכבל עולה בשרוול לקופסת הסתעפות, ושם חיבור אחד רק שזור ומלופף בסלוטייפ.'],
+           ['החיבור הרופף מתחמם.', 'כשהמגע קטן, הזרם נדחק דרכו והחיבור מתחמם, הרבה יותר מהכבל. הבידוד החום משחיר, ויש ריח של פלסטיק חם. מבחוץ לא רואים כלום.'],
+           ['הבידוד נמס: קצר.', 'הפאזה (חום) נוגעת באפס (כחול). נוצרת קשת חשמלית, וגיצים נופלים לתחתית הקופסה.'],
+           ['המפסק קופץ. חושך.', 'תוך שבריר שנייה המפסק של השקעים מנתק, וזה בדיוק התפקיד שלו. החיווי בחזית הופך לירוק. בחדר נכבה האור.'],
+           ['בודקים, חותכים, מחברים, בודקים.', 'בלי זרם ועם פנס ראש: מכשיר הבדיקה מראה 0.00 מגה-אוהם בין הפאזה לאפס, כלומר קצר. חותכים את החלק השרוף, מחברים במחברי מנוף, ובודקים שוב: מעל 999 מגה-אוהם, תקין. סוגרים את המכסה.'],
+           ['מרימים את המפסק. אור חדש.', 'הזרם חוזר, התנור דולק, והחיבור נשאר קר. בחדר שוב יש אור.']],
+      en: [['One plug, one heater.', 'A 2,000 W heater draws about 9 A through the living-room socket. The cable runs up a conduit to a junction box, where one joint is only twisted together and taped.'],
+           ['The loose joint heats up.', 'When the contact is small, the current squeezes through it and the joint gets hot, far hotter than the cable. The brown insulation darkens and smells of hot plastic. From outside, you see nothing.'],
+           ['The insulation melts: a short.', 'Live (brown) touches neutral (blue). An electric arc forms, and sparks fall to the bottom of the box.'],
+           ['The breaker trips. Dark.', "In a fraction of a second the sockets breaker cuts out, which is exactly its job. The flag on its front turns green. The room's light goes off."],
+           ['Test, cut, connect, test.', 'Power off, head torch on: the insulation tester reads 0.00 MΩ between live and neutral, which means a short. The burnt part is cut out, the wires go into lever connectors, and the test reads over 999 MΩ: sound. The lid goes back on.'],
+           ['Breaker up. New light.', 'The power is back, the heater is on and the joint stays cool. The room has light again.']]
+    };
+    var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; }, span = function (p, a, b) { return clamp((p - a) / (b - a)); }, sm = function (t) { return t * t * (3 - 2 * t); };
+    // the same timeline as short3d.js
+    var load = function (p) { return p < 0.44 ? span(p, 0.02, 0.06) : p < 0.93 ? 0 : span(p, 0.93, 0.95); };
+    function reading(p) {
+      // [mode, value, unit, what (he), what (en)]
+      if (p >= 0.62 && p < 0.7) return ['M', '0.00', 'MΩ', 'קצר בין פאזה לאפס', 'Short, live to neutral'];
+      if (p >= 0.79 && p < 0.86) return ['M', '>999', 'MΩ', 'בידוד תקין', 'Insulation sound'];
+      if (p >= 0.405 && p < 0.44) return ['A', '>200', 'A', 'זרם קצר', 'Fault current'];
+      if (p >= 0.13 && p < 0.405) { var c = 31 + 64 * sm(span(p, 0.13, 0.4)); return ['C', Math.round(c) + '', '°C', 'חום בחיבור', 'Joint temperature']; }
+      if (p >= 0.44 && p < 0.62) { var c2 = 95 - 60 * sm(span(p, 0.44, 0.6)); return ['C', Math.round(c2) + '', '°C', 'החיבור מתקרר', 'Joint cooling']; }
+      var a = 9.1 * load(p); return ['A', a.toFixed(1), 'A', a > 0.1 ? 'זרם בכבל' : 'אין זרם', a > 0.1 ? 'Current in the cable' : 'No current'];
+    }
+    var STILL_P = [0.07, 0.3, 0.42, 0.57, 0.81, 0.985];
+    var STILL_L = {"1": [["heater", 0.9102, 0.7861, "<span lang=\"he\">תנור, 2,000 וואט</span><span lang=\"en\">Heater, 2,000 W</span>"]], "2": [["joint", 0.3932, 0.3979, "<span lang=\"he\">חיבור שזור ומבודד בסלוטייפ</span><span lang=\"en\">Twisted joint, taped over</span>"]], "3": [["joint", 0.4325, 0.4232, "<span lang=\"he\">חיבור שזור ומבודד בסלוטייפ</span><span lang=\"en\">Twisted joint, taped over</span>"]], "4": [["breaker", 0.4569, 0.5765, "<span lang=\"he\">המפסק של השקעים קפץ</span><span lang=\"en\">The sockets breaker tripped</span>"]], "5": [["conn", 0.6439, 0.5968, "<span lang=\"he\">מחברי מנוף חדשים</span><span lang=\"en\">New lever connectors</span>"]], "6": []};
+    var shown = -1, labelKey = '';
+    function placeLabels(si) {
+      var sw = stage.clientWidth, sh = stage.clientHeight, k = Math.min(sw / 1200, sh / 1000), ox = (sw - 1200 * k) / 2, oy = (sh - 1000 * k) / 2;
+      var key = si + '|' + sw + 'x' + sh + '|' + root.lang; if (key === labelKey) return; labelKey = key;
+      el.slab.innerHTML = '';
+      (STILL_L[si + 1] || []).forEach(function (l) {
+        var e = document.createElement('span'); e.className = 'l3d l3d-' + l[0]; e.innerHTML = l[3];
+        e.style.transform = 'translate(' + (ox + 1200 * k * l[1]).toFixed(1) + 'px, ' + (oy + 1000 * k * l[2]).toFixed(1) + 'px)'; el.slab.appendChild(e);
+      });
+    }
+    function render() {
+      var r = track.getBoundingClientRect(), ps = clamp(-r.top / (r.height - innerHeight)), he = root.lang === 'he';
+      var live = !!window.__short3d, useStills = !live && (still() || stage.classList.contains('no3d'));
+      var sg = ps < 0.17 ? 0 : ps < 0.4 ? 1 : ps < 0.47 ? 2 : ps < 0.66 ? 3 : ps < 0.91 ? 4 : 5;
+      var p = useStills ? STILL_P[sg] : ps;
+      if (useStills) {
+        var src = 'img/still-' + (sg + 1) + '.jpg';
+        if (el.still.getAttribute('src') !== src) el.still.src = src;
+        el.still.alt = S[he ? 'he' : 'en'][sg][0];
+        placeLabels(sg);
+      }
+      var rd = reading(p);
+      el.val.textContent = rd[1]; el.unit.textContent = rd[2]; el.what.textContent = he ? rd[3] : rd[4];
+      modes.forEach(function (m) { m.classList.toggle('on', m.dataset.mode === rd[0]); });
+      el.dial.style.setProperty('--dial', rd[0] === 'A' ? '-40deg' : rd[0] === 'C' ? '0deg' : '40deg');
+      if (sg !== shown) {
+        shown = sg; var st = S[he ? 'he' : 'en'][sg];
+        el.title.textContent = st[0]; el.text.textContent = st[1];
+        chips.forEach(function (c, i) { c.setAttribute('aria-pressed', i <= sg ? 'true' : 'false'); });
+      }
+      if (live) window.__short3d.set(ps);
+    }
+    var ticking = false;
+    addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; render(); }); } }, { passive: true });
+    addEventListener('resize', function () { labelKey = ''; render(); });
+    chips.forEach(function (c) { c.addEventListener('click', function () {
+      var r = track.getBoundingClientRect();
+      scrollTo({ top: scrollY + r.top + parseFloat(c.dataset.go) * (r.height - innerHeight), behavior: still() ? 'auto' : 'smooth' });
+    }); });
+    window.__shortRender = function () { shown = -1; labelKey = ''; render(); };
+    window.__stillLabels = function (o) { STILL_L = o; labelKey = ''; render(); };
+    render();
+  })();
+
+  setLang(root.lang === 'en' ? 'en' : 'he');
+  setInterval(status, 60000);
+})();
+</script>
+<script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.min.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.163.0/examples/jsm/" } }</script>
+<script type="module">
+  // the 3D scene only loads with animations on; turning them off pauses it, turning them on loads or resumes it
+  const root = document.documentElement, stage = document.querySelector('[data-stage]'), host = stage.querySelector('[data-3d]');
+  const isStill = () => root.classList.contains('still');
+  const rerender = () => window.__shortRender && window.__shortRender();
+  let api = null, loading = null;
+  const fail = (e) => { stage.classList.add('no3d'); window.__short3d = null; if (e) console.warn('3D view unavailable, showing stills', e); rerender(); };
+  function start() {
+    if (api) { api.resume(); window.__short3d = api; rerender(); return; }
+    if (loading) return;
+    loading = import('./short3d.js').then(({ initShort3D }) => {
+      if (isStill()) return;
+      api = initShort3D(host, host.querySelector('.l3d-host'), { calm: isStill });
+      if (!api) return fail();
+      stage.classList.remove('no3d'); window.__short3d = api; rerender();
+    }).catch(fail).finally(() => { loading = null; });
+  }
+  function stop() { if (api) api.pause(); window.__short3d = null; rerender(); }
+  window.__motion3d = (on) => (on ? start() : stop());
+  if (!isStill()) start();
+</script>
+</body>
+</html>
