@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#0a0b0d">
+<meta name="theme-color" content="#15100c">
 <meta name="color-scheme" content="dark">
 <title>אור חדש · סאלח, חשמלאי בחיפה, 24/7</title>
 <meta name="description" content="קונספט לדוגמה עבור אור חדש: סאלח, חשמלאי מוסמך בחיפה ובקריות, פתוח 24 שעות. 5.0 בגוגל מ-89 ביקורות.">
@@ -14,504 +14,414 @@
 var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage.getItem('lang')}catch(e){}l=q==='en'||q==='he'?q:(l==='en'?'en':'he');r.lang=l;r.dir=l==='he'?'rtl':'ltr';})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Karantina:wght@400;700&family=Noto+Sans+Hebrew:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+/* Warm lamplight: a quiet room at night, lit by soft warm light. Each part of the page comes up like a dimmer.
+   Glows, soft gradients and moulded switch-plate depth are the owner's approved direction. taste-skill-ignore */
 :root {
-  --night: #0a0b0d; --ink: #ebebe8; --muted: #b3ac9f; --line: #2a2b2f;
-  --amber: #f2a93b; --amber-deep: #d98d1c; --amber-ink: #16120b;
-  --graphite: #17181b; --graphite-2: #222428; --graphite-3: #2e3035;
-  --warm: #1b1712; --navy: #121c33; --navy-2: #1a2847;
-  --live: #6b3d1e; --neutral: #2b5be0; --earth: #2f8f3a; --earth-y: #e3c22b; --flag-on: #d8352a; --flag-off: #2f9e44;
-  --meter: #26282c; --meter-2: #33363b; --meter-zone: #efc12a; --lcd: #07090a;
-  --ease-out: cubic-bezier(0.23, 1, 0.32, 1); --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-  --t-press: 120ms; --t-ui: 220ms; --t-reveal: 720ms;
+  --ground: #15100c; --ground-2: #1b140f; --ground-3: #221a13;
+  --plate: #2a2019; --plate-2: #33271e; --plate-hi: #3d2f24; --plate-lo: #120d09;
+  --ink: #f4e7d4; --muted: #cbb79e; --soft: #9c8670;
+  --lamp: #f2b462; --lamp-2: #e59f4b; --lamp-ink: #2b1907;
+  --glow: rgba(242, 164, 80, 0.20); --glow-2: rgba(242, 164, 80, 0.09);
+  --live: #6b3d1e; --neutral: #3f6fd8; --flag-on: #d0463a; --flag-off: #4fae5d;
+  --meter: #2b241f; --meter-zone: #d4a24e; --lcd: #0d0b09;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1); --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); --ease-dim: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --t-press: 120ms; --t-ui: 220ms; --t-dim: 1500ms;
   --m: clamp(16px, 3.4vw, 40px);
+  --r-plate: 26px; --r-btn: 18px; --r-photo: 24px;
   --s-small: 0.875rem;
   --s-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
-  --s-lead: clamp(1.3125rem, 1.15rem + 0.7vw, 1.75rem);
-  --s-head: clamp(2.75rem, 1.6rem + 4.6vw, 6rem);
-  --s-giant: clamp(6.5rem, 2rem + 17vw, 17rem);
-  --f: 'Noto Sans Hebrew', system-ui, sans-serif;
-  --fd: 'Karantina', 'Noto Sans Hebrew', system-ui, sans-serif;
+  --s-lead: clamp(1.125rem, 1.03rem + 0.45vw, 1.375rem);
+  --s-head: clamp(2rem, 1.4rem + 2.2vw, 3.25rem);
+  --s-hero: clamp(2.5rem, 1.6rem + 3.6vw, 4.75rem);
+  --f: 'Rubik', system-ui, sans-serif;
+  --plate-depth: inset 0 1px 0 rgba(255, 228, 190, 0.07), inset 0 -2px 0 rgba(0, 0, 0, 0.28), 0 18px 40px -22px rgba(0, 0, 0, 0.7); /* taste-skill-ignore */
 }
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; background: var(--night); }
-body { margin: 0; background: var(--night); color: var(--ink); font-family: var(--f); font-size: var(--s-body); line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; background: var(--ground); }
+body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--f); font-size: var(--s-body); line-height: 1.55; -webkit-font-smoothing: antialiased; overflow-x: clip; }
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; }
 button, input { font: inherit; color: inherit; }
 input { font-size: max(16px, 1rem); }
-:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
-::selection { background: var(--amber); color: var(--amber-ink); }
+:focus-visible { outline: 3px solid var(--lamp); outline-offset: 3px; border-radius: 6px; }
+::selection { background: var(--lamp); color: var(--lamp-ink); }
 html[lang="he"] [lang="en"], html[lang="en"] [lang="he"] { display: none !important; }
-.skip { position: absolute; inset-inline-start: 12px; top: -80px; z-index: 60; background: var(--amber); color: var(--amber-ink); padding: 10px 16px; text-decoration: none; }
+.skip { position: absolute; inset-inline-start: 12px; top: -80px; z-index: 60; background: var(--lamp); color: var(--lamp-ink); padding: 10px 16px; border-radius: 12px; text-decoration: none; }
 .skip:focus { top: 12px; }
-[id] { scroll-margin-top: 76px; }
+[id] { scroll-margin-top: 84px; }
 a, button, input, label { touch-action: manipulation; }
-button, .btn, .brk, .key, .pos, .flip, .wsw a { -webkit-user-select: none; user-select: none; }
+button, .btn, .sw, .key, .pos, .rk, .wsw a, .knob-wrap { -webkit-user-select: none; user-select: none; }
 .sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
-.wrap { padding-inline: var(--m); max-width: 1480px; margin-inline: auto; }
-h1, h2, h3 { margin: 0; font-weight: 700; text-wrap: balance; }
-h2 { font-family: var(--fd); font-size: var(--s-head); line-height: 0.92; letter-spacing: -0.01em; }
-h3 { font-size: var(--s-lead); line-height: 1.2; font-weight: 500; }
+.wrap { padding-inline: var(--m); max-width: 1320px; margin-inline: auto; }
+h1, h2, h3 { margin: 0; font-weight: 500; text-wrap: balance; }
+h2 { font-size: var(--s-head); line-height: 1.08; letter-spacing: -0.012em; }
+h3 { font-size: var(--s-lead); line-height: 1.25; font-weight: 500; }
 p { margin: 0; }
+.lead { font-size: var(--s-lead); line-height: 1.5; color: var(--muted); max-width: 40ch; margin-top: 16px; text-wrap: pretty; }
 .tnum { font-variant-numeric: tabular-nums; }
 .ltr { direction: ltr; unicode-bidi: isolate; }
 
-/* buttons: square, flat; the call button is the lamp's colour */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 0 24px; background: var(--amber); color: var(--amber-ink); text-decoration: none; font-weight: 500; border: 0; cursor: pointer; transition: transform var(--t-press) var(--ease-out), background-color 180ms ease; }
+/* buttons: rounded like a switch plate; the call button is the lamp's colour */
+.btn { white-space: nowrap; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 0 24px; border-radius: var(--r-btn); background: var(--lamp); color: var(--lamp-ink); text-decoration: none; font-weight: 500; border: 0; cursor: pointer; transition: transform var(--t-press) var(--ease-out), background-color 200ms ease; }
 .btn svg { width: 20px; height: 20px; flex: none; }
 .btn:active { transform: scale(0.97); }
-.btn.ghost { background: var(--graphite-3); color: var(--ink); }
-@media (hover: hover) and (pointer: fine) { .btn:hover { background: var(--amber-deep); } .btn.ghost:hover { background: #3a3d43; } }
+.btn.ghost { background: var(--plate-2); color: var(--ink); }
+@media (hover: hover) and (pointer: fine) { .btn:hover { background: #f6c27a; } .btn.ghost:hover { background: var(--plate-2); } }
+.act { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+.status { display: inline-flex; align-items: center; gap: 10px; font-size: var(--s-body); color: var(--ink); margin-top: 20px; }
+.status .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--soft); flex: none; }
+.status.open .dot { background: #8fd18a; box-shadow: 0 0 0 4px rgba(143, 209, 138, 0.16), 0 0 14px rgba(143, 209, 138, 0.6); } /* taste-skill-ignore: a pilot lamp */
 
 /* concept bar */
-.concept { background: #000; color: #e9e4d9; font-size: var(--s-small); padding: 7px var(--m); text-align: center; }
+.concept { background: #0e0a07; color: #e6d6bf; font-size: var(--s-small); padding: 7px var(--m); text-align: center; }
 
 /* top row: wordmark and the house controls */
-.top { display: flex; align-items: center; gap: 12px 18px; padding: 12px var(--m); max-width: 1480px; margin-inline: auto; }
-.mark { font-family: var(--fd); font-size: 2.1rem; line-height: 1; font-weight: 700; text-decoration: none; letter-spacing: 0.01em; }
-.top .tools { margin-inline-start: auto; display: flex; align-items: center; gap: 14px; }
-/* the language switch is a changeover switch: the lever points at the language */
-.chg { display: inline-flex; align-items: center; gap: 8px; border: 0; background: transparent; padding: 6px 2px; cursor: pointer; font-size: var(--s-small); color: var(--ink); }
-.chg .body { width: 46px; height: 26px; background: var(--graphite-3); position: relative; }
-.chg .body::after { content: ""; position: absolute; top: 4px; width: 18px; height: 18px; background: var(--ink); inset-inline-start: 4px; transition: transform var(--t-ui) var(--ease-out); }
-html[lang="en"] .chg .body::after { transform: translateX(-20px); }
-html[lang="en"][dir="ltr"] .chg .body::after { transform: translateX(20px); }
-.chg .lab b { font-weight: 500; }
-.chg:active .body { transform: scale(0.95); }
-.chg .body { transition: transform var(--t-press) var(--ease-out); }
-/* the animations switch is a miniature breaker */
-.mswitch { display: inline-flex; align-items: center; gap: 8px; border: 0; background: transparent; cursor: pointer; padding: 6px 2px; font-size: var(--s-small); color: var(--ink); }
-.mswitch .mod { width: 22px; height: 34px; background: #e4e4e1; position: relative; transition: transform var(--t-press) var(--ease-out); }
-.mswitch .mod::before { content: ""; position: absolute; left: 5px; right: 5px; top: 5px; bottom: 5px; background: #c9c5bc; }
-.mswitch .mod::after { content: ""; position: absolute; left: 6px; right: 6px; top: 6px; height: 11px; background: #2b2d31; transition: transform var(--t-ui) var(--ease-out); }
-.mswitch[aria-checked="false"] .mod::after { transform: translateY(11px); }
-.mswitch .flag { width: 7px; height: 7px; background: var(--flag-on); }
-.mswitch[aria-checked="false"] .flag { background: var(--flag-off); }
+.top { display: flex; align-items: center; gap: 12px 18px; padding: 14px var(--m) 10px; max-width: 1320px; margin-inline: auto; }
+.mark { font-size: 1.5rem; line-height: 1; font-weight: 600; text-decoration: none; letter-spacing: -0.01em; display: inline-flex; align-items: center; gap: 10px; }
+.mark i { width: 12px; height: 12px; border-radius: 50%; background: var(--lamp); box-shadow: 0 0 0 5px rgba(242, 180, 98, 0.14), 0 0 22px 4px rgba(242, 164, 80, 0.55); } /* taste-skill-ignore: a lit bulb */
+.top .tools { margin-inline-start: auto; display: flex; align-items: center; gap: 12px; }
+/* the language switch: a rocker, its lit side is the language */
+.chg { display: inline-flex; align-items: center; gap: 2px; border: 0; background: var(--plate); box-shadow: var(--plate-depth); border-radius: 14px; padding: 4px; cursor: pointer; font-size: var(--s-small); min-height: 44px; transition: transform var(--t-press) var(--ease-out); } /* taste-skill-ignore: moulded switch-plate depth, owner-approved warm lamplight */
+.chg b { font-weight: 500; padding: 6px 10px; border-radius: 10px; color: var(--soft); transition: background-color var(--t-ui) ease, color var(--t-ui) ease; }
+html[lang="he"] .chg .he, html[lang="en"] .chg .en { background: var(--plate-hi); color: var(--ink); }
+.chg:active { transform: scale(0.96); }
+/* the animations switch: a small rocker with a locator light */
+.mswitch { display: inline-flex; align-items: center; gap: 9px; border: 0; background: transparent; cursor: pointer; padding: 6px 2px; font-size: var(--s-small); color: var(--muted); min-height: 44px; }
+.mswitch .mod { width: 26px; height: 36px; border-radius: 9px; background: var(--plate); box-shadow: var(--plate-depth); position: relative; transition: transform var(--t-press) var(--ease-out); } /* taste-skill-ignore: moulded switch-plate depth, owner-approved warm lamplight */
+.mswitch .mod::after { content: ""; position: absolute; left: 5px; right: 5px; top: 5px; bottom: 5px; border-radius: 6px; background: linear-gradient(180deg, #4a3a2c, #2a1f17); transition: background 220ms ease; } /* taste-skill-ignore: a rocker's tilt */
+.mswitch[aria-checked="false"] .mod::after { background: linear-gradient(0deg, #4a3a2c, #2a1f17); } /* taste-skill-ignore */
+.mswitch .flag { width: 7px; height: 7px; border-radius: 50%; background: var(--lamp); box-shadow: 0 0 10px 2px rgba(242, 164, 80, 0.55); transition: background-color 200ms ease, box-shadow 200ms ease; } /* taste-skill-ignore: locator light */
+.mswitch[aria-checked="false"] .flag { background: #5a4636; box-shadow: none; } /* taste-skill-ignore: moulded switch-plate depth, owner-approved warm lamplight */
 .mswitch:active .mod { transform: scale(0.94); }
-.mswitch .st { color: var(--muted); }
 .top .call { min-height: 46px; padding: 0 18px; }
-.motion-why { display: none; font-size: var(--s-small); color: var(--muted); padding: 0 var(--m) 8px; max-width: 1480px; margin-inline: auto; }
+.motion-why { display: none; font-size: var(--s-small); color: var(--muted); padding: 0 var(--m) 8px; max-width: 1320px; margin-inline: auto; }
 html[data-motion-auto] .motion-why { display: block; }
 .motion-why [data-why] { display: none; }
 html[data-motion-auto="reduce"] [data-why="reduce"], html[data-motion-auto="data"] [data-why="data"], html[data-motion-auto="slow"] [data-why="slow"], html[data-motion-auto="device"] [data-why="device"] { display: inline; }
 
-/* the navigation is a row of breakers on a DIN rail; a circuit's breaker goes up when its part of the page has light */
-.rail { position: sticky; top: 0; z-index: 40; background: #0d0e10; transition: transform var(--t-ui) var(--ease-out); }
-html.in-stage:not(.still) .rail { transform: translateY(-100%); }
-.rail .in { max-width: 1480px; margin-inline: auto; padding: 6px var(--m) 6px; display: flex; align-items: center; gap: 2px; position: relative; }
-.rail .din { position: absolute; inset-inline: var(--m); top: 50%; height: 16px; margin-top: -14px; background: #8f9398; }
-.brk { position: relative; z-index: 1; width: 74px; background: #e4e4e1; color: #1b1c1e; text-decoration: none; display: flex; flex-direction: column; align-items: center; padding: 6px 4px 5px; gap: 3px; transition: transform var(--t-press) var(--ease-out); }
-.brk:active { transform: scale(0.95); }
-.brk .tg { width: 14px; height: 22px; background: #c9c5bc; position: relative; }
-.brk .tg::after { content: ""; position: absolute; left: 2px; right: 2px; top: 2px; height: 8px; background: #2b2d31; transform: translateY(10px); transition: transform var(--t-ui) var(--ease-out); }
-.brk.on .tg::after { transform: none; }
-.brk .fl { position: absolute; top: 7px; inset-inline-end: 7px; width: 6px; height: 6px; background: var(--flag-off); }
-.brk.on .fl { background: var(--flag-on); }
-.brk .lb { font-size: var(--s-small); line-height: 1.1; font-weight: 500; white-space: nowrap; }
-.brk[aria-current="true"] { background: #fff6dc; }
-.rail .clock { position: relative; z-index: 1; margin-inline-start: auto; background: var(--lcd); color: var(--amber); font-family: var(--fd); font-size: 2rem; line-height: 1; padding: 6px 12px 4px; min-width: 92px; text-align: center; }
-@media (hover: hover) and (pointer: fine) { .brk:hover { background: #fff; } }
+/* the navigation: a long switch plate; each part of the page has a locator light that comes on when it's lit */
+.rail { position: sticky; top: 0; z-index: 40; padding: 8px var(--m) 0; transition: transform var(--t-ui) var(--ease-out), opacity var(--t-ui) ease; }
+html.in-stage:not(.still) .rail { transform: translateY(-110%); opacity: 0; }
+.rail .plate { max-width: 1320px; margin-inline: auto; display: flex; align-items: center; gap: 4px; padding: 6px; border-radius: 22px; background: rgba(42, 32, 25, 0.94); box-shadow: var(--plate-depth); } /* taste-skill-ignore: moulded switch-plate depth, owner-approved warm lamplight */
+.sw { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 0 14px; border-radius: 16px; text-decoration: none; color: var(--muted); font-size: 1rem; white-space: nowrap; transition: background-color var(--t-ui) ease, color var(--t-ui) ease, transform var(--t-press) var(--ease-out); }
+.sw i { width: 8px; height: 8px; border-radius: 50%; background: #5a4636; flex: none; transition: background-color 600ms ease, box-shadow 600ms ease; } /* taste-skill-ignore: moulded switch-plate depth, owner-approved warm lamplight */
+.sw.on i { background: var(--lamp); box-shadow: 0 0 10px 2px rgba(242, 164, 80, 0.5); } /* taste-skill-ignore: locator light */
+.sw[aria-current="true"] { background: var(--plate-hi); color: var(--ink); }
+.sw:active { transform: scale(0.96); }
+@media (hover: hover) and (pointer: fine) { .sw:hover { color: var(--ink); } }
+.rail .clock { margin-inline-start: auto; background: var(--plate-lo); color: var(--lamp); border-radius: 14px; font-size: 1.0625rem; font-weight: 500; line-height: 1; padding: 0 14px; min-height: 40px; display: inline-flex; align-items: center; gap: 8px; text-shadow: 0 0 12px rgba(242, 164, 80, 0.45); } /* taste-skill-ignore: a lit readout */
+.rail .clock small { color: var(--soft); font-size: 0.8125rem; font-weight: 400; text-shadow: none; } /* taste-skill-ignore: moulded switch-plate depth, owner-approved warm lamplight */
 
-/* every part of the page starts dark, as in a power cut, and switches on when its circuit is restored */
-.circuit { position: relative; transition: background-color 900ms ease; }
-html.js:not(.still) .circuit:not(.on) { background-color: var(--night) !important; }
-html.js:not(.still) .circuit > .lit { transition: opacity 700ms var(--ease-out); }
-html.js:not(.still) .circuit:not(.on) > .lit { opacity: 0.1; }
+/* every part of the page comes up like a dimmer when it's reached: the light pool first, then the things in it */
+.circuit { position: relative; isolation: isolate; }
+.circuit::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(var(--gs, 60% 55%) at var(--gx, 30%) var(--gy, 30%), var(--glow), var(--glow-2) 45%, transparent 75%); } /* taste-skill-ignore: lamp light pooling */
+html.js:not(.still) .circuit::before { opacity: 0; transition: opacity 1800ms var(--ease-dim); }
+html.js:not(.still) .circuit.on::before { opacity: 1; }
+html.js:not(.still) .circuit .lit { transition: opacity var(--t-dim) var(--ease-dim); }
+html.js:not(.still) .circuit:not(.on) .lit { opacity: 0.22; }
 
-/* ---------------------------------------------------------------- 21:40, the hero: words in the dark */
-.hero { min-height: calc(100svh - 150px); padding: clamp(28px, 8vh, 96px) var(--m) clamp(28px, 6vh, 64px); max-width: 1480px; margin-inline: auto; display: flex; flex-direction: column; }
-.hero h1 { font-family: var(--fd); font-weight: 700; font-size: clamp(6rem, 16.5vw, 16rem); line-height: 0.82; letter-spacing: -0.005em; }
-.hero h1 .l { display: block; overflow: hidden; padding-bottom: 0.04em; }
-.hero h1 .l > span { display: block; }
-.hero h1 .l2 { text-align: end; }
-html[dir="rtl"] .hero h1 .l1 > span { text-align: right; }
-html.js:not(.still) .hero h1 .l > span { animation: rise 900ms var(--ease-out) both; }
-html.js:not(.still) .hero h1 .l2 > span { animation-delay: 110ms; }
-@keyframes rise { from { transform: translateY(102%); } }
-.hero .colon { display: inline-block; }
-html.js:not(.still) .hero .colon { animation: blink 1s steps(1) 1.2s 4; }
-@keyframes blink { 50% { opacity: 0.15; } }
-.hero .base { margin-top: auto; padding-top: 40px; display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 24px 48px; align-items: end; }
-.hero .lead { font-size: var(--s-lead); line-height: 1.35; max-width: 34ch; }
-.hero .lead b { font-weight: 500; color: var(--amber); }
-.hero .side { display: flex; flex-direction: column; gap: 14px; align-items: flex-end; }
-.hero .act { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
-html.js:not(.still) .hero .base > * { animation: fade 700ms var(--ease-out) 650ms both; }
-@keyframes fade { from { opacity: 0; transform: translateY(14px); } }
-.status { display: inline-flex; align-items: center; gap: 9px; font-size: var(--s-body); }
-.status .dot { width: 10px; height: 10px; background: var(--muted); flex: none; }
-.status.open .dot { background: #3fbf5a; }
-.hero .note { font-size: var(--s-small); color: var(--muted); max-width: 40ch; text-align: end; }
+/* ---------------------------------------------------------------- 21:40, the hero: the room in the dark, a warm pool of light */
+.hero { --gx: 18%; --gy: 82%; --gs: 70% 70%; min-height: max(560px, calc(100svh - 150px)); display: flex; align-items: flex-end; padding: 0 var(--m) clamp(28px, 7vh, 72px); }
+.hero .bg { position: absolute; inset: 10px max(var(--m), calc((100% - 1320px) / 2)) 0; z-index: -2; border-radius: 34px; overflow: hidden; background: #0f0b08; }
+.hero .bg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 40%; filter: sepia(1) saturate(1.45) hue-rotate(-12deg) brightness(0.46) contrast(1.02); }
+.hero .bg::after { content: ""; position: absolute; inset: 0; background: radial-gradient(85% 75% at 20% 92%, rgba(242, 164, 80, 0.30), transparent 60%), linear-gradient(180deg, rgba(21, 16, 12, 0.35), rgba(21, 16, 12, 0.15) 35%, rgba(21, 16, 12, 0.88)); } /* taste-skill-ignore: lamplight and a scrim for the words */
+html[dir="rtl"] .hero .bg::after { background: radial-gradient(85% 75% at 80% 92%, rgba(242, 164, 80, 0.30), transparent 60%), linear-gradient(180deg, rgba(21, 16, 12, 0.35), rgba(21, 16, 12, 0.15) 35%, rgba(21, 16, 12, 0.88)); } /* taste-skill-ignore */
+html.js:not(.still) .hero .bg img { animation: dimup 2600ms var(--ease-dim) 150ms both; }
+@keyframes dimup { from { opacity: 0; } }
+.hero .in { position: relative; max-width: 1320px; width: 100%; margin-inline: auto; padding: 0 clamp(8px, 3vw, 48px); }
+.hero h1 { font-size: var(--s-hero); line-height: 1.05; letter-spacing: -0.02em; font-weight: 500; max-width: 16ch; }
+.hero .lead { color: #e2d2bc; max-width: 44ch; }
+html.js:not(.still) .hero .in > * { animation: rise 1100ms var(--ease-out) both; }
+html.js:not(.still) .hero .in > :nth-child(2) { animation-delay: 120ms; } html.js:not(.still) .hero .in > :nth-child(3) { animation-delay: 220ms; } html.js:not(.still) .hero .in > :nth-child(4) { animation-delay: 300ms; }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } }
 
-/* ---------------------------------------------------------------- 21:41, the dark room and the phone torch (the live thing) */
-.dark { padding: clamp(80px, 12vh, 140px) 0 clamp(90px, 14vh, 160px); }
-.dark .grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 32px 56px; align-items: center; }
-.torch { position: relative; margin: 0; aspect-ratio: 4 / 3; overflow: hidden; background: #000; cursor: crosshair; touch-action: pan-y; }
-.torch img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.torch .dim { filter: brightness(0.13) saturate(0.4) contrast(1.15); }
-@property --x { syntax: '<percentage>'; inherits: false; initial-value: 62%; }
-@property --y { syntax: '<percentage>'; inherits: false; initial-value: 46%; }
-.torch .beam { --x: 62%; --y: 46%; -webkit-mask-image: radial-gradient(circle at var(--x) var(--y), #000 0, #000 9%, rgba(0,0,0,.55) 15%, transparent 24%); mask-image: radial-gradient(circle at var(--x) var(--y), #000 0, #000 9%, rgba(0,0,0,.55) 15%, transparent 24%); filter: brightness(0.92) sepia(0.12); } /* taste-skill-ignore: the torch beam is a soft-edged mask on the photograph */
-html.js:not(.still) .torch.sweep .beam { animation: sweep 3.2s var(--ease-in-out) 1 both; }
-@keyframes sweep { 0% { --x: 18%; --y: 88%; } 35% { --x: 6%; --y: 48%; } 70% { --x: 40%; --y: 36%; } 100% { --x: 62%; --y: 46%; } }
-.torch figcaption { position: absolute; inset-inline-start: 12px; bottom: 12px; background: rgba(0,0,0,.72); color: #ece7dc; font-size: var(--s-small); padding: 5px 10px; }
-.dark .txt h2 { margin-bottom: 22px; }
-.dark .txt p + p { margin-top: 14px; }
-.dark .txt .hint { color: var(--muted); font-size: var(--s-small); }
-.dark .steps { margin: 22px 0 0; padding: 0; list-style: none; }
-.dark .steps li { padding: 14px 0; display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 14px; align-items: start; }
-.dark .steps li:nth-child(even) { background: #121317; margin-inline: -12px; padding-inline: 12px; }
-.dark .steps i { width: 22px; height: 34px; background: #e4e4e1; position: relative; margin-top: 3px; }
-.dark .steps i::after { content: ""; position: absolute; left: 5px; right: 5px; top: 5px; height: 11px; background: #2b2d31; }
-.dark .steps i.dn::after { transform: translateY(13px); }
-.dark .steps i.rcd { background: #dfe3ea; } .dark .steps i.rcd::after { background: var(--neutral); transform: translateY(13px); }
+/* ---------------------------------------------------------------- 21:42, the call: a 24-hour time switch, every pin lit */
+.call24 { --gx: 70%; --gy: 45%; padding: clamp(110px, 16vh, 190px) 0 clamp(70px, 10vh, 120px); }
+html[dir="rtl"] .call24 { --gx: 30%; }
+.call24 .grid { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 40px 64px; align-items: center; }
+.tsw { display: grid; place-items: center; position: relative; }
+.tsw::before { content: ""; position: absolute; width: 80%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(closest-side, rgba(242, 164, 80, 0.22), transparent); z-index: -1; } /* taste-skill-ignore: the dial's glow */
+.tsw svg { width: min(100%, 440px); height: auto; overflow: visible; }
+.tsw .dial { transform-origin: 260px 260px; transition: transform 2s var(--ease-out); }
 
-/* ---------------------------------------------------------------- 21:42, the call: a 24-hour time switch with every pin pushed in */
-.call24 { background: var(--graphite); padding: clamp(90px, 14vh, 170px) 0; }
-.call24 .grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: 40px 64px; align-items: center; }
-.call24 h2 { margin-bottom: 22px; }
-.call24 p { max-width: 44ch; }
-.call24 .status { margin-top: 22px; font-size: var(--s-lead); }
-.call24 .act { margin-top: 26px; display: flex; gap: 10px; flex-wrap: wrap; }
-.tsw { display: grid; place-items: center; }
-.tsw svg { width: min(100%, 520px); height: auto; overflow: visible; }
-.tsw .dial { transform-origin: 260px 260px; transition: transform 1.6s var(--ease-out); }
-.tsw .cap { margin-top: 14px; font-size: var(--s-small); color: var(--muted); text-align: center; max-width: 46ch; }
-
-/* ---------------------------------------------------------------- 21:50, on the way: two giant times, the same */
-.way { background: var(--warm); padding: clamp(90px, 14vh, 170px) 0 0; overflow: hidden; }
-.way .head { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px 56px; align-items: start; }
-.way .head p { max-width: 46ch; }
-.way .pair { margin-top: clamp(48px, 9vh, 110px); display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--m); }
-.way .spec { height: calc(var(--s-giant) * 0.8); overflow: hidden; position: relative; }
-.way .spec b { display: block; font-family: var(--fd); font-weight: 700; font-size: var(--s-giant); line-height: 0.8; color: var(--amber); direction: ltr; text-align: start; }
-html[dir="rtl"] .way .spec b { text-align: end; }
-.way .spec.b2 b { color: var(--ink); }
-.way .cap { font-size: var(--s-body); margin-top: 12px; color: var(--muted); }
-.way .quotes { margin-top: 36px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px 40px; padding-bottom: clamp(70px, 10vh, 120px); }
-.way blockquote { margin: 0; font-size: var(--s-body); }
-.way blockquote p { font-size: var(--s-lead); line-height: 1.3; }
-.way cite { display: block; margin-top: 10px; font-style: normal; color: var(--muted); font-size: var(--s-small); }
-.illus { font-size: var(--s-small); color: var(--muted); }
+/* ---------------------------------------------------------------- 21:50, on the way: two readouts, the same */
+.way { --gx: 50%; --gy: 55%; --gs: 50% 60%; padding: clamp(70px, 10vh, 120px) 0 clamp(110px, 16vh, 190px); text-align: center; }
+.way .lead { margin-inline: auto; }
+.way .pair { margin: 40px auto 0; display: inline-grid; grid-template-columns: 1fr 1fr; gap: 14px; padding: 12px; border-radius: var(--r-plate); background: var(--plate); box-shadow: var(--plate-depth); } /* taste-skill-ignore: moulded switch-plate depth, owner-approved warm lamplight */
+.way .pair > div { background: var(--plate-lo); border-radius: 18px; padding: 16px 28px 14px; min-width: 150px; }
+.way .pair b { display: block; font-size: clamp(2rem, 1.6rem + 1.4vw, 2.75rem); line-height: 1; font-weight: 500; color: var(--lamp); text-shadow: 0 0 18px rgba(242, 164, 80, 0.45); direction: ltr; } /* taste-skill-ignore: a lit readout */
+.way .pair span { display: block; margin-top: 8px; font-size: var(--s-small); color: var(--muted); }
 
 /* ---------------------------------------------------------------- 22:15, the wall, seen through the tester's screen */
-.wall { background: #0e0f11; }
-.wall .intro { padding: clamp(90px, 14vh, 170px) var(--m) 36px; max-width: 1480px; margin-inline: auto; display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 20px 56px; align-items: end; }
-.wall .intro p { max-width: 50ch; }
-.wall .intro p b { font-weight: 500; color: var(--amber); }
+.wall { --gx: 50%; --gy: 20%; --gs: 70% 40%; }
+.wall .intro { padding: clamp(110px, 16vh, 190px) var(--m) 36px; max-width: 1320px; margin-inline: auto; }
 .track { height: 760svh; position: relative; }
 .stagewrap { position: sticky; top: 0; height: 100svh; display: grid; place-items: center; padding: 14px var(--m); }
-/* the tester: a landscape case, the screen on one side, the selector and the memory on the other */
-.tester { direction: ltr; width: min(1360px, 100%); height: min(calc(100svh - 28px), 860px); background: var(--meter); display: grid; grid-template-columns: minmax(0, 1fr) clamp(300px, 26vw, 380px); gap: 0; padding: 14px; border-radius: 26px; position: relative; } /* taste-skill-ignore: a moulded instrument case */
-.tester::before { content: ""; position: absolute; inset: 6px; border-radius: 21px; border: 3px solid #3a3d42; pointer-events: none; } /* taste-skill-ignore: the case's rubber holster */
-.screen { position: relative; background: var(--lcd); border-radius: 12px; overflow: hidden; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; } /* taste-skill-ignore: the screen bezel */
-.screen .view { position: relative; overflow: hidden; background: #0b0c0f; }
+/* the tester: a moulded case, the screen on one side, the selector and the memory on the other */
+.tester { direction: ltr; width: min(1360px, 100%); height: min(calc(100svh - 28px), 860px); background: linear-gradient(160deg, #362d26, var(--meter) 40%, #231d19); display: grid; grid-template-columns: minmax(0, 1fr) clamp(300px, 26vw, 380px); gap: 0; padding: 16px; border-radius: 34px; position: relative; box-shadow: inset 0 1px 0 rgba(255, 230, 200, 0.08), 0 40px 80px -40px rgba(0, 0, 0, 0.8), 0 0 120px -30px rgba(242, 164, 80, 0.18); } /* taste-skill-ignore: a moulded instrument case */
+.tester::before { content: ""; position: absolute; inset: 6px; border-radius: 29px; border: 3px solid rgba(70, 58, 48, 0.8); pointer-events: none; } /* taste-skill-ignore: the case's rubber holster */
+.screen { position: relative; background: var(--lcd); border-radius: 20px; overflow: hidden; display: grid; grid-template-rows: auto minmax(0, 1fr) auto; box-shadow: inset 0 0 0 2px #1a1612; } /* taste-skill-ignore: the screen bezel */
+.screen .view { position: relative; overflow: hidden; background: #0e0c0b; }
 .screen [data-3d] { position: absolute; inset: 0; }
 .screen canvas { width: 100% !important; height: 100% !important; display: block; }
-.screen .stillimg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: none; background: #121214; }
+.screen .stillimg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: none; background: #141210; }
 html.still .screen .stillimg, .screen.no3d .stillimg { display: block; }
 html.still .screen canvas, .screen.no3d canvas { visibility: hidden; }
 .l3d-host, .slabels { position: absolute; inset: 0; pointer-events: none; }
-.l3d { position: absolute; left: 0; top: 0; background: rgba(7,9,10,.86); color: #f1ece2; font-size: var(--s-small); line-height: 1.25; padding: 5px 9px; white-space: nowrap; transition: opacity var(--t-ui) ease; margin: -14px 0 0 12px; }
+.l3d { position: absolute; left: 0; top: 0; background: rgba(24, 17, 12, 0.88); color: #f6ead8; font-size: var(--s-small); line-height: 1.25; padding: 6px 11px; border-radius: 10px; white-space: nowrap; transition: opacity var(--t-ui) ease; margin: -14px 0 0 12px; }
 html[dir="rtl"] .l3d { margin: -14px 0 0 0; translate: calc(-100% - 12px) 0; }
 html.still .l3d-host { display: none; }
 html:not(.still) .screen:not(.no3d) .slabels { display: none; }
 /* the screen's readout bands, drawn as the tester draws them (left to right whatever the page language) */
-.band { direction: ltr; display: flex; align-items: center; gap: 14px; padding: 10px 16px; color: #e8e2d4; background: var(--lcd); min-width: 0; }
+.band { direction: ltr; display: flex; align-items: center; gap: 14px; padding: 10px 16px; color: #ebe0cf; background: var(--lcd); min-width: 0; }
 .band.top { justify-content: space-between; }
-.fn { flex: 1; flex-wrap: nowrap; align-items: center; display: flex; gap: 6px; font-size: var(--s-small); font-weight: 500; flex-wrap: wrap; }
-.fn span { padding: 1px 6px; color: #8d877d; line-height: 1.5; }
+.fn { flex: 1; align-items: center; display: flex; gap: 6px; font-size: var(--s-small); font-weight: 500; flex-wrap: wrap; }
+.fn span { padding: 1px 7px; color: #8a8072; line-height: 1.5; border-radius: 6px; }
 .fn span.on { color: var(--lcd); background: var(--meter-zone); }
 .fn span.warn.on { background: var(--flag-on); color: #fff; }
-.fn span.ok.on { background: #3fbf5a; color: #07150a; }
+.fn span.ok.on { background: #5cbf68; color: #07150a; }
 .rd { display: flex; align-items: baseline; gap: 6px; margin-left: auto; }
 .rd .val::before { content: attr(data-v); }
-.rd .val { font-family: var(--fd); font-size: clamp(3rem, 2rem + 2.6vw, 4.6rem); line-height: 0.8; font-weight: 700; color: var(--amber); min-width: 3.1ch; text-align: end; font-variant-numeric: tabular-nums; }
+.rd .val { font-size: clamp(2.4rem, 1.6rem + 2vw, 3.6rem); line-height: 0.9; font-weight: 500; color: var(--lamp); min-width: 3.1ch; text-align: end; font-variant-numeric: tabular-nums; text-shadow: 0 0 18px rgba(242, 164, 80, 0.35); } /* taste-skill-ignore: a backlit digit */
 .rd .unit { font-size: var(--s-lead); font-weight: 500; }
 .band.bot { font-size: var(--s-small); }
 .bar { flex: 1; height: 14px; display: grid; grid-template-columns: repeat(40, 1fr); gap: 2px; min-width: 60px; }
-.bar i { background: #232529; }
-.bar i.on { background: var(--amber); }
-.tstamp { white-space: nowrap; color: #e8e2d4; }
-.tstamp b { font-weight: 500; color: var(--amber); }
+.bar i { background: #27221d; border-radius: 2px; }
+.bar i.on { background: var(--lamp); }
+.tstamp { white-space: nowrap; color: #ebe0cf; }
+.tstamp b { font-weight: 500; color: var(--lamp); }
 /* the selector side */
 .ctrl { padding: 8px 4px 4px 18px; display: flex; flex-direction: column; min-height: 0; gap: 14px; }
 html[dir="rtl"] .mem, html[dir="rtl"] .keys { direction: rtl; }
-.brand { display: flex; justify-content: space-between; align-items: center; font-size: var(--s-small); color: #cfc8ba; }
-.brand b { font-family: var(--fd); font-size: 1.7rem; font-weight: 700; color: var(--ink); letter-spacing: 0.02em; }
+.brand { display: flex; justify-content: space-between; align-items: center; font-size: var(--s-small); color: #d3c6b4; }
+.brand b { font-size: 1.35rem; font-weight: 600; color: var(--ink); letter-spacing: 0.01em; }
 .jacks { display: flex; gap: 10px; direction: ltr; }
-.jacks i { width: 20px; height: 20px; border-radius: 50%; background: #111; box-shadow: inset 0 0 0 4px #c4241c; } /* taste-skill-ignore: probe sockets */
-.jacks i + i { box-shadow: inset 0 0 0 4px #4a4d52; } /* taste-skill-ignore: probe sockets */
-.zone { background: var(--meter-zone); border-radius: 16px; padding: 10px 8px 12px; color: #1a1712; } /* taste-skill-ignore: the coloured function zone around the selector */
+.jacks i { width: 20px; height: 20px; border-radius: 50%; background: #111; box-shadow: inset 0 0 0 4px #b8352b; } /* taste-skill-ignore: probe sockets */
+.jacks i + i { box-shadow: inset 0 0 0 4px #4d4640; } /* taste-skill-ignore: probe sockets */
+.zone { background: linear-gradient(170deg, #ddb062, var(--meter-zone) 55%, #c08f40); border-radius: 26px; padding: 10px 8px 12px; color: #2a1d0d; box-shadow: inset 0 1px 0 rgba(255, 240, 205, 0.5), inset 0 -2px 0 rgba(90, 60, 20, 0.25); } /* taste-skill-ignore: the moulded function zone around the selector */
 .dialw { position: relative; width: 100%; aspect-ratio: 1.25; max-height: 270px; margin-inline: auto; direction: ltr; }
-.dialw .knob { position: absolute; left: 50%; top: 58%; width: 38%; aspect-ratio: 1; margin-left: -19%; transform: translateY(-50%); border-radius: 50%; background: #1d1f22; } /* taste-skill-ignore: rotary knob */
-.dialw .knob::before { content: ""; position: absolute; inset: 10%; border-radius: 50%; background: #2b2e33; } /* taste-skill-ignore: knob face */
-.dialw .knob i { position: absolute; left: 50%; top: 4%; bottom: 50%; width: 16%; margin-left: -8%; background: #f1ece2; transform-origin: 50% 100%; border-radius: 3px; } /* taste-skill-ignore: knob pointer */
-.dialw .knob .rot { position: absolute; inset: 0; transition: transform var(--t-ui) var(--ease-out); }
-.pos { position: absolute; transform: translate(-50%, -50%); border: 0; background: transparent; color: #1a1712; font-size: var(--s-small); font-weight: 500; line-height: 1.05; padding: 8px 4px; min-width: 44px; min-height: 40px; cursor: pointer; text-align: center; transition: transform var(--t-press) var(--ease-out); }
-.pos::before { content: ""; display: block; width: 6px; height: 6px; margin: 0 auto 4px; background: #1a1712; opacity: 0.35; }
+.dialw .knob { position: absolute; left: 50%; top: 58%; width: 38%; aspect-ratio: 1; margin-left: -19%; transform: translateY(-50%); border-radius: 50%; background: radial-gradient(circle at 40% 30%, #3a332d, #1d1916 70%); box-shadow: 0 8px 18px -6px rgba(40, 25, 10, 0.6); } /* taste-skill-ignore: rotary knob */
+.dialw .knob::before { content: ""; position: absolute; inset: 11%; border-radius: 50%; background: radial-gradient(circle at 45% 35%, #3b342e, #26211d); } /* taste-skill-ignore: knob face */
+.dialw .knob i { position: absolute; left: 50%; top: 5%; bottom: 50%; width: 15%; margin-left: -7.5%; background: #f6ead8; transform-origin: 50% 100%; border-radius: 99px; } /* taste-skill-ignore: knob pointer */
+.dialw .knob .rot { position: absolute; inset: 0; transition: transform 320ms var(--ease-out); }
+.pos { position: absolute; transform: translate(-50%, -50%); border: 0; background: transparent; color: #2a1d0d; font-size: var(--s-small); font-weight: 500; line-height: 1.05; padding: 8px 4px; min-width: 44px; min-height: 40px; cursor: pointer; text-align: center; border-radius: 10px; transition: transform var(--t-press) var(--ease-out); }
+.pos::before { content: ""; display: block; width: 7px; height: 7px; border-radius: 50%; margin: 0 auto 4px; background: #2a1d0d; opacity: 0.3; }
 .pos[aria-pressed="true"] { color: #000; }
 .pos[aria-pressed="true"]::before { opacity: 1; background: var(--flag-on); }
 .pos:active { transform: translate(-50%, -50%) scale(0.94); }
 .keys { display: flex; gap: 8px; justify-content: space-between; margin-top: 6px; }
-.key { flex: 1; min-height: 44px; border: 0; background: #1d1f22; color: var(--ink); cursor: pointer; font-size: var(--s-small); font-weight: 500; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border-radius: 10px; transition: transform var(--t-press) var(--ease-out), background-color 160ms ease; } /* taste-skill-ignore: rubber keys */
+.key { flex: 1; min-height: 44px; border: 0; background: #272019; color: var(--ink); cursor: pointer; font-size: var(--s-small); font-weight: 500; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border-radius: 16px; box-shadow: inset 0 1px 0 rgba(255, 230, 200, 0.08), 0 4px 10px -4px rgba(40, 25, 10, 0.5); transition: transform var(--t-press) var(--ease-out), background-color 160ms ease; } /* taste-skill-ignore: rubber keys */
 .key:active:not(:disabled) { transform: scale(0.95); }
-.key:disabled { color: #9a968f; cursor: default; }
+.key:disabled { color: #a99d8d; cursor: default; }
 .key svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
 [dir="rtl"] .key svg { transform: scaleX(-1); }
-@media (hover: hover) and (pointer: fine) { .key:not(:disabled):hover { background: #2a2d31; } .pos:hover::before { opacity: 0.8; } }
+@media (hover: hover) and (pointer: fine) { .key:not(:disabled):hover { background: #33291f; } .pos:hover::before { opacity: 0.8; } }
 /* the memory: one entry per step, the current one written out */
-.mem { flex: 1; min-height: 0; background: #101113; border-radius: 10px; padding: 14px 16px; overflow: hidden; display: flex; flex-direction: column; gap: 6px; } /* taste-skill-ignore: the tester's second screen */
-.mem .cur .t { font-size: var(--s-small); color: var(--amber); font-weight: 500; }
+.mem { flex: 1; min-height: 0; background: #14110e; border-radius: 18px; padding: 14px 16px; overflow: hidden; display: flex; flex-direction: column; gap: 6px; box-shadow: inset 0 0 0 2px #1d1915; } /* taste-skill-ignore: the tester's second screen */
+.mem .cur .t { font-size: var(--s-small); color: var(--lamp); font-weight: 500; }
 .mem .cur h3 { font-size: 1.25rem; margin-top: 2px; }
-.mem .cur p { margin-top: 6px; font-size: 1rem; line-height: 1.5; color: #ddd6c8; }
-.mem ol { list-style: none; margin: auto 0 0; padding: 10px 0 0; display: grid; gap: 3px; font-size: var(--s-small); color: var(--muted); }
+.mem .cur p { margin-top: 6px; font-size: 1rem; line-height: 1.5; color: #e2d6c4; }
+.mem ol { list-style: none; margin: auto 0 0; padding: 10px 0 0; display: grid; gap: 3px; font-size: var(--s-small); color: var(--soft); }
 .mem ol li { display: flex; gap: 10px; }
-.mem ol li.done { color: #d9d2c4; }
-.mem ol li.now { color: var(--amber); }
+.mem ol li.done { color: #ddd1be; }
+.mem ol li.now { color: var(--lamp); }
 .mem ol .tm { width: 3.2em; flex: none; direction: ltr; text-align: start; font-variant-numeric: tabular-nums; }
-.wall .after { padding: 56px var(--m) clamp(90px, 14vh, 160px); max-width: 1480px; margin-inline: auto; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 24px 56px; }
-.wall .after h3 { font-size: var(--s-lead); }
-.wall .after p { max-width: 58ch; }
-.mini { display: none; }
 .if-still { display: none; }
 html.still .if-still { display: inline; }
 html.still .if-motion { display: none; }
-
 /* animations off: the tester is an ordinary block, stepped with its keys or the selector; scrolling passes it */
 html.still .track { height: auto; }
 html.still .stagewrap { position: relative; height: auto; padding-block: 0 24px; }
+html.still .track { scroll-margin-top: 90px; }
 html.still .tester { height: clamp(560px, 82svh, 820px); }
 
-/* ---------------------------------------------------------------- 23:05, the new panel: a drawing whose breakers go up one by one */
-.panel { background: #1d1c19; padding: clamp(90px, 14vh, 170px) 0; }
-.panel .head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 20px 56px; align-items: end; margin-bottom: clamp(40px, 7vh, 80px); }
-.panel .head p { max-width: 50ch; }
-.panel .body { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 40px 56px; align-items: start; }
-.drawing { position: sticky; top: 90px; }
-.drawing svg { width: 100%; height: auto; display: block; }
-.drawing .cap { margin-top: 10px; font-size: var(--s-small); color: var(--muted); }
-.drawing .tg { transition: transform 420ms var(--ease-out); transform-box: fill-box; transform-origin: 50% 50%; }
-.drawing .mod:not(.up) .tg { transform: translateY(22px); }
-.drawing .fl { transition: fill 300ms ease; }
-.drawing .mod .tag { transition: fill 300ms ease; }
-.drawing .mod.up .tag { fill: #fff3cf; }
-.svc { list-style: none; margin: 0; padding: 0; }
-.svc li { padding: 24px 0; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 24px; }
-.svc li:nth-child(odd) { background: #24231f; margin-inline: -18px; padding-inline: 18px; }
-.svc h3 { font-size: var(--s-lead); }
-.svc p { grid-column: 1 / -1; color: #ddd6c8; max-width: 52ch; }
-.svc .rate { font-family: var(--fd); font-size: 1.9rem; line-height: 1; color: var(--amber); direction: ltr; }
-.svc figure { grid-column: 1 / -1; margin: 6px 0 0; }
-.svc figure img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
-.svc figcaption { margin-top: 6px; font-size: var(--s-small); color: var(--muted); }
+/* ---------------------------------------------------------------- 23:05, the work: his own photographs, lamplit */
+.work { --gx: 50%; --gy: 70%; --gs: 80% 50%; padding: clamp(110px, 16vh, 190px) 0; }
+.work .head { max-width: 46rem; }
+.shots { margin-top: clamp(36px, 6vh, 64px); display: grid; grid-template-columns: 2.1fr 3fr 2.4fr 2.1fr 2.4fr; gap: 14px; align-items: end; }
+.shot { margin: 0; position: relative; border-radius: var(--r-photo); overflow: hidden; background: #1e1611; height: clamp(320px, 34vw, 470px); }
+.shot:nth-child(2), .shot:nth-child(4) { height: clamp(280px, 29vw, 400px); }
+.shot img { width: 100%; height: 100%; object-fit: cover; filter: sepia(0.55) saturate(1.3) hue-rotate(-8deg) brightness(0.78) contrast(1.02); }
+.shot::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(90% 55% at 50% 0%, rgba(255, 190, 110, 0.22), transparent 70%), linear-gradient(0deg, rgba(21, 16, 12, 0.9), rgba(21, 16, 12, 0) 45%); } /* taste-skill-ignore: lamplight from above, a scrim under the caption */
+.shot figcaption { position: absolute; z-index: 1; inset-inline: 16px; bottom: 14px; font-size: 1rem; line-height: 1.3; color: var(--ink); }
+.work .src { margin-top: 18px; font-size: var(--s-small); color: var(--muted); }
+html.js:not(.still) [data-open] .shot { opacity: 0; transform: translateY(24px); transition: opacity 1100ms var(--ease-dim), transform 1100ms var(--ease-out); }
+html.js:not(.still) [data-open].in .shot { opacity: 1; transform: none; }
+html.js:not(.still) [data-open].in .shot:nth-child(2) { transition-delay: 90ms; } html.js:not(.still) [data-open].in .shot:nth-child(3) { transition-delay: 180ms; } html.js:not(.still) [data-open].in .shot:nth-child(4) { transition-delay: 270ms; } html.js:not(.still) [data-open].in .shot:nth-child(5) { transition-delay: 360ms; }
 
-/* ---------------------------------------------------------------- 23:31, the light comes back: an amber field */
-.light { background: #e5a033; color: var(--amber-ink); padding: clamp(90px, 14vh, 170px) 0; }
-.light h2 { margin-bottom: 28px; }
-.light .grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 32px 48px; align-items: start; }
-.room { position: relative; margin: 0; aspect-ratio: 4 / 3; overflow: hidden; background: #000; }
+/* ---------------------------------------------------------------- 23:31, the light comes back: turn the dimmer */
+.light { --gx: 35%; --gy: 50%; --gs: 75% 70%; padding: 0 0 clamp(110px, 16vh, 190px); }
+html[dir="rtl"] .light { --gx: 65%; }
+.light .grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 32px 56px; align-items: center; }
+.room { position: relative; margin: 0; aspect-ratio: 4 / 3; overflow: hidden; border-radius: 30px; background: #0d0a07; }
 .room img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.room .dim { filter: brightness(0.13) saturate(0.4) contrast(1.15); }
-.room .on { opacity: 1; }
-html.js:not(.still) .room:not(.lit) .on { opacity: 0; }
-html.js:not(.still) .room .on { transition: opacity 900ms ease 200ms; }
-.room figcaption { position: absolute; inset-inline-start: 12px; bottom: 12px; background: rgba(0,0,0,.72); color: #fff; font-size: var(--s-small); padding: 5px 10px; }
-/* the night's job sheet, on a slip */
-.slip { background: #eeede9; color: #1d1a14; padding: 26px 26px 0; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), 95% 100%, 90% calc(100% - 12px), 85% 100%, 80% calc(100% - 12px), 75% 100%, 70% calc(100% - 12px), 65% 100%, 60% calc(100% - 12px), 55% 100%, 50% calc(100% - 12px), 45% 100%, 40% calc(100% - 12px), 35% 100%, 30% calc(100% - 12px), 25% 100%, 20% calc(100% - 12px), 15% 100%, 10% calc(100% - 12px), 5% 100%, 0 calc(100% - 12px)); }
-.slip h3 { font-size: var(--s-lead); font-weight: 700; }
-.slip .sub { font-size: var(--s-small); color: #5a5449; margin-top: 4px; }
-.slip ol { list-style: none; margin: 18px 0 0; padding: 0; }
-.slip li { display: flex; align-items: baseline; gap: 8px; padding: 7px 0; font-size: 1rem; }
-.slip li .w { flex: none; max-width: 70%; }
-.slip li .dots { flex: 1; min-width: 20px; height: 4px; background-image: radial-gradient(circle, #8a8275 1.5px, transparent 1.7px); background-size: 8px 4px; transform: translateY(-3px); } /* taste-skill-ignore: dotted leader on a printed slip */
-.slip li .tm { flex: none; direction: ltr; font-variant-numeric: tabular-nums; font-weight: 500; }
-.slip .total { margin: 14px -26px 0; background: #1d1a14; color: #eeede9; display: flex; justify-content: space-between; gap: 12px; padding: 12px 26px 24px; font-weight: 500; }
-.light .row { margin-top: 32px; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 3fr) minmax(0, 5fr); gap: 14px; align-items: end; }
-.light .row figure { margin: 0; }
-.light .row img { width: 100%; object-fit: cover; }
-.light .row .r1 img { aspect-ratio: 3 / 4; } .light .row .r2 img { aspect-ratio: 9 / 16; } .light .row .r3 img { aspect-ratio: 4 / 3; }
-.light .row figcaption { margin-top: 8px; font-size: var(--s-small); }
-.light .src { margin-top: 18px; font-size: var(--s-small); }
+.room .dim { filter: sepia(1) saturate(1.2) hue-rotate(-12deg) brightness(0.16); }
+.room .on { filter: sepia(0.6) saturate(1.5) hue-rotate(-10deg) brightness(0.96) contrast(1.04); opacity: var(--lv, 1); }
+.room::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: rgba(214, 128, 52, 0.22); mix-blend-mode: multiply; } /* taste-skill-ignore: warm lamp cast */
+.room .pool { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(60% 45% at 50% 18%, rgba(255, 196, 120, 0.35), transparent 70%), radial-gradient(30% 30% at 12% 45%, rgba(255, 190, 110, 0.3), transparent 70%), radial-gradient(30% 30% at 92% 42%, rgba(255, 190, 110, 0.3), transparent 70%); mix-blend-mode: screen; opacity: var(--lv, 1); } /* taste-skill-ignore: the lamps' own light */
+.room figcaption { position: absolute; inset-inline-start: 14px; bottom: 14px; background: rgba(21, 16, 12, 0.78); color: var(--ink); font-size: var(--s-small); padding: 6px 12px; border-radius: 12px; }
+.wallplate { margin-top: 30px; display: flex; align-items: center; gap: 22px; padding: 18px; border-radius: 30px; background: var(--plate); box-shadow: var(--plate-depth); width: fit-content; } /* taste-skill-ignore: moulded switch-plate depth, owner-approved warm lamplight */
+.knob-wrap { position: relative; width: 116px; height: 116px; border-radius: 50%; display: grid; place-items: center; cursor: grab; touch-action: none; background: radial-gradient(circle, var(--plate-lo) 62%, transparent 63%); } /* taste-skill-ignore: moulded switch-plate depth, owner-approved warm lamplight */
+.knob-wrap:active { cursor: grabbing; }
+.knob-wrap .ring { position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from -135deg, var(--lamp) calc(var(--lv, 1) * 270deg), #3a2c21 0 270deg, transparent 0); -webkit-mask: radial-gradient(circle, transparent 54px, #000 55px); mask: radial-gradient(circle, transparent 54px, #000 55px); filter: drop-shadow(0 0 6px rgba(242, 164, 80, 0.5)); } /* taste-skill-ignore: the lit arc of the dimmer */
+.knob-wrap .kn { width: 80px; height: 80px; border-radius: 50%; background: radial-gradient(circle at 40% 30%, #4b3b2e, #261c15 72%); box-shadow: inset 0 1px 0 rgba(255, 230, 200, 0.12), 0 10px 20px -8px rgba(0, 0, 0, 0.8); position: relative; transform: rotate(calc(-135deg + var(--lv, 1) * 270deg)); } /* taste-skill-ignore: a dimmer knob */
+.knob-wrap .kn::after { content: ""; position: absolute; left: 50%; top: 9px; width: 6px; height: 18px; margin-left: -3px; border-radius: 99px; background: var(--lamp); box-shadow: 0 0 10px rgba(242, 164, 80, 0.7); } /* taste-skill-ignore */
+.wallplate .rd2 { font-size: var(--s-small); color: var(--muted); line-height: 1.4; }
+.wallplate .rd2 b { display: block; font-size: 1.75rem; font-weight: 500; color: var(--lamp); line-height: 1.1; font-variant-numeric: tabular-nums; }
 
-/* ---------------------------------------------------------------- reviews: one letter, and four short ones, on the neutral-wire blue */
-.reviews { background: var(--navy); padding: clamp(90px, 14vh, 170px) 0; }
-.reviews .top5 { display: flex; align-items: flex-end; gap: 12px 32px; flex-wrap: wrap; margin-bottom: clamp(40px, 8vh, 90px); }
-.reviews .big { font-family: var(--fd); font-size: var(--s-giant); line-height: 0.78; font-weight: 700; color: var(--amber); direction: ltr; }
-.reviews .top5 h2 { font-size: var(--s-head); }
-.reviews .top5 p { color: #d8dcea; }
-.reviews .top5 .big { color: var(--amber); }
-.reviews .grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 40px 64px; align-items: start; }
-.letter { max-width: 38ch; }
-.letter .open { font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); line-height: 1.25; font-weight: 500; }
-.letter p + p { margin-top: 18px; }
-.letter .sign { margin-top: 36px; font-size: var(--s-body); }
-.letter .sign span { display: block; color: #c4cbe0; font-size: var(--s-small); }
-.shorts { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px; }
-.shorts blockquote { margin: 0; }
-.shorts p { font-size: var(--s-body); }
-.shorts cite { display: block; margin-top: 8px; font-style: normal; color: #c4cbe0; font-size: var(--s-small); }
-.reviews .more { margin-top: 36px; }
-.reviews .more a { text-underline-offset: 4px; }
+/* ---------------------------------------------------------------- reviews: three, in the lamp's circle */
+.reviews { --gx: 25%; --gy: 40%; --gs: 60% 60%; padding: clamp(110px, 16vh, 190px) 0; background: var(--ground-2); }
+html[dir="rtl"] .reviews { --gx: 75%; }
+.reviews .grid { margin-top: clamp(36px, 6vh, 64px); display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 18px; align-items: stretch; }
+.reviews .side { display: grid; gap: 18px; }
+.quote { margin: 0; border-radius: var(--r-plate); background: var(--plate); box-shadow: var(--plate-depth); padding: clamp(22px, 3vw, 40px); display: flex; flex-direction: column; justify-content: space-between; gap: 22px; } /* taste-skill-ignore: moulded switch-plate depth, owner-approved warm lamplight */
+.quote p { font-size: var(--s-lead); line-height: 1.5; }
+.quote.big { background: transparent; box-shadow: none; padding-inline-start: 0; } /* taste-skill-ignore: moulded switch-plate depth, owner-approved warm lamplight */
+.quote.big p { font-size: clamp(1.3rem, 1.05rem + 1.2vw, 2.125rem); line-height: 1.4; }
+.quote footer { display: flex; align-items: center; gap: 12px; font-size: var(--s-small); color: var(--muted); }
+.quote footer b { color: var(--ink); font-weight: 500; font-size: 1rem; display: block; }
+.stars { display: inline-flex; gap: 3px; color: var(--lamp); }
+.stars svg { width: 15px; height: 15px; fill: currentColor; }
+.reviews .more { margin-top: 22px; font-size: var(--s-body); }
+.reviews .more a { color: var(--lamp); text-underline-offset: 5px; }
 
-/* ---------------------------------------------------------------- the message: flip the breakers for what's wrong */
-.msg { background: var(--graphite); padding: clamp(90px, 14vh, 170px) 0 80px; }
-.msg .grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 40px 64px; align-items: start; }
-.msg .txt p { margin-top: 18px; max-width: 42ch; }
-.board { background: #d9d6cf; color: #1b1c1e; padding: 18px; }
-.board .rowlab { font-size: var(--s-small); font-weight: 500; margin-bottom: 8px; color: #3c3b37; }
-.flips { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 3px; padding: 14px 10px 10px; background: #bdb9b0; }
-.flips::before { content: ""; position: absolute; inset-inline: 0; top: 50%; height: 20px; margin-top: -10px; background: #9a9ea3; }
-.flip { position: relative; border: 0; background: #f2f0ea; cursor: pointer; padding: 10px 4px 10px; display: flex; flex-direction: column; align-items: center; gap: 8px; min-height: 150px; transition: transform var(--t-press) var(--ease-out); color: #1b1c1e; }
-.flip:active { transform: scale(0.96); }
-.flip .tg { width: 22px; height: 42px; background: #c9c5bc; position: relative; }
-.flip .tg::after { content: ""; position: absolute; left: 3px; right: 3px; top: 3px; height: 16px; background: #2b2d31; transition: transform var(--t-ui) var(--ease-out); }
-.flip[aria-pressed="true"] .tg::after { transform: translateY(20px); }
-.flip .fl { width: 10px; height: 6px; background: var(--flag-on); }
-.flip[aria-pressed="true"] .fl { background: var(--flag-off); }
-.flip .tx { font-size: var(--s-small); line-height: 1.2; text-align: center; font-weight: 500; }
-.flip[aria-pressed="true"] { background: #fff4d6; }
-.board .when { margin-top: 16px; display: flex; gap: 3px; background: #bdb9b0; padding: 6px; }
+/* ---------------------------------------------------------------- the message: switch on what's wrong, on a wall plate */
+.msg { --gx: 70%; --gy: 40%; padding: clamp(110px, 16vh, 190px) 0 80px; }
+html[dir="rtl"] .msg { --gx: 30%; }
+.msg .grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 40px 64px; align-items: start; }
+.board { background: var(--plate); border-radius: 32px; padding: clamp(14px, 2vw, 24px); box-shadow: var(--plate-depth); } /* taste-skill-ignore: moulded switch-plate depth, owner-approved warm lamplight */
+.board .rowlab { font-size: var(--s-small); color: var(--muted); margin: 4px 6px 10px; }
+.rks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.rk { position: relative; border: 0; background: var(--plate-lo); border-radius: 22px; cursor: pointer; padding: 16px 8px 14px; display: flex; flex-direction: column; align-items: center; gap: 12px; color: var(--muted); transition: transform var(--t-press) var(--ease-out), background-color 260ms ease, color 260ms ease; }
+.rk .pd { width: 34px; height: 50px; border-radius: 12px; background: linear-gradient(180deg, #4d3c2e 0%, #33271e 48%, #241b14 52%, #2c2219 100%); box-shadow: inset 0 1px 0 rgba(255, 230, 200, 0.12), 0 3px 8px -3px rgba(0, 0, 0, 0.7); position: relative; transition: background 220ms ease; } /* taste-skill-ignore: a rocker paddle, tilted */
+.rk .pd::after { content: ""; position: absolute; left: 50%; top: 8px; width: 8px; height: 8px; margin-left: -4px; border-radius: 50%; background: #5a4636; transition: background-color 260ms ease, box-shadow 260ms ease; } /* taste-skill-ignore: moulded switch-plate depth, owner-approved warm lamplight */
+.rk[aria-pressed="true"] { background: #2b1f15; color: var(--ink); }
+.rk[aria-pressed="true"] .pd { background: linear-gradient(0deg, #4d3c2e 0%, #33271e 48%, #241b14 52%, #2c2219 100%); } /* taste-skill-ignore */
+.rk[aria-pressed="true"] .pd::after { background: var(--lamp); box-shadow: 0 0 12px 3px rgba(242, 164, 80, 0.6); } /* taste-skill-ignore: locator light */
+.rk .tx { font-size: 1rem; line-height: 1.25; text-align: center; }
+.rk:active { transform: scale(0.96); }
+@media (hover: hover) and (pointer: fine) { .rk:hover { color: var(--ink); } }
+.board .when { margin-top: 12px; display: flex; gap: 4px; background: var(--plate-lo); padding: 5px; border-radius: 20px; }
 .board .when label { flex: 1; position: relative; }
 .board .when input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
-.board .when input + span { color: #1b1c1e; display: flex; align-items: center; justify-content: center; min-height: 46px; background: #f2f0ea; font-size: var(--s-small); font-weight: 500; transition: background-color 160ms ease, transform var(--t-press) var(--ease-out); }
-.board .when input:checked + span { background: #1b1c1e; color: #f2f0ea; }
-.board .when input:focus-visible + span { outline: 3px solid var(--amber); outline-offset: 2px; }
+.board .when input + span { display: flex; align-items: center; justify-content: center; min-height: 46px; border-radius: 15px; color: var(--muted); font-size: 1rem; transition: background-color 200ms ease, color 200ms ease, transform var(--t-press) var(--ease-out); }
+.board .when input:checked + span { background: var(--plate-hi); color: var(--ink); }
+.board .when input:focus-visible + span { outline: 3px solid var(--lamp); outline-offset: 2px; }
 .board .when label:active input + span { transform: scale(0.97); }
 .board .fields { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.board .fields input { width: 100%; height: 50px; border: 0; background: #fbfaf5; color: #1b1c1e; padding: 0 12px; border-radius: 0; }
-.board .fields input::placeholder { color: #6e6a62; }
-.board .label { margin-top: 12px; background: #fbfaf5; padding: 12px 14px; min-height: 5.4em; font-size: 1rem; line-height: 1.45; }
-.board .label .k { font-size: var(--s-small); color: #6e6a62; display: block; margin-bottom: 4px; }
-.caret { display: inline-block; width: 2px; height: 1em; background: currentColor; vertical-align: -0.15em; margin-inline-start: 1px; }
+.board .fields input { width: 100%; height: 52px; border: 0; background: var(--plate-lo); color: var(--ink); padding: 0 16px; border-radius: 16px; }
+.board .fields input::placeholder { color: #a8927a; }
+.board .label { margin-top: 12px; background: var(--plate-lo); border-radius: 20px; padding: 14px 16px; min-height: 5.4em; font-size: 1rem; line-height: 1.5; color: #eadcc7; }
+.caret { display: inline-block; width: 2px; height: 1em; background: var(--lamp); vertical-align: -0.15em; margin-inline-start: 1px; }
 .board .send { margin-top: 12px; width: 100%; }
-.board .send.btn { background: #1b1c1e; color: #f2f0ea; }
-@media (hover: hover) and (pointer: fine) { .board .send.btn:hover { background: #33353a; } .flip:hover { background: #fffdf6; } }
 
-/* ---------------------------------------------------------------- where: the address in display rows, and the map */
-.find { background: var(--night); padding: 70px 0 clamp(90px, 14vh, 160px); }
-.find .rows { display: grid; gap: 4px; }
-.find .rows > * { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; min-height: clamp(84px, 13vh, 140px); padding: 12px 20px; background: var(--graphite); text-decoration: none; font-family: var(--fd); font-size: clamp(2.6rem, 1.4rem + 4.4vw, 5.6rem); line-height: 1; font-weight: 700; }
-.find .rows > *:nth-child(even) { background: var(--graphite-2); }
-.find .rows small { font-family: var(--f); font-size: var(--s-small); font-weight: 400; color: var(--muted); margin-bottom: 0.5em; text-align: end; }
-.find .rows a { transition: background-color 160ms ease; }
-.find .rows .wa { background: var(--amber) !important; color: var(--amber-ink); }
-.find .rows .wa small { color: #3b2d12; }
-@media (hover: hover) and (pointer: fine) { .find .rows a:hover { background: #2c2e33; } .find .rows .wa:hover { background: var(--amber-deep) !important; } }
-.find .map { margin-top: 4px; aspect-ratio: 21 / 8; background: var(--graphite); }
-.find iframe { width: 100%; height: 100%; border: 0; display: block; filter: grayscale(0.35) brightness(0.85); }
-.find .status { font-family: var(--f); font-size: var(--s-body); font-weight: 400; }
+/* ---------------------------------------------------------------- where: the address and the map */
+.find { --gx: 50%; --gy: 30%; padding: 70px 0 clamp(110px, 16vh, 170px); }
+.find .grid { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 32px 56px; align-items: center; }
+.find .map { aspect-ratio: 16 / 10; border-radius: 30px; overflow: hidden; background: var(--plate); box-shadow: var(--plate-depth); } /* taste-skill-ignore: moulded switch-plate depth, owner-approved warm lamplight */
+.find iframe { width: 100%; height: 100%; border: 0; display: block; filter: invert(0.9) hue-rotate(180deg) sepia(0.5) saturate(0.9) brightness(0.92) contrast(0.92); }
 
-/* ---------------------------------------------------------------- footer: the circuit list glued inside the panel door */
-.door { background: #2c2d30; padding: 64px var(--m) calc(130px + env(safe-area-inset-bottom)); }
-.door .in { max-width: 1480px; margin-inline: auto; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 40px 64px; align-items: start; }
-.card { background: #ece7da; color: #1d1b17; padding: 26px 26px 18px; }
-.card .ttl { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-.card h2 { font-family: var(--f); font-size: var(--s-lead); line-height: 1.2; }
-.card table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: var(--s-body); }
-.card th, .card td { text-align: start; padding: 10px 8px; border-top: 1px solid #bdb6a6; vertical-align: top; }
-.card th { font-weight: 500; color: #5c564a; font-size: var(--s-small); }
-.card td:first-child { width: 3em; color: #5c564a; font-variant-numeric: tabular-nums; }
-.card a { text-underline-offset: 3px; }
-.hazard { width: 64px; height: 56px; flex: none; }
-.credits { font-size: var(--s-small); color: #c8c2b6; line-height: 1.6; }
-.credits p + p { margin-top: 12px; }
-.credits a { color: #f1ece2; }
-.credits .mswitch { margin-top: 18px; }
+/* ---------------------------------------------------------------- footer: short */
+.foot { background: #0f0b08; padding: 40px var(--m) calc(120px + env(safe-area-inset-bottom)); font-size: var(--s-small); color: var(--muted); }
+.foot .in { max-width: 1320px; margin-inline: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; }
+.foot .nm { font-size: 1.125rem; font-weight: 500; color: var(--ink); display: inline-flex; align-items: center; gap: 10px; }
+.foot .nm i { width: 9px; height: 9px; border-radius: 50%; background: var(--lamp); box-shadow: 0 0 14px 3px rgba(242, 164, 80, 0.5); } /* taste-skill-ignore: a lit bulb */
+.foot a { color: var(--ink); text-underline-offset: 4px; }
+.foot .cr { flex-basis: 100%; line-height: 1.6; max-width: 60ch; }
+.foot .mswitch { margin-inline-start: auto; }
 
-/* the call control on phones: a two-gang wall switch whose locator lights glow in the dark */
-.wsw { position: fixed; z-index: 45; bottom: calc(14px + env(safe-area-inset-bottom)); inset-inline-end: 14px; display: none; gap: 4px; padding: 8px; background: #2a2b2e; border-radius: 10px; box-shadow: 0 10px 28px rgba(0,0,0,.45); transition: transform var(--t-ui) var(--ease-out), opacity var(--t-ui) ease; } /* taste-skill-ignore: a switch plate floating over the page */
-.wsw a { width: 64px; height: 80px; background: #3a3c40; border-radius: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-decoration: none; color: #f1ece2; font-size: var(--s-small); font-weight: 500; transition: transform var(--t-press) var(--ease-out); position: relative; } /* taste-skill-ignore: rocker */
-.wsw a::after { content: ""; position: absolute; top: 7px; width: 10px; height: 3px; background: var(--amber); border-radius: 2px; } /* taste-skill-ignore: locator light */
-.wsw a:active { transform: perspective(200px) rotateX(14deg) scale(0.97); }
+/* the call control on phones: a two-gang switch plate, its locator lights glowing */
+.wsw { position: fixed; z-index: 45; bottom: calc(14px + env(safe-area-inset-bottom)); inset-inline-end: 14px; display: none; gap: 6px; padding: 8px; background: rgba(42, 32, 25, 0.97); border-radius: 26px; box-shadow: inset 0 1px 0 rgba(255, 228, 190, 0.08), 0 14px 34px rgba(0, 0, 0, 0.5), 0 0 40px -10px rgba(242, 164, 80, 0.3); transition: transform var(--t-ui) var(--ease-out), opacity var(--t-ui) ease; } /* taste-skill-ignore: a switch plate floating over the page */
+.wsw a { width: 70px; height: 78px; background: var(--plate-2); border-radius: 19px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-decoration: none; color: var(--ink); font-size: var(--s-small); font-weight: 500; transition: transform var(--t-press) var(--ease-out); position: relative; box-shadow: inset 0 1px 0 rgba(255, 230, 200, 0.1); } /* taste-skill-ignore: rocker */
+.wsw a::after { content: ""; position: absolute; top: 8px; width: 6px; height: 6px; border-radius: 50%; background: var(--lamp); box-shadow: 0 0 8px 2px rgba(242, 164, 80, 0.6); } /* taste-skill-ignore: locator light */
+.wsw a:active { transform: scale(0.95); }
 .wsw svg { width: 22px; height: 22px; }
-.wsw .wa { background: #4a3a1c; }
+.wsw .call { background: var(--lamp); color: var(--lamp-ink); }
+.wsw .call::after { background: #fff4e0; }
 .wsw.away { transform: translateY(150%); opacity: 0; pointer-events: none; }
 
-/* section entrances, once */
-html.js:not(.still) [data-r] > * { opacity: 0; transform: translateY(22px); transition: opacity var(--t-reveal) var(--ease-out), transform var(--t-reveal) var(--ease-out); }
+/* entrances, once: heading, then the line, then the rest */
+html.js:not(.still) [data-r] > * { opacity: 0; transform: translateY(20px); transition: opacity 1000ms var(--ease-dim), transform 1000ms var(--ease-out); }
 html.js:not(.still) [data-r].in > * { opacity: 1; transform: none; }
-html.js:not(.still) [data-r].in > :nth-child(2) { transition-delay: 80ms; } html.js:not(.still) [data-r].in > :nth-child(3) { transition-delay: 160ms; } html.js:not(.still) [data-r].in > :nth-child(4) { transition-delay: 240ms; } html.js:not(.still) [data-r].in > :nth-child(5) { transition-delay: 320ms; }
-html.js:not(.still) [data-open] img { clip-path: inset(0 0 100% 0); transition: clip-path 1s var(--ease-out); }
-html.js:not(.still) [data-open].in img { clip-path: inset(0 0 0 0); }
+html.js:not(.still) [data-r].in > :nth-child(2) { transition-delay: 90ms; } html.js:not(.still) [data-r].in > :nth-child(3) { transition-delay: 180ms; } html.js:not(.still) [data-r].in > :nth-child(4) { transition-delay: 260ms; }
 html.still *, html.still *::before, html.still *::after { transition-duration: 0s !important; animation: none !important; }
-@media (prefers-reduced-motion: reduce) { html.js [data-r] > * { transform: none !important; } }
+@media (prefers-reduced-motion: reduce) { html.js [data-r] > *, html.js [data-open] .shot { transform: none !important; } }
 
-/* ---------------------------------------------------------------- phones and small tablets */
+/* ---------------------------------------------------------------- tablets */
 @media (max-width: 1080px) {
   .tester { grid-template-columns: minmax(0, 1fr) 280px; }
+  .shots { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .shot, .shot:nth-child(2), .shot:nth-child(4) { height: 340px; }
+  .shot:nth-child(-n+3) { grid-column: span 2; }
+  .shot:nth-child(n+4) { grid-column: span 3; height: 300px; }
 }
+/* ---------------------------------------------------------------- phones and small tablets */
 @media (max-width: 900px) {
-  .top { padding-block: 10px; }
-  .mark { font-size: 1.9rem; }
-  .top .call, .top .mswitch .st, .chg .lab { display: none; }
-  .top .tools { gap: 10px; }
-  .rail .in { padding: 5px 10px; gap: 2px; }
-  .rail .din { inset-inline: 10px; }
-  .brk { width: auto; flex: 1 1 0; min-width: 0; padding: 5px 2px 4px; }
-  .brk .lb { font-size: 0.8125rem; }
-  .brk .fl { top: 5px; inset-inline-end: 4px; width: 5px; height: 5px; }
-  .rail .clock { font-size: 1.55rem; min-width: 0; padding: 6px 7px 4px; margin-inline-start: 4px; }
-  .hero { min-height: 0; padding-top: 32px; }
-  .hero h1 { font-size: 21.5vw; line-height: 0.84; }
-  .hero h1 .l2 { text-align: start; }
-  .hero .base { grid-template-columns: 1fr; padding-top: 28px; }
-  .hero .side { align-items: stretch; }
-  .hero .act { justify-content: stretch; }
-  .hero .act .btn { flex: 1 1 0; }
-  .hero .note { text-align: start; }
-  .dark .grid, .call24 .grid, .way .head, .wall .intro, .wall .after, .panel .head, .panel .body, .light .grid, .reviews .grid, .msg .grid, .door .in { grid-template-columns: minmax(0, 1fr); }
-  .torch { aspect-ratio: 1 / 1; margin-inline: calc(-1 * var(--m)); order: 2; }
+  .top { padding-block: 12px 8px; }
+  .mark { font-size: 1.3rem; }
+  .top .call, .top .mswitch .st { display: none; }
+  .top .tools { gap: 8px; }
+  .rail { padding: 6px 10px 0; }
+  .rail .plate { gap: 2px; padding: 5px; border-radius: 20px; }
+  .sw { flex: 1 1 0; min-width: 0; justify-content: center; flex-direction: column; gap: 4px; padding: 6px 2px 5px; font-size: 0.8125rem; border-radius: 14px; min-height: 48px; }
+  .sw i { width: 7px; height: 7px; }
+  .rail .clock { padding: 0 9px; font-size: 1rem; min-height: 48px; margin-inline-start: 2px; }
+  .rail .clock small { display: none; }
+  .hero { min-height: max(520px, calc(100svh - 170px)); padding: 0 10px 20px; }
+  .hero .bg { inset: 8px 10px 0; border-radius: 28px; }
+  .hero .in { padding: 0 16px 8px; }
+  .hero .act .btn { flex: 1 1 0; padding: 0 12px; gap: 8px; }
+  .hero .act .btn:first-child { flex-grow: 1.35; }
+  .call24 .grid, .light .grid, .reviews .grid, .msg .grid, .find .grid { grid-template-columns: minmax(0, 1fr); }
   .call24 .act .btn { flex: 1 1 0; }
   .call24 .act .btn .ltr { display: none; }
-  .way .pair { grid-template-columns: 1fr; gap: 18px; }
-  .way .spec { height: 34vw; }
-  .way .spec b { font-size: 44vw; }
-  .way .quotes { grid-template-columns: 1fr; }
-  .drawing { position: relative; top: 0; }
-  .light .row { grid-template-columns: 1fr 1fr; }
-  .light .row .r3 { grid-column: 1 / -1; }
-  .room { margin-inline: calc(-1 * var(--m)); }
-  .reviews .big { font-size: 40vw; }
-  .flips { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .flips::before { display: none; }
-  .flip { min-height: 128px; }
-  .board { padding: 12px; margin-inline: calc(-1 * var(--m) + 6px); }
+  .tsw svg { width: min(86%, 380px); }
+  .way .pair > div { min-width: 0; padding: 14px 18px 12px; }
+  .shots { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .shot, .shot:nth-child(n) { grid-column: auto; height: 250px; border-radius: 20px; }
+  .shot:nth-child(1) { grid-row: span 2; height: 510px; }
+  .shot:nth-child(5) { grid-column: 1 / -1; height: 230px; }
+  .shot figcaption { inset-inline: 12px; bottom: 10px; font-size: 0.875rem; }
+  .light .grid > div { order: -1; }
+  .room { border-radius: 24px; }
+  .wallplate { width: 100%; }
+  .rks { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .rk { padding: 12px 4px 10px; border-radius: 18px; gap: 9px; }
+  .rk .pd { width: 30px; height: 44px; }
+  .rk .tx { font-size: 0.875rem; }
+  .board { border-radius: 26px; margin-inline: calc(-1 * var(--m) + 8px); }
   .board .fields { grid-template-columns: 1fr; }
-  .find .rows > * { padding: 10px 14px; flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 4px; }
-  .find .rows small { text-align: start; margin: 0; }
-  .find .map { aspect-ratio: 4 / 3; }
-  .card { padding: 20px 14px 12px; }
-  .card th, .card td { padding: 9px 4px; }
+  .find .map { aspect-ratio: 4 / 3; border-radius: 24px; }
+  .foot .mswitch { margin-inline-start: 0; }
   .wsw { display: flex; }
   /* the tester stands upright on a phone: screen on top, the memory, then the selector */
   .stagewrap { padding: 6px 8px; }
-  .tester { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; height: calc(100svh - 12px); padding: 8px; border-radius: 20px; }
-  .tester::before { inset: 3px; border-radius: 18px; }
+  .tester { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr) auto; height: calc(100svh - 12px); padding: 9px; border-radius: 26px; }
+  .tester::before { inset: 3px; border-radius: 23px; }
   .ctrl, html[dir="rtl"] .ctrl { padding: 8px 2px 2px; gap: 8px; display: grid; grid-template-columns: minmax(0, 1fr); }
   .brand, .mem ol { display: none; }
-  .mem { order: -1; padding: 10px 12px; flex: none; min-height: 7.6em; }
+  .mem { order: -1; padding: 10px 12px; flex: none; min-height: 7.6em; border-radius: 16px; }
   .mem .cur h3 { font-size: 1.0625rem; }
-  .mem .cur p { font-size: 0.9375rem; line-height: 1.45; }
-  .zone { padding: 4px 6px 8px; }
+  .mem .cur p { font-size: 1rem; line-height: 1.45; }
+  .zone { padding: 4px 6px 8px; border-radius: 22px; }
   .dialw { aspect-ratio: 2.3; max-height: 150px; }
   .dialw .knob { width: 22%; margin-left: -11%; top: 66%; }
   .pos { padding: 4px 2px; min-height: 40px; }
   .band { padding: 6px 10px; gap: 10px; }
-  .rd .val::before { content: attr(data-v); }
-.rd .val { font-size: 2.6rem; }
+  .rd .val { font-size: 2.3rem; }
   .fn { gap: 3px; flex-wrap: nowrap; }
   .fn span { padding: 1px 5px; }
   .fn span:not(.on) { display: none; }
   .band.bot { font-size: 0.8125rem; }
   .bar { grid-template-columns: repeat(24, 1fr); }
   .bar i:nth-child(n+25) { display: none; }
+  .screen { border-radius: 16px; }
   html.still .tester { height: auto; }
   html.still .screen .view { height: 62vw; }
 }
-@media (max-width: 380px) { .brk .lb { font-size: 0.75rem; } .rail .clock { font-size: 1.35rem; } }
+@media (max-width: 380px) { .sw { font-size: 0.75rem; } .rail .clock { padding: 0 6px; } .rk .tx { font-size: 0.8125rem; } }
 </style>
 </head>
 <body>
@@ -522,72 +432,48 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
 </div>
 
 <header class="top">
-  <a class="mark" href="#night" translate="no"><span lang="he">אור חדש</span><span lang="en">Or Hadash</span></a>
+  <a class="mark" href="#night" translate="no"><i aria-hidden="true"></i><span lang="he">אור חדש</span><span lang="en">Or Hadash</span></a>
   <div class="tools">
-    <button class="chg" type="button" data-set-lang aria-label="English"><span class="body" aria-hidden="true"></span><span class="lab"><b>עב</b> · <b>EN</b></span></button>
+    <button class="chg" type="button" data-set-lang aria-label="English"><b class="he">עב</b><b class="en">EN</b></button>
     <button class="mswitch" type="button" role="switch" aria-checked="true" data-motion-toggle><span class="mod" aria-hidden="true"></span><span class="flag" aria-hidden="true"></span><span class="st"><span lang="he">אנימציות</span><span lang="en">Animations</span></span><span class="sr"><span lang="he">אנימציות</span><span lang="en">Animations</span></span></button>
     <a class="btn call" href="tel:+972542514004"><span lang="he">התקשרו לסאלח</span><span lang="en">Call Saleh</span></a>
   </div>
 </header>
 <p class="motion-why">
-  <span lang="he"><span data-why="reduce">האנימציות כבויות כי המכשיר שלכם מבקש פחות תנועה.</span><span data-why="data">האנימציות כבויות כי חיסכון בנתונים פועל.</span><span data-why="slow">האנימציות כבויות כי החיבור איטי.</span><span data-why="device">האנימציות כבויות כדי שהמכשיר יישאר מהיר.</span> אפשר להרים אותן במפסק למעלה.</span>
-  <span lang="en"><span data-why="reduce">Animations are off because your device asks for reduced motion.</span><span data-why="data">Animations are off because data saver is on.</span><span data-why="slow">Animations are off because the connection is slow.</span><span data-why="device">Animations are off to keep this device fast.</span> You can switch them on with the breaker above.</span>
+  <span lang="he"><span data-why="reduce">האנימציות כבויות כי המכשיר שלכם מבקש פחות תנועה.</span><span data-why="data">האנימציות כבויות כי חיסכון בנתונים פועל.</span><span data-why="slow">האנימציות כבויות כי החיבור איטי.</span><span data-why="device">האנימציות כבויות כדי שהמכשיר יישאר מהיר.</span> אפשר להדליק אותן במתג למעלה.</span>
+  <span lang="en"><span data-why="reduce">Animations are off because your device asks for reduced motion.</span><span data-why="data">Animations are off because data saver is on.</span><span data-why="slow">Animations are off because the connection is slow.</span><span data-why="device">Animations are off to keep this device fast.</span> You can switch them on above.</span>
 </p>
 
 <nav class="rail" aria-label="ניווט" data-rail>
-  <div class="in">
-    <span class="din" aria-hidden="true"></span>
-    <a class="brk" href="#night" data-c="0"><span class="fl" aria-hidden="true"></span><span class="tg" aria-hidden="true"></span><span class="lb"><span lang="he">הלילה</span><span lang="en">Night</span></span></a>
-    <a class="brk" href="#wall" data-c="1"><span class="fl" aria-hidden="true"></span><span class="tg" aria-hidden="true"></span><span class="lb"><span lang="he">בקיר</span><span lang="en">Wall</span></span></a>
-    <a class="brk" href="#panel" data-c="2"><span class="fl" aria-hidden="true"></span><span class="tg" aria-hidden="true"></span><span class="lb"><span lang="he">הלוח</span><span lang="en">Panel</span></span></a>
-    <a class="brk" href="#light" data-c="3"><span class="fl" aria-hidden="true"></span><span class="tg" aria-hidden="true"></span><span class="lb"><span lang="he">האור</span><span lang="en">Light</span></span></a>
-    <a class="brk" href="#reviews" data-c="4"><span class="fl" aria-hidden="true"></span><span class="tg" aria-hidden="true"></span><span class="lb"><span lang="he">ביקורות</span><span lang="en">Reviews</span></span></a>
-    <a class="brk" href="#message" data-c="5"><span class="fl" aria-hidden="true"></span><span class="tg" aria-hidden="true"></span><span class="lb"><span lang="he">הודעה</span><span lang="en">Write</span></span></a>
-    <span class="clock tnum" data-clock aria-hidden="true">21:40</span>
+  <div class="plate">
+    <a class="sw" href="#night" data-c="0"><i aria-hidden="true"></i><span lang="he">הלילה</span><span lang="en">Night</span></a>
+    <a class="sw" href="#wall" data-c="1"><i aria-hidden="true"></i><span lang="he">בקיר</span><span lang="en">Wall</span></a>
+    <a class="sw" href="#work" data-c="2"><i aria-hidden="true"></i><span lang="he">עבודות</span><span lang="en">Work</span></a>
+    <a class="sw" href="#reviews" data-c="3"><i aria-hidden="true"></i><span lang="he">ביקורות</span><span lang="en">Reviews</span></a>
+    <a class="sw" href="#message" data-c="4"><i aria-hidden="true"></i><span lang="he">הודעה</span><span lang="en">Write</span></a>
+    <span class="clock tnum" aria-hidden="true"><small><span lang="he">הלילה</span><span lang="en">tonight</span></small><span data-clock>21:40</span></span>
   </div>
 </nav>
 
 <main id="main">
 <section class="hero circuit" id="night" data-circuit="0" data-t="1300" aria-labelledby="h1">
-  <h1 id="h1" class="lit"><span class="l l1"><span class="ltr">21<span class="colon">:</span>40.</span></span><span class="l l2"><span><span lang="he">החשמל נפל.</span><span lang="en">Power's out.</span></span></span></h1>
-  <div class="base lit">
-    <p class="lead"><span lang="he"><b>סאלח עונה.</b> אור חדש: חשמלאי מוסמך בחיפה ובקריות, פתוח 24 שעות ביממה, כל ימות השבוע. 5.0 בגוגל מ-89 ביקורות.</span><span lang="en"><b>Saleh picks up.</b> Or Hadash: a licensed electrician in Haifa and the Krayot, open 24 hours a day, every day. Rated 5.0 on Google from 89 reviews.</span></p>
-    <div class="side">
-      <p class="status" data-status><span class="dot"></span></p>
-      <div class="act">
-        <a class="btn" href="tel:+972542514004"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8Z"/></svg><span lang="he">התקשרו לסאלח</span><span lang="en">Call Saleh</span></a>
-        <a class="btn ghost" href="https://wa.me/972542514004" data-wa-plain><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
-      </div>
-      <p class="note"><span lang="he">לילה אחד על השעון, להמחשה: גללו, השעה מתקדמת והבית נדלק מעגל אחרי מעגל.</span><span lang="en">One night on the clock, for illustration: scroll, the time moves on and the house comes back circuit by circuit.</span></p>
+  <div class="bg" aria-hidden="true"><img src="img/room-lit.jpg" width="960" height="720" alt="" fetchpriority="high"></div>
+  <div class="in lit">
+    <h1 id="h1"><span lang="he">21:40. החשמל נפל.</span><span lang="en">21:40. The power's out.</span></h1>
+    <p class="lead"><span lang="he">סאלח עונה, גם עכשיו. חשמלאי מוסמך בחיפה ובקריות, 24 שעות ביממה · 5.0 בגוגל מ-89 ביקורות.</span><span lang="en">Saleh picks up, even now. A licensed electrician in Haifa and the Krayot, 24 hours a day · 5.0 on Google from 89 reviews.</span></p>
+    <div class="act">
+      <a class="btn" href="tel:+972542514004"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8Z"/></svg><span lang="he">התקשרו לסאלח</span><span lang="en">Call Saleh</span></a>
+      <a class="btn ghost" href="https://wa.me/972542514004" data-wa-plain><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
     </div>
-  </div>
-</section>
-
-<section class="dark circuit" data-circuit="0" data-t="1301" aria-labelledby="dark-h">
-  <div class="wrap grid lit">
-    <figure class="torch" data-torch>
-      <img class="dim" src="img/room-lit.jpg" width="960" height="720" alt="" aria-hidden="true" loading="lazy">
-      <img class="beam" src="img/room-lit.jpg" width="960" height="720" alt="חדר עם תאורה שקועה ומנורות קיר, מעבודות אור חדש, בחושך" loading="lazy" data-beam>
-      <figcaption><span lang="he">מעבודות אור חדש, בחושך להמחשה</span><span lang="en">An Or Hadash job, shown dark for illustration</span></figcaption>
-    </figure>
-    <div class="txt" data-r>
-      <h2 id="dark-h"><span lang="he" class="ltr">21:41</span><span lang="en" class="ltr">21:41</span><br><span lang="he">פנס של הטלפון.</span><span lang="en">Phone torch on.</span></h2>
-      <p><span lang="he">הבית חשוך. לפני שמתקשרים, מסתכלים בלוח: הוא מספר מה קרה.</span><span lang="en">The home is dark. Before you call, look at the panel: it tells you what happened.</span></p>
-      <ul class="steps">
-        <li><i class="dn" aria-hidden="true"></i><span><span lang="he">מפסק אחד למטה: נפל מעגל אחד, למשל השקעים בסלון.</span><span lang="en">One breaker down: one circuit dropped, say the living-room sockets.</span></span></li>
-        <li><i class="rcd" aria-hidden="true"></i><span><span lang="he">ממסר הפחת למטה: זרם בורח לאן שהוא לא אמור.</span><span lang="en">The residual-current switch down: current is leaking where it shouldn't.</span></span></li>
-        <li><i aria-hidden="true"></i><span><span lang="he">הרמתם והוא קפץ שוב? לא מרימים פעם שלישית. מתקשרים.</span><span lang="en">Lifted it and it tripped again? Don't try a third time. Call.</span></span></li>
-      </ul>
-      <p class="hint"><span lang="he">העבירו אצבע או עכבר על התמונה כדי להאיר אותה.</span><span lang="en">Move your finger or mouse over the photo to light it.</span></p>
-    </div>
+    <p class="status" data-status><span class="dot"></span></p>
   </div>
 </section>
 
 <section class="call24 circuit" data-circuit="0" data-t="1302" aria-labelledby="call-h">
   <div class="wrap grid lit">
     <div data-r>
-      <h2 id="call-h"><span class="ltr">21:42</span><br><span lang="he">מתקשרים. עונים.</span><span lang="en">You call. He answers.</span></h2>
-      <p><span lang="he">לפי Google, אור חדש פתוח 24 שעות ביממה, שבעה ימים בשבוע. השעון כאן הוא שעון הזמן מהלוח: כל פין לחוץ הוא רבע שעה שבה הוא פתוח, והיום כולם לחוצים.</span><span lang="en">Per Google, Or Hadash is open 24 hours a day, seven days a week. The dial here is the time switch from the panel: every pin pushed in is a quarter of an hour he's open, and today they're all in.</span></p>
+      <h2 id="call-h"><span lang="he">21:42. מתקשרים, והוא עונה.</span><span lang="en">21:42. You call. He answers.</span></h2>
+      <p class="lead"><span lang="he">פתוח 24 שעות, כל יום, לפי גוגל. כל פין בשעון דולק.</span><span lang="en">Open 24 hours, every day, per Google. Every pin on the dial is lit.</span></p>
       <p class="status" data-status><span class="dot"></span></p>
       <div class="act">
         <a class="btn" href="tel:+972542514004"><span lang="he">התקשרו לסאלח</span><span lang="en">Call Saleh</span><span class="ltr tnum">054-251-4004</span></a>
@@ -595,49 +481,39 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
       </div>
     </div>
     <div class="tsw" data-tsw>
-      <svg viewBox="0 0 520 520" role="img" aria-label="שעון זמן של 24 שעות, כל הפינים לחוצים" data-tsw-svg>
-        <rect x="40" y="40" width="440" height="440" rx="18" fill="#e6e2d9"/>
-        <rect x="58" y="58" width="404" height="404" rx="10" fill="#d4cfc4"/>
+      <svg viewBox="0 0 520 520" role="img" aria-label="שעון זמן של 24 שעות, כל הפינים דולקים" data-tsw-svg>
+        <rect x="40" y="40" width="440" height="440" rx="64" fill="#2a2019"/>
+        <rect x="56" y="56" width="408" height="408" rx="52" fill="#1d1510"/>
         <g class="dial" data-tsw-dial>
-          <circle cx="260" cy="260" r="190" fill="#f3efe6"/>
+          <circle cx="260" cy="260" r="190" fill="#35281e"/>
           <g data-tsw-pins></g>
-          <circle cx="260" cy="260" r="150" fill="#f3efe6"/>
-          <g data-tsw-nums font-family="Noto Sans Hebrew, sans-serif" font-size="17" font-weight="500" fill="#2a2925" text-anchor="middle"></g>
-          <circle cx="260" cy="260" r="58" fill="#2b2d31"/>
-          <rect x="252" y="214" width="16" height="92" rx="3" fill="#3d4046"/>
+          <circle cx="260" cy="260" r="150" fill="#2b2019"/>
+          <g data-tsw-nums font-family="Rubik, sans-serif" font-size="17" font-weight="500" fill="#e9d9c2" text-anchor="middle"></g>
+          <circle cx="260" cy="260" r="58" fill="#1a130e"/>
+          <rect x="252" y="214" width="16" height="92" rx="8" fill="#43342a"/>
         </g>
-        <path d="M260 52 l-14 -0 l14 26 l14 -26 z" fill="#d8352a"/>
-        <text x="260" y="472" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="15" fill="#4a463e" data-tsw-now></text>
+        <path d="M260 78 l-12 -22 h24 z" fill="#f2b462" stroke="#f2b462" stroke-width="4" stroke-linejoin="round"/>
+        <text x="260" y="452" text-anchor="middle" font-family="Rubik, sans-serif" font-size="15" fill="#cbb79e" data-tsw-now></text>
       </svg>
-      <p class="cap"><span lang="he">ציור של שעון זמן מכני, ככזה שמותקן בלוחות. החץ האדום מראה את השעה בחיפה עכשיו.</span><span lang="en">A drawing of a mechanical time switch, the kind fitted in panels. The red arrow shows the time in Haifa now.</span></p>
     </div>
   </div>
 </section>
 
 <section class="way circuit" data-circuit="0" data-t="1310" data-t2="1330" aria-labelledby="way-h">
-  <div class="wrap lit">
-    <div class="head" data-r>
-      <h2 id="way-h"><span class="ltr">21:50</span><br><span lang="he">בדרך. בזמן שאמר.</span><span lang="en">On his way. When he said.</span></h2>
-      <div>
-        <p><span lang="he">זה מה שהלקוחות כותבים עליו שוב ושוב: מגיע מתי שהוא אומר, ואם יש עיכוב, מעדכן. ככה נראים שני השעונים בלילה כזה (השעות להמחשה).</span><span lang="en">It's what customers write about him again and again: he comes when he says he will, and if he's running late, he tells you. On a night like this, the two clocks look like this (times are for illustration).</span></p>
-      </div>
-    </div>
-    <div class="pair" aria-label="אמר 22:10, הגיע 22:10">
-      <div><div class="spec"><b class="tnum">22:10</b></div><p class="cap"><span lang="he">אמר שיגיע</span><span lang="en">Said he'd be there</span></p></div>
-      <div><div class="spec b2"><b class="tnum">22:10</b></div><p class="cap"><span lang="he">הגיע</span><span lang="en">Arrived</span></p></div>
-    </div>
-    <div class="quotes" data-r>
-      <blockquote><p lang="he">"מגיע מתי שהוא אומר, אם יש לו עיכוב הוא מעדכן."</p><p lang="en">“He comes when he says he will; if he's running late, he lets you know.”</p><cite>Adi Lotem · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></cite></blockquote>
-      <blockquote><p lang="he">"תמיד מגיע בזמן, עושה עבודה מצוינת ומחיר הגון."</p><p lang="en">“Always on time, does excellent work at an honest price.”</p><cite>Shirley Aharonov · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></cite></blockquote>
-      <blockquote><p lang="he">"עמד בזמנים שהתחייב."</p><p lang="en">“He kept to the times he promised.”</p><cite><bdi>רינת שאבי</bdi> · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review (translated)</span></cite></blockquote>
+  <div class="wrap lit" data-r>
+    <h2 id="way-h"><span lang="he">21:50. בדרך, בזמן שאמר.</span><span lang="en">21:50. On his way, when he said.</span></h2>
+    <p class="lead"><span lang="he">ואם יש עיכוב, הוא מעדכן. ככה כותבים עליו שוב ושוב.</span><span lang="en">And if he's running late, he tells you. People write it again and again.</span></p>
+    <div class="pair" role="img" aria-label="אמר 22:10, הגיע 22:10, להמחשה">
+      <div><b class="tnum">22:10</b><span><span lang="he">אמר שיגיע</span><span lang="en">Said he'd come</span></span></div>
+      <div><b class="tnum">22:10</b><span><span lang="he">הגיע</span><span lang="en">Arrived</span></span></div>
     </div>
   </div>
 </section>
 
 <section class="wall circuit" id="wall" data-circuit="1" data-t="1335" data-t2="1375" aria-labelledby="wall-h">
   <div class="intro lit" data-r>
-    <h2 id="wall-h"><span class="ltr">22:15</span><br><span lang="he">מה קרה בתוך הקיר?</span><span lang="en">What happened in the wall?</span></h2>
-    <p><span lang="he"><b>המחשה בתלת-ממד, לא עבודה אמיתית:</b> תקלה נפוצה, דרך המסך של מכשיר הבדיקה. חיבור בקופסת הסתעפות שרק נשזר ולופף בבידוד. מה קרה ב-21:40, ואיך מאתרים ומתקנים. <span class="if-motion">גללו, או סובבו את הבורר.</span><span class="if-still">עברו בין השלבים בבורר או בכפתורים.</span></span><span lang="en"><b>A 3D illustration, not a real job:</b> a common fault, through the tester's screen. A junction-box joint that was only twisted and taped. What happened at 21:40, and how it's found and fixed. <span class="if-motion">Scroll, or turn the selector.</span><span class="if-still">Step through with the selector or the keys.</span></span></p>
+    <h2 id="wall-h"><span lang="he">22:15. מה קרה בתוך הקיר?</span><span lang="en">22:15. What happened in the wall?</span></h2>
+    <p class="lead"><span lang="he">תקלה נפוצה בתלת-ממד, דרך מסך מכשיר הבדיקה. <span class="if-motion">גללו, או סובבו את הבורר.</span><span class="if-still">עברו בין השלבים בבורר או בכפתורים.</span></span><span lang="en">A common fault in 3D, through the tester's screen. <span class="if-motion">Scroll, or turn the selector.</span><span class="if-still">Step through with the selector or the keys.</span></span></p>
   </div>
   <div class="track" data-track>
     <div class="stagewrap">
@@ -676,111 +552,84 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
       </div>
     </div>
   </div>
-  <div class="after lit" data-r>
-    <h3><span lang="he">למה המפסק קפץ, ולא הקיר נשרף?</span><span lang="en">Why did the breaker trip, and the wall not burn?</span></h3>
-    <p><span lang="he">חיבור רופף מתחמם, כי הזרם נדחק דרך מגע קטן. כשהבידוד נמס והפאזה נוגעת באפס, הזרם קופץ בבת אחת והמפסק מנתק תוך שבריר שנייה. זה התפקיד שלו. התיקון הוא לא להרים אותו שוב ושוב, אלא למצוא את החיבור, לחתוך את החלק השרוף, לחבר במחברים תקינים ולבדוק לפני שמחזירים זרם. המכשיר כאן מצויר להמחשה; התלת-ממד עם טקסטורות של Poly Haven (CC0).</span><span lang="en">A loose joint heats up because the current squeezes through a tiny contact. When the insulation melts and live touches neutral, the current jumps at once and the breaker cuts it in a fraction of a second. That's its job. The fix isn't lifting it again and again, but finding the joint, cutting out the burnt part, reconnecting with proper connectors and testing before the power goes back on. The tester here is drawn for illustration; the 3D uses Poly Haven textures (CC0).</span></p>
-  </div>
 </section>
 
-<section class="panel circuit" id="panel" data-circuit="2" data-t="1385" data-t2="1405" aria-labelledby="panel-h">
+<section class="work circuit" id="work" data-circuit="2" data-t="1385" data-t2="1405" aria-labelledby="work-h">
   <div class="wrap lit">
     <div class="head" data-r>
-      <h2 id="panel-h"><span class="ltr">23:05</span><br><span lang="he">לוח חדש, מעגל אחרי מעגל.</span><span lang="en">A new panel, circuit by circuit.</span></h2>
-      <p><span lang="he">כשהלוח ישן, לא מטליאים: מחליפים לוח שלם, ובודקים כל מעגל לפני שמחזירים זרם. אלה העבודות שמזמינים מסאלח, כל אחת על המפסק שלה.</span><span lang="en">When the panel is old, you don't patch it: you replace the whole panel and test every circuit before the power goes back. These are the jobs people call Saleh for, each on its own breaker.</span></p>
+      <h2 id="work-h"><span lang="he">23:05. מעגל אחרי מעגל.</span><span lang="en">23:05. Circuit by circuit.</span></h2>
+      <p class="lead"><span lang="he">לוחות, שקעים, תאורה ותשתית. עבודות של סאלח, מהתמונות שלו בגוגל.</span><span lang="en">Panels, sockets, lighting and wiring. Saleh's own jobs, from his Google photos.</span></p>
     </div>
-    <div class="body">
-      <div class="drawing" data-drawing>
-        <svg viewBox="0 0 640 560" role="img" aria-label="ציור טכני של לוח חשמל: מפסק ראשי, ממסר פחת ושישה מפסקים, אחד לכל סוג עבודה" data-panel-svg></svg>
-        <p class="cap"><span lang="he">ציור טכני להמחשה. המפסקים עולים אחד אחד כשהחלק נדלק.</span><span lang="en">A technical drawing for illustration. The breakers go up one by one as this part lights.</span></p>
-      </div>
-      <ul class="svc">
-        <li data-svc="0"><h3><span lang="he">איתור קצרים ותקלות</span><span lang="en">Finding shorts and faults</span></h3><span class="rate">C16</span><p><span lang="he">מפסק שקופץ, חלק מהבית בלי חשמל, שקע שמתחמם. מאתרים עם מכשיר בדיקה, לא בניחוש. ("איתר כמה קצרים בבית ותיקן הכל", <bdi>יוחאי שטרסברג</bdi>)</span><span lang="en">A breaker that trips, part of the home without power, a socket that runs hot. Found with a tester, not by guessing. (“Found several shorts in the house and fixed everything”, <bdi>יוחאי שטרסברג</bdi>)</span></p></li>
-        <li data-svc="1"><h3><span lang="he">החלפת לוח חשמל</span><span lang="en">Replacing the panel</span></h3><span class="rate">40A</span><p><span lang="he">לוח שלם במקום הישן, עם בדיקה של כל מעגל. ("החליף לי לוח חשמל שלם", יוחאי שטרסברג) בתמונה: לוח בבדיקה, מתוך התמונות של אור חדש בגוגל.</span><span lang="en">A whole new panel in place of the old one, every circuit tested. (“He replaced a whole electrical panel for me”, <bdi>יוחאי שטרסברג</bdi>) Pictured: a panel under test, from Or Hadash's Google photos.</span></p>
-          <figure data-open><img src="img/panel-test.jpg" alt="לוח חשמל פתוח עם מפסקים ומכשיר בדיקה מחובר" width="585" height="1300" loading="lazy" style="object-position:50% 38%"></figure></li>
-        <li data-svc="2"><h3><span lang="he">שקעים, מתגים וגופי תאורה</span><span lang="en">Sockets, switches and light fittings</span></h3><span class="rate">C10</span><p><span lang="he">החלפה של כל האביזרים בבית בבת אחת. ("החלפת כל השקעים והמתגים וכל גופי התאורה", רינת שאבי)</span><span lang="en">Every fitting in the home, changed in one go. (“Replacing all the sockets, switches and light fittings”, <bdi>רינת שאבי</bdi>)</span></p></li>
-        <li data-svc="3"><h3><span lang="he">תאורה שקועה, מנורות קיר ומאווררי תקרה</span><span lang="en">Recessed lights, wall lights and ceiling fans</span></h3><span class="rate">C10</span><p><span lang="he">בתוך הבית ובפרגולה, כמו בתמונות של העבודות שלו בהמשך.</span><span lang="en">Indoors and on pergolas, like the photos of his work further down.</span></p></li>
-        <li data-svc="4"><h3><span lang="he">שעון לדוד</span><span lang="en">Water-heater timer</span></h3><span class="rate">C20</span><p><span lang="he">מפסק עם שעון שמכבה את הדוד לבד. ("התקין את השעון לדוד בצורה מושלמת", Rafael Fiszbajn)</span><span lang="en">A timer switch that turns the heater off on its own. (“He installed the water-heater timer perfectly”, Rafael Fiszbajn)</span></p></li>
-        <li data-svc="5"><h3><span lang="he">תשתית חשמל בשלד</span><span lang="en">Wiring in new builds</span></h3><span class="rate">C16</span><p><span lang="he">שרוולים וקופסאות על הבלוקים, לפני הטיח. בתמונה: מתוך התמונות של אור חדש בגוגל.</span><span lang="en">Conduits and boxes on the blocks, before the plaster. Pictured: from Or Hadash's Google photos.</span></p>
-          <figure data-open><img src="img/conduits.jpg" alt="שרוולים ירוקים וקופסאות חשמל על קיר בלוקים לפני טיח" width="865" height="900" loading="lazy"></figure></li>
-      </ul>
+    <div class="shots" data-open>
+      <figure class="shot"><img src="img/panel-test.jpg" alt="לוח חשמל פתוח עם מפסקים ומכשיר בדיקה מחובר" width="585" height="1300" loading="lazy" style="object-position:50% 40%"><figcaption><span lang="he">החלפת לוח, ובדיקה</span><span lang="en">A new panel, tested</span></figcaption></figure>
+      <figure class="shot"><img src="img/conduits.jpg" alt="שרוולים ירוקים וקופסאות חשמל על קיר בלוקים לפני טיח" width="865" height="900" loading="lazy"><figcaption><span lang="he">תשתית חשמל בשלד</span><span lang="en">Wiring a new build</span></figcaption></figure>
+      <figure class="shot"><img src="img/fan-view.jpg" alt="מאוורר תקרה עם גוף תאורה מעל מרפסת סגורה בזכוכית" width="750" height="1000" loading="lazy" style="object-position:50% 40%"><figcaption><span lang="he">מאוורר תקרה עם תאורה</span><span lang="en">A ceiling fan with a light</span></figcaption></figure>
+      <figure class="shot"><img src="img/pergola.jpg" alt="פרגולה עם גוף תאורה עגול דולק ומאוורר תקרה" width="676" height="1200" loading="lazy" style="object-position:50% 18%"><figcaption><span lang="he">תאורה בפרגולה</span><span lang="en">Pergola lighting</span></figcaption></figure>
+      <figure class="shot"><img src="img/channels.jpg" alt="קיר בלוקים עם תעלות חשמל סגורות בטיח וקופסאות" width="750" height="1000" loading="lazy" style="object-position:50% 35%"><figcaption><span lang="he">שקעים ומתגים, לפני הטיח</span><span lang="en">Sockets and switches, before plaster</span></figcaption></figure>
     </div>
   </div>
 </section>
 
-<section class="light circuit" id="light" data-circuit="3" data-t="1411" aria-labelledby="light-h">
-  <div class="wrap lit">
-    <h2 id="light-h"><span class="ltr">23:31</span><br><span lang="he">האור חוזר.</span><span lang="en">The light comes back.</span></h2>
-    <div class="grid">
-      <figure class="room" data-room>
-        <img class="dim" src="img/room-lit.jpg" width="960" height="720" alt="" aria-hidden="true" loading="lazy">
-        <img class="on" src="img/room-lit.jpg" width="960" height="720" alt="חדר עם תאורה שקועה בתקרה, פס לד ומנורות קיר דולקות, מעבודות אור חדש" loading="lazy">
-        <figcaption><span lang="he">אותו חדר, דולק. מתוך התמונות של אור חדש בגוגל.</span><span lang="en">The same room, lit. From Or Hadash's Google photos.</span></figcaption>
-      </figure>
-      <div class="slip" data-r>
-        <div>
-          <h3><span lang="he">דוח הלילה</span><span lang="en">The night's job sheet</span></h3>
-          <p class="sub"><span lang="he">לילה טיפוסי, להמחשה</span><span lang="en">A typical night, for illustration</span></p>
-          <ol>
-            <li><span class="w"><span lang="he">החשמל נפל</span><span lang="en">Power out</span></span><span class="dots"></span><span class="tm">21:40</span></li>
-            <li><span class="w"><span lang="he">שיחה לסאלח</span><span lang="en">Call to Saleh</span></span><span class="dots"></span><span class="tm">21:42</span></li>
-            <li><span class="w"><span lang="he">מגיע, כמו שאמר</span><span lang="en">Arrives, as he said</span></span><span class="dots"></span><span class="tm">22:10</span></li>
-            <li><span class="w"><span lang="he">בדיקת בידוד, נמצא הקצר</span><span lang="en">Insulation test, short found</span></span><span class="dots"></span><span class="tm">22:20</span></li>
-            <li><span class="w"><span lang="he">חיבור שרוף הוחלף</span><span lang="en">Burnt joint replaced</span></span><span class="dots"></span><span class="tm">22:45</span></li>
-            <li><span class="w"><span lang="he">לוח חדש מותקן</span><span lang="en">New panel fitted</span></span><span class="dots"></span><span class="tm">23:05</span></li>
-            <li><span class="w"><span lang="he">כל מעגל נבדק</span><span lang="en">Every circuit tested</span></span><span class="dots"></span><span class="tm">23:25</span></li>
-          </ol>
-        </div>
-        <p class="total"><span><span lang="he">האור חזר</span><span lang="en">Lights back on</span></span><span class="ltr tnum">23:31</span></p>
+<section class="light circuit" id="light" data-circuit="2" data-t="1411" aria-labelledby="light-h">
+  <div class="wrap grid lit">
+    <figure class="room" data-room>
+      <img class="dim" src="img/room-lit.jpg" width="960" height="720" alt="" aria-hidden="true" loading="lazy">
+      <img class="on" src="img/room-lit.jpg" width="960" height="720" alt="חדר עם תאורה שקועה בתקרה, פס לד ומנורות קיר דולקות, מעבודות אור חדש" loading="lazy">
+      <span class="pool" aria-hidden="true"></span>
+      <figcaption><span lang="he">מעבודות אור חדש, מגוגל</span><span lang="en">An Or Hadash job, from Google</span></figcaption>
+    </figure>
+    <div data-r>
+      <h2 id="light-h"><span lang="he">23:31. האור חוזר.</span><span lang="en">23:31. The light comes back.</span></h2>
+      <p class="lead"><span lang="he">סובבו את המעמעם. אותו חדר, מעבודה של סאלח.</span><span lang="en">Turn the dimmer. The same room, from one of Saleh's jobs.</span></p>
+      <div class="wallplate">
+        <div class="knob-wrap" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100" aria-valuetext="100%" aria-label="מעמעם" data-dimmer><span class="ring" aria-hidden="true"></span><span class="kn" aria-hidden="true"></span></div>
+        <p class="rd2"><b class="tnum" data-dim-v>100%</b><span lang="he">האור בחדר</span><span lang="en">Room light</span></p>
       </div>
     </div>
-    <div class="row">
-      <figure class="r1" data-open><img src="img/fan-view.jpg" alt="מאוורר תקרה עם גוף תאורה מעל מרפסת סגורה בזכוכית" width="750" height="1000" loading="lazy" style="object-position:50% 45%"><figcaption><span lang="he">מאוורר תקרה עם תאורה, במרפסת</span><span lang="en">A ceiling fan with a light, on a balcony</span></figcaption></figure>
-      <figure class="r2" data-open><img src="img/pergola.jpg" alt="פרגולה עם גוף תאורה עגול דולק ומאוורר תקרה" width="676" height="1200" loading="lazy" style="object-position:50% 20%"><figcaption><span lang="he">פרגולה: תאורה ומאוורר</span><span lang="en">A pergola: lights and a fan</span></figcaption></figure>
-      <figure class="r3" data-open><img src="img/channels.jpg" alt="קיר בלוקים עם תעלות חשמל סגורות בטיח וקופסאות" width="750" height="1000" loading="lazy" style="object-position:50% 40%"><figcaption><span lang="he">מאחורי הקיר: התעלות סגורות בטיח, הקופסאות מחכות לאביזרים</span><span lang="en">Behind the wall: chases plastered, boxes waiting for fittings</span></figcaption></figure>
-    </div>
-    <p class="src"><span lang="he">כל התמונות בחלק הזה מעבודות של אור חדש, מתוך הפרופיל בגוגל.</span><span lang="en">Every photo in this part is from Or Hadash's work, from their Google profile.</span></p>
   </div>
 </section>
 
-<section class="reviews circuit" id="reviews" data-circuit="4" data-t="1411" aria-labelledby="rev-h">
+<section class="reviews circuit" id="reviews" data-circuit="3" data-t="1411" aria-labelledby="rev-h">
   <div class="wrap lit">
-    <div class="top5" data-r>
-      <p class="big tnum" aria-hidden="true">5.0</p>
-      <div><h2 id="rev-h"><span lang="he">מה כותבים עליו</span><span lang="en">What people write</span></h2><p><span lang="he">5.0 בגוגל מ-89 ביקורות. חמש מהן, במילים של הכותבים:</span><span lang="en">5.0 on Google from 89 reviews. Five of them, in their writers' words:</span></p></div>
+    <div data-r>
+      <h2 id="rev-h"><span lang="he">5.0 בגוגל, מ-89 ביקורות.</span><span lang="en">5.0 on Google, from 89 reviews.</span></h2>
+      <p class="lead"><span lang="he">שלוש מהן, במילים של הכותבים.</span><span lang="en">Three of them, in their writers' words.</span></p>
     </div>
-    <div class="grid">
-      <div class="letter" data-r>
-        <p class="open" lang="he">ממליץ בחום על אור חדש, החשמלאי מקצוען.</p><p class="open" lang="en">I warmly recommend Or Hadash, the electrician is a pro.</p>
-        <p lang="he">החליף לי לוח חשמל שלם, איתר כמה קצרים בבית ותיקן הכל תוך פחות משעתיים. עבודה נקייה, מקצועית וברמה גבוהה מאוד.</p><p lang="en">He replaced a whole electrical panel for me, found several short circuits in the house and fixed everything in under two hours. Clean, professional, very high-standard work.</p>
-        <p lang="he">פשוט בא, פתר את כל הבעיות ויצא. נדיר למצוא בעלי מקצוע כאלה היום. ממליץ מכל הלב.</p><p lang="en">He just came, solved every problem and left. It's rare to find tradespeople like that today. Recommended with all my heart.</p>
-        <p class="sign">יוחאי שטרסברג<span><span lang="he">ביקורת בגוגל, 5 כוכבים</span><span lang="en">Google review, 5 stars (translated)</span></span></p>
+    <div class="grid" data-r>
+      <blockquote class="quote big">
+        <p lang="he">"החליף לי לוח חשמל שלם, איתר כמה קצרים בבית ותיקן הכל תוך פחות משעתיים. עבודה נקייה, מקצועית וברמה גבוהה מאוד."</p><p lang="en">“He replaced a whole electrical panel for me, found several short circuits in the house and fixed everything in under two hours. Clean, professional, very high-standard work.”</p>
+        <footer><span class="stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.3 5.7.7-4.2 4 1.1 5.7L10 14.7l-5.1 2.8 1.1-5.7-4.2-4 5.7-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.3 5.7.7-4.2 4 1.1 5.7L10 14.7l-5.1 2.8 1.1-5.7-4.2-4 5.7-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.3 5.7.7-4.2 4 1.1 5.7L10 14.7l-5.1 2.8 1.1-5.7-4.2-4 5.7-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.3 5.7.7-4.2 4 1.1 5.7L10 14.7l-5.1 2.8 1.1-5.7-4.2-4 5.7-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.3 5.7.7-4.2 4 1.1 5.7L10 14.7l-5.1 2.8 1.1-5.7-4.2-4 5.7-.7z"/></svg></span><span><b><bdi>יוחאי שטרסברג</bdi></b><span lang="he">ביקורת בגוגל, 5 כוכבים</span><span lang="en">Google review, 5 stars (translated)</span></span></footer>
+      </blockquote>
+      <div class="side">
+        <blockquote class="quote">
+          <p lang="he">"סופר מקצועי, מגיע מתי שהוא אומר, אם יש לו עיכוב הוא מעדכן. העבודה שלו נהדרת והגישה שלו מאוד נעימה."</p><p lang="en">“Super professional. He comes when he says he will, and if he's running late he lets you know. His work is great and he's very pleasant to deal with.”</p>
+          <footer><span class="stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.3 5.7.7-4.2 4 1.1 5.7L10 14.7l-5.1 2.8 1.1-5.7-4.2-4 5.7-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.3 5.7.7-4.2 4 1.1 5.7L10 14.7l-5.1 2.8 1.1-5.7-4.2-4 5.7-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.3 5.7.7-4.2 4 1.1 5.7L10 14.7l-5.1 2.8 1.1-5.7-4.2-4 5.7-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.3 5.7.7-4.2 4 1.1 5.7L10 14.7l-5.1 2.8 1.1-5.7-4.2-4 5.7-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.3 5.7.7-4.2 4 1.1 5.7L10 14.7l-5.1 2.8 1.1-5.7-4.2-4 5.7-.7z"/></svg></span><span><b>Adi Lotem</b><span lang="he">ביקורת בגוגל, 5 כוכבים</span><span lang="en">Google review, 5 stars (translated)</span></span></footer>
+        </blockquote>
+        <blockquote class="quote">
+          <p lang="he">"הגיע בזמן, עבד במהירות ובמקצועיות, מאוד מסודר ונקי. התקין את השעון לדוד בצורה מושלמת."</p><p lang="en">“Arrived on time, worked quickly and professionally, very tidy and clean. He installed the water-heater timer perfectly.”</p>
+          <footer><span class="stars" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.3 5.7.7-4.2 4 1.1 5.7L10 14.7l-5.1 2.8 1.1-5.7-4.2-4 5.7-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.3 5.7.7-4.2 4 1.1 5.7L10 14.7l-5.1 2.8 1.1-5.7-4.2-4 5.7-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.3 5.7.7-4.2 4 1.1 5.7L10 14.7l-5.1 2.8 1.1-5.7-4.2-4 5.7-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.3 5.7.7-4.2 4 1.1 5.7L10 14.7l-5.1 2.8 1.1-5.7-4.2-4 5.7-.7z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1.8l2.5 5.3 5.7.7-4.2 4 1.1 5.7L10 14.7l-5.1 2.8 1.1-5.7-4.2-4 5.7-.7z"/></svg></span><span><b>Rafael Fiszbajn</b><span lang="he">ביקורת בגוגל, 5 כוכבים</span><span lang="en">Google review, 5 stars (translated)</span></span></footer>
+        </blockquote>
       </div>
-      <ul class="shorts" data-r>
-        <li><blockquote><p lang="he">"סלאח מאור חדש, הוא מקסים, סופר מקצועי, מגיע מתי שהוא אומר, אם יש לו עיכוב הוא מעדכן. העבודה שלו נהדרת, המחירים סבירים והגישה שלו מאוד נעימה."</p><p lang="en">“Salah from Or Hadash is lovely and super professional. He comes when he says he will, and if he's running late he lets you know. His work is great, the prices are fair and he's very pleasant to deal with.”</p><cite>Adi Lotem · <span lang="he">5 כוכבים</span><span lang="en">5 stars (translated)</span></cite></blockquote></li>
-        <li><blockquote><p lang="he">"סאלח חשמלאי מצוין! תיקן אצלי כמה פעמים. תמיד מגיע בזמן, עושה עבודה מצוינת ומחיר הגון."</p><p lang="en">“Saleh is an excellent electrician! He has done repairs for me several times. Always on time, excellent work, an honest price.”</p><cite>Shirley Aharonov · <span lang="he">5 כוכבים</span><span lang="en">5 stars (translated)</span></cite></blockquote></li>
-        <li><blockquote><p lang="he">"הגיע בזמן, עבד במהירות ובמקצועיות, מאוד מסודר ונקי בעבודה שלו, ואדיב ונעים בהתנהלות. התקין את השעון לדוד בצורה מושלמת."</p><p lang="en">“Arrived on time, worked quickly and professionally, very tidy and clean, courteous and pleasant. He installed the water-heater timer perfectly.”</p><cite>Rafael Fiszbajn · <span lang="he">5 כוכבים</span><span lang="en">5 stars (translated)</span></cite></blockquote></li>
-        <li><blockquote><p lang="he">"עשה אצלי עבודה לא קטנה של החלפת כל השקעים והמתגים וכל גופי התאורה. תקשורתי ואמין, גם תיקן דברים מעבר ולא גבה תשלום. עמד בזמנים שהתחייב."</p><p lang="en">“He did quite a big job for me, replacing all the sockets, switches and light fittings. Communicative and reliable, he even fixed extra things without charging. He kept to the times he promised.”</p><cite><bdi>רינת שאבי</bdi> · <span lang="he">5 כוכבים</span><span lang="en">5 stars (translated)</span></cite></blockquote></li>
-      </ul>
     </div>
     <p class="more"><a href="https://maps.google.com/?cid=14084775805220384212" target="_blank" rel="noopener"><span lang="he">כל 89 הביקורות בגוגל</span><span lang="en">All 89 reviews on Google</span></a></p>
   </div>
 </section>
 
-<section class="msg circuit" id="message" data-circuit="5" data-t="1411" aria-labelledby="msg-h">
+<section class="msg circuit" id="message" data-circuit="4" data-t="1411" aria-labelledby="msg-h">
   <div class="wrap grid lit">
-    <div class="txt" data-r>
-      <h2 id="msg-h"><span lang="he">מה קרה? הורידו את המפסק.</span><span lang="en">What's wrong? Flip its breaker.</span></h2>
-      <p><span lang="he">הורידו את המפסקים של מה שלא עובד, בחרו מתי, וההודעה לסאלח נכתבת על התווית. היא נשלחת מהוואטסאפ שלכם, ואפשר לשנות אותה לפני השליחה.</span><span lang="en">Flip down the breakers for what isn't working, choose when, and the message to Saleh writes itself on the label. It goes from your own WhatsApp, and you can edit it before sending.</span></p>
+    <div data-r>
+      <h2 id="msg-h"><span lang="he">מה לא עובד?</span><span lang="en">What isn't working?</span></h2>
+      <p class="lead"><span lang="he">הדליקו את מה שמתאים, וההודעה לסאלח נכתבת לבד. נשלחת מהוואטסאפ שלכם.</span><span lang="en">Switch on what fits, and the message to Saleh writes itself. It goes from your own WhatsApp.</span></p>
     </div>
     <form class="board" id="composer" onsubmit="return false" data-ui>
-      <p class="rowlab" id="flips-l"><span lang="he">מה לא עובד</span><span lang="en">What isn't working</span></p>
-      <div class="flips" role="group" aria-labelledby="flips-l">
-        <button type="button" class="flip" data-p="trip" aria-pressed="false"><span class="fl" aria-hidden="true"></span><span class="tg" aria-hidden="true"></span><span class="tx"><span lang="he">מפסק קופץ</span><span lang="en">A breaker trips</span></span></button>
-        <button type="button" class="flip" data-p="nopower" aria-pressed="false"><span class="fl" aria-hidden="true"></span><span class="tg" aria-hidden="true"></span><span class="tx"><span lang="he">אין חשמל בחלק מהבית</span><span lang="en">No power in part of the home</span></span></button>
-        <button type="button" class="flip" data-p="burn" aria-pressed="false"><span class="fl" aria-hidden="true"></span><span class="tg" aria-hidden="true"></span><span class="tx"><span lang="he">ריח שרוף או שקע חם</span><span lang="en">Burning smell, hot socket</span></span></button>
-        <button type="button" class="flip" data-p="panel" aria-pressed="false"><span class="fl" aria-hidden="true"></span><span class="tg" aria-hidden="true"></span><span class="tx"><span lang="he">החלפת לוח</span><span lang="en">Replace the panel</span></span></button>
-        <button type="button" class="flip" data-p="fittings" aria-pressed="false"><span class="fl" aria-hidden="true"></span><span class="tg" aria-hidden="true"></span><span class="tx"><span lang="he">שקעים, מתגים, תאורה</span><span lang="en">Sockets, switches, lights</span></span></button>
-        <button type="button" class="flip" data-p="boiler" aria-pressed="false"><span class="fl" aria-hidden="true"></span><span class="tg" aria-hidden="true"></span><span class="tx"><span lang="he">שעון לדוד</span><span lang="en">Water-heater timer</span></span></button>
+      <p class="rowlab" id="rks-l"><span lang="he">מה קורה</span><span lang="en">What's going on</span></p>
+      <div class="rks" role="group" aria-labelledby="rks-l">
+        <button type="button" class="rk" data-p="trip" aria-pressed="false"><span class="pd" aria-hidden="true"></span><span class="tx"><span lang="he">מפסק קופץ</span><span lang="en">A breaker trips</span></span></button>
+        <button type="button" class="rk" data-p="nopower" aria-pressed="false"><span class="pd" aria-hidden="true"></span><span class="tx"><span lang="he">אין חשמל בחלק מהבית</span><span lang="en">No power in part of the home</span></span></button>
+        <button type="button" class="rk" data-p="burn" aria-pressed="false"><span class="pd" aria-hidden="true"></span><span class="tx"><span lang="he">ריח שרוף או שקע חם</span><span lang="en">Burning smell, hot socket</span></span></button>
+        <button type="button" class="rk" data-p="panel" aria-pressed="false"><span class="pd" aria-hidden="true"></span><span class="tx"><span lang="he">החלפת לוח</span><span lang="en">Replace the panel</span></span></button>
+        <button type="button" class="rk" data-p="fittings" aria-pressed="false"><span class="pd" aria-hidden="true"></span><span class="tx"><span lang="he">שקעים, מתגים, תאורה</span><span lang="en">Sockets, switches, lights</span></span></button>
+        <button type="button" class="rk" data-p="boiler" aria-pressed="false"><span class="pd" aria-hidden="true"></span><span class="tx"><span lang="he">שעון לדוד</span><span lang="en">Water-heater timer</span></span></button>
       </div>
       <fieldset style="border:0;margin:0;padding:0;min-width:0">
         <legend class="sr"><span lang="he">מתי</span><span lang="en">When</span></legend>
@@ -796,58 +645,43 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
         <label class="sr" for="c-w"><span lang="he">איפה</span><span lang="en">Where</span></label>
         <input id="c-w" name="where" type="text" autocomplete="address-level2" enterkeyhint="done" data-ph-he="שכונה או עיר, למשל הדר…" data-ph-en="Area or town, e.g. Hadar…" placeholder="שכונה או עיר, למשל הדר…">
       </div>
-      <p class="label" aria-live="polite"><span class="k"><span lang="he">ההודעה</span><span lang="en">The message</span></span><span data-preview></span></p>
+      <p class="label" aria-live="polite"><span class="sr"><span lang="he">ההודעה</span><span lang="en">The message</span></span><span data-preview></span></p>
       <a class="btn send" href="https://wa.me/972542514004" data-send><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg><span lang="he">שלחו לסאלח בוואטסאפ</span><span lang="en">Send to Saleh on WhatsApp</span></a>
     </form>
   </div>
 </section>
 
-<section class="find circuit" id="find" data-circuit="5" data-t="1411" aria-labelledby="find-h">
-  <div class="wrap lit">
-    <h2 id="find-h" class="sr"><span lang="he">איפה ומתי</span><span lang="en">Where and when</span></h2>
-    <div class="rows" data-r>
-      <a href="https://www.google.com/maps/search/?api=1&query=%D7%97%D7%99%D7%A8%D7%9D%20181%2C%20%D7%97%D7%99%D7%A4%D7%94" target="_blank" rel="noopener"><span><span lang="he">חירם 181, חיפה</span><span lang="en">181 Hiram St, Haifa</span></span><small><span lang="he">כתובת · חיפה והקריות</span><span lang="en">Address · Haifa and the Krayot</span></small></a>
-      <div><span><span lang="he">24 שעות, כל יום</span><span lang="en">24 hours, every day</span></span><small class="status" data-status><span class="dot"></span></small></div>
-      <a href="tel:+972542514004"><span class="ltr tnum">054-251-4004</span><small><span lang="he">טלפון · סאלח</span><span lang="en">Phone · Saleh</span></small></a>
-      <a class="wa" href="https://wa.me/972542514004" data-wa-plain><span><span lang="he">וואטסאפ לסאלח</span><span lang="en">WhatsApp Saleh</span></span><small><span lang="he">הודעה ישירה</span><span lang="en">Direct message</span></small></a>
+<section class="find circuit" id="find" data-circuit="4" data-t="1411" aria-labelledby="find-h">
+  <div class="wrap grid lit">
+    <div data-r>
+      <h2 id="find-h"><span lang="he">חירם 181, חיפה.</span><span lang="en">181 Hiram St, Haifa.</span></h2>
+      <p class="lead"><span lang="he">בחיפה ובקריות. 24 שעות, כל יום.</span><span lang="en">Haifa and the Krayot. 24 hours, every day.</span></p>
+      <p class="status" data-status><span class="dot"></span></p>
+      <div class="act find-act">
+        <a class="btn" href="tel:+972542514004"><span class="ltr tnum">054-251-4004</span></a>
+        <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=%D7%97%D7%99%D7%A8%D7%9D%20181%2C%20%D7%97%D7%99%D7%A4%D7%94" target="_blank" rel="noopener"><span lang="he">ניווט</span><span lang="en">Directions</span></a>
+      </div>
     </div>
     <div class="map"><iframe title="מפה: חירם 181, חיפה" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=%D7%97%D7%99%D7%A8%D7%9D%20181%2C%20%D7%97%D7%99%D7%A4%D7%94&output=embed"></iframe></div>
   </div>
 </section>
 </main>
 
-<footer class="door">
+<footer class="foot">
   <div class="in">
-    <div class="card">
-      <div class="ttl">
-        <h2><span lang="he">רשימת מעגלים · אור חדש</span><span lang="en">Circuit list · Or Hadash</span></h2>
-        <svg class="hazard" viewBox="0 0 64 56" role="img" aria-label="סכנת חשמל"><path d="M32 3 61 53H3Z" fill="#f2c400"/><path d="M32 9 55 49H9Z" fill="none" stroke="#1d1b17" stroke-width="3"/><path d="M35 18 25 34h7l-4 12 11-17h-7l4-11Z" fill="#1d1b17"/></svg>
-      </div>
-      <table>
-        <thead><tr><th scope="col"><span lang="he">מעגל</span><span lang="en">Circuit</span></th><th scope="col"><span lang="he">מה</span><span lang="en">What</span></th><th scope="col"><span lang="he">איפה</span><span lang="en">Where</span></th></tr></thead>
-        <tbody>
-          <tr><td>1</td><td><span lang="he">טלפון</span><span lang="en">Phone</span></td><td><a href="tel:+972542514004" class="ltr">054-251-4004</a></td></tr>
-          <tr><td>2</td><td><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></td><td><a href="https://wa.me/972542514004" data-wa-plain><span lang="he">הודעה לסאלח</span><span lang="en">Message Saleh</span></a></td></tr>
-          <tr><td>3</td><td><span lang="he">כתובת</span><span lang="en">Address</span></td><td><span lang="he">חירם 181, חיפה</span><span lang="en">181 Hiram St, Haifa</span></td></tr>
-          <tr><td>4</td><td><span lang="he">שעות</span><span lang="en">Hours</span></td><td><span lang="he">24/7, לפי Google</span><span lang="en">24/7, per Google</span></td></tr>
-          <tr><td>5</td><td><span lang="he">ביקורות</span><span lang="en">Reviews</span></td><td><a href="https://maps.google.com/?cid=14084775805220384212" target="_blank" rel="noopener"><span lang="he">5.0 מ-89, בגוגל</span><span lang="en">5.0 from 89, on Google</span></a></td></tr>
-          <tr><td>6</td><td><span lang="he">חזרה</span><span lang="en">Back</span></td><td><a href="#night"><span lang="he">לתחילת הלילה</span><span lang="en">To the start of the night</span></a></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="credits">
-      <p><span lang="he">אור חדש, חשמלאי מוסמך בחיפה ובקריות (כפי שמופיע בגוגל). השם המלא בגוגל: "חשמלאי מוסמך חשמלאי בקריות חשמלאי בחיפה ובצפון . אור חדש".</span><span lang="en">Or Hadash, licensed electrician in Haifa and the Krayot (as listed on Google). Full Google listing name: "חשמלאי מוסמך חשמלאי בקריות חשמלאי בחיפה ובצפון . אור חדש".</span></p>
-      <p><span lang="he">צילומי העבודות: מתוך הפרופיל של אור חדש במפות Google (תורמי Google Maps). טקסטורות התלת-ממד: Poly Haven, CC0. מכשיר הבדיקה, שעון הזמן ולוח החשמל: ציורים להמחשה. הלילה והשעות בעמוד: המחשה של לילה טיפוסי, לא אירוע אמיתי.</span><span lang="en">Work photos: from Or Hadash's Google Maps profile (Google Maps contributors). 3D textures: Poly Haven, CC0. The tester, the time switch and the panel: drawings for illustration. The night and its times: an illustration of a typical night, not a real event.</span></p>
-      <p><span lang="he">קונספט לדוגמה. זה אינו האתר הרשמי של העסק.</span><span lang="en">A sample concept. This is not the business's official website.</span></p>
-      <button class="mswitch" type="button" role="switch" aria-checked="true" data-motion-toggle><span class="mod" aria-hidden="true"></span><span class="flag" aria-hidden="true"></span><span class="st"><span lang="he">אנימציות</span><span lang="en">Animations</span></span></button>
-    </div>
+    <span class="nm"><i aria-hidden="true"></i><span lang="he">אור חדש · סאלח</span><span lang="en">Or Hadash · Saleh</span></span>
+    <a href="tel:+972542514004" class="ltr tnum">054-251-4004</a>
+    <a href="https://wa.me/972542514004" data-wa-plain><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
+    <a href="#night"><span lang="he">חזרה למעלה</span><span lang="en">Back to top</span></a>
+    <button class="mswitch" type="button" role="switch" aria-checked="true" data-motion-toggle><span class="mod" aria-hidden="true"></span><span class="flag" aria-hidden="true"></span><span class="st"><span lang="he">אנימציות</span><span lang="en">Animations</span></span></button>
+    <p class="cr"><span lang="he">קונספט לדוגמה, לא האתר הרשמי. צילומים: הפרופיל של אור חדש במפות Google (תורמי Google Maps). תלת-ממד: טקסטורות Poly Haven, CC0. מכשיר הבדיקה ושעון הזמן מצוירים, והלילה הוא המחשה.</span><span lang="en">A sample concept, not the official site. Photos: Or Hadash's Google Maps profile (Google Maps contributors). 3D: Poly Haven textures, CC0. The tester and the time switch are drawn, and the night is an illustration.</span></p>
   </div>
 </footer>
 
 <script type="application/json" id="still-labels">{"1": [], "2": [["joint", 0.3813, 0.3851, "<span lang=\"he\">חיבור שזור, מלופף בבידוד</span><span lang=\"en\">Twisted joint, taped over</span>"]], "3": [], "4": [["breaker", 0.1697, 0.6667, "<span lang=\"he\">מפסק השקעים בסלון קפץ</span><span lang=\"en\">The living-room sockets breaker tripped</span>"]], "5": [["probe", 0.3596, 0.5739, "<span lang=\"he\">בדיקת בידוד, פאזה מול אפס</span><span lang=\"en\">Insulation test, live to neutral</span>"]], "6": [["conn", 0.6292, 0.5516, "<span lang=\"he\">מחברי מנוף חדשים</span><span lang=\"en\">New lever connectors</span>"]], "7": []}</script>
 <nav class="wsw away" data-wsw aria-label="יצירת קשר מהירה">
-  <a href="tel:+972542514004"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8Z"/></svg><span lang="he">חייגו</span><span lang="en">Call</span></a>
-  <a class="wa" href="https://wa.me/972542514004" data-wa-plain><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
+  <a class="call" href="tel:+972542514004"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1L6.6 10.8Z"/></svg><span lang="he">חייגו</span><span lang="en">Call</span></a>
+  <a href="https://wa.me/972542514004" data-wa-plain><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
 </nav>
 
 <script>
@@ -867,12 +701,14 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
     $('[data-rail]').setAttribute('aria-label', l === 'he' ? 'ניווט' : 'Navigation');
     $('[data-wsw]').setAttribute('aria-label', l === 'he' ? 'יצירת קשר מהירה' : 'Quick contact');
     $('[data-dial]').setAttribute('aria-label', l === 'he' ? 'שלבי התקלה' : 'Fault stages');
-    $('.way .pair').setAttribute('aria-label', l === 'he' ? 'אמר 22:10, הגיע 22:10' : 'Said 22:10, arrived 22:10');
+    $('[data-dimmer]').setAttribute('aria-label', l === 'he' ? 'מעמעם' : 'Dimmer');
+    $('[data-tsw-svg]').setAttribute('aria-label', l === 'he' ? 'שעון זמן של 24 שעות, כל הפינים דולקים' : 'A 24-hour time switch, every pin lit');
+    $('.way .pair').setAttribute('aria-label', l === 'he' ? 'אמר 22:10, הגיע 22:10, להמחשה' : 'Said 22:10, arrived 22:10, for illustration');
     write(); status(); tsw(true); if (window.__shortRender) window.__shortRender();
   }
   $$('[data-set-lang]').forEach(function (b) { b.addEventListener('click', function () { setLang(root.lang === 'he' ? 'en' : 'he'); }); });
 
-  // ---------------------------------------------------------------- animations on/off (miniature breakers), remembered
+  // ---------------------------------------------------------------- animations on/off, remembered
   var switches = $$('[data-motion-toggle]'), story = {};
   function motionUI() { switches.forEach(function (b) { b.setAttribute('aria-checked', still() ? 'false' : 'true'); }); }
   switches.forEach(function (b) { b.addEventListener('click', function () {
@@ -880,7 +716,7 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
     root.classList.toggle('still', !on); delete root.dataset.motionAuto;
     if (keep) story.after(keep);
     try { localStorage.setItem('motion', on ? 'on' : 'off'); } catch (e) {}
-    motionUI(); write(); allOn(); roomLit(); tsw(true); panelUp();
+    motionUI(); write(); allOn(); dimStill(); tsw(true);
     if (window.__motion3d) window.__motion3d(on);
     if (window.__shortRender) window.__shortRender();
   }); });
@@ -905,10 +741,10 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
   }
   window.__status = status;
 
-  // ---------------------------------------------------------------- the 24-hour time switch: 96 pins, pushed in where today is open; the dial turns to Haifa's time
+  // ---------------------------------------------------------------- the 24-hour time switch: 96 pins, lit where today is open; the dial turns to Haifa's time
   var tswDial = $('[data-tsw-dial]'), tswPins = $('[data-tsw-pins]'), tswNums = $('[data-tsw-nums]'), tswNow = $('[data-tsw-now]'), tswSeen = false;
   (function () {
-    var ns = 'http://www.w3.org/2000/svg', h = '';
+    var h = '';
     for (var i = 0; i < 24; i += 2) { var a = i / 24 * Math.PI * 2; h += '<text x="' + (260 + Math.sin(a) * 128).toFixed(1) + '" y="' + (266 - Math.cos(a) * 128).toFixed(1) + '">' + i + '</text>'; }
     tswNums.innerHTML = h;
   })();
@@ -916,8 +752,8 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
     var n = window.__now || now(), t = H[n.d], h = '';
     for (var i = 0; i < 96; i++) {
       var hr = i / 4, on = !!t && hr >= t[0] && hr < t[1], a = i * 3.75;
-      // pushed-in pins sit flush (dark), pulled-out pins stand proud (light)
-      h += '<rect x="255" y="' + (on ? 82 : 70) + '" width="10" height="' + (on ? 26 : 38) + '" rx="2" fill="' + (on ? '#2b2d31' : '#f8f6f0') + '" stroke="' + (on ? 'none' : '#8a857b') + '" transform="rotate(' + a + ' 260 260)"/>';
+      // pushed-in pins glow warm; pulled-out pins stay dark
+      h += '<rect x="255.5" y="' + (on ? 80 : 72) + '" width="9" height="' + (on ? 26 : 34) + '" rx="4.5" fill="' + (on ? '#f2b462' : '#5a4838') + '" opacity="' + (on ? 0.95 : 1) + '" transform="rotate(' + a + ' 260 260)"/>';
     }
     tswPins.innerHTML = h;
     var deg = -(n.h / 24) * 360;
@@ -925,18 +761,18 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
     tswNow.textContent = (root.lang === 'he' ? 'עכשיו בחיפה ' : 'Now in Haifa ') + hh(n.h);
   }
 
-  // ---------------------------------------------------------------- the composer: breakers down for what's wrong; the message writes itself on the label
+  // ---------------------------------------------------------------- the composer: switch on what's wrong; the message writes itself
   var T = {
     he: { p: { trip: 'מפסק קופץ', nopower: 'אין חשמל בחלק מהבית', burn: 'יש ריח שרוף או שקע חם', panel: 'צריך להחליף לוח חשמל', fittings: 'עבודה בשקעים, מתגים ותאורה', boiler: 'שעון לדוד' },
           w: { now: 'זה דחוף, אפשר עכשיו?', today: 'אפשר היום?', book: 'מתי נוח לך לתאם?' }, hi: 'שלום סאלח, הגעתי דרך האתר. ', me: 'שמי ', what: 'מה קורה: ', none: 'יש לי עבודת חשמל', at: 'אזור: ' },
     en: { p: { trip: 'a breaker keeps tripping', nopower: 'no power in part of the home', burn: 'a burning smell or a hot socket', panel: 'the panel needs replacing', fittings: 'work on sockets, switches and lights', boiler: 'a water-heater timer' },
           w: { now: "It's urgent, could you come now?", today: 'Could you come today?', book: 'When would suit you to book?' }, hi: 'Hi Saleh, I found you through your website. ', me: 'My name is ', what: "What's going on: ", none: 'I have an electrical job', at: 'Area: ' }
   };
-  var form = $('#composer'), preview = $('[data-preview]'), send = $('[data-send]'), typeT = 0, flips = $$('.flip', form);
-  flips.forEach(function (b) { b.addEventListener('click', function () { b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); write(); }); });
+  var form = $('#composer'), preview = $('[data-preview]'), send = $('[data-send]'), typeT = 0, rks = $$('.rk', form);
+  rks.forEach(function (b) { b.addEventListener('click', function () { b.setAttribute('aria-pressed', b.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); write(); }); });
   function write() {
     var t = T[root.lang] || T.he, f = new FormData(form), where = (f.get('where') || '').trim(), name = (f.get('name') || '').trim();
-    var picked = flips.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; }).map(function (b) { return t.p[b.dataset.p]; });
+    var picked = rks.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; }).map(function (b) { return t.p[b.dataset.p]; });
     var m = t.hi + (name ? t.me + name + '. ' : '') + (picked.length ? t.what + picked.join(', ') : t.none) + '. ' + (where ? t.at + where + '. ' : '') + t.w[f.get('w') || 'now'];
     send.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(m);
     clearInterval(typeT);
@@ -947,76 +783,44 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
   form.addEventListener('change', write);
   form.addEventListener('input', function (e) { if (e.target.tagName === 'INPUT' && e.target.type === 'text') write(); });
 
-  // ---------------------------------------------------------------- the panel drawing (a precise elevation, built once)
-  (function () {
-    var svg = $('[data-panel-svg]'), he = true, x0 = 108, mod = 36, h = '';
-    h += '<rect x="40" y="20" width="560" height="520" rx="10" fill="#d9d6ce"/><rect x="60" y="40" width="520" height="480" rx="4" fill="#c4c0b6"/>';
-    // two DIN rails with their slots
-    [150, 360].forEach(function (y) { h += '<rect x="76" y="' + (y - 14) + '" width="488" height="28" fill="#9ea2a7"/>'; for (var i = 0; i < 30; i++) h += '<rect x="' + (84 + i * 16) + '" y="' + (y - 3) + '" width="9" height="6" fill="#80848a"/>'; });
-    // top row: main switch (2 modules) and residual-current switch (2 modules)
-    function module(x, y, n, kind, tag, rate, idx) {
-      var w = n * mod - 2, s = '<g class="mod' + (kind ? ' fixed up' : '') + '"' + (idx != null ? ' data-mod="' + idx + '"' : '') + '>';
-      s += '<rect x="' + x + '" y="' + (y - 88) + '" width="' + w + '" height="176" rx="3" fill="#f4f2ec"/>';
-      s += '<rect x="' + (x + 3) + '" y="' + (y - 46) + '" width="' + (w - 6) + '" height="92" fill="#ebe8e0"/>';
-      for (var i = 0; i < n; i++) { s += '<circle cx="' + (x + 17 + i * mod) + '" cy="' + (y - 72) + '" r="6" fill="#b7bbc0"/><circle cx="' + (x + 17 + i * mod) + '" cy="' + (y + 72) + '" r="6" fill="#b7bbc0"/>'; }
-      s += '<rect x="' + (x + w / 2 - 9) + '" y="' + (y - 34) + '" width="18" height="46" rx="3" fill="#d5d1c8"/>';
-      s += '<rect class="tg" x="' + (x + w / 2 - 7) + '" y="' + (y - 32) + '" width="14" height="20" rx="2" fill="' + (kind === 'main' ? '#c8302a' : kind === 'rcd' ? '#2b5be0' : '#2b2d31') + '"/>';
-      s += '<rect class="fl" x="' + (x + w - 12) + '" y="' + (y - 42) + '" width="7" height="6" fill="' + (kind ? '#d8352a' : '#2f9e44') + '"/>';
-      s += '<text x="' + (x + w / 2) + '" y="' + (y + 32) + '" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="14" font-weight="700" fill="#1b1c1e">' + rate + '</text>';
-      if (kind === 'rcd') s += '<circle cx="' + (x + w - 14) + '" cy="' + (y + 22) + '" r="6" fill="#f2c400"/>';
-      s += '</g>';
-      return s;
-    }
-    h += module(x0, 150, 2, 'main', '', '40A') + module(x0 + 2 * mod, 150, 2, 'rcd', '', '30mA');
-    // top-row spare blanks
-    for (var b = 0; b < 8; b++) h += '<rect x="' + (x0 + 4 * mod + b * mod + 1) + '" y="104" width="' + (mod - 4) + '" height="92" fill="#e3e0d8"/>';
-    // bottom row: one breaker per kind of job
-    var rates = ['C16', '40A', 'C10', 'C10', 'C20', 'C16'];
-    for (var j = 0; j < 6; j++) h += module(x0 + j * 2 * mod, 360, 2, '', '', rates[j], j);
-    // label strip with the jobs' names, numbered
-    h += '<g data-tags>';
-    for (var k = 0; k < 6; k++) h += '<rect class="tag" data-tag="' + k + '" x="' + (x0 + k * 2 * mod) + '" y="462" width="' + (2 * mod - 2) + '" height="34" fill="#efece4"/><text x="' + (x0 + k * 2 * mod + mod - 1) + '" y="485" text-anchor="middle" font-family="Noto Sans Hebrew, sans-serif" font-size="16" font-weight="500" fill="#1b1c1e">' + (k + 1) + '</text>';
-    h += '</g>';
-    // the comb busbar over the bottom row and the feed
-    h += '<rect x="' + x0 + '" y="258" width="' + (12 * mod - 2) + '" height="10" fill="#7d6a45"/>';
-    h += '<rect x="' + (x0 + 6) + '" y="64" width="10" height="20" fill="#5a3219"/><rect x="' + (x0 + 26) + '" y="64" width="10" height="20" fill="#2b5be0"/>';
-    svg.innerHTML = h;
-  })();
-  var mods = $$('[data-panel-svg] [data-mod]'), svcs = $$('[data-svc]'), panelDone = false;
-  function panelUp() {
-    if (still() || panelDone) { mods.forEach(function (m) { m.classList.add('up'); m.querySelector('.fl').setAttribute('fill', '#d8352a'); }); panelDone = true; return; }
+  // ---------------------------------------------------------------- the dimmer: turn the knob, the room's lamps come up
+  var room = $('[data-room]'), dimmer = $('[data-dimmer]'), dimV = $('[data-dim-v]'), lv = still() ? 1 : 0, dimRaf = 0, dimTouched = false;
+  function setLv(v) {
+    lv = Math.max(0, Math.min(1, v)); var pc = Math.round(lv * 100);
+    room.style.setProperty('--lv', lv.toFixed(3)); dimmer.style.setProperty('--lv', lv.toFixed(3));
+    dimmer.setAttribute('aria-valuenow', pc); dimmer.setAttribute('aria-valuetext', pc + '%'); dimV.textContent = pc + '%';
   }
-  function panelSeq() {
-    if (panelDone) return; panelDone = true;
-    mods.forEach(function (m, i) { setTimeout(function () { m.classList.add('up'); m.querySelector('.fl').setAttribute('fill', '#d8352a'); }, 260 + i * 240); });
+  function dimTo(target, ms) {
+    cancelAnimationFrame(dimRaf); var from = lv, t0 = performance.now();
+    (function step(t) { var k = Math.min(1, (t - t0) / ms), e = 1 - Math.pow(1 - k, 3); setLv(from + (target - from) * e); if (k < 1) dimRaf = requestAnimationFrame(step); })(t0);
   }
+  function dimStill() { if (still() && !dimTouched) { cancelAnimationFrame(dimRaf); setLv(1); } }
+  function angleLv(e) {
+    var r = dimmer.getBoundingClientRect(), a = Math.atan2(e.clientX - (r.left + r.width / 2), -(e.clientY - (r.top + r.height / 2))) * 180 / Math.PI;
+    return (Math.max(-135, Math.min(135, a)) + 135) / 270;
+  }
+  dimmer.addEventListener('pointerdown', function (e) { dimTouched = true; cancelAnimationFrame(dimRaf); dimmer.setPointerCapture(e.pointerId); setLv(angleLv(e)); });
+  dimmer.addEventListener('pointermove', function (e) { if (dimmer.hasPointerCapture(e.pointerId)) setLv(angleLv(e)); });
+  dimmer.addEventListener('keydown', function (e) {
+    var k = e.key, d = { ArrowUp: 0.1, ArrowRight: 0.1, PageUp: 0.25, ArrowDown: -0.1, ArrowLeft: -0.1, PageDown: -0.25 }[k];
+    if (k === 'Home') d = -1; if (k === 'End') d = 1;
+    if (d == null) return; e.preventDefault(); dimTouched = true; cancelAnimationFrame(dimRaf); setLv(lv + d);
+  });
+  setLv(lv);
 
-  // ---------------------------------------------------------------- the torch over the dark room (the live thing)
-  var torch = $('[data-torch]'), beam = $('[data-beam]');
-  function aim(e) { var r = torch.getBoundingClientRect(); beam.style.setProperty('--x', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%'); beam.style.setProperty('--y', ((e.clientY - r.top) / r.height * 100).toFixed(1) + '%'); torch.classList.remove('sweep'); }
-  torch.addEventListener('pointermove', aim); torch.addEventListener('pointerdown', aim);
-  // the light comes back: the same room, lit
-  var room = $('[data-room]');
-  function roomLit() { if (still()) room.classList.add('lit'); }
-
-  // ---------------------------------------------------------------- circuits: each part of the page lights when reached; its breaker in the rail goes up
-  var circuits = $$('.circuit'), brks = $$('.brk'), restored = {};
+  // ---------------------------------------------------------------- each part of the page comes up like a dimmer when reached; its locator light in the plate glows
+  var circuits = $$('.circuit'), sws = $$('.sw');
   function restore(sec) {
     if (sec.classList.contains('on')) return;
-    sec.classList.add('on'); var c = sec.dataset.circuit; restored[c] = true;
-    brks.forEach(function (b) { if (b.dataset.c === c) b.classList.add('on'); });
-    // a short start-up flicker, like a lamp catching, then steady
-    var lit = $$('.lit', sec);
-    if (!still() && !reduce && lit.length && lit[0].animate) lit.forEach(function (l) { l.animate([{ opacity: 0.1 }, { opacity: 0.85, offset: 0.25 }, { opacity: 0.35, offset: 0.45 }, { opacity: 1 }], { duration: 420, easing: 'ease-out' }); });
-    if (sec.classList.contains('dark') && !still() && !reduce) torch.classList.add('sweep');
+    sec.classList.add('on'); var c = sec.dataset.circuit;
+    sws.forEach(function (b) { if (b.dataset.c === c) b.classList.add('on'); });
     if (sec.classList.contains('call24')) { tswSeen = true; requestAnimationFrame(function () { tsw('now'); }); }
-    if (sec.classList.contains('panel')) panelSeq();
-    if (sec.classList.contains('light')) setTimeout(function () { room.classList.add('lit'); }, 250);
+    if (sec.classList.contains('light') && !dimTouched) { if (still() || reduce) setLv(1); else setTimeout(function () { if (!dimTouched) dimTo(1, 2400); }, 350); }
   }
   function allOn() { if (still()) circuits.forEach(restore); }
   var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
     es.forEach(function (e) { if (e.isIntersecting) { restore(e.target); io.unobserve(e.target); } });
-  }, { rootMargin: '0px 0px -25% 0px', threshold: 0.01 }) : null;
+  }, { rootMargin: '0px 0px -22% 0px', threshold: 0.01 }) : null;
   if (io && !still()) circuits.forEach(function (c) { io.observe(c); }); else circuits.forEach(restore);
   restore(circuits[0]);
 
@@ -1026,7 +830,7 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
   }, { rootMargin: '0px 0px -10% 0px' }) : null;
   $$('[data-r], [data-open]').forEach(function (el) { rio ? rio.observe(el) : el.classList.add('in'); });
 
-  // ---------------------------------------------------------------- the story clock in the rail, and which breaker is current
+  // ---------------------------------------------------------------- the night's clock in the plate, and which part is current
   var clock = $('[data-clock]'), tSecs = $$('[data-t]');
   function clockTick() {
     var mid = innerHeight * 0.4, cur = null, tm = 1300;
@@ -1037,14 +841,14 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
     var m = Math.round(tm), txt = Math.floor(m / 60) + ':' + ('0' + (m % 60)).slice(-2);
     if (clock.textContent !== txt) clock.textContent = txt;
     var c = cur ? cur.dataset.circuit : '0';
-    brks.forEach(function (b) { b.setAttribute('aria-current', b.dataset.c === c ? 'true' : 'false'); });
+    sws.forEach(function (b) { b.setAttribute('aria-current', b.dataset.c === c ? 'true' : 'false'); });
   }
 
-  // ---------------------------------------------------------------- the wall call to action: the switch plate steps aside where the page has its own buttons
+  // ---------------------------------------------------------------- the floating switch plate steps aside where the page has its own buttons
   var wsw = $('[data-wsw]'), seen = new Set();
   if (io) {
     var pio = new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? seen.add(e.target) : seen.delete(e.target); }); wsw.classList.toggle('away', seen.size > 0); });
-    $$('.hero, .tester, .board, .find .rows, .door').forEach(function (el) { pio.observe(el); });
+    $$('.hero .act, .call24 .act, .tester, .board, .find-act, .foot').forEach(function (el) { pio.observe(el); });
   } else wsw.classList.remove('away');
 
   // ---------------------------------------------------------------- the fault, through the tester: scroll drives the 3D scene, or the stills when animations are off
@@ -1173,7 +977,7 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
   })();
 
   setLang(root.lang === 'en' ? 'en' : 'he');
-  allOn(); roomLit(); panelUp(); clockTick(); tsw();
+  allOn(); dimStill(); clockTick(); tsw();
   setInterval(function () { status(); tsw(); }, 60000);
 })();
 </script>
