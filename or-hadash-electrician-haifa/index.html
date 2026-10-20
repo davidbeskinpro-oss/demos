@@ -864,7 +864,7 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
   function start() {
     if (api) { api.resume(); window.__short3d = api; rerender(); return; }
     if (loading) return;
-    loading = import('./short3d.js?v=3').then(({ initShort3D }) => {
+    loading = import('./short3d.js?v=4').then(({ initShort3D }) => {
       if (isStill()) return;
       api = initShort3D(host, host.querySelector('.l3d-host'), { calm: isStill });
       if (!api) return fail();
