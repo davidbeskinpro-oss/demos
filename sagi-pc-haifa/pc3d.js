@@ -81,7 +81,7 @@ export function initPc3D(host, labelsHost, opts) {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xe9ecea);
+  scene.background = new THREE.Color(0x111a16);
   const pmrem = new THREE.PMREMGenerator(renderer);
   scene.environment = pmrem.fromScene(new RoomEnvironment(renderer), 0.04).texture;
   scene.environmentIntensity = 0.75;
@@ -161,7 +161,7 @@ export function initPc3D(host, labelsHost, opts) {
   };
 
   // ---------------------------------------------------------------- the bench and the base shell
-  const bench = box(plastic(0xdfe3e0, 0.85), -40, 40, -0.6, 0, -40, 40); bench.castShadow = false;
+  const bench = box(plastic(0x1f2b25, 0.85), -40, 40, -0.6, 0, -40, 40); bench.castShadow = false;
   box(M.shell, -17, 17, 0, 0.3, -12, 12);
   box(M.shell, -17, 17, 0.3, 1.9, 11.7, 12); box(M.shell, -17, -16.7, 0.3, 1.9, -12, 12); box(M.shell, 16.7, 17, 0.3, 1.9, -12, 12);
   // the back wall has the exhaust vent behind the fins (x -13 .. -6)
