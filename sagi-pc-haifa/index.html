@@ -91,7 +91,7 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
       <img src="img/fan-macro.jpg" width="1024" height="683" loading="lazy" alt="" data-alt-he="מאוורר של מחשב נייד ליד צלעות קירור מנחושת, באור צד" data-alt-en="A laptop blower fan beside copper cooling fins, in side light">
       <figcaption><span lang="he">תמונה להמחשה: מאוורר וצלעות. nick@, CC BY 2.0</span><span lang="en">Illustration: a fan and its fins. nick@, CC BY 2.0</span></figcaption>
     </figure>
-    <p data-reveal><span lang="he">המעבד מוסר חום דרך משחה טרמית לפלטת נחושת, צינור חום מוביל אותו לצלעות, והמאוורר דוחף אוויר החוצה. כשאחד מהם נכשל, הכול נתקע. גללו, או הקישו על אחד השבבים למטה.</span><span lang="en">The CPU passes its heat through thermal paste to a copper plate, a heat pipe carries it to the fins, and the fan pushes air out. When one of them fails, everything backs up. Scroll, or tap one of the chips below.</span></p>
+    <p data-reveal><span lang="he">המעבד מוסר חום דרך משחה טרמית לפלטת נחושת, צינור חום מוביל אותו לצלעות, והמאוורר דוחף אוויר החוצה. כשאחד מהם נכשל, הכול נתקע. <span class="if-motion">גללו, או הקישו על אחד השבבים למטה.</span><span class="if-still">עברו בין השלבים בחצים, או הקישו על אחד השבבים למטה.</span></span><span lang="en">The CPU passes its heat through thermal paste to a copper plate, a heat pipe carries it to the fins, and the fan pushes air out. When one of them fails, everything backs up. <span class="if-motion">Scroll, or tap one of the chips below.</span><span class="if-still">Step through with the arrows, or tap one of the chips below.</span></span></p>
   </div>
   <div class="track" data-track>
     <div class="stage" data-stage>
@@ -118,6 +118,12 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
         <button type="button" class="dip" data-go="0.6"><i></i><span class="vh"><span lang="he">מאוורר חדש</span><span lang="en">A new fan</span></span></button>
         <button type="button" class="dip" data-go="0.76"><i></i><span class="vh"><span lang="he">משחה טרמית</span><span lang="en">Thermal paste</span></span></button>
         <button type="button" class="dip" data-go="0.94"><i></i><span class="vh"><span lang="he">קר ומהיר</span><span lang="en">Cool and fast</span></span></button>
+      </div>
+      <!-- animations off: no pinning, two keys step through the six stages -->
+      <div class="stepper" role="group" aria-label="מעבר בין השלבים" data-stepper>
+        <button type="button" class="step step-prev" data-step="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg><span lang="he">הקודם</span><span lang="en">Back</span></button>
+        <p class="step-n"><span data-step-n>1</span> / 6</p>
+        <button type="button" class="step step-next" data-step="1"><span lang="he">הבא</span><span lang="en">Next</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>
       </div>
     </div>
   </div>

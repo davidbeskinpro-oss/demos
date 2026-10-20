@@ -23,8 +23,9 @@
   var switches = [].slice.call(document.querySelectorAll('[data-motion-toggle]'));
   function motionUI() { switches.forEach(function (b) { b.setAttribute('aria-checked', still() ? 'false' : 'true'); }); }
   switches.forEach(function (b) { b.addEventListener('click', function () {
-    var on = still();
+    var on = still(), keep = storyBefore();
     root.classList.toggle('still', !on); delete root.dataset.motionAuto;
+    storyAfter(keep);
     try { localStorage.setItem('motion', on ? 'on' : 'off'); } catch (e) {}
     motionUI(); write();
     if (window.__motion3d) window.__motion3d(on);
@@ -149,6 +150,8 @@
   var track = document.querySelector('[data-track]'), stage = track.querySelector('[data-stage]');
   var stillImg = track.querySelector('[data-still]'), capT = track.querySelector('[data-cap-title]'), capX = track.querySelector('[data-cap-text]');
   var chambers = [].slice.call(track.querySelectorAll('[data-go]'));
+  // animations off: the story is a normal block, stepped with the key tags or the chambers; scrolling leaves it alone
+  var step = 0, stepN = track.querySelector('[data-step-n]'), stepBtns = [].slice.call(track.querySelectorAll('[data-step]'));
   var STAGES = [0, 0.16, 0.33, 0.5, 0.66, 0.83, 1];
   var S = {
     he: [['המפתח נתקע.', 'מפתח שחוק כבר לא מרים שני פינים מספיק גבוה. הפינים העליונים שלהם חוצים את קו הגזירה, הגליל זז מילימטר ונעצר, והבריחים נשארים בתוך המשקוף.'],
@@ -174,10 +177,16 @@
     var k = Math.min(sw / STILL_W, sh / STILL_H), ox = (sw - STILL_W * k) / 2, oy = (sh - STILL_H * k) * 0.4;
     var key = si + '|' + sw + 'x' + sh + root.lang; if (key === labelKey) return; labelKey = key;
     slab.innerHTML = '';
+    var boxes = [];
     (STILL_L[si + 1] || []).forEach(function (l) {
       var e = document.createElement('span'); e.className = 'l3d l3d-' + l[0]; e.innerHTML = l[3];
       var x = ox + STILL_W * k * l[1], y = oy + STILL_H * k * Math.min(0.95, Math.max(0.05, l[2]));
-      e.style.transform = 'translate(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px)'; slab.appendChild(e);
+      slab.appendChild(e);
+      // two tags that land on each other: the later one moves down clear of the first
+      var w = e.offsetWidth, h = e.offsetHeight;
+      boxes.forEach(function (bx) { if (x < bx[0] + bx[2] && bx[0] < x + w && y < bx[1] + bx[3] + 4 && bx[1] < y + h + 4) y = bx[1] + bx[3] + 6; });
+      boxes.push([x, y, w, h]);
+      e.style.transform = 'translate(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px)';
     });
   }
   var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
@@ -187,6 +196,7 @@
     var r = track.getBoundingClientRect(), ps = clamp(-r.top / Math.max(1, r.height - innerHeight)), l = he() ? 'he' : 'en';
     var live = !!window.__lock3d, useStills = !live;
     var sg = 0; while (sg < 5 && ps >= STAGES[sg + 1]) sg++;
+    if (still()) sg = step;
     if (useStills) {
       var src = 'img/still-' + (sg + 1) + '.jpg';
       if (stillImg.getAttribute('src') !== src) stillImg.src = src;
@@ -197,6 +207,8 @@
       shown = sg; capT.dataset.l = l;
       capT.textContent = S[l][sg][0]; capX.textContent = S[l][sg][1];
       chambers.forEach(function (c, i) { c.setAttribute('aria-pressed', i === sg ? 'true' : 'false'); });
+      stepN.textContent = sg + 1;
+      stepBtns.forEach(function (b) { b.disabled = +b.dataset.step < 0 ? sg === 0 : sg === 5; });
     }
     if (live) window.__lock3d.set(ps);
   }
@@ -204,10 +216,21 @@
   addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; render(); }); } }, { passive: true });
   addEventListener('resize', function () { labelKey = ''; render(); });
   stillImg.addEventListener('load', function () { labelKey = ''; render(); });
-  chambers.forEach(function (c) { c.addEventListener('click', function () {
+  function go(i) { step = Math.max(0, Math.min(5, i)); render(); }
+  stepBtns.forEach(function (b) { b.addEventListener('click', function () { go(shown + +b.dataset.step); }); });
+  chambers.forEach(function (c, i) { c.addEventListener('click', function () {
+    if (still()) return go(i);
     var r = track.getBoundingClientRect();
     scrollTo({ top: scrollY + r.top + parseFloat(c.dataset.go) * (r.height - innerHeight), behavior: still() ? 'auto' : 'smooth' });
   }); });
+  // switching modes keeps the visitor on the same stage, and on the story if they were in it
+  function storyBefore() { var r = stage.getBoundingClientRect(); return { sg: shown < 0 ? 0 : shown, pinned: !still() && r.top <= 1 && r.bottom >= innerHeight - 1, seen: r.top < innerHeight && r.bottom > 0 }; }
+  function storyAfter(k) {
+    if (still()) { step = k.sg; if (k.pinned) scrollTo(0, scrollY + stage.getBoundingClientRect().top); return; }
+    if (!k.seen) return;
+    var r = track.getBoundingClientRect();
+    scrollTo(0, scrollY + r.top + parseFloat(chambers[k.sg].dataset.go) * (r.height - innerHeight));
+  }
   window.__trackRender = function () { shown = -1; labelKey = ''; render(); };
 
   var qs = new URLSearchParams(location.search).get('lang'), saved = null;

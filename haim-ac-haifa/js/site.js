@@ -14,6 +14,7 @@
     document.querySelectorAll('img[data-alt-he]').forEach(function (i) { i.alt = i.dataset[l === 'he' ? 'altHe' : 'altEn']; });
     document.querySelector('.pocket').setAttribute('aria-label', l === 'he' ? 'יצירת קשר מהירה' : 'Quick contact');
     document.querySelector('.keys').setAttribute('aria-label', l === 'he' ? 'שלבי הסיפור, כמו כפתורים בשלט' : 'Stages of the story, like remote buttons');
+    document.querySelector('[data-stepper]').setAttribute('aria-label', l === 'he' ? 'מעבר בין השלבים' : 'Step through the stages');
     write(); status(); hours(); if (window.__trackRender) window.__trackRender();
   }
   document.querySelectorAll('[data-set-lang]').forEach(function (b) { b.addEventListener('click', function () { setLang(he() ? 'en' : 'he'); }); });
@@ -22,8 +23,9 @@
   var switches = [].slice.call(document.querySelectorAll('[data-motion-toggle]'));
   function motionUI() { switches.forEach(function (b) { b.setAttribute('aria-checked', still() ? 'false' : 'true'); }); }
   switches.forEach(function (b) { b.addEventListener('click', function () {
-    var on = still();
+    var on = still(), keep = storyBefore();
     root.classList.toggle('still', !on); delete root.dataset.motionAuto;
+    storyAfter(keep);
     try { localStorage.setItem('motion', on ? 'on' : 'off'); } catch (e) {}
     motionUI(); write();
     if (window.__motion3d) window.__motion3d(on);
@@ -120,6 +122,8 @@
   var track = document.querySelector('[data-track]'), stage = track.querySelector('[data-stage]');
   var stillImg = track.querySelector('[data-still]'), capT = track.querySelector('[data-cap-title]'), capX = track.querySelector('[data-cap-text]'), capTemp = track.querySelector('[data-cap-temp]');
   var keys = [].slice.call(track.querySelectorAll('[data-go]'));
+  // animations off: the story is a normal block, stepped with the arrow keys or the remote buttons; scrolling leaves it alone
+  var step = 0, stepN = track.querySelector('[data-step-n]'), stepBtns = [].slice.call(track.querySelectorAll('[data-step]'));
   var STAGES = [0, 0.16, 0.33, 0.5, 0.66, 0.83, 1];
   // the room temperature at a scroll position, the same curve the 3D scene uses
   var sm = function (t) { return t * t * (3 - 2 * t); }, sp = function (p, a, b) { return clamp((p - a) / (b - a)); };
@@ -147,11 +151,17 @@
     var k = Math.max(sw / STILL_W, sh / STILL_H), ox = (sw - STILL_W * k) / 2, oy = (sh - STILL_H * k) * 0.4;
     var key = si + '|' + sw + 'x' + sh + root.lang; if (key === labelKey) return; labelKey = key;
     slab.innerHTML = '';
+    var boxes = [];
     (STILL_L[si + 1] || []).forEach(function (l) {
       var x = ox + STILL_W * k * l[1], y = oy + STILL_H * k * l[2];
       if (x < 8 || x > sw - 40 || y < 30 || y > sh - 8) return;
       var e = document.createElement('span'); e.className = 'l3d l3d-' + l[0]; e.innerHTML = l[3];
-      e.style.transform = 'translate(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px)'; slab.appendChild(e);
+      slab.appendChild(e);
+      // on a small stage two tags can land on each other: lift the later one clear
+      var w = e.offsetWidth, h = e.offsetHeight;
+      boxes.forEach(function (b) { if (x < b[0] + b[2] && b[0] < x + w && y < b[1] + b[3] + 4 && b[1] < y + h + 4) y = b[1] - h - 6; });
+      boxes.push([x, y, w, h]);
+      e.style.transform = 'translate(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px)';
     });
   }
   function clamp(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
@@ -160,6 +170,7 @@
     var r = track.getBoundingClientRect(), ps = clamp(-r.top / Math.max(1, r.height - innerHeight)), l = he() ? 'he' : 'en';
     var live = !!window.__ac3d;
     var sg = 0; while (sg < 5 && ps >= STAGES[sg + 1]) sg++;
+    if (still()) sg = step;
     if (!live) {
       var src = 'img/still-' + (sg + 1) + '.jpg';
       if (stillImg.getAttribute('src') !== src) stillImg.src = src;
@@ -173,6 +184,8 @@
       shown = sg; capT.dataset.l = l;
       capT.textContent = S[l][sg][0]; capX.textContent = S[l][sg][1];
       keys.forEach(function (c, i) { c.setAttribute('aria-pressed', i === sg ? 'true' : 'false'); });
+      stepN.textContent = sg + 1;
+      stepBtns.forEach(function (b) { b.disabled = +b.dataset.step < 0 ? sg === 0 : sg === 5; });
     }
     if (live) window.__ac3d.set(ps);
   }
@@ -180,10 +193,21 @@
   addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; render(); }); } }, { passive: true });
   addEventListener('resize', function () { labelKey = ''; render(); });
   stillImg.addEventListener('load', function () { labelKey = ''; render(); });
-  keys.forEach(function (c) { c.addEventListener('click', function () {
+  function go(i) { step = Math.max(0, Math.min(5, i)); render(); }
+  stepBtns.forEach(function (b) { b.addEventListener('click', function () { go(shown + +b.dataset.step); }); });
+  keys.forEach(function (c, i) { c.addEventListener('click', function () {
+    if (still()) return go(i);
     var r = track.getBoundingClientRect();
     scrollTo({ top: scrollY + r.top + parseFloat(c.dataset.go) * (r.height - innerHeight), behavior: still() ? 'auto' : 'smooth' });
   }); });
+  // switching modes keeps the visitor on the same stage, and on the story if they were in it
+  function storyBefore() { var r = stage.getBoundingClientRect(); return { sg: shown < 0 ? 0 : shown, pinned: !still() && r.top <= 1 && r.bottom >= innerHeight - 1, seen: r.top < innerHeight && r.bottom > 0 }; }
+  function storyAfter(k) {
+    if (still()) { step = k.sg; if (k.pinned) scrollTo(0, scrollY + stage.getBoundingClientRect().top); return; }
+    if (!k.seen) return;
+    var r = track.getBoundingClientRect();
+    scrollTo(0, scrollY + r.top + parseFloat(keys[k.sg].dataset.go) * (r.height - innerHeight));
+  }
   window.__trackRender = function () { shown = -1; labelKey = ''; render(); };
 
   // the unit's display in the hero counts down from the heat to the set point, once

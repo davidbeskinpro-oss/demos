@@ -194,6 +194,35 @@ html.js:not(.still) .faceplate:not(.in) .fp-bolts { transform: translateX(44px);
 .chamber:active { transform: scale(0.95); }
 .shear { position: absolute; left: 14px; right: 14px; top: calc(14px + 73px); height: 4px; margin-top: -2px; background: var(--amber); pointer-events: none; }
 @media (hover: hover) and (pointer: fine) { .chamber:hover { background: #0e1d55; } }
+/* animations off: no pinning. The stage is a normal block; two brass key tags, cut to point the way, step through it */
+.stepper { display: none; }
+.if-still { display: none; }
+html.still .if-still { display: inline; }
+html.still .if-motion { display: none; }
+html.still .track { height: auto; }
+html.still .stage { position: relative; height: clamp(560px, 76svh, 840px); }
+html.still .stepper { display: flex; position: absolute; z-index: 2; inset-inline-end: var(--m); top: clamp(24px, 5vh, 56px); width: 366px; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 14px; background: var(--cobalt); }
+.step { position: relative; isolation: isolate; height: 48px; min-width: 112px; display: inline-flex; align-items: center; justify-content: center; gap: 6px; border: 0; background: transparent; color: var(--deep); font: inherit; font-size: var(--t-small); font-weight: 700; cursor: pointer; -webkit-user-select: none; user-select: none; touch-action: manipulation; }
+.step-prev { padding: 0 16px 0 28px; }
+.step-next { padding: 0 28px 0 16px; }
+/* the tag is the fill, so the focus ring outside it is not clipped; the chamfered end, with its brass-ringed hole, points the way */
+.step::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--brass); }
+.step-next::before, [dir="rtl"] .step-prev::before { clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%); }
+.step-prev::before, [dir="rtl"] .step-next::before { clip-path: polygon(16px 0, 100% 0, 100% 100%, 16px 100%, 0 calc(100% - 16px), 0 16px); }
+[dir="rtl"] .step-prev { padding: 0 28px 0 16px; }
+[dir="rtl"] .step-next { padding: 0 16px 0 28px; }
+.step::after { content: ""; position: absolute; top: 50%; width: 10px; height: 10px; margin-top: -5px; border-radius: 50%; background: var(--cobalt); box-shadow: 0 0 0 2px var(--brass-2); }
+.step-prev::after { inset-inline-start: 9px; }
+.step-next::after { inset-inline-end: 9px; }
+.step svg { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+[dir="rtl"] .step svg { transform: scaleX(-1); }
+html.still .step { transition: transform var(--press) var(--ease) !important; }
+.step:active:not(:disabled) { transform: scale(0.95); }
+.step:disabled { color: var(--cobalt-soft); cursor: default; }
+.step:disabled::before { background: #0e1d55; }
+.step:disabled::after { background: var(--cobalt); box-shadow: 0 0 0 2px #1d2f72; }
+.step-n { min-width: 4.5ch; text-align: center; color: var(--sand); font-size: 1.25rem; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (hover: hover) and (pointer: fine) { .step:not(:disabled):hover::before { background: var(--amber); } }
 @media (max-width: 900px) {
   .lock-intro h2, .lock-intro > p, .lock-intro .pull { grid-column: 1 / -1; grid-row: auto; }
   .track { height: 640vh; }
@@ -208,6 +237,12 @@ html.js:not(.still) .faceplate:not(.in) .fp-bolts { transform: translateX(44px);
   .chamber:nth-child(n) { --lift: calc(var(--l, 0) * 1px); }
   .chamber:nth-child(1) { --l: -10; } .chamber:nth-child(2) { --l: 8; } .chamber:nth-child(3) { --l: -5; } .chamber:nth-child(4) { --l: 11; } .chamber:nth-child(5) { --l: -8; } .chamber:nth-child(6) { --l: 6; }
   .shear { left: var(--m); right: var(--m); top: calc(10px + 43px); }
+  /* animations off on a phone: picture, key tags, caption, chambers, one after the other in the page */
+  html.still .stage { height: auto; grid-template-rows: none; }
+  html.still .view { height: clamp(240px, 36svh, 360px); }
+  html.still .stepper { position: relative; inset: auto; order: 1; width: auto; padding: 10px var(--m); }
+  html.still .caption { order: 2; }
+  html.still .chambers { order: 3; }
 }
 
 /* chapter 3: the bench — sand */

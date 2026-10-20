@@ -18,6 +18,7 @@
     document.querySelector('nav.top').setAttribute('aria-label', l === 'he' ? 'ראשי' : 'Main');
     document.querySelector('.qcode').setAttribute('aria-label', l === 'he' ? '5.0 בגוגל מ-332 ביקורות' : '5.0 on Google from 332 reviews');
     document.querySelector('.dips').setAttribute('aria-label', l === 'he' ? 'שלבי הסיפור בתוך המחשב' : 'Stages of the story inside the laptop');
+    document.querySelector('[data-stepper]').setAttribute('aria-label', l === 'he' ? 'מעבר בין השלבים' : 'Step through the stages');
     document.querySelectorAll('.dip').forEach(function (b) { var s = b.querySelector('[lang="' + l + '"]'); b.title = s ? s.textContent : ''; });
     write(); status(); hours(); if (window.__trackRender) window.__trackRender();
   }
@@ -27,8 +28,9 @@
   var switches = [].slice.call(document.querySelectorAll('[data-motion-toggle]'));
   function motionUI() { switches.forEach(function (b) { b.setAttribute('aria-checked', still() ? 'false' : 'true'); }); }
   switches.forEach(function (b) { b.addEventListener('click', function () {
-    var on = still();
+    var on = still(), keep = storyBefore();
     root.classList.toggle('still', !on); delete root.dataset.motionAuto;
+    storyAfter(keep);
     try { localStorage.setItem('motion', on ? 'on' : 'off'); } catch (e) {}
     motionUI(); write(); seg(5.0, true); xfer(true);
     if (window.__motion3d) window.__motion3d(on);
@@ -183,7 +185,7 @@
   function panelUI() { panel.classList.toggle('show', away.size === 0); }
   if ('IntersectionObserver' in window) {
     var pio = new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? away.add(e.target) : away.delete(e.target); }); panelUI(); }, { threshold: 0 });
-    [document.querySelector('.hero-act'), document.querySelector('.qcode'), document.querySelector('.v-act'), document.querySelector('.screen'), document.querySelector('.dips'), document.querySelector('.label')].forEach(function (el) { pio.observe(el); });
+    [document.querySelector('.hero-act'), document.querySelector('.qcode'), document.querySelector('.v-act'), document.querySelector('.screen'), document.querySelector('.dips'), document.querySelector('[data-stepper]'), document.querySelector('.label')].forEach(function (el) { pio.observe(el); });
   } else panel.classList.add('show');
 
   // ---------------------------------------------------------------- the laptop story
@@ -198,6 +200,8 @@
   var track = document.querySelector('[data-track]'), stage = track.querySelector('[data-stage]');
   var stillImg = track.querySelector('[data-still]'), capT = track.querySelector('[data-cap-title]'), capX = track.querySelector('[data-cap-text]');
   var dips = [].slice.call(track.querySelectorAll('[data-go]'));
+  // animations off: the story is a normal block, stepped with the arrow keys or the chips; scrolling leaves it alone
+  var step = 0, stepN = track.querySelector('[data-step-n]'), stepBtns = [].slice.call(track.querySelectorAll('[data-step]'));
   var rT = track.querySelector('[data-r-temp]'), rG = track.querySelector('[data-r-ghz]'), rR = track.querySelector('[data-r-rpm]'), rB = track.querySelector('[data-r-bar]'), meter = track.querySelector('.meter');
   var STAGES = [0, 0.16, 0.33, 0.5, 0.66, 0.83, 1];
   var S = {
@@ -239,6 +243,7 @@
     var r = track.getBoundingClientRect(), ps = clamp(-r.top / Math.max(1, r.height - innerHeight)), l = he() ? 'he' : 'en';
     var live = !!window.__pc3d;
     var sg = 0; while (sg < 5 && ps >= STAGES[sg + 1]) sg++;
+    if (still()) sg = step;
     if (!live) {
       var src = 'img/still-' + (sg + 1) + '.jpg';
       if (stillImg.getAttribute('src') !== src) stillImg.src = src;
@@ -249,6 +254,8 @@
       shown = sg; capT.dataset.l = l;
       capT.textContent = S[l][sg][0]; capX.textContent = S[l][sg][1];
       dips.forEach(function (c, i) { c.setAttribute('aria-pressed', i === sg ? 'true' : 'false'); });
+      stepN.textContent = sg + 1;
+      stepBtns.forEach(function (b) { b.disabled = +b.dataset.step < 0 ? sg === 0 : sg === 5; });
     }
     // in stills mode the readout shows each stage's settled numbers
     var q = live ? ps : [0.1, 0.25, 0.42, 0.63, 0.75, 0.995][sg], rd = read(q), key = rd.off + '|' + rd.t + '|' + rd.ghz + '|' + rd.rpm + l;
@@ -264,10 +271,21 @@
   addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; render(); }); } }, { passive: true });
   addEventListener('resize', function () { labelKey = ''; render(); });
   stillImg.addEventListener('load', function () { labelKey = ''; render(); });
-  dips.forEach(function (c) { c.addEventListener('click', function () {
+  function go(i) { step = Math.max(0, Math.min(5, i)); render(); }
+  stepBtns.forEach(function (b) { b.addEventListener('click', function () { go(shown + +b.dataset.step); }); });
+  dips.forEach(function (c, i) { c.addEventListener('click', function () {
+    if (still()) return go(i);
     var r = track.getBoundingClientRect();
     scrollTo({ top: scrollY + r.top + parseFloat(c.dataset.go) * (r.height - innerHeight), behavior: still() ? 'auto' : 'smooth' });
   }); });
+  // switching modes keeps the visitor on the same stage, and on the story if they were in it
+  function storyBefore() { var r = stage.getBoundingClientRect(); return { sg: shown < 0 ? 0 : shown, pinned: !still() && r.top <= 1 && r.bottom >= innerHeight - 1, seen: r.top < innerHeight && r.bottom > 0 }; }
+  function storyAfter(k) {
+    if (still()) { step = k.sg; if (k.pinned) scrollTo(0, scrollY + stage.getBoundingClientRect().top); return; }
+    if (!k.seen) return;
+    var r = track.getBoundingClientRect();
+    scrollTo(0, scrollY + r.top + parseFloat(dips[k.sg].dataset.go) * (r.height - innerHeight));
+  }
   window.__trackRender = function () { shown = -1; labelKey = ''; lastRead = ''; render(); };
 
   var qs = new URLSearchParams(location.search).get('lang'), saved = null;

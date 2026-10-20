@@ -104,7 +104,7 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
 <section class="ch ch-lock" aria-labelledby="h-lock">
   <div class="lock-intro">
     <h2 id="h-lock" data-reveal><span lang="he">מה קורה בתוך הצילינדר</span><span lang="en">Inside the cylinder</span></h2>
-    <p data-reveal><span lang="he">מפתח פותח בזכות חמישה זוגות של פינים. רק כשכל זוג נעצר בדיוק על קו הגזירה, הגליל מסתובב. גללו, או הקישו על אחד הפינים למטה.</span><span lang="en">A key works because of five pairs of pins. Only when every pair stops exactly on the shear line can the plug turn. Scroll, or tap one of the pins below.</span></p>
+    <p data-reveal><span lang="he">מפתח פותח בזכות חמישה זוגות של פינים. רק כשכל זוג נעצר בדיוק על קו הגזירה, הגליל מסתובב. <span class="if-motion">גללו, או הקישו על אחד הפינים למטה.</span><span class="if-still">עברו בין השלבים בחצים, או הקישו על אחד הפינים למטה.</span></span><span lang="en">A key works because of five pairs of pins. Only when every pair stops exactly on the shear line can the plug turn. <span class="if-motion">Scroll, or tap one of the pins below.</span><span class="if-still">Step through with the arrows, or tap one of the pins below.</span></span></p>
     <blockquote class="pull pull-dark" data-reveal>
       <p><span lang="he">״יגאל החליף מנגנון של פלדלת עם ציפוי עץ שלא אפשר גישה לבריחים. עבודה מקצועית נקיה למרות הקושי.״</span><span lang="en">“Yigal replaced the mechanism of a wood-clad steel door that gave no access to the bolts. Clean, professional work despite the difficulty.”</span></p>
       <footer><span lang="he">ניב שר</span><span lang="en">Niv Sher</span> · <span class="stars"><svg viewBox="0 0 92 16" aria-hidden="true"><path d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(19)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(38)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(57)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(76)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/></svg><span class="vh"><span lang="he">5 כוכבים</span><span lang="en">5 stars</span></span></span><span lang="en" class="tr"> · translated from Hebrew</span></footer>
@@ -131,6 +131,12 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
         <button type="button" class="chamber" data-go="0.76"><i class="sp"></i><i class="dr"></i><i class="kp"></i><span class="vh"><span lang="he">עותק במכונת השכפול</span><span lang="en">A copy on the duplicator</span></span></button>
         <button type="button" class="chamber" data-go="0.93"><i class="sp"></i><i class="dr"></i><i class="kp"></i><span class="vh"><span lang="he">כל הפינים על הקו</span><span lang="en">Every pin on the line</span></span></button>
         <span class="shear" aria-hidden="true"></span>
+      </div>
+      <!-- animations off: no pinning; two brass key tags step through the six stages -->
+      <div class="stepper" role="group" aria-label="מעבר בין השלבים" data-stepper>
+        <button type="button" class="step step-prev" data-step="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"/></svg><span lang="he">הקודם</span><span lang="en">Back</span></button>
+        <p class="step-n" dir="ltr"><span data-step-n>1</span> / 6</p>
+        <button type="button" class="step step-next" data-step="1"><span lang="he">הבא</span><span lang="en">Next</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"/></svg></button>
       </div>
     </div>
   </div>

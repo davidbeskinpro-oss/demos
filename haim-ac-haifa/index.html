@@ -89,7 +89,7 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
 <section class="ch ch-inside" aria-labelledby="h-inside">
   <div class="inside-intro">
     <h2 id="h-inside" data-reveal><span lang="he">כשמזגן מפסיק לקרר</span><span lang="en">When an AC stops cooling</span></h2>
-    <p data-reveal><span lang="he">המחשה של תקלה נפוצה ביחידה החיצונית, מהחום בסלון ועד שהמדחום יורד. גללו, או הקישו על הכפתורים בשלט.</span><span lang="en">An illustration of a common outdoor-unit fault, from the heat in the living room until the thermometer drops. Scroll, or tap the buttons on the remote.</span></p>
+    <p data-reveal><span lang="he">המחשה של תקלה נפוצה ביחידה החיצונית, מהחום בסלון ועד שהמדחום יורד. <span class="if-motion">גללו, או הקישו על הכפתורים בשלט.</span><span class="if-still">עברו בין השלבים בחצים, או הקישו על הכפתורים בשלט.</span></span><span lang="en">An illustration of a common outdoor-unit fault, from the heat in the living room until the thermometer drops. <span class="if-motion">Scroll, or tap the buttons on the remote.</span><span class="if-still">Step through with the arrows, or tap the buttons on the remote.</span></span></p>
   </div>
   <div class="track" data-track>
     <div class="stage" data-stage>
@@ -111,6 +111,12 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
         <button type="button" class="key" data-go="0.58"><span lang="he">לחץ</span><span lang="en">Press.</span></button>
         <button type="button" class="key" data-go="0.75"><span lang="he">ניקוז</span><span lang="en">Drain</span></button>
         <button type="button" class="key" data-go="0.93"><span lang="he">קר</span><span lang="en">Cool</span></button>
+      </div>
+      <!-- animations off: no pinning; the top of the remote steps through the six stages -->
+      <div class="stepper" role="group" aria-label="מעבר בין השלבים" data-stepper>
+        <button type="button" class="key step" data-step="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"/></svg><span class="vh"><span lang="he">השלב הקודם</span><span lang="en">Previous stage</span></span></button>
+        <p class="step-lcd"><span lang="he">שלב</span><span lang="en">Stage</span> <b dir="ltr"><span data-step-n>1</span>/6</b></p>
+        <button type="button" class="key step" data-step="1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"/></svg><span class="vh"><span lang="he">השלב הבא</span><span lang="en">Next stage</span></span></button>
       </div>
     </div>
   </div>

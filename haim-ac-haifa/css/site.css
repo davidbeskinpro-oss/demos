@@ -163,6 +163,23 @@ html.js:not(.still) .thermo:not(.in) .th-fill { transform: scaleY(0.45); }
 .key:active { transform: scale(0.94); }
 .key[aria-pressed="true"] { background: var(--cold); color: #fff; }
 @media (hover: hover) and (pointer: fine) { .key:not([aria-pressed="true"]):hover { background: var(--white-3); } }
+/* animations off: no pinning. The stage is a normal block; the top of the remote gets two arrow keys and an LCD */
+.stepper { display: none; }
+.if-still { display: none; }
+html.still .if-still { display: inline; }
+html.still .if-motion { display: none; }
+html.still .track { height: auto; }
+html.still .stage { position: relative; height: clamp(560px, 76svh, 840px); }
+html.still .stepper { display: grid; position: absolute; z-index: 2; inset-inline-end: var(--m); bottom: calc(clamp(24px, 5vh, 56px) + 138px); width: 244px; grid-template-columns: 1fr 1fr; gap: 10px; padding: 16px 16px 0; background: var(--white); border-radius: 26px 26px 0 0; }
+html.still .keys { border-radius: 0 0 40px 40px; }
+.step { display: grid; place-items: center; cursor: pointer; touch-action: manipulation; }
+html.still .step { transition: transform var(--press) var(--ease), background-color 160ms var(--ease) !important; }
+.step svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+[dir="rtl"] .step svg { transform: scaleX(-1); }
+.step:disabled { color: #a3aaa6; background: var(--white); box-shadow: inset 0 0 0 2px var(--white-2); cursor: default; }
+.step:disabled:active { transform: none; }
+.step-lcd { grid-column: 1 / -1; grid-row: 1; display: flex; align-items: center; justify-content: center; gap: 6px; height: 48px; border-radius: 14px; background: #10302f; color: var(--lcd); font-size: var(--t-small); font-weight: 500; white-space: nowrap; }
+.step-lcd b { font-size: 1.25rem; font-weight: 500; font-variant-numeric: tabular-nums; }
 @media (max-width: 900px) {
   .inside-intro { grid-column: 1 / -1; }
   .track { height: 640vh; }
@@ -173,6 +190,15 @@ html.js:not(.still) .thermo:not(.in) .th-fill { transform: scaleY(0.45); }
   .cap-text { font-size: 15px; margin-top: 6px; } .cap-note { display: none; }
   .keys { position: relative; inset: auto; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; padding: 10px var(--m) calc(12px + env(safe-area-inset-bottom)); border-radius: 0; background: var(--white-2); }
   .key { height: 44px; padding: 0 2px; font-size: 13px; }
+  /* animations off on a phone: picture, remote top, caption, buttons, one after the other in the page */
+  html.still .stage { height: auto; grid-template-rows: none; }
+  html.still .view { height: clamp(280px, 48svh, 440px); }
+  html.still .stepper { position: relative; inset: auto; order: 1; width: auto; grid-template-columns: 56px 1fr 56px; gap: 8px; padding: 10px var(--m); border-radius: 0; background: var(--white-2); }
+  html.still .step { height: 48px; background: var(--white); }
+  html.still .step-lcd { grid-column: 2; }
+  html.still .step:disabled { background: var(--white-2); box-shadow: inset 0 0 0 2px var(--white-3); }
+  html.still .caption { order: 2; }
+  html.still .keys { order: 3; border-radius: 0; }
 }
 
 /* chapter 3: fridge, ice field */

@@ -160,6 +160,28 @@ html[lang="en"] .ch h2 { font-family: "Albert Sans", var(--font); letter-spacing
 .dip[aria-pressed="true"] i { background: var(--mint); }
 .dip:active { transform: scale(0.94); }
 @media (hover: hover) and (pointer: fine) { .dip:hover::before { background: #2a332e; } .dip[aria-pressed="true"]:hover::before { background: var(--pcb); } }
+/* animations off: no pinning. The stage is a normal block and two chip-cut keys step through it */
+.stepper { display: none; }
+.if-still { display: none; }
+html.still .if-still { display: inline; }
+html.still .if-motion { display: none; }
+html.still .track { height: auto; }
+html.still .stage { position: relative; height: clamp(540px, 74svh, 820px); }
+html.still .stepper { display: flex; position: absolute; z-index: 2; bottom: 22px; inset-inline-end: var(--m); align-items: center; gap: 4px; padding: 6px; background: var(--night); }
+.step { position: relative; isolation: isolate; min-width: 48px; height: 48px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 0 18px; border: 0; background: transparent; color: var(--ink); font: inherit; font-size: var(--t-small); font-weight: 600; cursor: pointer; -webkit-user-select: none; user-select: none; touch-action: manipulation; }
+/* the fill carries the cut corner, so the focus ring outside the key is not clipped */
+.step::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--surface); clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px); }
+[dir="rtl"] .step::before { clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%); }
+.step-next::before { background: var(--pcb); }
+.step svg { width: 18px; height: 18px; flex: none; fill: none; stroke: var(--mint); stroke-width: 2.6; stroke-linecap: square; }
+[dir="rtl"] .step svg { transform: scaleX(-1); }
+html.still .step { transition: transform var(--press) var(--ease) !important; }
+.step:active:not(:disabled) { transform: scale(0.94); }
+.step:disabled { color: #5d6b63; cursor: default; }
+.step:disabled::before { background: #121a16; }
+.step:disabled svg { stroke: #3f4b44; }
+.step-n { min-width: 5ch; text-align: center; font-family: "Albert Sans", var(--font); font-weight: 600; font-variant-numeric: tabular-nums; color: var(--mint); direction: ltr; white-space: nowrap; }
+@media (hover: hover) and (pointer: fine) { .step:not(:disabled):hover::before { background: #2a332e; } .step-next:not(:disabled):hover::before { background: #185a3d; } }
 
 /* kept up to date: PCB-green field with four status LEDs */
 .ch-updates { background: var(--pcb); color: var(--pcb-ink); display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 16px; row-gap: 56px; }
@@ -308,6 +330,12 @@ html.still *, html.still *::before, html.still *::after { animation: none !impor
   .cap-text { font-size: 1rem; line-height: 1.45; }
   .dips { bottom: calc(14px + env(safe-area-inset-bottom)); gap: 4px; inset-inline-end: var(--m); justify-content: space-between; }
   .dip { width: 48px; height: 46px; }
+  /* animations off on a phone: picture, keys, caption, chips, one after the other in the page */
+  html.still .stage { height: auto; display: flex; flex-direction: column; padding-bottom: 28px; }
+  html.still .stage .view { position: relative; inset: auto; flex: none; height: clamp(300px, 50svh, 460px); }
+  html.still .stepper { position: relative; inset: auto; order: 1; margin: 12px var(--m); justify-content: space-between; }
+  html.still .caption { position: relative; inset: auto; order: 2; margin: 0 var(--m); overflow: visible; }
+  html.still .dips { position: relative; inset: auto; order: 3; margin: 14px var(--m) 0; }
   .map iframe { height: 340px; }
   .label { padding-bottom: calc(150px + env(safe-area-inset-bottom)); }
   .msg { min-height: 6em; }

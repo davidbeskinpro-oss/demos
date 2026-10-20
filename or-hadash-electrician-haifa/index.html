@@ -178,6 +178,26 @@ html:not(.still) .stage:not(.no3d) .slabels { display: none; }
 .rail button[aria-pressed="true"] { background: #3d3720; }
 .rail .tx { min-height: 2.3em; text-align: center; }
 .short .mini { position: absolute; bottom: calc(14px + env(safe-area-inset-bottom)); inset-inline-end: var(--m); }
+/* animations off: no pinning. The stage is a normal block; a second short rail beside the breakers steps through it */
+.stepper { display: none; }
+.if-still { display: none; }
+html.still .if-still { display: inline; }
+html.still .if-motion { display: none; }
+html.still .track { height: auto; }
+html.still .stage { position: relative; height: clamp(560px, 76svh, 840px); }
+html.still .stepper { display: flex; position: absolute; bottom: calc(14px + env(safe-area-inset-bottom)); inset-inline-start: var(--m); gap: 2px; padding: 10px 10px 0; background: #b9bcc0; }
+.step, .step-n { width: 62px; padding: 10px 4px 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: var(--step-small); line-height: 1.15; }
+.step { background: var(--bg); color: var(--ink); border: 0; font-family: inherit; cursor: pointer; -webkit-user-select: none; user-select: none; touch-action: manipulation; }
+html.still .step { transition: transform var(--t-press) var(--ease-out) !important; }
+.step:active:not(:disabled) { transform: scale(0.96); }
+.step .ar { width: 26px; height: 30px; display: grid; place-items: center; background: var(--accent); color: var(--accent-ink); }
+.step .ar svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+[dir="rtl"] .step .ar svg { transform: scaleX(-1); }
+.step:disabled { color: var(--muted); cursor: default; }
+.step:disabled .ar { background: var(--surface-2); color: var(--muted); }
+.step-n { background: #e8b81c; color: #111; }
+.step-n .lcdn { min-width: 46px; height: 30px; padding: 0 4px; display: flex; align-items: center; justify-content: center; white-space: nowrap; background: #c9d3b9; font-size: 1.0625rem; font-weight: 500; font-variant-numeric: tabular-nums; }
+@media (hover: hover) and (pointer: fine) { .step:not(:disabled):hover .ar { background: var(--accent-deep); } }
 .short-foot { padding: 64px var(--m) clamp(96px, 16vh, 180px); max-width: 1440px; margin-inline: auto; display: grid; grid-template-columns: 5fr 7fr; gap: 32px 64px; }
 .short-foot blockquote { margin: 0; font-size: var(--step-lead); line-height: 1.25; max-width: 30ch; }
 .short-foot cite { display: block; margin-top: 16px; font-style: normal; font-size: var(--step-body); color: var(--field-muted); }
@@ -342,6 +362,15 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
   .rail { left: var(--m); right: var(--m); transform: none; justify-content: center; padding: 6px 6px 0; gap: 2px; }
   .rail button { width: auto; flex: 1 1 0; min-width: 0; font-size: var(--step-small); padding: 8px 2px 10px; gap: 6px; }
   .rail .tg { width: 14px; height: 24px; } .rail .tg::after { height: 8px; transform: translateY(11px); }
+  /* animations off on a phone: picture (with the tester over it), the stepper rail, the label card, the breakers, in page order */
+  html.still .stage { --pic: clamp(260px, 42svh, 380px); height: auto; display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 10px; align-items: start; padding: var(--pic) var(--m) 24px; }
+  html.still .stage .stillimg, html.still .slabels { inset: 0 0 auto 0; height: var(--pic); }
+  html.still .stepper { position: relative; inset: auto; grid-row: 1; grid-column: 1 / -1; margin-top: 12px; justify-content: space-between; padding: 6px 6px 0; }
+  html.still .step, html.still .step-n { flex: 1 1 0; width: auto; flex-direction: row; justify-content: center; padding: 8px 6px 10px; gap: 10px; }
+  html.still .plate { position: relative; inset: auto; grid-row: 2; grid-column: 1; width: auto; margin-top: 12px; }
+  html.still .plate .note { display: block; }
+  html.still .meter { position: relative; inset: auto; grid-row: 2; grid-column: 2; margin-top: 12px; }
+  html.still .rail { position: relative; inset: auto; grid-row: 3; grid-column: 1 / -1; margin-top: 12px; max-width: none; }
   .short .mini { display: none; }
   .short-foot { grid-template-columns: 1fr; }
   .grow h2 { font-size: var(--step-h3); margin-bottom: 18px; }
@@ -443,7 +472,7 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
 <section class="short" id="short" aria-labelledby="short-h">
   <div class="short-head" data-r>
     <h2 id="short-h"><span lang="he">מה קורה בקיר כשיש קצר</span><span lang="en">What a short does inside the wall</span></h2>
-    <p><span lang="he"><b>המחשה, לא עבודה אמיתית:</b> חיבור אחד בקופסת הסתעפות, שזור ומלופף בסלוטייפ במקום מחבר. גללו למטה, או לחצו על המפסקים שבתחתית.</span><span lang="en"><b>An illustration, not a real job:</b> one joint in a junction box, twisted and taped instead of properly connected. Scroll down, or press the breakers at the bottom.</span></p>
+    <p><span lang="he"><b>המחשה, לא עבודה אמיתית:</b> חיבור אחד בקופסת הסתעפות, שזור ומלופף בסלוטייפ במקום מחבר. <span class="if-motion">גללו למטה, או לחצו על המפסקים שבתחתית.</span><span class="if-still">עברו בין השלבים בחצים, או לחצו על המפסקים שבתחתית.</span></span><span lang="en"><b>An illustration, not a real job:</b> one joint in a junction box, twisted and taped instead of properly connected. <span class="if-motion">Scroll down, or press the breakers at the bottom.</span><span class="if-still">Step through with the arrows, or press the breakers at the bottom.</span></span></p>
   </div>
   <div class="track" data-track>
     <div class="stage" data-stage>
@@ -468,6 +497,12 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
         <button type="button" data-go="0.565" aria-pressed="false"><span class="tg din din-s" aria-hidden="true"></span><span class="tx"><span lang="he">המפסק קפץ</span><span lang="en">Tripped</span></span></button>
         <button type="button" data-go="0.8" aria-pressed="false"><span class="tg din din-s" aria-hidden="true"></span><span class="tx"><span lang="he">איתור ותיקון</span><span lang="en">Test, fix</span></span></button>
         <button type="button" data-go="0.985" aria-pressed="false"><span class="tg din din-s" aria-hidden="true"></span><span class="tx"><span lang="he">אור חוזר</span><span lang="en">Light back</span></span></button>
+      </div>
+      <!-- animations off: no pinning; two more modules on their own rail step through the six stages -->
+      <div class="stepper" role="group" aria-label="מעבר בין השלבים" data-stepper>
+        <button type="button" class="step" data-step="-1"><span class="ar din din-s" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M14.5 6l-6 6 6 6"/></svg></span><span class="tx"><span lang="he">הקודם</span><span lang="en">Back</span></span></button>
+        <p class="step-n"><span class="lcdn" dir="ltr"><span data-step-n>1</span>/6</span><span class="tx"><span lang="he">שלב</span><span lang="en">Stage</span></span></p>
+        <button type="button" class="step" data-step="1"><span class="ar din din-s" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9.5 6l6 6-6 6"/></svg></span><span class="tx"><span lang="he">הבא</span><span lang="en">Next</span></span></button>
       </div>
       <button class="mswitch mini" type="button" role="switch" aria-checked="true" data-motion-toggle style="color:#f2f2f2"><span class="brk" aria-hidden="true" style="background:#3a3a3a"></span><span class="flag" aria-hidden="true"></span><span lang="he">אנימציות</span><span lang="en">Animations</span></button>
     </div>
@@ -687,6 +722,7 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
     $$('option[data-he]').forEach(function (o) { o.textContent = o.dataset[l]; });
     $('[data-plate]').setAttribute('aria-label', l === 'he' ? 'יצירת קשר מהירה' : 'Quick contact');
     $('[data-rail]').setAttribute('aria-label', l === 'he' ? 'שלבי הקצר' : 'Short-circuit stages');
+    $('[data-stepper]').setAttribute('aria-label', l === 'he' ? 'מעבר בין השלבים' : 'Step through the stages');
     $('.top nav').setAttribute('aria-label', l === 'he' ? 'ניווט' : 'Navigation');
     write(); status(); if (window.__shortRender) window.__shortRender();
   }
@@ -695,9 +731,11 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
   // animations on/off (the small breakers), remembered for next time
   var switches = $$('[data-motion-toggle]');
   function motionUI() { switches.forEach(function (b) { b.setAttribute('aria-checked', still() ? 'false' : 'true'); }); }
+  var story = {};
   switches.forEach(function (b) { b.addEventListener('click', function () {
-    var on = still();
+    var on = still(), keep = story.before && story.before();
     root.classList.toggle('still', !on); delete root.dataset.motionAuto;
+    if (keep) story.after(keep);
     try { localStorage.setItem('motion', on ? 'on' : 'off'); } catch (e) {}
     motionUI(); write();
     if (!on) lights(true);
@@ -777,6 +815,8 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
     var track = $('[data-track]'), stage = $('[data-stage]');
     var el = { still: $('[data-still]'), title: $('[data-st-title]'), text: $('[data-st-text]'), val: $('[data-val]'), unit: $('[data-unit]'), dial: $('[data-dial]'), what: $('[data-what]'), slab: $('[data-slabels]') };
     var chips = $$('[data-go]', track), modes = $$('[data-mode]', track);
+    // animations off: the story is a normal block, stepped with the two modules or the breakers; scrolling leaves it alone
+    var step = 0, stepN = $('[data-step-n]', track), stepBtns = $$('[data-step]', track);
     var S = {
       he: [['תקע אחד, תנור אחד.', 'תנור של 2,000 וואט מושך כ-9 אמפר דרך השקע בסלון. הכבל עולה בשרוול לקופסת הסתעפות, ושם חיבור אחד רק שזור ומלופף בסלוטייפ.'],
            ['החיבור הרופף מתחמם.', 'כשהמגע קטן, הזרם נדחק דרכו והחיבור מתחמם, הרבה יותר מהכבל. הבידוד החום משחיר, ויש ריח של פלסטיק חם. מבחוץ לא רואים כלום.'],
@@ -807,18 +847,23 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
     var STILL_L = {"1": [["heater", 0.9102, 0.7861, "<span lang=\"he\">תנור, 2,000 וואט</span><span lang=\"en\">Heater, 2,000 W</span>"]], "2": [["joint", 0.3932, 0.3979, "<span lang=\"he\">חיבור שזור ומבודד בסלוטייפ</span><span lang=\"en\">Twisted joint, taped over</span>"]], "3": [["joint", 0.4325, 0.4232, "<span lang=\"he\">חיבור שזור ומבודד בסלוטייפ</span><span lang=\"en\">Twisted joint, taped over</span>"]], "4": [["breaker", 0.4569, 0.5765, "<span lang=\"he\">המפסק של השקעים קפץ</span><span lang=\"en\">The sockets breaker tripped</span>"]], "5": [["conn", 0.6439, 0.5968, "<span lang=\"he\">מחברי מנוף חדשים</span><span lang=\"en\">New lever connectors</span>"]], "6": []};
     var shown = -1, labelKey = '';
     function placeLabels(si) {
-      var sw = stage.clientWidth, sh = stage.clientHeight, k = Math.min(sw / 1200, sh / 1000), ox = (sw - 1200 * k) / 2, oy = (sh - 1000 * k) / 2;
+      var sw = el.still.clientWidth || stage.clientWidth, sh = el.still.clientHeight || stage.clientHeight, k = Math.min(sw / 1200, sh / 1000), ox = (sw - 1200 * k) / 2, oy = (sh - 1000 * k) / 2;
       var key = si + '|' + sw + 'x' + sh + '|' + root.lang; if (key === labelKey) return; labelKey = key;
       el.slab.innerHTML = '';
       (STILL_L[si + 1] || []).forEach(function (l) {
         var e = document.createElement('span'); e.className = 'l3d l3d-' + l[0]; e.innerHTML = l[3];
-        e.style.transform = 'translate(' + (ox + 1200 * k * l[1]).toFixed(1) + 'px, ' + (oy + 1000 * k * l[2]).toFixed(1) + 'px)'; el.slab.appendChild(e);
+        el.slab.appendChild(e);
+        // keep the whole label on the stage on a narrow screen (it hangs to the left of its point in Hebrew, to the right in English)
+        var x = ox + 1200 * k * l[1], w = e.offsetWidth;
+        x = root.dir === 'rtl' ? Math.max(x, w + 16) : Math.min(x, sw - w - 16);
+        e.style.transform = 'translate(' + x.toFixed(1) + 'px, ' + (oy + 1000 * k * l[2]).toFixed(1) + 'px)';
       });
     }
     function render() {
       var r = track.getBoundingClientRect(), ps = clamp(-r.top / (r.height - innerHeight)), he = root.lang === 'he';
       var live = !!window.__short3d, useStills = !live && (still() || stage.classList.contains('no3d'));
       var sg = ps < 0.17 ? 0 : ps < 0.4 ? 1 : ps < 0.47 ? 2 : ps < 0.66 ? 3 : ps < 0.91 ? 4 : 5;
+      if (still()) sg = step;
       var p = useStills ? STILL_P[sg] : ps;
       if (useStills) {
         var src = 'img/still-' + (sg + 1) + '.jpg';
@@ -834,16 +879,29 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
         shown = sg; var st = S[he ? 'he' : 'en'][sg];
         el.title.textContent = st[0]; el.text.textContent = st[1];
         chips.forEach(function (c, i) { c.setAttribute('aria-pressed', i <= sg ? 'true' : 'false'); });
+        stepN.textContent = sg + 1;
+        stepBtns.forEach(function (b) { b.disabled = +b.dataset.step < 0 ? sg === 0 : sg === 5; });
       }
       if (live) window.__short3d.set(ps);
     }
     var ticking = false;
     addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; render(); }); } }, { passive: true });
     addEventListener('resize', function () { labelKey = ''; render(); });
-    chips.forEach(function (c) { c.addEventListener('click', function () {
+    function go(i) { step = Math.max(0, Math.min(5, i)); render(); }
+    stepBtns.forEach(function (b) { b.addEventListener('click', function () { go(shown + +b.dataset.step); }); });
+    chips.forEach(function (c, i) { c.addEventListener('click', function () {
+      if (still()) return go(i);
       var r = track.getBoundingClientRect();
       scrollTo({ top: scrollY + r.top + parseFloat(c.dataset.go) * (r.height - innerHeight), behavior: still() ? 'auto' : 'smooth' });
     }); });
+    // switching modes keeps the visitor on the same stage, and on the story if they were in it
+    story.before = function () { var r = stage.getBoundingClientRect(); return { sg: shown < 0 ? 0 : shown, pinned: !still() && r.top <= 1 && r.bottom >= innerHeight - 1, seen: r.top < innerHeight && r.bottom > 0 }; };
+    story.after = function (k) {
+      if (still()) { step = k.sg; if (k.pinned) scrollTo(0, scrollY + stage.getBoundingClientRect().top); return; }
+      if (!k.seen) return;
+      var r = track.getBoundingClientRect();
+      scrollTo(0, scrollY + r.top + parseFloat(chips[k.sg].dataset.go) * (r.height - innerHeight));
+    };
     window.__shortRender = function () { shown = -1; labelKey = ''; render(); };
     window.__stillLabels = function (o) { STILL_L = o; labelKey = ''; render(); };
     render();
