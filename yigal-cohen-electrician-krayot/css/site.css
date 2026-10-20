@@ -1,0 +1,363 @@
+/* Yigal Cohen · "wired in" concept.
+   One shape runs the page: a three-core cable. Seen side-on it is the band that separates the sections
+   (each is stripped, its cores pushed into a lever connector, and the next section switches on);
+   seen end-on it is the round frame of the photographs, the bullets and the footer.
+   Each section's ground takes the tone of one core: brown, blue, green-yellow, over the van's anthracite. */
+/* taste-skill-ignore: rendered cable materials (PVC, copper, clear plastic) need gradients; the owner's reference asks for a glass pill nav and italic accent words */
+
+:root {
+  --g0: #0e1114;
+  --ink: #eceeeb;
+  --soft: #a7aeb3;
+  --acc: #e3e4e0;
+  --acc-hi: #ffffff;
+  --acc-ink: #101316;
+  --em: #a9c1ea;
+  --glass: rgba(18, 22, 26, 0.6);
+  --card: rgba(236, 238, 235, 0.05);
+  --edge: rgba(236, 238, 235, 0.09);
+  --sans: "Hanken Grotesk", "Miriam Libre", system-ui, sans-serif;
+  --serif: "Newsreader", "Noto Serif Hebrew", Georgia, serif;
+  --ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --m: clamp(16px, 4vw, 48px);
+  --r: 26px;
+  --cb: 30px;
+  --c: clamp(40px, 6vw, 100px);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { color-scheme: dark; -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: 100%; background: var(--g0); color: var(--ink); }
+body { margin: 0; font-family: var(--sans); font-size: 17px; line-height: 1.55; background: var(--g0); overflow-x: clip; }
+html[lang="he"] body { font-family: "Miriam Libre", "Hanken Grotesk", system-ui, sans-serif; line-height: 1.6; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+p, h1, h2, h3, ul, figure, blockquote, fieldset { margin: 0; padding: 0; }
+fieldset { border: 0; min-width: 0; }
+ul { list-style: none; }
+em { font-family: var(--serif); font-style: italic; font-weight: 300; letter-spacing: -0.01em; color: var(--em); }
+html[lang="he"] em { font-style: normal; font-weight: 300; letter-spacing: 0; }
+button, a, [role="button"], label { touch-action: manipulation; }
+button, .btn, .bin, .pill a, .lev { -webkit-user-select: none; user-select: none; }
+input { font-size: 16px; }
+:focus-visible { outline: 2px solid var(--em); outline-offset: 3px; border-radius: 10px; }
+::selection { background: var(--em); color: var(--acc-ink); }
+[id] { scroll-margin-top: 90px; }
+
+/* only the visitor's language is in the page */
+html[lang="he"] body [lang="en"], html[lang="en"] body [lang="he"] { display: none !important; }
+.vh { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.skip { position: absolute; inset-inline-start: 12px; top: -60px; z-index: 100; background: var(--acc); color: var(--acc-ink); padding: 10px 14px; border-radius: 99px; }
+.skip:focus { top: 8px; }
+
+/* concept bar */
+.concept { position: relative; z-index: 3; height: var(--cb); display: flex; align-items: center; justify-content: center; background: #07090b; color: var(--soft); font-size: 13px; padding: 0 12px; text-align: center; }
+.concept p { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* the motif at text size: a cable's cut end */
+.xs { display: inline-block; width: 1em; height: 1em; flex: none; border-radius: 50%; vertical-align: -0.14em;
+  background:
+    radial-gradient(circle at 50% 31%, #d08a52 0 9%, #7a4a2a 10% 19%, transparent 20%), /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+    radial-gradient(circle at 33% 61%, #d08a52 0 9%, #2f5fae 10% 19%, transparent 20%), /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+    radial-gradient(circle at 67% 61%, #d08a52 0 9%, #c9c43a 10% 19%, transparent 20%), /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+    radial-gradient(closest-side, #e7e3d8 0 82%, #9a9f9f 84% 100%); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+
+/* ---------------------------------------------------------------- floating glass nav */
+.pill { position: fixed; z-index: 40; top: calc(var(--cb) + 10px); left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 6px; padding: 6px; border-radius: 99px; background: var(--glass); -webkit-backdrop-filter: blur(14px) saturate(1.2); backdrop-filter: blur(14px) saturate(1.2); box-shadow: inset 0 0 0 1px var(--edge); width: max-content; max-width: calc(100vw - 20px); transition: transform 320ms var(--ease); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.pill.up { transform: translateX(-50%) translateY(calc(-1 * var(--cb))); }
+.mark { display: inline-flex; align-items: center; gap: 9px; font-size: 16px; font-weight: 500; text-decoration: none; padding: 6px 10px; white-space: nowrap; }
+.mark .xs { font-size: 20px; }
+.links { display: none; gap: 2px; }
+.links a { display: block; font-size: 15px; text-decoration: none; color: var(--soft); padding: 8px 12px; border-radius: 99px; transition: color 160ms ease, background-color 160ms ease; white-space: nowrap; }
+.links a[aria-current="true"] { color: var(--ink); background: rgba(236, 238, 235, 0.08); }
+.motion, .langb { appearance: none; border: 0; font: inherit; color: var(--ink); background: rgba(236, 238, 235, 0.07); border-radius: 99px; height: 36px; padding: 0 12px; font-size: 15px; display: inline-flex; align-items: center; gap: 8px; cursor: pointer; transition: transform 140ms var(--ease), background-color 160ms ease; white-space: nowrap; }
+.motion:active, .langb:active { transform: scale(0.96); }
+.knob { width: 26px; height: 15px; border-radius: 99px; background: rgba(236, 238, 235, 0.2); position: relative; flex: none; transition: background-color 200ms ease; }
+.knob::after { content: ""; position: absolute; top: 2px; inset-inline-start: 2px; width: 11px; height: 11px; border-radius: 50%; background: var(--ink); transition: transform 220ms var(--ease); }
+.motion[aria-checked="true"] .knob { background: var(--em); }
+.motion[aria-checked="true"] .knob::after { transform: translateX(11px); background: var(--acc-ink); }
+html[dir="rtl"] .motion[aria-checked="true"] .knob::after { transform: translateX(-11px); }
+.langb { min-width: 44px; justify-content: center; font-weight: 500; }
+@media (min-width: 1080px) { .links { display: flex; } }
+@media (max-width: 380px) { .mark { padding-inline: 6px; } .motion { padding: 0 9px; } }
+@media (hover: hover) and (pointer: fine) {
+  .links a:hover { color: var(--ink); }
+  .motion:hover, .langb:hover { background: rgba(236, 238, 235, 0.13); }
+}
+
+/* ---------------------------------------------------------------- buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 24px; border-radius: 99px; background: var(--acc); color: var(--acc-ink); font-weight: 500; font-size: 17px; text-decoration: none; transition: transform 140ms var(--ease), background-color 180ms ease; }
+.btn:active { transform: scale(0.97); }
+.btn-ghost { background: rgba(236, 238, 235, 0.09); color: var(--ink); box-shadow: inset 0 0 0 1px var(--edge); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.btn-wide { width: 100%; }
+.num { font-variant-numeric: tabular-nums; }
+.tl { color: var(--em); text-underline-offset: 4px; text-decoration-thickness: 1px; }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { background: var(--acc-hi); }
+  .btn-ghost:hover { background: rgba(236, 238, 235, 0.15); }
+}
+
+/* ---------------------------------------------------------------- sections, tints */
+.sec { position: relative; isolation: isolate; background: var(--prev, var(--g0)); }
+.sec > .tint { position: absolute; inset: 0; z-index: -2; overflow: hidden; pointer-events: none; }
+.tint i { position: absolute; left: 0; right: 0; top: 0; height: calc(100% + 40vh); background: linear-gradient(180deg, var(--own) calc(100% - 40vh), transparent); will-change: transform; } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+html.still .tint i { transform: none !important; }
+.wrap { width: min(1280px, 100% - 2 * var(--m)); margin-inline: auto; }
+.sec:not(.hero) { padding-block: calc(var(--c) * 1.6 + clamp(72px, 10vw, 150px)) clamp(96px, 12vw, 170px); }
+.head { max-width: 760px; }
+.head h2 { font-size: clamp(36px, 5vw, 74px); line-height: 1.02; font-weight: 500; letter-spacing: -0.04em; text-wrap: balance; }
+html[lang="he"] .head h2 { letter-spacing: -0.015em; line-height: 1.1; font-weight: 500; }
+.head > p { margin-top: 18px; font-size: 17px; color: var(--soft); max-width: 44ch; }
+@media (min-width: 700px) { .head > p { font-size: 19px; } }
+
+/* entrances: heading, line, pieces; once */
+html.js:not(.still) [data-reveal] { opacity: 0; transform: translateY(22px); transition: opacity 700ms var(--ease) var(--d, 0ms), transform 900ms var(--ease) var(--d, 0ms); }
+html.js:not(.still) [data-reveal].in { opacity: 1; transform: none; }
+
+/* ---------------------------------------------------------------- hero */
+.hero { min-height: 100svh; margin-top: calc(-1 * var(--cb)); padding-top: var(--cb); background: var(--g0); overflow: clip; display: flex; flex-direction: column; }
+.hero-in { position: relative; z-index: 2; width: min(1280px, 100% - 2 * var(--m)); margin: 0 auto; padding-top: 112px; }
+.hero h1 { font-size: clamp(42px, 11.4vw, 108px); line-height: 0.98; font-weight: 500; letter-spacing: -0.045em; text-wrap: balance; max-width: 11ch; }
+html[lang="he"] .hero h1 { letter-spacing: -0.02em; line-height: 1.06; max-width: 10ch; }
+html[lang="en"] .hero h1 { font-size: clamp(40px, 10.4vw, 100px); }
+.lead { margin-top: 20px; max-width: 34ch; font-size: 17px; color: var(--ink); opacity: 0.86; text-wrap: pretty; }
+.acts { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 10px; }
+.meta { margin-top: 22px; display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 15px; color: var(--soft); }
+.rating { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; }
+.rating b { color: var(--ink); font-weight: 500; }
+.stars { display: inline-flex; vertical-align: middle; }
+.stars svg { width: 82px; height: 14px; fill: #e9d58a; }
+.status { display: inline-flex; align-items: center; gap: 8px; }
+.status .dot { width: 8px; height: 8px; border-radius: 50%; background: #8d8478; flex: none; }
+.status.open .dot { background: #9fd08f; box-shadow: 0 0 0 4px rgba(159, 208, 143, 0.15); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+
+/* the photo in the cable's cut end */
+.porthole { position: relative; flex: none; width: min(128vw, 110svh); aspect-ratio: 1; margin: 30px 0 calc(-0.4 * min(128vw, 110svh)); align-self: center; border-radius: 50%; }
+.porthole picture, .porthole img { position: absolute; inset: 3.4%; width: 93.2%; height: 93.2%; border-radius: 50%; object-fit: cover; object-position: 60% 30%; }
+.porthole img { transform-origin: 50% 40%; }
+.porthole .ring { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ring-print text { direction: ltr; font: 500 17px/1 var(--sans); letter-spacing: 0.18em; fill: rgba(30, 33, 34, 0.75); }
+html[lang="he"] .ring-print text { letter-spacing: 0.08em; font-family: "Miriam Libre", var(--sans); }
+.ring-print { transform-origin: 500px 500px; }
+@media (min-width: 1100px) {
+  .hero { display: grid; align-items: center; }
+  .hero-in { padding-block: 120px 90px; }
+  .hero-in > * { max-width: min(560px, 46%); }
+  .hero h1 { font-size: clamp(56px, 6.2vw, 112px); max-width: none; }
+  html[lang="en"] .hero h1 { font-size: clamp(54px, 5.8vw, 104px); }
+  .lead { font-size: 19px; }
+  .porthole { position: absolute; margin: 0; width: min(104vh, 78vw); top: calc(52% - min(52vh, 39vw)); inset-inline-end: calc(19% - min(52vh, 39vw)); }
+  .porthole picture, .porthole img { object-position: 74% 30%; }
+  html[dir="ltr"] .hero-in > * { max-width: min(560px, 44%); }
+  html[dir="ltr"] .porthole { width: min(100vh, 70vw); top: calc(52% - min(50vh, 35vw)); inset-inline-end: calc(25% - min(50vh, 35vw)); }
+}
+html.js:not(.still) .hero h1, html.js:not(.still) .lead, html.js:not(.still) .acts, html.js:not(.still) .meta { animation: rise 900ms var(--ease) both; }
+html.js:not(.still) .lead { animation-delay: 90ms; }
+html.js:not(.still) .acts { animation-delay: 170ms; }
+html.js:not(.still) .meta { animation-delay: 240ms; }
+html.js:not(.still) .porthole { animation: open 1400ms var(--ease) 120ms both; }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } }
+@keyframes open { from { opacity: 0; transform: scale(0.94) rotate(-6deg); } }
+
+/* ---------------------------------------------------------------- THE SEAM: a three-core cable across each section's top edge.
+   Geometry is laid out by the script in px (left-to-right, mirrored for Hebrew); per frame it writes transforms and opacity only. */
+.seam { position: absolute; left: 0; right: 0; top: 0; height: calc(var(--c) * 2.4); transform: translateY(-50%); pointer-events: none; z-index: 3; direction: ltr; overflow-x: clip; overflow-y: visible; }
+.rig { position: absolute; inset: 0; }
+html[dir="rtl"] .rig { transform: scaleX(-1); }
+html[dir="rtl"] .rig .print { transform: scaleX(-1); }
+.cg, .rig > * { position: absolute; top: 50%; }
+.cg { left: 0; top: 0; height: 100%; width: 100%; will-change: transform; }
+.jacket, .sleeve { position: absolute; top: 50%; height: var(--c); margin-top: calc(var(--c) / -2); overflow: hidden;
+  background: linear-gradient(180deg, #4b4f50 0%, #8f9494 14%, #babfbe 30%, #a4a9a9 46%, #878c8c 66%, #636868 84%, #3d4142 100%); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.jacket { border-radius: 0 calc(var(--c) * 0.1) calc(var(--c) * 0.1) 0 / 0 50% 50% 0; }
+.jacket::after { content: ""; position: absolute; right: 0; top: 0; bottom: 0; width: calc(var(--c) * 0.14); background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.28)); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.sleeve { border-radius: calc(var(--c) * 0.06) calc(var(--c) * 0.16) calc(var(--c) * 0.16) calc(var(--c) * 0.06) / 50%; will-change: transform, opacity; }
+.sleeve::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: calc(var(--c) * 0.12); background: linear-gradient(90deg, rgba(0, 0, 0, 0.3), transparent); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.print { position: absolute; inset: 0; display: flex; align-items: center; white-space: nowrap; font: 500 max(13px, calc(var(--c) * 0.21))/1 "Miriam Libre", var(--sans); letter-spacing: 0.1em; color: rgba(28, 31, 32, 0.62); padding-inline: 1em; }
+.print span + span { margin-inline-start: 3em; }
+.pulse { position: absolute; top: 0; bottom: 0; left: 0; width: 40vw; opacity: 0; will-change: transform, opacity; background: linear-gradient(90deg, transparent, rgba(255, 246, 222, 0.5) 50%, transparent); mix-blend-mode: screen; } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.score { position: absolute; top: 50%; height: calc(var(--c) * 1.06); margin-top: calc(var(--c) * -0.53); width: 3px; margin-left: -1.5px; border-radius: 2px; background: linear-gradient(180deg, transparent, #26292a 20%, #f4f1e8 50%, #26292a 80%, transparent); opacity: 0; } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.core { position: absolute; top: 50%; height: calc(var(--c) * 0.27); border-radius: 0 calc(var(--c) * 0.1) calc(var(--c) * 0.1) 0 / 0 50% 50% 0; }
+.core, .core .tip { background: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 32%, rgba(255, 255, 255, 0.26) 42%, transparent 56%, rgba(0, 0, 0, 0.55)), var(--ins); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.core.k1 { --ins: #8a5634; margin-top: calc(var(--c) * -0.445); }
+.core.k2 { --ins: #3666b8; margin-top: calc(var(--c) * -0.135); }
+.core.k3 { --ins: linear-gradient(180deg, #2f8a3a 0 30%, #d3cb38 30% 70%, #2f8a3a 70%); margin-top: calc(var(--c) * 0.175); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.core .cu { position: absolute; right: 0; top: 16%; bottom: 16%; border-radius: 0 40% 40% 0 / 0 50% 50% 0;
+  background: repeating-linear-gradient(104deg, rgba(60, 24, 6, 0.28) 0 1px, transparent 1px 3px), linear-gradient(180deg, #5a2e14, #c4773e 32%, #f6be8a 44%, #b0622e 64%, #4a250f); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.core .tip { position: absolute; right: 0; top: 0; bottom: 0; border-radius: inherit; will-change: transform, opacity; }
+.core .tip::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: rgba(0, 0, 0, 0.35); }
+.term { position: absolute; top: 50%; height: calc(var(--c) * 1.16); margin-top: calc(var(--c) * -0.58); border-radius: calc(var(--c) * 0.12);
+  background: linear-gradient(180deg, rgba(236, 242, 244, 0.42), rgba(205, 214, 218, 0.26) 45%, rgba(170, 180, 186, 0.36)); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.45), inset 0 2px 0 rgba(255, 255, 255, 0.6), 0 6px 18px rgba(0, 0, 0, 0.35); z-index: 2; } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.term .cell { position: absolute; left: 4%; right: 4%; height: 27%; border-radius: calc(var(--c) * 0.05); }
+.term .cell:nth-child(1) { top: 5.5%; } .term .cell:nth-child(2) { top: 36.5%; } .term .cell:nth-child(3) { top: 67.5%; }
+.term .lever { position: absolute; right: 0; top: 4%; bottom: 4%; width: 54%; border-radius: calc(var(--c) * 0.05) calc(var(--c) * 0.08) calc(var(--c) * 0.08) calc(var(--c) * 0.05); transform-origin: 100% 50%; will-change: transform;
+  background: repeating-linear-gradient(90deg, rgba(120, 50, 0, 0.22) 0 1px, transparent 1px 4px), linear-gradient(180deg, #ffb35c, #f08c2a 40%, #d26f12 80%, #a6530a); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.term .lever::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: rgba(255, 236, 210, 0.55); opacity: var(--lift, 0); }
+.term .glow { position: absolute; left: 50%; top: 50%; width: calc(var(--c) * 3.4); height: calc(var(--c) * 3.4); margin: calc(var(--c) * -1.7); border-radius: 50%; background: radial-gradient(closest-side, var(--glow, rgba(255, 236, 200, 0.42)), transparent); opacity: 0; z-index: -1; will-change: opacity; } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+
+/* ---------------------------------------------------------------- van */
+.van-grid { display: grid; gap: 28px; }
+.round { padding: clamp(8px, 1.2vw, 14px); border-radius: 50%; aspect-ratio: 1; background: radial-gradient(closest-side, #5d6263 0 93%, #a7acac 95.5%, #8c9192 98%, #4c5051 100%); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.round img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: 50% 30%; }
+.ph { position: relative; }
+.ph img { width: 100%; height: 100%; object-fit: cover; border-radius: 999px; }
+.ph figcaption { margin-top: 12px; font-size: 15px; color: var(--soft); text-align: center; }
+.van-grid .round { width: min(86vw, 420px); justify-self: center; }
+.van-grid .smalls { display: contents; }
+.ph-van, .ph-front { display: inline-block; }
+.van-grid { grid-template-columns: 1fr 1fr; }
+.van-grid .head, .van-grid .round { grid-column: 1 / -1; }
+.ph-van img { aspect-ratio: 3 / 5; }
+.ph-front img { aspect-ratio: 3 / 5; object-position: 70% 50%; }
+@media (min-width: 900px) {
+  .van-grid { grid-template-columns: repeat(12, 1fr); gap: 0 24px; align-items: start; }
+  .van-grid .head { grid-column: 1 / span 6; grid-row: 1; }
+  .van-grid .round { grid-column: 7 / span 6; grid-row: 1 / span 2; width: min(100%, 600px); justify-self: end; }
+  .ph-van { grid-column: 1 / span 3; grid-row: 2; margin-top: 56px; }
+  .ph-front { grid-column: 4 / span 3; grid-row: 2; margin-top: 136px; }
+}
+
+/* ---------------------------------------------------------------- work: the run */
+.jobs { margin-top: clamp(44px, 6vw, 80px); display: grid; grid-auto-flow: column; grid-auto-columns: minmax(250px, 72vw); gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 6px; scrollbar-width: none; margin-inline: calc(-1 * var(--m)); padding-inline: var(--m); scroll-padding-inline: var(--m); overscroll-behavior-x: contain; touch-action: pan-x pan-y; }
+.jobs::-webkit-scrollbar { display: none; }
+.job { scroll-snap-align: start; background: var(--card); box-shadow: inset 0 0 0 1px var(--edge); border-radius: var(--r); padding: 10px 10px 24px; min-width: 0; } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.job h3 { margin: 20px 12px 0; font-size: 25px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.12; }
+.job p { margin: 8px 12px 0; color: var(--soft); font-size: 17px; }
+.jv { position: relative; aspect-ratio: 30 / 26; border-radius: 18px; overflow: hidden; background: #1a1e22; }
+.jv svg { width: 100%; height: 100%; }
+.jv-photo img { width: 100%; height: 100%; object-fit: cover; }
+@media (min-width: 760px) { .jobs { grid-auto-columns: minmax(260px, 38vw); } }
+@media (min-width: 1200px) { .jobs { grid-auto-flow: row; grid-template-columns: repeat(5, 1fr); overflow: visible; margin-inline: 0; padding-inline: 0; } .jv { aspect-ratio: 4 / 5; } .jv svg { height: 100%; } .jv-wall svg, .jv-socket svg { width: 100%; height: 100%; } }
+.jv-wall svg, .jv-socket svg { object-fit: cover; }
+/* the card pictures come alive once, as the run comes into view */
+html.js:not(.still) .jobs:not(.go) .jv-wall .fault { opacity: 0; }
+html.js:not(.still) .jobs:not(.go) .jv-wall .hid { opacity: 0.12; }
+html.js:not(.still) .jobs:not(.go) .jv-socket .plug { transform: translateY(70px); }
+html.js:not(.still) .jobs:not(.go) .jv-socket .uled { opacity: 0.25; }
+.fanw { position: absolute; width: 34% !important; height: auto !important; aspect-ratio: 1; inset-inline-end: 8px; top: 8px; }
+.fanw .blades { transform-origin: 50px 50px; }
+.jv-out .lampglow { position: absolute; left: 55%; top: 24%; width: 40%; aspect-ratio: 1; margin: -20% 0 0 -20%; border-radius: 50%; background: radial-gradient(closest-side, rgba(255, 228, 170, 0.75), rgba(255, 210, 140, 0.18) 55%, transparent); opacity: 0; mix-blend-mode: screen; } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+html.js:not(.still) .jobs.go .jv-wall .probe { animation: probe 2600ms var(--ease) 300ms both; }
+html.js:not(.still) .jobs.go .jv-wall .hid { animation: show 900ms ease 1500ms both; }
+html.js:not(.still) .jobs.go .jv-wall .fault { animation: show 600ms ease 2300ms both; }
+html.js:not(.still) .jobs.go .jv-socket .plug { animation: plug 1200ms var(--ease) 600ms both; }
+html.js:not(.still) .jobs.go .jv-socket .uled { animation: led 400ms ease 1700ms both; }
+html.js:not(.still) .jobs.go .fanw .blades { animation: spin 4200ms cubic-bezier(0.3, 0, 0.2, 1) 500ms both; }
+html.js:not(.still) .jobs.go .jv-out .lampglow { animation: lamp 1200ms ease 900ms both; }
+html.js:not(.still) .jobs.go .jv-photo img { animation: drift 5000ms var(--ease) both; }
+.jv-wall .probe { transform: translate(130px, 104px); }
+html.still .jv-out .lampglow { opacity: 0.7; }
+html.js:not(.still) .jobs:not(.go) .jv-wall .probe { transform: translate(40px, 120px); }
+@keyframes probe { 0% { transform: translate(40px, 150px); } 40% { transform: translate(90px, 112px); } 70% { transform: translate(150px, 108px); } 100% { transform: translate(130px, 104px); } }
+@keyframes show { from { opacity: 0; } to { opacity: 1; } }
+@keyframes plug { from { transform: translateY(70px); } to { transform: none; } }
+@keyframes led { from { opacity: 0.25; } to { opacity: 1; } }
+@keyframes spin { from { transform: rotate(0); } to { transform: rotate(1440deg); } }
+@keyframes lamp { 0% { opacity: 0; } 30% { opacity: 0.5; } 40% { opacity: 0.2; } 100% { opacity: 0.75; } }
+@keyframes drift { from { transform: scale(1.08); } to { transform: none; } }
+
+/* ---------------------------------------------------------------- always: the meter */
+.always-grid { display: grid; gap: 40px; align-items: center; }
+.hours { margin-top: 30px; border-collapse: collapse; font-size: 17px; }
+.hours td { padding: 4px 0; }
+.hours td + td { padding-inline-start: 28px; color: var(--ink); font-weight: 500; }
+.hours td:first-child { color: var(--soft); }
+.status.big { margin-top: 14px; font-size: 17px; }
+.meter { position: relative; border-radius: var(--r); overflow: hidden; max-width: 640px; width: 100%; justify-self: center; background: #1a1e22; }
+.meter img { width: 100%; height: auto; filter: brightness(0.86) contrast(1.04); }
+.lcd { position: absolute; left: 23.6%; top: 28.8%; width: 43.2%; height: 16.6%; border-radius: 3px; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(180deg, #4d463b, #57503f 40%, #4f4839); box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.lcd svg { height: 66%; width: auto; }
+.lcd .seg { fill: #1f1b15; } .lcd .off { fill: rgba(31, 27, 21, 0.07); }
+.meter figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 20px 16px; font-size: 15px; color: #f2f1ec; background: linear-gradient(180deg, transparent, rgba(10, 12, 14, 0.82)); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+@media (min-width: 900px) { .always-grid { grid-template-columns: 5fr 6fr; gap: 64px; } }
+
+/* ---------------------------------------------------------------- reviews */
+.quotes { margin-top: clamp(44px, 6vw, 80px); display: grid; gap: 14px; }
+.q { background: var(--card); box-shadow: inset 0 0 0 1px var(--edge); border-radius: var(--r); padding: clamp(24px, 3vw, 40px); display: flex; flex-direction: column; justify-content: space-between; gap: 26px; min-width: 0; } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.q p { font-size: 19px; line-height: 1.5; text-wrap: pretty; overflow-wrap: anywhere; }
+.q-main p { font-size: clamp(21px, 2.3vw, 32px); line-height: 1.34; letter-spacing: -0.01em; }
+.q footer { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 15px; color: var(--soft); }
+.q footer bdi { color: var(--ink); font-weight: 500; overflow-wrap: anywhere; }
+.q footer .xs { font-size: 22px; }
+.tr { color: var(--soft); }
+@media (min-width: 900px) { .quotes { grid-template-columns: 1fr 1fr; } .q-main { grid-row: span 2; } }
+
+/* ---------------------------------------------------------------- the message: the parts organiser */
+.msg-grid { display: grid; gap: 40px; align-items: start; }
+.box { position: relative; border-radius: 28px; padding: 22px 14px 16px; background: linear-gradient(180deg, #24303c, #1b2530); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.07), inset 0 2px 0 rgba(255, 255, 255, 0.06); max-width: 640px; width: 100%; } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.box::before, .box::after { content: ""; position: absolute; top: -5px; width: 46px; height: 12px; border-radius: 4px 4px 2px 2px; background: linear-gradient(180deg, #4d8ee6, #2a62b8); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.box::before { inset-inline-start: 18%; } .box::after { inset-inline-end: 18%; }
+.bins { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.bins.when { margin-top: 8px; }
+.bin { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; min-height: 104px; padding: 10px 6px; border-radius: 16px; cursor: pointer; text-align: center;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.12)); box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35); transition: background-color 180ms ease, transform 140ms var(--ease); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.when .bin { min-height: 62px; flex-direction: row; gap: 10px; }
+.bin input { position: absolute; opacity: 0; pointer-events: none; }
+.bin .part { width: 50px; height: 50px; transition: transform 260ms var(--ease); }
+.bin .bl { font-size: 15px; line-height: 1.25; color: var(--soft); transition: color 160ms ease; overflow-wrap: anywhere; }
+.bin:active { transform: scale(0.97); }
+.bin:has(input:checked) { background: rgba(169, 193, 234, 0.16); box-shadow: inset 0 0 0 1.5px rgba(169, 193, 234, 0.55); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.bin:has(input:checked) .bl { color: var(--ink); }
+.bin:has(input:checked) .part { transform: translateY(-4px) scale(1.06); }
+.bin:has(input:focus-visible) { outline: 2px solid var(--em); outline-offset: 2px; }
+.core-dot { width: 20px; height: 20px; border-radius: 50%; flex: none; background: radial-gradient(circle, #d08a52 0 30%, var(--c) 34%); box-shadow: inset 0 -2px 3px rgba(0, 0, 0, 0.35); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.core-dot.gy { background: radial-gradient(circle, #d08a52 0 30%, transparent 34%), linear-gradient(90deg, #2f8a3a 0 30%, #d3cb38 30% 70%, #2f8a3a 70%); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.where { display: block; margin-top: 16px; font-size: 15px; color: var(--soft); }
+.where input { display: block; width: 100%; margin-top: 6px; height: 50px; border-radius: 14px; border: 0; padding: 0 16px; background: rgba(0, 0, 0, 0.3); color: var(--ink); font: inherit; font-size: 16px; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.where input::placeholder { color: rgba(167, 174, 179, 0.7); }
+.where input:focus-visible { outline: 2px solid var(--em); outline-offset: 2px; }
+/* the message, printed along a grey cable: every wrapped line is a length of sheath */
+.printout { margin: 18px 0 16px; min-height: 120px; }
+.printout p { font: 500 15px/2.55 "Miriam Libre", var(--sans); letter-spacing: 0.02em; color: #24282a; overflow-wrap: anywhere; }
+html[lang="en"] .printout p { font-family: "Hanken Grotesk", var(--sans); letter-spacing: 0.04em; }
+.printout .ink { padding: 0.5em 1.1em; border-radius: 99px; -webkit-box-decoration-break: clone; box-decoration-break: clone;
+  background: linear-gradient(180deg, #5b6061 0%, #a0a5a5 16%, #c4c8c7 32%, #b0b5b5 50%, #8f9494 72%, #5f6465 100%); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.caret { display: inline-block; width: 0.5em; height: 0.9em; vertical-align: -0.1em; background: rgba(36, 40, 42, 0.5); border-radius: 1px; }
+@media (min-width: 900px) { .msg-grid { grid-template-columns: 5fr 6fr; gap: 64px; } }
+@media (hover: hover) and (pointer: fine) { .bin:hover { background-color: rgba(255, 255, 255, 0.05); } }
+
+/* ---------------------------------------------------------------- find */
+.find-grid { display: grid; gap: 40px; align-items: center; }
+.find .status { margin-top: 18px; font-size: 17px; color: var(--soft); }
+.find .acts { margin-top: 26px; }
+.find .tl { display: inline-block; margin-top: 20px; font-size: 17px; }
+.map { border-radius: var(--r); overflow: hidden; aspect-ratio: 4 / 3; background: #1b1f23; }
+.map iframe { width: 100%; height: 100%; border: 0; filter: grayscale(0.4) brightness(0.9); }
+@media (min-width: 900px) { .find-grid { grid-template-columns: 5fr 6fr; gap: 64px; } }
+
+/* ---------------------------------------------------------------- footer: the cable end, head-on */
+.foot { background: #0a0c0e; padding: 90px var(--m) calc(130px + env(safe-area-inset-bottom)); text-align: center; }
+.endface { position: relative; width: 112px; height: 112px; margin: 0 auto 26px; border-radius: 50%; background: radial-gradient(closest-side, #e7e3d8 0 80%, #a7acac 82%, #8c9192 92%, #4c5051 100%); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.endface i { position: absolute; width: 36%; height: 36%; border-radius: 50%; background: radial-gradient(circle, #f1b07a 0, #c4773e 30%, #8a4a20 46%, var(--k) 50%); box-shadow: inset 0 -3px 5px rgba(0, 0, 0, 0.3); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.endface .c1 { --k: #7a4a2a; left: 32%; top: 13%; } .endface .c2 { --k: #2f5fae; left: 14%; top: 45%; } .endface .c3 { --k: #c9c43a; left: 50%; top: 45%; }
+.f-name { font-size: clamp(30px, 4vw, 48px); font-weight: 500; letter-spacing: -0.03em; }
+.f-line { margin-top: 10px; color: var(--soft); font-size: 17px; }
+.f-line a { text-decoration: none; color: var(--ink); white-space: nowrap; }
+.fine { margin: 26px auto 0; max-width: 62ch; font-size: 15px; color: rgba(167, 174, 179, 0.82); }
+
+/* ---------------------------------------------------------------- sticky: the two-lever connector */
+.wago { position: fixed; z-index: 30; bottom: calc(14px + env(safe-area-inset-bottom)); left: 50%; display: flex; gap: 6px; padding: 8px; border-radius: 18px; transform: translate(-50%, 140%); opacity: 0; transition: transform 420ms var(--ease), opacity 260ms ease; }
+.wago.show { transform: translate(-50%, 0); opacity: 1; }
+.wago .housing { position: absolute; inset: 0; border-radius: inherit; background: linear-gradient(180deg, rgba(214, 224, 228, 0.3), rgba(160, 172, 178, 0.2) 55%, rgba(120, 130, 136, 0.3)); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 10px 30px rgba(0, 0, 0, 0.45); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.wago .wires { position: absolute; top: 50%; inset-inline-start: -26px; width: 34px; height: 30px; margin-top: -15px; }
+.wago .wires i { position: absolute; inset-inline-start: 0; width: 100%; height: 10px; border-radius: 5px; }
+.wago .w-br { top: 2px; background: linear-gradient(180deg, #3d2414, #a86e46 40%, #2f1b0e); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.wago .w-bl { bottom: 2px; background: linear-gradient(180deg, #13284d, #5687d6 40%, #0f1f3c); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.lev { position: relative; display: flex; flex-direction: column; align-items: stretch; gap: 5px; width: 104px; text-decoration: none; color: #101316; border-radius: 12px; }
+.lv { display: block; height: 26px; perspective: 160px; }
+.lv i { position: relative; }
+.lv i::after { content: ""; position: absolute; left: 10%; right: 10%; top: 3px; height: 5px; border-radius: 3px; background: rgba(150, 62, 0, 0.28); }
+.lv i { display: block; height: 100%; border-radius: 9px 9px 7px 7px; transform-origin: 50% 100%; transition: transform 160ms var(--ease);
+  background: repeating-linear-gradient(90deg, rgba(120, 50, 0, 0.2) 0 1px, transparent 1px 5px), linear-gradient(180deg, #ffb760, #f08c2a 45%, #cf6c10 85%, #a6530a); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5); } /* taste-skill-ignore: cable materials (PVC, copper, clear plastic) and the reference's soft card edges */
+.lt { display: flex; align-items: center; justify-content: center; gap: 6px; height: 30px; border-radius: 8px; background: rgba(240, 244, 245, 0.88); font-size: 15px; font-weight: 500; }
+.lt svg { width: 16px; height: 16px; fill: currentColor; flex: none; }
+.lev:active .lv i { transform: rotateX(38deg); }
+@media (min-width: 900px) { .wago { left: auto; inset-inline-end: 24px; transform: translateY(140%); } .wago.show { transform: none; } }
+@media (hover: hover) and (pointer: fine) { .lev:hover .lv i { transform: rotateX(18deg); } }
+
+/* ---------------------------------------------------------------- animations off / reduced motion */
+html.still *, html.still *::before, html.still *::after { animation: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  html:not(.motion-forced) [data-reveal] { transition: opacity 300ms ease !important; transform: none !important; }
+}
+@media (min-width: 600px) and (max-width: 899px) { .van-grid .ph { width: min(100%, 250px); justify-self: center; } }
