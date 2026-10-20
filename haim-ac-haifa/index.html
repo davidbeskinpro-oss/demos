@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#1e2428">
-<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#0d1316">
+<meta name="color-scheme" content="dark">
 <title>חיים מזגנים · טכנאי מזגנים ומקררים בחיפה והקריות</title>
 <meta name="description" content="קונספט לדוגמה לאתר של חיים מזגנים, טכנאי מזגנים ומקררים בחיפה והקריות. 4.4 בגוגל מ-54 ביקורות.">
 <script>document.documentElement.classList.add('js');
@@ -14,271 +14,325 @@
 var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage.getItem('lang')}catch(e){}l=q==='en'||q==='he'?q:l==='en'?'en':'he';r.lang=l;r.dir=l==='he'?'rtl':'ltr';})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=STIX+Two+Text:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="img/hero-unit.webp" type="image/webp">
 <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
 <a class="skip" href="#main"><span lang="he">דלג לתוכן</span><span lang="en">Skip to content</span></a>
 
 <div class="concept" data-concept="קונספט לדוגמה שנבנה עבור חיים מזגנים · זה אינו האתר הרשמי של העסק">
-  <p class="concept-text"><span lang="he">קונספט לדוגמה שנבנה עבור חיים מזגנים · זה אינו האתר הרשמי של העסק</span><span lang="en">A sample concept built for Haim Mazganim · This is not the business’s official website</span></p>
+  <p class="concept-text"><span lang="he">קונספט לדוגמה שנבנה עבור חיים מזגנים · זה אינו האתר הרשמי של העסק</span><span lang="en">A sample concept built for Haim AC · This is not the business’s official website</span></p>
   <div class="concept-tools">
     <button type="button" class="tool" data-set-lang><span lang="he">English</span><span lang="en">עברית</span></button>
     <button type="button" class="tool motion-switch" role="switch" aria-checked="true" data-motion-toggle>
-      <svg viewBox="0 0 24 24" aria-hidden="true" class="ms-fan"><path d="M12 10.2c-.9-3.6.4-7 3-7.2 2.4-.2 3.1 3.4-1.2 6.4M13.8 12c3.6-.9 7 .4 7.2 3 .2 2.4-3.4 3.1-6.4-1.2M12 13.8c.9 3.6-.4 7-3 7.2-2.4.2-3.1-3.4 1.2-6.4M10.2 12c-3.6.9-7-.4-7.2-3-.2-2.4 3.4-3.1 6.4 1.2"/><circle cx="12" cy="12" r="1.8"/></svg>
+      <svg viewBox="0 0 24 24" aria-hidden="true" class="ms-drop"><path d="M12 3.2c3.4 4.3 5.6 7.6 5.6 10.4a5.6 5.6 0 0 1-11.2 0c0-2.8 2.2-6.1 5.6-10.4z"/></svg>
       <span lang="he">אנימציה <b class="ms-on">פועלת</b><b class="ms-off">כבויה</b></span><span lang="en">Animation <b class="ms-on">on</b><b class="ms-off">off</b></span>
     </button>
   </div>
 </div>
 
-<!-- the hero is the indoor unit: the name sits on its front panel, the air comes out of its louvre -->
-<header class="hero" id="top">
-  <div class="unit">
-    <div class="unit-panel">
-      <h1 class="name" translate="no"><span lang="he">חיים מזגנים</span><span lang="en">Haim Mazganim</span></h1>
-      <div class="unit-display" aria-hidden="true"><span class="led"></span><span class="lcd" data-lcd>24°</span></div>
-    </div>
-    <div class="louvre" aria-hidden="true"><span></span></div>
-  </div>
-  <div class="airflow" aria-hidden="true">
-    <i style="--x:8%;--d:0ms"></i><i style="--x:21%;--d:420ms"></i><i style="--x:34%;--d:180ms"></i><i style="--x:47%;--d:640ms"></i><i style="--x:60%;--d:300ms"></i><i style="--x:73%;--d:820ms"></i><i style="--x:86%;--d:120ms"></i>
-  </div>
-  <div class="hero-body">
-    <div class="hero-text">
-      <p class="lead"><span lang="he">חיים מזגנים, טכנאי מזגנים ומקררים בחיפה והקריות. חיים סבן מתקן ומתקין מזגנים, ומתקן מקררים, מכונות כביסה ומייבשים, אצלכם בבית.</span><span lang="en">Haim Mazganim, air-conditioner and refrigerator technician in Haifa and the Krayot. Haim Saban repairs and installs air conditioners, and repairs fridges, washing machines and dryers, at your home.</span></p>
-      <p class="rating"><a href="https://maps.google.com/?cid=14391809792870270112" target="_blank" rel="noopener"><b>4.4</b> <svg class="stars" viewBox="0 0 92 16" aria-hidden="true"><path transform="translate(0)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(19)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(38)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(57)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(76)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z" class="off"/></svg> <span lang="he">54 ביקורות בגוגל</span><span lang="en">54 Google reviews</span></a></p>
-      <p class="status" data-status></p>
-      <div class="actions">
-        <a class="btn btn-call" href="tel:+972544895289"><span lang="he">התקשרו לחיים</span><span lang="en">Call Haim</span> <span class="num" dir="ltr">054-489-5289</span></a>
-        <a class="btn btn-wa" href="https://wa.me/972544895289" data-wa><span lang="he">וואטסאפ לחיים</span><span lang="en">WhatsApp Haim</span></a>
-      </div>
-    </div>
-    <figure class="hero-photo">
-      <img src="img/van-street.jpg" width="900" height="1600" alt="" data-alt-he="הרכב של חיים מזגנים חונה מול בניין מגורים, עם יחידות מזגן חיצוניות על הקיר" data-alt-en="Haim’s van parked in front of an apartment block with outdoor AC units on the wall" fetchpriority="high">
-      <figcaption><span lang="he">הרכב של חיים, מול בניין עם מזגנים. תמונה מדף העסק בגוגל.</span><span lang="en">Haim’s van, outside a block full of AC units. Photo from the Google listing.</span></figcaption>
-    </figure>
-  </div>
+<!-- the header is the unit's indicator strip: one small lamp per part of the page, lit for the part you are in -->
+<header class="bar">
+  <a class="mark" href="#top" translate="no"><span lang="he">חיים מזגנים</span><span lang="en">Haim AC</span></a>
+  <nav class="lamps" aria-label="ניווט">
+    <a href="#craft" data-lamp="craft"><i aria-hidden="true"></i><span lang="he">השירות</span><span lang="en">Service</span></a>
+    <a href="#drip" data-lamp="drip"><i aria-hidden="true"></i><span lang="he">הטפטוף</span><span lang="en">The drip</span></a>
+    <a href="#install" data-lamp="install"><i aria-hidden="true"></i><span lang="he">התקנה</span><span lang="en">Installing</span></a>
+    <a href="#reviews" data-lamp="reviews"><i aria-hidden="true"></i><span lang="he">ביקורות</span><span lang="en">Reviews</span></a>
+    <a href="#visit" data-lamp="visit"><i aria-hidden="true"></i><span lang="he">שעות</span><span lang="en">Hours</span></a>
+  </nav>
+  <a class="bar-call" href="tel:+972544895289"><span lang="he">התקשרו לחיים</span><span lang="en">Call Haim</span></a>
 </header>
+
+<!-- the hero: the indoor unit itself, big, with water beading on its lower edge; the drops that fall from it carry you down the page -->
+<section class="hero" id="top" aria-labelledby="h1">
+  <div class="unit" data-unit>
+    <img src="img/hero-unit.webp" width="1600" height="820" alt="" data-alt-he="יחידת מזגן פנימית על הקיר, טיפות מים על השפה התחתונה שלה" data-alt-en="An indoor AC unit on the wall, with water beading on its lower edge" fetchpriority="high">
+    <div class="beads" data-beads aria-hidden="true">
+      <svg class="drop d1" viewBox="0 0 20 28"><path class="dw" d="M10 1C13 7 18 12 18 18a8 8 0 0 1-16 0C2 12 7 7 10 1z"/><path class="dr" d="M4 19a6 6 0 0 0 9 5"/><circle class="dh" cx="7" cy="15" r="2"/></svg>
+      <svg class="drop d2" viewBox="0 0 20 28"><path class="dw" d="M10 1C13 7 18 12 18 18a8 8 0 0 1-16 0C2 12 7 7 10 1z"/><path class="dr" d="M4 19a6 6 0 0 0 9 5"/><circle class="dh" cx="7" cy="15" r="2"/></svg>
+    </div>
+  </div>
+  <div class="hero-text">
+    <h1 id="h1" class="name" translate="no"><span lang="he">חיים מזגנים</span><span lang="en">Haim AC</span></h1>
+    <p class="lead"><span lang="he">חיים מזגנים, טכנאי מזגנים ומקררים בחיפה והקריות. חיים סבן מתקן ומתקין מזגנים, ומתקן מקררים, מכונות כביסה ומייבשים, אצלכם בבית.</span><span lang="en">Haim AC, air-conditioner and refrigerator technician in Haifa and the Krayot. Haim Saban repairs and installs air conditioners, and repairs fridges, washing machines and dryers, in your home.</span></p>
+    <div class="hero-facts">
+      <a class="rating" href="https://maps.google.com/?cid=14391809792870270112" target="_blank" rel="noopener"><b>4.4</b><svg class="stars" viewBox="0 0 92 16" aria-hidden="true"><path d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(19)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(38)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(57)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(76)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z" class="off"/></svg><span lang="he">54 ביקורות בגוגל</span><span lang="en">54 Google reviews</span></a>
+      <p class="status" data-status></p>
+    </div>
+    <div class="actions" data-hero-actions>
+      <a class="btn btn-call" href="tel:+972544895289"><span lang="he">התקשרו לחיים</span><span lang="en">Call Haim</span><span class="num" dir="ltr">054-489-5289</span></a>
+      <a class="btn btn-wa" href="https://wa.me/972544895289" data-wa target="_blank" rel="noopener"><span lang="he">וואטסאפ לחיים</span><span lang="en">WhatsApp Haim</span></a>
+    </div>
+  </div>
+</section>
 
 <main id="main">
 
-<!-- chapter 1: the heat -->
-<section class="ch ch-heat" aria-labelledby="h-heat">
-  <div class="heat-text">
-    <h2 id="h-heat" data-reveal><span lang="he">ערב חג, 15:00, והמזגן שותק</span><span lang="en">Holiday eve, 3 pm, and the AC quits</span></h2>
-    <p data-reveal><span lang="he">לקוחה חזרה הביתה ביום לוהט, הדליקה את המזגן, והוא לא עבד. היא חיפשה בגוגל, וחיים היה הראשון שהיא התקשרה אליו. הוא אמר שהוא מגיע מיד, ומצא את התקלה מהר.</span><span lang="en">A customer came home on a scorching day, switched on the AC, and nothing happened. She searched Google, and Haim was the first person she called. He said he was on his way, and found the fault quickly.</span></p>
+<!-- the craft: what Haim works on, straight from his own business card -->
+<section class="sec craft" id="craft" data-splash aria-labelledby="h-craft">
+  <svg class="fall" viewBox="0 0 20 28" aria-hidden="true"><path class="dw" d="M10 1C13 7 18 12 18 18a8 8 0 0 1-16 0C2 12 7 7 10 1z"/><path class="dr" d="M4 19a6 6 0 0 0 9 5"/><circle class="dh" cx="7" cy="15" r="2"/></svg>
+  <span class="ripple" aria-hidden="true"><i></i><i></i><b></b><b></b><b></b><b></b><b></b></span>
+  <div class="craft-grid">
+    <div class="craft-text">
+      <h2 id="h-craft" class="rv"><span lang="he">מזגנים, מקררים, וגם הכביסה</span><span lang="en">Air conditioners, fridges, laundry</span></h2>
+      <p class="rv"><span lang="he">חיים סבן מגיע אליכם הביתה, בחיפה ובקריות, ועובד על מה שמקרר ועל מה שמסתובב: מתקן ומתקין מזגנים, ומתקן מקררים, מכונות כביסה ומייבשי כביסה. ככה זה כתוב גם על כרטיס הביקור שלו.</span><span lang="en">Haim Saban comes to your home, in Haifa and the Krayot, and works on the things that cool and the things that spin: he repairs and installs air conditioners, and repairs fridges, washing machines and tumble dryers. That is what his business card says too.</span></p>
+      <ul class="appliances rv" role="list">
+        <li><b><span lang="he">מזגנים</span><span lang="en">Air conditioners</span></b><span lang="he">תיקונים והתקנות</span><span lang="en">Repairs and installations</span></li>
+        <li><b><span lang="he">מקררים</span><span lang="en">Fridges</span></b><span lang="he">תיקון בבית שלכם</span><span lang="en">Repaired in your home</span></li>
+        <li><b><span lang="he">מכונות כביסה</span><span lang="en">Washing machines</span></b><span lang="he">תיקונים</span><span lang="en">Repairs</span></li>
+        <li><b><span lang="he">מייבשי כביסה</span><span lang="en">Tumble dryers</span></b><span lang="he">תיקונים</span><span lang="en">Repairs</span></li>
+      </ul>
+    </div>
+    <figure class="card-photo rv">
+      <img src="img/card.jpg" width="1200" height="825" loading="lazy" alt="" data-alt-he="כרטיס הביקור של חיים: מקררים ומזגנים, תיקונים והתקנות, מזגנים, מקררים, מכונות כביסה, מייבשי כביסה, מכבדים כרטיסי אשראי, 0544-89-52-89" data-alt-en="Haim’s business card: fridges and air conditioners, repairs and installations; air conditioners, fridges, washing machines, dryers; credit cards accepted; 0544-89-52-89">
+      <figcaption><span lang="he">כרטיס הביקור של חיים. תמונה מדף העסק בגוגל.</span><span lang="en">Haim’s business card. Photo from the Google listing.</span></figcaption>
+    </figure>
   </div>
-  <figure class="thermo" data-reveal aria-hidden="true">
-    <svg viewBox="0 0 140 420">
-      <rect class="th-body" x="40" y="10" width="60" height="330" rx="30"/>
-      <rect class="th-bore" x="62" y="40" width="16" height="290" rx="8"/>
-      <rect class="th-fill" x="62" y="90" width="16" height="240" rx="8"/>
-      <circle class="th-bulb" cx="70" cy="360" r="42"/>
-      <g class="th-ticks"><path d="M100 70h22M100 120h14M100 170h22M100 220h14M100 270h22"/></g>
-      <text x="128" y="76">40</text><text x="128" y="176">30</text><text x="128" y="276">20</text>
-    </svg>
-    <figcaption><span lang="he">ציור: מדחום בסלון ביום של שרב</span><span lang="en">Drawing: a living-room thermometer in a heatwave</span></figcaption>
-  </figure>
-  <blockquote class="quote quote-heat" data-reveal>
-    <p><span lang="he">״חיים לא היסס ואמר שהוא מגיע במיידי לבדוק מה התקלה, חיים איתר את התקלה במהרה, ניכר כי הוא מקצוען ומאד אמין.״</span><span lang="en">“Haim didn’t hesitate and said he was coming right away to check the fault. He found it quickly; you can tell he’s a professional and very reliable.”</span></p>
-    <footer><span translate="no">I.M TRAVELS</span> · <svg class="stars" viewBox="0 0 92 16" aria-hidden="true"><path transform="translate(0)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(19)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(38)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(57)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(76)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/></svg><span class="vh"><span lang="he">5 כוכבים</span><span lang="en">5 stars</span></span><span lang="en" class="tr"> · translated from Hebrew</span></footer>
-  </blockquote>
+  <!-- the brands printed along the bottom of the card, set like the fins of a coil -->
+  <div class="fins rv" aria-labelledby="fins-h">
+    <p id="fins-h" class="fins-h"><span lang="he">המותגים שמופיעים על הכרטיס. ומשלמים גם באשראי.</span><span lang="en">The brands printed on the card. Credit cards accepted, it says.</span></p>
+    <ul class="fin-row" role="list" translate="no">
+      <li>LG</li><li>Samsung</li><li>Amana</li><li>Amcor</li><li><span lang="he">טורנדו</span><span lang="en">Tornado</span></li><li>Carrier</li><li><span lang="he">תדיראן</span><span lang="en">Tadiran</span></li><li><span lang="he">אלקטרה</span><span lang="en">Electra</span></li>
+    </ul>
+  </div>
 </section>
 
-<!-- chapter 2: inside the system, the 3D cutaway -->
-<section class="ch ch-inside" aria-labelledby="h-inside">
-  <div class="inside-intro">
-    <h2 id="h-inside" data-reveal><span lang="he">כשמזגן מפסיק לקרר</span><span lang="en">When an AC stops cooling</span></h2>
-    <p data-reveal><span lang="he">המחשה של תקלה נפוצה ביחידה החיצונית, מהחום בסלון ועד שהמדחום יורד. <span class="if-motion">גללו, או הקישו על הכפתורים בשלט.</span><span class="if-still">עברו בין השלבים בחצים, או הקישו על הכפתורים בשלט.</span></span><span lang="en">An illustration of a common outdoor-unit fault, from the heat in the living room until the thermometer drops. <span class="if-motion">Scroll, or tap the buttons on the remote.</span><span class="if-still">Step through with the arrows, or tap the buttons on the remote.</span></span></p>
+<!-- the drip: a blocked condensate drain, shown in a 3D cutaway that follows the water; the drain path itself is the control -->
+<section class="sec drip" id="drip" data-splash aria-labelledby="h-drip">
+  <svg class="fall" viewBox="0 0 20 28" aria-hidden="true"><path class="dw" d="M10 1C13 7 18 12 18 18a8 8 0 0 1-16 0C2 12 7 7 10 1z"/><path class="dr" d="M4 19a6 6 0 0 0 9 5"/><circle class="dh" cx="7" cy="15" r="2"/></svg>
+  <span class="ripple" aria-hidden="true"><i></i><i></i><b></b><b></b><b></b><b></b><b></b></span>
+  <div class="drip-head">
+    <h2 id="h-drip" class="rv"><span lang="he">למה מזגן מטפטף בסלון</span><span lang="en">Why an AC drips indoors</span></h2>
+    <p class="rv"><span lang="he">מזגן שמקרר מייצר מים: הלחות שבאוויר מתעבה על הסליל הקר, נאספת במגש ויוצאת החוצה בצינור ניקוז. כשהצינור נסתם, המגש מתמלא והמים מוצאים דרך אחרת, אל הסלון. <span class="if-motion">גללו כדי לראות את המים, או הקישו על נקודה במסלול הניקוז.</span><span class="if-still">עברו בין השלבים בחצים, או הקישו על נקודה במסלול הניקוז.</span></span><span lang="en">An AC that cools makes water: moisture in the air condenses on the cold coil, collects in a pan and leaves through a drain hose. When the hose blocks, the pan fills and the water finds another way out, into the living room. <span class="if-motion">Scroll to follow the water, or tap a point on the drain path.</span><span class="if-still">Step through with the arrows, or tap a point on the drain path.</span></span></p>
   </div>
-  <div class="track" data-track>
+  <div class="story" data-story>
     <div class="stage" data-stage>
-      <div class="view" data-3d>
-        <img class="still" data-still src="img/still-1.jpg" width="1200" height="1000" alt="">
-        <div class="l3d-host" aria-hidden="true"></div>
-        <div class="slabels" data-slabels aria-hidden="true"></div>
+      <div class="view" data-view>
+        <img class="still" data-still src="img/still-1.jpg" width="1200" height="900" alt="" loading="lazy">
+        <div class="host3d" data-host3d aria-hidden="true"></div>
+        <div class="labels" data-labels aria-hidden="true"></div>
+        <div class="labels" data-slabels aria-hidden="true"></div>
       </div>
-      <div class="caption" aria-live="polite">
-        <p class="cap-temp" aria-hidden="true"><span data-cap-temp>34</span>°</p>
-        <p class="cap-title" data-cap-title></p>
-        <p class="cap-text" data-cap-text></p>
-        <p class="cap-note"><span lang="he">המחשה תלת-ממדית. כל מזגן וכל תקלה שונים.</span><span lang="en">A 3D illustration. Every unit and every fault is different.</span></p>
+      <!-- the drain path: unit, pan, hose, wall, the drain outside. Its points are the stage controls; its readouts follow the water -->
+      <div class="path" data-path>
+        <div class="path-in">
+          <div class="ro-row">
+          <p class="ro ro-temp"><span class="ro-l"><span lang="he">בחדר</span><span lang="en">Room</span></span><span class="ro-v" data-ro="temp" dir="ltr"></span></p>
+          <p class="ro ro-drops"><span class="ro-l"><span lang="he">טיפות לדקה</span><span lang="en">Drops a minute</span></span><span class="ro-v" data-ro="drops" dir="ltr"></span></p>
+          <p class="ro ro-floor"><span class="ro-l"><span lang="he">מים על הרצפה</span><span lang="en">Water on the floor</span></span><span class="ro-v" data-ro="floor" dir="ltr"></span></p>
+          </div>
+        <svg class="path-art" viewBox="0 0 640 132" aria-hidden="true" dir="ltr">
+          <rect class="pa-wall-in" x="0" y="0" width="356" height="120"/>
+          <rect class="pa-wall" x="356" y="0" width="34" height="120"/>
+          <rect class="pa-out" x="390" y="0" width="250" height="120"/>
+          <rect class="pa-floor" x="0" y="118" width="356" height="14"/>
+          <rect class="pa-floor-out" x="390" y="118" width="250" height="14"/>
+          <path class="pa-unit" d="M22 12h172a10 10 0 0 1 10 10v26a14 14 0 0 1-14 14H36a14 14 0 0 1-14-14z"/>
+          <path class="pa-pan" d="M48 47h132v8H48z"/>
+          <rect class="pa-pan-water" data-pa-pan x="49" y="48" width="130" height="6"/>
+          <circle class="pa-plug" data-pa-plug cx="181" cy="51" r="5"/>
+          <path class="pa-louvre" d="M40 63h150l-6 5H46z"/>
+          <path class="pa-hose" d="M184 52c40 2 120 3 172 4h34c18 0 24 6 24 18v36"/>
+          <path class="pa-flow" data-pa-flow d="M184 52c40 2 120 3 172 4h34c18 0 24 6 24 18v36"/>
+          <ellipse class="pa-grate" cx="414" cy="118" rx="16" ry="3"/>
+          <ellipse class="pa-puddle" data-pa-puddle cx="178" cy="119" rx="34" ry="4"/>
+          <path class="pa-drip" data-pa-drip d="M182 72c2 3 4 5 4 7a4 4 0 0 1-8 0c0-2 2-4 4-7z"/>
+          <g class="pa-air" data-pa-air><path d="M60 70c4 14 2 26-6 40"/><path d="M100 70c4 14 4 26 0 40"/><path d="M140 70c2 14 6 26 12 40"/></g>
+        </svg>
+        <div class="stops" role="group" aria-label="שלבי הסיפור על מסלול הניקוז" data-stops>
+          <button type="button" class="stop" style="--x:28.4%;--y:62.0%" data-go="0"><span lang="he">טפטוף</span><span lang="en">Drip</span></button>
+          <button type="button" class="stop" style="--x:13%;--y:30.0%" data-go="1"><span lang="he">המגש</span><span lang="en">Pan</span></button>
+          <button type="button" class="stop" style="--x:31%;--y:30.0%" data-go="2"><span lang="he">סתימה</span><span lang="en">Plug</span></button>
+          <button type="button" class="stop" style="--x:47%;--y:34.0%" data-go="3"><span lang="he">שטיפה</span><span lang="en">Flush</span></button>
+          <button type="button" class="stop" style="--x:20%;--y:89.1%" data-go="4"><span lang="he">ייבוש</span><span lang="en">Drying</span></button>
+          <button type="button" class="stop" style="--x:5%;--y:62.0%" data-go="5"><span lang="he">קר</span><span lang="en">Cool</span></button>
+        </div>
+        </div>
       </div>
-      <div class="keys" role="group" aria-label="שלבים">
-        <button type="button" class="key" data-go="0.08"><span lang="he">חם</span><span lang="en">Hot</span></button>
-        <button type="button" class="key" data-go="0.25"><span lang="he">בדיקה</span><span lang="en">Check</span></button>
-        <button type="button" class="key" data-go="0.42"><span lang="he">קבל</span><span lang="en">Part</span></button>
-        <button type="button" class="key" data-go="0.58"><span lang="he">לחץ</span><span lang="en">Press.</span></button>
-        <button type="button" class="key" data-go="0.75"><span lang="he">ניקוז</span><span lang="en">Drain</span></button>
-        <button type="button" class="key" data-go="0.93"><span lang="he">קר</span><span lang="en">Cool</span></button>
+      <!-- animations off: the story is a normal block; the arrows follow the water's direction -->
+      <div class="stepper" data-stepper role="group" aria-label="מעבר בין השלבים">
+        <button type="button" class="arrow" data-step="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span class="vh"><span lang="he">השלב הקודם</span><span lang="en">Previous stage</span></span></button>
+        <p class="stepper-t" data-step-title aria-live="polite"></p>
+        <button type="button" class="arrow" data-step="1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span class="vh"><span lang="he">השלב הבא</span><span lang="en">Next stage</span></span></button>
       </div>
-      <!-- animations off: no pinning; the top of the remote steps through the six stages -->
-      <div class="stepper" role="group" aria-label="מעבר בין השלבים" data-stepper>
-        <button type="button" class="key step" data-step="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 6l-6 6 6 6"/></svg><span class="vh"><span lang="he">השלב הקודם</span><span lang="en">Previous stage</span></span></button>
-        <p class="step-lcd"><span lang="he">שלב</span><span lang="en">Stage</span> <b dir="ltr"><span data-step-n>1</span>/6</b></p>
-        <button type="button" class="key step" data-step="1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9.5 6l6 6-6 6"/></svg><span class="vh"><span lang="he">השלב הבא</span><span lang="en">Next stage</span></span></button>
-      </div>
+      <p class="still-text" data-still-text></p>
+    </div>
+    <ol class="steps" data-steps>
+      <li class="step"><div class="step-c"><h3><span lang="he">המגש עולה על גדותיו</span><span lang="en">The pan overflows</span></h3><p><span lang="he">המים לא יכולים לצאת, אז הם גולשים מהמגש וזורמים לאורך התריס עד לפינה הנמוכה. שם נוצרת טיפה, נמתחת ונופלת. על הרצפה מתחילה שלולית, ובקיר מתחת למזגן יורד פס רטוב.</span><span lang="en">The water can’t get out, so it spills over the pan and runs along the louvre to its lowest corner. A drop forms there, stretches and falls. A puddle starts on the floor, and a damp streak creeps down the wall under the unit.</span></p></div></li>
+      <li class="step"><div class="step-c"><h3><span lang="he">מכבים ומרימים את הפנל</span><span lang="en">Off, and the panel up</span></h3><p><span lang="he">מכבים את המזגן ומרימים את הפנל הקדמי. בקצה של הניקוז רואים את מגש הניקוז, מלא עד השפה, והמים גולשים מעליו החוצה.</span><span lang="en">The unit is switched off and the front panel lifted. At the drain end you can see the drain pan, full to the lip, with water spilling over it.</span></p></div></li>
+      <li class="step"><div class="step-c"><h3><span lang="he">פקק של רפש ואבק</span><span lang="en">A plug of slime and dust</span></h3><p><span lang="he">בפתח היציאה של המגש יושב פקק. הוא נבנה לאט, מאבק שעובר את הפילטר ומהרטיבות שעומדת במגש, עד שהוא סוגר את הדרך לצינור.</span><span lang="en">A plug sits in the pan’s outlet. It builds up slowly, from dust that gets past the filter and the damp that stands in the pan, until it closes the way into the hose.</span></p></div></li>
+      <li class="step"><div class="step-c"><h3><span lang="he">שוטפים, והמים יוצאים החוצה</span><span lang="en">A flush, and out it goes</span></h3><p><span lang="he">שוטפים בלחץ ישר לתוך הפתח. הפקק מתפרק, המגש מתרוקן, והמים רצים בצינור הניקוז, דרך הקיר, ויוצאים לניקוז במרפסת. הזרם חזק בהתחלה ונחלש ככל שהמגש מתרוקן.</span><span lang="en">A pressure flush goes straight into the outlet. The plug breaks up, the pan empties, and the water runs down the drain hose, through the wall and out into the balcony drain. The flow is strong at first and weakens as the pan empties.</span></p></div></li>
+      <li class="step"><div class="step-c"><h3><span lang="he">הטפטוף נעצר</span><span lang="en">The drip stops</span></h3><p><span lang="he">בלי מים במגש אין מה שיגלוש. הטפטוף מהתריס מאט, הטיפה האחרונה נופלת, והרטיבות בקיר וברצפה מתייבשת מהשוליים פנימה.</span><span lang="en">With the pan empty there is nothing to spill. The drip from the louvre slows, the last drop falls, and the damp on the wall and the floor dries from the edges in.</span></p></div></li>
+      <li class="step"><div class="step-c"><h3><span lang="he">אוויר קר, וחדר יבש</span><span lang="en">Cold air, dry room</span></h3><p><span lang="he">מדליקים שוב. התריס נפתח, יוצא אוויר קר, והמים החדשים מהסליל יורדים בצינור כמו שצריך. בחדר יורדת הטמפרטורה אל 24 מעלות.</span><span lang="en">Back on. The louvre opens, cold air comes out, and the new water from the coil goes down the hose the way it should. The room falls to 24 degrees.</span></p></div></li>
+    </ol>
+  </div>
+  <div class="drip-foot">
+    <p class="note"><span lang="he">המחשה תלת-ממדית של תקלה נפוצה במזגן עילי. כל מזגן וכל סתימה שונים.</span><span lang="en">A 3D illustration of a common fault in wall-mounted units. Every unit and every blockage is different.</span></p>
+    <p class="drip-cta"><span lang="he">מטפטף אצלכם?</span><span lang="en">Dripping at your place?</span> <a href="tel:+972544895289"><span lang="he">התקשרו לחיים</span><span lang="en">Call Haim</span></a> <a href="https://wa.me/972544895289" data-wa target="_blank" rel="noopener"><span lang="he">או שלחו וואטסאפ</span><span lang="en">or send a WhatsApp</span></a></p>
+  </div>
+</section>
+
+<!-- installing: a row of moments you drag through, from choosing the wall to the clean-up -->
+<section class="sec install" id="install" data-splash aria-labelledby="h-install">
+  <svg class="fall" viewBox="0 0 20 28" aria-hidden="true"><path class="dw" d="M10 1C13 7 18 12 18 18a8 8 0 0 1-16 0C2 12 7 7 10 1z"/><path class="dr" d="M4 19a6 6 0 0 0 9 5"/><circle class="dh" cx="7" cy="15" r="2"/></svg>
+  <span class="ripple" aria-hidden="true"><i></i><i></i><b></b><b></b><b></b><b></b><b></b></span>
+  <div class="install-top">
+    <h2 id="h-install" class="rv"><span lang="he">התקנה, שיפוע אחרי שיפוע</span><span lang="en">An install, fall by fall</span></h2>
+    <div class="row-btns rv">
+      <button type="button" class="sq" data-row="-1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg><span class="vh"><span lang="he">הקודם</span><span lang="en">Previous</span></span></button>
+      <button type="button" class="sq" data-row="1"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg><span class="vh"><span lang="he">הבא</span><span lang="en">Next</span></span></button>
     </div>
   </div>
+  <p class="install-note rv"><span lang="he">מה שהמחשנו למעלה מתחיל בהתקנה: מים זורמים רק למטה, אז כל חלק בדרך שלהם צריך לרדת.</span><span lang="en">What we showed above starts at the install: water only runs downhill, so every part of its way out has to fall.</span></p>
+  <div class="row-bar rv" aria-hidden="true"><i data-row-bar></i></div>
+  <ol class="row" data-row-track tabindex="0" aria-label="שלבי התקנה">
+    <li class="mo" style="--gap:96px"><h3><span lang="he">פלטה עם נטייה</span><span lang="en">A plate with a lean</span></h3><p><span lang="he">פלטת התלייה נתלית ישרה, עם נטייה קלה לצד הניקוז, כדי שהמים במגש יזרמו אל היציאה ולא יעמדו.</span><span lang="en">The mounting plate goes up level, with a slight lean toward the drain side, so the water in the pan runs to the outlet instead of standing.</span></p><figure><img src="img/install-1.jpg" width="800" height="1000" loading="lazy" alt="" data-alt-he="הדמיה: יחידה פנימית תלויה על קיר, הצנרת יוצאת מהצד" data-alt-en="Rendering: an indoor unit on a wall, its lines leaving from the side"><figcaption><span lang="he">הדמיה</span><span lang="en">Rendering</span></figcaption></figure></li>
+    <li class="mo" style="--gap:40px"><h3><span lang="he">צינור שתמיד יורד</span><span lang="en">A hose that always falls</span></h3><p><span lang="he">צינור הניקוז רץ לאורך הקיר בירידה קבועה, בלי גב ובלי שקע שבו עומדים מים ומצטבר רפש.</span><span lang="en">The drain hose runs along the wall on a steady fall, with no hump and no dip where water stands and slime builds up.</span></p><figure><img src="img/install-2.jpg" width="800" height="1000" loading="lazy" alt="" data-alt-he="הדמיה: צינור הניקוז וצרור הצנרת העטוף לאורך הקיר" data-alt-en="Rendering: the drain hose and the taped bundle of lines along the wall"><figcaption><span lang="he">הדמיה</span><span lang="en">Rendering</span></figcaption></figure></li>
+    <li class="mo" style="--gap:128px"><h3><span lang="he">קידוח שיורד החוצה</span><span lang="en">A hole that slopes out</span></h3><p><span lang="he">הקידוח בקיר יורד מעט כלפי חוץ. דרכו עוברים יחד זוג צינורות נחושת מבודדים, הכבל וצינור הניקוז.</span><span lang="en">The hole through the wall slopes slightly outward. The insulated copper pair, the cable and the drain hose all pass through it together.</span></p><figure><img src="img/install-3.jpg" width="800" height="1000" loading="lazy" alt="" data-alt-he="הדמיה: חתך בקיר, הצנרת וצינור הניקוז עוברים דרך השרוול" data-alt-en="Rendering: a section through the wall, the lines and the drain hose passing through the sleeve"><figcaption><span lang="he">הדמיה</span><span lang="en">Rendering</span></figcaption></figure></li>
+    <li class="mo" style="--gap:64px"><h3><span lang="he">בחוץ, על זוויתנים</span><span lang="en">Outside, on brackets</span></h3><p><span lang="he">היחידה החיצונית עולה על זוג זוויתנים, מפולסת ובמרחק מהקיר, כדי שהאוויר החם ייצא ממנה בחופשיות.</span><span lang="en">The outdoor unit goes up on a pair of brackets, level and clear of the wall, so its hot air can get away freely.</span></p><figure><img src="img/outdoor-units.jpg" width="1024" height="683" loading="lazy" alt="" data-alt-he="שתי יחידות מזגן חיצוניות על זוויתנים, עם צנרת מבודדת" data-alt-en="Two outdoor AC units on wall brackets, with insulated lines"><figcaption><span lang="he">תמונה להמחשה, מדף העסק בגוגל</span><span lang="en">Illustrative photo, from the Google listing</span></figcaption></figure></li>
+    <li class="mo" style="--gap:112px"><h3><span lang="he">פנל פתוח, בדיקה אחרונה</span><span lang="en">Panel open, a last check</span></h3><p><span lang="he">בסוף פותחים את הפנל, בודקים שהמים מהמגש יוצאים בצינור, ואוספים את האבק מהקידוח ואת כל האריזות.</span><span lang="en">At the end the panel comes open, the water from the pan is checked running out through the hose, and the drilling dust and all the packaging are cleared away.</span></p><figure><img src="img/service.jpg" width="1200" height="800" loading="lazy" alt="" data-alt-he="פתיחת הפנל של יחידה פנימית במברג" data-alt-en="Opening the panel of an indoor unit with a screwdriver"><figcaption><span lang="he">תמונה להמחשה, מדף העסק בגוגל</span><span lang="en">Illustrative photo, from the Google listing</span></figcaption></figure></li>
+  </ol>
 </section>
 
-<!-- chapter 3: the fridge -->
-<section class="ch ch-fridge" aria-labelledby="h-fridge">
-  <figure class="fridge" data-reveal aria-hidden="true">
-    <svg viewBox="0 0 300 460">
-      <rect class="fr-body" x="20" y="10" width="200" height="430" rx="14"/>
-      <rect class="fr-in" x="36" y="26" width="168" height="130" rx="6"/>
-      <rect class="fr-in" x="36" y="172" width="168" height="252" rx="6"/>
-      <path class="fr-shelf" d="M36 250h168M36 330h168"/>
-      <path class="fr-coil" d="M228 40v380M240 40v380M252 40v380M228 40h24M240 420h12M228 420h12M240 40h12"/>
-      <g class="fr-comp"><rect x="150" y="440" width="90" height="0"/><ellipse cx="248" cy="420" rx="28" ry="20"/></g>
-      <g class="fr-checks">
-        <circle cx="120" cy="90" r="18"/><path d="M111 90l6 6 12-13"/>
-        <circle cx="120" cy="210" r="18"/><path d="M111 210l6 6 12-13"/>
-        <circle cx="120" cy="290" r="18"/><path d="M111 290l6 6 12-13"/>
-        <circle cx="120" cy="380" r="18"/><path d="M111 380l6 6 12-13"/>
-      </g>
-    </svg>
-    <figcaption><span lang="he">ציור: מקרר, כל תא נבדק</span><span lang="en">Drawing: a fridge, every compartment checked</span></figcaption>
-  </figure>
-  <div class="fridge-text">
-    <h2 id="h-fridge" data-reveal><span lang="he">וגם כשהמקרר מפסיק לקרר</span><span lang="en">And when the fridge stops cooling</span></h2>
-    <p data-reveal><span lang="he">לקוח פנה לחיים עם תקלה במקרר, בימים של מטחי הטילים מאיראן, כשהרבה נותני שירות לא עבדו. חיים הגיע תוך זמן קצר, מצא את מקור התקלה, תיקן אותה, ובדק גם את שאר מערכות המקרר.</span><span lang="en">A customer called Haim about a broken fridge during the days of the missile barrages from Iran, when many tradespeople weren’t working. Haim came within a short time, found the source of the fault, fixed it, and checked the rest of the fridge’s systems too.</span></p>
-    <blockquote class="quote quote-fridge" data-reveal>
-      <p><span lang="he">״במיידי חיים מצא את מקור התקלה ותיקן אותה, בנוסף לבדיקה יסודית של שאר מערכות המקרר.״</span><span lang="en">“Haim found the source of the fault immediately and fixed it, and also gave the rest of the fridge’s systems a thorough check.”</span></p>
-      <footer><span lang="he">תמיר סוזן</span><span lang="en">Tamir Suzan</span> · <svg class="stars" viewBox="0 0 92 16" aria-hidden="true"><path transform="translate(0)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(19)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(38)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(57)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(76)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/></svg><span class="vh"><span lang="he">5 כוכבים</span><span lang="en">5 stars</span></span><span lang="en" class="tr"> · translated from Hebrew</span></footer>
+<!-- reviews: one long letter, then four shorter notes, as written on Google -->
+<section class="sec letters" id="reviews" data-splash aria-labelledby="h-reviews">
+  <svg class="fall" viewBox="0 0 20 28" aria-hidden="true"><path class="dw" d="M10 1C13 7 18 12 18 18a8 8 0 0 1-16 0C2 12 7 7 10 1z"/><path class="dr" d="M4 19a6 6 0 0 0 9 5"/><circle class="dh" cx="7" cy="15" r="2"/></svg>
+  <span class="ripple" aria-hidden="true"><i></i><i></i><b></b><b></b><b></b><b></b><b></b></span>
+  <div class="letters-head">
+    <h2 id="h-reviews" class="rv"><span lang="he">מה כתבו בגוגל</span><span lang="en">What people wrote</span></h2>
+    <a class="score rv" href="https://maps.google.com/?cid=14391809792870270112" target="_blank" rel="noopener"><b>4.4</b><span><span lang="he">מתוך 5, לפי 54 ביקורות בגוגל</span><span lang="en">out of 5, from 54 Google reviews</span></span></a>
+  </div>
+  <figure class="letter rv">
+    <blockquote>
+      <p class="letter-open"><span lang="he">חיפשתי בגוגל, והאדם הראשון שהתקשרתי אליו היה חיים סבן.</span><span lang="en">I searched Google, and the first person I called was Haim Saban.</span></p>
+      <p><span lang="he">דרמה… ערב חג… חזרתי הביתה בשעה 15:00, חם אש בבית, מדליקה את המזגן ואופס, המזגן החליט שלא בא לו לעבוד. חיים לא היסס ואמר שהוא מגיע במיידי לבדוק מה התקלה. חיים איתר את התקלה במהרה, ניכר כי הוא מקצוען ומאוד אמין.</span><span lang="en">Drama… a holiday eve… I got home at 3 pm, the flat was boiling, I switched on the AC and oops, it decided it didn’t feel like working. Haim didn’t hesitate and said he was coming right away to find the fault. He found it quickly; you can tell he’s a professional and very reliable.</span></p>
+      <p><span lang="he">רוצה להודות לך חיים היקר על שהצלת אותנו מהחום המטורף הזה, במיוחד היום בערב חג. עשית אותי מאושרת בשנייה. תבורך, ושתהיה לך ברכה בפרנסה ושפע של לקוחות מרוצים. עכשיו החג שלי שמח כפליים.</span><span lang="en">I want to thank you, dear Haim, for saving us from this crazy heat, especially today, on a holiday eve. You made me happy in a second. Bless you, and may you have a good living and plenty of happy customers. Now my holiday is twice as happy.</span></p>
     </blockquote>
+    <figcaption><span translate="no">I.M TRAVELS</span><span class="stars5"><svg class="stars" viewBox="0 0 92 16" aria-hidden="true"><path d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(19)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(38)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(57)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(76)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/></svg><span class="vh"><span lang="he">5 כוכבים</span><span lang="en">5 stars</span></span></span><span lang="he">ביקורת בגוגל</span><span lang="en">Google review, translated from Hebrew</span></figcaption>
+  </figure>
+  <div class="notes">
+    <figure class="note-q rv"><blockquote><p><span lang="he">״במיידי חיים מצא את מקור התקלה ותיקן אותה, בנוסף לבדיקה יסודית של שאר מערכות המקרר. הכל נעשה על ידו ביושרה, באדיבות, בחיוך, במקצועניות, בהוגנות ובמחיר ראוי.״</span><span lang="en">“Haim found the source of the fault immediately and fixed it, and gave the rest of the fridge’s systems a thorough check too. All done with honesty, courtesy, a smile, professionalism, fairness and at a fair price.”</span></p></blockquote><figcaption><span lang="he">תמיר סוזן</span><span lang="en">Tamir Suzan</span><span class="stars5"><svg class="stars" viewBox="0 0 92 16" aria-hidden="true"><path d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(19)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(38)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(57)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(76)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/></svg><span class="vh"><span lang="he">5 כוכבים</span><span lang="en">5 stars</span></span></span><span lang="en" class="tr">translated from Hebrew</span></figcaption></figure>
+    <figure class="note-q rv"><blockquote><p><span lang="he">״הגיע להתקין בביתי שני מזגנים, וביצע התקנה מעולה. שמר על ניקיון הדירה ועל פינוי כל הפסולת. התקנה נקייה ומעולה!״</span><span lang="en">“He came to install two air conditioners in my home and did an excellent installation. He kept the flat clean and took away all the waste. A clean, excellent installation!”</span></p></blockquote><figcaption><span translate="no">MOSHE STEIN</span><span class="stars5"><svg class="stars" viewBox="0 0 92 16" aria-hidden="true"><path d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(19)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(38)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(57)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(76)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/></svg><span class="vh"><span lang="he">5 כוכבים</span><span lang="en">5 stars</span></span></span><span lang="en" class="tr">translated from Hebrew</span></figcaption></figure>
+    <figure class="note-q rv"><blockquote><p><span lang="he">״תוך זמן קצר הוא הגיע ופתר את התקלה במקצועיות, והכי חשוב, היה שקוף ואמין לאורך כל התיקון.״</span><span lang="en">“He arrived within a short time and solved the fault professionally, and most importantly, he was transparent and reliable throughout the repair.”</span></p></blockquote><figcaption><span lang="he">מאור תמים</span><span lang="en">Maor Tamim</span><span class="stars5"><svg class="stars" viewBox="0 0 92 16" aria-hidden="true"><path d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(19)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(38)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(57)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(76)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/></svg><span class="vh"><span lang="he">5 כוכבים</span><span lang="en">5 stars</span></span></span><span lang="en" class="tr">translated from Hebrew</span></figcaption></figure>
+    <figure class="note-q rv"><blockquote><p><span lang="he">״שירות מעולה, עמידה בזמנים… אמין ומקצועי, מומלץ.״</span><span lang="en">“Excellent service, on time… reliable and professional, recommended.”</span></p></blockquote><figcaption><span translate="no">Niso Aviram</span><span class="stars5"><svg class="stars" viewBox="0 0 92 16" aria-hidden="true"><path d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(19)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(38)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(57)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(76)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/></svg><span class="vh"><span lang="he">5 כוכבים</span><span lang="en">5 stars</span></span></span><span lang="en" class="tr">translated from Hebrew</span></figcaption></figure>
   </div>
 </section>
 
-<!-- chapter 4: a clean installation -->
-<section class="ch ch-install" aria-labelledby="h-install">
-  <div class="install-text">
-    <h2 id="h-install" data-reveal><span lang="he">שני מזגנים, בלי לכלוך</span><span lang="en">Two units in, no mess left</span></h2>
-    <p data-reveal><span lang="he">בהתקנה עוברים דרך הקיר צנרת נחושת, כבל וצינור ניקוז, ותולים יחידה חיצונית על זוג זוויתנים. לקוח שחיים התקין אצלו שני מזגנים כתב שהדירה נשארה נקייה, וכל הפסולת פונתה.</span><span lang="en">An installation runs copper lines, a cable and a drain hose through the wall, and hangs the outdoor unit on a pair of brackets. A customer who had two units installed by Haim wrote that the flat was left clean and all the waste taken away.</span></p>
+<!-- the message: a fridge thermostat knob picks what happened; the message is written on the frosted glass -->
+<section class="sec dial" id="message" data-splash aria-labelledby="h-msg">
+  <svg class="fall" viewBox="0 0 20 28" aria-hidden="true"><path class="dw" d="M10 1C13 7 18 12 18 18a8 8 0 0 1-16 0C2 12 7 7 10 1z"/><path class="dr" d="M4 19a6 6 0 0 0 9 5"/><circle class="dh" cx="7" cy="15" r="2"/></svg>
+  <span class="ripple" aria-hidden="true"><i></i><i></i><b></b><b></b><b></b><b></b><b></b></span>
+  <div class="dial-text">
+    <h2 id="h-msg" class="rv"><span lang="he">שלחו לחיים הודעה</span><span lang="en">Send Haim a message</span></h2>
+    <p class="rv"><span lang="he">סובבו את הכפתור למה שקרה, כתבו איפה אתם, וההודעה נכתבת על הזכוכית. הכפתור שולח אותה לחיים בוואטסאפ.</span><span lang="en">Turn the knob to what happened, add where you are, and the message writes itself on the glass. The button sends it to Haim on WhatsApp.</span></p>
   </div>
-  <figure class="install-photo ip-a" data-reveal>
-    <img src="img/outdoor-units.jpg" width="1200" height="800" loading="lazy" alt="" data-alt-he="שתי יחידות מזגן חיצוניות על זוויתנים, עם צנרת מבודדת" data-alt-en="Two outdoor AC units on wall brackets, with insulated lines">
-    <figcaption><span lang="he">תמונה להמחשה, מדף העסק בגוגל</span><span lang="en">Illustrative photo, from the Google listing</span></figcaption>
-  </figure>
-  <figure class="install-photo ip-b" data-reveal>
-    <img src="img/service.jpg" width="1200" height="800" loading="lazy" alt="" data-alt-he="פתיחת מכסה של יחידה פנימית במברג" data-alt-en="Opening the cover of an indoor unit with a screwdriver">
-    <figcaption><span lang="he">תמונה להמחשה, מדף העסק בגוגל</span><span lang="en">Illustrative photo, from the Google listing</span></figcaption>
-  </figure>
-  <blockquote class="quote quote-install" data-reveal>
-    <p><span lang="he">״הגיע להתקין בביתי שני מזגנים, וביצע התקנה מעולה. שמר על ניקיון הדירה ועל פינוי כל הפסולת. התקנה נקייה ומעולה!״</span><span lang="en">“He came to install two air conditioners in my home and did an excellent installation. He kept the flat clean and took away all the waste. A clean, excellent installation!”</span></p>
-    <footer><span translate="no">MOSHE STEIN</span> · <svg class="stars" viewBox="0 0 92 16" aria-hidden="true"><path transform="translate(0)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(19)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(38)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(57)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(76)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/></svg><span class="vh"><span lang="he">5 כוכבים</span><span lang="en">5 stars</span></span><span lang="en" class="tr"> · translated from Hebrew</span></footer>
-  </blockquote>
-</section>
-
-<!-- chapter 5: the van -->
-<section class="ch ch-van" aria-labelledby="h-van">
-  <figure class="van-photo" data-reveal>
-    <img src="img/van-side.jpg" width="800" height="650" loading="lazy" alt="" data-alt-he="צד הרכב: מזגנים ומקררים, שירות תיקונים למוסדות, מפעלים ופרטיים, 0544-89-52-89" data-alt-en="The side of the van: air conditioners and fridges, repairs for institutions, factories and homes, 0544-89-52-89">
-  </figure>
-  <div class="van-text">
-    <h2 id="h-van" data-reveal><span lang="he">הרכב הלבן עם המספר על הדלת</span><span lang="en">The white van with the number on it</span></h2>
-    <p data-reveal><span lang="he">על הדלת כתוב ״שירות תיקונים למוסדות, מפעלים ופרטיים״. כשחיים בדרך אליכם, זה הרכב שתראו בחניה, עם אותו מספר שאתם מתקשרים אליו.</span><span lang="en">The side reads “repair service for institutions, factories and private homes”. When Haim is on his way to you, this is the van you’ll see outside, with the same number you call.</span></p>
-    <blockquote class="quote quote-van" data-reveal>
-      <p><span lang="he">״תוך זמן קצר הוא הגיע ופתר את התקלה במקצועיות, והכי חשוב, היה שקוף ואמין לאורך כל התיקון.״</span><span lang="en">“He arrived within a short time and solved the fault professionally, and most importantly, he was transparent and reliable throughout the repair.”</span></p>
-      <footer><span lang="he">מאור תמים</span><span lang="en">Maor Tamim</span> · <svg class="stars" viewBox="0 0 92 16" aria-hidden="true"><path transform="translate(0)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(19)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(38)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(57)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(76)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/></svg><span class="vh"><span lang="he">5 כוכבים</span><span lang="en">5 stars</span></span><span lang="en" class="tr"> · translated from Hebrew</span></footer>
-    </blockquote>
-    <blockquote class="quote quote-short" data-reveal>
-      <p><span lang="he">״שרות מעולה, עמידה בזמנים… אמין ומקצועי, מומלץ.״</span><span lang="en">“Excellent service, on time… reliable and professional, recommended.”</span></p>
-      <footer><span translate="no">Niso Aviram</span> · <svg class="stars" viewBox="0 0 92 16" aria-hidden="true"><path transform="translate(0)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(19)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(38)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(57)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(76)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/></svg><span class="vh"><span lang="he">5 כוכבים</span><span lang="en">5 stars</span></span><span lang="en" class="tr"> · translated from Hebrew</span></footer>
-    </blockquote>
-  </div>
-</section>
-
-<!-- chapter 6: the remote writes the WhatsApp message -->
-<section class="ch ch-remote" id="message" aria-labelledby="h-remote">
-  <div class="remote-text">
-    <h2 id="h-remote" data-reveal><span lang="he">שלחו לחיים הודעה</span><span lang="en">Send Haim a message</span></h2>
-    <p data-reveal><span lang="he">בחרו מה קרה ואיפה אתם. השלט כותב את ההודעה, והכפתור הגדול שולח אותה לחיים בוואטסאפ.</span><span lang="en">Pick what happened and where you are. The remote writes the message, and the big button sends it to Haim on WhatsApp.</span></p>
-  </div>
-  <form class="remote" id="composer" data-reveal onsubmit="return false">
-    <div class="remote-lcd" aria-live="polite"><p class="lcd-text" data-preview></p></div>
-    <fieldset class="modes">
+  <form class="thermo rv" id="composer" onsubmit="return false">
+    <fieldset class="knob-set">
       <legend class="vh"><span lang="he">מה קרה?</span><span lang="en">What happened?</span></legend>
-      <label class="mode"><input type="radio" name="need" value="warm" checked><span><span lang="he">המזגן לא מקרר</span><span lang="en">AC not cooling</span></span></label>
-      <label class="mode"><input type="radio" name="need" value="drip"><span><span lang="he">המזגן מטפטף</span><span lang="en">AC dripping</span></span></label>
-      <label class="mode"><input type="radio" name="need" value="install"><span><span lang="he">התקנת מזגן</span><span lang="en">Installing an AC</span></span></label>
-      <label class="mode"><input type="radio" name="need" value="fridge"><span><span lang="he">תקלה במקרר</span><span lang="en">Fridge fault</span></span></label>
-      <label class="mode"><input type="radio" name="need" value="wash"><span><span lang="he">מכונת כביסה או מייבש</span><span lang="en">Washer or dryer</span></span></label>
+      <div class="knob-face" data-knob-face>
+        <label class="tick" style="--a:-76deg"><input type="radio" name="need" value="warm" checked><span><span lang="he">לא מקרר</span><span lang="en">Not cooling</span></span></label>
+        <label class="tick" style="--a:-38deg"><input type="radio" name="need" value="drip"><span><span lang="he">מטפטף</span><span lang="en">Dripping</span></span></label>
+        <label class="tick" style="--a:0deg"><input type="radio" name="need" value="install"><span><span lang="he">התקנה</span><span lang="en">New install</span></span></label>
+        <label class="tick" style="--a:38deg"><input type="radio" name="need" value="fridge"><span><span lang="he">מקרר</span><span lang="en">Fridge</span></span></label>
+        <label class="tick" style="--a:76deg"><input type="radio" name="need" value="wash"><span><span lang="he">כביסה</span><span lang="en">Laundry</span></span></label>
+        <svg class="knob" data-knob viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="kn-skirt" cx="60" cy="60" r="56"/>
+          <circle class="kn-top" cx="60" cy="60" r="44"/>
+          <rect class="kn-grip" x="51" y="14" width="18" height="92" rx="9"/>
+          <path class="kn-point" d="M60 6l7 12H53z"/>
+        </svg>
+      </div>
     </fieldset>
-    <label class="where"><span lang="he">איפה?</span><span lang="en">Where?</span>
-      <input type="text" name="where" autocomplete="address-level2" maxlength="80" placeholder="למשל: נווה שאנן" data-ph-he="למשל: נווה שאנן" data-ph-en="e.g. Neve Sha’anan"></label>
-    <a class="power" href="https://wa.me/972544895289" data-send target="_blank" rel="noopener">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v8M6.3 6.6a8 8 0 1 0 11.4 0"/></svg>
-      <span lang="he">שליחה לחיים</span><span lang="en">Send to Haim</span>
-    </a>
+    <label class="where"><span lang="he">איפה אתם?</span><span lang="en">Where are you?</span>
+      <input type="text" name="where" autocomplete="address-level2" maxlength="80" placeholder="למשל: קריית ביאליק…" data-ph-he="למשל: קריית ביאליק…" data-ph-en="e.g. Kiryat Bialik…"></label>
+    <div class="glass" aria-live="polite"><p class="glass-text" data-preview></p></div>
+    <div class="send-row">
+      <a class="btn btn-send" href="https://wa.me/972544895289" data-send target="_blank" rel="noopener"><span lang="he">שליחה לחיים בוואטסאפ</span><span lang="en">Send to Haim on WhatsApp</span></a>
+      <a class="btn btn-call-sm" href="tel:+972544895289"><span lang="he">או התקשרו</span><span lang="en">or call</span> <span dir="ltr">054-489-5289</span></a>
+    </div>
   </form>
 </section>
 
-<!-- visit: hours, area, map -->
-<section class="visit" id="visit" aria-labelledby="h-visit">
-  <div class="visit-card">
-    <h2 id="h-visit" data-reveal><span lang="he">מתי ואיפה</span><span lang="en">When and where</span></h2>
-    <p class="big-rating"><a href="https://maps.google.com/?cid=14391809792870270112" target="_blank" rel="noopener"><b>4.4</b> <svg class="stars" viewBox="0 0 92 16" aria-hidden="true"><path transform="translate(0)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(19)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(38)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(57)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/><path transform="translate(76)" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z" class="off"/></svg> <span lang="he">מ-54 ביקורות בגוגל</span><span lang="en">from 54 Google reviews</span></a></p>
+<!-- when and where: the van in the street, with the unit's timer as the opening hours -->
+<section class="sec visit" id="visit" data-splash aria-labelledby="h-visit">
+  <svg class="fall" viewBox="0 0 20 28" aria-hidden="true"><path class="dw" d="M10 1C13 7 18 12 18 18a8 8 0 0 1-16 0C2 12 7 7 10 1z"/><path class="dr" d="M4 19a6 6 0 0 0 9 5"/><circle class="dh" cx="7" cy="15" r="2"/></svg>
+  <span class="ripple" aria-hidden="true"><i></i><i></i><b></b><b></b><b></b><b></b><b></b></span>
+  <div class="visit-photo">
+    <img src="img/van-street.jpg" width="900" height="1250" loading="lazy" alt="" data-alt-he="הרכב הלבן של חיים מזגנים חונה מול בניין מגורים עם יחידות מזגן על הקיר, על הדלת ׳מזגנים ומקררים׳ והמספר" data-alt-en="Haim’s white van parked in front of an apartment block with AC units on the wall, ‘air conditioners and fridges’ and the number on its side">
+    <p class="photo-cap"><span lang="he">הרכב של חיים. תמונה מדף העסק בגוגל.</span><span lang="en">Haim’s van. Photo from the Google listing.</span></p>
+  </div>
+  <div class="timer-card rv">
+    <h2 id="h-visit"><span lang="he">מתי חיים בדרך</span><span lang="en">When Haim’s on the road</span></h2>
+    <p class="area"><span lang="he">חיים מגיע אליכם הביתה, בחיפה ובקריות. כשהוא בדרך, זה הרכב שתראו בחניה, עם אותו מספר שאתם מתקשרים אליו.</span><span lang="en">Haim comes to your home, in Haifa and the Krayot. When he’s on his way, this is the van you’ll see outside, with the same number you call.</span></p>
     <p class="status" data-status></p>
-    <table class="hours"><caption class="vh"><span lang="he">שעות פעילות</span><span lang="en">Opening hours</span></caption><tbody data-hours></tbody></table>
-    <p class="area"><span lang="he">אזור שירות: חיפה והקריות. חיים מגיע אליכם הביתה.</span><span lang="en">Service area: Haifa and the Krayot. Haim comes to your home.</span></p>
+    <table class="timer"><caption class="vh"><span lang="he">שעות פעילות</span><span lang="en">Opening hours</span></caption><tbody data-hours></tbody></table>
+    <div class="card-actions">
+      <a class="btn btn-call" href="tel:+972544895289"><span lang="he">התקשרו לחיים</span><span lang="en">Call Haim</span><span class="num" dir="ltr">054-489-5289</span></a>
+      <a class="btn btn-wa" href="https://wa.me/972544895289" data-wa target="_blank" rel="noopener"><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
+    </div>
   </div>
   <div class="map">
-    <iframe title="Google Maps: חיפה" src="https://www.google.com/maps?q=%D7%97%D7%99%D7%A4%D7%94&z=11&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <iframe title="Google Maps: חיפה והקריות" src="https://www.google.com/maps?q=%D7%97%D7%99%D7%A4%D7%94&z=11&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
 </section>
 
 </main>
 
-<!-- the footer is the unit's rating plate -->
+<!-- the footer is the back of the unit: its galvanised mounting plate, punched with slots -->
 <footer class="plate">
-  <div class="plate-card">
-    <p class="plate-name" translate="no"><span lang="he">חיים מזגנים</span><span lang="en">Haim Mazganim</span></p>
-    <table class="plate-rows">
-      <tbody>
-        <tr><th><span lang="he">שירות</span><span lang="en">Service</span></th><td><span lang="he">מזגנים, מקררים, מכונות כביסה ומייבשים. תיקונים והתקנות.</span><span lang="en">Air conditioners, fridges, washing machines and dryers. Repairs and installations.</span></td></tr>
-        <tr><th><span lang="he">אזור</span><span lang="en">Area</span></th><td><span lang="he">חיפה והקריות</span><span lang="en">Haifa and the Krayot</span></td></tr>
-        <tr><th><span lang="he">שעות</span><span lang="en">Hours</span></th><td><span lang="he">ראשון עד חמישי <span dir="ltr">7:00–20:00</span>, שישי <span dir="ltr">7:00–16:00</span>, שבת סגור</span><span lang="en">Sun–Thu 7:00–20:00, Fri 7:00–16:00, closed Saturday</span></td></tr>
-        <tr><th><span lang="he">טלפון</span><span lang="en">Phone</span></th><td><a href="tel:+972544895289" dir="ltr">054-489-5289</a> · <a href="https://wa.me/972544895289" data-wa><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a></td></tr>
-        <tr><th><span lang="he">אימייל</span><span lang="en">Email</span></th><td><a href="mailto:haimsa5@netvision.net.il">haimsa5@netvision.net.il</a></td></tr>
-      </tbody>
-    </table>
-    <p class="credits"><span lang="he">תמונות: תורמי Google Maps, מתוך דף העסק. תמונות היחידות והפתיחה של המזגן מוצגות להמחשה. ההמחשה התלת-ממדית והציורים נבנו לקונספט הזה. מפה: Google.</span><span lang="en">Photos: Google Maps contributors, from the business listing. The outdoor-unit and service photos are shown for illustration. The 3D illustration and drawings were made for this concept. Map: Google.</span></p>
-    <p class="imprint"><span lang="he">קונספט לדוגמה שנבנה עבור חיים מזגנים · זה אינו האתר הרשמי של העסק</span><span lang="en">A sample concept built for Haim Mazganim · This is not the business’s official website</span></p>
+  <div class="plate-in">
+    <div class="plate-a">
+      <p class="plate-name" translate="no" data-fit><span lang="he">חיים מזגנים</span><span lang="en">Haim AC</span></p>
+      <p class="plate-msg"><span lang="he">מזגנים, מקררים, מכונות כביסה ומייבשים. תיקונים, והתקנות מזגנים, בחיפה ובקריות.</span><span lang="en">Air conditioners, fridges, washing machines and dryers. Repairs, and AC installations, in Haifa and the Krayot.</span></p>
+    </div>
+    <ul class="plate-b" role="list">
+      <li><a href="tel:+972544895289" dir="ltr">054-489-5289</a></li>
+      <li><a href="https://wa.me/972544895289" data-wa target="_blank" rel="noopener"><span lang="he">וואטסאפ לחיים</span><span lang="en">WhatsApp Haim</span></a></li>
+      <li><a href="mailto:haimsa5@netvision.net.il">haimsa5@netvision.net.il</a></li>
+      <li><span lang="he">ראשון עד חמישי <span dir="ltr">7:00–20:00</span>, שישי <span dir="ltr">7:00–16:00</span>, שבת סגור</span><span lang="en">Sun–Thu 7:00–20:00, Fri 7:00–16:00, closed Saturday</span></li>
+    </ul>
+    <p class="credits"><span lang="he">תמונות: תורמי Google Maps, מתוך דף העסק (כרטיס הביקור, הרכב). תמונות היחידות החיצוניות ופתיחת הפנל מוצגות להמחשה. ההמחשה התלת-ממדית וההדמיות נבנו לקונספט הזה, עם טקסטורות מ-Poly Haven (CC0). מפה: Google.</span><span lang="en">Photos: Google Maps contributors, from the business listing (the business card, the van). The outdoor-unit and panel photos are shown for illustration. The 3D illustration and renderings were made for this concept, with textures from Poly Haven (CC0). Map: Google.</span></p>
+    <p class="imprint"><span lang="he">קונספט לדוגמה שנבנה עבור חיים מזגנים · זה אינו האתר הרשמי של העסק</span><span lang="en">A sample concept built for Haim AC · This is not the business’s official website</span></p>
   </div>
 </footer>
 
-<!-- the pocket remote: a small LCD with the open status, a round call button and a WhatsApp key -->
-<nav class="pocket" data-pocket aria-label="יצירת קשר מהירה">
-  <p class="pocket-lcd" data-status-short></p>
-  <a class="pocket-call" href="tel:+972544895289"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span class="vh"><span lang="he">התקשרו לחיים</span><span lang="en">Call Haim</span></span></a>
-  <a class="pocket-wa" href="https://wa.me/972544895289" data-wa><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
+<!-- sticky contact on phones: two drops, the big one calls, the small one opens WhatsApp -->
+<nav class="drops" data-drops aria-label="יצירת קשר מהירה">
+  <a class="dp dp-call" href="tel:+972544895289"><svg viewBox="0 0 64 84" aria-hidden="true"><path class="dp-b" d="M32 2C42 20 62 38 62 54a30 30 0 0 1-60 0C2 38 22 20 32 2z"/><path class="dp-i" d="M24.6 46.6a20 20 0 0 0 8.8 8.8l2.9-2.9a1.4 1.4 0 0 1 1.4-.35 15 15 0 0 0 4.8.77 1.4 1.4 0 0 1 1.4 1.4V59a1.4 1.4 0 0 1-1.4 1.4A23.6 23.6 0 0 1 18.8 37a1.4 1.4 0 0 1 1.4-1.4h4.7a1.4 1.4 0 0 1 1.4 1.4c0 1.7.27 3.3.77 4.8a1.4 1.4 0 0 1-.35 1.4z"/></svg><span class="vh"><span lang="he">התקשרו לחיים</span><span lang="en">Call Haim</span></span></a>
+  <a class="dp dp-wa" href="https://wa.me/972544895289" data-wa target="_blank" rel="noopener"><svg viewBox="0 0 64 84" aria-hidden="true"><path class="dp-b" d="M32 2C42 20 62 38 62 54a30 30 0 0 1-60 0C2 38 22 20 32 2z"/><path class="dp-i" d="M32 38a14 14 0 0 0-12.1 21L18 66l7.2-1.9A14 14 0 1 0 32 38zm0 2.6a11.4 11.4 0 1 1-5.8 21.2l-.4-.2-4.3 1.1 1.2-4.2-.3-.4A11.4 11.4 0 0 1 32 40.6zm-4.4 5.8c-.3 0-.7.1-1 .5-.4.4-1.4 1.3-1.4 3.2s1.4 3.7 1.6 4c.2.2 2.7 4.2 6.6 5.7 3.3 1.3 3.9 1 4.6.9.7-.1 2.3-.9 2.6-1.9.3-.9.3-1.7.2-1.9-.1-.2-.3-.3-.7-.5l-2.5-1.2c-.3-.1-.6-.2-.8.2l-1.1 1.4c-.2.3-.4.3-.8.1-.3-.2-1.5-.5-2.8-1.7-1-.9-1.7-2-1.9-2.4-.2-.3 0-.5.2-.7l.5-.6.4-.6v-.6l-1.1-2.7c-.3-.7-.6-.6-.8-.6h-.7z"/></svg><span class="vh"><span lang="he">וואטסאפ לחיים</span><span lang="en">WhatsApp Haim</span></span></a>
 </nav>
 
 <script src="js/site.js"></script>
 <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.163.0/build/three.module.min.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.163.0/examples/jsm/" } }</script>
 <script type="module">
-  // the 3D cutaway only loads with animations on; turning them off pauses it, turning them on loads or resumes it
-  const root = document.documentElement, stage = document.querySelector('[data-stage]'), host = stage.querySelector('[data-3d]');
+  // the 3D cutaway only loads with animations on; switching them off pauses it, switching them on loads or resumes it
+  const root = document.documentElement, stage = document.querySelector('[data-stage]');
+  const host = stage.querySelector('[data-host3d]'), labels = stage.querySelector('[data-labels]');
   const isStill = () => root.classList.contains('still');
-  const rerender = () => window.__trackRender && window.__trackRender();
+  const rerender = () => window.__storyRender && window.__storyRender();
   let api = null, loading = null;
-  const fail = (e) => { stage.classList.remove('has3d'); stage.classList.add('no3d'); window.__ac3d = null; if (e) console.warn('3D view unavailable, showing stills', e); rerender(); };
+  const fail = (e) => { stage.classList.remove('has3d'); window.__drain3d = null; if (e) console.warn('3D view unavailable, showing stills', e); rerender(); };
   function start() {
-    if (api) { stage.classList.add('has3d'); api.resume(); window.__ac3d = api; rerender(); return; }
+    if (api) { stage.classList.add('has3d'); api.resume(); window.__drain3d = api; rerender(); return; }
     if (loading) return;
-    loading = import('./ac3d.js').then(({ initAC3D }) => {
+    loading = import('./drain3d.js').then(({ initDrain3D }) => {
       if (isStill()) return;
-      stage.classList.add('has3d');
-      api = initAC3D(host, host.querySelector('.l3d-host'), { calm: isStill });
+      api = initDrain3D(host, labels, { background: 0x0e171b });
       if (!api) return fail();
-      window.__ac3d = api; rerender();
+      stage.classList.add('has3d'); window.__drain3d = api; rerender();
     }).catch(fail).finally(() => { loading = null; });
   }
-  function stop() { if (api) api.pause(); stage.classList.remove('has3d'); window.__ac3d = null; rerender(); }
+  function stop() { if (api) api.pause(); stage.classList.remove('has3d'); window.__drain3d = null; rerender(); }
   window.__motion3d = (on) => (on ? start() : stop());
-  if (!isStill()) start();
+  // load the 3D only when the story comes near, so the hero stays light
+  if (!isStill()) {
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting) && !isStill()) { start(); io.disconnect(); } }, { rootMargin: '150% 0px' });
+      io.observe(stage);
+    } else start();
+  }
 </script>
 </body>
 </html>

@@ -1,8 +1,9 @@
 (function () {
-  var root = document.documentElement, WA = '972559810311', EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';   // = --ease in site.css
+  var root = document.documentElement, WA = '972559810311', EASE = 'cubic-bezier(0.23, 1, 0.32, 1)';   // = --ease in site.css
+  var JOB = window.__JOB;
   var still = function () { return root.classList.contains('still'); };
   var he = function () { return root.lang === 'he'; };
-  var TITLE = { he: 'Sagi PC · מעבדת מחשבים · זלמן שז״ר 6, חיפה', en: 'Sagi PC · Computer repair lab · 6 Zalman Shazar St, Haifa' };
+  var TITLE = { he: 'Sagi PC · תיקון, הרכבה ושדרוג מחשבים · זלמן שז״ר 6, חיפה', en: 'Sagi PC · Computer repair, builds and upgrades · 6 Zalman Shazar St, Haifa' };
   var CONCEPT = { he: 'קונספט לדוגמה שנבנה עבור Sagi PC · זה אינו האתר הרשמי של העסק', en: 'A sample concept built for Sagi PC · This is not the business’s official website' };
   var STAR = '<svg viewBox="0 0 92 16" aria-hidden="true">' + [0, 19, 38, 57, 76].map(function (x) { return '<path transform="translate(' + x + ')" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/>'; }).join('') + '</svg><span class="vh"><span lang="he">5 כוכבים</span><span lang="en">5 stars</span></span>';
   document.querySelectorAll('[data-stars]').forEach(function (s) { s.innerHTML = STAR; });
@@ -14,12 +15,12 @@
     try { localStorage.setItem('lang', l); } catch (e) {}
     var d = document.querySelector('[name=detail]'); if (d) d.placeholder = d.dataset['ph' + (l === 'he' ? 'He' : 'En')];
     document.querySelectorAll('img[data-alt-he]').forEach(function (i) { i.alt = i.dataset[l === 'he' ? 'altHe' : 'altEn']; });
-    document.querySelector('[data-panel]').setAttribute('aria-label', l === 'he' ? 'יצירת קשר מהירה' : 'Quick contact');
-    document.querySelector('nav.top').setAttribute('aria-label', l === 'he' ? 'ראשי' : 'Main');
-    document.querySelector('.qcode').setAttribute('aria-label', l === 'he' ? '5.0 בגוגל מ-332 ביקורות' : '5.0 on Google from 332 reviews');
-    document.querySelector('.dips').setAttribute('aria-label', l === 'he' ? 'שלבי הסיפור בתוך המחשב' : 'Stages of the story inside the laptop');
-    document.querySelector('[data-stepper]').setAttribute('aria-label', l === 'he' ? 'מעבר בין השלבים' : 'Step through the stages');
-    document.querySelectorAll('.dip').forEach(function (b) { var s = b.querySelector('[lang="' + l + '"]'); b.title = s ? s.textContent : ''; });
+    var aria = function (sel, h, e) { var el = document.querySelector(sel); if (el) el.setAttribute('aria-label', l === 'he' ? h : e); };
+    aria('[data-bay]', 'יצירת קשר מהירה', 'Quick contact');
+    aria('.t-row', 'ראשי', 'Main');
+    aria('[data-statuses]', 'סטטוסים בכרטיס העבודה', 'Statuses on the job card');
+    aria('[data-stepper]', 'מעבר בין הסטטוסים', 'Step through the statuses');
+    var map = document.querySelector('.map iframe'); if (map) map.title = l === 'he' ? 'Google Maps: זלמן שז״ר 6, חיפה' : 'Google Maps: 6 Zalman Shazar St, Haifa';
     write(); status(); hours(); if (window.__trackRender) window.__trackRender();
   }
   document.querySelectorAll('[data-set-lang]').forEach(function (b) { b.addEventListener('click', function () { setLang(he() ? 'en' : 'he'); }); });
@@ -32,54 +33,24 @@
     root.classList.toggle('still', !on); delete root.dataset.motionAuto;
     storyAfter(keep);
     try { localStorage.setItem('motion', on ? 'on' : 'off'); } catch (e) {}
-    motionUI(); write(); seg(5.0, true); xfer(true);
+    motionUI(); write(); xfer(true);
+    document.querySelectorAll('[data-reveal]').forEach(function (el) { el.classList.add('in'); });
     if (window.__motion3d) window.__motion3d(on);
     if (window.__trackRender) window.__trackRender();
   }); });
   motionUI();
 
-  // the name fits the column in two lines at most, whatever its length or language
-  var h1 = document.querySelector('.hero h1');
+  // the name always fits its tile on one line
+  var h1 = document.querySelector('.t-name h1');
   function fitName() {
-    h1.style.fontSize = '';
-    var lh = parseFloat(getComputedStyle(h1).lineHeight) || parseFloat(getComputedStyle(h1).fontSize) * 0.9, n = 0;
-    while (n++ < 30 && (h1.scrollWidth > h1.clientWidth + 1 || h1.getBoundingClientRect().height > lh * 2.2)) {
-      var fs = parseFloat(getComputedStyle(h1).fontSize) * 0.92; if (fs < 34) break;
-      h1.style.fontSize = fs + 'px'; lh = fs * 0.9;
-    }
+    h1.style.fontSize = ''; h1.style.whiteSpace = '';
+    var n = 0, box = h1.parentNode, room = box.clientWidth - parseFloat(getComputedStyle(box).paddingLeft) - parseFloat(getComputedStyle(box).paddingRight);
+    while (n++ < 30 && h1.scrollWidth > room + 1) { var fs = parseFloat(getComputedStyle(h1).fontSize) * 0.93; if (fs < 40) break; h1.style.fontSize = fs + 'px'; }
+    if (h1.scrollWidth > room + 1) h1.style.whiteSpace = 'normal';   // a very long name wraps rather than push the page sideways
   }
   addEventListener('resize', fitName);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitName);
   fitName();
-
-  // the chip's contact pads, drawn once around the edge
-  (function () {
-    var g = document.querySelector('[data-pads]'), h = '';
-    for (var i = 0; i < 12; i++) { h += '<rect x="' + (60 + i * 24) + '" y="356" width="12" height="28"/>'; h += '<rect x="356" y="' + (60 + i * 24) + '" width="28" height="12"/>'; }
-    g.innerHTML = h;
-  })();
-
-  // the rating on a seven-segment debug display, counting up once on load
-  var SEGS = { 0: 'abcdef', 1: 'bc', 2: 'abged', 3: 'abgcd', 4: 'fgbc', 5: 'afgcd', 6: 'afgedc', 7: 'abc', 8: 'abcdefg', 9: 'abcdfg' };
-  var segEl = document.querySelector('[data-seg]');
-  (function () {
-    var P = { a: 'M6 0h28l-5 6H11z', b: 'M35 1v29l-6-4V7z', c: 'M35 34v29l-6-6V38z', d: 'M6 64h28l-5-6H11z', e: 'M0 34v29l6-6V38z', f: 'M0 1v29l6-4V7z', g: 'M3 32l5-4h24l5 4-5 4H8z' };
-    var html = '';
-    [0, 1].forEach(function (k) {
-      html += '<g transform="translate(' + (k ? 86 : 14) + ' 16)" data-digit="' + k + '">';
-      Object.keys(P).forEach(function (s) { html += '<path class="s" data-s="' + s + '" d="' + P[s] + '"/>'; });
-      html += '</g>';
-    });
-    html += '<rect class="s on" x="64" y="74" width="8" height="8"/>';
-    segEl.innerHTML = html;
-  })();
-  function showDigit(k, n) { segEl.querySelectorAll('[data-digit="' + k + '"] .s').forEach(function (p) { p.classList.toggle('on', SEGS[n].indexOf(p.dataset.s) >= 0); }); }
-  function seg(v, now) {
-    if (now || still()) { showDigit(0, Math.floor(v)); showDigit(1, Math.round(v * 10) % 10); return; }
-    var t0 = performance.now();
-    (function step(t) { var k = Math.max(0, Math.min(1, (t - t0) / 700)), e = 1 - Math.pow(1 - k, 3), x = v * e; showDigit(0, Math.floor(x)); showDigit(1, Math.floor(x * 10) % 10); if (k < 1) requestAnimationFrame(step); else seg(v, true); })(t0);
-  }
-  seg(5.0, false);
 
   // live opening status in Haifa time. null = closed that day
   var H = { 0: [8, 22], 1: [8, 22], 2: [8, 22], 3: [8, 22], 4: [8, 22], 5: [9, 15], 6: [19, 22] };
@@ -119,17 +90,17 @@
   }
   window.__status = status; window.__H = H; window.__hours = hours;
 
-  // the memory slots write the WhatsApp message
+  // the parts cabinet: the drawer you pull writes the WhatsApp message on the bench monitor
   var T = {
-    he: { n: { laptop: 'תקלה במחשב נייד', desktop: 'תקלה במחשב נייח', fan: 'מאוורר רועש או מחשב שמתחמם', build: 'הרכבת מחשב חדש', upgrade: 'שדרוג כרטיס מסך או מעבד', files: 'העברת קבצים למחשב חדש' },
-          hi: 'היי שגיא, הגעתי דרך האתר. אשמח לעזרה עם ', d: '. מה קורה: ', end: '. מתי אפשר להביא?' },
-    en: { n: { laptop: 'a laptop fault', desktop: 'a desktop fault', fan: 'a loud fan or a computer that overheats', build: 'building a new PC', upgrade: 'upgrading a graphics card or processor', files: 'moving my files to a new PC' },
-          hi: 'Hi Sagi, I found you through your website. I would like help with ', d: '. What’s happening: ', end: '. When could I bring it in?' }
+    he: { n: { desktop: 'תקלה במחשב נייח', fan: 'מאוורר רועש או מחשב שמתחמם', laptop: 'תקלה במחשב נייד', build: 'הרכבת מחשב חדש', upgrade: 'שדרוג כרטיס מסך או מעבד', files: 'העברת קבצים למחשב חדש' },
+          hi: 'היי שגיא, הגעתי דרך האתר. אשמח לפתוח כרטיס: ', d: '. מה קורה: ', end: '. מתי אפשר להביא?' },
+    en: { n: { desktop: 'a desktop fault', fan: 'a loud fan or a computer that overheats', laptop: 'a laptop fault', build: 'building a new PC', upgrade: 'upgrading a graphics card or processor', files: 'moving my files to a new PC' },
+          hi: 'Hi Sagi, I found you through your website. I’d like to open a job card: ', d: '. What’s happening: ', end: '. When could I bring it in?' }
   };
-  var form = document.getElementById('composer'), preview = document.querySelector('[data-preview]'), send = document.querySelector('[data-send]');
+  var form = document.getElementById('composer'), preview = document.querySelector('[data-preview]'), send = document.querySelector('[data-send]'), detail = document.querySelector('[name=detail]');
   function write() {
-    var t = T[root.lang] || T.he, f = new FormData(form), det = (f.get('detail') || '').trim().slice(0, 90);
-    var m = t.hi + t.n[f.get('need') || 'laptop'] + (det ? t.d + det : '') + t.end;
+    var t = T[root.lang] || T.he, f = new FormData(form), det = (detail.value || '').trim().slice(0, 90);
+    var m = t.hi + t.n[f.get('need') || 'desktop'] + (det ? t.d + det : '') + t.end;
     send.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(m);
     type(m);
   }
@@ -145,31 +116,24 @@
       if (i < m.length) preview.insertAdjacentHTML('beforeend', caret); else clearInterval(typeT);
     }, 16);
   }
-  form.addEventListener('change', function (e) {
-    write();
-    // the module clicks into its slot: a short settle, played with WAAPI so fast re-taps restart cleanly
-    var s = e.target.parentNode.querySelector('.stick');
-    if (s && s.animate && !still()) s.animate([{ transform: 'translateY(-10px)' }, { transform: 'translateY(1px)' }, { transform: 'none' }], { duration: 180, easing: EASE });
-  });
-  form.addEventListener('input', function (e) { if (e.target.name === 'detail') write(); });
+  form.addEventListener('change', write);
+  detail.addEventListener('input', write);
 
   // entrances, once, staggered inside each section
-  document.querySelectorAll('section').forEach(function (s) { s.querySelectorAll('[data-reveal]').forEach(function (el, i) { el.style.setProperty('--d', Math.min(i, 4) * 80 + 'ms'); }); });
+  document.querySelectorAll('section, header').forEach(function (s) { s.querySelectorAll('[data-reveal]').forEach(function (el, i) { el.style.setProperty('--d', Math.min(i, 4) * 70 + 'ms'); }); });
   var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
-    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); if (e.target.hasAttribute('data-leds')) leds(); if (e.target.hasAttribute('data-xfer')) xfer(); } });
-  }, { rootMargin: '0px 0px -10% 0px' }) : null;
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { rootMargin: '0px 0px -8% 0px' }) : null;
   document.querySelectorAll('[data-reveal]').forEach(function (el) { io ? io.observe(el) : el.classList.add('in'); });
-  if (!io) { leds(); xfer(); }
+  var xio = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { xio.disconnect(); xfer(); } });
+  }, { threshold: 0.35 }) : null;
+  if (xio && document.querySelector('[data-xfer]')) xio.observe(document.querySelector('[data-xfer]')); else xfer();
 
-  // the four status lights come on one after the other
-  function leds() {
-    var ls = document.querySelectorAll('.led');
-    ls.forEach(function (l, i) { if (still()) l.classList.add('lit'); else setTimeout(function () { l.classList.add('lit'); }, 300 + i * 450); });
-  }
   // the transfer. The old disk spins up and its arm hunts across the platter for scattered pieces; every read goes down
   // the cable as a packet, and the count, the bar and the chips on the new drive only move when a packet lands.
   // The rest of the data sits in long runs and streams; then the arm parks on its ramp and the platter spins down.
-  var xf = document.querySelector('[data-xfer]'), X = null;
+  var xf = document.querySelector('[data-xfer]'), X = null, xferSeen = false;
   if (xf && xf.querySelector('[data-cable]') && xf.querySelector('[data-cable]').getTotalLength) X = {
     arm: xf.querySelector('[data-arm]'), clamp: xf.querySelector('[data-clamp]'), cable: xf.querySelector('[data-cable]'), ctrl: xf.querySelector('[data-ctrl]'),
     pk: [].slice.call(xf.querySelectorAll('.pk')), fills: [].slice.call(xf.querySelectorAll('[data-nand] .fill'))
@@ -209,8 +173,9 @@
     xfill(100);
   }
   function xfer(now) {
+    if (now !== true) xferSeen = true;
     if (xferDone || xferRaf) return;
-    if (now === true || still() || !X) { if (now === true && !document.querySelector('[data-xfer].in')) return; return xferEnd(); }
+    if (now === true || still() || !X) { if (now === true && !xferSeen) return; return xferEnd(); }
     var P = xplan(), len = X.cable.getTotalLength(), t0 = performance.now(), last = t0, theta = 0, drawn = -1;
     var io2 = function (k) { return k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; };   // a seek: the arm accelerates and brakes hard
     xferRaf = requestAnimationFrame(function frame(t) {
@@ -242,116 +207,154 @@
     });
   }
 
-  // the panel shows once the hero's buttons are gone, and steps aside over the visit card and the composer
-  var panel = document.querySelector('[data-panel]'), away = new Set();
-  function panelUI() { panel.classList.toggle('show', away.size === 0); }
+  // the drive bay shows once the hero's call tile has gone, and steps aside where the page already offers the same buttons
+  var bay = document.querySelector('[data-bay]'), away = new Set();
+  function bayUI() { bay.classList.toggle('show', away.size === 0); }
   if ('IntersectionObserver' in window) {
-    var pio = new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? away.add(e.target) : away.delete(e.target); }); panelUI(); }, { threshold: 0 });
-    [document.querySelector('.hero-act'), document.querySelector('.qcode'), document.querySelector('.v-act'), document.querySelector('.screen'), document.querySelector('.dips'), document.querySelector('[data-stepper]'), document.querySelector('.label')].forEach(function (el) { pio.observe(el); });
-  } else panel.classList.add('show');
+    var bio = new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? away.add(e.target) : away.delete(e.target); }); bayUI(); }, { threshold: 0 });
+    ['[data-hero-act]', '.t-open', '.monitor', '[data-visit-act]', '.io'].forEach(function (s) { var el = document.querySelector(s); if (el) bio.observe(el); });
+    // on wide screens the bay would sit on the graph while the job is pinned, so it steps aside there; the card keeps its own
+    var wide = matchMedia('(min-width: 900px)'), stageEl = document.querySelector('[data-stage]');
+    var sio = new IntersectionObserver(function (es) { es.forEach(function (e) { var r = e.boundingClientRect; (wide.matches && !still() && e.isIntersecting && e.intersectionRatio > 0.6) ? away.add(stageEl) : away.delete(stageEl); }); bayUI(); }, { threshold: [0, 0.6, 1] });
+    sio.observe(stageEl);
+  } else bay.classList.add('show');
 
-  // ---------------------------------------------------------------- the laptop story
-  // readout shared with the 3D scene: CPU temperature, clock and fan speed for a scroll position
-  function read(p) {
-    var c = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; }, sm = function (t) { return t * t * (3 - 2 * t); };
-    if (p < 0.5) { var k = sm(c(p / 0.12)), t = Math.round(71 + 26 * k); return { t: t, ghz: t >= 95 ? 1.1 : t >= 90 ? 2.2 : 3.4, rpm: 5200, off: false }; }
-    if (p < 0.83) return { t: 0, ghz: 0, rpm: 0, off: true };
-    var u = sm(c((p - 0.86) / 0.11)); return { t: Math.round(97 - 35 * u), ghz: u > 0.25 ? 3.4 : 2.2, rpm: Math.round(3100 * sm(c((p - 0.86) / 0.04)) / 100) * 100, off: false };
-  }
-  window.__pcRead = read;
+  // ---------------------------------------------------------------- the job card, the graph and the bench camera
   var track = document.querySelector('[data-track]'), stage = track.querySelector('[data-stage]');
-  var stillImg = track.querySelector('[data-still]'), capT = track.querySelector('[data-cap-title]'), capX = track.querySelector('[data-cap-text]');
-  var dips = [].slice.call(track.querySelectorAll('[data-go]'));
-  // animations off: the story is a normal block, stepped with the arrow keys or the chips; scrolling leaves it alone
-  var step = 0, stepN = track.querySelector('[data-step-n]'), stepBtns = [].slice.call(track.querySelectorAll('[data-step]'));
-  var rT = track.querySelector('[data-r-temp]'), rG = track.querySelector('[data-r-ghz]'), rR = track.querySelector('[data-r-rpm]'), rB = track.querySelector('[data-r-bar]'), meter = track.querySelector('.meter');
-  var STAGES = [0, 0.16, 0.33, 0.5, 0.66, 0.83, 1];
+  var stillImg = stage.querySelector('[data-still]'), noteT = stage.querySelector('[data-note-title]'), noteX = stage.querySelector('[data-note]');
+  var sts = [].slice.call(stage.querySelectorAll('.st')), stepBtns = [].slice.call(stage.querySelectorAll('[data-step]'));
+  var STAGES = JOB.STAGES, NS = 6;
+  // where each status shows its still (animations off); the same p the stills were rendered at
+  var STILL_P = [0.05, 0.24, 0.43, 0.555, 0.85, 0.985];
   var S = {
-    he: [['רותח ומאט.', 'תחת עומס המעבד מטפס ל-97 מעלות. כדי לא להישרף הוא מוריד את התדר בעצמו, והמחשב נהיה איטי, בזמן שהמאוורר צורח במלוא המהירות.'],
-         ['פותחים את המכסה.', 'מתחת למקלדת: המעבד, פלטת הנחושת וצינור החום שמוביל לצלעות הקירור. על פני הצלעות יושבת שכבת אבק, והאוויר החם חוזר פנימה במקום לצאת.'],
-         ['המסב השחוק.', 'המאוורר עצמו מתנדנד על ציר שחוק. הוא רועש ודוחף פחות אוויר. את זה צריך להסביר ללקוח לפני שמזמינים חלק.'],
-         ['מאוורר חדש.', 'שלושה ברגים, המאוורר הישן יוצא, שכבת האבק יורדת מהצלעות בחתיכה אחת, והמאוורר החדש נכנס למקומו.'],
-         ['משחה טרמית.', 'מרימים את הקירור. המשחה הישנה התייבשה ונסדקה, מנקים אותה, שמים טיפה קטנה של משחה חדשה, והלחץ של הפלטה מורח אותה לשכבה דקה.'],
-         ['קר ומהיר.', 'סוגרים. האוויר זורם החוצה דרך הצלעות, הטמפרטורה יורדת והמעבד חוזר לתדר המלא.']],
-    en: [['Hot and throttling.', 'Under load the CPU climbs to 97 °C. To protect itself it cuts its own clock speed, so the computer crawls while the fan screams at full speed.'],
-         ['The cover comes off.', 'Under the keyboard: the CPU, the copper plate and the heat pipe running to the cooling fins. A mat of dust sits across the fins, so hot air backs up instead of leaving.'],
-         ['The worn bearing.', 'The fan itself wobbles on a worn bearing. It is loud and moves less air. That is what gets explained to the customer before a part is ordered.'],
-         ['A new fan.', 'Three screws, the old fan comes out, the dust mat lifts off the fins in one piece, and the new fan drops into place.'],
-         ['Thermal paste.', 'The cooler comes up. The old paste has dried and cracked; it is wiped off, a small pea of fresh paste goes on, and the plate’s pressure spreads it into a thin layer.'],
-         ['Cool and fast.', 'Closed up again. Air flows out through the fins, the temperature falls and the CPU goes back to full speed.']]
+    he: [['התקבל', 'המחשב מגיע לזלמן שז״ר 6, ונרשם מה קורה: תחת עומס הוא מתחמם, המאווררים צורחים והכול נהיה איטי.'],
+         ['אובחן והוסבר', 'במבחן עומס המעבד מגיע ל-97 מעלות ומוריד תדר כדי להגן על עצמו. הסיבות: אבק שסותם את צלעות הקירור, ומאוורר אחורי שמקרטע על מסב שחוק. שגיא מסביר לפני שמזמינים.'],
+         ['הוזמן חלק', 'מוזמן מאוורר 120 מ״מ חדש לפליטה האחורית. בינתיים המחשב כבוי ומחכה על השולחן.'],
+         ['הותקן', 'המאוורר הישן יוצא, אוויר דחוס מעיף את האבק מהצלעות החוצה מהכיוון שבו נכנס, והחדש נכנס. המשחה הטרמית היבשה יורדת, ושכבה חדשה מתפזרת תחת הקירור.'],
+         ['נבדק בעומס', 'אותו מבחן עומס של עשר דקות: הטמפרטורה נעצרת סביב 68 מעלות, המעבד נשאר בתדר המלא, והאוויר נכנס מקדימה ויוצא מאחור.'],
+         ['מוכן, שגיא מתקשר', 'המכסה חוזר למקום. המחשב מוכן, ושגיא מתקשר להגיד שאפשר לבוא לקחת.']],
+    en: [['Received', 'The computer arrives at 6 Zalman Shazar St and the fault goes on the card: under load it runs hot, the fans roar and everything slows down.'],
+         ['Diagnosed, explained', 'Under a stress test the CPU hits 97 °C and cuts its own clock to protect itself. The causes: dust clogging the cooler fins, and a rear fan stuttering on a worn bearing. Sagi explains before anything is ordered.'],
+         ['Part ordered', 'A new 120 mm fan is ordered for the rear exhaust. Meanwhile the computer waits on the bench, switched off.'],
+         ['Fitted', 'The old fan comes out, compressed air blows the dust out of the fins the way it came in, and the new fan goes in. The dried thermal paste comes off and a fresh layer spreads under the cooler.'],
+         ['Stress-tested', 'The same ten-minute stress test: the temperature levels off around 68 °C, the CPU holds its full clock, and air comes in at the front and leaves at the back.'],
+         ['Ready, Sagi calls', 'The side panel goes back on. The computer is ready, and Sagi calls to say you can come and collect it.']]
   };
-  var STILL_W = 1200, STILL_H = 1000;
-  // label anchors (fraction of the still) recorded when the stills were rendered from pc3d.js (stills.py)
-  var STILL_L = {"1": [["screen", 0.7623, 0.4539, "<span lang=\"he\">המסך: טמפרטורה ותדר המעבד</span><span lang=\"en\">The screen: CPU temperature and clock</span>"]], "2": [["dust", 0.4806, 0.3729, "<span lang=\"he\">שכבת אבק חוסמת את הצלעות</span><span lang=\"en\">A mat of dust blocks the fins</span>"]], "3": [["bearing", 0.4615, 0.4425, "<span lang=\"he\">מסב שחוק: המאוורר מתנדנד</span><span lang=\"en\">Worn bearing: the fan wobbles</span>"]], "4": [["newfan", 0.0932, 0.4569, "<span lang=\"he\">מאוורר חדש</span><span lang=\"en\">A new fan</span>"]], "5": [["newpaste", 0.506, 0.5726, "<span lang=\"he\">משחה חדשה מתפזרת בלחץ</span><span lang=\"en\">Fresh paste spreads under pressure</span>"]], "6": [["screen", 0.6757, 0.5073, "<span lang=\"he\">המסך: טמפרטורה ותדר המעבד</span><span lang=\"en\">The screen: CPU temperature and clock</span>"]]};
-  var slab = track.querySelector('[data-slabels]'), labelKey = '';
+  // the work log under the note: each line is ticked when the bench gets there
+  var LOG = [
+    [[0.0, 'נרשם: מחשב נייח, מתחמם תחת עומס', 'Logged: desktop, runs hot under load'], [0.06, 'מקום על השולחן', 'A place on the bench']],
+    [[0.105, 'הודלק, מבחן עומס התחיל', 'Powered on, stress test started'], [0.138, 'המכסה הצדדי הוסר', 'Side panel off'], [0.2, 'אבק על צלעות הקירור', 'Dust on the cooler fins'], [0.3, 'מאוורר אחורי: מסב שחוק', 'Rear fan: worn bearing'], [0.345, 'הוסבר ללקוח', 'Explained to the customer']],
+    [[0.37, 'כובה', 'Switched off'], [0.39, 'הוזמן מאוורר 120 מ״מ', '120 mm fan ordered'], [0.43, 'החלק הגיע', 'The part arrived']],
+    [[0.505, 'מאוורר אחורי ישן הוצא', 'Old rear fan out'], [0.53, 'מאוורר הקירור שוחרר', 'Cooler fan unclipped'], [0.575, 'האבק הועף מהצלעות', 'Dust blown out of the fins'], [0.618, 'מאוורר אחורי חדש הותקן', 'New rear fan fitted'], [0.668, 'המשחה הישנה נוקתה', 'Old paste cleaned off'], [0.71, 'משחה חדשה, הקירור הוחזר', 'Fresh paste, cooler back on'], [0.728, 'מאוורר הקירור הוחזר', 'Cooler fan clipped back']],
+    [[0.765, 'הודלק', 'Powered on'], [0.89, 'מבחן עומס: 68°, ‎4.6 GHz', 'Stress test: 68°, 4.6 GHz']],
+    [[0.955, 'המכסה הוחזר', 'Side panel back on'], [0.97, 'שגיא מתקשר ללקוח', 'Sagi calls the customer']]
+  ];
+  var logEl = stage.querySelector('[data-log]'), logKey = '';
+  function drawLog(sg, ps, l) {
+    var key = sg + l; if (key !== logKey) { logKey = key; logEl.innerHTML = LOG[sg].map(function (e) { return '<li>' + (l === 'he' ? e[1] : e[2]) + '</li>'; }).join(''); }
+    [].forEach.call(logEl.children, function (li, i) { li.classList.toggle('on', still() || ps >= LOG[sg][i][0]); });
+  }
+  var GSTATE = { he: { idle: 'במנוחה', off: 'כבוי', A: 'לפני התיקון', B: 'אחרי התיקון', wait: 'ממתין לבדיקה' }, en: { idle: 'Idle', off: 'Off', A: 'Before the fix', B: 'After the fix', wait: 'Waiting for the test' } };
+
+  // the two runs, drawn once as paths in the graph's 600 × 176 box (temperature lane 0–112, clock lane 124–176)
+  var gsvg = stage.querySelector('[data-g-svg]'), gState = stage.querySelector('[data-g-state]');
+  var yT = function (t) { return 112 - (t - 30) / 75 * 112; }, yC = function (g) { return 174 - (g - 2) / 3 * 48; };
+  function pathOf(f, y) { var d = '', i, N = 160; for (i = 0; i <= N; i++) { var u = i / N; d += (i ? 'L' : 'M') + (u * 600).toFixed(1) + ' ' + y(f(u)).toFixed(1); } return d; }
+  var runs = { a: stage.querySelector('[data-run-a]'), b: stage.querySelector('[data-run-b]'), ca: stage.querySelector('[data-clk-a]'), cb: stage.querySelector('[data-clk-b]') };
+  runs.a.setAttribute('d', pathOf(JOB.tempA, yT)); runs.b.setAttribute('d', pathOf(JOB.tempB, yT));
+  runs.ca.setAttribute('d', pathOf(JOB.clkA, yC)); runs.cb.setAttribute('d', pathOf(JOB.clkB, yC));
+  // paths are drawn up to "now" with a dash the length of the path
+  var LEN = {}; Object.keys(runs).forEach(function (k) { LEN[k] = runs[k].getTotalLength ? runs[k].getTotalLength() : 1000; runs[k].style.strokeDasharray = LEN[k] + ' ' + LEN[k]; });
+  function drawRun(k, u) { runs[k].style.strokeDashoffset = (LEN[k] * (1 - u)).toFixed(1); runs[k].style.visibility = u > 0.001 ? 'visible' : 'hidden'; }
+  var rT = stage.querySelector('[data-r-temp]'), rG = stage.querySelector('[data-r-ghz]'), rR = stage.querySelector('[data-r-rpm]');
+
+  var STILL_W = 1200, STILL_H = 900;
+  // label anchors (fraction of the still) recorded when the stills were rendered from tower3d.js (stills.py)
+  var STILL_L = {};
+  var slab = stage.querySelector('[data-slabels]'), labelKey = '';
   function placeLabels(si) {
-    var sw = stillImg.clientWidth || stage.clientWidth, sh = stillImg.clientHeight || stage.clientHeight;
-    var k = Math.max(sw / STILL_W, sh / STILL_H), ox = (sw - STILL_W * k) / 2, oy = (sh - STILL_H * k) * 0.4;
+    var sw = stillImg.clientWidth, sh = stillImg.clientHeight;
+    var k = Math.max(sw / STILL_W, sh / STILL_H), ox = (sw - STILL_W * k) / 2, oy = (sh - STILL_H * k) / 2;
     var key = si + '|' + sw + 'x' + sh + root.lang; if (key === labelKey) return; labelKey = key;
     slab.innerHTML = '';
     (STILL_L[si + 1] || []).forEach(function (l) {
       var x = ox + STILL_W * k * l[1], y = oy + STILL_H * k * l[2];
-      if (x < 8 || x > sw - 40 || y < 30 || y > sh - 8) return;
+      if (x < 8 || x > sw - 40 || y < 16 || y > sh - 30) return;
       var e = document.createElement('span'); e.className = 'l3d l3d-' + l[0]; e.innerHTML = l[3];
       slab.appendChild(e);
-      // keep the whole label inside the stage on narrow screens
-      x = Math.max(4 + 6, Math.min(x, sw - e.offsetWidth - 4 + 6));
+      x = Math.max(8, Math.min(x, sw - e.offsetWidth - 8));   // the whole label stays inside the camera tile
       e.style.transform = 'translate(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px)';
     });
   }
   var clamp = function (v) { return v < 0 ? 0 : v > 1 ? 1 : v; };
-  var shown = -1, lastRead = '';
+  var step = 0, shown = -1, lastG = '';
+  function progress() { var r = track.getBoundingClientRect(); return clamp(-r.top / Math.max(1, r.height - innerHeight)); }
   function render() {
-    var r = track.getBoundingClientRect(), ps = clamp(-r.top / Math.max(1, r.height - innerHeight)), l = he() ? 'he' : 'en';
-    var live = !!window.__pc3d;
-    var sg = 0; while (sg < 5 && ps >= STAGES[sg + 1]) sg++;
+    var l = he() ? 'he' : 'en', live = !!window.__tower3d && !still();
+    var ps = still() ? STILL_P[step] : progress();
+    var sg = 0; while (sg < NS - 1 && ps >= STAGES[sg + 1]) sg++;
     if (still()) sg = step;
     if (!live) {
       var src = 'img/still-' + (sg + 1) + '.jpg';
       if (stillImg.getAttribute('src') !== src) stillImg.src = src;
-      stillImg.alt = S[l][sg][0] + ' ' + S[l][sg][1];
+      stillImg.alt = S[l][sg][0] + ': ' + S[l][sg][1];
       placeLabels(sg);
     }
-    if (sg !== shown || capT.dataset.l !== l) {
-      var moved = shown >= 0 && sg !== shown;
-      shown = sg; capT.dataset.l = l;
-      capT.textContent = S[l][sg][0]; capX.textContent = S[l][sg][1];
-      // a new stage's words settle in place instead of snapping
-      if (moved && !still() && capT.animate) [capT, capX].forEach(function (el) { el.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: EASE }); });
-      dips.forEach(function (c, i) { c.setAttribute('aria-pressed', i === sg ? 'true' : 'false'); });
-      stepN.textContent = sg + 1;
-      stepBtns.forEach(function (b) { b.disabled = +b.dataset.step < 0 ? sg === 0 : sg === 5; });
+    if (sg !== shown || noteT.dataset.l !== l) {
+      var moved = shown >= 0 && sg !== shown, fwd = sg > shown;
+      shown = sg; noteT.dataset.l = l;
+      noteT.textContent = S[l][sg][0]; noteX.textContent = S[l][sg][1];
+      sts.forEach(function (b, i) {
+        var wasDone = b.classList.contains('done');
+        b.classList.toggle('done', i <= sg);
+        if (i === sg) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+        b.setAttribute('aria-label', S[l][i][0]);
+        // a status that has just been reached is stamped: the box lands from slightly above, quickly
+        if (i <= sg && !wasDone && moved && fwd && !still() && b.animate) b.querySelector('.st-box').animate([{ transform: 'scale(1.35)', opacity: 0.4 }, { transform: 'none', opacity: 1 }], { duration: 160, easing: EASE });
+      });
+      if (moved && !still() && noteX.animate) [noteT, noteX].forEach(function (el) { el.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: EASE }); });
+      stepBtns.forEach(function (b) { b.disabled = +b.dataset.step < 0 ? sg === 0 : sg === NS - 1; });
     }
-    // in stills mode the readout shows each stage's settled numbers
-    var q = live ? ps : [0.1, 0.25, 0.42, 0.63, 0.75, 0.995][sg], rd = read(q), key = rd.off + '|' + rd.t + '|' + rd.ghz + '|' + rd.rpm + l;
-    if (key !== lastRead) {
-      lastRead = key;
-      meter.classList.toggle('off', rd.off);
-      rT.textContent = rd.off ? '–' : rd.t; rG.textContent = rd.off ? '–' : rd.ghz.toFixed(1); rR.textContent = rd.off ? (l === 'he' ? 'כבוי' : 'off') : rd.rpm;
-      rB.style.transform = 'scaleX(' + (rd.off ? 0 : rd.t / 100) + ')'; rB.classList.toggle('cool', !rd.off && rd.t < 80);
+    drawLog(sg, ps, l);
+    // the graph and the readouts: what the bench measures at this point of the job
+    var rd = JOB.read(ps), uA = clamp((ps - JOB.A[0]) / (JOB.A[1] - JOB.A[0])), uB = clamp((ps - JOB.B[0]) / (JOB.B[1] - JOB.B[0]));
+    var gk = [l, uA.toFixed(3), uB.toFixed(3), rd.on, rd.temp ? Math.round(rd.temp) : '', rd.ghz ? rd.ghz.toFixed(1) : '', Math.round(rd.rpmRear / 10)].join('|');
+    if (gk !== lastG) {
+      lastG = gk;
+      drawRun('a', ps < JOB.A[0] ? 0 : uA); drawRun('ca', ps < JOB.A[0] ? 0 : uA); drawRun('b', uB); drawRun('cb', uB);
+      gsvg.classList.toggle('both', uB > 0);
+      var key = !rd.on ? (ps < JOB.A[0] ? 'wait' : 'off') : rd.run || 'idle';
+      gState.textContent = GSTATE[l][key];
+      gState.className = 'g-state' + (rd.run === 'A' ? ' hot' : rd.run === 'B' ? ' cool' : '');
+      rT.textContent = rd.on && rd.temp ? Math.round(rd.temp) : '–';
+      rT.className = rd.on && rd.temp ? (rd.temp >= 90 ? 'hot' : rd.temp < 75 && ps > 0.5 ? 'cool' : '') : '';
+      rG.textContent = rd.ghz ? rd.ghz.toFixed(1) : '–';
+      rR.textContent = rd.on ? Math.round(rd.rpmRear / 10) * 10 : '–';
     }
-    if (live) window.__pc3d.set(ps);
+    if (live) window.__tower3d.set(ps);
   }
   var ticking = false;
   addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(function () { ticking = false; render(); }); } }, { passive: true });
   addEventListener('resize', function () { labelKey = ''; render(); });
   stillImg.addEventListener('load', function () { labelKey = ''; render(); });
-  function go(i) { step = Math.max(0, Math.min(5, i)); render(); }
+  function go(i) { step = Math.max(0, Math.min(NS - 1, i)); render(); }
   stepBtns.forEach(function (b) { b.addEventListener('click', function () { go(shown + +b.dataset.step); }); });
-  dips.forEach(function (c, i) { c.addEventListener('click', function () {
+  sts.forEach(function (b, i) { b.addEventListener('click', function () {
     if (still()) return go(i);
     var r = track.getBoundingClientRect();
-    scrollTo({ top: scrollY + r.top + parseFloat(c.dataset.go) * (r.height - innerHeight), behavior: still() ? 'auto' : 'smooth' });
+    scrollTo({ top: scrollY + r.top + parseFloat(b.dataset.go) * (r.height - innerHeight), behavior: 'smooth' });
   }); });
-  // switching modes keeps the visitor on the same stage, and on the story if they were in it
+  // switching modes keeps the visitor on the same status, and on the story if they were in it
   function storyBefore() { var r = stage.getBoundingClientRect(); return { sg: shown < 0 ? 0 : shown, pinned: !still() && r.top <= 1 && r.bottom >= innerHeight - 1, seen: r.top < innerHeight && r.bottom > 0 }; }
   function storyAfter(k) {
     if (still()) { step = k.sg; if (k.pinned) scrollTo(0, scrollY + stage.getBoundingClientRect().top); return; }
     if (!k.seen) return;
     var r = track.getBoundingClientRect();
-    scrollTo(0, scrollY + r.top + parseFloat(dips[k.sg].dataset.go) * (r.height - innerHeight));
+    scrollTo(0, scrollY + r.top + parseFloat(sts[k.sg].dataset.go) * (r.height - innerHeight));
   }
-  window.__trackRender = function () { shown = -1; labelKey = ''; lastRead = ''; render(); };
+  window.__trackRender = function () { shown = -1; labelKey = ''; lastG = ''; logKey = ''; render(); };
+  window.__jobStill = function (i) { go(i); };
+  fetch('img/still-labels.json').then(function (r) { return r.json(); }).then(function (j) { STILL_L = j; labelKey = ''; render(); }).catch(function () {});
 
   var qs = new URLSearchParams(location.search).get('lang'), saved = null;
   try { saved = localStorage.getItem('lang'); } catch (e) {}
