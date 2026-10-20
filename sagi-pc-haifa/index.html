@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#0f1114">
+<meta name="theme-color" content="#060709">
 <meta name="color-scheme" content="dark">
 <title>Sagi PC · תיקון, הרכבה ושדרוג מחשבים · זלמן שז״ר 6, חיפה</title>
 <meta name="description" content="קונספט לדוגמה לאתר של Sagi PC: תיקון, הרכבה ושדרוג מחשבים בזלמן שז״ר 6, חיפה. 5.0 בגוגל מ-332 ביקורות.">
@@ -14,7 +14,7 @@
 var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage.getItem('lang')}catch(e){}l=q==='en'||q==='he'?q:l==='en'?'en':'he';r.lang=l;r.dir=l==='he'?'rtl':'ltr';})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&family=Figtree:wght@400;600&family=Noto+Sans+Hebrew:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wdth,wght@75..100,400..800&family=Oxanium:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/site.css">
 </head>
 <body>
@@ -31,62 +31,69 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
   </div>
 </div>
 
-<!-- the first screen is the board itself: a row of tiles for the nav, then two by two -->
-<header class="board hero" id="top">
-  <nav class="t-row" aria-label="ראשי">
-    <a class="t t-mark" href="#top" aria-label="Sagi PC">
-      <svg viewBox="0 0 40 40" aria-hidden="true"><rect x="3" y="3" width="34" height="34" rx="5"/><circle cx="20" cy="20" r="14.5" class="hole"/><g class="blades"><path d="M20 16.6c-.6-4.6 1.2-7.6 4.8-8.2 1.8.9 1.1 4.9-2.4 8.3z"/><path d="M23.3 19.2c4.1-2.2 7.6-1.5 9.3 1.7-.3 2-4.4 2.7-8.8.3z"/><path d="M22.1 23.1c2.7 3.8 2.7 7.3-.2 9.6-2-.3-2.6-4.4-.5-8.9z"/><path d="M18 23.4c-3.4 3.2-6.9 3.6-9.4 1-.1-2 3.8-3.4 8.6-2.5z"/><path d="M16.7 19.4c-4.5-1.1-6.4-4.1-5-7.5 1.9-.7 4.5 2.5 5.7 7.3z"/><circle cx="20" cy="20" r="3.4"/></g></svg>
-    </a>
-    <ul class="t t-links">
-      <li><a href="#job"><span lang="he">כרטיס העבודה</span><span lang="en">The job card</span></a></li>
-      <li><a href="#board"><span lang="he">על הלוח</span><span lang="en">On the board</span></a></li>
-      <li><a href="#reviews"><span lang="he">ביקורות</span><span lang="en">Reviews</span></a></li>
-      <li><a href="#visit"><span lang="he">שעות וכתובת</span><span lang="en">Hours &amp; address</span></a></li>
-    </ul>
-    <a class="t t-call" href="tel:+972559810311"><span lang="he">התקשרו לשגיא</span><span lang="en">Call Sagi</span></a>
-  </nav>
-  <div class="t t-name">
-    <h1 translate="no">Sagi PC</h1>
-    <a class="rating" href="#reviews"><span class="stars" data-stars></span> <span lang="he">5.0 בגוגל · 332 ביקורות</span><span lang="en">5.0 on Google · 332 reviews</span></a>
-  </div>
-  <figure class="t t-photo t-photo-a shutter">
-    <img src="img/rgb-build.jpg" width="840" height="1100" alt="" data-alt-he="מחשב גיימינג לבן עם תאורת RGB ומאווררים מוארים, על משטח עבודה כחול בדוגמת משושים" data-alt-en="A white gaming PC with RGB lighting and lit fans, on a blue hexagon bench mat" fetchpriority="high">
-    <figcaption><span lang="he">מהתמונות של Sagi PC בגוגל</span><span lang="en">From Sagi PC’s photos on Google</span></figcaption>
+<!-- the RGB strips along the glass edges. Their colour runs with the scroll (site.js moves the inner layer with transform only) -->
+<div class="edge edge-a" aria-hidden="true"><i data-flow></i></div>
+<div class="edge edge-b" aria-hidden="true"><i data-flow></i></div>
+
+<!-- the menu is a bank of RAM sticks; the one for the section you are in lights up -->
+<nav class="dimms" data-dimms aria-label="ראשי">
+  <a class="mark" href="#top" translate="no" aria-label="Sagi PC">Sagi PC</a>
+  <ul class="sticks">
+    <li><a class="stick" href="#builds" style="--h:150"><span lang="he">הרכבות</span><span lang="en">Builds</span></a></li>
+    <li><a class="stick" href="#repair" style="--h:188"><span lang="he">תיקון</span><span lang="en">Repair</span></a></li>
+    <li><a class="stick" href="#files" style="--h:222"><span lang="he">קבצים</span><span lang="en">Files</span></a></li>
+    <li><a class="stick" href="#reviews" style="--h:300"><span lang="he">ביקורות</span><span lang="en">Reviews</span></a></li>
+    <li><a class="stick" href="#contact" style="--h:28"><span lang="he">קשר</span><span lang="en">Contact</span></a></li>
+  </ul>
+  <a class="nav-call" href="tel:+972559810311"><span lang="he">התקשרו</span><span lang="en">Call</span> <span dir="ltr">055-981-0311</span></a>
+</nav>
+
+<!-- hero: Sagi's own white RGB build, seen through the glass; its light fills the screen -->
+<header class="hero" id="top">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <figure class="pane">
+    <img src="img/rgb-build.jpg" width="840" height="1100" alt="" data-alt-he="מחשב גיימינג לבן עם תאורת RGB ומאווררים מוארים, שהרכיב שגיא" data-alt-en="A white gaming PC with RGB lighting and lit fans, built by Sagi" fetchpriority="high">
+    <span class="sheen" aria-hidden="true"></span>
   </figure>
-  <figure class="t t-photo t-photo-b">
-    <img src="img/gpu-inside.jpg" width="1200" height="584" alt="" data-alt-he="כרטיס מסך מותקן בתוך מארז, ליד קירור המעבד ומאוורר אדום מואר" data-alt-en="A graphics card fitted inside a case, beside the CPU cooler and a red-lit fan">
-    <figcaption><span lang="he">מהתמונות של Sagi PC בגוגל</span><span lang="en">From Sagi PC’s photos on Google</span></figcaption>
-  </figure>
-  <div class="t t-say">
-    <p><span lang="he">שגיא מתקן, מרכיב ומשדרג מחשבים בזלמן שז״ר 6 בחיפה, ומעדכן אתכם בכל שלב עד שהמחשב מוכן.</span><span lang="en">Sagi repairs, builds and upgrades computers at 6 Zalman Shazar St, Haifa, and keeps you posted at every step until it’s ready.</span></p>
-    <a class="wa" href="https://wa.me/972559810311" target="_blank" rel="noopener"><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span> <span dir="ltr">055-981-0311</span></a>
+  <div class="hero-text">
+    <h1 class="logo" translate="no">Sagi PC</h1>
+    <p class="hero-line"><span lang="he">תיקון, הרכבה ושדרוג מחשבים בזלמן שז״ר 6, חיפה.</span><span lang="en">Computer repair, custom builds and upgrades at 6 Zalman Shazar St, Haifa.</span></p>
+    <a class="rating" href="#reviews"><b translate="no">5.0</b> <span class="stars" data-stars></span> <span lang="he">332 ביקורות בגוגל</span><span lang="en">332 Google reviews</span></a>
+    <div class="acts" data-hero-act>
+      <a class="btn" href="tel:+972559810311"><span lang="he">התקשרו לשגיא</span><span lang="en">Call Sagi</span></a>
+      <a class="btn btn-wa" href="https://wa.me/972559810311" target="_blank" rel="noopener"><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
+    </div>
+    <p class="status" data-status></p>
   </div>
-  <a class="t t-act" href="tel:+972559810311" data-hero-act>
-    <span class="act-big"><span lang="he">התקשרו לשגיא</span><span lang="en">Call Sagi</span></span>
-    <span class="act-num" dir="ltr">055-981-0311</span>
-    <span class="status" data-status></span>
-  </a>
 </header>
 
 <main id="main">
 
-<!-- the job card: one computer, status by status. The bench camera (3D) and the stress-test graph sit beside it -->
-<section class="job" id="job" aria-labelledby="h-job">
-  <div class="board job-intro">
-    <h2 class="t t-h" id="h-job" data-reveal><span lang="he">תמיד יודעים איפה המחשב עומד</span><span lang="en">You always know where it stands</span></h2>
-    <p class="t t-lead" data-reveal><span lang="he">ככה נראה תיקון נפוץ אצל שגיא: מחשב נייח שמתחמם, מרעיש ומאט. כל שלב נרשם בכרטיס העבודה, ושגיא מסביר מה מצא לפני שהוא מזמין חלק. <span class="if-motion">גללו, או הקישו על סטטוס בכרטיס.</span><span class="if-still">עברו בין הסטטוסים בחצים או בהקשה.</span></span><span lang="en">Here is a common repair at Sagi’s: a desktop that runs hot, gets loud and slows down. Every step goes on the job card, and Sagi explains what he found before he orders a part. <span class="if-motion">Scroll, or tap a status on the card.</span><span class="if-still">Step through the statuses with the arrows, or tap one.</span></span></p>
-    <figure class="t t-photo t-atx" data-reveal>
-      <img src="img/atx-open.jpg" width="900" height="675" loading="lazy" alt="" data-alt-he="מחשב נייח שהמכסה הצדדי שלו הוסר: קירור מעבד, זיכרון, כרטיס מסך וספק כוח" data-alt-en="A desktop tower with its side panel off: CPU cooler, memory, graphics card and power supply">
-      <figcaption><span lang="he">תמונה להמחשה: מחשב נייח פתוח. Bretwa, CC BY-SA 4.0</span><span lang="en">Illustration: an open desktop tower. Bretwa, CC BY-SA 4.0</span></figcaption>
-    </figure>
+<!-- GPU: custom builds and graphics card / CPU upgrades, on his own photo of a card he fitted -->
+<section class="gpu" id="builds" aria-labelledby="h-gpu" style="--h:150">
+  <div class="sec-head" data-reveal>
+    <h2 id="h-gpu"><span lang="he">מחשב שנבנה בדיוק בשבילכם</span><span lang="en">A PC built exactly for you</span></h2>
+    <p><span lang="he">הרכבה חדשה מהחלקים ומעלה, או שדרוג כרטיס מסך ומעבד במחשב שכבר יש לכם.</span><span lang="en">A new build from the parts up, or a graphics card and CPU upgrade for the one you already have.</span></p>
+  </div>
+  <figure class="card-gpu" data-reveal>
+    <span class="gpu-bar" aria-hidden="true"><span translate="no">SAGI PC</span></span>
+    <img src="img/gpu-inside.jpg" width="1200" height="584" loading="lazy" alt="" data-alt-he="כרטיס מסך מותקן בתוך מארז, ליד קירור המעבד ומאוורר אדום מואר" data-alt-en="A graphics card fitted inside a case, beside the CPU cooler and a red-lit fan">
+  </figure>
+</section>
+
+<!-- the repair: one job card, status by status, with the 3D tower on the bench and the stress-test graph -->
+<section class="job" id="repair" aria-labelledby="h-job" style="--h:188">
+  <div class="sec-head" data-reveal>
+    <h2 id="h-job"><span lang="he">תמיד יודעים איפה המחשב עומד</span><span lang="en">You always know where it stands</span></h2>
+    <p><span lang="he">תיקון נפוץ אצל שגיא, שלב אחרי שלב, עד שהוא מתקשר להגיד שמוכן.</span><span lang="en">A common repair at Sagi’s, step by step, until he calls to say it’s ready.</span></p>
   </div>
 
   <div class="track" data-track>
-    <div class="stage board" data-stage>
-      <div class="t card" data-card>
+    <div class="stage" data-stage>
+      <div class="card" data-card>
         <div class="card-head">
           <p class="card-title"><span lang="he">כרטיס עבודה · מחשב נייח</span><span lang="en">Job card · Desktop tower</span></p>
-          <p class="card-fault"><span lang="he">התקלה: מתחמם, מרעיש ומאט תחת עומס</span><span lang="en">Fault: runs hot, loud and slow under load</span></p>
+          <p class="card-fault"><span lang="he">מתחמם, מרעיש ומאט תחת עומס</span><span lang="en">Runs hot, loud and slow under load</span></p>
         </div>
         <ol class="statuses" aria-label="סטטוסים" data-statuses>
           <li><button type="button" class="st" data-go="0.05"><span class="st-box" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M4 10.5l4 4 8-9"/></svg></span><span class="st-name"><span lang="he">התקבל</span><span lang="en">Received</span></span></button></li>
@@ -108,14 +115,14 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
         </div>
       </div>
 
-      <div class="t cam" data-3d>
+      <div class="cam" data-3d>
         <img class="still" data-still src="img/still-1.jpg" width="1200" height="900" alt="">
         <div class="l3d-host" aria-hidden="true"></div>
         <div class="slabels" data-slabels aria-hidden="true"></div>
-        <p class="cam-note"><span lang="he">הדמיה תלת-ממדית של תיקון נפוץ. המספרים להמחשה; כל מחשב שונה.</span><span lang="en">A 3D illustration of a common repair. The numbers are illustrative; every computer is different.</span></p>
+        <p class="cam-note"><span lang="he">הדמיה להמחשה, המספרים לדוגמה</span><span lang="en">Illustration; the numbers are examples</span></p>
       </div>
 
-      <div class="t graph" data-graph>
+      <div class="graph" data-graph>
         <div class="g-head">
           <p class="g-title"><span lang="he">מבחן עומס, 10 דקות</span><span lang="en">Stress test, 10 minutes</span> <span class="g-state" data-g-state></span></p>
           <dl class="g-read">
@@ -136,218 +143,134 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
         </svg>
         <div class="g-foot">
           <p class="g-band"><span lang="he">מעל 95°: המעבד מאט את עצמו</span><span lang="en">Above 95°: the CPU slows itself down</span></p>
-          <p class="g-key"><span class="k k-a"></span><span lang="he">לפני</span><span lang="en">Before</span> <span class="k k-b"></span><span lang="he">אחרי</span><span lang="en">After</span> <span class="g-x"><span lang="he">0–10 דק׳</span><span lang="en">0–10 min</span></span></p>
+          <p class="g-key"><span class="k k-a"></span><span lang="he">לפני</span><span lang="en">Before</span> <span class="k k-b"></span><span lang="he">אחרי</span><span lang="en">After</span></p>
         </div>
       </div>
     </div>
   </div>
+</section>
 
-  <div class="board job-parts">
-    <p class="t t-say2" data-reveal><span lang="he">בכרטיס הזה: מאוורר 120 מ״מ, משחה טרמית וניקוי אבק. וכשהמחשב מוכן, שגיא מתקשר.</span><span lang="en">On this card: a 120 mm fan, thermal paste and a dust clean. And when the computer is ready, Sagi calls.</span></p>
-    <figure class="t t-photo t-fan" data-reveal>
-      <img src="img/case-fan.jpg" width="900" height="720" loading="lazy" alt="" data-alt-he="מאוורר מארז שחור בקוטר 120 מ״מ, מקרוב" data-alt-en="A black 120 mm case fan, close up">
-      <figcaption><span lang="he">תמונה להמחשה: מאוורר 120 מ״מ. Eric Chan, CC BY 2.0</span><span lang="en">Illustration: a 120 mm fan. Eric Chan, CC BY 2.0</span></figcaption>
-    </figure>
-    <figure class="t t-photo t-paste" data-reveal>
-      <img src="img/paste.jpg" width="900" height="675" loading="lazy" alt="" data-alt-he="מזרק משחה טרמית ומרית פלסטיק קטנה" data-alt-en="A syringe of thermal paste and a small plastic spreader">
-      <figcaption><span lang="he">תמונה להמחשה: משחה טרמית. FxJ, נחלת הכלל</span><span lang="en">Illustration: thermal paste. FxJ, public domain</span></figcaption>
-    </figure>
-    <div class="t t-open" data-reveal>
-      <p><span lang="he">רוצים לפתוח כרטיס? התקשרו, או שלחו הודעה.</span><span lang="en">Want to open a card? Call, or send a message.</span></p>
-      <div class="acts">
-        <a class="btn" href="tel:+972559810311"><span lang="he">התקשרו לשגיא</span><span lang="en">Call Sagi</span></a>
-        <a class="btn btn-2" href="https://wa.me/972559810311" target="_blank" rel="noopener"><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
-      </div>
+<!-- SSD: moving files from the old disk to the new drive -->
+<section class="ssd" id="files" aria-labelledby="h-ssd" style="--h:222">
+  <div class="sec-head" data-reveal>
+    <h2 id="h-ssd"><span lang="he">מחשב חדש, אותם קבצים</span><span lang="en">New PC, same files</span></h2>
+    <p><span lang="he">קונים מחשב דרך שגיא, והקבצים מהמחשב הקודם עוברים אליו.</span><span lang="en">Buy a new computer through Sagi and your files move over from the old one.</span></p>
+  </div>
+  <figure class="xfer" data-xfer data-reveal>
+    <!-- an old 3.5" disk with its cover off, a SATA cable, and the bare board of the new SSD. site.js moves the clamp, the arm, the packets and the chip fills -->
+    <svg viewBox="0 22 520 272" aria-hidden="true">
+      <defs>
+        <linearGradient id="x-al" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a7b0b5"/><stop offset=".55" stop-color="#c9d0d4"/><stop offset="1" stop-color="#8e979c"/></linearGradient>
+        <radialGradient id="x-plat"><stop offset=".22" stop-color="#d3dade"/><stop offset=".72" stop-color="#eef2f4"/><stop offset=".96" stop-color="#bcc4c8"/><stop offset="1" stop-color="#8f989d"/></radialGradient>
+        <linearGradient id="x-sheen" x1="0" y1="0" x2="1" y2="1"><stop offset=".3" stop-color="#fff" stop-opacity="0"/><stop offset=".47" stop-color="#fff" stop-opacity=".7"/><stop offset=".53" stop-color="#fff" stop-opacity=".7"/><stop offset=".7" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <linearGradient id="x-pcb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c1f24"/><stop offset="1" stop-color="#121418"/></linearGradient>
+      </defs>
+      <g class="hdd">
+        <rect x="10" y="30" width="180" height="240" rx="7" fill="url(#x-al)"/>
+        <circle cx="92" cy="118" r="76" class="well"/><rect x="124" y="196" width="60" height="66" rx="8" class="well"/>
+        <g class="screw"><circle cx="22" cy="42" r="4.5"/><circle cx="178" cy="42" r="4.5"/><circle cx="22" cy="258" r="4.5"/><circle cx="22" cy="214" r="4.5"/><circle cx="178" cy="150" r="4.5"/><path d="M19 42h6M175 42h6M19 258h6M19 214h6M175 150h6"/></g>
+        <circle cx="92" cy="118" r="70" fill="url(#x-plat)"/>
+        <g class="tracks"><circle cx="92" cy="118" r="30"/><circle cx="92" cy="118" r="42"/><circle cx="92" cy="118" r="54"/><circle cx="92" cy="118" r="64"/></g>
+        <circle cx="92" cy="118" r="70" fill="url(#x-sheen)"/>
+        <g data-clamp><circle cx="92" cy="118" r="18" class="clamp"/><circle cx="103" cy="118" r="2.4" class="cs"/><circle cx="97.5" cy="127.5" r="2.4" class="cs"/><circle cx="86.5" cy="127.5" r="2.4" class="cs"/><circle cx="81" cy="118" r="2.4" class="cs"/><circle cx="86.5" cy="108.5" r="2.4" class="cs"/><circle cx="97.5" cy="108.5" r="2.4" class="cs"/><rect x="90" y="100.5" width="4" height="3" class="notch"/><circle cx="92" cy="118" r="5.5" class="hub"/></g>
+        <rect x="170" y="95" width="16" height="22" rx="2" class="ramp"/>
+        <g data-arm transform="rotate(9 160 222)"><path d="M150 226 L170 226 L178 250 L142 250 Z" class="coil"/><path d="M152 222 L157.5 110 L162.5 110 L168 222 Z" class="arm"/><rect x="157" y="101" width="6" height="9" rx="1" class="slider"/><circle cx="160" cy="222" r="9" class="pivot"/><circle cx="160" cy="222" r="3" class="hub"/></g>
+        <path d="M134 233 h52 v25 a6 6 0 0 1 -6 6 h-40 a6 6 0 0 1 -6 -6 z" class="magnet"/>
+        <rect x="116" y="264" width="56" height="10" rx="1.5" class="port"/><path d="M120 269 h48" class="pins"/>
+      </g>
+      <path class="cable" data-cable d="M144 274 C 220 296, 262 150, 318 150"/>
+      <path class="cable-hi" d="M144 274 C 220 296, 262 150, 318 150"/>
+      <g class="ssdb">
+        <rect x="330" y="80" width="180" height="140" rx="5" fill="url(#x-pcb)"/>
+        <path class="trace" d="M332 150 H350 M390 140 H404 M390 156 C398 156 398 181 404 181 M448 119 H456 M448 181 H456"/>
+        <circle cx="340" cy="90" r="4" class="hole"/><circle cx="500" cy="90" r="4" class="hole"/><circle cx="340" cy="210" r="4" class="hole"/><circle cx="500" cy="210" r="4" class="hole"/>
+        <rect x="318" y="134" width="14" height="32" rx="1.5" class="port"/><path d="M325 138 v24" class="pins"/>
+        <rect x="350" y="128" width="40" height="40" rx="2" class="ctrl"/><rect x="350" y="128" width="40" height="40" rx="2" class="ctrl-flash" data-ctrl/>
+        <rect x="350" y="180" width="40" height="24" rx="1.5" class="dram"/>
+        <g data-nand><rect x="404" y="92" width="44" height="54" rx="2" class="pkg"/><rect x="409" y="97" width="34" height="44" class="fill" transform="scale(1 0)"/></g>
+        <g data-nand><rect x="456" y="92" width="44" height="54" rx="2" class="pkg"/><rect x="461" y="97" width="34" height="44" class="fill" transform="scale(1 0)"/></g>
+        <g data-nand><rect x="404" y="154" width="44" height="54" rx="2" class="pkg"/><rect x="409" y="159" width="34" height="44" class="fill" transform="scale(1 0)"/></g>
+        <g data-nand><rect x="456" y="154" width="44" height="54" rx="2" class="pkg"/><rect x="461" y="159" width="34" height="44" class="fill" transform="scale(1 0)"/></g>
+      </g>
+      <g data-packets><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/></g>
+    </svg>
+    <figcaption><span class="bar"><i data-xfer-bar></i></span><span class="xfer-count" data-xfer-count>0%</span><span class="xfer-note"><span lang="he">ציור להמחשה</span><span lang="en">Drawing</span></span></figcaption>
+  </figure>
+</section>
+
+<!-- reviews: an RGB LED strip that carries real quotes. Paused on hover, focus or by its button; a plain list with animations off -->
+<section class="reviews" id="reviews" aria-labelledby="h-rev" style="--h:300">
+  <div class="sec-head" data-reveal>
+    <h2 id="h-rev"><span lang="he">5.0 בגוגל, מ-332 ביקורות</span><span lang="en">5.0 on Google, from 332 reviews</span></h2>
+    <p><span class="stars" data-stars></span> <a class="textlink" href="https://maps.google.com/?cid=15748355052042840365" target="_blank" rel="noopener"><span lang="he">לכל הביקורות בגוגל</span><span lang="en">Read them all on Google</span></a></p>
+  </div>
+  <div class="strip" data-strip>
+    <div class="strip-run" data-run>
+      <ul class="quotes">
+        <li class="q"><blockquote><p><span lang="he">״לאורך כל הדרך מרגע שהמחשב היה אצלו ועד שחייג אלי שהוא מוכן הוא עידכן אותי בכל הדרך בלי שאני הלקוח צריך לחפור לי. בנאדם מקצועי ברמה גבוה וזריז.״</span><span lang="en">“All the way, from the moment the computer was with him until he called to say it was ready, he kept me updated without me, the customer, having to chase him. A highly professional and quick person.”</span></p><footer><span lang="he">אלון סטרולוביץ׳</span><span lang="en">Alon Strulovitch</span><span lang="en" class="tr"> · translated from Hebrew</span></footer></blockquote></li>
+        <li class="q"><blockquote><p><span lang="he">״הוא היה זמין, סבלני ומקצועי מאוד. הסביר לי על התקלה ועל אופן הטיפול, הזמין עבורי מאוורר חדש והרכיב אותו.״</span><span lang="en">“He was available, patient and very professional. He explained the fault and how he would fix it, ordered a new fan for me and fitted it.”</span></p><footer><span lang="he">טליה שכטר</span><span lang="en">Talia Shechter</span><span lang="en" class="tr"> · translated from Hebrew</span></footer></blockquote></li>
+        <li class="q"><blockquote><p><span lang="he">״שגיא הרכיב לילד בן ה7 שלי את המחשב הכי מגניב שהילד שלי ראה!! […] ואפילו יצא ששידרג לנו את הכרטיס מסך והמעבד.״</span><span lang="en">“Sagi built my 7-year-old the coolest computer my kid has ever seen!! […] He even ended up upgrading our graphics card and processor.”</span></p><footer><span translate="no">ANTON COMANTANY</span><span lang="en" class="tr"> · translated from Hebrew</span></footer></blockquote></li>
+        <li class="q"><blockquote><p><span lang="he">״אני ובת הזוג שלי רכשנו דרכו מחשב חדש והעברת חומרים מהמחשב הקודם, […] לקח הרבה יותר זמן ממה שנהוג להעברת החומרים אך שגיא לא ביקש כסף נוסף על העבודה הנוספת.״</span><span lang="en">“My partner and I bought a new computer through him, with our files moved over from the old one. […] The transfer took much longer than usual, but Sagi didn’t ask for extra money for the extra work.”</span></p><footer><span translate="no">roei</span><span lang="en" class="tr"> · translated from Hebrew</span></footer></blockquote></li>
+        <li class="q"><blockquote><p><span lang="he">״שגיא מקצוען, חיובי, עוזר ומשתדל לתת שירות מעולה וזריז, עם התחשבות בלקוח. פתר בעיה במחשב נייד תוך זמן קצר מאד.״</span><span lang="en">“Sagi is a pro: positive, helpful, and works to give excellent, quick service with consideration for the customer. He solved a laptop problem in a very short time.”</span></p><footer><span translate="no">Hai Benron</span><span lang="en" class="tr"> · translated from Hebrew</span></footer></blockquote></li>
+      </ul>
     </div>
+    <button type="button" class="strip-pause" aria-pressed="false" data-strip-pause><span class="pz" aria-hidden="true"></span><span lang="he">עצירה</span><span lang="en">Pause</span></button>
   </div>
 </section>
 
-<!-- the rest of the board: other jobs Sagi does -->
-<section class="board tickets" id="board" aria-labelledby="h-board">
-  <h2 class="t t-h" id="h-board" data-reveal><span lang="he">עוד כרטיסים על הלוח</span><span lang="en">More cards on the board</span></h2>
-
-  <article class="t tk tk-build" data-reveal>
-    <h3><span lang="he">מחשב חדש, בנוי למה שצריך</span><span lang="en">A new PC, built for what it’s for</span></h3>
-    <p><span lang="he">שגיא מרכיב מחשבים חדשים מהחלקים ומעלה, ולקוחות כותבים שהוא יודע לקלוע בול לצרכים. המחשב הלבן בראש העמוד הוא אחד מהם.</span><span lang="en">Sagi builds new computers from the parts up, and customers write that he gets their needs exactly right. The white PC at the top of this page is one of his.</span></p>
-    <ul class="parts">
-      <li><span lang="he">מעבד</span><span lang="en">Processor</span></li>
-      <li><span lang="he">לוח אם</span><span lang="en">Motherboard</span></li>
-      <li><span lang="he">זיכרון</span><span lang="en">Memory</span></li>
-      <li><span lang="he">כרטיס מסך</span><span lang="en">Graphics card</span></li>
-      <li><span lang="he">כונן SSD</span><span lang="en">SSD</span></li>
-      <li><span lang="he">ספק כוח</span><span lang="en">Power supply</span></li>
-      <li><span lang="he">מארז וקירור</span><span lang="en">Case and cooling</span></li>
-    </ul>
-  </article>
-
-  <article class="t tk tk-up" data-reveal>
-    <h3><span lang="he">שדרוג כרטיס מסך ומעבד</span><span lang="en">Graphics card and CPU upgrades</span></h3>
-    <p><span lang="he">לפעמים לא צריך מחשב חדש: שגיא משדרג את כרטיס המסך או המעבד במחשב שכבר יש לכם.</span><span lang="en">Sometimes you don’t need a new computer: Sagi upgrades the graphics card or the processor in the one you have.</span></p>
-  </article>
-
-  <article class="t tk tk-files" data-reveal>
-    <div class="tk-files-text">
-      <h3><span lang="he">מחשב חדש, כל הקבצים עוברים</span><span lang="en">A new PC, every file moved over</span></h3>
-      <p><span lang="he">קונים מחשב חדש דרך שגיא, והחומרים מהמחשב הקודם עוברים אליו.</span><span lang="en">Buy a new computer through Sagi and your files from the old one move over.</span></p>
-    </div>
-    <figure class="xfer" data-xfer>
-      <!-- an old 3.5" disk with its cover off, a SATA cable, and the bare board of the new SSD. site.js moves the clamp, the arm, the packets and the chip fills -->
-      <svg viewBox="0 22 520 272" aria-hidden="true">
-        <defs>
-          <linearGradient id="x-al" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a7b0b5"/><stop offset=".55" stop-color="#c9d0d4"/><stop offset="1" stop-color="#8e979c"/></linearGradient>
-          <radialGradient id="x-plat"><stop offset=".22" stop-color="#d3dade"/><stop offset=".72" stop-color="#eef2f4"/><stop offset=".96" stop-color="#bcc4c8"/><stop offset="1" stop-color="#8f989d"/></radialGradient>
-          <linearGradient id="x-sheen" x1="0" y1="0" x2="1" y2="1"><stop offset=".3" stop-color="#fff" stop-opacity="0"/><stop offset=".47" stop-color="#fff" stop-opacity=".7"/><stop offset=".53" stop-color="#fff" stop-opacity=".7"/><stop offset=".7" stop-color="#fff" stop-opacity="0"/></linearGradient>
-          <linearGradient id="x-pcb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1c1f24"/><stop offset="1" stop-color="#121418"/></linearGradient>
-        </defs>
-        <g class="hdd">
-          <rect x="10" y="30" width="180" height="240" rx="7" fill="url(#x-al)"/>
-          <circle cx="92" cy="118" r="76" class="well"/><rect x="124" y="196" width="60" height="66" rx="8" class="well"/>
-          <g class="screw"><circle cx="22" cy="42" r="4.5"/><circle cx="178" cy="42" r="4.5"/><circle cx="22" cy="258" r="4.5"/><circle cx="22" cy="214" r="4.5"/><circle cx="178" cy="150" r="4.5"/><path d="M19 42h6M175 42h6M19 258h6M19 214h6M175 150h6"/></g>
-          <circle cx="92" cy="118" r="70" fill="url(#x-plat)"/>
-          <g class="tracks"><circle cx="92" cy="118" r="30"/><circle cx="92" cy="118" r="42"/><circle cx="92" cy="118" r="54"/><circle cx="92" cy="118" r="64"/></g>
-          <circle cx="92" cy="118" r="70" fill="url(#x-sheen)"/>
-          <g data-clamp><circle cx="92" cy="118" r="18" class="clamp"/><circle cx="103" cy="118" r="2.4" class="cs"/><circle cx="97.5" cy="127.5" r="2.4" class="cs"/><circle cx="86.5" cy="127.5" r="2.4" class="cs"/><circle cx="81" cy="118" r="2.4" class="cs"/><circle cx="86.5" cy="108.5" r="2.4" class="cs"/><circle cx="97.5" cy="108.5" r="2.4" class="cs"/><rect x="90" y="100.5" width="4" height="3" class="notch"/><circle cx="92" cy="118" r="5.5" class="hub"/></g>
-          <rect x="170" y="95" width="16" height="22" rx="2" class="ramp"/>
-          <g data-arm transform="rotate(9 160 222)"><path d="M150 226 L170 226 L178 250 L142 250 Z" class="coil"/><path d="M152 222 L157.5 110 L162.5 110 L168 222 Z" class="arm"/><rect x="157" y="101" width="6" height="9" rx="1" class="slider"/><circle cx="160" cy="222" r="9" class="pivot"/><circle cx="160" cy="222" r="3" class="hub"/></g>
-          <path d="M134 233 h52 v25 a6 6 0 0 1 -6 6 h-40 a6 6 0 0 1 -6 -6 z" class="magnet"/>
-          <rect x="116" y="264" width="56" height="10" rx="1.5" class="port"/><path d="M120 269 h48" class="pins"/>
-        </g>
-        <path class="cable" data-cable d="M144 274 C 220 296, 262 150, 318 150"/>
-        <path class="cable-hi" d="M144 274 C 220 296, 262 150, 318 150"/>
-        <g class="ssd">
-          <rect x="330" y="80" width="180" height="140" rx="5" fill="url(#x-pcb)"/>
-          <path class="trace" d="M332 150 H350 M390 140 H404 M390 156 C398 156 398 181 404 181 M448 119 H456 M448 181 H456"/>
-          <circle cx="340" cy="90" r="4" class="hole"/><circle cx="500" cy="90" r="4" class="hole"/><circle cx="340" cy="210" r="4" class="hole"/><circle cx="500" cy="210" r="4" class="hole"/>
-          <rect x="318" y="134" width="14" height="32" rx="1.5" class="port"/><path d="M325 138 v24" class="pins"/>
-          <rect x="350" y="128" width="40" height="40" rx="2" class="ctrl"/><rect x="350" y="128" width="40" height="40" rx="2" class="ctrl-flash" data-ctrl/>
-          <rect x="350" y="180" width="40" height="24" rx="1.5" class="dram"/>
-          <g data-nand><rect x="404" y="92" width="44" height="54" rx="2" class="pkg"/><rect x="409" y="97" width="34" height="44" class="fill" transform="scale(1 0)"/></g>
-          <g data-nand><rect x="456" y="92" width="44" height="54" rx="2" class="pkg"/><rect x="461" y="97" width="34" height="44" class="fill" transform="scale(1 0)"/></g>
-          <g data-nand><rect x="404" y="154" width="44" height="54" rx="2" class="pkg"/><rect x="409" y="159" width="34" height="44" class="fill" transform="scale(1 0)"/></g>
-          <g data-nand><rect x="456" y="154" width="44" height="54" rx="2" class="pkg"/><rect x="461" y="159" width="34" height="44" class="fill" transform="scale(1 0)"/></g>
-        </g>
-        <g data-packets><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/></g>
-      </svg>
-      <div class="bar"><i data-xfer-bar></i></div>
-      <figcaption><span class="xfer-count" data-xfer-count>0%</span> <span lang="he">ציור להמחשה: מהדיסק הישן לכונן החדש</span><span lang="en">Drawing: from the old disk to the new drive</span></figcaption>
-    </figure>
-  </article>
-
-  <article class="t tk tk-laptop" data-reveal>
-    <figure class="t-photo">
-      <img src="img/laptop-board.jpg" width="900" height="900" loading="lazy" alt="" data-alt-he="לוח של מחשב נייד פתוח, כרטיס רשת אלחוטית ואנטנות מחוברות" data-alt-en="An opened laptop board with its wireless card and antenna leads">
-      <figcaption><span lang="he">מהתמונות של Sagi PC בגוגל</span><span lang="en">From Sagi PC’s photos on Google</span></figcaption>
-    </figure>
-    <div class="tk-laptop-text">
-      <h3><span lang="he">גם מחשבים ניידים</span><span lang="en">Laptops too</span></h3>
-      <p><span lang="he">שגיא מתקן גם מחשבים ניידים, ולקוחות כותבים שהבעיה נפתרה תוך זמן קצר.</span><span lang="en">Sagi fixes laptops too, and customers write that the problem was solved in a short time.</span></p>
-    </div>
-  </article>
-</section>
-
-<!-- what people wrote, in their own words -->
-<section class="board reviews" id="reviews" aria-labelledby="h-rev">
-  <div class="t rv-score" data-reveal>
-    <h2 id="h-rev"><span lang="he">מה כתבו בגוגל</span><span lang="en">What people wrote on Google</span></h2>
-    <p class="big5" translate="no">5.0</p>
-    <p><span class="stars" data-stars></span> <span lang="he">מ-332 ביקורות</span><span lang="en">from 332 reviews</span></p>
-    <a class="textlink" href="https://maps.google.com/?cid=15748355052042840365" target="_blank" rel="noopener"><span lang="he">כל הביקורות בגוגל</span><span lang="en">All reviews on Google</span></a>
-  </div>
-  <blockquote class="t rv rv-1" data-reveal>
-    <p><span lang="he">״לאורך כל הדרך מרגע שהמחשב היה אצלו ועד שחייג אלי שהוא מוכן הוא עידכן אותי בכל הדרך בלי שאני הלקוח צריך לחפור לי. בנאדם מקצועי ברמה גבוה וזריז.״</span><span lang="en">“All the way, from the moment the computer was with him until he called to say it was ready, he kept me updated without me, the customer, having to chase him. A highly professional and quick person.”</span></p>
-    <footer><span lang="he">אלון סטרולוביץ׳</span><span lang="en">Alon Strulovitch</span> <span class="stars" data-stars></span><span lang="en" class="tr"> · translated from Hebrew</span></footer>
-  </blockquote>
-  <blockquote class="t rv rv-2" data-reveal>
-    <p><span lang="he">״הוא היה זמין, סבלני ומקצועי מאוד. הסביר לי על התקלה ועל אופן הטיפול, הזמין עבורי מאוורר חדש והרכיב אותו.״</span><span lang="en">“He was available, patient and very professional. He explained the fault and how he would fix it, ordered a new fan for me and fitted it.”</span></p>
-    <footer><span lang="he">טליה שכטר</span><span lang="en">Talia Shechter</span> <span class="stars" data-stars></span><span lang="en" class="tr"> · translated from Hebrew</span></footer>
-  </blockquote>
-  <blockquote class="t rv rv-3" data-reveal>
-    <p><span lang="he">״שגיא הרכיב לילד בן ה7 שלי את המחשב הכי מגניב שהילד שלי ראה!! […] מאוד שירותי ומסביר ויודע לקלוע בול לצרכים […] ואפילו יצא ששידרג לנו את הכרטיס מסך והמעבד.״</span><span lang="en">“Sagi built my 7-year-old the coolest computer my kid has ever seen!! […] very service-minded, explains things and hits the needs exactly […] he even ended up upgrading our graphics card and processor.”</span></p>
-    <footer translate="no">ANTON COMANTANY <span class="stars" data-stars></span><span lang="en" class="tr"> · translated from Hebrew</span></footer>
-  </blockquote>
-  <blockquote class="t rv rv-4" data-reveal>
-    <p><span lang="he">״אני ובת הזוג שלי רכשנו דרכו מחשב חדש והעברת חומרים מהמחשב הקודם, […] לקח הרבה יותר זמן ממה שנהוג להעברת החומרים אך שגיא לא ביקש כסף נוסף על העבודה הנוספת.״</span><span lang="en">“My partner and I bought a new computer through him, with our files moved over from the old one. […] The transfer took much longer than usual, but Sagi didn’t ask for extra money for the extra work.”</span></p>
-    <footer translate="no">roei <span class="stars" data-stars></span><span lang="en" class="tr"> · translated from Hebrew</span></footer>
-  </blockquote>
-  <blockquote class="t rv rv-5" data-reveal>
-    <p><span lang="he">״שגיא מקצוען, חיובי, עוזר ומשתדל לתת שירות מעולה וזריז, עם התחשבות בלקוח. פתר בעיה במחשב נייד תוך זמן קצר מאד.״</span><span lang="en">“Sagi is a pro: positive, helpful, and works to give excellent, quick service with consideration for the customer. He solved a laptop problem in a very short time.”</span></p>
-    <footer translate="no">Hai Benron <span class="stars" data-stars></span><span lang="en" class="tr"> · translated from Hebrew</span></footer>
-  </blockquote>
-</section>
-
-<!-- the live thing: pull a drawer from the parts cabinet and the bench monitor writes the WhatsApp message -->
-<section class="board write" id="write" aria-labelledby="h-write">
-  <div class="t t-h wr-head" data-reveal>
-    <h2 id="h-write"><span lang="he">פתחו כרטיס בוואטסאפ</span><span lang="en">Open a card on WhatsApp</span></h2>
-    <p><span lang="he">שלפו מגירה. ההודעה לשגיא נכתבת על המסך, ואתם רק שולחים.</span><span lang="en">Pull out a drawer. Your message to Sagi writes itself on the screen; you just send it.</span></p>
-  </div>
-  <form class="t cabinet" id="composer" onsubmit="return false" data-reveal>
-    <fieldset class="drawers">
-      <legend class="vh"><span lang="he">מה צריך</span><span lang="en">What you need</span></legend>
-      <label class="drawer"><input type="radio" name="need" value="desktop" checked><span class="dr-face"><span class="dr-lbl"><span lang="he">מחשב נייח לא תקין</span><span lang="en">A desktop fault</span></span><span class="dr-pull" aria-hidden="true"></span></span></label>
-      <label class="drawer"><input type="radio" name="need" value="fan"><span class="dr-face"><span class="dr-lbl"><span lang="he">מאוורר רועש או חום</span><span lang="en">A loud fan or heat</span></span><span class="dr-pull" aria-hidden="true"></span></span></label>
-      <label class="drawer"><input type="radio" name="need" value="laptop"><span class="dr-face"><span class="dr-lbl"><span lang="he">מחשב נייד</span><span lang="en">A laptop</span></span><span class="dr-pull" aria-hidden="true"></span></span></label>
-      <label class="drawer"><input type="radio" name="need" value="build"><span class="dr-face"><span class="dr-lbl"><span lang="he">הרכבת מחשב חדש</span><span lang="en">A new PC build</span></span><span class="dr-pull" aria-hidden="true"></span></span></label>
-      <label class="drawer"><input type="radio" name="need" value="upgrade"><span class="dr-face"><span class="dr-lbl"><span lang="he">שדרוג כרטיס מסך או מעבד</span><span lang="en">A GPU or CPU upgrade</span></span><span class="dr-pull" aria-hidden="true"></span></span></label>
-      <label class="drawer"><input type="radio" name="need" value="files"><span class="dr-face"><span class="dr-lbl"><span lang="he">העברת קבצים למחשב חדש</span><span lang="en">Moving files to a new PC</span></span><span class="dr-pull" aria-hidden="true"></span></span></label>
-    </fieldset>
-  </form>
-  <div class="t monitor" data-reveal>
-    <div class="screen" data-ui>
-      <label class="detail"><span class="d-lbl"><span lang="he">מה קורה? (לא חובה)</span><span lang="en">What’s happening? (optional)</span></span>
-        <input form="composer" type="text" name="detail" autocomplete="off" enterkeyhint="done" maxlength="90" data-ph-he="למשל: נכבה לבד אחרי חצי שעה…" data-ph-en="E.g. it shuts down after half an hour…" placeholder="למשל: נכבה לבד אחרי חצי שעה…">
-      </label>
-      <p class="msg" data-preview></p>
-      <a class="btn btn-wide" data-send href="https://wa.me/972559810311" target="_blank" rel="noopener"><span lang="he">שליחה לשגיא בוואטסאפ</span><span lang="en">Send to Sagi on WhatsApp</span></a>
-      <p class="m-note"><span lang="he">נשלח ל-055-981-0311. אפשר גם פשוט להתקשר.</span><span lang="en">Goes to 055-981-0311. You can also just call.</span></p>
-    </div>
-    <span class="stand" aria-hidden="true"></span>
-  </div>
-</section>
-
-<!-- visit: the address, live hours, the map -->
-<section class="board visit" id="visit" aria-labelledby="h-visit">
-  <div class="t v-card" data-reveal>
-    <h2 id="h-visit"><span lang="he">זלמן שז״ר 6, חיפה</span><span lang="en">6 Zalman Shazar St, Haifa</span></h2>
+<!-- PSU: the power supply feeds everything, so it is where you reach Sagi. Plug a cable into a socket and the message writes itself -->
+<section class="psu" id="contact" aria-labelledby="h-psu" style="--h:28">
+  <div class="sec-head" data-reveal>
+    <h2 id="h-psu"><span lang="he">מחברים את שגיא</span><span lang="en">Plug in Sagi</span></h2>
     <p class="status" data-status></p>
-    <table class="hours">
-      <caption class="vh"><span lang="he">שעות פתיחה</span><span lang="en">Opening hours</span></caption>
-      <tbody data-hours></tbody>
-    </table>
   </div>
-  <div class="t v-act" data-reveal>
-    <a class="btn" href="tel:+972559810311" data-visit-act><span lang="he">התקשרו לשגיא</span><span lang="en">Call Sagi</span></a>
-    <a class="btn btn-2" href="https://wa.me/972559810311" target="_blank" rel="noopener"><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
-    <a class="textlink" href="mailto:contact@sagi-pc.co.il">contact@sagi-pc.co.il</a>
+
+  <div class="psu-unit" data-reveal>
+    <form class="panel" id="composer" onsubmit="return false">
+      <fieldset class="sockets">
+        <legend><span lang="he">על מה מדובר? חברו כבל, וההודעה נכתבת לבד.</span><span lang="en">What is it about? Plug in a cable and the message writes itself.</span></legend>
+        <label class="sock"><input type="radio" name="need" value="desktop" checked><span class="sk" aria-hidden="true"><span class="plug"></span></span><span class="sk-l"><span lang="he">תקלה בנייח</span><span lang="en">Desktop fault</span></span></label>
+        <label class="sock"><input type="radio" name="need" value="fan"><span class="sk" aria-hidden="true"><span class="plug"></span></span><span class="sk-l"><span lang="he">רעש או חום</span><span lang="en">Noise or heat</span></span></label>
+        <label class="sock"><input type="radio" name="need" value="laptop"><span class="sk" aria-hidden="true"><span class="plug"></span></span><span class="sk-l"><span lang="he">מחשב נייד</span><span lang="en">Laptop</span></span></label>
+        <label class="sock"><input type="radio" name="need" value="build"><span class="sk" aria-hidden="true"><span class="plug"></span></span><span class="sk-l"><span lang="he">הרכבה חדשה</span><span lang="en">New build</span></span></label>
+        <label class="sock"><input type="radio" name="need" value="upgrade"><span class="sk" aria-hidden="true"><span class="plug"></span></span><span class="sk-l"><span lang="he">שדרוג GPU / CPU</span><span lang="en">GPU / CPU upgrade</span></span></label>
+        <label class="sock"><input type="radio" name="need" value="files"><span class="sk" aria-hidden="true"><span class="plug"></span></span><span class="sk-l"><span lang="he">העברת קבצים</span><span lang="en">Moving files</span></span></label>
+      </fieldset>
+      <div class="oled" data-ui>
+        <label class="detail"><span class="d-lbl"><span lang="he">מה קורה? (לא חובה)</span><span lang="en">What’s happening? (optional)</span></span>
+          <input type="text" name="detail" autocomplete="off" enterkeyhint="done" maxlength="90" data-ph-he="למשל: נכבה לבד אחרי חצי שעה…" data-ph-en="E.g. it shuts down after half an hour…" placeholder="למשל: נכבה לבד אחרי חצי שעה…">
+        </label>
+        <p class="msg" data-preview></p>
+        <a class="btn btn-wa btn-wide" data-send href="https://wa.me/972559810311" target="_blank" rel="noopener"><span lang="he">שליחה לשגיא בוואטסאפ</span><span lang="en">Send to Sagi on WhatsApp</span></a>
+      </div>
+    </form>
+
+    <div class="label-plate" data-visit-act>
+      <p class="addr"><span lang="he">זלמן שז״ר 6, חיפה</span><span lang="en">6 Zalman Shazar St, Haifa</span></p>
+      <table class="hours">
+        <caption class="vh"><span lang="he">שעות פתיחה</span><span lang="en">Opening hours</span></caption>
+        <tbody data-hours></tbody>
+      </table>
+      <a class="btn btn-wide" href="tel:+972559810311"><span lang="he">התקשרו לשגיא</span> <span lang="en">Call Sagi</span> <span dir="ltr" class="num">055-981-0311</span></a>
+    </div>
   </div>
-  <div class="t map">
+
+  <div class="map">
     <iframe title="Google Maps: זלמן שז״ר 6, חיפה" src="https://www.google.com/maps?q=%D7%96%D7%9C%D7%9E%D7%9F%20%D7%A9%D7%96%22%D7%A8%206%2C%20%D7%97%D7%99%D7%A4%D7%94&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
   </div>
 </section>
 
 </main>
 
-<!-- footer: the back of the tower, where everything plugs in. Each port is a way to reach Sagi -->
-<footer class="io" aria-labelledby="h-io">
-  <h2 class="vh" id="h-io"><span lang="he">יצירת קשר</span><span lang="en">Contact</span></h2>
-  <ul class="ports">
-    <li class="port p-lan"><a href="tel:+972559810311"><svg viewBox="0 0 48 40" aria-hidden="true"><path d="M6 6h36v22h-8v6H14v-6H6z"/><path class="pin" d="M13 9h2v6h-2zM18 9h2v6h-2zM23 9h2v6h-2zM28 9h2v6h-2zM33 9h2v6h-2z"/></svg><span class="pl"><span lang="he">טלפון</span><span lang="en">Phone</span></span><span class="pv" dir="ltr">055-981-0311</span></a></li>
-    <li class="port p-usb"><a href="https://wa.me/972559810311" target="_blank" rel="noopener"><svg viewBox="0 0 48 40" aria-hidden="true"><path d="M8 12h32v16H8z"/><path class="pin" d="M12 16h24v5H12z"/></svg><span class="pl"><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></span><span class="pv" dir="ltr">055-981-0311</span></a></li>
-    <li class="port p-hdmi"><a href="mailto:contact@sagi-pc.co.il"><svg viewBox="0 0 48 40" aria-hidden="true"><path d="M5 13h38v9l-5 6H10l-5-6z"/><path class="pin" d="M10 17h28v4H10z"/></svg><span class="pl"><span lang="he">מייל</span><span lang="en">Email</span></span><span class="pv">contact@sagi-pc.co.il</span></a></li>
-    <li class="port p-audio"><a href="https://maps.google.com/?cid=15748355052042840365" target="_blank" rel="noopener"><svg viewBox="0 0 48 40" aria-hidden="true"><circle cx="14" cy="20" r="8"/><circle cx="34" cy="20" r="8"/><circle class="pin" cx="14" cy="20" r="3"/><circle class="pin" cx="34" cy="20" r="3"/></svg><span class="pl"><span lang="he">כתובת</span><span lang="en">Address</span></span><span class="pv"><span lang="he">זלמן שז״ר 6, חיפה</span><span lang="en">6 Zalman Shazar St, Haifa</span></span></a></li>
-    <li class="port p-psu"><a href="#reviews"><svg viewBox="0 0 48 40" aria-hidden="true"><path d="M10 6h28v28H10z"/><path class="pin" d="M17 12h14v16H17z"/></svg><span class="pl"><span lang="he">דירוג</span><span lang="en">Rating</span></span><span class="pv"><span lang="he">5.0 בגוגל</span><span lang="en">5.0 on Google</span></span></a></li>
-  </ul>
-  <div class="fine">
-    <p><span translate="no">Sagi PC</span> · <span lang="he">תיקון, הרכבה ושדרוג מחשבים</span><span lang="en">Computer repair, builds and upgrades</span></p>
-    <p><span lang="he">תמונות: Sagi PC, דרך תורמי Google Maps. תמונות להמחשה: ״ATX computer case - left״ מאת Bretwa (CC BY-SA 4.0), ״Corsair Logo 120mm desktop computer case fan״ מאת Eric Chan (CC BY 2.0), ״Thermal compound pl״ מאת FxJ (נחלת הכלל), כולן דרך Wikimedia Commons. משטח השולחן בהדמיה: Poly Haven (CC0). ההדמיה התלת-ממדית והציורים נבנו לקונספט הזה.</span><span lang="en">Photos: Sagi PC, via Google Maps contributors. Illustration photos: “ATX computer case - left” by Bretwa (CC BY-SA 4.0), “Corsair Logo 120mm desktop computer case fan” by Eric Chan (CC BY 2.0), “Thermal compound pl” by FxJ (public domain), all via Wikimedia Commons. Desk surface in the 3D view: Poly Haven (CC0). The 3D view and drawings were made for this concept.</span></p>
-    <p><span lang="he">קונספט לדוגמה, לא האתר הרשמי של העסק. הביקורות מצוטטות מגוגל.</span><span lang="en">A sample concept, not the business’s official website. Reviews quoted from Google.</span></p>
-  </div>
+<footer class="foot">
+  <p class="foot-main"><span class="foot-logo" translate="no">Sagi PC</span> <a href="tel:+972559810311" dir="ltr">055-981-0311</a> <a href="mailto:contact@sagi-pc.co.il">contact@sagi-pc.co.il</a></p>
+  <p class="fine"><span lang="he">קונספט לדוגמה, לא האתר הרשמי של העסק. הביקורות מצוטטות מגוגל. תמונות: Sagi PC, דרך תורמי Google Maps. משטח השולחן בהדמיה: Poly Haven (CC0). ההדמיה התלת-ממדית והציורים נבנו לקונספט הזה.</span><span lang="en">A sample concept, not the business’s official website. Reviews quoted from Google. Photos: Sagi PC, via Google Maps contributors. Desk surface in the 3D view: Poly Haven (CC0). The 3D view and drawings were made for this concept.</span></p>
 </footer>
 
-<!-- sticky contact: the front of a drive bay. The tray is the call, the eject key opens WhatsApp, the activity light is the open status -->
-<nav class="bay" data-bay aria-label="יצירת קשר מהירה">
-  <a class="tray" href="tel:+972559810311"><span class="bay-led" data-led></span><span class="tray-t"><span lang="he">התקשרו לשגיא</span><span lang="en">Call Sagi</span></span><span class="tray-n" dir="ltr">055-981-0311</span></a>
-  <a class="eject" href="https://wa.me/972559810311" target="_blank" rel="noopener"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4l6 7H4z"/><path d="M4 14h12v2H4z"/></svg><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
+<!-- sticky contact on the phone: the case's front panel. The big power button with its RGB ring calls, the small one opens WhatsApp, the LED is the open status -->
+<nav class="front" data-bay aria-label="יצירת קשר מהירה">
+  <a class="pwr" href="tel:+972559810311"><span class="pwr-ring" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v8"/><path d="M6.6 6.6a7.6 7.6 0 1 0 10.8 0"/></svg></span><span class="pwr-t"><span lang="he">התקשרו לשגיא</span><span lang="en">Call Sagi</span><span class="pwr-s"><span class="led" data-led></span><span dir="ltr">055-981-0311</span></span></span></a>
+  <a class="rst" href="https://wa.me/972559810311" target="_blank" rel="noopener"><span class="rst-dot" aria-hidden="true"></span><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
 </nav>
 
 <script src="js/job.js"></script>

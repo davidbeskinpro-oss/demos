@@ -17,7 +17,8 @@
     document.querySelectorAll('img[data-alt-he]').forEach(function (i) { i.alt = i.dataset[l === 'he' ? 'altHe' : 'altEn']; });
     var aria = function (sel, h, e) { var el = document.querySelector(sel); if (el) el.setAttribute('aria-label', l === 'he' ? h : e); };
     aria('[data-bay]', 'יצירת קשר מהירה', 'Quick contact');
-    aria('.t-row', 'ראשי', 'Main');
+    aria('[data-dimms]', 'ראשי', 'Main');
+    stripUI();
     aria('[data-statuses]', 'סטטוסים בכרטיס העבודה', 'Statuses on the job card');
     aria('[data-stepper]', 'מעבר בין הסטטוסים', 'Step through the statuses');
     var map = document.querySelector('.map iframe'); if (map) map.title = l === 'he' ? 'Google Maps: זלמן שז״ר 6, חיפה' : 'Google Maps: 6 Zalman Shazar St, Haifa';
@@ -33,15 +34,15 @@
     root.classList.toggle('still', !on); delete root.dataset.motionAuto;
     storyAfter(keep);
     try { localStorage.setItem('motion', on ? 'on' : 'off'); } catch (e) {}
-    motionUI(); write(); xfer(true);
+    motionUI(); write(); xfer(true); if (window.__chrome) window.__chrome();
     document.querySelectorAll('[data-reveal]').forEach(function (el) { el.classList.add('in'); });
     if (window.__motion3d) window.__motion3d(on);
     if (window.__trackRender) window.__trackRender();
   }); });
   motionUI();
 
-  // the name always fits its tile on one line
-  var h1 = document.querySelector('.t-name h1');
+  // the name always fits the hero on one line
+  var h1 = document.querySelector('.logo');
   function fitName() {
     h1.style.fontSize = ''; h1.style.whiteSpace = '';
     var n = 0, box = h1.parentNode, room = box.clientWidth - parseFloat(getComputedStyle(box).paddingLeft) - parseFloat(getComputedStyle(box).paddingRight);
@@ -90,7 +91,7 @@
   }
   window.__status = status; window.__H = H; window.__hours = hours;
 
-  // the parts cabinet: the drawer you pull writes the WhatsApp message on the bench monitor
+  // the PSU: the socket you plug a cable into writes the WhatsApp message on the little display
   var T = {
     he: { n: { desktop: 'תקלה במחשב נייח', fan: 'מאוורר רועש או מחשב שמתחמם', laptop: 'תקלה במחשב נייד', build: 'הרכבת מחשב חדש', upgrade: 'שדרוג כרטיס מסך או מעבד', files: 'העברת קבצים למחשב חדש' },
           hi: 'היי שגיא, הגעתי דרך האתר. אשמח לפתוח כרטיס: ', d: '. מה קורה: ', end: '. מתי אפשר להביא?' },
@@ -207,17 +208,61 @@
     });
   }
 
-  // the drive bay shows once the hero's call tile has gone, and steps aside where the page already offers the same buttons
+  // the front panel shows once the hero's buttons have gone, and steps aside where the page already offers the same buttons
   var bay = document.querySelector('[data-bay]'), away = new Set();
   function bayUI() { bay.classList.toggle('show', away.size === 0); }
   if ('IntersectionObserver' in window) {
     var bio = new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? away.add(e.target) : away.delete(e.target); }); bayUI(); }, { threshold: 0 });
-    ['[data-hero-act]', '.t-open', '.monitor', '[data-visit-act]', '.io'].forEach(function (s) { var el = document.querySelector(s); if (el) bio.observe(el); });
+    ['[data-hero-act]', '.oled', '[data-visit-act]', '.foot'].forEach(function (s) { var el = document.querySelector(s); if (el) bio.observe(el); });
     // on wide screens the bay would sit on the graph while the job is pinned, so it steps aside there; the card keeps its own
     var wide = matchMedia('(min-width: 900px)'), stageEl = document.querySelector('[data-stage]');
-    var sio = new IntersectionObserver(function (es) { es.forEach(function (e) { var r = e.boundingClientRect; (wide.matches && !still() && e.isIntersecting && e.intersectionRatio > 0.6) ? away.add(stageEl) : away.delete(stageEl); }); bayUI(); }, { threshold: [0, 0.6, 1] });
+    var sio = new IntersectionObserver(function (es) { es.forEach(function (e) { var r = e.boundingClientRect; (wide.matches && e.isIntersecting && e.intersectionRatio > 0.6) ? away.add(stageEl) : away.delete(stageEl); }); bayUI(); }, { threshold: [0, 0.6, 1] });
     sio.observe(stageEl);
   } else bay.classList.add('show');
+
+  // the reviews strip: a second copy makes the loop seamless; it pauses on hover/focus (CSS), with its button, and off screen
+  var strip = document.querySelector('[data-strip]'), pauseBtn = document.querySelector('[data-strip-pause]');
+  if (strip) {
+    var qs0 = strip.querySelector('.quotes'), cl = qs0.cloneNode(true);
+    cl.setAttribute('aria-hidden', 'true'); cl.setAttribute('data-clone', ''); cl.inert = true;
+    strip.querySelector('[data-run]').appendChild(cl);
+    pauseBtn.addEventListener('click', function () { strip.classList.toggle('paused'); stripUI(); });
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { es.forEach(function (e) { strip.classList.toggle('off', !e.isIntersecting); }); }).observe(strip);
+  }
+  function stripUI() {
+    if (!pauseBtn) return;
+    var p = strip.classList.contains('paused'), l = he();
+    pauseBtn.setAttribute('aria-pressed', p ? 'true' : 'false');
+    pauseBtn.innerHTML = '<span class="pz" aria-hidden="true"></span>' + (p ? (l ? 'המשך' : 'Play') : (l ? 'עצירה' : 'Pause'));
+  }
+
+  // the RAM sticks: the one for the section on screen lights up
+  var sticks = [].slice.call(document.querySelectorAll('.stick'));
+  if ('IntersectionObserver' in window) {
+    var secIO = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (!e.isIntersecting) return; sticks.forEach(function (a) { a.setAttribute('aria-current', a.getAttribute('href') === '#' + e.target.id ? 'true' : 'false'); }); });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('main > section[id], #top').forEach(function (s) { secIO.observe(s); });
+  }
+
+  // the RGB strips on the edges: their colour runs with the scroll. Scroll-driven CSS does it where it can; here otherwise
+  var flows = [].slice.call(document.querySelectorAll('[data-flow]')), sda = window.CSS && CSS.supports && CSS.supports('animation-timeline: scroll()');
+  var dimms = document.querySelector('[data-dimms]'), navAway = false;
+  function chrome() {
+    if (!sda) {
+      var max = Math.max(1, document.documentElement.scrollHeight - innerHeight), k = still() ? 0 : Math.min(1, scrollY / max);
+      var tf = k ? 'translate3d(0,' + (-k * 3.6 * innerHeight).toFixed(1) + 'px,0)' : '';
+      flows.forEach(function (f) { f.style.transform = tf; });
+    }
+    // the menu slides away while the repair story holds the screen
+    var tr = document.querySelector('[data-track]').getBoundingClientRect();
+    var away = !still() && tr.top < dimms.offsetHeight && tr.bottom > innerHeight * 0.6;
+    if (away !== navAway) { navAway = away; dimms.classList.toggle('away', away); }
+  }
+  var cTick = false;
+  addEventListener('scroll', function () { if (!cTick) { cTick = true; requestAnimationFrame(function () { cTick = false; chrome(); }); } }, { passive: true });
+  addEventListener('resize', chrome);
+  window.__chrome = chrome;
 
   // ---------------------------------------------------------------- the job card, the graph and the bench camera
   var track = document.querySelector('[data-track]'), stage = track.querySelector('[data-stage]');
@@ -227,18 +272,18 @@
   // where each status shows its still (animations off); the same p the stills were rendered at
   var STILL_P = [0.05, 0.24, 0.43, 0.555, 0.85, 0.985];
   var S = {
-    he: [['התקבל', 'המחשב מגיע לזלמן שז״ר 6, ונרשם מה קורה: תחת עומס הוא מתחמם, המאווררים צורחים והכול נהיה איטי.'],
-         ['אובחן והוסבר', 'במבחן עומס המעבד מגיע ל-97 מעלות ומוריד תדר כדי להגן על עצמו. הסיבות: אבק שסותם את צלעות הקירור, ומאוורר אחורי שמקרטע על מסב שחוק. שגיא מסביר לפני שמזמינים.'],
-         ['הוזמן חלק', 'מוזמן מאוורר 120 מ״מ חדש לפליטה האחורית. בינתיים המחשב כבוי ומחכה על השולחן.'],
-         ['הותקן', 'המאוורר הישן יוצא, אוויר דחוס מעיף את האבק מהצלעות החוצה מהכיוון שבו נכנס, והחדש נכנס. המשחה הטרמית היבשה יורדת, ושכבה חדשה מתפזרת תחת הקירור.'],
-         ['נבדק בעומס', 'אותו מבחן עומס של עשר דקות: הטמפרטורה נעצרת סביב 68 מעלות, המעבד נשאר בתדר המלא, והאוויר נכנס מקדימה ויוצא מאחור.'],
-         ['מוכן, שגיא מתקשר', 'המכסה חוזר למקום. המחשב מוכן, ושגיא מתקשר להגיד שאפשר לבוא לקחת.']],
-    en: [['Received', 'The computer arrives at 6 Zalman Shazar St and the fault goes on the card: under load it runs hot, the fans roar and everything slows down.'],
-         ['Diagnosed, explained', 'Under a stress test the CPU hits 97 °C and cuts its own clock to protect itself. The causes: dust clogging the cooler fins, and a rear fan stuttering on a worn bearing. Sagi explains before anything is ordered.'],
-         ['Part ordered', 'A new 120 mm fan is ordered for the rear exhaust. Meanwhile the computer waits on the bench, switched off.'],
-         ['Fitted', 'The old fan comes out, compressed air blows the dust out of the fins the way it came in, and the new fan goes in. The dried thermal paste comes off and a fresh layer spreads under the cooler.'],
-         ['Stress-tested', 'The same ten-minute stress test: the temperature levels off around 68 °C, the CPU holds its full clock, and air comes in at the front and leaves at the back.'],
-         ['Ready, Sagi calls', 'The side panel goes back on. The computer is ready, and Sagi calls to say you can come and collect it.']]
+    he: [['התקבל', 'המחשב מגיע: תחת עומס הוא מתחמם, מרעיש ומאט.'],
+         ['אובחן והוסבר', '97° במבחן עומס: אבק בצלעות הקירור ומאוורר אחורי שחוק. שגיא מסביר לפני שמזמינים.'],
+         ['הוזמן חלק', 'מוזמן מאוורר 120 מ״מ חדש. המחשב מחכה כבוי על השולחן.'],
+         ['הותקן', 'האבק מועף מהצלעות, המאוורר מוחלף, ומשחה טרמית חדשה נמרחת.'],
+         ['נבדק בעומס', 'אותו מבחן עומס: 68°, והמעבד נשאר בתדר המלא.'],
+         ['מוכן, שגיא מתקשר', 'המכסה נסגר, ושגיא מתקשר להגיד שאפשר לבוא לקחת.']],
+    en: [['Received', 'It arrives: under load it runs hot, loud and slow.'],
+         ['Diagnosed, explained', '97 °C under a stress test: dust in the cooler fins and a worn rear fan. Sagi explains before ordering.'],
+         ['Part ordered', 'A new 120 mm fan is ordered. The computer waits on the bench, switched off.'],
+         ['Fitted', 'The dust is blown out of the fins, the fan is replaced and fresh thermal paste goes on.'],
+         ['Stress-tested', 'The same stress test: 68 °C, and the CPU holds its full clock.'],
+         ['Ready, Sagi calls', 'The panel goes back on, and Sagi calls to say you can collect it.']]
   };
   // the work log under the note: each line is ticked when the bench gets there
   var LOG = [
@@ -347,7 +392,7 @@
   // switching modes keeps the visitor on the same status, and on the story if they were in it
   function storyBefore() { var r = stage.getBoundingClientRect(); return { sg: shown < 0 ? 0 : shown, pinned: !still() && r.top <= 1 && r.bottom >= innerHeight - 1, seen: r.top < innerHeight && r.bottom > 0 }; }
   function storyAfter(k) {
-    if (still()) { step = k.sg; if (k.pinned) scrollTo(0, scrollY + stage.getBoundingClientRect().top); return; }
+    if (still()) { step = k.sg; if (k.pinned) scrollTo(0, scrollY + stage.getBoundingClientRect().top - document.querySelector('[data-dimms]').offsetHeight); return; }
     if (!k.seen) return;
     var r = track.getBoundingClientRect();
     scrollTo(0, scrollY + r.top + parseFloat(sts[k.sg].dataset.go) * (r.height - innerHeight));
@@ -360,6 +405,6 @@
   try { saved = localStorage.getItem('lang'); } catch (e) {}
   hours();
   setLang(qs === 'en' || qs === 'he' ? qs : (saved === 'en' ? 'en' : 'he'));
-  render();
+  render(); chrome();
   setInterval(status, 60000);
 })();
