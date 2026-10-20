@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#f8f8f7">
+<meta name="theme-color" content="#161719">
 <title>אור חדש · סאלח, חשמלאי בחיפה</title>
 <meta name="description" content="קונספט לדוגמה עבור אור חדש, חשמלאי בחיפה ובקריות. 5.0 בגוגל מ-89 ביקורות.">
 <script>document.documentElement.classList.add('js');
@@ -18,10 +18,10 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
 <style>
 :root {
   --step-h3: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
-  --bg: #f8f8f7; --surface: #ececea; --surface-2: #e0e0dd; --ink: #121212; --muted: #55554f;
-  --accent: #1f4fd8; --accent-ink: #ffffff; --accent-deep: #1638a3;
+  --bg: #161719; --surface: #212326; --surface-2: #2d3034; --ink: #ecebe7; --muted: #a8a79f; --dark: #121212;
+  --accent: #2f5fe8; --accent-ink: #ffffff; --accent-deep: #1638a3;
   --live: #6b3f1f; --live-ink: #ffffff; --earth-g: #2f8f3a; --earth-y: #e8c02a;
-  --field: #121212; --field-ink: #f2f2f2; --field-muted: #b9b8b0;
+  --field: #0b0b0c; --field-ink: #f2f2f2; --field-muted: #b9b8b0;
   --step: 14px; --step-s: 6px;
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1); --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
   --t-press: 140ms; --t-hover: 180ms; --t-ui: 240ms; --t-reveal: 760ms;
@@ -40,9 +40,9 @@ img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; }
 button, input, select { font: inherit; color: inherit; }
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-::selection { background: var(--earth-y); color: var(--ink); }
+::selection { background: var(--earth-y); color: var(--dark); }
 html[lang="he"] [lang="en"], html[lang="en"] [lang="he"] { display: none !important; }
-.skip { position: absolute; inset-inline-start: 12px; top: -60px; z-index: 50; background: var(--ink); color: #fff; padding: 10px 16px; text-decoration: none; }
+.skip { position: absolute; inset-inline-start: 12px; top: -60px; z-index: 50; background: var(--accent); color: #fff; padding: 10px 16px; text-decoration: none; }
 .skip:focus { top: 12px; }
 [id] { scroll-margin-top: 16px; }
 a, button, select, input { touch-action: manipulation; }
@@ -57,7 +57,7 @@ p { margin: 0; }
 .din-s { --step: var(--step-s); }
 
 /* concept bar */
-.concept { background: var(--ink); color: var(--field-ink); font-size: var(--step-small); padding: 7px var(--m); text-align: center; }
+.concept { background: var(--field); color: var(--field-ink); font-size: var(--step-small); padding: 7px var(--m); text-align: center; }
 
 /* header */
 .top { display: flex; align-items: center; gap: 12px 20px; padding: 14px var(--m); max-width: 1440px; margin-inline: auto; flex-wrap: wrap; }
@@ -86,7 +86,7 @@ html[data-motion-auto="reduce"] [data-why="reduce"], html[data-motion-auto="data
 .btn svg { width: 20px; height: 20px; flex: none; }
 .btn:active { transform: scale(0.97); }
 .btn.ghost { background: var(--surface); color: var(--ink); }
-.btn.dark { background: var(--ink); color: var(--field-ink); }
+.btn.dark { background: var(--field); color: var(--field-ink); }
 .top .btn { min-height: 44px; padding: 0 18px; font-size: var(--step-body); }
 @media (hover: hover) {
   .top nav a:hover::after { transform: scaleX(1); }
@@ -175,7 +175,7 @@ html:not(.still) .stage:not(.no3d) .slabels { display: none; }
 .rail .tg { width: 16px; height: 30px; background: var(--surface-2); position: relative; }
 .rail .tg::after { content: ""; position: absolute; left: 3px; right: 3px; top: 3px; height: 11px; background: var(--muted); transform: translateY(13px); transition: transform var(--t-ui) var(--ease-out), background-color var(--t-ui) ease; }
 .rail button[aria-pressed="true"] .tg::after { transform: none; background: var(--ink); }
-.rail button[aria-pressed="true"] { background: #fff6cc; }
+.rail button[aria-pressed="true"] { background: #3d3720; }
 .rail .tx { min-height: 2.3em; text-align: center; }
 .short .mini { position: absolute; bottom: calc(14px + env(safe-area-inset-bottom)); inset-inline-end: var(--m); }
 .short-foot { padding: 64px var(--m) clamp(96px, 16vh, 180px); max-width: 1440px; margin-inline: auto; display: grid; grid-template-columns: 5fr 7fr; gap: 32px 64px; }
@@ -210,9 +210,9 @@ html:not(.still) .stage:not(.no3d) .slabels { display: none; }
 .folder .txt p { margin-top: 14px; max-width: 40ch; }
 .folder blockquote { margin: 26px 0 0; font-size: var(--step-lead); line-height: 1.35; max-width: 34ch; }
 .folder blockquote footer { margin-top: 10px; font-size: var(--step-small); opacity: .8; }
-.f1 .band { background: var(--accent); color: #fff; } .f1 .tab { background: var(--earth-y); color: var(--ink); }
+.f1 .band { background: var(--accent); color: #fff; } .f1 .tab { background: var(--earth-y); color: var(--dark); }
 .f2 .band { background: var(--live); color: var(--live-ink); } .f2 .tab { background: var(--bg); color: var(--ink); }
-.f3 .band { background: var(--surface-2); color: var(--ink); } .f3 .tab { background: var(--ink); color: #fff; }
+.f3 .band { background: var(--surface-2); color: var(--ink); } .f3 .tab { background: var(--field); color: #fff; }
 .timer { width: 100%; height: 100%; background: #cfd3c8; display: grid; place-items: center; }
 .timer svg { width: min(70%, 360px); height: auto; }
 
@@ -245,8 +245,8 @@ html:not(.still) .stage:not(.no3d) .slabels { display: none; }
 .gauge svg { width: 100%; max-width: 320px; height: auto; }
 .gauge .needle { transform-origin: 160px 150px; transform: rotate(-60deg); transition: transform 1.2s var(--ease-out) .2s; }
 .gauge.in .needle, html.still .gauge .needle { transform: rotate(60deg); }
-.board .t.y { background: var(--earth-y); } .board .t.y > span { color: var(--ink); }
-.board .t.k { background: var(--ink); color: #fff; } .board .t.k > span { color: var(--field-muted); }
+.board .t.y { background: var(--earth-y); color: var(--dark); } .board .t.y > span { color: var(--dark); }
+.board .t.k { background: var(--field); color: #fff; } .board .t.k > span { color: var(--field-muted); }
 
 /* the coupon: the WhatsApp message is filled in here */
 .contact { padding: 120px var(--m); max-width: 1440px; margin-inline: auto; }
@@ -264,7 +264,7 @@ html[dir="rtl"] .coupon { -webkit-mask: radial-gradient(circle 14px at 54% 0, #0
 html[dir="ltr"] .coupon select { background-position: right 16px center; }
 .coupon input::placeholder { color: #e8d4c2; }
 .coupon .prev { font-size: var(--step-small); min-height: 3.2em; color: #f1dfcf; }
-.coupon .send { --step: 0; height: 56px; background: var(--ink); color: #fff; justify-content: center; }
+.coupon .send { --step: 0; height: 56px; background: var(--field); color: #fff; justify-content: center; }
 @media (hover: hover) { .coupon .send:hover { background: #2a2a2a; } }
 .coupon .caret { display: inline-block; width: 2px; height: 1em; background: currentColor; vertical-align: -0.15em; margin-inline-start: 1px; }
 .where { margin-top: 64px; display: grid; grid-template-columns: 5fr 7fr; gap: 24px 48px; align-items: start; }
@@ -411,7 +411,6 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
 <main id="main">
 <section class="hero" aria-labelledby="h1">
   <div class="card">
-    <div class="stripe" aria-hidden="true" data-stripe></div>
     <p class="word"><span lang="he">אור חדש</span><span lang="en">Or Hadash</span></p>
     <h1 id="h1"><span lang="he">סאלח, חשמלאי מוסמך בחיפה ובקריות</span><span lang="en">Salah, a licensed electrician in Haifa</span></h1>
     <p class="sub"><span lang="he">אור חדש, החשמלאי של סאלח: לוחות חשמל, קצרים, שקעים, תאורה ושעון לדוד. 5.0 בגוגל מ-89 ביקורות.</span><span lang="en">Or Hadash is Salah's electrical business: panels, short circuits, sockets, lighting and water-heater timers. Rated 5.0 on Google from 89 reviews.</span></p>
@@ -642,7 +641,6 @@ html.still *, html.still *::before, html.still *::after { transition-duration: 0
 </section>
 </main>
 
-<div class="earth" aria-hidden="true" data-stripe></div>
 <footer class="site">
   <div class="in">
     <div class="sched din">
