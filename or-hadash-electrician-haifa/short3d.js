@@ -76,7 +76,7 @@ export function initShort3D(host, labelHost, opts = {}) {
   const M = (o) => { const m = new THREE.MeshStandardMaterial(o); m.userData.env = o.envMapIntensity ?? 1; mats.push(m); return m; };
 
   // ---- the block wall, as in the photographs of Salah's rough-in work
-  const blockMat = M({ map: tex('concrete_block_wall_light_diff', true, 2.2, 1.7), normalMap: tex('concrete_block_wall_nor_gl', false, 2.2, 1.7), roughnessMap: tex('concrete_block_wall_rough', false, 2.2, 1.7), roughness: 1, color: 0xe8e4de });
+  const blockMat = M({ map: tex('concrete_block_wall_light_diff', true, 2.2, 1.7), normalMap: tex('concrete_block_wall_nor_gl', false, 2.2, 1.7), roughnessMap: tex('concrete_block_wall_rough_rgb', false, 2.2, 1.7), roughness: 1, color: 0xe8e4de });
   const wall = new THREE.Mesh(new THREE.BoxGeometry(3.6, 2.7, 0.2), blockMat); wall.position.set(0, 0.25, -0.1); scene.add(wall);
 
   // ---- the plaster, with the opening cut by hand (ragged, irregular edge)
@@ -92,7 +92,7 @@ export function initShort3D(host, labelHost, opts = {}) {
   }
   hole.moveTo(pts[0][0], pts[0][1]); pts.slice(1).forEach((q) => hole.lineTo(q[0], q[1])); hole.closePath(); shape.holes.push(hole);
   const plGeo = new THREE.ExtrudeGeometry(shape, { depth: 0.028, bevelEnabled: false, curveSegments: 4 });
-  const plMat = M({ map: tex('white_plaster_02_diff', true, 1.6, 1.3), normalMap: tex('white_plaster_02_nor_gl', false, 1.6, 1.3), roughnessMap: tex('white_plaster_02_rough', false, 1.6, 1.3), color: 0xf3efe8, envMapIntensity: 0.5 });
+  const plMat = M({ map: tex('white_plaster_02_diff', true, 1.6, 1.3), normalMap: tex('white_plaster_02_nor_gl', false, 1.6, 1.3), roughnessMap: tex('white_plaster_02_rough_rgb', false, 1.6, 1.3), color: 0xf3efe8, envMapIntensity: 0.5 });
   plGeo.attributes.uv && (() => { const uv = plGeo.attributes.uv; for (let i = 0; i < uv.count; i++) uv.setXY(i, uv.getX(i) / 3.6 + 0.5, uv.getY(i) / 2.7 + 0.4); })();
   const plaster = new THREE.Mesh(plGeo, plMat); scene.add(plaster);
 
