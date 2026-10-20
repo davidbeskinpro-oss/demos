@@ -76,7 +76,7 @@ export function initShort3D(host, labelHost, opts = {}) {
   const M = (o) => { const m = new THREE.MeshStandardMaterial(o); m.userData.env = o.envMapIntensity ?? 1; mats.push(m); return m; };
 
   // ---- the block wall, as in the photographs of Salah's rough-in work
-  const blockMat = M({ map: tex('concrete_block_wall_diff', true, 2.2, 1.7), normalMap: tex('concrete_block_wall_nor_gl', false, 2.2, 1.7), roughnessMap: tex('concrete_block_wall_rough', false, 2.2, 1.7), roughness: 1, color: 0xd9d4cc });
+  const blockMat = M({ map: tex('concrete_block_wall_diff', true, 2.2, 1.7), normalMap: tex('concrete_block_wall_nor_gl', false, 2.2, 1.7), roughnessMap: tex('concrete_block_wall_rough', false, 2.2, 1.7), roughness: 1, color: 0xe8e4de });
   const wall = new THREE.Mesh(new THREE.BoxGeometry(3.6, 2.7, 0.2), blockMat); wall.position.set(0, 0.25, -0.1); scene.add(wall);
 
   // ---- the plaster, with the opening cut by hand (ragged, irregular edge)
