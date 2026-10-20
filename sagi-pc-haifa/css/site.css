@@ -141,7 +141,8 @@ html[lang="en"] .ch h2 { font-family: "Albert Sans", var(--font); letter-spacing
 .m-unit { font-size: var(--t-small); }
 .m-name { font-size: var(--t-small); text-align: end; color: #aab8b0; }
 .m-bar { height: 8px; background: #26302b; display: block; }
-.m-bar i { display: block; height: 100%; width: 97%; background: var(--hot); transition: width 300ms var(--ease), background-color 300ms var(--ease); }
+.m-bar i { display: block; height: 100%; background: var(--hot); transform: scaleX(0.97); transform-origin: left; transition: transform 300ms var(--ease), background-color 300ms var(--ease); }
+[dir="rtl"] .m-bar i { transform-origin: right; }
 .m-bar i.cool { background: var(--mint); }
 .meter.off b { color: #6c7a72; }
 .caption { position: absolute; z-index: 2; inset-inline-start: var(--m); bottom: 92px; width: min(460px, calc(100% - 2 * var(--m))); background: var(--bg); padding: 20px 22px 18px; --cut: 20px; }
@@ -200,13 +201,21 @@ html.still .step { transition: transform var(--press) var(--ease) !important; }
 .tr-text { grid-column: 1 / span 6; display: grid; gap: 36px; align-content: center; }
 .xfer { grid-column: 8 / span 5; align-self: center; }
 .xfer svg { width: 100%; height: auto; }
-.hdd rect:first-child { fill: #8e9893; } .platter { fill: #e4e8e6; } .spindle { fill: #8b958f; } .arm { stroke: #3d4741; stroke-width: 8; stroke-linecap: round; } .pins { fill: #c9a85c; }
-.cable { fill: none; stroke: var(--ink); stroke-width: 6; stroke-linecap: round; }
-.ssd rect:first-child { fill: var(--pcb); } .nand { fill: #1c211e; } .ctrl { fill: #2d3530; }
-.bar { height: 14px; background: var(--surface); margin-top: 16px; }
-.bar i { display: block; height: 100%; width: 0; background: var(--pcb); }
+.xfer .well { fill: #6f7873; }
+.xfer .screw circle { fill: #5e6762; } .xfer .screw path { stroke: #454e49; stroke-width: 1.4; }
+.xfer .tracks circle { fill: none; stroke: #7d8782; stroke-opacity: 0.22; stroke-width: 0.8; }
+.xfer .clamp { fill: #c6cdc9; stroke: #8a938e; } .xfer .cs { fill: #6b746f; } .xfer .notch { fill: #454e49; } .xfer .hub { fill: #8b958f; }
+.xfer .ramp { fill: #3a433e; } .xfer .magnet { fill: #4b5450; }
+.xfer .coil { fill: #b9783a; } .xfer .arm { fill: #aab3ae; stroke: #59625d; } .xfer .slider { fill: #2a312d; } .xfer .pivot { fill: #cdd3d0; stroke: #69726d; stroke-width: 1.2; }
+.xfer .port { fill: #1c201e; } .xfer .pins { fill: none; stroke: #d1b062; stroke-width: 4; stroke-dasharray: 2 1.6; }
+.cable { fill: none; stroke: #1b201e; stroke-width: 9; stroke-linecap: round; } .cable-hi { fill: none; stroke: #444e49; stroke-width: 1.4; }
+.xfer .trace { fill: none; stroke: #2a7a55; stroke-width: 1.6; } .xfer .hole { fill: var(--bg); stroke: #c9a85c; stroke-width: 2; }
+.xfer .ctrl { fill: #262d29; } .xfer .ctrl-flash { fill: var(--mint); opacity: 0; } .xfer .dram { fill: #1b201d; } .xfer .pkg { fill: #1a1f1c; } .xfer .fill { fill: var(--mint); opacity: 0.55; }
+.xfer .pk { fill: var(--mint); }
+/* the bar follows the data, left to right like the drawing, in both languages */
+.bar { height: 14px; background: var(--surface); margin-top: 16px; direction: ltr; }
+.bar i { display: block; height: 100%; background: var(--pcb); transform: scaleX(0); transform-origin: left; transition: transform 200ms var(--ease); }
 .xfer-count { font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; }
-html.js:not(.still) .xfer.in .platter { animation: spin 0.9s linear 6; transform-origin: 95px 130px; }
 
 /* builds: night field so the RGB shows */
 .ch-builds { background: var(--night); color: #eef3f0; display: grid; grid-template-columns: repeat(12, 1fr); column-gap: 16px; row-gap: 48px; }

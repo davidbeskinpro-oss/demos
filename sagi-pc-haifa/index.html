@@ -155,10 +155,42 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
     </blockquote>
   </div>
   <figure class="xfer" data-xfer data-reveal>
-    <svg viewBox="0 0 520 300" aria-hidden="true">
-      <g class="hdd"><rect x="10" y="40" width="170" height="220" rx="6"/><circle cx="95" cy="130" r="62" class="platter"/><circle cx="95" cy="130" r="10" class="spindle"/><path d="M160 230 L110 140" class="arm"/><rect x="40" y="246" width="110" height="8" class="pins"/></g>
-      <path class="cable" d="M150 250 C 250 300, 270 120, 340 150"/>
-      <g class="ssd"><rect x="330" y="80" width="180" height="120" rx="4"/><rect x="350" y="100" width="44" height="34" class="nand"/><rect x="404" y="100" width="44" height="34" class="nand"/><rect x="458" y="100" width="36" height="34" class="nand"/><rect x="350" y="150" width="70" height="30" class="ctrl"/></g>
+    <!-- an old 3.5" disk with its cover off, a SATA cable, and the bare board of the new SSD. site.js moves the clamp, the arm, the packets and the chip fills -->
+    <svg viewBox="0 22 520 272" aria-hidden="true">
+      <defs>
+        <linearGradient id="x-al" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a7b0ab"/><stop offset=".55" stop-color="#c9d0cc"/><stop offset="1" stop-color="#8e9792"/></linearGradient>
+        <radialGradient id="x-plat"><stop offset=".22" stop-color="#d3dad6"/><stop offset=".72" stop-color="#eef2f0"/><stop offset=".96" stop-color="#bcc4c0"/><stop offset="1" stop-color="#8f9893"/></radialGradient>
+        <linearGradient id="x-sheen" x1="0" y1="0" x2="1" y2="1"><stop offset=".3" stop-color="#fff" stop-opacity="0"/><stop offset=".47" stop-color="#fff" stop-opacity=".7"/><stop offset=".53" stop-color="#fff" stop-opacity=".7"/><stop offset=".7" stop-color="#fff" stop-opacity="0"/></linearGradient>
+        <linearGradient id="x-pcb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1a5c3f"/><stop offset="1" stop-color="#11402b"/></linearGradient>
+      </defs>
+      <g class="hdd">
+        <rect x="10" y="30" width="180" height="240" rx="7" fill="url(#x-al)"/>
+        <circle cx="92" cy="118" r="76" class="well"/><rect x="124" y="196" width="60" height="66" rx="8" class="well"/>
+        <g class="screw"><circle cx="22" cy="42" r="4.5"/><circle cx="178" cy="42" r="4.5"/><circle cx="22" cy="258" r="4.5"/><circle cx="22" cy="214" r="4.5"/><circle cx="178" cy="150" r="4.5"/><path d="M19 42h6M175 42h6M19 258h6M19 214h6M175 150h6"/></g>
+        <circle cx="92" cy="118" r="70" fill="url(#x-plat)"/>
+        <g class="tracks"><circle cx="92" cy="118" r="30"/><circle cx="92" cy="118" r="42"/><circle cx="92" cy="118" r="54"/><circle cx="92" cy="118" r="64"/></g>
+        <circle cx="92" cy="118" r="70" fill="url(#x-sheen)"/>
+        <g data-clamp><circle cx="92" cy="118" r="18" class="clamp"/><circle cx="103" cy="118" r="2.4" class="cs"/><circle cx="97.5" cy="127.5" r="2.4" class="cs"/><circle cx="86.5" cy="127.5" r="2.4" class="cs"/><circle cx="81" cy="118" r="2.4" class="cs"/><circle cx="86.5" cy="108.5" r="2.4" class="cs"/><circle cx="97.5" cy="108.5" r="2.4" class="cs"/><rect x="90" y="100.5" width="4" height="3" class="notch"/><circle cx="92" cy="118" r="5.5" class="hub"/></g>
+        <rect x="170" y="95" width="16" height="22" rx="2" class="ramp"/>
+        <g data-arm transform="rotate(9 160 222)"><path d="M150 226 L170 226 L178 250 L142 250 Z" class="coil"/><path d="M152 222 L157.5 110 L162.5 110 L168 222 Z" class="arm"/><rect x="157" y="101" width="6" height="9" rx="1" class="slider"/><circle cx="160" cy="222" r="9" class="pivot"/><circle cx="160" cy="222" r="3" class="hub"/></g>
+        <path d="M134 233 h52 v25 a6 6 0 0 1 -6 6 h-40 a6 6 0 0 1 -6 -6 z" class="magnet"/>
+        <rect x="116" y="264" width="56" height="10" rx="1.5" class="port"/><path d="M120 269 h48" class="pins"/>
+      </g>
+      <path class="cable" data-cable d="M144 274 C 220 296, 262 150, 318 150"/>
+      <path class="cable-hi" d="M144 274 C 220 296, 262 150, 318 150"/>
+      <g class="ssd">
+        <rect x="330" y="80" width="180" height="140" rx="5" fill="url(#x-pcb)"/>
+        <path class="trace" d="M332 150 H350 M390 140 H404 M390 156 C398 156 398 181 404 181 M448 119 H456 M448 181 H456"/>
+        <circle cx="340" cy="90" r="4" class="hole"/><circle cx="500" cy="90" r="4" class="hole"/><circle cx="340" cy="210" r="4" class="hole"/><circle cx="500" cy="210" r="4" class="hole"/>
+        <rect x="318" y="134" width="14" height="32" rx="1.5" class="port"/><path d="M325 138 v24" class="pins"/>
+        <rect x="350" y="128" width="40" height="40" rx="2" class="ctrl"/><rect x="350" y="128" width="40" height="40" rx="2" class="ctrl-flash" data-ctrl/>
+        <rect x="350" y="180" width="40" height="24" rx="1.5" class="dram"/>
+        <g data-nand><rect x="404" y="92" width="44" height="54" rx="2" class="pkg"/><rect x="409" y="97" width="34" height="44" class="fill" transform="scale(1 0)"/></g>
+        <g data-nand><rect x="456" y="92" width="44" height="54" rx="2" class="pkg"/><rect x="461" y="97" width="34" height="44" class="fill" transform="scale(1 0)"/></g>
+        <g data-nand><rect x="404" y="154" width="44" height="54" rx="2" class="pkg"/><rect x="409" y="159" width="34" height="44" class="fill" transform="scale(1 0)"/></g>
+        <g data-nand><rect x="456" y="154" width="44" height="54" rx="2" class="pkg"/><rect x="461" y="159" width="34" height="44" class="fill" transform="scale(1 0)"/></g>
+      </g>
+      <g data-packets><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/><rect class="pk" x="-6" y="-2.5" width="12" height="5" rx="2.5" visibility="hidden"/></g>
     </svg>
     <div class="bar"><i data-xfer-bar></i></div>
     <figcaption><span class="xfer-count" data-xfer-count>0%</span> <span lang="he">ציור להמחשה: מהדיסק הישן לכונן החדש</span><span lang="en">Drawing: from the old disk to the new drive</span></figcaption>

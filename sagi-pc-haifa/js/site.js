@@ -1,5 +1,5 @@
 (function () {
-  var root = document.documentElement, WA = '972559810311';
+  var root = document.documentElement, WA = '972559810311', EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';   // = --ease in site.css
   var still = function () { return root.classList.contains('still'); };
   var he = function () { return root.lang === 'he'; };
   var TITLE = { he: 'Sagi PC · מעבדת מחשבים · זלמן שז״ר 6, חיפה', en: 'Sagi PC · Computer repair lab · 6 Zalman Shazar St, Haifa' };
@@ -149,7 +149,7 @@
     write();
     // the module clicks into its slot: a short settle, played with WAAPI so fast re-taps restart cleanly
     var s = e.target.parentNode.querySelector('.stick');
-    if (s && s.animate && !still()) s.animate([{ transform: 'translateY(-10px)' }, { transform: 'translateY(1px)' }, { transform: 'none' }], { duration: 180, easing: 'ease-out' });
+    if (s && s.animate && !still()) s.animate([{ transform: 'translateY(-10px)' }, { transform: 'translateY(1px)' }, { transform: 'none' }], { duration: 180, easing: EASE });
   });
   form.addEventListener('input', function (e) { if (e.target.name === 'detail') write(); });
 
@@ -166,18 +166,80 @@
     var ls = document.querySelectorAll('.led');
     ls.forEach(function (l, i) { if (still()) l.classList.add('lit'); else setTimeout(function () { l.classList.add('lit'); }, 300 + i * 450); });
   }
-  // the transfer bar: slow at first (an old disk), then done
-  var xferDone = false;
-  function xfer(now) {
+  // the transfer. The old disk spins up and its arm hunts across the platter for scattered pieces; every read goes down
+  // the cable as a packet, and the count, the bar and the chips on the new drive only move when a packet lands.
+  // The rest of the data sits in long runs and streams; then the arm parks on its ramp and the platter spins down.
+  var xf = document.querySelector('[data-xfer]'), X = null;
+  if (xf && xf.querySelector('[data-cable]') && xf.querySelector('[data-cable]').getTotalLength) X = {
+    arm: xf.querySelector('[data-arm]'), clamp: xf.querySelector('[data-clamp]'), cable: xf.querySelector('[data-cable]'), ctrl: xf.querySelector('[data-ctrl]'),
+    pk: [].slice.call(xf.querySelectorAll('.pk')), fills: [].slice.call(xf.querySelectorAll('[data-nand] .fill'))
+  };
+  var PARK = 9, OMEGA = 0.6, TRAVEL = 480, SLOW = 14, SEEK = 90, READ = 120, FAST = 40, GAP = 42;   // degrees, degrees per ms, ms
+  // arm angle (around its pivot at 160,222, head 118 out) that puts the head at radius r from the spindle at 92,118
+  function headR(phi) { var a = phi * Math.PI / 180, x = 68 + 118 * Math.sin(a), y = 104 - 118 * Math.cos(a); return Math.sqrt(x * x + y * y); }
+  function phiFor(r) { var lo = -33, hi = 0, i, m; for (i = 0; i < 24; i++) { m = (lo + hi) / 2; if (headR(m) < r) lo = m; else hi = m; } return m; }
+  function xplan() {
+    var s = 7, rnd = function () { s = s * 16807 % 2147483647; return s / 2147483647; };
+    var moves = [], sends = [], t = 450, r = 46, i;
+    moves.push({ t0: t, t1: t + 220, a: PARK, b: phiFor(r) }); t += 220;   // loads off the ramp once the platter is up to speed
+    for (i = 0; i < SLOW; i++) {   // seek, read, send
+      var nr = 24 + rnd() * 42;
+      moves.push({ t0: t, t1: t + SEEK, a: phiFor(r), b: phiFor(nr) }); t += SEEK + READ; r = nr;
+      sends.push({ t: t, v: 45 / SLOW });
+    }
+    var r1 = r > 45 ? r - 22 : r + 22;   // one long run: the head creeps across the tracks while the packets stream
+    moves.push({ t0: t, t1: t + FAST * GAP, a: phiFor(r), b: phiFor(r1), lin: true });
+    for (i = 1; i <= FAST; i++) sends.push({ t: t + i * GAP, v: 55 / FAST });
+    t += FAST * GAP;
+    moves.push({ t0: t + 120, t1: t + 380, a: phiFor(r1), b: PARK });
+    return { moves: moves, sends: sends, down: t + 420, end: Math.max(t + TRAVEL, t + 420 + 1400) };
+  }
+  function xfill(v) {
     var bar = document.querySelector('[data-xfer-bar]'), c = document.querySelector('[data-xfer-count]');
-    if (xferDone) return;
-    if (now === true || still()) { if (now === true && !document.querySelector('[data-xfer].in')) return; bar.style.width = '100%'; c.textContent = '100%'; xferDone = true; return; }
-    var t0 = performance.now(), D = 3600;
-    (function step(t) {
-      var k = Math.min(1, (t - t0) / D), e = k < 0.7 ? k / 0.7 * 0.45 : 0.45 + (k - 0.7) / 0.3 * 0.55;   // the old disk crawls, then the rest goes fast
-      bar.style.width = (e * 100).toFixed(1) + '%'; c.textContent = Math.round(e * 100) + '%';
-      if (k < 1) requestAnimationFrame(step); else xferDone = true;
-    })(t0);
+    bar.style.transform = 'scaleX(' + (v / 100).toFixed(4) + ')'; c.textContent = Math.round(v) + '%';
+    if (X) X.fills.forEach(function (f, i) {   // the chips fill in order, from the bottom up
+      var k = Math.max(0, Math.min(1, v / 25 - i)), yb = +f.getAttribute('y') + +f.getAttribute('height');
+      f.setAttribute('transform', 'translate(0 ' + (yb * (1 - k)).toFixed(2) + ') scale(1 ' + k.toFixed(3) + ')');
+    });
+  }
+  var xferDone = false, xferRaf = 0;
+  function xferEnd() {
+    xferDone = true; cancelAnimationFrame(xferRaf);
+    if (X) { X.arm.setAttribute('transform', 'rotate(' + PARK + ' 160 222)'); X.pk.forEach(function (p) { p.setAttribute('visibility', 'hidden'); }); X.ctrl.style.opacity = 0; }
+    xfill(100);
+  }
+  function xfer(now) {
+    if (xferDone || xferRaf) return;
+    if (now === true || still() || !X) { if (now === true && !document.querySelector('[data-xfer].in')) return; return xferEnd(); }
+    var P = xplan(), len = X.cable.getTotalLength(), t0 = performance.now(), last = t0, theta = 0, drawn = -1;
+    var io2 = function (k) { return k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; };   // a seek: the arm accelerates and brakes hard
+    xferRaf = requestAnimationFrame(function frame(t) {
+      if (still()) return xferEnd();
+      var e = t - t0, dt = Math.min(50, t - last), i; last = t;
+      // platter: up to speed in 600 ms, coasts down after the arm parks
+      var w = e < 600 ? 1 - Math.pow(1 - e / 600, 2) : e < P.down ? 1 : Math.pow(Math.max(0, 1 - (e - P.down) / 1400), 2);
+      theta = (theta + OMEGA * w * dt) % 360;
+      X.clamp.setAttribute('transform', 'rotate(' + theta.toFixed(1) + ' 92 118)');
+      var phi = PARK;
+      P.moves.forEach(function (m) { if (e >= m.t0) { var k = Math.min(1, (e - m.t0) / (m.t1 - m.t0)); phi = m.a + (m.b - m.a) * (m.lin ? k : io2(k)); } });
+      X.arm.setAttribute('transform', 'rotate(' + phi.toFixed(2) + ' 160 222)');
+      // packets on the cable; what has landed is what has been copied
+      var got = 0, landed = -1e9, n = 0;
+      for (i = 0; i < P.sends.length; i++) {
+        var k = (e - P.sends[i].t) / TRAVEL;
+        if (k >= 1) { got += P.sends[i].v; landed = P.sends[i].t + TRAVEL; }
+        else if (k >= 0 && n < X.pk.length) {
+          var a = X.cable.getPointAtLength(k * len), b = X.cable.getPointAtLength(Math.min(len, k * len + 2));
+          X.pk[n].setAttribute('transform', 'translate(' + a.x.toFixed(1) + ' ' + a.y.toFixed(1) + ') rotate(' + (Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI).toFixed(1) + ')');
+          X.pk[n++].setAttribute('visibility', 'visible');
+        }
+      }
+      for (i = n; i < X.pk.length; i++) X.pk[i].setAttribute('visibility', 'hidden');
+      X.ctrl.style.opacity = Math.max(0, 1 - (e - landed) / 160) * 0.8;   // the controller blinks as each packet arrives
+      var v = Math.min(100, got);
+      if (v !== drawn) { drawn = v; xfill(v); }
+      if (e < P.end) xferRaf = requestAnimationFrame(frame); else xferEnd();
+    });
   }
 
   // the panel shows once the hero's buttons are gone, and steps aside over the visit card and the composer
@@ -251,8 +313,11 @@
       placeLabels(sg);
     }
     if (sg !== shown || capT.dataset.l !== l) {
+      var moved = shown >= 0 && sg !== shown;
       shown = sg; capT.dataset.l = l;
       capT.textContent = S[l][sg][0]; capX.textContent = S[l][sg][1];
+      // a new stage's words settle in place instead of snapping
+      if (moved && !still() && capT.animate) [capT, capX].forEach(function (el) { el.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 220, easing: EASE }); });
       dips.forEach(function (c, i) { c.setAttribute('aria-pressed', i === sg ? 'true' : 'false'); });
       stepN.textContent = sg + 1;
       stepBtns.forEach(function (b) { b.disabled = +b.dataset.step < 0 ? sg === 0 : sg === 5; });
@@ -263,7 +328,7 @@
       lastRead = key;
       meter.classList.toggle('off', rd.off);
       rT.textContent = rd.off ? '–' : rd.t; rG.textContent = rd.off ? '–' : rd.ghz.toFixed(1); rR.textContent = rd.off ? (l === 'he' ? 'כבוי' : 'off') : rd.rpm;
-      rB.style.width = (rd.off ? 0 : rd.t) + '%'; rB.classList.toggle('cool', !rd.off && rd.t < 80);
+      rB.style.transform = 'scaleX(' + (rd.off ? 0 : rd.t / 100) + ')'; rB.classList.toggle('cool', !rd.off && rd.t < 80);
     }
     if (live) window.__pc3d.set(ps);
   }
