@@ -127,50 +127,57 @@
     var hb = hero.getBoundingClientRect().bottom + scrollY, fall = Math.max(120, hb - cornerY + 40);
     $$('.drop', hero).forEach(function (d) { d.style.setProperty('--fall', (fall / (d.getBoundingClientRect().height || 14) * 100).toFixed(0) + '%'); });
     landY = parseFloat(getComputedStyle(root).getPropertyValue('--land-y')) || 64;
+    // the flood must reach the section's farthest corner from the splash point
+    var dx = parseFloat(getComputedStyle(root).getPropertyValue('--drip-x')) || x;
+    secs.forEach(function (s) { var w = s.offsetWidth, h = s.offsetHeight; s._R = Math.ceil(Math.hypot(Math.max(dx, w - dx), Math.max(landY, h - landY))) + 2; s._k = -1; });
     splashTick();
   }
 
-  // ---------------------------------------------------------------- each section opens with a splash: a drop falls into it as you scroll in
-  secs.forEach(function (s) { $$('.rv', s).forEach(function (el, i) { el.style.setProperty('--rd', (200 + Math.min(i, 6) * 80) + 'ms'); }); });
-  function openSec(s, animate) {
-    if (s.classList.contains('open')) return;
-    s.classList.add('open');
-    var f = $('.fall', s); if (f) f.style.opacity = 0;
-    if (animate) { s.classList.add('splash'); setTimeout(function () { s.classList.remove('splash'); }, 1300); }
-  }
-  function openAll() { secs.forEach(function (s) { openSec(s, false); }); }
+  // ---------------------------------------------------------------- each section opens with a splash, all of it tied to the scroll, both ways:
+  // the drop falls as you scroll in (and climbs back if you scroll up), lands, the rings and droplets spread, and the section's colour floods out
+  // from the splash point. Scroll back above it and the colour drains back into the point, so the next pass down plays it again.
+  var FLY = [[-46, -38], [-18, -58], [12, -64], [38, -44], [56, -22]];
+  secs.forEach(function (s) {
+    $$('.rv', s).forEach(function (el, i) { el.style.setProperty('--rd', (200 + Math.min(i, 6) * 80) + 'ms'); });
+    var fl = document.createElement('i'); fl.className = 'flood'; fl.setAttribute('aria-hidden', 'true'); s.insertBefore(fl, s.firstChild);
+    s._fl = fl; s._f = $('.fall', s); s._rings = $$('.ripple i', s); s._dots = $$('.ripple b', s); s._k = -1;
+  });
+  function openAll() { secs.forEach(function (s) { s.classList.add('open'); s._k = -1; }); }
   function dropT(off, sy) { return 'translate(-50%, ' + (-off).toFixed(1) + 'px) translateY(-100%) scale(' + (1 / Math.sqrt(sy)).toFixed(3) + ',' + sy.toFixed(3) + ')'; }
-  function release(s, f, off, sy) {
-    s._rel = true;
-    // time to fall the rest of the way, from the screen distance (about a metre per screen)
-    var ms = Math.round(clamp(Math.sqrt(off / innerHeight) * 450, 140, 420));
-    var done = function () { openSec(s, true); };
-    if (f.animate) {
-      var a = f.animate([{ transform: dropT(off, sy) }, { transform: dropT(0, 1.55) }], { duration: ms, easing: 'cubic-bezier(0.5, 0, 1, 1)', fill: 'forwards' });
-      a.onfinish = done;
-    } else done();
+  var outC = function (t) { return 1 - Math.pow(1 - t, 3); };
+  function splash(s, q) {
+    var k = clamp((q - 1) / 0.7, 0, 1), k2 = clamp((q - 1.1) / 0.8, 0, 1);
+    // two rings spread on the surface, the second one later and wider
+    [k, k2].forEach(function (t, j) { var r = s._rings[j]; if (!r) return; r.style.opacity = t > 0 && t < 1 ? (0.9 * (1 - t)).toFixed(3) : 0; r.style.transform = 'scale(' + (0.1 + 2.5 * outC(t)).toFixed(3) + ')'; });
+    // droplets thrown up and out, then falling back under gravity
+    s._dots.forEach(function (b, j) {
+      var fx = FLY[j][0], fy = FLY[j][1], x, y, sc, op;
+      if (k <= 0 || k >= 1) { b.style.opacity = 0; return; }
+      if (k < 0.55) { var u = outC(k / 0.55); x = fx * 0.75 * u; y = fy * u; sc = 1 - 0.1 * u; op = 1; }
+      else { var v = (k - 0.55) / 0.45, g = v * v; x = fx * (0.75 + 0.25 * v); y = fy + (6 - fy) * g; sc = 0.9 - 0.3 * v; op = 1 - v; }
+      b.style.opacity = op.toFixed(3); b.style.transform = 'translate(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px) scale(' + sc.toFixed(3) + ')';
+    });
   }
-  var first = true;
   function splashTick() {
     if (still()) { openAll(); return; }
-    var vh = innerHeight, tops = secs.map(function (s) { return s.classList.contains('open') ? 0 : s.getBoundingClientRect().top; });
+    var vh = innerHeight, tops = secs.map(function (s) { return s.getBoundingClientRect().top; });   // read everything, then write
     for (var i = 0; i < secs.length; i++) {
-      var s = secs[i]; if (s.classList.contains('open')) continue;
-      var top = tops[i] + landY, q = (vh - top) / (vh * 0.42);
-      if (first && top < vh * 0.58) { openSec(s, false); continue; }
-      var f = $('.fall', s);
-      if (s._rel) continue;
-      if (q >= 1 || !f) { openSec(s, true); continue; }
-      if (q <= 0) { f.style.opacity = 0; continue; }
-      // the first drop comes from the unit's corner; later ones from the dark above the section
-      var D = i === 0 ? Math.max(vh * 0.4, tops[i] + scrollY + landY - cornerY) : vh * 0.55;
-      var off = D * (1 - q) * (1 - q), sy = 1 + 0.45 * q;
-      f.style.opacity = 1;
-      f.style.transform = dropT(off, sy);
-      // past half way the scroll lets go of it: gravity finishes the fall and the splash opens the section
-      if (q >= 0.5) release(s, f, off, sy);
+      var s = secs[i], top = tops[i] + landY, q = (vh - top) / (vh * 0.42);
+      // q: 0 = the landing point enters at the bottom, 1 = the drop lands (58% down the screen), 2.2 = the colour fills the section
+      var key = clamp(q, -0.01, 2.21).toFixed(3); if (key === s._k) continue; s._k = key;
+      var f = s._f;
+      if (f) {
+        if (q > 0 && q < 1) {
+          // the first drop comes from the unit's corner; later ones from the dark above the section. Gravity: the distance left shrinks with the square
+          var D = i === 0 ? Math.max(vh * 0.4, tops[i] + scrollY + landY - cornerY) : vh * 0.55;
+          f.style.opacity = 1; f.style.transform = dropT(D * (1 - q) * (1 - q), 1 + 0.45 * q);
+        } else f.style.opacity = 0;
+      }
+      splash(s, q);
+      var kf = clamp((q - 1) / 1.2, 0, 1);
+      s._fl.style.clipPath = kf >= 1 ? 'none' : 'circle(' + (outC(kf) * s._R).toFixed(1) + 'px at var(--drip-x) var(--land-y))';
+      s.classList.toggle('open', q >= 1);
     }
-    first = false;
   }
 
   // ---------------------------------------------------------------- the lamps: the part of the page you are in

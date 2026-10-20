@@ -140,21 +140,12 @@ html.js:not(.still) .fall { display: block; position: absolute; z-index: 3; left
 html.js:not(.still) .ripple { display: block; position: absolute; z-index: -1; left: var(--drip-x); top: var(--land-y); width: 0; height: 0; pointer-events: none; }
 .ripple i { position: absolute; left: -60px; top: -14px; width: 120px; height: 28px; border-radius: 50%; border: 2px solid rgba(169, 220, 239, 0.7); opacity: 0; transform: scale(0.1); }
 .ripple b { position: absolute; left: -3px; top: -3px; width: 6px; height: 6px; border-radius: 50%; background: rgba(214, 238, 246, 0.9); opacity: 0; }
-html.js:not(.still) .sec:not(.open)::before { clip-path: circle(0px at var(--drip-x) var(--land-y)); }
-html.js:not(.still) .sec::before { transition: clip-path 1200ms var(--ease-out); }
+/* with motion on, the colour is a real element whose clip-path site.js scrubs with the scroll (the ::before stays for animations off) */
+.flood { display: none; }
+html.js:not(.still) .sec::before { content: none; }
+html.js:not(.still) .flood { display: block; position: absolute; inset: 0; z-index: -2; background: var(--g); clip-path: circle(0px at var(--drip-x) var(--land-y)); pointer-events: none; }
 html.js:not(.still) .sec .rv { transition: opacity 640ms var(--ease-out), transform 760ms var(--ease-out); transition-delay: var(--rd, 200ms); }
-html.js:not(.still) .sec:not(.open) .rv { opacity: 0; transform: translateY(26px); }
-.sec.splash .ripple i { animation: ring 900ms var(--ease-out) forwards; }
-.sec.splash .ripple i + i { animation-delay: 140ms; animation-duration: 1100ms; }
-.sec.splash .ripple b { animation: fly 620ms var(--ease-out) forwards; }
-.ripple b:nth-of-type(1) { --fx: -46px; --fy: -38px; } .ripple b:nth-of-type(2) { --fx: -18px; --fy: -58px; } .ripple b:nth-of-type(3) { --fx: 12px; --fy: -64px; }
-.ripple b:nth-of-type(4) { --fx: 38px; --fy: -44px; } .ripple b:nth-of-type(5) { --fx: 56px; --fy: -22px; }
-@keyframes ring { 0% { opacity: 0.9; transform: scale(0.1); } 100% { opacity: 0; transform: scale(2.6); } }
-@keyframes fly {
-  0% { opacity: 1; transform: translate(0, 0) scale(1); animation-timing-function: cubic-bezier(0.2, 0.6, 0.4, 1); }
-  55% { opacity: 1; transform: translate(calc(var(--fx) * 0.75), var(--fy)) scale(0.9); animation-timing-function: cubic-bezier(0.5, 0, 1, 1); }
-  100% { opacity: 0; transform: translate(var(--fx), 6px) scale(0.6); }
-}
+html.js:not(.still) .sec:not(.open) .rv { opacity: 0; transform: translateY(26px); transition-delay: 0ms; }
 .sec h2 { font-size: var(--fs-h2); font-weight: 500; line-height: 1.04; letter-spacing: -0.025em; max-width: 18ch; }
 html[lang='en'] .sec h2 { letter-spacing: -0.02em; }
 
