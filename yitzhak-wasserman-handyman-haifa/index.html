@@ -15,7 +15,7 @@
 var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage.getItem('yw-lang')}catch(e){}l=q==='en'||q==='he'?q:l==='en'?'en':'he';r.lang=l;r.dir=l==='he'?'rtl':'ltr';})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Noto+Rashi+Hebrew:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600&family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&family=Secular+One&family=Schibsted+Grotesk:wght@400;500;600&family=Fraunces:ital,opsz,wght@1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect x=%222%22 y=%2210%22 width=%2228%22 height=%2212%22 rx=%226%22 fill=%22%23c49a5c%22/%3E%3Crect x=%229%22 y=%2213%22 width=%2214%22 height=%226%22 rx=%223%22 fill=%22%23e2d36a%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%222%22 fill=%22%23fbf6dc%22/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/site.css">
 <link rel="preload" as="image" href="img/hero.jpg" media="(min-width: 760px)">
@@ -91,7 +91,7 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
       </svg>
     </div>
     <div class="board-in">
-      <h2 id="lv-h" data-reveal><span lang="he">ישר. <em>עד האפס.</em></span><span lang="en">Level. <em>Down to zero.</em></span></h2>
+      <h2 id="lv-h" data-reveal><span lang="he">ישר. <em>עד המילימטר.</em></span><span lang="en">Level. <em>To the millimetre.</em></span></h2>
       <p class="sub" data-reveal><span lang="he">מדף, כוננית או יחידה על הקיר: נמדד, מסומן ונתלה ישר.</span><span lang="en">A shelf, a unit, a cabinet on the wall: measured, marked and hung true.</span></p>
       <ul class="cards" data-cards>
         <li class="card" data-reveal>
@@ -165,7 +165,7 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
 <section class="fix" id="fix" aria-labelledby="fx-h" data-fix>
   <div class="wrap fix-grid">
     <div class="fix-text">
-      <h2 id="fx-h" data-reveal><span lang="he">מסמן, קודח, <em>מחזיק.</em></span><span lang="en">Mark, drill, <em>hold.</em></span></h2>
+      <h2 id="fx-h" data-reveal><span lang="he">מסמן, קודח, <em>תולה.</em></span><span lang="en">Mark, drill, <em>hang.</em></span></h2>
       <p class="sub" data-reveal><span lang="he">ומסביר לכם כל צעד בדרך.</span><span lang="en">And explains every step as he goes.</span></p>
     </div>
     <svg class="cut" viewBox="0 0 640 300" aria-hidden="true" focusable="false" data-cut>
@@ -210,7 +210,7 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
       </fieldset>
       <fieldset class="peg-f">
         <legend><span lang="he">באיזה חדר</span><span lang="en">Which room</span></legend>
-        <div class="pegboard"><label class="tag"><input type="radio" name="room" value="living" checked><span><i aria-hidden="true"></i><span lang="he">סלון</span><span lang="en">Living room</span></span></label><label class="tag"><input type="radio" name="room" value="kitchen"><span><i aria-hidden="true"></i><span lang="he">מטבח</span><span lang="en">Kitchen</span></span></label><label class="tag"><input type="radio" name="room" value="bed"><span><i aria-hidden="true"></i><span lang="he">חדר שינה</span><span lang="en">Bedroom</span></span></label><label class="tag"><input type="radio" name="room" value="kids"><span><i aria-hidden="true"></i><span lang="he">חדר ילדים</span><span lang="en">Kids’ room</span></span></label><label class="tag"><input type="radio" name="room" value="bath"><span><i aria-hidden="true"></i><span lang="he">רחצה</span><span lang="en">Bathroom</span></span></label><label class="tag"><input type="radio" name="room" value="balc"><span><i aria-hidden="true"></i><span lang="he">מרפסת</span><span lang="en">Balcony</span></span></label></div>
+        <div class="pegboard"><label class="tag"><input type="radio" name="room" value="living" checked><span><i aria-hidden="true"></i><span lang="he">סלון</span><span lang="en">Living room</span></span></label><label class="tag"><input type="radio" name="room" value="kitchen"><span><i aria-hidden="true"></i><span lang="he">מטבח</span><span lang="en">Kitchen</span></span></label><label class="tag"><input type="radio" name="room" value="bed"><span><i aria-hidden="true"></i><span lang="he">חדר שינה</span><span lang="en">Bedroom</span></span></label><label class="tag"><input type="radio" name="room" value="kids"><span><i aria-hidden="true"></i><span lang="he">חדר ילדים</span><span lang="en">Kids’ room</span></span></label><label class="tag"><input type="radio" name="room" value="bath"><span><i aria-hidden="true"></i><span lang="he">חדר רחצה</span><span lang="en">Bathroom</span></span></label><label class="tag"><input type="radio" name="room" value="balc"><span><i aria-hidden="true"></i><span lang="he">מרפסת</span><span lang="en">Balcony</span></span></label></div>
       </fieldset>
       <fieldset class="bits-f">
         <legend><span lang="he">מתי</span><span lang="en">When</span></legend>
@@ -218,7 +218,7 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
         <svg width="0" height="0" aria-hidden="true" style="position:absolute"><defs><pattern id="bitfl" width="20" height="9" patternUnits="userSpaceOnUse"><rect width="20" height="9" fill="#b8c0b8"/><path d="M0 9L20 2v3L0 12z" fill="#6f786f"/></pattern></defs></svg>
       </fieldset>
       <div class="note-f">
-        <label for="note" class="lbl"><span lang="he">פרט קטן (לא חובה)</span><span lang="en">A detail (optional)</span></label>
+        <label for="note" class="lbl"><span lang="he">פרטים נוספים (לא חובה)</span><span lang="en">A detail (optional)</span></label>
         <input id="note" name="note" type="text" maxlength="90" autocomplete="off" data-note>
       </div>
       <div class="slip">

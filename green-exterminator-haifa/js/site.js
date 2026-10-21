@@ -357,7 +357,7 @@
   var form = $('#composer'), preview = $('[data-preview]'), send = $('[data-send]'), street = $('[data-street]'), when = $('[data-when]'), whenVal = $('[data-when-val]'), sun = $('[data-sun]'), hspot = $('[data-hspot]');
   var ZONE = { roof: [160, 64], balcony: [216, 160], kitchen: [97, 158], garden: [288, 216] };
   var T = {
-    he: { hi: 'היי מאיר, הגעתי דרך האתר. ', what: { pigeons: 'יש לי עניין של יונים', pests: 'יש לי בעיה של מזיקים', home: 'אשמח לעזרה בעבודה בבית' },
+    he: { hi: 'היי מאיר, הגעתי דרך האתר. ', what: { pigeons: 'יש לי בעיה של יונים', pests: 'יש לי בעיה של מזיקים', home: 'אשמח לעזרה בעבודה בבית' },
           where: { roof: ' בגג', balcony: ' במרפסת', kitchen: ' במטבח', garden: ' בגינה' }, st: ', ברחוב ',
           when: ['. אפשר להגיע היום?', '. אפשר לתאם השבוע?', '. מתי נוח לך להגיע?'], end: ' תודה!', wl: ['היום, אם אפשר', 'השבוע', 'בלי לחץ'] },
     en: { hi: 'Hi Meir, I found you through your website. ', what: { pigeons: 'I have a pigeon problem', pests: 'I have a pest problem', home: 'I’d like help with some work at home' },

@@ -94,9 +94,9 @@
 
   // ================================================================ the composer: where in the house + how urgent -> WhatsApp to Ben
   var T = {
-    he: { hi: 'היי בן, הגעתי דרך האתר. ', where: { bath: 'יש לי נזילה באמבטיה', kitchen: 'יש לי נזילה במטבח', ceiling: 'יש לי כתם רטיבות בתקרה', garden: 'יש לי נזילה בגינה', sewer: 'יש לי בעיה בביוב' },
+    he: { hi: 'היי, הגעתי דרך האתר. ', where: { bath: 'יש לי נזילה באמבטיה', kitchen: 'יש לי נזילה במטבח', ceiling: 'יש לי כתם רטיבות בתקרה', garden: 'יש לי נזילה בגינה', sewer: 'יש לי בעיה בביוב' },
           st: ', ב', urg: ['. אפשר להגיע עכשיו?', '. אפשר להגיע היום?', '. מתי יש לך זמן השבוע?'], tag: ['עכשיו', 'היום', 'השבוע'], end: ' תודה!' },
-    en: { hi: 'Hi Ben, I found you through your website. ', where: { bath: 'I have a leak in the bathroom', kitchen: 'I have a leak in the kitchen', ceiling: 'There’s a damp patch on my ceiling', garden: 'I have a leak in the garden', sewer: 'I have a problem with the sewer' },
+    en: { hi: 'Hi, I found you through your website. ', where: { bath: 'I have a leak in the bathroom', kitchen: 'I have a leak in the kitchen', ceiling: 'There’s a damp patch on my ceiling', garden: 'I have a leak in the garden', sewer: 'I have a problem with the sewer' },
           st: ', at ', urg: ['. Could you come now?', '. Could you come today?', '. When would you have time this week?'], tag: ['now', 'today', 'this week'], end: ' Thanks!' }
   };
   var form = $('#composer'), preview = $('[data-preview]'), send = $('[data-send]'), street = $('[data-street]'), urg = $('[data-urg]'), urgOut = $('[data-urg-out]');

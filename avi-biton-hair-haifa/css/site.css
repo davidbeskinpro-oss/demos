@@ -14,7 +14,7 @@
   --r: 28px;
   --m: clamp(16px, 3.4vw, 40px);
   --sans: "Varela Round", "Arial Hebrew", system-ui, sans-serif;
-  --acc-he: "Gveret Levin", "Varela Round", cursive;
+  --acc-he: "Bellefair", "Varela Round", serif;
   --acc-en: "Fraunces", Georgia, serif;
   --s-small: 1rem;
   --s-body: clamp(1.0625rem, 1rem + .25vw, 1.1875rem);

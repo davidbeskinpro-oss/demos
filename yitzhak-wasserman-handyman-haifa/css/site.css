@@ -26,7 +26,7 @@
   --t-body: clamp(1.0625rem, 1rem + .25vw, 1.1875rem);
   --t-small: .875rem;
   --f-text: 'Varela Round', system-ui, sans-serif;
-  --f-acc: 'Noto Rashi Hebrew', 'Varela Round', serif;
+  --f-acc: 'Secular One', 'Varela Round', sans-serif;
 }
 html[lang="en"] { --f-text: 'Schibsted Grotesk', system-ui, sans-serif; --f-acc: 'Fraunces', Georgia, serif;
   --t-h1: clamp(2.15rem, .9rem + 4.1vw, 5.4rem); --t-h2: clamp(2rem, 1rem + 3.4vw, 4.4rem); }
@@ -43,7 +43,7 @@ ul { padding: 0; list-style: none; }
 fieldset { border: 0; padding: 0; min-width: 0; }
 h1, h2 { font-weight: 400; letter-spacing: -.02em; line-height: 1.02; text-wrap: balance; }
 html[lang="en"] h1, html[lang="en"] h2 { font-weight: 500; letter-spacing: -.035em; }
-em { font-family: var(--f-acc); font-style: normal; font-weight: 500; letter-spacing: 0; color: var(--vial); }
+em { font-family: var(--f-acc); font-style: normal; font-weight: 400; letter-spacing: 0; color: var(--vial); }
 html[lang="en"] em { font-style: italic; font-weight: 300; letter-spacing: -.01em; }
 .sub { margin-top: 18px; font-size: 1.25rem; color: var(--soft); max-width: 34ch; }
 
