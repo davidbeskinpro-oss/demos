@@ -1,0 +1,271 @@
+/* Sukanya Thai Massage: the room by candlelight, a Thai cloth laid over it, everything after set on the cloth and the dark teak of the room.
+   One sans for everything (Lunasima, Hebrew + Latin), one serif for the accent words (Libertinus Serif). */
+:root{
+  --ground:#120c09; --ground-2:#170f0b; --card:#1d1410; --card-2:#241913;
+  --edge:rgba(242,226,204,.09); --edge-2:rgba(242,226,204,.16);
+  --ink:#efe8df; --ink-2:rgba(239,232,223,.76); --ink-3:rgba(239,232,223,.6);
+  --gold:#e3b866; --gold-ink:#1b120c; --clay:#b65a3d; --leaf:#93bd55;
+  --sans:"Lunasima",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --serif:"Libertinus Serif","Times New Roman",serif;
+  --gut:clamp(16px,4.2vw,56px); --max:1240px;
+  --ease:cubic-bezier(.23,1,.32,1); --ease-io:cubic-bezier(.65,0,.35,1);
+  --tile:100vw;
+  --fy1:46.1%; --fy2:47.8%;
+}
+@media (min-width:700px){ :root{ --fy1:84.2%; --fy2:88.2%; --tile:min(100vw,820px); } }
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--ground)}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 17px/1.55 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip;-webkit-tap-highlight-color:transparent}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3,p,figure,blockquote,ul{margin:0;padding:0}
+ul{list-style:none}
+em{font-style:normal;color:var(--gold)}
+:lang(en) em{font-family:var(--serif);font-style:italic;font-weight:400;letter-spacing:0}
+:lang(he) em{font-family:var(--serif);font-weight:400}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+::selection{background:var(--gold);color:var(--gold-ink)}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:6px}
+
+/* language: both versions live in the page; the html lang decides which shows */
+html[lang="he"] [lang="en"]:not(html), html[lang="en"] [lang="he"]:not(html){display:none!important}
+
+.skip{position:fixed;inset-inline-start:12px;top:-60px;z-index:100;background:var(--gold);color:var(--gold-ink);padding:10px 14px;border-radius:999px;text-decoration:none;font-weight:700}
+.skip:focus{top:12px}
+
+/* the concept bar */
+.concept{position:relative;z-index:30;background:#0b0705;color:var(--ink-2);font-size:13px;line-height:1.4;text-align:center;padding:8px var(--gut)}
+
+/* buttons: round, one fill */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 22px;border-radius:999px;background:var(--gold);color:var(--gold-ink);font:700 16px/1 var(--sans);text-decoration:none;border:0;cursor:pointer;transition:transform .16s var(--ease),background-color .2s}
+.btn svg{width:18px;height:18px;fill:currentColor;flex:none}
+.btn-ghost{background:rgba(243,232,216,.1);color:var(--ink);box-shadow:inset 0 0 0 1px var(--edge-2)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.btn:active{transform:scale(.97)}
+@media (hover:hover){ .btn:hover{background:#f0c878} .btn-ghost:hover{background:rgba(243,232,216,.17)} }
+.btn-s{min-height:38px;padding:0 16px;font-size:14px}
+.tl{color:var(--gold);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+
+/* floating glass nav */
+.pill{position:fixed;z-index:40;top:44px;inset-inline:0;margin-inline:auto;width:min(calc(100% - 24px),980px);display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;background:rgba(22,14,10,.58);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);box-shadow:inset 0 0 0 1px var(--edge-2),0 10px 30px rgba(0,0,0,.25);transition:top .35s var(--ease)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.pill.up{top:12px}
+.mark{display:flex;align-items:center;gap:8px;text-decoration:none;font-weight:700;font-size:16px;padding-inline:6px 10px}
+.mark svg{width:30px;height:30px}
+.links{display:none;gap:2px;margin-inline-start:auto}
+.links a{display:block;padding:8px 13px;border-radius:999px;font-size:14.5px;color:var(--ink-2);text-decoration:none;transition:background-color .2s,color .2s}
+.links a[aria-current="true"]{color:var(--ink);background:rgba(243,232,216,.09)}
+@media (hover:hover){ .links a:hover{color:var(--ink)} }
+.motion{margin-inline-start:auto;display:flex;align-items:center;gap:7px;background:none;border:0;color:var(--ink-2);font:400 13.5px/1 var(--sans);padding:8px 8px;cursor:pointer;border-radius:999px}
+.motion .knob{position:relative;width:30px;height:18px;border-radius:999px;background:rgba(243,232,216,.18);transition:background-color .2s}
+.motion .knob::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:12px;height:12px;border-radius:50%;background:var(--ink);transition:transform .2s var(--ease)}
+.motion[aria-checked="true"] .knob{background:var(--leaf)}
+html[dir="rtl"] .motion[aria-checked="true"] .knob::after{transform:translateX(-12px)}
+html[dir="ltr"] .motion[aria-checked="true"] .knob::after{transform:translateX(12px)}
+.langb{background:rgba(243,232,216,.08);border:0;color:var(--ink);font:700 13px/1 var(--sans);width:38px;height:38px;border-radius:50%;cursor:pointer}
+.navcall{display:none}
+@media (min-width:900px){ .links{display:flex} .motion{margin-inline-start:4px} .navcall{display:inline-flex} }
+@media (max-width:380px){ .motion > span[lang]{display:none!important} }
+
+/* ---------------------------------------------------------------- the stage */
+.stage{position:relative;height:220svh;background:var(--ground)}
+.pin{position:sticky;top:0;height:100svh;overflow:hidden;contain:paint}
+.hero-ph{position:absolute;left:50%;top:50%;width:max(100%,calc(100svh * .7504));aspect-ratio:860/1146;transform:translate(-50%,-50%)}
+@media (min-width:700px){ .hero-ph{width:max(100%,calc(100svh * 1.7778));aspect-ratio:16/9} }
+.hero-ph picture,.hero-ph img{width:100%;height:100%;object-fit:cover}
+.hero-ph img{filter:saturate(.92) brightness(.82)}
+/* the candles' light: a warm halo on each flame, which wavers when the air moves (when you scroll) and settles */
+.flame{position:absolute;left:var(--x);top:var(--y);width:clamp(70px,9vw,150px);aspect-ratio:1;margin:calc(clamp(70px,9vw,150px) / -2) 0 0 calc(clamp(70px,9vw,150px) / -2);border-radius:50%;background:radial-gradient(closest-side,rgba(255,214,140,.55),rgba(255,170,80,.18) 55%,rgba(255,150,60,0));mix-blend-mode:screen;pointer-events:none;transform-origin:50% 70%} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,8,6,.62) 0%,rgba(12,8,6,.12) 22%,rgba(12,8,6,0) 40%,rgba(12,8,6,.62) 58%,rgba(12,8,6,.94) 80%,rgba(12,8,6,.97) 100%)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+@media (min-width:700px){ .hero-shade{background:linear-gradient(180deg,rgba(12,8,6,.9) 0%,rgba(12,8,6,.7) 38%,rgba(12,8,6,.15) 58%,rgba(12,8,6,0) 72%,rgba(12,8,6,.3) 100%)} } /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.hero-copy{position:absolute;inset-inline:0;bottom:calc(46px + env(safe-area-inset-bottom));padding-inline:var(--gut);text-align:center;will-change:opacity,transform}
+@media (min-width:700px){ .hero-copy{bottom:auto;top:clamp(112px,15svh,170px)} }
+.hero-copy h1{font:400 clamp(44px,6.4vw,112px)/1 var(--sans);letter-spacing:-.025em;max-width:13ch;margin-inline:auto;text-wrap:balance}
+html[lang="en"] .hero-copy h1{font-size:clamp(40px,5.8vw,100px);max-width:14ch;line-height:1.02}
+@media (min-width:700px){ .hero-copy h1{max-width:none} html[lang="en"] .hero-copy h1{max-width:none} html .hero-copy p.lead{max-width:60ch} }
+.hero-copy .lead{margin:22px auto 0;max-width:34ch;font-size:clamp(17px,1.35vw,19px);color:var(--ink);text-wrap:balance}
+.acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px}
+.meta{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:center;align-items:center;font-size:15px;color:var(--ink-2)}
+.rating{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink)}
+.rating b{font-weight:700}
+.stars svg{width:82px;height:14px;fill:var(--gold);display:block}
+.status{display:inline-flex;align-items:center;gap:8px}
+.status .dot{width:8px;height:8px;border-radius:50%;background:#8b7a6a;flex:none}
+.status.open .dot{background:var(--leaf);box-shadow:0 0 0 4px rgba(147,189,85,.18)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.hero-cap{position:absolute;top:calc(env(safe-area-inset-top) + 112px);inset-inline-start:var(--gut);font-size:13px;color:var(--ink-2)}
+@media (min-width:700px){ .hero-cap{top:auto;bottom:18px} }
+
+/* the laid cloth: a window that starts at the roll's middle and runs to the bottom; the cloth inside never moves */
+.cloth{position:absolute;inset:0;overflow:hidden;transform:translate3d(0,100%,0);will-change:transform}
+.cloth-in{position:absolute;inset:0;background:url(../img/cloth.jpg) center bottom/var(--tile) auto repeat;will-change:transform}
+.cloth-dim{position:absolute;inset:0;background:#120a07;opacity:.05}
+/* the roll: the same cloth wound up, its pattern squeezed by the curve and moving as it turns, shaded as a cylinder */
+.roll{position:absolute;inset-inline:0;top:0;height:var(--R0,88px);transform:translate3d(0,110svh,0);will-change:transform}
+.roll-tex{position:absolute;inset:0;background:url(../img/cloth.jpg) center 0/var(--tile) auto repeat;filter:brightness(.98) saturate(1.05)}
+.roll-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,4,2,.82) 0%,rgba(8,4,2,.35) 14%,rgba(255,232,196,.16) 30%,rgba(255,232,196,.05) 40%,rgba(8,4,2,0) 52%,rgba(8,4,2,.42) 80%,rgba(8,4,2,.86) 100%)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.roll::before{content:"";position:absolute;inset-inline:0;top:26%;height:9%;background:rgba(255,236,206,.13);filter:blur(2px)}
+.roll::after{content:"";position:absolute;inset-inline:0;top:100%;height:34%;background:linear-gradient(180deg,rgba(6,3,2,.7),rgba(6,3,2,0))} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.roll-shadow{position:absolute;inset-inline:0;top:0;height:120px;background:linear-gradient(180deg,rgba(6,3,2,0),rgba(6,3,2,.62));transform:translate3d(0,110svh,0);will-change:transform,opacity;pointer-events:none} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+
+/* motion off: no pin, the room is one screen and the cloth simply begins under it */
+html.still .stage{height:auto}
+html.still .pin{position:relative;height:100svh}
+html.still .cloth,html.still .roll,html.still .roll-shadow{display:none}
+html:not(.js) .stage{height:auto}
+html:not(.js) .pin{position:relative}
+html:not(.js) .cloth,html:not(.js) .roll,html:not(.js) .roll-shadow{display:none}
+
+/* ---------------------------------------------------------------- sections */
+.sec{position:relative;padding-block:clamp(96px,14vw,190px)}
+.wrap{width:min(100% - 2 * var(--gut),var(--max));margin-inline:auto}
+.head h2,.score h2,.vcard h2{font:400 clamp(38px,5.6vw,84px)/1.02 var(--sans);letter-spacing:-.02em;text-wrap:balance}
+.head p{margin-top:16px;font-size:clamp(17px,1.4vw,20px);color:var(--ink-2)}
+
+/* the treatment, on the cloth */
+.treat{background:url(../img/cloth.jpg) center top/var(--tile) auto repeat;padding-top:clamp(120px,16vw,200px)}
+.treat::before{content:"";position:absolute;inset:0;background:#120a07;opacity:.86}
+.treat::after{content:"";position:absolute;inset-inline:0;bottom:0;height:min(40%,420px);background:linear-gradient(180deg,rgba(18,12,9,0),var(--ground));pointer-events:none} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.treat > *{position:relative;z-index:1}
+.cloth-cap{position:absolute;top:18px;inset-inline-end:var(--gut);font-size:13px;color:var(--ink-3);z-index:2}
+.treat .head{max-width:760px}
+.run{display:grid;gap:18px;margin-top:clamp(48px,6vw,84px)}
+.card{background:rgba(29,20,16,.92);border-radius:28px;box-shadow:inset 0 0 0 1px var(--edge);padding:10px} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.cv{position:relative;overflow:hidden;border-radius:20px;aspect-ratio:4/5;background:#2a1c15}
+.cv img{width:100%;height:100%;object-fit:cover}
+.ct{padding:20px 14px 14px}
+.ct h3{font:400 clamp(24px,2.1vw,30px)/1.12 var(--sans);letter-spacing:-.01em}
+.ct p{margin-top:8px;color:var(--ink-2);font-size:16.5px}
+@media (min-width:760px){
+  .run{grid-template-columns:repeat(3,1fr);align-items:start;gap:clamp(16px,2vw,28px)}
+  .card.c2{margin-top:clamp(48px,7vw,110px)}
+  .card.c3{margin-top:clamp(20px,3vw,46px)}
+}
+/* card 1: the palms press, the towel gives a little under them, warmth spreads, and they ease off */
+.cv-palms img{transform-origin:62% 54%}
+.warm{position:absolute;width:44%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(255,186,120,.42),rgba(255,160,90,0));mix-blend-mode:screen;opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(.6)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.w1{left:52%;top:57%} .w2{left:83%;top:60%}
+/* card 2: the camera drifts slowly along the two chairs */
+.cv-feet img{transform:scale(1.1) translateX(3%)}
+/* card 3: candlelight off the frame, breathing on the tray */
+.glow{position:absolute;width:38%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(255,206,140,.34),rgba(255,180,100,0));mix-blend-mode:screen;transform:translate(-50%,-50%);pointer-events:none;opacity:.5} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.g1{left:53%;top:48%} .g2{left:64%;top:56%}
+html:not(.still) .run.on .cv-feet img{animation:drift 9s var(--ease-io) 1 both}
+@keyframes drift{from{transform:scale(1.1) translateX(3%)}to{transform:scale(1.1) translateX(-3%)}}
+
+/* the room */
+.room{background:var(--ground)}
+.room-grid{display:grid;gap:clamp(40px,6vw,90px);align-items:center}
+.says{font:400 clamp(36px,5.2vw,80px)/1.16 var(--sans);letter-spacing:-.02em;max-width:15ch}
+.ip{display:inline-block;width:1.7em;height:.86em;border-radius:999px;overflow:hidden;vertical-align:-.06em;box-shadow:inset 0 0 0 1px var(--edge-2);background:#2a1c15} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.ip img{width:100%;height:100%;object-fit:cover;filter:brightness(.8) saturate(.95)}
+.room-text p{margin-top:22px;color:var(--ink-2);font-size:clamp(17px,1.4vw,20px)}
+.room-ph{margin:0}
+.rp-frame{border-radius:28px;overflow:hidden;aspect-ratio:900/1012;box-shadow:inset 0 0 0 1px var(--edge)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.rp-frame img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);transform-origin:50% 60%}
+.room-ph figcaption{margin-top:12px;font-size:13.5px;color:var(--ink-3)}
+@media (min-width:860px){ .room-grid{grid-template-columns:1.15fr .85fr} }
+
+/* reviews */
+.reviews{background:var(--ground-2)}
+.rev-grid{display:grid;gap:clamp(36px,5vw,72px)}
+.score h2{font-size:clamp(64px,10vw,150px);line-height:.95}
+.score p{margin-top:18px;font-size:16px}
+.quotes{display:grid;gap:14px}
+.q{background:var(--card);border-radius:26px;padding:clamp(22px,2.6vw,34px);box-shadow:inset 0 0 0 1px var(--edge)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.q p{font-size:17.5px;line-height:1.6}
+.q-lead p{font-size:clamp(19px,1.7vw,23px);line-height:1.5}
+.q footer{margin-top:14px;font-size:14.5px;color:var(--ink-2)}
+.q footer bdi{color:var(--ink);font-weight:700}
+.tr{color:var(--ink-3)}
+.allrev{margin-top:6px;font-size:15px}
+@media (min-width:860px){ .rev-grid{grid-template-columns:.8fr 1.2fr;align-items:start} .score{position:sticky;top:120px} }
+
+/* booking: the slip, each question a strip of the cloth under a shade */
+.book{background:var(--ground)}
+.book-wrap{display:grid;gap:clamp(36px,5vw,64px)}
+.slip{background:var(--card);border-radius:30px;padding:clamp(18px,2.6vw,30px);box-shadow:inset 0 0 0 1px var(--edge);display:grid;gap:18px;max-width:760px;width:100%} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.row{border:0;margin:0;padding:0;min-width:0}
+.row legend,.row .lg{display:block;font-size:14px;color:var(--ink-2);margin-bottom:8px;padding:0}
+.strip{display:grid;gap:3px;padding:3px;border-radius:15px;background:linear-gradient(rgba(18,10,7,.5),rgba(18,10,7,.5)),url(../img/cloth.jpg) center/420px auto;position:relative;isolation:isolate} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.strip.s3{grid-template-columns:repeat(3,1fr)}
+.strip.days{grid-template-columns:repeat(6,1fr)}
+.strip label{position:relative;display:block;cursor:pointer}
+.strip input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.strip label > span{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:52px;padding:6px 4px;border-radius:12px;background:rgba(20,12,9,.9);color:var(--ink);font-size:15px;line-height:1.2;text-align:center;transition:background-color .35s var(--ease),box-shadow .35s var(--ease)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.strip label > span small{font-size:12.5px;color:var(--ink-3);margin-top:2px;transition:color .3s}
+.strip input:checked + span{background:rgba(20,12,9,.5);box-shadow:inset 0 -3px 0 var(--gold);font-weight:700} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.strip input:checked + span small{color:var(--ink)}
+.strip input:focus-visible + span{outline:2px solid var(--gold);outline-offset:-2px}
+.strip input:disabled + span{opacity:.35;cursor:not-allowed}
+@media (hover:hover){ .strip input:not(:checked):not(:disabled) + span:hover{background:rgba(20,12,9,.74)} }
+.namef input{width:100%;min-height:50px;border-radius:14px;border:0;background:rgba(243,232,216,.07);box-shadow:inset 0 0 0 1px var(--edge-2);color:var(--ink);font:400 16px/1.3 var(--sans);padding:0 16px} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.namef input::placeholder{color:var(--ink-3)}
+.namef input:focus{outline:2px solid var(--gold);outline-offset:1px}
+.msg{background:#f1e5d1;color:#2a1c13;border-radius:18px;padding:16px 18px}
+.msg-l{font-size:13px;color:#6d5848;margin-bottom:4px}
+.draft{font-size:16.5px;line-height:1.5;min-height:3em}
+.caret{display:inline-block;width:2px;height:1.05em;background:#2a1c13;vertical-align:-.15em;margin-inline-start:1px}
+.btn-wide{width:100%;min-height:54px;font-size:17px}
+@media (min-width:860px){ .book-wrap{grid-template-columns:.8fr 1.2fr;align-items:start} .book .head{position:sticky;top:130px} }
+
+/* visit */
+.visit{background:var(--ground-2)}
+.visit-grid{display:grid;gap:18px}
+.visit-grid .vcard{order:1} .visit-grid .door{order:2} .visit-grid .map{order:3}
+.door{margin:0;position:relative;border-radius:28px;overflow:hidden;aspect-ratio:4/5}
+.door img{width:100%;height:100%;object-fit:cover}
+.door figcaption{position:absolute;bottom:12px;inset-inline-start:12px;font-size:13px;background:rgba(18,12,9,.7);padding:6px 12px;border-radius:999px}
+.vcard{background:var(--card);border-radius:28px;padding:clamp(22px,3vw,40px);box-shadow:inset 0 0 0 1px var(--edge)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.vcard .addr{margin-top:12px;font-size:18px}
+.vcard .status{margin-top:12px;color:var(--ink)}
+.hours{margin-top:18px;border-collapse:collapse;width:100%;max-width:380px;font-size:16px}
+.hours td{padding:7px 0;color:var(--ink-2)}
+.hours td + td{text-align:end;color:var(--ink)}
+.hours tr.today td{color:var(--gold)}
+.vacts{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.vcard .tl{display:inline-block;margin-top:18px}
+.map{border-radius:28px;overflow:hidden;box-shadow:inset 0 0 0 1px var(--edge);min-height:320px;background:#2a1c15} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.map iframe{display:block;width:100%;height:100%;min-height:320px;border:0;filter:grayscale(.3) brightness(.85) contrast(1.05)}
+@media (min-width:860px){
+  .visit-grid{grid-template-columns:.75fr 1fr;grid-template-areas:"door card" "door map"}
+  .door{grid-area:door;aspect-ratio:auto;min-height:100%}
+  .vcard{grid-area:card} .map{grid-area:map}
+}
+
+/* footer: the cloth's frayed end */
+.foot{position:relative;background:#0c0806;padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+.fringe{height:44px;background:url(../img/cloth.jpg) center 12%/var(--tile) auto;-webkit-mask:linear-gradient(#000 0 18px,transparent 18px),repeating-linear-gradient(90deg,#000 0 2px,transparent 2px 4px,#000 4px 5px,transparent 5px 8px);mask:linear-gradient(#000 0 18px,transparent 18px),repeating-linear-gradient(90deg,#000 0 2px,transparent 2px 4px,#000 4px 5px,transparent 5px 8px);-webkit-mask-composite:source-over;mask-composite:add;opacity:.9} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.fringe{position:relative}
+.fringe::after{content:"";position:absolute;inset:18px 0 0;background:linear-gradient(180deg,rgba(12,8,6,0),#0c0806)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.foot-in{padding-top:42px;display:grid;gap:14px}
+.f-name{display:flex;align-items:center;gap:12px;font-size:clamp(22px,2.4vw,30px)}
+.f-name svg{width:38px;height:38px;flex:none}
+.f-line{color:var(--ink-2);font-size:16px}
+.f-line a{color:var(--ink)}
+.fine{color:var(--ink-3);font-size:15px;max-width:90ch;line-height:1.6}
+@media (min-width:900px){ .foot{padding-bottom:56px} }
+
+/* the tray (phones): bamboo, a raised rim, two glazed bowls */
+.tray{position:fixed;z-index:45;left:50%;bottom:calc(12px + env(safe-area-inset-bottom));width:min(calc(100% - 28px),344px);height:68px;transform:translateX(-50%);display:flex;align-items:center;justify-content:space-between;gap:8px;padding:0 9px;border-radius:16px;
+  background:
+    linear-gradient(180deg,rgba(255,240,205,.32),rgba(255,240,205,0) 30%,rgba(60,30,8,0) 70%,rgba(60,30,8,.35)), /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+    repeating-linear-gradient(90deg,rgba(120,72,28,.0) 0 7px,rgba(120,72,28,.18) 7px 8px,rgba(120,72,28,0) 8px 19px,rgba(90,50,18,.14) 19px 20px), /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+    linear-gradient(90deg,#c99a5c,#d8ad6c 30%,#c4935a 55%,#d6a967 80%,#c08e55); /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+  box-shadow:inset 0 0 0 3px rgba(150,96,44,.55),inset 0 4px 0 3px rgba(255,236,196,.28),0 14px 30px rgba(0,0,0,.45),0 2px 4px rgba(0,0,0,.4); /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+  transition:transform .4s var(--ease),opacity .3s}
+.tray.away{transform:translate(-50%,140%);opacity:0;pointer-events:none}
+.bowl{position:relative;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;flex:none;text-decoration:none;transition:transform .14s var(--ease);box-shadow:0 3px 5px rgba(60,30,8,.45),0 1px 0 rgba(255,240,210,.4)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.bowl svg{width:22px;height:22px}
+.b-call{background:radial-gradient(circle at 34% 28%,#fffaf0 0 10%,#efe2c8 28%,#d6c3a1 70%,#b7a17c 100%)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.b-call svg{fill:#3a281a}
+.b-wa{background:radial-gradient(circle at 34% 28%,#8e8a86 0 6%,#3a3633 22%,#1a1715 64%,#0c0a09 100%)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.b-wa svg{fill:#f1e5d1}
+.bowl::after{content:"";position:absolute;inset:5px;border-radius:50%;box-shadow:inset 0 2px 5px rgba(0,0,0,.35)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.bowl:active{transform:scale(.92)}
+.t-status{flex:1;text-align:center;font:700 14px/1.15 var(--sans);color:#4e2d12}
+@media (min-width:900px){ .tray{display:none} }
+
+/* entrances: once per section, staggered */
+html.js:not(.still) [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .9s var(--ease) var(--d,0ms),transform .9s var(--ease) var(--d,0ms)}
+html.js:not(.still) [data-reveal].in{opacity:1;transform:none}
+html.still *{animation:none!important}
+
+@media (min-width:700px){ .hero-cap{inset-inline-start:auto;inset-inline-end:var(--gut)} }
