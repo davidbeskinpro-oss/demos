@@ -65,23 +65,32 @@ html[dir="ltr"] .motion[aria-checked="true"] .knob::after{transform:translateX(1
 @media (min-width:900px){ .links{display:flex} .motion{margin-inline-start:4px} .navcall{display:inline-flex} }
 @media (max-width:380px){ .motion > span[lang]{display:none!important} }
 
-/* ---------------------------------------------------------------- the stage */
-.stage{position:relative;height:220svh;background:var(--ground)}
-.pin{position:sticky;top:0;height:100svh;overflow:hidden;contain:paint}
-.hero-ph{position:absolute;left:50%;top:50%;width:max(100%,calc(100svh * .7504));aspect-ratio:860/1146;transform:translate(-50%,-50%)}
-@media (min-width:700px){ .hero-ph{width:max(100%,calc(100svh * 1.7778));aspect-ratio:16/9} }
-.hero-ph picture,.hero-ph img{width:100%;height:100%;object-fit:cover}
-.hero-ph img{filter:saturate(.92) brightness(.82)}
-/* the candles' light: a warm halo on each flame, which wavers when the air moves (when you scroll) and settles */
-.flame{position:absolute;left:var(--x);top:var(--y);width:clamp(70px,9vw,150px);aspect-ratio:1;margin:calc(clamp(70px,9vw,150px) / -2) 0 0 calc(clamp(70px,9vw,150px) / -2);border-radius:50%;background:radial-gradient(closest-side,rgba(255,214,140,.55),rgba(255,170,80,.18) 55%,rgba(255,150,60,0));mix-blend-mode:screen;pointer-events:none;transform-origin:50% 70%} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
-.hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,8,6,.62) 0%,rgba(12,8,6,.12) 22%,rgba(12,8,6,0) 40%,rgba(12,8,6,.62) 58%,rgba(12,8,6,.94) 80%,rgba(12,8,6,.97) 100%)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
-@media (min-width:700px){ .hero-shade{background:linear-gradient(180deg,rgba(12,8,6,.9) 0%,rgba(12,8,6,.7) 38%,rgba(12,8,6,.15) 58%,rgba(12,8,6,0) 72%,rgba(12,8,6,.3) 100%)} } /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+/* ---------------------------------------------------------------- the stage: a camera move through their own photos */
+.stage{position:relative;height:320svh;background:var(--ground)}
+.pin{position:sticky;top:0;height:100svh;overflow:hidden;contain:paint;background:var(--ground)}
+/* the two depth layers share one box (set by script to cover the screen with the candles in place); without script they simply cover */
+.ly{position:absolute;inset:0;will-change:transform}
+.ly img{width:100%;height:100%;object-fit:cover;object-position:58% 30%;display:block}
+.ly-back img{filter:saturate(.92) brightness(.84)}
+.ly-bed img{filter:saturate(.92) brightness(.8)}
+html:not(.placed) .flame{display:none}
+/* the candles' light: a warm halo on each real flame; it wavers when the air moves (when you scroll) and settles */
+.flame{position:absolute;width:clamp(60px,7vw,120px);aspect-ratio:1;translate:-50% -55%;border-radius:50%;background:radial-gradient(closest-side,rgba(255,214,140,.6),rgba(255,170,80,.2) 55%,rgba(255,150,60,0));mix-blend-mode:screen;pointer-events:none;transform-origin:50% 70%} /* taste-skill-ignore: real candlelight and photo scrims */
+/* the light the camera walks into: centred on the candles, it grows until it fills the frame */
+.bloom{position:absolute;left:0;top:0;width:120vmax;height:120vmax;margin:-60vmax 0 0 -60vmax;border-radius:50%;background:radial-gradient(closest-side,rgba(255,226,176,1),rgba(244,170,90,.8) 30%,rgba(180,90,36,.42) 58%,rgba(60,24,8,0) 80%);mix-blend-mode:screen;opacity:0;pointer-events:none;will-change:transform,opacity} /* taste-skill-ignore: real candlelight and photo scrims */
+/* the treatment bed seen from above, which the camera tilts down */
+.tilt{position:absolute;left:0;top:0;opacity:0;will-change:transform,opacity}
+.tilt img{width:100%;height:auto;display:block;filter:saturate(.9) brightness(.86)}
+.tilt-cap{position:absolute;bottom:18px;inset-inline-start:var(--gut);font-size:13px;color:var(--ink-2);opacity:0}
+.dusk{position:absolute;inset:-2px;background:var(--ground);opacity:0;pointer-events:none}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(12,8,6,.62) 0%,rgba(12,8,6,.12) 22%,rgba(12,8,6,0) 40%,rgba(12,8,6,.62) 58%,rgba(12,8,6,.94) 80%,rgba(12,8,6,.97) 100%);will-change:opacity} /* taste-skill-ignore: real candlelight and photo scrims */
+@media (min-width:700px){ .hero-shade{background:linear-gradient(180deg,rgba(12,8,6,.9) 0%,rgba(12,8,6,.7) 38%,rgba(12,8,6,.15) 58%,rgba(12,8,6,0) 72%,rgba(12,8,6,.3) 100%)} /* taste-skill-ignore: real candlelight and photo scrims */ }
 .hero-copy{position:absolute;inset-inline:0;bottom:calc(46px + env(safe-area-inset-bottom));padding-inline:var(--gut);text-align:center;will-change:opacity,transform}
 @media (min-width:700px){ .hero-copy{bottom:auto;top:clamp(112px,15svh,170px)} }
 .hero-copy h1{font:400 clamp(44px,6.4vw,112px)/1 var(--sans);letter-spacing:-.025em;max-width:13ch;margin-inline:auto;text-wrap:balance}
 html[lang="en"] .hero-copy h1{font-size:clamp(40px,5.8vw,100px);max-width:14ch;line-height:1.02}
-@media (min-width:700px){ .hero-copy h1{max-width:none} html[lang="en"] .hero-copy h1{max-width:none} html .hero-copy p.lead{max-width:60ch} }
 .hero-copy .lead{margin:22px auto 0;max-width:34ch;font-size:clamp(17px,1.35vw,19px);color:var(--ink);text-wrap:balance}
+@media (min-width:700px){ .hero-copy h1{max-width:none} html[lang="en"] .hero-copy h1{max-width:none} html .hero-copy p.lead{max-width:60ch} }
 .acts{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px}
 .meta{margin-top:20px;display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:center;align-items:center;font-size:15px;color:var(--ink-2)}
 .rating{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink)}
@@ -89,29 +98,14 @@ html[lang="en"] .hero-copy h1{font-size:clamp(40px,5.8vw,100px);max-width:14ch;l
 .stars svg{width:82px;height:14px;fill:var(--gold);display:block}
 .status{display:inline-flex;align-items:center;gap:8px}
 .status .dot{width:8px;height:8px;border-radius:50%;background:#8b7a6a;flex:none}
-.status.open .dot{background:var(--leaf);box-shadow:0 0 0 4px rgba(147,189,85,.18)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.status.open .dot{background:var(--leaf);box-shadow:0 0 0 4px rgba(147,189,85,.18)} /* taste-skill-ignore: status ring */
 .hero-cap{position:absolute;top:calc(env(safe-area-inset-top) + 112px);inset-inline-start:var(--gut);font-size:13px;color:var(--ink-2)}
-@media (min-width:700px){ .hero-cap{top:auto;bottom:18px} }
+@media (min-width:700px){ .hero-cap{top:auto;bottom:18px;inset-inline-start:auto;inset-inline-end:var(--gut)} }
 
-/* the laid cloth: a window that starts at the roll's middle and runs to the bottom; the cloth inside never moves */
-.cloth{position:absolute;inset:0;overflow:hidden;transform:translate3d(0,100%,0);will-change:transform}
-.cloth-in{position:absolute;inset:0;background:url(../img/cloth.jpg) center bottom/var(--tile) auto repeat;will-change:transform}
-.cloth-dim{position:absolute;inset:0;background:#120a07;opacity:.05}
-/* the roll: the same cloth wound up, its pattern squeezed by the curve and moving as it turns, shaded as a cylinder */
-.roll{position:absolute;inset-inline:0;top:0;height:var(--R0,88px);transform:translate3d(0,110svh,0);will-change:transform}
-.roll-tex{position:absolute;inset:0;background:url(../img/cloth.jpg) center 0/var(--tile) auto repeat;filter:brightness(.98) saturate(1.05)}
-.roll-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,4,2,.82) 0%,rgba(8,4,2,.35) 14%,rgba(255,232,196,.16) 30%,rgba(255,232,196,.05) 40%,rgba(8,4,2,0) 52%,rgba(8,4,2,.42) 80%,rgba(8,4,2,.86) 100%)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
-.roll::before{content:"";position:absolute;inset-inline:0;top:26%;height:9%;background:rgba(255,236,206,.13);filter:blur(2px)}
-.roll::after{content:"";position:absolute;inset-inline:0;top:100%;height:34%;background:linear-gradient(180deg,rgba(6,3,2,.7),rgba(6,3,2,0))} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
-.roll-shadow{position:absolute;inset-inline:0;top:0;height:120px;background:linear-gradient(180deg,rgba(6,3,2,0),rgba(6,3,2,.62));transform:translate3d(0,110svh,0);will-change:transform,opacity;pointer-events:none} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
-
-/* motion off: no pin, the room is one screen and the cloth simply begins under it */
-html.still .stage{height:auto}
-html.still .pin{position:relative;height:100svh}
-html.still .cloth,html.still .roll,html.still .roll-shadow{display:none}
-html:not(.js) .stage{height:auto}
-html:not(.js) .pin{position:relative}
-html:not(.js) .cloth,html:not(.js) .roll,html:not(.js) .roll-shadow{display:none}
+/* motion off: no pin, the room is one still screen */
+html.still .stage,html:not(.js) .stage{height:auto}
+html.still .pin,html:not(.js) .pin{position:relative;height:100svh}
+html.still .bloom,html.still .tilt,html.still .dusk,html.still .tilt-cap{display:none}
 
 /* ---------------------------------------------------------------- sections */
 .sec{position:relative;padding-block:clamp(96px,14vw,190px)}
@@ -120,14 +114,14 @@ html:not(.js) .cloth,html:not(.js) .roll,html:not(.js) .roll-shadow{display:none
 .head p{margin-top:16px;font-size:clamp(17px,1.4vw,20px);color:var(--ink-2)}
 
 /* the treatment, on the cloth */
-.treat{background:url(../img/cloth.jpg) center top/var(--tile) auto repeat;padding-top:clamp(120px,16vw,200px)}
-.treat::before{content:"";position:absolute;inset:0;background:#120a07;opacity:.86}
-.treat::after{content:"";position:absolute;inset-inline:0;bottom:0;height:min(40%,420px);background:linear-gradient(180deg,rgba(18,12,9,0),var(--ground));pointer-events:none} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.treat{background:var(--ground);padding-top:clamp(110px,14vw,180px)}
+/* with motion on, the treatment section rides up over the end of the camera move: its top is clear, so the heading arrives
+   over their cloth as the light is lowered, and only below the stage's end does its own ground begin */
+html.js:not(.still) .treat{margin-top:-100svh;z-index:1;background:linear-gradient(transparent 0 100svh,var(--ground) 100svh);padding-top:30svh} /* taste-skill-ignore: a hard stop, not a fade */
 .treat > *{position:relative;z-index:1}
-.cloth-cap{position:absolute;top:18px;inset-inline-end:var(--gut);font-size:13px;color:var(--ink-3);z-index:2}
 .treat .head{max-width:760px}
 .run{display:grid;gap:18px;margin-top:clamp(48px,6vw,84px)}
-.card{background:rgba(29,20,16,.92);border-radius:28px;box-shadow:inset 0 0 0 1px var(--edge);padding:10px} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.card{background:var(--card);border-radius:28px;box-shadow:inset 0 0 0 1px var(--edge);padding:10px} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
 .cv{position:relative;overflow:hidden;border-radius:20px;aspect-ratio:4/5;background:#2a1c15}
 .cv img{width:100%;height:100%;object-fit:cover}
 .ct{padding:20px 14px 14px}
@@ -144,18 +138,16 @@ html:not(.js) .cloth,html:not(.js) .roll,html:not(.js) .roll-shadow{display:none
 .w1{left:52%;top:57%} .w2{left:83%;top:60%}
 /* card 2: the camera drifts slowly along the two chairs */
 .cv-feet img{transform:scale(1.1) translateX(3%)}
-/* card 3: candlelight off the frame, breathing on the tray */
-.glow{position:absolute;width:38%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(255,206,140,.34),rgba(255,180,100,0));mix-blend-mode:screen;transform:translate(-50%,-50%);pointer-events:none;opacity:.5} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
-.g1{left:53%;top:48%} .g2{left:64%;top:56%}
 html:not(.still) .run.on .cv-feet img{animation:drift 9s var(--ease-io) 1 both}
+.cv-shelf img{transform:scale(1.08) translateY(2%)}
+html:not(.still) .run.on .cv-shelf img{animation:rise 10s var(--ease-io) 1 both}
+@keyframes rise{from{transform:scale(1.08) translateY(2%)}to{transform:scale(1.08) translateY(-2%)}}
 @keyframes drift{from{transform:scale(1.1) translateX(3%)}to{transform:scale(1.1) translateX(-3%)}}
 
 /* the room */
 .room{background:var(--ground)}
 .room-grid{display:grid;gap:clamp(40px,6vw,90px);align-items:center}
 .says{font:400 clamp(36px,5.2vw,80px)/1.16 var(--sans);letter-spacing:-.02em;max-width:15ch}
-.ip{display:inline-block;width:1.7em;height:.86em;border-radius:999px;overflow:hidden;vertical-align:-.06em;box-shadow:inset 0 0 0 1px var(--edge-2);background:#2a1c15} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
-.ip img{width:100%;height:100%;object-fit:cover;filter:brightness(.8) saturate(.95)}
 .room-text p{margin-top:22px;color:var(--ink-2);font-size:clamp(17px,1.4vw,20px)}
 .room-ph{margin:0}
 .rp-frame{border-radius:28px;overflow:hidden;aspect-ratio:900/1012;box-shadow:inset 0 0 0 1px var(--edge)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
@@ -184,7 +176,7 @@ html:not(.still) .run.on .cv-feet img{animation:drift 9s var(--ease-io) 1 both}
 .slip{background:var(--card);border-radius:30px;padding:clamp(18px,2.6vw,30px);box-shadow:inset 0 0 0 1px var(--edge);display:grid;gap:18px;max-width:760px;width:100%} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
 .row{border:0;margin:0;padding:0;min-width:0}
 .row legend,.row .lg{display:block;font-size:14px;color:var(--ink-2);margin-bottom:8px;padding:0}
-.strip{display:grid;gap:3px;padding:3px;border-radius:15px;background:linear-gradient(rgba(18,10,7,.5),rgba(18,10,7,.5)),url(../img/cloth.jpg) center/420px auto;position:relative;isolation:isolate} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.strip{display:grid;gap:3px;padding:3px;border-radius:15px;background:linear-gradient(rgba(18,10,7,.5),rgba(18,10,7,.5)),url(../img/cloth-own.jpg) center/300px auto;position:relative;isolation:isolate} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
 .strip.s3{grid-template-columns:repeat(3,1fr)}
 .strip.days{grid-template-columns:repeat(6,1fr)}
 .strip label{position:relative;display:block;cursor:pointer}
@@ -232,7 +224,7 @@ html:not(.still) .run.on .cv-feet img{animation:drift 9s var(--ease-io) 1 both}
 
 /* footer: the cloth's frayed end */
 .foot{position:relative;background:#0c0806;padding-bottom:calc(110px + env(safe-area-inset-bottom))}
-.fringe{height:44px;background:url(../img/cloth.jpg) center 12%/var(--tile) auto;-webkit-mask:linear-gradient(#000 0 18px,transparent 18px),repeating-linear-gradient(90deg,#000 0 2px,transparent 2px 4px,#000 4px 5px,transparent 5px 8px);mask:linear-gradient(#000 0 18px,transparent 18px),repeating-linear-gradient(90deg,#000 0 2px,transparent 2px 4px,#000 4px 5px,transparent 5px 8px);-webkit-mask-composite:source-over;mask-composite:add;opacity:.9} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
+.fringe{height:44px;background:url(../img/cloth-own.jpg) center 20%/600px auto;-webkit-mask:linear-gradient(#000 0 18px,transparent 18px),repeating-linear-gradient(90deg,#000 0 2px,transparent 2px 4px,#000 4px 5px,transparent 5px 8px);mask:linear-gradient(#000 0 18px,transparent 18px),repeating-linear-gradient(90deg,#000 0 2px,transparent 2px 4px,#000 4px 5px,transparent 5px 8px);-webkit-mask-composite:source-over;mask-composite:add;opacity:.9} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
 .fringe{position:relative}
 .fringe::after{content:"";position:absolute;inset:18px 0 0;background:linear-gradient(180deg,rgba(12,8,6,0),#0c0806)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) and rendered materials (cloth roll, bamboo, glaze, candlelight, photo scrims) */
 .foot-in{padding-top:42px;display:grid;gap:14px}
@@ -240,7 +232,7 @@ html:not(.still) .run.on .cv-feet img{animation:drift 9s var(--ease-io) 1 both}
 .f-name svg{width:38px;height:38px;flex:none}
 .f-line{color:var(--ink-2);font-size:16px}
 .f-line a{color:var(--ink)}
-.fine{color:var(--ink-3);font-size:15px;max-width:90ch;line-height:1.6}
+.fine{color:var(--ink-3);font-size:15px;max-width:68ch;line-height:1.6}
 @media (min-width:900px){ .foot{padding-bottom:56px} }
 
 /* the tray (phones): bamboo, a raised rim, two glazed bowls */

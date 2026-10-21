@@ -220,55 +220,71 @@
     });
   }
 
-  // ---------------------------------------------------------------- THE CLOTH
-  // The page opens in the treatment room. As you scroll, a rolled Thai cloth comes up from the bottom edge and unrolls over
-  // the room, the way the cloth is spread before a treatment. Tied to the scroll, both ways, every pass:
-  //   the roll travels up; the laid cloth behind it does not move (it is cut by a window that starts at the roll's middle);
-  //   the roll turns as it goes (its pattern moves along it, squeezed by the curve) and gets thinner as cloth leaves it;
-  //   the room just ahead of it darkens a little, as if under it; the room's words fade before the cloth reaches them;
-  //   once the room is covered, the light is lowered on the cloth, and the treatment section, set on the same cloth, follows.
-  // Back up, the cloth rolls itself up again. Only transform and opacity are written, except the roll's own small pattern.
-  var stage = $('[data-stage]'), roll = $('[data-roll]'), rtex = $('[data-rtex]'), cloth = $('[data-cloth]'), clothIn = $('[data-cloth-in]'),
-      dim = $('[data-dim]'), rsh = $('[data-rshadow]'), copy = $('[data-copy]'), cap = $('.hero-cap');
-  var vw = 0, vh = 0, sTop = 0, sH = 0, R0 = 40, copyB = 0, capB = 0, tileW = 0, lastKey = '';
+  // ---------------------------------------------------------------- THE CAMERA
+  // Everything here is their own photographs. The room photo is cut into two depths: the back (wall, Buddha, candles) and
+  // the treatment bed in front. Tied to the scroll, both ways, every pass:
+  //   the camera moves into the room toward the two candles: both layers grow about the candles, but the bed, being nearer,
+  //     grows faster and slides down and out of frame (parallax), uncovering only the dark floor under it;
+  //   the candles' light grows until it fills the frame;
+  //   out of that light the camera is looking down at the treatment bed, and tilts down it, past the flowers on the tray,
+  //     to the Thai cloth at its foot, while the light is lowered to the page's own ground.
+  // The pin's background is that same ground, and every layer is sized to cover the screen, so nothing else can show.
+  // Only transform and opacity are written while scrolling.
+  var stage = $('[data-stage]'), lys = $$('[data-ly]'), back = lys[0], bed = lys[1], bloom = $('[data-bloom]'), tilt = $('[data-tilt]'),
+      dusk = $('[data-dusk]'), shade = $('.hero-shade'), copy = $('[data-copy]'), cap = $('[data-cap]'), tcap = $('[data-tcap]');
+  var vw = 0, vh = 0, sTop = 0, sH = 0, box = {}, TL = {}, lastKey = '';
+  var FX = 0.585, FY = 0.486;                                   // between the two flames, as a share of the photo
+  var eio = function (t) { t = clamp(t, 0, 1); return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+  function place() {
+    var r = 2000 / 2667, W = Math.max(vw, vh * r), Hh = W / r;
+    var sx = vw * 0.5, sy = vw < 700 ? vh * 0.36 : vh * 0.78;   // where the candles sit at rest: above the words on phones, under them on wide screens
+    var ox = clamp(sx - FX * W, vw - W, 0), oy = clamp(sy - FY * Hh, vh - Hh, 0);
+    box = { W: W, H: Hh, cx: ox + FX * W, cy: oy + FY * Hh };
+    lys.forEach(function (l) {
+      l.style.inset = 'auto'; l.style.left = ox + 'px'; l.style.top = oy + 'px'; l.style.width = W + 'px'; l.style.height = Hh + 'px';
+      l.style.transformOrigin = (FX * W).toFixed(1) + 'px ' + (FY * Hh).toFixed(1) + 'px';
+    });
+    root.classList.add('placed');
+    // the bed from above: wide enough that the tilt is a real camera move, and never narrower or shorter than the screen
+    var tw = Math.max(vw, vh * 0.62) * 1.12, th = tw * 2666 / 1200;
+    TL = { w: tw, h: th, x: (vw - tw) / 2, end: clamp(-(0.64 * th - 0.42 * vh), vh - th, 0) };
+    tilt.style.width = tw + 'px'; tilt.style.transformOrigin = '50% 0';
+  }
   function resetStage() {
-    [roll, cloth, clothIn, dim, rsh, copy, cap].forEach(function (e) { e.style.transform = ''; e.style.opacity = ''; });
-    rtex.style.backgroundPosition = ''; lastKey = '';
+    [back, bed, bloom, tilt, dusk, shade, copy, cap, tcap].forEach(function (e) { e.style.transform = ''; e.style.opacity = ''; });
+    lastKey = '';
+  }
+  function paint(p) {
+    var d = eio(p / 0.54);
+    var tx = (vw * 0.5 - box.cx) * d, ty = (vh * 0.5 - box.cy) * d;
+    back.style.transform = 'translate3d(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px,0) scale(' + lerp(1, 2.4, d).toFixed(4) + ')';
+    bed.style.transform = 'translate3d(' + tx.toFixed(1) + 'px,' + (ty + vh * 0.2 * d).toFixed(1) + 'px,0) scale(' + lerp(1, 4.4, Math.pow(d, 1.15)).toFixed(4) + ')';
+    bed.style.opacity = (1 - smooth((p - 0.34) / 0.12)).toFixed(3);
+    var bo = smooth((p - 0.24) / 0.26) * (1 - smooth((p - 0.6) / 0.16)), bs = lerp(0.1, 2.3, smooth((p - 0.2) / 0.38));
+    bloom.style.transform = 'translate3d(' + (box.cx + tx).toFixed(1) + 'px,' + (box.cy + ty).toFixed(1) + 'px,0) scale(' + bs.toFixed(4) + ')';
+    bloom.style.opacity = bo.toFixed(3);
+    var tt = eio((p - 0.5) / 0.4);
+    tilt.style.opacity = smooth((p - 0.52) / 0.07).toFixed(3);
+    tilt.style.transform = 'translate3d(' + TL.x.toFixed(1) + 'px,' + (TL.end * tt).toFixed(1) + 'px,0) scale(' + lerp(1.06, 1, tt).toFixed(4) + ')';
+    tcap.style.opacity = (smooth((p - 0.55) / 0.05) * (1 - smooth((p - 0.62) / 0.04))).toFixed(3);
+    dusk.style.opacity = (p >= 1 ? 1 : smooth((p - 0.64) / 0.33)).toFixed(3);
+    var o = 1 - smooth(p / 0.1);
+    copy.style.opacity = o.toFixed(3);
+    copy.style.transform = 'translate3d(0,' + (-28 * (1 - o)).toFixed(1) + 'px,0)';
+    shade.style.opacity = (1 - 0.7 * smooth((p - 0.04) / 0.16)).toFixed(3);
+    if (cap) cap.style.opacity = (1 - smooth(p / 0.06)).toFixed(3);
   }
   function layout() {
     vw = root.clientWidth; vh = innerHeight;
     sTop = stage.getBoundingClientRect().top + scrollY; sH = stage.offsetHeight;
-    R0 = clamp(vw * 0.11, 42, 64);
-    roll.style.setProperty('--R0', (2 * R0) + 'px');
-    tileW = vw < 700 ? vw : Math.min(vw, 820);
-    rtex.style.backgroundSize = tileW + 'px ' + (tileW * 1570 / 1100 * 0.64).toFixed(1) + 'px';
-    copy.style.transform = ''; copyB = copy.offsetTop + copy.offsetHeight; capB = cap ? cap.offsetTop + cap.offsetHeight : 0;
-    lastKey = '';
+    place(); lastKey = '';
     tick();
-  }
-  function paint(p) {
-    var e = (1 - Math.cos(Math.PI * p)) / 2;
-    var start = vh + R0 + 12, cy = lerp(start, -R0 * 0.4, e);                       // the roll's middle, on screen
-    var Rmin = R0 * 0.32, R = Math.sqrt(Rmin * Rmin + (R0 * R0 - Rmin * Rmin) * (1 - e)); // a spiral's radius shrinks with the cloth left on it
-    roll.style.transform = 'translate3d(0,' + (cy - R).toFixed(1) + 'px,0) scaleY(' + (R / R0).toFixed(4) + ')';
-    roll.style.transformOrigin = '50% 0';
-    roll.style.opacity = (1 - smooth((p - 0.93) / 0.07)).toFixed(3);
-    rtex.style.backgroundPosition = '50% ' + (-(start - cy) * 0.64 * R0 / R).toFixed(1) + 'px';
-    cloth.style.transform = 'translate3d(0,' + cy.toFixed(1) + 'px,0)';
-    clothIn.style.transform = 'translate3d(0,' + (-cy).toFixed(1) + 'px,0)';
-    dim.style.opacity = (0.16 + 0.7 * smooth((p - 0.5) / 0.45)).toFixed(3);
-    rsh.style.transform = 'translate3d(0,' + (cy - R - 118).toFixed(1) + 'px,0)';
-    rsh.style.opacity = (p > 0 ? 1 - smooth((p - 0.88) / 0.1) : 0).toFixed(3);
-    var o = clamp(1 - (copyB - (cy - R)) / (vh * 0.22), 0, 1);
-    copy.style.opacity = o.toFixed(3);
-    copy.style.transform = 'translate3d(0,' + (-22 * (1 - o)).toFixed(1) + 'px,0)';
-    if (cap) cap.style.opacity = clamp(1 - (capB - (cy - R)) / 70, 0, 1).toFixed(3);
   }
   function tick() {
     var y = scrollY;
     if (pill) pill.classList.toggle('up', y > 24);
     if (still()) return;
-    var run = sH - vh, s0 = vh * 0.05;
+    var run = sH - vh, s0 = vh * 0.02;
     var p = clamp((y - sTop - s0) / Math.max(1, run - s0), 0, 1), key = p.toFixed(4);
     if (key !== lastKey) { lastKey = key; paint(p); }
     // the room photo beside the statement drifts a little with the page
@@ -291,5 +307,5 @@
   lastW = root.clientWidth;
   layout();
   setTimeout(function () { waver(0.8); }, 500);
-  window.__cloth = { layout: layout, paint: paint, tick: tick };
+  window.__cam = { layout: layout, paint: paint, tick: tick };
 })();

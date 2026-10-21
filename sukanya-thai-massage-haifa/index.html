@@ -17,8 +17,7 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
 <link href="https://fonts.googleapis.com/css2?family=Libertinus+Serif:ital,wght@0,400;1,400&family=Lunasima:wght@400;700&display=swap" rel="stylesheet">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%22-16 -16 32 32%22%3E%3Ccircle r=%2216%22 fill=%22%237fa843%22/%3E%3Cg fill=%22%23fbf6ea%22%3E%3Cellipse cx=%220%22 cy=%22-6.4%22 rx=%224.2%22 ry=%227%22/%3E%3Cellipse cx=%220%22 cy=%22-6.4%22 rx=%224.2%22 ry=%227%22 transform=%22rotate(72)%22/%3E%3Cellipse cx=%220%22 cy=%22-6.4%22 rx=%224.2%22 ry=%227%22 transform=%22rotate(144)%22/%3E%3Cellipse cx=%220%22 cy=%22-6.4%22 rx=%224.2%22 ry=%227%22 transform=%22rotate(216)%22/%3E%3Cellipse cx=%220%22 cy=%22-6.4%22 rx=%224.2%22 ry=%227%22 transform=%22rotate(288)%22/%3E%3C/g%3E%3Ccircle r=%223%22 fill=%22%23f2c14e%22/%3E%3C/svg%3E">
 <link rel="stylesheet" href="css/site.css">
-<link rel="preload" as="image" href="img/hero-d.jpg" media="(min-width: 700px)">
-<link rel="preload" as="image" href="img/hero-m.jpg" media="(max-width: 699px)">
+<link rel="preload" as="image" href="img/room-back.jpg">
 </head>
 <body>
 <a class="skip" href="#main"><span lang="he">דלג לתוכן</span><span lang="en">Skip to content</span></a>
@@ -63,16 +62,21 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
   <a class="btn btn-s navcall" href="tel:+972549739237"><span lang="he">התקשרו</span><span lang="en">Call</span></a>
 </nav>
 
-<!-- THE STAGE. The room by candlelight (their own photo). Scroll, and a rolled Thai cloth comes up from the floor's edge,
-     unrolling as it goes: the roll turns, grows thinner, the laid cloth stays still behind it. When it has covered the room
-     the light is lowered, and the cloth becomes the ground the treatment section is set on. Back up, it rolls itself up again. -->
+<!-- THE STAGE, made only of their own photographs. The room by candlelight, cut into depth: the wall, the Buddha and the
+     candles at the back, the treatment bed in front. Scroll, and the camera moves slowly into the room toward the two candles:
+     the bed, being nearer, slides past and out of frame faster than the wall behind it; the candlelight grows until it fills
+     the frame; out of that light the camera is looking down at the treatment bed, and tilts down it past the flowers on the
+     tray to the Thai cloth at its foot, as the light is lowered. Back up, it all plays in reverse. -->
 <header class="stage" id="top" data-stage>
   <div class="pin" data-pin>
-    <div class="hero-ph" data-hero-ph>
-      <picture><source media="(min-width: 700px)" srcset="img/hero-d.jpg" width="1600" height="900"><img src="img/hero-m.jpg" width="860" height="1146" alt="" data-alt-he="פינה בחדר הטיפולים: פסל בודהה, שני נרות דולקים, קיר טרקוטה ומיטת טיפול" data-alt-en="A corner of the treatment room: a Buddha statue, two lit candles, a terracotta wall and the treatment bed" fetchpriority="high"></picture>
-      <i class="flame" style="--x:55.1%;--y:var(--fy1)" data-flame aria-hidden="true"></i>
-      <i class="flame" style="--x:61.9%;--y:var(--fy2)" data-flame aria-hidden="true"></i>
+    <div class="ly ly-back" data-ly>
+      <img src="img/room-back.jpg" width="2000" height="2667" alt="" data-alt-he="פינה בחדר הטיפולים: פסל בודהה, שני נרות דולקים, קיר טרקוטה ומיטת טיפול" data-alt-en="A corner of the treatment room: a Buddha statue, two lit candles, a terracotta wall and the treatment bed" fetchpriority="high">
+      <i class="flame" style="left:55.1%;top:48.4%" data-flame aria-hidden="true"></i>
+      <i class="flame" style="left:62.1%;top:48.6%" data-flame aria-hidden="true"></i>
     </div>
+    <div class="ly ly-bed" data-ly aria-hidden="true"><img src="img/room-bed.webp" width="2000" height="2667" alt=""></div>
+    <div class="tilt" data-tilt aria-hidden="true"><img src="img/bed-tilt.jpg" width="1200" height="2666" alt="" loading="lazy"></div>
+    <div class="bloom" data-bloom aria-hidden="true"></div>
     <div class="hero-shade" aria-hidden="true"></div>
     <div class="hero-copy" data-copy>
       <h1><span lang="he">עיסוי תאילנדי <em>בחדר שקט.</em></span><span lang="en">Thai massage, <em>in a quiet room.</em></span></h1>
@@ -83,25 +87,23 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
       </div>
       <p class="meta"><a class="rating" href="#reviews"><b>4.9</b> <span class="stars" data-stars></span> <span lang="he">183 ביקורות בגוגל</span><span lang="en">183 Google reviews</span></a> <span class="status" data-status></span></p>
     </div>
-    <p class="hero-cap"><span lang="he">פינה בחדר, בת חן 7</span><span lang="en">A corner of the room, 7 Bat Hen St</span></p>
-    <div class="cloth" data-cloth aria-hidden="true"><div class="cloth-in" data-cloth-in><div class="cloth-dim" data-dim></div></div></div>
-    <div class="roll-shadow" data-rshadow aria-hidden="true"></div>
-    <div class="roll" data-roll aria-hidden="true"><div class="roll-tex" data-rtex></div><div class="roll-shade"></div></div>
+    <p class="hero-cap" data-cap><span lang="he">פינה בחדר, בת חן 7</span><span lang="en">A corner of the room, 7 Bat Hen St</span></p>
+    <p class="tilt-cap" data-tcap aria-hidden="true"><span lang="he">מיטת הטיפול והבד התאילנדי, מהתמונות של סוקניה</span><span lang="en">The treatment bed and the Thai cloth, from Sukanya’s own photos</span></p>
+    <div class="dusk" data-dusk aria-hidden="true"></div>
   </div>
 </header>
 
 <main id="main">
 
-<!-- the treatment, set on the cloth that was just laid: three cards, each one of their own photos with one small living thing on it -->
+<!-- the treatment: three cards, each one of their own photos with one small living thing on it -->
 <section class="sec treat" id="treat" aria-labelledby="h-treat">
-  <p class="cloth-cap"><span lang="he">בד איקאט תאילנדי, תמונה להמחשה</span><span lang="en">Thai ikat cloth, for illustration</span></p>
-  <div class="wrap">
-    <div class="head" data-reveal>
+    <div class="wrap">
+    <div class="head">
       <h2 id="h-treat"><span lang="he">ידיים, לחץ <em>ונשימה.</em></span><span lang="en">Hands, pressure, <em>breath.</em></span></h2>
       <p><span lang="he">עיסוי תאילנדי ועיסוי רגליים.</span><span lang="en">Thai massage and foot massage.</span></p>
     </div>
     <ul class="run" data-run>
-      <li class="card c1" data-reveal>
+      <li class="card c1">
         <div class="cv cv-palms" data-press><img src="img/c-palms.jpg" width="640" height="798" loading="lazy" alt="" data-alt-he="שתי כפות ידיים לוחצות על הגב, מעל מגבת לבנה" data-alt-en="Two palms pressing on the back, over a white towel"><i class="warm w1" aria-hidden="true"></i><i class="warm w2" aria-hidden="true"></i></div>
         <div class="ct">
           <h3><span lang="he">לחץ <em>בכפות הידיים.</em></span><span lang="en">Pressure, <em>with the palms.</em></span></h3>
@@ -116,26 +118,26 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
         </div>
       </li>
       <li class="card c3" data-reveal>
-        <div class="cv cv-tray"><img src="img/c-tray.jpg" width="640" height="800" loading="lazy" alt="" data-alt-he="מגש במבוק עם שתי קערות ופרחים, על בד תאילנדי בקצה מיטת הטיפול" data-alt-en="A bamboo tray with two bowls and flowers, on Thai cloth at the end of the treatment bed"><i class="glow g1" aria-hidden="true"></i><i class="glow g2" aria-hidden="true"></i></div>
+        <div class="cv cv-shelf"><img src="img/c-shelf.jpg" width="640" height="800" loading="lazy" alt="" data-alt-he="ראש בודהה מוזהב על מדף, ומתחתיו מדף עם סחלב לבן" data-alt-en="A gilded Buddha head on a shelf, and below it a shelf with a white orchid"></div>
         <div class="ct">
-          <h3><span lang="he">פרחים <em>על המגש.</em></span><span lang="en">Flowers <em>on the tray.</em></span></h3>
-          <p><span lang="he">ובד תאילנדי לרגלי המיטה.</span><span lang="en">And Thai cloth at the foot of the bed.</span></p>
+          <h3><span lang="he">בודהה <em>וסחלב.</em></span><span lang="en">A Buddha <em>and an orchid.</em></span></h3>
+          <p><span lang="he">על המדפים, מעל הכורסאות.</span><span lang="en">On the shelves, above the recliners.</span></p>
         </div>
       </li>
     </ul>
   </div>
 </section>
 
-<!-- the room: one calm statement with three small pictures set inside it, and the room itself beside it -->
+<!-- the room: one calm statement, and the room itself beside it -->
 <section class="sec room" id="room" aria-labelledby="h-room">
   <div class="wrap room-grid">
     <div class="room-text">
-      <h2 id="h-room" class="says" data-reveal><span lang="he">בודהה <i class="ip"><img src="img/pill-buddha.jpg" width="300" height="196" alt="" loading="lazy"></i>, נר <i class="ip"><img src="img/pill-candle.jpg" width="300" height="203" alt="" loading="lazy"></i> <em>וצמחים</em> <i class="ip"><img src="img/pill-leaf.jpg" width="300" height="200" alt="" loading="lazy"></i>.</span><span lang="en">A Buddha <i class="ip"><img src="img/pill-buddha.jpg" width="300" height="196" alt="" loading="lazy"></i>, a candle <i class="ip"><img src="img/pill-candle.jpg" width="300" height="203" alt="" loading="lazy"></i> <em>and plants</em> <i class="ip"><img src="img/pill-leaf.jpg" width="300" height="200" alt="" loading="lazy"></i>.</span></h2>
+      <h2 id="h-room" class="says" data-reveal><span lang="he">בודהה, נר <em>וצמחים.</em></span><span lang="en">A Buddha, a candle <em>and plants.</em></span></h2>
       <p data-reveal><span lang="he">קיר טרקוטה, לבנים בהירות ואור נמוך.</span><span lang="en">A terracotta wall, white brick, low light.</span></p>
     </div>
     <figure class="room-ph" data-reveal>
-      <div class="rp-frame" data-drift><img src="img/room.jpg" width="900" height="1012" loading="lazy" alt="" data-alt-he="חדר הטיפולים: מיטה עם סדין בהיר, כרית פנים כחולה, שידת קש וקיר לבנים" data-alt-en="The treatment room: a bed with a pale sheet, a blue face cushion, a wicker chest and a brick wall"></div>
-      <figcaption><span lang="he">החדר, מהתמונות של סוקניה</span><span lang="en">The room, from Sukanya’s own photos</span></figcaption>
+      <div class="rp-frame" data-drift><img src="img/room.jpg" width="900" height="1012" loading="lazy" alt="" data-alt-he="קיר צמחים במסגרת שחורה, על קיר לבנים בהיר" data-alt-en="A wall of plants in a black frame, on a pale brick wall"></div>
+      <figcaption><span lang="he">קיר הצמחים בחדר</span><span lang="en">The plant wall in the room</span></figcaption>
     </figure>
   </div>
 </section>
@@ -165,7 +167,7 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
   </div>
 </section>
 
-<!-- booking: a strip of the same cloth per question. Choosing lifts the shade off that part of the cloth;
+<!-- booking: a strip of their own Thai cloth per question. Choosing lifts the shade off that part of the cloth;
      the message at the bottom is what goes to WhatsApp -->
 <section class="sec book" id="book" aria-labelledby="h-book">
   <div class="wrap book-wrap">
@@ -242,7 +244,7 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
   <div class="wrap foot-in">
     <p class="f-name"><svg viewBox="-20 -20 40 40" aria-hidden="true"><use href="#bloom" x="-20" y="-20" width="40" height="40"/></svg><span lang="he">סוקניה · עיסוי תאילנדי</span><span lang="en">Sukanya · Thai massage</span></p>
     <p class="f-line"><span lang="he">בת חן 7, חיפה</span><span lang="en">7 Bat Hen St, Haifa</span> · <a href="tel:+972549739237" dir="ltr">054-973-9237</a> · <a href="https://wa.me/972549739237" target="_blank" rel="noopener"><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a></p>
-    <p class="fine"><span lang="he">קונספט לדוגמה, לא האתר הרשמי של העסק. הביקורות מצוטטות מגוגל, חלקן בקיצור. תמונות: עיסוי תאילנדי סוקניה, Tigran Dobin ו-Alexander K (Sasha), דרך Google Maps. הבד: טקסטיל תאילנדי מסוף המאה ה-18 או תחילת המאה ה-19, מוזיאון המטרופוליטן לאמנות, CC0, תמונה להמחשה. הפרח והאנימציות צוירו לקונספט הזה.</span><span lang="en">A sample concept, not the business’s official website. Reviews quoted from Google, some shortened. Photos: Sukanya Thai Massage, Tigran Dobin and Alexander K (Sasha), via Google Maps. The cloth: Thai textile, late 18th to early 19th century, The Metropolitan Museum of Art, CC0, for illustration. The flower and the animations were drawn for this concept.</span></p>
+    <p class="fine"><span lang="he">קונספט לדוגמה, לא האתר הרשמי של העסק. הביקורות מצוטטות מגוגל, חלקן בקיצור. תמונות: עיסוי תאילנדי סוקניה, Tigran Dobin ו-Alexander K (Sasha), דרך Google Maps. הפרח צויר לקונספט הזה; האנימציות בנויות מהתמונות של העסק.</span><span lang="en">A sample concept, not the business’s official website. Reviews quoted from Google, some shortened. Photos: Sukanya Thai Massage, Tigran Dobin and Alexander K (Sasha), via Google Maps. The flower was drawn for this concept; the animations are built from the business’s own photos.</span></p>
   </div>
 </footer>
 
