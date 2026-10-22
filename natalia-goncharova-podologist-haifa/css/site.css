@@ -1,0 +1,297 @@
+/* Medical pedicure, Natalia Goncharova, 3 Balfour St, Haifa.
+   The page walks in from the street: the shop front, the sign on the glass door, the treatment room. Everything after is set
+   in the clinic's own materials: the dark aluminium of the shop front (ground), the green-blue of a sterile drape (one field),
+   sealed sterilisation pouches, her scrubs' teal (the accent), the pale wood floor (small warm details).
+   Heebo for everything (Hebrew + Latin), David Libre for the accent words. */
+:root{
+  --ground:#15191b; --ground-2:#191e21; --card:#20262a; --card-2:#262d32;
+  --drape:#163a3b; --drape-2:#1b4546;
+  --edge:rgba(225,236,233,.08); --edge-2:rgba(225,236,233,.15);
+  --ink:#e8ecea; --ink-2:rgba(232,236,234,.78); --ink-3:rgba(232,236,234,.64);
+  --teal:#8cc7bf; --teal-ink:#0e2423; --wood:#d8b98f; --star:#e7c98f;
+  --sans:"Heebo",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+  --serif:"David Libre","Times New Roman",serif;
+  --gut:clamp(16px,4.2vw,56px); --max:1240px;
+  --ease:cubic-bezier(.23,1,.32,1); --ease-io:cubic-bezier(.65,0,.35,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--ground);color-scheme:dark}
+section[id]{scroll-margin-top:72px}
+a,button,label,input{touch-action:manipulation}
+h2,h3{text-wrap:balance}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 17px/1.55 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:clip;-webkit-tap-highlight-color:transparent}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+h1,h2,h3,p,figure,blockquote,ul,dl,dd{margin:0;padding:0}
+ul{list-style:none}
+em{font-style:normal;color:var(--teal)}
+:lang(he) em,:lang(en) em{font-family:var(--serif);font-weight:400;letter-spacing:0}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+::selection{background:var(--teal);color:var(--teal-ink)}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:6px}
+
+/* language: both versions live in the page; the html lang decides which shows */
+html[lang="he"] [lang="en"]:not(html), html[lang="en"] [lang="he"]:not(html){display:none!important}
+
+.skip{position:fixed;inset-inline-start:12px;top:-60px;z-index:100;background:var(--teal);color:var(--teal-ink);padding:10px 14px;border-radius:999px;text-decoration:none;font-weight:600}
+.skip:focus{top:12px}
+
+.concept{position:absolute;top:0;inset-inline:0;z-index:30;background:rgba(14,17,18,.82);color:var(--ink-2);font-size:13px;line-height:1.4;text-align:center;padding:8px var(--gut)}
+
+/* buttons: round, one fill */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 22px;border-radius:999px;background:var(--teal);color:var(--teal-ink);font:600 16px/1 var(--sans);text-decoration:none;border:0;cursor:pointer;transition:transform .14s var(--ease),background-color .2s;user-select:none;-webkit-user-select:none}
+.btn svg{width:18px;height:18px;fill:currentColor;flex:none}
+.btn-ghost{background:rgba(232,236,234,.1);color:var(--ink);box-shadow:inset 0 0 0 1px var(--edge-2)} /* taste-skill-ignore: owner reference (soft card edges, glass nav) */
+.btn:active{transform:scale(.97)}
+@media (hover:hover){ .btn:hover{background:#a3d6cf} .btn-ghost:hover{background:rgba(232,236,234,.17)} }
+.btn-s{min-height:38px;padding:0 16px;font-size:14px}
+.tl{color:var(--teal);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px}
+.num{font-variant-numeric:tabular-nums}
+
+/* floating glass nav (owner reference) */
+.pill{position:fixed;z-index:40;top:44px;inset-inline:0;margin-inline:auto;width:min(calc(100% - 24px),1000px);display:flex;align-items:center;gap:6px;padding:6px;border-radius:999px;background:rgba(18,22,24,.56);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);box-shadow:inset 0 0 0 1px var(--edge-2),0 10px 30px rgba(0,0,0,.22);transition:top .35s var(--ease)} /* taste-skill-ignore: owner reference (glass pill nav with a Motion toggle) */
+.pill.up{top:12px}
+.mark{display:flex;align-items:center;gap:9px;text-decoration:none;font-weight:600;font-size:15.5px;padding-inline:8px 10px;white-space:nowrap;min-width:0}
+.mark > span{overflow:hidden;text-overflow:ellipsis}
+/* the mark: the ring of a magnifier lamp, lit */
+.lens{width:22px;height:22px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 3px var(--teal),inset 0 0 0 6px rgba(140,199,191,.18)} /* taste-skill-ignore: the lamp ring, a drawn object */
+.links{display:none;gap:2px;margin-inline-start:auto}
+.links a{display:block;padding:8px 13px;border-radius:999px;font-size:14.5px;color:var(--ink-2);text-decoration:none;transition:background-color .2s,color .2s}
+.links a[aria-current="true"]{color:var(--ink);background:rgba(232,236,234,.09)}
+@media (hover:hover){ .links a:hover{color:var(--ink)} }
+.motion{margin-inline-start:auto;display:flex;align-items:center;gap:7px;background:none;border:0;color:var(--ink-2);font:400 13.5px/1 var(--sans);padding:8px;cursor:pointer;border-radius:999px;min-height:38px}
+.motion .knob{position:relative;width:30px;height:18px;border-radius:999px;background:rgba(232,236,234,.18);transition:background-color .2s}
+.motion .knob::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:12px;height:12px;border-radius:50%;background:var(--ink);transition:transform .2s var(--ease)}
+.motion[aria-checked="true"] .knob{background:var(--teal)}
+html[dir="rtl"] .motion[aria-checked="true"] .knob::after{transform:translateX(-12px)}
+html[dir="ltr"] .motion[aria-checked="true"] .knob::after{transform:translateX(12px)}
+.langb{background:rgba(232,236,234,.08);border:0;color:var(--ink);font:600 13px/1 var(--sans);width:38px;height:38px;border-radius:50%;cursor:pointer;flex:none}
+.navcall{display:none}
+@media (min-width:960px){ .links{display:flex} .motion{margin-inline-start:4px} .navcall{display:inline-flex} }
+@media (max-width:400px){ .motion > span[lang]{display:none!important} .mark{font-size:14.5px} }
+
+/* ---------------------------------------------------------------- the walk in */
+.stage{position:relative;height:340svh;background:var(--ground)}
+.pin{position:sticky;top:0;height:100svh;overflow:hidden;contain:paint;background:var(--ground)}
+/* each photo is sized and moved by script so that it always covers the frame; without script it simply covers */
+.ph{position:absolute;inset:0;transform-origin:0 0;will-change:transform,opacity}
+.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%}
+.ph .sh{will-change:opacity}
+.ph[data-ph="door"],.ph[data-ph="nat"]{opacity:0}
+html.placed .ph{inset:auto;left:0;top:0}
+html.placed .ph img{object-fit:fill}
+.scrim{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(14,17,18,.5) 0%,rgba(14,17,18,0) 22%,rgba(14,17,18,0) 42%,rgba(14,17,18,.72) 66%,rgba(14,17,18,.94) 100%)} /* taste-skill-ignore: neutral scrim under text on a photo */
+@media (min-width:900px){ .scrim{background:linear-gradient(180deg,rgba(14,17,18,.45) 0%,rgba(14,17,18,0) 20%,rgba(14,17,18,0) 46%,rgba(14,17,18,.66) 72%,rgba(14,17,18,.9) 100%)} /* taste-skill-ignore: neutral scrim under text on a photo */ }
+/* the title along the bottom edge, like a film title */
+.hero-copy{position:absolute;inset-inline:0;bottom:calc(30px + env(safe-area-inset-bottom));padding-inline:var(--gut);will-change:opacity,transform}
+.hero-copy h1{font:300 clamp(46px,7.4vw,124px)/.98 var(--sans);letter-spacing:-.03em;text-wrap:balance}
+html[lang="en"] .hero-copy h1{font-size:clamp(42px,6.6vw,112px)}
+.hero-copy .lead{margin-top:16px;max-width:40ch;font-size:clamp(17px,1.4vw,20px);color:var(--ink)}
+.acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.meta{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-size:15px;color:var(--ink-2)}
+@media (min-width:900px){
+  .hero-copy{display:grid;grid-template-columns:1fr auto;align-items:end;column-gap:48px;bottom:40px}
+  .hero-copy h1{grid-column:1/-1}
+  .hero-copy .lead{grid-column:1}
+  .hero-copy .acts{grid-column:2;grid-row:2/4;margin:0;align-self:end}
+}
+.rating{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink)}
+.rating b{font-weight:600}
+.stars svg{width:82px;height:14px;display:block}
+.status{display:inline-flex;align-items:center;gap:8px}
+.status .dot{width:8px;height:8px;border-radius:50%;background:#7d8689;flex:none}
+.status.open .dot{background:var(--teal);box-shadow:0 0 0 4px rgba(140,199,191,.2)} /* taste-skill-ignore: status ring */
+.cap{position:absolute;bottom:calc(26px + env(safe-area-inset-bottom));inset-inline-start:var(--gut);font-size:14px;color:var(--ink);opacity:0;background:rgba(14,17,18,.6);padding:7px 13px;border-radius:999px}
+.meet{position:absolute;inset-inline:0;bottom:calc(34px + env(safe-area-inset-bottom));padding-inline:var(--gut);opacity:0;pointer-events:none}
+.meet h2{font:300 clamp(44px,6.6vw,108px)/1 var(--sans);letter-spacing:-.03em}
+.meet p{margin-top:12px;font-size:clamp(17px,1.4vw,20px);max-width:38ch}
+.steps{display:none}
+
+/* motion off: no pin. The same three frames, stepped with arrows; scrolling never changes the frame */
+html.still .stage,html:not(.js) .stage{height:auto}
+html.still .pin,html:not(.js) .pin{position:relative;height:100svh;min-height:560px}
+html.still .steps{display:flex;position:absolute;z-index:3;top:calc(env(safe-area-inset-top) + 104px);inset-inline-end:var(--gut);align-items:center;gap:10px}
+.stp{width:44px;height:44px;border-radius:50%;border:0;background:rgba(14,17,18,.62);color:var(--ink);display:grid;place-items:center;cursor:pointer;box-shadow:inset 0 0 0 1px var(--edge-2);transition:transform .14s var(--ease)} /* taste-skill-ignore: owner reference (soft edges) */
+.stp svg{width:20px;height:20px}
+html[dir="rtl"] .stp svg{transform:scaleX(-1)}
+html[dir="rtl"] .stp.nx svg{transform:none}
+html[dir="ltr"] .stp.nx svg{transform:scaleX(-1)}
+.stp:active{transform:scale(.94)}
+.stp:disabled{opacity:.35;cursor:default}
+.dots{display:flex;gap:6px}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(232,236,234,.35)}
+.dots i.on{background:var(--teal)}
+html:not(.js) .ph[data-ph="door"],html:not(.js) .ph[data-ph="nat"]{display:none}
+
+/* ---------------------------------------------------------------- sections */
+.sec{position:relative;padding-block:clamp(96px,13vw,180px)}
+.wrap{width:min(100% - 2 * var(--gut),var(--max));margin-inline:auto}
+.head h2,.score h2,.vcard h2,.room-text h2{font:300 clamp(40px,5.6vw,86px)/1.02 var(--sans);letter-spacing:-.025em;text-wrap:balance}
+.head p{margin-top:16px;font-size:clamp(17px,1.4vw,20px);color:var(--ink-2)}
+
+/* the treatments: sealed pouches on the drape */
+.care{background:var(--drape)}
+.run{display:flex;gap:clamp(14px,1.6vw,22px);overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:var(--gut);padding:clamp(48px,6vw,80px) var(--gut) 14px;scrollbar-width:none;overscroll-behavior-x:contain}
+.run::-webkit-scrollbar{display:none}
+.pouch{flex:0 0 clamp(168px,44vw,200px);scroll-snap-align:start;display:flex;flex-direction:column}
+@media (min-width:700px){ .run{display:grid;grid-template-columns:repeat(3,1fr);gap:32px clamp(16px,2vw,24px);overflow:visible;width:min(100% - 2 * var(--gut),720px);margin-inline:auto;padding-inline:0} }
+@media (min-width:1240px){ .run{grid-template-columns:repeat(6,1fr);width:min(100% - 2 * var(--gut),var(--max))} }
+/* the pouch: clear film over a paper back, crimped seals down both sides, a paper peel end with its indicator ink */
+.bag{position:relative;aspect-ratio:200/330;border-radius:16px;overflow:hidden;
+  background:
+    linear-gradient(90deg,rgba(255,255,255,.07),rgba(255,255,255,0) 30%,rgba(255,255,255,0) 70%,rgba(255,255,255,.05)), /* taste-skill-ignore: film sheen on a rendered pouch */
+    #23514f;
+  box-shadow:inset 0 0 0 1px rgba(214,236,232,.16)} /* taste-skill-ignore: film sheen on a rendered pouch */
+/* crimped seal: a fine ribbed band down each side and across the bottom */
+.bag::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:
+    repeating-linear-gradient(0deg,rgba(214,236,232,.16) 0 2px,rgba(214,236,232,0) 2px 5px) left/12px 100% no-repeat, /* taste-skill-ignore: crimped seal */
+    repeating-linear-gradient(0deg,rgba(214,236,232,.16) 0 2px,rgba(214,236,232,0) 2px 5px) right/12px 100% no-repeat, /* taste-skill-ignore: crimped seal */
+    repeating-linear-gradient(90deg,rgba(214,236,232,.16) 0 2px,rgba(214,236,232,0) 2px 5px) bottom/100% 12px no-repeat} /* taste-skill-ignore: the crimped seal of a sterilisation pouch */
+/* the paper peel end at the top, with the chevrons you pull from */
+.bag::after{content:"";position:absolute;inset:0 0 auto;height:19%;background:
+    repeating-linear-gradient(135deg,rgba(23,58,59,.0) 0 9px,rgba(23,58,59,.22) 9px 11px),#b9c7c3; /* taste-skill-ignore: printed pouch paper */
+  clip-path:polygon(0 0,100% 0,100% 72%,90% 100%,80% 72%,70% 100%,60% 72%,50% 100%,40% 72%,30% 100%,20% 72%,10% 100%,0 72%)} /* taste-skill-ignore: printed paper of a sterilisation pouch */
+.bag img{position:absolute;left:50%;top:21%;height:74%;width:auto;max-width:none;transform:translateX(-50%) rotate(-4deg);filter:drop-shadow(0 6px 8px rgba(0,0,0,.25));transition:transform .9s var(--ease)} /* taste-skill-ignore: instrument resting in the pouch */
+/* the indicator ink: rose before processing, deep olive after */
+.ink{position:absolute;z-index:2;top:4.5%;inset-inline-start:10%;width:26%;height:5%;border-radius:3px;background:#d98aa0;transition:background-color 1.4s var(--ease) var(--d,0ms)}
+.run.on .ink,html.still .ink{background:#5d5a2a}
+html:not(.still) .run:not(.on) .bag img{transform:translateX(-50%) translateY(5%) rotate(2deg)}
+.pouch h3{margin-top:18px;font:400 21px/1.2 var(--sans);letter-spacing:-.01em}
+.pouch p{margin-top:6px;font-size:16px;color:var(--ink-2);line-height:1.45}
+.pick{margin-top:auto;padding-top:12px;font-size:15px;color:var(--teal);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1px;align-self:flex-start;min-height:44px;display:inline-flex;align-items:center}
+.foot-note{margin-top:28px;font-size:16px;color:var(--ink-3)}
+
+/* the room: a tall photo that comes into focus, the facts beside it */
+.room{background:var(--ground)}
+.room-grid{display:grid;gap:clamp(40px,6vw,96px);align-items:center}
+.room-ph{margin:0}
+.rf{position:relative;border-radius:26px;overflow:hidden;aspect-ratio:584/1040;max-height:82svh;margin-inline:auto;background:#2b3236}
+.rf img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rf .sh{will-change:opacity,transform;transform-origin:50% 40%}
+.room-ph{position:relative;width:min(100%,calc(82svh * 584 / 1040));margin-inline:auto}
+@media (min-width:860px){ .room-ph{width:100%} }
+@media (max-width:859px){ .room-text{order:-1} }
+.room-ph figcaption{position:absolute;bottom:14px;inset-inline-start:14px;font-size:14px;color:var(--ink);background:rgba(14,17,18,.66);padding:6px 12px;border-radius:999px}
+.room-text p{margin-top:20px;color:var(--ink-2);font-size:clamp(17px,1.4vw,20px);max-width:36ch}
+.facts{margin-top:40px;display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:520px}
+.facts > div{background:var(--card);border-radius:20px;padding:18px 20px;display:flex;flex-direction:column-reverse;gap:2px}
+.facts dt{font-size:16px;color:var(--ink-2)}
+.facts dd{font:300 clamp(30px,3vw,42px)/1.1 var(--sans);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.facts dd.t{font-size:clamp(22px,2.2vw,32px);white-space:nowrap}
+@media (min-width:860px){ .room-grid{grid-template-columns:.8fr 1.2fr} .rf{max-height:none} }
+
+/* reviews */
+.reviews{background:var(--ground-2)}
+.rev-grid{display:grid;gap:clamp(36px,5vw,72px)}
+.score h2{font-size:clamp(70px,11vw,170px);line-height:.92}
+.score p{margin-top:18px;font-size:16px}
+.quotes{display:grid;gap:14px}
+.q{background:var(--card);border-radius:26px;padding:clamp(22px,2.6vw,34px)}
+.q p{font-size:17.5px;line-height:1.6}
+.q-lead p{font-size:clamp(19px,1.7vw,23px);line-height:1.5}
+.q footer{margin-top:14px;font-size:14.5px;color:var(--ink-2)}
+.q footer bdi{color:var(--ink);font-weight:600}
+.tr{color:var(--ink-3)}
+.allrev{margin-top:6px;font-size:15px}
+@media (min-width:860px){ .rev-grid{grid-template-columns:.8fr 1.2fr;align-items:start} .score{position:sticky;top:120px} .quotes{margin-top:120px} .q:nth-child(2){margin-inline-start:12%} }
+
+/* booking: the intake chart */
+.book{background:var(--ground)}
+.book-wrap{display:grid;gap:clamp(36px,5vw,64px)}
+.chart{display:grid;gap:clamp(18px,2.4vw,28px);background:var(--card);border-radius:30px;padding:clamp(16px,2.6vw,32px)}
+.footbox{display:grid;gap:14px;justify-items:center;background:var(--card-2);border-radius:22px;padding:18px 14px 22px}
+.side{display:flex;align-items:center;gap:4px;background:rgba(14,17,18,.5);border-radius:999px;padding:4px}
+.side-l{font-size:14px;color:var(--ink-2);padding-inline:10px 6px}
+.side label{position:relative;cursor:pointer}
+.side input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
+.side label > span{display:block;min-width:64px;text-align:center;padding:10px 12px;border-radius:999px;font-size:15px;transition:background-color .2s,color .2s}
+.side input:checked + span{background:var(--teal);color:var(--teal-ink);font-weight:600}
+.side input:focus-visible + span{outline:2px solid var(--teal);outline-offset:2px}
+.sole{position:relative;width:min(220px,58vw);aspect-ratio:200/440}
+.sole-svg{position:absolute;inset:0;width:100%;height:100%;transition:transform .45s var(--ease)}
+.sole.left .sole-svg{transform:scaleX(-1)}
+.sole.both .sole-svg{transform:none}
+.skin{fill:#d9c3ab}
+.lines path{fill:none;stroke:#b79c80;stroke-width:2;stroke-linecap:round}
+.z{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);cursor:pointer;display:grid;place-items:center;transition:left .45s var(--ease)}
+.sole.left .z{left:calc(100% - var(--x))}
+.z input{position:absolute;inset:-12px;opacity:0;margin:0;cursor:pointer;width:calc(100% + 24px);height:calc(100% + 24px)}
+.hot{width:26px;height:26px;border-radius:50%;background:rgba(22,58,59,.25);box-shadow:inset 0 0 0 2px rgba(22,58,59,.6);transition:transform .2s var(--ease),background-color .2s} /* taste-skill-ignore: tap target on a drawn foot */
+.zl{position:absolute;top:calc(100% + 2px);font-size:13px;color:#26302f;font-weight:600;white-space:nowrap;pointer-events:none;background:rgba(236,226,212,.85);padding:1px 7px;border-radius:999px}
+.z input:checked ~ .hot{background:var(--drape);box-shadow:0 0 0 6px rgba(140,199,191,.45),inset 0 0 0 2px var(--teal);transform:scale(1.12)} /* taste-skill-ignore: the marked spot glows like the lamp ring */
+.z input:focus-visible ~ .hot{outline:2px solid var(--teal-ink);outline-offset:3px}
+@media (hover:hover){ .z:hover .hot{transform:scale(1.1)} }
+.intake{display:grid;gap:16px;align-content:start}
+.what{border:0;margin:0;padding:0;display:grid;gap:4px;min-width:0}
+.what legend{font-size:14px;color:var(--ink-2);margin-bottom:8px;padding:0}
+.what label{position:relative;cursor:pointer}
+.what input{position:absolute;inset:0;opacity:0;margin:0;cursor:pointer}
+.what label > span{display:flex;align-items:center;gap:12px;min-height:46px;padding:8px 14px;border-radius:14px;background:rgba(14,17,18,.35);font-size:16px;transition:background-color .2s}
+/* the tick box of an intake form */
+.what label > span::before{content:"";width:18px;height:18px;border-radius:5px;box-shadow:inset 0 0 0 2px rgba(232,236,234,.45);flex:none;transition:background-color .2s,box-shadow .2s} /* taste-skill-ignore: a form tick box */
+.what input:checked + span{background:rgba(140,199,191,.14)}
+.what input:checked + span::before{background:var(--teal) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M4.5 9.5l3 3 6-7' fill='none' stroke='%230e2423' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat;box-shadow:none}
+.what input:focus-visible + span{outline:2px solid var(--teal);outline-offset:-2px}
+@media (hover:hover){ .what input:not(:checked) + span:hover{background:rgba(14,17,18,.55)} }
+.namef .lg{display:block;font-size:14px;color:var(--ink-2);margin-bottom:8px}
+.namef input{width:100%;min-height:50px;border-radius:14px;border:0;background:rgba(232,236,234,.07);box-shadow:inset 0 0 0 1px var(--edge-2);color:var(--ink);font:400 16px/1.3 var(--sans);padding:0 16px} /* taste-skill-ignore: a form field */
+.namef input::placeholder{color:var(--ink-3)}
+.namef input:focus{outline:2px solid var(--teal);outline-offset:1px}
+.note{background:#e3e9e6;color:#1d2a29;border-radius:18px;padding:16px 18px}
+.note-l{font-size:13px;color:#4b5a58;margin-bottom:4px}
+.draft{font-size:16.5px;line-height:1.5;min-height:3em}
+.caret{display:inline-block;width:2px;height:1.05em;background:#1d2a29;vertical-align:-.15em;margin-inline-start:1px}
+.btn-wide{width:100%;min-height:54px;font-size:17px}
+@media (min-width:760px){ .chart{grid-template-columns:minmax(260px,.8fr) 1.2fr} }
+
+
+/* visit: Balfour Street in 1964, the card, the map */
+.visit{position:relative;background:var(--ground-2);padding-bottom:clamp(64px,8vw,120px)}
+.street{position:relative;margin:0;height:min(78svh,760px);overflow:hidden}
+.street img{width:100%;height:100%;object-fit:cover;object-position:50% 62%;filter:grayscale(1) contrast(1.02) brightness(.8)}
+.street figcaption{position:absolute;bottom:14px;inset-inline-end:var(--gut);font-size:13.5px;color:var(--ink);background:rgba(14,17,18,.62);padding:6px 12px;border-radius:999px}
+.visit-in{display:grid;gap:18px;margin-top:-140px;position:relative}
+.vcard{background:var(--card);border-radius:28px;padding:clamp(22px,3vw,36px);display:grid;gap:12px;align-content:start}
+.vcard h2{font-size:clamp(40px,4.6vw,68px)}
+.addr{font-size:18px}
+.hours{border-collapse:collapse;width:100%;font-size:16px;margin-top:6px}
+.hours td{padding:9px 0;border-bottom:1px solid var(--edge)}
+.hours td:last-child{text-align:end;font-variant-numeric:tabular-nums}
+.hours tr.today td{color:var(--teal);font-weight:600}
+.vacts{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.map{display:grid;gap:12px;align-content:start}
+.map iframe{width:100%;height:clamp(300px,42vw,470px);border:0;border-radius:28px;filter:grayscale(.3) brightness(.92);background:var(--card)}
+.map .tl{font-size:15px;justify-self:start;min-height:44px;display:inline-flex;align-items:center}
+@media (min-width:860px){ .visit-in{grid-template-columns:minmax(340px,.75fr) 1.25fr;margin-top:-220px;align-items:start} .map{margin-top:220px} }
+
+/* the close: the back of an appointment card, torn along its perforation */
+.foot{background:var(--ground);padding:clamp(64px,8vw,110px) 0 calc(110px + env(safe-area-inset-bottom))}
+.appt{position:relative;display:grid;gap:28px;background:#2a3135;border-radius:22px;padding:clamp(26px,4vw,52px);overflow:hidden}
+/* perforation: a row of punched holes along the top */
+.appt::before{content:"";position:absolute;inset:0 0 auto;height:14px;background:radial-gradient(circle at 50% 0,var(--ground) 5px,transparent 5.5px) 0 0/22px 14px repeat-x} /* taste-skill-ignore: punched perforation of a paper card */
+.bye{font:300 clamp(40px,5.4vw,82px)/1.02 var(--sans);letter-spacing:-.025em}
+.who{margin-top:14px;color:var(--ink-2);font-size:17px}
+.appt-b{display:flex;gap:22px;align-items:flex-start}
+.stamp{width:clamp(82px,8vw,106px);height:auto;border-radius:6px;padding:5px;background:#3a4247;transform:rotate(-3deg);flex:none}
+.lines{display:grid;gap:10px;font-size:18px}
+.lines a{text-decoration:none;min-height:32px;display:inline-flex;align-items:center}
+@media (hover:hover){ .lines a:hover{color:var(--teal)} }
+@media (min-width:860px){ .appt{grid-template-columns:1.3fr .7fr;align-items:end} }
+.fine{margin-top:26px;font-size:16px;line-height:1.6;color:var(--ink-3);max-width:68ch}
+
+/* sticky contact on phones: the steel pull plate of the glass door */
+.plate{position:fixed;z-index:45;bottom:calc(14px + env(safe-area-inset-bottom));inset-inline-end:12px;display:flex;flex-direction:column;gap:10px;padding:10px 8px;border-radius:999px;
+  background:#aeb6b9;box-shadow:0 10px 26px rgba(0,0,0,.35),inset 0 0 0 1px rgba(255,255,255,.35),inset 0 -2px 0 rgba(0,0,0,.12);transition:transform .35s var(--ease),opacity .25s} /* taste-skill-ignore: brushed steel of the door's pull plate, a rendered material (g0) */
+.plate.away{transform:translateY(24px);opacity:0;pointer-events:none}
+.push{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;text-decoration:none;transition:transform .14s var(--ease)}
+.push svg{width:22px;height:22px;fill:currentColor}
+.p-call{background:#1d2427;color:var(--ink)}
+.p-wa{background:var(--teal);color:var(--teal-ink)}
+.push:active{transform:scale(.93)}
+@media (min-width:960px){ .plate{display:none} }
+
+/* entrances */
+html.js:not(.still) [data-reveal]{opacity:0;transform:translateY(24px);transition:opacity .7s var(--ease) var(--d,0ms),transform .7s var(--ease) var(--d,0ms)}
+html.js:not(.still) [data-reveal].in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){ html.js [data-reveal]{opacity:1!important;transform:none!important;transition:none!important} }
