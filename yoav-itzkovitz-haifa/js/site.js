@@ -8,14 +8,16 @@
   var he = function () { return root.lang === 'he'; };
   var TITLE = { he: 'יואב איצקוביץ · סוכן ביטוח ופנסיה · ההסתדרות 251, חיפה', en: 'Yoav Itzkovitz · Insurance & pension agent · 251 HaHistadrut Blvd, Haifa' };
   var CONCEPT = { he: 'קונספט לדוגמה שנבנה עבור יואב איצקוביץ, סוכן ביטוח · זה אינו האתר הרשמי של העסק', en: 'A sample concept built for Yoav Itzkovitz, insurance agent · This is not the business’s official website' };
+  var SEAL = {
+    he: { t: 'איצקו סוכנות לביטוח', bt: 'ההסתדרות 251 · חיפה', ts: 16, bs: 14, a: 'מעכשיו', b: 'זה ביחד', m: 19 },
+    en: { t: 'ITZKO INSURANCE AGENCY', bt: '251 HAHISTADRUT · HAIFA', ts: 13, bs: 12, a: 'From now on', b: 'together', m: 15 }
+  };
+  // Chrome lays text on a path left to right, so Hebrew is given in visual order (numbers kept as they read)
+  var visual = function (str) { return str.split('').reverse().join('').replace(/\d+/g, function (n) { return n.split('').reverse().join(''); }); };
   var STAR = '<svg viewBox="0 0 92 16" aria-hidden="true">' + [0, 19, 38, 57, 76].map(function (x) { return '<path transform="translate(' + x + ')" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/>'; }).join('') + '</svg>';
   $$('[data-stars]').forEach(function (s) { s.innerHTML = STAR; s.setAttribute('role', 'img'); });
 
   // ---------------------------------------------------------------- language
-  var TOPICS = [
-    ['any', 'על מה נדבר?', 'What about?'], ['home', 'הבית', 'Home'], ['car', 'הרכב', 'Car'],
-    ['family', 'המשפחה', 'Family'], ['pension', 'חיסכון ופנסיה', 'Savings & pension'], ['other', 'משהו אחר', 'Something else']
-  ];
   function texts(l) {
     var h = l === 'he';
     document.title = TITLE[l];
@@ -26,52 +28,75 @@
     $$('[data-t-wa]').forEach(function (a) { a.setAttribute('aria-label', h ? 'וואטסאפ ליואב' : 'WhatsApp Yoav'); });
     var set = function (sel, attr, a, b) { var el = $(sel); if (el) el.setAttribute(attr, h ? a : b); };
     set('[data-t-nav]', 'aria-label', 'ראשי', 'Main');
-    set('[data-t-sky]', 'aria-label', 'פתיחה', 'Opening');
+    set('[data-t-sky]', 'aria-label', 'מעכשיו זה ביחד', 'From now on, together');
     set('[data-t-map]', 'title', 'מפה: ההסתדרות 251, חיפה', 'Map: 251 HaHistadrut Blvd, Haifa');
     set('[data-prev]', 'aria-label', 'הקודם', 'Previous');
     set('[data-next]', 'aria-label', 'הבא', 'Next');
-    set('[data-baro]', 'aria-label', '4.9 מתוך 5 בגוגל, 43 ביקורות', '4.9 out of 5 on Google, 43 reviews');
-    var nm = $('[name=nm]'); nm.placeholder = nm.dataset[h ? 'phHe' : 'phEn'];
-    var sel = $('[data-topic]'), v = sel.value;
-    sel.innerHTML = TOPICS.map(function (t) { return '<option value="' + t[0] + '">' + (h ? t[1] : t[2]) + '</option>'; }).join('');
-    sel.value = v || 'any';
-    baroWords();
+    var nm = $('[data-name]'); nm.placeholder = nm.dataset[h ? 'phHe' : 'phEn'];
+    var S = SEAL[l], vis = h ? visual : function (x) { return x; };
+    $$('[data-seal-t]').forEach(function (t) { t.textContent = vis(S.t); t.parentNode.setAttribute('font-size', S.ts); });
+    $$('[data-seal-bt]').forEach(function (t) { t.textContent = vis(S.bt); t.parentNode.setAttribute('font-size', S.bs); });
+    $$('[data-seal-a]').forEach(function (t) { t.textContent = S.a; t.setAttribute('font-size', S.m); });
+    $$('[data-seal-b]').forEach(function (t) { t.textContent = S.b; t.setAttribute('font-size', S.m); });
   }
   function setLang(l) {
     root.lang = l; root.dir = l === 'he' ? 'rtl' : 'ltr';
     try { localStorage.setItem('yi-lang', l); } catch (e) {}
-    texts(l); hours(); waLinks(); tiles(); layout();
+    texts(l); hours(); waLinks(); layout();
   }
   $$('[data-set-lang]').forEach(function (b) { b.addEventListener('click', function () { setLang(he() ? 'en' : 'he'); }); });
 
   // ---------------------------------------------------------------- WhatsApp: a short, honest first message
   var TOPIC_MSG = {
-    he: { any: 'הביטוח שלי', home: 'ביטוח לבית', car: 'ביטוח לרכב', family: 'ביטוח למשפחה', pension: 'חיסכון ופנסיה', other: 'משהו אחר' },
-    en: { any: 'my insurance', home: 'home insurance', car: 'car insurance', family: 'insurance for my family', pension: 'savings and pension', other: 'something else' }
+    he: { any: 'ביטוח', ins: 'ביטוח', pension: 'פנסיה', other: 'משהו אחר' },
+    en: { any: 'insurance', ins: 'insurance', pension: 'my pension', other: 'something else' }
   };
   function waText(name, topic) {
     var l = he() ? 'he' : 'en', t = TOPIC_MSG[l][topic || 'any'] || TOPIC_MSG[l].any, n = (name || '').trim();
-    if (l === 'he') return 'שלום יואב, הגעתי דרך האתר. אשמח לדבר על ' + t + '.' + (n ? ' שמי ' + n + '.' : '');
-    return 'Hi Yoav, I found you through the website. I’d like to talk about ' + t + '.' + (n ? ' My name is ' + n + '.' : '');
+    if (l === 'he') return 'שלום יואב, הגעתי דרך האתר. אשמח לדבר איתך על ' + t + '.' + (n ? ' שמי ' + n + '.' : '');
+    return 'Hi Yoav, I found you through the website. I’d like to talk to you about ' + t + '.' + (n ? ' My name is ' + n + '.' : '');
   }
   function waLinks() { $$('a[data-wa]').forEach(function (a) { a.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(waText('', 'any')); }); }
   $('[data-composer]').addEventListener('submit', function (e) {
     e.preventDefault();
-    var f = e.currentTarget;
-    var url = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(waText(f.nm.value, f.tp.value));
+    var f = e.currentTarget, tp = (f.querySelector('[name=tp]:checked') || {}).value;
+    var url = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(waText(f.nm.value, tp));
+    stamp(seal2, -12, 0);
     var w = window.open(url, '_blank', 'noopener'); if (!w) location.href = url;
   });
+
+  // ---------------------------------------------------------------- the rubber stamp: lifted, pressed, a little bounce of the rubber
+  var seal1 = $('[data-seal]'), seal2 = $('[data-seal2]');
+  function stamp(el, rot, delay) {
+    if (still() || !el.animate) { el.style.opacity = ''; return; }
+    var r = 'rotate(' + rot + 'deg) ';
+    el.animate([
+      { opacity: 0, transform: r + 'translateY(-26px) scale(1.5)' },
+      { opacity: .25, transform: r + 'translateY(-8px) scale(1.12)', offset: .55 },
+      { opacity: .95, transform: r + 'scale(.95)', offset: .78 },
+      { opacity: .9, transform: r + 'scale(1)' }
+    ], { duration: 560, delay: delay || 0, easing: 'cubic-bezier(.5,0,.75,0)', fill: 'backwards' });
+  }
+  // the sheet's seal is pressed each time the form arrives on screen, and lifted again when it leaves
+  var sheet = $('[data-sheet]'), sheetStamped = false;
+  function sheetSeal() {
+    var r = sheet.getBoundingClientRect(), inView = r.top < innerHeight * .55 && r.bottom > innerHeight * .3;
+    if (still()) { seal2.style.opacity = ''; sheetStamped = true; return; }
+    if (inView && !sheetStamped) { sheetStamped = true; seal2.style.opacity = ''; stamp(seal2, -12, 120); }
+    else if (!inView && (r.top > innerHeight || r.bottom < 0) && sheetStamped) { sheetStamped = false; seal2.style.opacity = '0'; }
+  }
 
   // ---------------------------------------------------------------- motion switch
   var switches = $$('[data-motion-toggle]');
   function motionUI() { switches.forEach(function (b) { b.setAttribute('aria-checked', still() ? 'false' : 'true'); }); }
   switches.forEach(function (b) { b.addEventListener('click', function () {
-    var wasOff = still(), anchor = $('#cover'), keep = anchor.getBoundingClientRect().top, past = keep < innerHeight;
+    var wasOff = still(), anchor = $('#yoav'), keep = anchor.getBoundingClientRect().top, past = keep < innerHeight;
     root.classList.toggle('still', !wasOff); delete root.dataset.motionAuto;
     try { localStorage.setItem('yi-motion', wasOff ? 'on' : 'off'); } catch (e) {}
     motionUI();
     $$('[data-rv]').forEach(function (el) { el.classList.add('in'); });
-    if (wasOff) startSky(); else stopSky();
+    if (wasOff) { if (skyNear) startSky(); } else stopSky();
+    resetMotion();
     layout();
     if (past) { var now = anchor.getBoundingClientRect().top; if (now !== keep) scrollBy(0, now - keep); }
   }); });
@@ -115,12 +140,10 @@
   window.__status = status; window.__H = H; window.__hours = hours;
   setInterval(status, 60000);
 
-  // ---------------------------------------------------------------- the sky: storm → rain → clear, scroll-linked both ways
-  var sky = $('[data-sky]'), stage = $('[data-stage]'), beats = $$('[data-beat]'), glApi = null, glLoading = false, skyP = 0, stillIdx = 0;
-  var stormImg = $('[data-storm]'), clearImg = $('[data-clear]'), stillImg = $('[data-still]');
-  function beatAlpha(p) {
-    return [1 - smooth((p - .16) / .12), smooth((p - .30) / .10) * (1 - smooth((p - .56) / .10)), smooth((p - .68) / .10)];
-  }
+  // ---------------------------------------------------------------- the window: rain → clear, scroll-linked both ways
+  var sky = $('[data-sky]'), stage = $('[data-stage]'), beats = $$('[data-beat]'), glApi = null, glLoading = false, skyP = 0, stillIdx = 0, skyNear = false;
+  var stillImg = $('[data-still]'), STILLS = ['img/still-1.jpg', 'img/still-3.jpg'];
+  function beatAlpha(p) { return [1 - smooth((p - .34) / .14), smooth((p - .52) / .14)]; }
   function showBeats(a) {
     beats.forEach(function (b, i) {
       b.style.opacity = a[i].toFixed(3);
@@ -134,13 +157,13 @@
     skyP = clamp(-r.top / Math.max(1, span), 0, 1);
     showBeats(beatAlpha(skyP));
     // without WebGL the clear photo simply comes through
-    stage.style.setProperty('--clear', smooth((skyP - .3) / .5).toFixed(3));
-    if (glApi) glApi.setP(skyP);
+    stage.style.setProperty('--clear', smooth((skyP - .25) / .45).toFixed(3));
+    if (glApi) glApi.setP(clamp(skyP * 1.15, 0, 1));
   }
   function startSky() {
     beats.forEach(function (b) { b.classList.remove('on'); });
     skyScroll();
-    if (glApi) { glApi.start(); return; }
+    if (glApi) { glApi.start(); stage.classList.add('gl-on'); return; }
     if (glLoading) return;
     glLoading = true;
     import('./sky.js').then(function (m) {
@@ -149,7 +172,7 @@
     }).then(function (api) {
       if (!api) return;
       glApi = api; window.__skyApi = api;
-      api.setP(skyP);
+      api.setP(clamp(skyP * 1.15, 0, 1));
       if (!still()) { api.start(); stage.classList.add('gl-on'); }
     }).catch(function () {});
   }
@@ -159,85 +182,58 @@
     beats.forEach(function (b) { b.style.opacity = ''; b.style.visibility = ''; b.style.transform = ''; });
     setStill(0);
   }
-  // animations off: a normal-height block; arrows and stage names step through three stills
+  // the WebGL rain only loads when the window is about to come on screen
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) { if (es[0].isIntersecting && !skyNear) { skyNear = true; if (!still()) startSky(); } }, { rootMargin: '600px 0px' }).observe(sky);
+  } else { skyNear = true; }
+  // animations off: a normal-height block; arrows and stage names step through two stills
   function setStill(i) {
-    stillIdx = clamp(i, 0, 2);
+    stillIdx = clamp(i, 0, 1);
     beats.forEach(function (b, k) { b.classList.toggle('on', k === stillIdx); });
-    stillImg.src = 'img/still-' + (stillIdx + 1) + '.jpg';
+    stillImg.src = STILLS[stillIdx];
     $$('[data-dot]').forEach(function (d) { d.setAttribute('aria-selected', +d.dataset.dot === stillIdx ? 'true' : 'false'); });
-    $('[data-prev]').disabled = stillIdx === 0; $('[data-next]').disabled = stillIdx === 2;
+    $('[data-prev]').disabled = stillIdx === 0; $('[data-next]').disabled = stillIdx === 1;
   }
   $('[data-prev]').addEventListener('click', function () { setStill(stillIdx - 1); });
   $('[data-next]').addEventListener('click', function () { setStill(stillIdx + 1); });
   $$('[data-dot]').forEach(function (d) { d.addEventListener('click', function () { setStill(+d.dataset.dot); }); });
   if (still()) setStill(0);
 
-  // ---------------------------------------------------------------- the squall drifts in slowly as it passes
-  var squall = $('[data-squall]');
-  function tiles() {
-    if (still()) { squall.style.setProperty('--sq', '1'); return; }
-    var r = squall.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+  // ---------------------------------------------------------------- the armchair portrait settles as it passes
+  var whoImg = $('[data-who-img]');
+  function whoScroll() {
+    if (still()) { whoImg.style.removeProperty('--wz'); return; }
+    var r = whoImg.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
     var p = clamp((innerHeight - r.top) / (innerHeight + r.height), 0, 1);
-    squall.style.setProperty('--sq', (1.12 - p * .1).toFixed(4));
+    whoImg.style.setProperty('--wz', (1.1 - smooth(p * 1.4) * .1).toFixed(4));
   }
 
-  // ---------------------------------------------------------------- the barometer
-  var baro = $('[data-baro]'), needle = $('[data-needle]'), fc = $('[data-fc]');
-  var ang = function (v) { return -135 + (v - 1) * 67.5; };
-  var polar = function (a, r) { var t = (a - 90) * Math.PI / 180; return [r * Math.cos(t), r * Math.sin(t)]; };
-  function arcPath(a0, a1, r) { var p0 = polar(a0, r), p1 = polar(a1, r); return 'M' + p0[0].toFixed(2) + ' ' + p0[1].toFixed(2) + ' A' + r + ' ' + r + ' 0 ' + (a1 - a0 > 180 ? 1 : 0) + ' 1 ' + p1[0].toFixed(2) + ' ' + p1[1].toFixed(2); }
-  (function drawDial() {
-    var g = $('[data-ticks]'), s = '';
-    for (var v = 1; v <= 5.0001; v += 0.1) {
-      var major = Math.abs(v - Math.round(v)) < .001, half = Math.abs(v * 2 - Math.round(v * 2)) < .001;
-      var a = ang(v), p0 = polar(a, 160), p1 = polar(a, major ? 138 : half ? 146 : 151);
-      s += '<line x1="' + p0[0].toFixed(2) + '" y1="' + p0[1].toFixed(2) + '" x2="' + p1[0].toFixed(2) + '" y2="' + p1[1].toFixed(2) + '" stroke-width="' + (major ? 3 : 1.4) + '"/>';
+  // ---------------------------------------------------------------- letters: a pile on the desk that spreads into a row (wide screens)
+  var desk = $('[data-desk]'), letters = $$('[data-letter]'), ROT = [-5, 3.5, -2.2], REST = [-1.1, .7, -.6];
+  function lettersScroll() {
+    var wide = innerWidth > 980;
+    if (still() || !wide) {
+      letters.forEach(function (el, i) { el.style.setProperty('--lx', '0px'); el.style.setProperty('--ly', '0px'); el.style.setProperty('--lr', (wide ? REST[i] : 0) + 'deg'); });
+      return;
     }
-    g.innerHTML = s;
-    $('[data-arc=storm]').setAttribute('d', arcPath(ang(1), ang(3), 128));
-    $('[data-arc=fair]').setAttribute('d', arcPath(ang(4), ang(5), 128));
-  })();
-  function baroWords() {
-    var W = he() ? ['סערה', 'גשם', 'משתנה', 'נאה', 'בהיר'] : ['Stormy', 'Rain', 'Change', 'Fair', 'Clear'], s = '';
-    W.forEach(function (w, i) {
-      var a = ang(i + 1), p = polar(a, 104), pn = polar(a, 172);
-      s += '<text x="' + p[0].toFixed(1) + '" y="' + (p[1] + 5).toFixed(1) + '" text-anchor="middle">' + w + '</text>';
+    var r = desk.getBoundingClientRect(); if (r.bottom < -200 || r.top > innerHeight + 200) return;
+    var e = smooth((innerHeight - r.top) / (innerHeight * .75)), mid = desk.clientWidth / 2;
+    letters.forEach(function (el, i) {
+      var dx = mid - (el.offsetLeft + el.offsetWidth / 2);
+      el.style.setProperty('--lx', (dx * (1 - e) * .62).toFixed(1) + 'px');
+      el.style.setProperty('--ly', ((1 - e) * (i * 14 - 14)).toFixed(1) + 'px');
+      el.style.setProperty('--lr', (ROT[i] * (1 - e) + REST[i] * e).toFixed(2) + 'deg');
     });
-    $('[data-words]').innerHTML = s;
-  }
-  var needleA = ang(4.9), needleShown = null;
-  function setNeedle(a) { if (needleShown !== null && Math.abs(a - needleShown) < .05) return; needleShown = a; needle.setAttribute('transform', 'rotate(' + a.toFixed(2) + ')'); }
-  var quotes = $$('[data-q]');
-  function fcScroll() {
-    if (still()) { setNeedle(needleA); quotes.forEach(function (q) { q.classList.add('on'); }); return; }
-    var r = fc.getBoundingClientRect(), pinned = innerWidth >= 1000;
-    var p = pinned ? clamp(-r.top / Math.max(1, r.height - innerHeight), 0, 1) : clamp((innerHeight - r.top) / (innerHeight * 1.1), 0, 1);
-    // the needle swings from storm to 4.9 as the section arrives, overshoots a touch and settles
-    var k = pinned ? clamp((innerHeight - r.top) / (innerHeight * 1.2), 0, 1) : p;
-    var e = smooth(k), over = Math.sin(clamp((k - .55) / .45, 0, 1) * Math.PI) * 6;
-    setNeedle(ang(1.5) + (needleA - ang(1.5)) * e + over);
-    if (pinned) {
-      var step = p < .36 ? 0 : p < .68 ? 1 : 2;
-      quotes.forEach(function (q, i) { q.classList.toggle('on', i === step); });
-    } else quotes.forEach(function (q) { q.classList.add('on'); });
-  }
-
-  // ---------------------------------------------------------------- the strip of Haifa drifts with the scroll
-  var strip = $('[data-strip]'), row = $('[data-strip-row]');
-  function stripScroll() {
-    if (still()) { row.style.transform = ''; return; }
-    var r = strip.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
-    var p = (innerHeight - r.top) / (innerHeight + r.height), max = Math.max(0, row.scrollWidth - strip.clientWidth);
-    var x = -max * .15 - p * max * .5;
-    row.style.transform = 'translateX(' + (he() ? -x : x).toFixed(1) + 'px)';
   }
 
   // ---------------------------------------------------------------- nav position under the concept bar, the round buttons
-  var concept = $('.concept'), fab = $('[data-fab]');
+  var concept = $('.concept'), fab = $('[data-fab]'), head = $('.head'), reqSec = $('[data-req]');
   function chrome() {
     var cb = concept.getBoundingClientRect().bottom;
     root.style.setProperty('--navTop', Math.max(10, cb + 10).toFixed(0) + 'px');
-    fab.classList.toggle('show', sky.getBoundingClientRect().bottom < innerHeight * .6);
+    // hidden while the hero's own buttons are on screen, and from the form on (it has its own send, call and directions buttons)
+    var show = head.getBoundingClientRect().bottom < innerHeight * .35 && reqSec.getBoundingClientRect().top > innerHeight * .92;
+    fab.classList.toggle('show', show);
   }
 
   // ---------------------------------------------------------------- entrances: heading, text, picture, staggered
@@ -253,18 +249,23 @@
     $$('[data-rv]').forEach(function (el) { io.observe(el); });
   } else $$('[data-rv]').forEach(function (el) { el.classList.add('in'); });
 
+  function resetMotion() {
+    if (still()) { seal1.style.opacity = ''; seal2.style.opacity = ''; sheetStamped = true; }
+    else { sheetStamped = false; }
+  }
+
   // ---------------------------------------------------------------- frame loop for scroll work
   var ticking = false;
-  function frame() { ticking = false; chrome(); skyScroll(); fcScroll(); stripScroll(); tiles(); }
+  function frame() { ticking = false; chrome(); skyScroll(); whoScroll(); lettersScroll(); sheetSeal(); }
   function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
-  function layout() { tiles(); frame(); }
+  function layout() { frame(); }
   addEventListener('scroll', onScroll, { passive: true });
   addEventListener('resize', function () { layout(); if (glApi) glApi.resize(); });
   window.__layout = layout;
 
   texts(he() ? 'he' : 'en'); hours(); waLinks();
+  if (!still()) { seal2.style.opacity = '0'; stamp(seal1, -14, 650); }
   layout();
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
   addEventListener('load', layout);
-  if (!still()) startSky();
 })();

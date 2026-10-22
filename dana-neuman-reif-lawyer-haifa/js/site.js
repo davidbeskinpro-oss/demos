@@ -8,7 +8,7 @@
   var seg = function (p, a, b) { return clamp((p - a) / (b - a), 0, 1); };
   var still = function () { return root.classList.contains('still'); };
   var he = function () { return root.lang === 'he'; };
-  var TITLE = { he: 'עו״ד דנה נוימן-רייף · עורכת דין · פרויד 39, חיפה', en: 'Adv. Dana Neuman-Reif · Attorney · 39 Freud St, Haifa' };
+  var TITLE = { he: 'עו״ד דנה נוימן-רייף · עורכת דין, נוטריון ומגשרת · חיפה', en: 'Adv. Dana Neuman-Reif · Attorney, notary and mediator · Haifa' };
   var CONCEPT = { he: 'קונספט לדוגמה שנבנה עבור עו"ד דנה נוימן - רייף · זה אינו האתר הרשמי של העסק', en: 'A sample concept built for Adv. Dana Neuman-Reif · This is not the business’s official website' };
   var HELLO = { he: 'שלום דנה, הגעתי דרך האתר.', en: 'Hi Dana, I found your website.' };
   var STAR = '<svg viewBox="0 0 92 16" aria-hidden="true">' + [0, 19, 38, 57, 76].map(function (x) { return '<path transform="translate(' + x + ')" d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/>'; }).join('') + '</svg>';
@@ -43,7 +43,7 @@
     try { localStorage.setItem('dnr-motion', on ? 'on' : 'off'); } catch (e) {}
     motionUI();
     $$('[data-reveal]').forEach(function (el) { el.classList.add('in'); });
-    $('[data-foot]').classList.add('in');
+    $('[data-foot]').classList.add('in'); $('[data-file]').classList.add('in');
     layout();
     // the deal changes height between the two modes: keep the visitor where they were if they were past it
     if (keep < innerHeight) { var now = anchor.getBoundingClientRect().top; if (now !== keep) scrollBy(0, now - keep); }
@@ -90,18 +90,20 @@
 
   // ---------------------------------------------------------------- the letter: it reads exactly as it will be sent
   var T = {
-    he: { re: { buy: 'קנייה של דירה', sell: 'מכירה של דירה', both: 'מכירה וקנייה במקביל', other: 'שאלה בנושא אחר' },
+    he: { re: { buy: 'קנייה של דירה', sell: 'מכירה של דירה', both: 'מכירה וקנייה במקביל', will: 'צוואה או ייפוי כוח מתמשך', notary: 'שירותי נוטריון', other: 'שאלה בנושא אחר' },
       st: { start: 'אנחנו רק בתחילת הדרך.', party: 'כבר יש צד שני לעסקה.', draft: 'כבר יש לנו טיוטת חוזה.' },
       ask: 'אשמח לשיחה קצרה כדי להבין איך מתקדמים.', re0: 'הנדון: ', sign: 'בברכה,' },
-    en: { re: { buy: 'buying a home', sell: 'selling a home', both: 'selling and buying at once', other: 'another matter' },
+    en: { re: { buy: 'buying a home', sell: 'selling a home', both: 'selling and buying at once', will: 'a will or a lasting power of attorney', notary: 'notary services', other: 'another matter' },
       st: { start: 'We are just starting.', party: 'The other party is already found.', draft: 'We already have a draft contract.' },
       ask: 'I’d be glad to have a short call about the next steps.', re0: 'Re: ', sign: 'Best regards,' }
   };
-  var form = $('#letter'), body = $('[data-body]'), send = $('[data-send]'), nm = $('[name=nm]'), last = '';
+  var form = $('#letter'), stRow = $('[data-st-row]'), body = $('[data-body]'), send = $('[data-send]'), nm = $('[name=nm]'), last = '';
   function letter(instant) {
     var l = he() ? 'he' : 'en', t = T[l], re = $('[data-re]').value, st = $('[data-st]').value;
     var name = (nm.value || '').replace(/\s+/g, ' ').trim().slice(0, 40);
-    var line = (re === 'other' ? '' : t.st[st] + ' ') + t.ask;
+    var deal = re === 'buy' || re === 'sell' || re === 'both';
+    stRow.hidden = !deal;
+    var line = (deal ? t.st[st] + ' ' : '') + t.ask;
     if (!instant && !still() && line !== last) { body.innerHTML = ''; var s = document.createElement('span'); s.className = 'new'; s.textContent = line; body.appendChild(s); }
     else body.textContent = line;
     last = line;
@@ -116,7 +118,8 @@
   var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
     es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { rootMargin: '0px 0px -8% 0px' }) : null;
-  $$('[data-reveal], [data-foot]').forEach(function (el) { io && !still() ? io.observe(el) : el.classList.add('in'); });
+  $$('[data-clause]').forEach(function (li, i) { li.style.setProperty('--i', i); });
+  $$('[data-reveal], [data-foot], [data-file]').forEach(function (el) { io && !still() ? io.observe(el) : el.classList.add('in'); });
 
   // ---------------------------------------------------------------- bar: solid once off the hero; where you are
   var bar = $('[data-bar]'), links = $$('.links a');
@@ -124,7 +127,7 @@
     var nio = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) links.forEach(function (a) { a.setAttribute('aria-current', a.getAttribute('href') === '#' + e.target.id ? 'true' : 'false'); }); });
     }, { rootMargin: '-45% 0px -50% 0px' });
-    ['top', 'deal', 'reviews', 'write', 'office'].forEach(function (id) { var el = document.getElementById(id); if (el) nio.observe(el); });
+    ['top', 'dana', 'deal', 'reviews', 'write', 'office'].forEach(function (id) { var el = document.getElementById(id); if (el) nio.observe(el); });
   }
 
   // ---------------------------------------------------------------- seals: on phones, once the page's own buttons are out of sight
@@ -188,12 +191,15 @@
     steps.forEach(function (li, i) { li.classList.toggle('on', i === a); });
   }
 
-  // ---------------------------------------------------------------- the hero photograph drifts; two photographs ease within their frames
-  var heroPh = $('[data-hero-ph]'), drifts = $$('[data-drift] img');
+  // ---------------------------------------------------------------- depth in the hero: the city far back moves least, she moves a little; two photographs ease within their frames
+  var heroBg = $('[data-hero-bg]'), portrait = $('[data-portrait]'), drifts = $$('[data-drift] img');
   function drift() {
-    if (still()) { heroPh.style.transform = ''; drifts.forEach(function (i) { i.style.transform = ''; }); return; }
+    if (still()) { heroBg.style.transform = portrait.style.transform = ''; drifts.forEach(function (i) { i.style.transform = ''; }); return; }
     var y = scrollY;
-    if (y < innerHeight * 1.2) heroPh.style.transform = 'translate3d(0,' + (y * 0.22).toFixed(1) + 'px,0) scale(' + (1.06 - Math.min(y / innerHeight, 1) * 0.04).toFixed(4) + ')';
+    if (y < innerHeight * 1.2) {
+      heroBg.style.transform = 'translate3d(0,' + (y * 0.35).toFixed(1) + 'px,0) scale(' + (1.08 - Math.min(y / innerHeight, 1) * 0.05).toFixed(4) + ')';
+      portrait.style.transform = 'translate3d(0,' + (y * 0.12).toFixed(1) + 'px,0)';
+    }
     drifts.forEach(function (i) {
       var r = i.parentNode.getBoundingClientRect(); if (r.bottom < -50 || r.top > innerHeight + 50) return;
       var q = clamp((innerHeight - r.top) / (innerHeight + r.height), 0, 1), room = i.offsetHeight - r.height;

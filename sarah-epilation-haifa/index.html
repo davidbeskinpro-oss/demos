@@ -22,7 +22,7 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
 <a class="skip" href="#work"><span lang="he">דילוג לתוכן</span><span lang="en">Skip to content</span></a>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></symbol>
-  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2zm0 17.9a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8.1 8.1 0 1 1 12 20.1zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.1 11.1 0 0 0 4.2 3.7c1.6.7 2.2.7 3 .6a2.5 2.5 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .1-1.2c-.1-.1-.2-.2-.4-.3z"/></symbol>
+  <symbol id="i-sms" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M4.5 3h15A2.5 2.5 0 0 1 22 5.5v10a2.5 2.5 0 0 1-2.5 2.5H10l-4.6 3.7a.6.6 0 0 1-1-.47V18A2.5 2.5 0 0 1 2 15.5v-10A2.5 2.5 0 0 1 4.5 3zM7 8v1.7h10V8zm0 3.6v1.7h7v-1.7z"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></symbol>
 </defs></svg>
 
@@ -42,7 +42,7 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
       <span class="knob" aria-hidden="true"></span><span lang="he">תנועה</span><span lang="en">Motion</span>
     </button>
     <button type="button" class="langb" data-set-lang><span lang="he">EN</span><span lang="en">עב</span></button>
-    <a class="navwa" data-wa href="https://wa.me/972583215106" target="_blank" rel="noopener" aria-label="וואטסאפ לשרה"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
+    <a class="navmsg" data-sms href="sms:+972583215106" aria-label="הודעה לשרה"><svg aria-hidden="true"><use href="#i-sms"/></svg></a>
   </nav>
 </header>
 
@@ -58,7 +58,7 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
         <span class="sub"><span lang="he">אפילציה ועיצוב גבות</span><span lang="en">Electrolysis &amp; brow design</span></span></h1>
       <p class="lead"><span lang="he">אפילציה בחיפה שרה: חדר טיפולים שקט ברחוב ביל״ו 20, חיפה. 5.0 בגוגל מ-37 ביקורות.</span><span lang="en">Epilation in Haifa – Sarah: a quiet treatment room at 20 Bilu Street, Haifa. Rated 5.0 on Google from 37 reviews.</span></p>
       <div class="actions">
-        <a class="btn" data-wa href="https://wa.me/972583215106" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span lang="he">לכתוב לשרה</span><span lang="en">WhatsApp Sarah</span></a>
+        <a class="btn" data-sms href="sms:+972583215106"><svg aria-hidden="true"><use href="#i-sms"/></svg><span lang="he">הודעה לשרה</span><span lang="en">Text Sarah</span></a>
         <a class="btn ghost" href="tel:+972583215106"><svg aria-hidden="true"><use href="#i-phone"/></svg><span lang="he">להתקשר</span><span lang="en">Call</span></a>
       </div>
     </div>
@@ -163,7 +163,7 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
   <form class="coupon" data-composer onsubmit="return false">
     <div class="c-head">
       <h2 id="h-book"><span lang="he">לתאם <em>תור.</em></span><span lang="en">Book <em>a visit.</em></span></h2>
-      <p><span lang="he">בוחרים טיפול ומועד, וההודעה לשרה מוכנה בוואטסאפ.</span><span lang="en">Pick a treatment and a time, and your WhatsApp message to Sarah is ready.</span></p>
+      <p><span lang="he">בוחרים טיפול ומועד, וההודעה לשרה מוכנה לשליחה ב-SMS.</span><span lang="en">Pick a treatment and a time, and your text message to Sarah is ready to send.</span></p>
     </div>
     <div class="perf" aria-hidden="true"></div>
     <div class="c-body">
@@ -182,7 +182,7 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
       <label class="namef"><span lang="he">שם (לא חובה)</span><span lang="en">Name (optional)</span>
         <input type="text" name="nm" autocomplete="given-name" enterkeyhint="done" maxlength="40" data-ph-he="למשל: נועה…" data-ph-en="e.g. Noa…" placeholder="למשל: נועה…"></label>
       <p class="preview" data-preview aria-live="polite"></p>
-      <a class="btn send" data-send href="https://wa.me/972583215106" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span lang="he">לשלוח לשרה בוואטסאפ</span><span lang="en">Send to Sarah on WhatsApp</span></a>
+      <a class="btn send" data-send href="sms:+972583215106"><svg aria-hidden="true"><use href="#i-sms"/></svg><span lang="he">לשלוח לשרה הודעה</span><span lang="en">Text it to Sarah</span></a>
       <p class="alt"><span lang="he">או להתקשר:</span><span lang="en">Or call:</span> <a href="tel:+972583215106" dir="ltr">058-321-5106</a></p>
     </div>
   </form>
@@ -211,7 +211,7 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
   <div class="lamp" aria-hidden="true"><span>שרה</span></div>
   <div class="f-text">
     <p class="f-name"><span lang="he">שרה · אפילציה ועיצוב גבות</span><span lang="en">Sarah · Electrolysis &amp; brow design</span></p>
-    <p><span lang="he">ביל״ו 20, חיפה</span><span lang="en">20 Bilu St, Haifa</span> · <a href="tel:+972583215106" dir="ltr">058-321-5106</a> · <a data-wa href="https://wa.me/972583215106" target="_blank" rel="noopener"><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a></p>
+    <p><span lang="he">ביל״ו 20, חיפה</span><span lang="en">20 Bilu St, Haifa</span> · <a href="tel:+972583215106" dir="ltr">058-321-5106</a> · <a data-sms href="sms:+972583215106"><span lang="he">הודעת SMS</span><span lang="en">Text message</span></a></p>
     <p class="small"><span lang="he">צילומים: אפילציה בחיפה שרה, מתוך הפרופיל בגוגל מפות. ביקורות ודירוג: Google.</span><span lang="en">Photos: Epilation in Haifa – Sarah, from her Google Maps profile. Reviews and rating: Google.</span></p>
     <p class="small"><span lang="he">קונספט לדוגמה, זה אינו האתר הרשמי של העסק.</span><span lang="en">A sample concept, not the business’s official website.</span></p>
   </div>
@@ -219,7 +219,7 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
 
 <!-- mobile: two lenses, always in reach -->
 <div class="dock" aria-label="יצירת קשר" data-dock>
-  <a class="d-wa" data-wa href="https://wa.me/972583215106" target="_blank" rel="noopener" aria-label="וואטסאפ לשרה"><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
+  <a class="d-sms" data-sms href="sms:+972583215106" aria-label="הודעה לשרה"><svg aria-hidden="true"><use href="#i-sms"/></svg></a>
   <a class="d-tel" href="tel:+972583215106" aria-label="להתקשר לשרה, 058-321-5106"><svg aria-hidden="true"><use href="#i-phone"/></svg></a>
 </div>
 

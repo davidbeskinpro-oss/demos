@@ -101,32 +101,98 @@ h2{font-size:var(--s-head)}
 .status .dot{width:9px;height:9px;border-radius:50%;background:var(--muted);flex:none}
 .status.open .dot{background:var(--open)}
 
-/* ------------------------------------------------------------- 1. hero */
-.hero{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;isolation:isolate}
-.hero-ph{position:absolute;inset:0;z-index:-2;transform-origin:50% 60%}
-.hero-ph img{width:100%;height:100%;object-fit:cover;object-position:50% 70%}
-/* neutral scrim under the words, the one allowed */
-.hero::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to top,var(--ground) 0,rgba(14,18,32,.78) 34%,rgba(14,18,32,.18) 62%,rgba(14,18,32,.45) 100%)} /* taste-skill-ignore: scrim */
-.hero-in{max-width:var(--max);width:100%;margin-inline:auto;padding:0 max(var(--gut),env(safe-area-inset-left)) clamp(40px,8svh,96px)}
-.hero-h{font-size:var(--s-hero);line-height:.98}
-.hero-h .acc{display:inline-block;font-size:.62em;margin-top:.12em;color:var(--paper)}
-.hero-h>span:lang(en){font-size:.94em}
-.underline{display:block;width:min(560px,80%);height:28px;margin-top:6px;overflow:visible}
-.underline path{fill:none;stroke:var(--seal);stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0}
-html.js:not(.still) .underline path{animation:draw 1.1s var(--ease) .25s both}
+/* ------------------------------------------------------------- 1. hero: her portrait under a key light, the city out of focus */
+.hero{position:relative;min-height:100svh;display:grid;grid-template-columns:repeat(12,1fr);column-gap:clamp(12px,2vw,28px);align-items:end;overflow:hidden;isolation:isolate;padding-inline:max(var(--gut),calc((100vw - var(--max))/2 + var(--gut)))}
+.hero-bg{position:absolute;inset:-4% 0 0;z-index:-3;transform-origin:50% 30%}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 70%;opacity:.55}
+/* the room: ink from the floor up, a little darker at the text side so the words sit on calm ground */
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(to top,var(--ground) 0,rgba(14,18,32,.55) 38%,rgba(14,18,32,.25) 70%,rgba(14,18,32,.6) 100%)} /* taste-skill-ignore: scrim */
+.portrait{grid-column:7/span 6;grid-row:1;align-self:end;justify-self:center;position:relative;width:min(100%,calc(min(90svh,980px) * 580 / 940));aspect-ratio:580/940;margin:0}
+.p-img{position:relative;width:100%;height:100%;object-fit:contain;object-position:50% 100%;-webkit-mask-image:linear-gradient(to top,transparent 0,#000 22%);mask-image:linear-gradient(to top,transparent 0,#000 22%)}
+/* the key light: warm, soft, from above her shoulder */
+.p-light{position:absolute;inset:-6% -30% 0;background:radial-gradient(closest-side at 50% 36%,rgba(233,220,192,.26),rgba(233,220,192,.08) 55%,rgba(233,220,192,0) 100%)} /* taste-skill-ignore: a soft studio light behind a portrait */
+.hero-in{grid-column:1/span 6;grid-row:1;align-self:end;padding:120px 0 clamp(40px,9svh,104px);position:relative;z-index:1}
+.hero-h{font-size:clamp(2.75rem,1.4rem + 4.6vw,6.5rem);line-height:.98}
+.hero-h>span:lang(he){font-family:var(--serif-he);font-weight:400;letter-spacing:-.01em}
+.hero-h>span:lang(en){font-family:var(--serif-en);font-weight:400;font-size:.84em}
+.hero-h .nm{white-space:nowrap}
+.hero-h .acc{display:inline-block;font-family:var(--sans);font-style:normal;font-weight:300;font-size:.36em;letter-spacing:.01em;margin-top:.5em;color:var(--paper-2)}
+.underline{display:block;width:min(420px,78%);height:22px;margin-top:10px;overflow:visible}
+.underline path{fill:none;stroke:var(--seal);stroke-width:2.6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:0}
+html.js:not(.still) .underline path{animation:draw 1.2s var(--ease) .5s both}
 @keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
-.lead{margin-top:18px;max-width:40ch;font-size:var(--s-lead);line-height:1.4;text-wrap:pretty}
+.lead{margin-top:18px;max-width:34ch;font-size:var(--s-lead);line-height:1.4;text-wrap:pretty}
 .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
 .meta{display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center;margin-top:26px;font-size:1rem}
 .hero-cap{position:absolute;bottom:max(14px,env(safe-area-inset-bottom));inset-inline-end:var(--gut)}
-@media (max-width:699px){.hero-ph img{object-position:50% 100%;transform:scale(1.55);transform-origin:56% 96%}.hero::before{background:linear-gradient(to top,var(--ground) 0,rgba(14,18,32,.86) 42%,rgba(14,18,32,.3) 72%,rgba(14,18,32,.5) 100%)} /* taste-skill-ignore: scrim */
-.hero-cap{display:none}.acts .btn{flex:1 1 auto;justify-content:center}}
-html.js:not(.still) .hero-in>*{animation:rise .7s var(--ease) both}
-html.js:not(.still) .hero-in>:nth-child(2){animation-delay:.06s}
-html.js:not(.still) .hero-in>:nth-child(3){animation-delay:.12s}
-html.js:not(.still) .hero-in>:nth-child(4){animation-delay:.18s}
-html.js:not(.still) .hero-in>:nth-child(5){animation-delay:.24s}
+@media (max-width:899px){
+  .hero{display:flex;flex-direction:column;justify-content:flex-end;padding-inline:0}
+  .portrait{position:absolute;top:58px;left:50%;width:auto;height:min(64svh,560px);margin-left:calc(min(64svh,560px) * -290 / 940)}
+  [dir=rtl] .portrait{margin-left:calc(min(64svh,560px) * -290 / 940 - 6vw)}
+  .p-img{-webkit-mask-image:linear-gradient(to top,transparent 0,#000 34%);mask-image:linear-gradient(to top,transparent 0,#000 34%)}
+  .hero::before{background:linear-gradient(to top,var(--ground) 0,var(--ground) 30%,rgba(14,18,32,.4) 58%,rgba(14,18,32,.25) 80%,rgba(14,18,32,.6) 100%)} /* taste-skill-ignore: scrim */
+  .hero-in{padding:min(52svh,470px) var(--gut) 34px;width:100%;max-width:640px}
+  .hero-h{font-size:clamp(2.5rem,11vw,3.25rem)}
+  .hero-h .acc{font-size:.42em}
+  .lead{font-size:1.125rem;margin-top:14px}
+  .acts{margin-top:22px}.acts .btn{flex:1 1 auto;justify-content:center}
+  .meta{margin-top:20px}
+  .hero-cap{display:none}
+}
+@media (min-width:700px) and (max-width:899px){.portrait{height:min(66svh,700px);margin-left:calc(min(66svh,700px) * -290 / 940)}[dir=rtl] .portrait{margin-left:calc(min(66svh,700px) * -290 / 940 - 4vw)}.hero-in{padding-top:min(56svh,600px)}.acts .btn{flex:0 0 auto}}
+/* entrance: the light comes up, she settles into it, then the words */
+html.js:not(.still) .p-light{animation:lightup 1.6s var(--ease) both}
+html.js:not(.still) .p-img{animation:settle 1.4s var(--ease) .1s both}
+@keyframes lightup{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:none}}
+@keyframes settle{from{opacity:0;transform:translateY(14px) scale(1.025)}to{opacity:1;transform:none}}
+html.js:not(.still) .hero-in>*{animation:rise .8s var(--ease) both}
+html.js:not(.still) .hero-in>:nth-child(1){animation-delay:.15s}
+html.js:not(.still) .hero-in>:nth-child(3){animation-delay:.3s}
+html.js:not(.still) .hero-in>:nth-child(4){animation-delay:.38s}
+html.js:not(.still) .hero-in>:nth-child(5){animation-delay:.46s}
 @keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+
+/* ------------------------------------------------------------- 1b. who: a case file with her name on the tab */
+.who{background:var(--ground);padding:clamp(72px,12svh,150px) 0 clamp(80px,13svh,170px)}
+.who-grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:clamp(12px,2vw,28px);align-items:center}
+.who-head{grid-column:1/span 5}
+.who-head h2>span:lang(he){font-family:var(--serif-he);font-weight:400}
+.file{grid-column:7/span 6;position:relative;padding-top:38px;filter:drop-shadow(0 30px 40px rgba(0,0,0,.35))}
+.f-tab{position:absolute;top:0;inset-inline-start:0;height:40px;display:flex;align-items:center;padding:0 22px;background:#bba57c;color:#2a2418;font-size:.9375rem;font-weight:600;letter-spacing:.02em;border-radius:12px 12px 0 0;white-space:nowrap}
+.f-body{position:relative;background:#c9b48a;color:#231e15;border-radius:0 14px 14px 14px;padding:clamp(28px,4vw,52px) clamp(24px,4vw,52px) clamp(30px,4vw,48px);overflow:hidden;
+  background-image:linear-gradient(transparent 0,transparent 100%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .16 0 0 0 0 .1 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E")}
+[dir=rtl] .f-body{border-radius:14px 0 14px 14px}
+.f-title{font-size:.9375rem;font-weight:600;letter-spacing:.04em;color:#5a4c33;padding-bottom:6px}
+.clauses{display:grid;margin-top:6px;max-width:30ch}
+.clauses li{display:flex;gap:14px;align-items:baseline;padding:14px 0;font-size:clamp(1.1875rem,1rem + .6vw,1.5rem);line-height:1.3;position:relative}
+.clauses li>span:lang(he){font-family:var(--serif-he)}
+.clauses li>span:lang(en){font-family:var(--serif-en)}
+.clauses li::after{content:"";position:absolute;inset-inline:0;bottom:0;height:1px;background:#231e1526;transform-origin:var(--o,right)}
+[dir=ltr] .clauses li::after{--o:left}
+.c-n{font-variant-numeric:tabular-nums;color:#6b5a3c;min-width:1.4em;font-size:.85em}
+/* the seal: blind-embossed into the cover, no ink. Light from the top left: highlight below-right of the rims, shadow above-left */
+.emboss{transform-origin:50% 50%;position:absolute;width:clamp(120px,15vw,176px);height:auto;inset-inline-end:clamp(14px,2.4vw,34px);bottom:clamp(14px,2.4vw,30px);overflow:visible;opacity:.9}
+.emboss .e-rim{fill:none;stroke:#c9b48a;stroke-width:2.4;filter:drop-shadow(-1px -1px 0 rgba(60,45,20,.38)) drop-shadow(1px 1px 0 rgba(255,246,222,.6))}
+.emboss .e-txt{font:600 15px/1 var(--sans);fill:#c9b48a;filter:drop-shadow(-.8px -.8px 0 rgba(60,45,20,.4)) drop-shadow(.8px .8px 0 rgba(255,246,222,.6))}
+.emboss .e-txt:lang(en){font-size:14px;letter-spacing:.06em}
+.emboss .e-scale{fill:none;stroke:#c9b48a;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(-1px -1px 0 rgba(60,45,20,.38)) drop-shadow(1px 1px 0 rgba(255,246,222,.6))}
+.emboss .e-scale circle{fill:#c9b48a}
+@media (max-width:899px){
+  .who-grid{display:block}
+  .file{margin-top:44px}
+  .clauses{max-width:none;padding-bottom:clamp(120px,34vw,150px)}
+  .emboss{inset-inline-end:auto;inset-inline-start:clamp(14px,2.4vw,34px)}
+  .clauses li{padding:12px 0}
+}
+/* the file opens in: it rises, its clauses are written in one by one, then the seal is pressed */
+html.js:not(.still) .file{opacity:0;transform:translateY(30px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+html.js:not(.still) .file.in{opacity:1;transform:none}
+html.js:not(.still) .clauses li{opacity:0;transform:translateY(8px);transition:opacity .6s var(--ease),transform .6s var(--ease);transition-delay:calc(.35s + var(--i) * .11s)}
+html.js:not(.still) .clauses li::after{transform:scaleX(0);transition:transform .8s var(--ease);transition-delay:calc(.4s + var(--i) * .11s)}
+html.js:not(.still) .file.in .clauses li{opacity:1;transform:none}
+html.js:not(.still) .file.in .clauses li::after{transform:none}
+html.js:not(.still) .emboss{opacity:0;transform:scale(1.12);transition:opacity .35s ease-out 1.15s,transform .5s cubic-bezier(.2,.9,.3,1.2) 1.15s}
+html.js:not(.still) .file.in .emboss{opacity:.9;transform:none}
 
 /* ------------------------------------------------------------- 2. the deal: one contract page, the dive into the ink */
 .deal{position:relative;background:var(--ground)}
@@ -207,6 +273,7 @@ html:not(.js) .sig-path{stroke-dashoffset:0}
 .l-hi{margin-top:26px;font-size:1.125rem;font-weight:600}
 .l-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px;margin-top:16px;font-size:1.125rem}
 .l-k{font-weight:600;white-space:nowrap}
+.l-row[hidden]{display:none}
 .letter select{appearance:none;-webkit-appearance:none;background:transparent;color:var(--on-paper);border:0;border-bottom:2px solid #1b1f2e66;border-radius:0;padding:6px 26px 6px 4px;font-size:1.125rem;font-weight:400;cursor:pointer;min-height:44px;max-width:100%;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%231b1f2e' stroke-width='1.8'/%3E%3C/svg%3E");background-repeat:no-repeat;background-size:12px 8px;background-position:left 6px center}
 [dir=ltr] .letter select{padding:6px 4px 6px 26px;background-position:right 6px center;padding-inline:4px 26px}
@@ -266,7 +333,7 @@ html.js:not(.still) .foot.in .f-sig path{transition:stroke-dashoffset 1.6s var(-
 .f-name{margin-top:6px;padding-top:10px;font-size:clamp(1.5rem,1.2rem + 1vw,2.25rem);font-weight:300;letter-spacing:-.01em;box-shadow:inset 0 2px 0 #ebe2cf99} /* taste-skill-ignore: the signature line is the object itself */
 .f-line{margin-top:8px;font-size:1rem}
 .f-line a{text-underline-offset:4px}
-.fine{margin-top:clamp(48px,8svh,96px);font-size:.875rem;color:#cfc7b8;max-width:80ch;line-height:1.55}
+.fine{margin-top:clamp(48px,8svh,96px);font-size:1rem;color:#cfc7b8;max-width:80ch;line-height:1.55}
 .fine a{color:#e3dccd;text-underline-offset:3px}
 
 /* ------------------------------------------------------------- seals: sticky contact on phones */

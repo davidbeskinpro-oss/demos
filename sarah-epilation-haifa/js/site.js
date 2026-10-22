@@ -1,5 +1,7 @@
 (function () {
-  var root = document.documentElement, WA = '972583215106';
+  // Sarah has no WhatsApp: messages go by SMS. iPhone/Mac want "sms:+972…&body=", others "?body="
+  var root = document.documentElement, TEL = '+972583215106';
+  var sms = function (text) { return 'sms:' + TEL + (/iPhone|iPad|iPod|Mac/.test(navigator.userAgent) ? '&' : '?') + 'body=' + encodeURIComponent(text); };
   var $ = function (s, c) { return (c || document).querySelector(s); };
   var $$ = function (s, c) { return [].slice.call((c || document).querySelectorAll(s)); };
   var clamp = function (v, a, b) { return v < a ? a : v > b ? b : v; };
@@ -17,7 +19,7 @@
     $$('img[data-alt-he]').forEach(function (i) { i.alt = i.dataset[l === 'he' ? 'altHe' : 'altEn']; });
     var aria = function (sel, h, e) { $$(sel).forEach(function (el) { el.setAttribute('aria-label', l === 'he' ? h : e); }); };
     aria('[data-pill]', 'ראשי', 'Main');
-    aria('.navwa,.d-wa', 'וואטסאפ לשרה', 'WhatsApp Sarah');
+    aria('.navmsg,.d-sms', 'הודעה לשרה', 'Text Sarah');
     aria('.d-tel', 'להתקשר לשרה, 058-321-5106', 'Call Sarah, 058-321-5106');
     aria('[data-dock]', 'יצירת קשר', 'Contact');
     aria('[data-tabs]', 'טיפולים', 'Treatments');
@@ -144,7 +146,7 @@
     var r = $('[name=tr][value=' + cur + ']'); if (r) { r.checked = true; write(); }
   });
 
-  // ---------------------------------------------------------------- WhatsApp composer
+  // ---------------------------------------------------------------- SMS composer
   var form = $('[data-composer]');
   var TR = { he: { epil: 'אפילציה', brow: 'עיצוב גבות', both: 'אפילציה ועיצוב גבות' }, en: { epil: 'electrolysis', brow: 'brow design', both: 'electrolysis and brow design' } };
   var WH = { he: { week: 'באחד הימים ראשון עד חמישי, אחר הצהריים או בערב', fri: 'ביום שישי בבוקר', sat: 'במוצאי שבת' }, en: { week: 'on a weekday (Sun–Thu) afternoon or evening', fri: 'on a Friday morning', sat: 'on a Saturday night' } };
@@ -156,9 +158,9 @@
   function write() {
     var m = message();
     $('[data-preview]').textContent = m;
-    $('[data-send]').href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(m);
+    $('[data-send]').href = sms(m);
     var hello = he() ? 'היי שרה, הגעתי מהאתר ואשמח לתאם תור.' : 'Hi Sarah, I found you through your website and would like to book a visit.';
-    $$('[data-wa]').forEach(function (a) { a.href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(hello); });
+    $$('[data-sms]').forEach(function (a) { a.href = sms(hello); });
   }
   form.addEventListener('input', write); form.addEventListener('change', write);
   // phone: the coupon's side notches sit exactly on the perforation

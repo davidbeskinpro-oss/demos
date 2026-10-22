@@ -25,7 +25,7 @@
   function setLang(l) {
     root.lang = l; root.dir = l === 'he' ? 'rtl' : 'ltr';
     try { localStorage.setItem('saba-lang', l); } catch (e) {}
-    texts(l); hours(); stage(cur, true); write(); fill(); lamp();
+    texts(l); hours(); stage(cur, true); write(); fill(); geo = null; seal(); desk();
   }
   $$('[data-set-lang]').forEach(function (b) { b.addEventListener('click', function () { setLang(he() ? 'en' : 'he'); }); });
 
@@ -33,14 +33,14 @@
   var switches = $$('[data-motion-toggle]');
   function motionUI() { switches.forEach(function (b) { b.setAttribute('aria-checked', still() ? 'false' : 'true'); }); }
   switches.forEach(function (b) { b.addEventListener('click', function () {
-    var on = still(), anchor = $('#year'), keep = anchor.getBoundingClientRect().top;
+    var on = still(), anchor = $('#who'), keep = anchor.getBoundingClientRect().top;
     root.classList.toggle('still', !on); delete root.dataset.motionAuto;
     try { localStorage.setItem('saba-motion', on ? 'on' : 'off'); } catch (e) {}
     motionUI();
     $$('[data-reveal]').forEach(function (el) { el.classList.add('in'); });
-    $('[data-lamp]').classList.add('lit');
-    if (!on) { stopAuto(); resetLamp(); }
-    lamp();
+    $('[data-seal]').classList.add('loaded');
+    if (!on) { stopAuto(); stopIntro(); }
+    geo = null; seal(); desk(); pan();
     if (keep < innerHeight) { var now = anchor.getBoundingClientRect().top; if (now !== keep) scrollBy(0, now - keep); }
   }); });
   motionUI();
@@ -65,6 +65,7 @@
         : (l ? 'סגור עכשיו · נפתח ביום ' + dayHe[nd] + ' ב-' + hhmm(H[nd][0]) : 'Closed now · opens ' + dayEn[nd] + ' at ' + hhmm(H[nd][0]));
     }
     $$('[data-status],[data-status2]').forEach(function (el) { el.classList.toggle('open', open); el.innerHTML = '<span class="dot"></span>' + txt; });
+    lampState(open);
     $$('[data-hours] tr').forEach(function (r) { r.classList.toggle('today', (r.dataset.days || '').split(',').indexOf(String(n.d)) >= 0); });
   }
   // consecutive days with the same hours share a row; the week starts on Sunday
@@ -125,7 +126,7 @@
   // ---------------------------------------------------------------- WRITE: the adding machine composer
   var form = $('[data-calc]'), msgEl = $('[data-msg]'), nm = $('#nm');
   var WHO = { self: ['אני עצמאי/ת', "I'm self-employed"], co: ['יש לי חברה', 'I run a company'], emp: ['אני שכיר/ה', "I'm an employee"] };
-  var WHAT = { books: ['הנהלת חשבונות', 'bookkeeping'], annual: ['דוח שנתי', 'an annual report'], refund: ['בדיקת החזר מס', 'checking for a tax refund'], open: ['פתיחת עסק', 'opening a business'] };
+  var WHAT = { books: ['הנהלת חשבונות', 'bookkeeping'], annual: ['דוח שנתי', 'an annual report'], refund: ['החזר מס', 'a tax refund'], open: ['פתיחת תיק ברשויות המס', 'opening a file with the tax authorities'] };
   function message() {
     var l = he() ? 0 : 1, fd = new FormData(form), w = fd.get('who'), t = fd.get('what'), n = (nm.value || '').trim();
     var s = l ? 'Hi Peter' : 'שלום פיטר';
@@ -146,54 +147,108 @@
   form.addEventListener('reset', function () { setTimeout(write, 0); });
   form.addEventListener('submit', function (e) { e.preventDefault(); write(); window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(message()), '_blank', 'noopener'); });
 
-  // ---------------------------------------------------------------- THE LAMP: pulled on, then the camera goes into the glass
-  var lampSec = $('[data-lamp]'), cam = $('[data-cam]'), glass = $('[data-glass]'), copy = $('[data-hero-copy]'), note = $('.photo-note'), bar = $('[data-bar]');
-  var F = { wide: [0.394, 0.299], tall: [0.434, 0.206] };      // the shade's centre in each crop
-  var SHADE = { wide: [0.52, 0.41], tall: [0.81, 0.28] };     // the shade's size in each crop
-  var geo = null;
+  // ---------------------------------------------------------------- THE SEAL: the plate opens, the camera moves in, a light passes over the foil
+  var sealSec = $('[data-seal]'), pin = $('[data-seal-pin]'), plate = $('[data-plate]'), cam = $('[data-cam]'), litImg = $('[data-lit]');
+  var fade = $('[data-fade]'), copy = $('[data-hero-copy]'), bar = $('[data-bar]');
+  var IW = 1500, IH = 1000, FX = 0.447, FY = 0.387, SEAL_W = 0.41;   // the seal's centre and width in the photo
+  var geo = null, introBand = 40, introRaf = 0;
+  var lerp = function (a, b, t) { return a + (b - a) * t; };
   function measure() {
-    var wide = matchMedia('(min-width: 700px)').matches, pic = $('.lamp-on'), im = $('img', pic);
-    var w = pic.offsetWidth, h = pic.offsetHeight, x0 = pic.offsetLeft, y0 = pic.offsetTop;
-    var iw = wide ? 2000 : 1000, ih = wide ? 1151 : 1309, op = wide ? [0.38, 0.2] : [0.2, 0.2];
-    var s = Math.max(w / iw, h / ih), dw = iw * s, dh = ih * s;
-    var f = F[wide ? 'wide' : 'tall'], fx = he() ? f[0] : 1 - f[0];
-    var ox = (w - dw) * (he() ? op[0] : 1 - op[0]), oy = (h - dh) * op[1];
-    var sh = SHADE[wide ? 'wide' : 'tall'], vw = cam.offsetWidth, vh = cam.offsetHeight;
-    var end = clamp(Math.max(2.4 * vw / (sh[0] * dw), 2.4 * vh / (sh[1] * dh)), 3.2, 9);
-    geo = { x: x0 + ox + fx * dw, y: y0 + oy + f[1] * dh, end: end };
-    cam.style.transformOrigin = geo.x + 'px ' + geo.y + 'px';
+    var cb = $('.concept'); root.style.setProperty('--cbar', (cb ? cb.offsetHeight : 0) + 'px');
+    var vw = pin.clientWidth, vh = pin.clientHeight, wide = vw >= 900;
+    var gut = clamp(vw * 0.032, 16, 48), r;
+    if (wide) {
+      var half = vw * 0.48;
+      r = he() ? [gut, 88, half, vh - 40] : [vw - half, 88, vw - gut, vh - 40];
+    } else {
+      var below = copy.offsetHeight + Math.max(36, parseFloat(getComputedStyle(copy).bottom) || 36) + 22;
+      r = [gut, 74, vw - gut, Math.max(74 + 200, vh - below)];
+    }
+    var c = Math.max(vw / IW, vh / IH);
+    geo = { vw: vw, vh: vh, r0: r, dw: IW * c, dh: IH * c, wide: wide };
+    cam.style.width = geo.dw + 'px'; cam.style.height = geo.dh + 'px';
   }
-  function resetLamp() { note.style.opacity = ''; cam.style.transform = ''; glass.style.opacity = ''; copy.style.opacity = ''; copy.style.transform = ''; }
-  function lamp() {
+  function place(p, band) {
+    var g = geo, vw = g.vw, vh = g.vh, e = smooth((p - 0.1) / 0.5);
+    // the plate's edges move out to the screen's edges
+    var R = [lerp(g.r0[0], 0, e), lerp(g.r0[1], 0, e), lerp(g.r0[2], vw, e), lerp(g.r0[3], vh, e)];
+    var rr = lerp(g.wide ? 26 : 22, 0, e);
+    plate.style.clipPath = 'inset(' + R[1].toFixed(1) + 'px ' + (vw - R[2]).toFixed(1) + 'px ' + (vh - R[3]).toFixed(1) + 'px ' + R[0].toFixed(1) + 'px round ' + rr.toFixed(1) + 'px)';
+    var pw = R[2] - R[0], ph = R[3] - R[1];
+    // the camera: the seal fills most of the plate at rest, then pushes in a little past full screen
+    var s0 = Math.max(0.74 * Math.min(pw, ph * 1.35) / (SEAL_W * g.dw), pw / g.dw, ph / g.dh);
+    var s1 = Math.max(1.16, vw / g.dw, vh / g.dh);
+    var S = lerp(s0, s1, smooth(p / 0.85));
+    var cx = lerp((R[0] + R[2]) / 2, vw * 0.5, e), cy = lerp((R[1] + R[3]) / 2, vh * 0.46, e);
+    var tx = cx - S * FX * g.dw, ty = cy - S * FY * g.dh;
+    tx = clamp(tx, R[2] - S * g.dw, R[0]); ty = clamp(ty, R[3] - S * g.dh, R[1]);
+    cam.style.transform = 'translate3d(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px,0) scale(' + S.toFixed(4) + ')';
+    litImg.style.setProperty('--band', band.toFixed(1) + '%');
+  }
+  function seal() {
     if (!geo) measure();
-    var r = lampSec.getBoundingClientRect(), vh = innerHeight;
     bar.classList.toggle('solid', scrollY > 40);
-    if (still()) { resetLamp(); return; }
-    var p = clamp(-r.top / Math.max(1, r.height - vh), 0, 1);
-    var tc = smooth(p / .2);
-    copy.style.opacity = 1 - tc;
-    copy.style.transform = 'translateY(' + (-36 * tc) + 'px)';
-    var e = smooth((p - .04) / .8);
-    cam.style.transform = 'scale(' + (1 + (geo.end - 1) * Math.pow(e, 1.7)).toFixed(4) + ')';
-    glass.style.opacity = smooth((p - .42) / .36).toFixed(3);
-    note.style.opacity = 1 - tc;
+    if (still()) { place(0, 40); fade.style.opacity = ''; copy.style.opacity = ''; copy.style.removeProperty('--cy'); copy.style.translate = ''; return; }
+    var r = sealSec.getBoundingClientRect(), p = clamp(-r.top / Math.max(1, r.height - innerHeight), 0, 1);
+    place(p, introBand + p * 95);
+    var tc = smooth(p / 0.12);
+    copy.style.opacity = (1 - tc).toFixed(3);
+    copy.style.translate = '0 ' + (-32 * tc).toFixed(1) + 'px';
+    fade.style.opacity = smooth((p - 0.7) / 0.3).toFixed(3);
   }
-  var ticking = false;
-  function onScroll() { if (ticking) return; ticking = true; requestAnimationFrame(function () { ticking = false; lamp(); pan(); }); }
-  addEventListener('scroll', onScroll, { passive: true });
-  addEventListener('resize', function () { geo = null; lamp(); pan(); });
+  // on load the light crosses onto the foil once, then rests on it
+  function intro() {
+    var t0 = performance.now(), D = 1800;
+    introBand = -30;
+    (function step(now) {
+      var t = clamp((now - t0) / D, 0, 1), k = 1 - Math.pow(1 - t, 3);
+      introBand = -30 + 70 * k; seal();
+      if (t < 1) introRaf = requestAnimationFrame(step);
+    })(t0);
+  }
+  function stopIntro() { cancelAnimationFrame(introRaf); introBand = 40; }
 
-  // the ledger page pans slowly down its column of figures while the section passes; Haifa drifts a little
-  var panImg = $('[data-pan]'), drift = $('[data-drift]');
+  // ---------------------------------------------------------------- WHO: the business card is set down on the desk as it comes in
+  var card = $('[data-card]');
+  function desk() {
+    if (still()) { card.style.removeProperty('--rx'); card.style.removeProperty('--rz'); return; }
+    var r = card.getBoundingClientRect(), vh = innerHeight;
+    if (r.top > vh + 100 || r.bottom < -100) return;
+    var t = smooth((vh - r.top) / (vh * 0.75));
+    card.style.setProperty('--rx', (34 * (1 - t)).toFixed(2) + 'deg');
+    card.style.setProperty('--rz', (-5 + 3.5 * t).toFixed(2) + 'deg');
+  }
+
+  // ---------------------------------------------------------------- VISIT: the lamp is lit while the office is open
+  var night = $('[data-lamp]'), lampOn = $('[data-lit-lamp]'), isOpen = false, lampSeen = false;
+  function lampState(open) {
+    isOpen = open;
+    if (!night) return;
+    night.classList.toggle('lit', open);
+  }
+  if (night && 'IntersectionObserver' in window) new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting || lampSeen) return;
+      lampSeen = true;
+      // the pull: a short flicker, then the glass holds its light
+      if (isOpen && !still() && lampOn.animate) lampOn.animate([{ opacity: 0 }, { opacity: .7, offset: .18 }, { opacity: .15, offset: .3 }, { opacity: 1, offset: .55 }, { opacity: 1 }], { duration: 760, delay: 250, easing: 'ease-out', fill: 'backwards' });
+    });
+  }, { threshold: .45 }).observe(night);
+
+  var ticking = false;
+  function onScroll() { if (ticking) return; ticking = true; requestAnimationFrame(function () { ticking = false; seal(); desk(); pan(); }); }
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', function () { geo = null; seal(); desk(); pan(); });
+
+  // the ledger page pans slowly down its column of figures while the section passes
+  var panImg = $('[data-pan]');
   function pan() {
-    if (still()) { panImg.style.transform = ''; drift.style.transform = ''; return; }
+    if (still()) { panImg.style.transform = ''; return; }
     var win = panImg.parentNode, r = win.getBoundingClientRect(), vh = innerHeight;
     if (r.bottom > -50 && r.top < vh + 50) {
       var t = clamp((vh - r.top) / (vh + r.height), 0, 1), travel = Math.max(0, panImg.offsetHeight - win.clientHeight);
       panImg.style.transform = 'translateY(' + (-travel * t).toFixed(1) + 'px)';
     }
-    var d = drift.parentNode.getBoundingClientRect();
-    if (d.bottom > 0 && d.top < vh) { var u = clamp((vh - d.top) / (vh + d.height), 0, 1); drift.style.transform = 'translateY(' + ((u - .5) * 40).toFixed(1) + 'px) scale(1.04)'; }
   }
 
   // the calculator clip plays through once each time it comes into view (8 s, no endless loop); motion off: the still frame
@@ -217,7 +272,7 @@
     var nio = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) links.forEach(function (a) { a.setAttribute('aria-current', a.getAttribute('href') === '#' + e.target.id ? 'true' : 'false'); }); });
     }, { rootMargin: '-45% 0px -50% 0px' });
-    ['year', 'plain', 'reviews', 'write', 'visit'].forEach(function (id) { nio.observe(document.getElementById(id)); });
+    ['who', 'plain', 'year', 'reviews', 'write', 'visit'].forEach(function (id) { nio.observe(document.getElementById(id)); });
     // the phone keys step aside while the composer and the contact block are on screen (they carry their own buttons)
     var dock = $('[data-dock]'), seen = new Set();
     var dio = new IntersectionObserver(function (es) { es.forEach(function (e) { e.isIntersecting ? seen.add(e.target) : seen.delete(e.target); }); dock.classList.toggle('away', seen.size > 0); });
@@ -226,19 +281,10 @@
 
   // ---------------------------------------------------------------- start
   texts(root.lang); hours(); stage(1, true); write();
-  function start() {
-    lamp(); pan();
-    requestAnimationFrame(function () {
-      lampSec.classList.add('loaded');
-      if (still()) { lampSec.classList.add('lit'); return; }
-      // the pull: a short flicker, then the glass holds its light
-      setTimeout(function () {
-        lampSec.classList.add('lit');
-        var on = $('[data-lit]');
-        if (on.animate) on.animate([{ opacity: 0 }, { opacity: .7, offset: .18 }, { opacity: .15, offset: .3 }, { opacity: 1, offset: .55 }, { opacity: 1 }], { duration: 760, easing: 'ease-out' });
-      }, 420);
-    });
-  }
-  start();
-  window.__lamp = lamp; window.__stage = stage;
+  seal(); desk(); pan();
+  requestAnimationFrame(function () {
+    sealSec.classList.add('loaded');
+    if (!still()) intro();
+  });
+  window.__seal = seal; window.__stage = stage;
 })();

@@ -98,6 +98,11 @@ html.still .if-motion, html:not(.still) .if-still { display: none; }
 .wordmark.wrap { white-space: normal; }
 .wordmark.wrap .fit { display: block; overflow-wrap: anywhere; }
 .hero-line { font-size: var(--step-head); font-weight: 600; letter-spacing: -0.02em; line-height: 1.02; max-width: 14ch; margin-bottom: 24px; }
+/* the shop's number, printed on the sign as text (owner note: "there's no phone number") */
+.hero-phone { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 14px; margin: -6px 0 22px; }
+.hero-phone .hp-l { font-size: var(--step-small); font-weight: 600; color: #c9d4ec; }
+.hero-phone a { font-size: clamp(1.75rem, 1.25rem + 2vw, 2.75rem); font-weight: 700; line-height: 1.1; letter-spacing: 0.01em; font-variant-numeric: tabular-nums; color: var(--brass); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; transition: color 160ms ease; }
+@media (hover: hover) and (pointer: fine) { .hero-phone a:hover { color: var(--brass-hi); } }
 .hero-sub { max-width: 44ch; margin-bottom: 20px; color: #dfe6f4; }
 .hero-card .status { margin-bottom: 18px; }
 .hero-act { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 24px; margin-bottom: 28px; }
@@ -303,6 +308,10 @@ html.still .card.is-on { display: block; }
 .hours td { padding: 10px 0; border-bottom: 1px solid var(--surface-2); }
 .hours td:last-child { text-align: end; }
 .hours tr.today td { color: var(--brass-hi); font-weight: 600; }
+.visit-phones { margin: -8px 0 0; display: grid; }
+.visit-phones > div { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 4px 0; border-bottom: 1px solid var(--surface-2); }
+.visit-phones dd { margin: 0; }
+.visit-phones a { font-size: 1.25rem; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--brass-hi); text-decoration: none; min-height: 44px; display: inline-flex; align-items: center; }
 .visit-act { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: center; margin-top: auto; }
 .map { grid-column: 1 / -1; height: clamp(300px, 44vh, 440px); background: var(--surface); }
 .map iframe { width: 100%; height: 100%; border: 0; display: block; filter: grayscale(0.35) brightness(0.92); }
@@ -320,14 +329,17 @@ html.still .card.is-on { display: block; }
 .foot-name { font-size: var(--step-head); font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
 .foot-links { display: flex; flex-wrap: wrap; gap: 6px 24px; font-weight: 600; }
 .foot-links a { display: inline-flex; min-height: 44px; align-items: center; overflow-wrap: anywhere; text-decoration: underline; text-underline-offset: 4px; }
+.foot-links .foot-tel { flex-basis: 100%; display: flex; align-items: baseline; gap: 12px; }
+.foot-links .foot-tel a { font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2rem); font-weight: 700; font-variant-numeric: tabular-nums; }
 .credits, .imprint { padding: 0 var(--m); max-width: calc(70ch + 2 * var(--m)); font-size: var(--step-small); color: var(--muted); }
 .credits { margin-top: 48px; }
 .imprint { margin-top: 12px; padding-bottom: calc(140px + env(safe-area-inset-bottom, 0px)); }
 
 /* ---------------------------------------------------------------- sticky: a door's handle plate */
-.plate { position: fixed; z-index: 40; inset-inline-end: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); width: 84px; padding: 12px 0 10px; background: var(--steel); color: var(--steel-ink); border-radius: 38px; display: grid; justify-items: center; gap: 10px; font-size: var(--step-small); font-weight: 700; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45); transform: translateY(0); opacity: 1; transition: transform 240ms var(--ease-out), opacity 200ms ease; } /* taste-skill-ignore: the sticky plate floats over the page */
+.plate { position: fixed; z-index: 40; inset-inline-end: 12px; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); width: 96px; padding: 12px 0 10px; background: var(--steel); color: var(--steel-ink); border-radius: 38px; display: grid; justify-items: center; gap: 10px; font-size: var(--step-small); font-weight: 700; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45); transform: translateY(0); opacity: 1; transition: transform 240ms var(--ease-out), opacity 200ms ease; } /* taste-skill-ignore: the sticky plate floats over the page */
 .plate.away { transform: translateY(calc(100% + 24px)); opacity: 0; pointer-events: none; }
-.plate a { display: grid; justify-items: center; gap: 2px; text-decoration: none; width: 84px; padding: 4px 0; }
+.plate a { display: grid; justify-items: center; gap: 2px; text-decoration: none; width: 96px; padding: 4px 0; }
+.pl-num { font-size: 0.75rem; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .lever { width: 70px; height: 24px; transform-origin: 83% 50%; transition: transform 140ms var(--ease-out); }
 [dir="rtl"] .lever { transform: scaleX(-1); transform-origin: 83% 50%; }
 .lever .rose { fill: var(--steel-2); } .lever .arm { fill: #5c6673; } .lever .pivot { fill: #3e4651; }
