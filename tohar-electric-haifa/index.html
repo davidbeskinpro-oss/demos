@@ -2,224 +2,352 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#0f1412">
+<meta name="theme-color" content="#1f2023">
+<meta name="color-scheme" content="dark">
 <title>טוהר החשמל · רועי יונה, חשמלאי מוסמך · ארתור הנטקה 12, חיפה</title>
-<meta name="description" content="קונספט לדוגמה עבור טוהר החשמל, רועי יונה, חשמלאי מוסמך בחיפה.">
-<script>
-(function(){var r=document.documentElement,q=new URLSearchParams(location.search),l=q.get('lang'),s=null,m=null;
-try{s=localStorage.getItem('th-lang');m=localStorage.getItem('th-motion');}catch(e){}
-l=l==='en'||l==='he'?l:(s==='en'?'en':'he');r.lang=l;r.dir=l==='he'?'rtl':'ltr';
-var n=navigator,c=n.connection||{},auto=(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)||c.saveData||/(^|-)(2g|3g)$/.test(c.effectiveType||'')||(n.deviceMemory&&n.deviceMemory<=2)||(n.hardwareConcurrency&&n.hardwareConcurrency<=2);
-if(m==='off'||(m!=='on'&&auto)){r.classList.add('still');if(m!=='off')r.dataset.motionAuto='1';}
-r.classList.add('js');})();
-</script>
+<meta name="description" content="קונספט לדוגמה לאתר של טוהר החשמל, רועי יונה, חשמלאי מוסמך בחיפה: לוחות חשמל, תאורה, חשמל חכם, תקלות ונקודות תקשורת. 4.7 בגוגל מ-24 ביקורות.">
+<script>document.documentElement.classList.add('js');
+// animations on/off: the visitor's choice wins; otherwise off for reduced motion, data saver, slow networks and weak devices
+(function(){var r=document.documentElement,s=null;try{s=localStorage.getItem('th-motion')}catch(e){}var c=navigator.connection||{},why=matchMedia('(prefers-reduced-motion: reduce)').matches?'reduce':c.saveData?'data':/2g|3g/.test(c.effectiveType||'')?'slow':((navigator.deviceMemory>0&&navigator.deviceMemory<=2)||(navigator.hardwareConcurrency>0&&navigator.hardwareConcurrency<=2))?'device':'';var off=s?s==='off':!!why;r.classList.toggle('still',off);if(!s&&why)r.dataset.motionAuto=why;
+var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage.getItem('th-lang')}catch(e){}l=q==='en'||q==='he'?q:l==='en'?'en':'he';r.lang=l;r.dir=l==='he'?'rtl':'ltr';})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Albert+Sans:wght@400;500&family=Heebo:wght@300;400;500&family=Imbue:opsz,wght@10..100,300..500&family=Noto+Sans+Hebrew:wdth,wght@62.5..100,300..500&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect x=%222%22 y=%222%22 width=%2228%22 height=%2228%22 rx=%226%22 fill=%22%230f1412%22/%3E%3Crect x=%2211%22 y=%226%22 width=%2210%22 height=%2220%22 rx=%222%22 fill=%22%23e7e5de%22/%3E%3Crect x=%2213.5%22 y=%228.5%22 width=%225%22 height=%224%22 fill=%22%23c63a26%22/%3E%3Crect x=%2213.5%22 y=%2214%22 width=%225%22 height=%227%22 rx=%221%22 fill=%22%231b2420%22/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@400;600;700&family=Noto+Serif+Hebrew:wght@500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="img/logo.png">
 <link rel="stylesheet" href="css/site.css">
 <link rel="preload" as="image" href="img/hero-off.jpg">
 </head>
 <body>
 <a class="skip" href="#main"><span lang="he">דלגו לתוכן</span><span lang="en">Skip to content</span></a>
 
+<svg class="vh" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></symbol>
+  <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2zm0 17.9a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8.1 8.1 0 1 1 12 20.1zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.1 11.1 0 0 0 4.2 3.7c1.6.7 2.2.7 3 .6a2.5 2.5 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .1-1.2c-.1-.1-.2-.2-.4-.3z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 16 16"><path d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-12a7 7 0 0 0-14 0c0 5.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="10" r="2.6" fill="currentColor"/></symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13.5 2 5 13.5h6L9.5 22 19 9.8h-6.2z"/></symbol>
+</defs></svg>
+
 <div class="concept" data-concept="קונספט לדוגמה שנבנה עבור טוהר החשמל · זה אינו האתר הרשמי של העסק">
-  <span lang="he">קונספט לדוגמה שנבנה עבור טוהר החשמל · זה אינו האתר הרשמי של העסק</span>
-  <span lang="en">A sample concept built for Tohar Electric · This is not the business’s official website</span>
+  <p><span lang="he">קונספט לדוגמה שנבנה עבור טוהר החשמל · זה אינו האתר הרשמי של העסק</span><span lang="en">A sample concept built for Tohar Electric · This is not the business’s official website</span></p>
 </div>
 
-<nav class="pill" data-pill aria-label="ראשי">
-  <a class="mark" href="#top"><span lang="he">טוהר החשמל</span><span lang="en">Tohar Electric</span></a>
-  <div class="links">
-    <a href="#order"><span lang="he">העבודה</span><span lang="en">The work</span></a>
-    <a href="#board"><span lang="he">הלוח</span><span lang="en">The board</span></a>
-    <a href="#reviews"><span lang="he">ביקורות</span><span lang="en">Reviews</span></a>
-    <a href="#visit"><span lang="he">הגעה</span><span lang="en">Find us</span></a>
-  </div>
-  <button class="motion" type="button" role="switch" aria-checked="true" data-motion-toggle>
-    <span class="sw" aria-hidden="true"><i></i></span><span lang="he">תנועה</span><span lang="en">Motion</span>
-  </button>
-  <button class="langbtn" type="button" data-set-lang><span lang="he" aria-label="Switch to English">EN</span><span lang="en" aria-label="מעבר לעברית">עב</span></button>
-  <a class="navwa" href="https://wa.me/972542725050" data-wa-plain><span lang="he">וואטסאפ לרועי</span><span lang="en">WhatsApp Roi</span></a>
-</nav>
-
-<header class="hero" id="top">
-  <div class="hero-photo" data-hero>
-    <div class="lamp" data-lamp>
-      <img class="lamp-off" src="img/hero-off.jpg" width="900" height="1200" alt="" fetchpriority="high">
-      <img class="lamp-on" src="img/hero-on.jpg" width="900" height="1200" data-alt-he="חשמלאי מטוהר החשמל על סולם, מתחת לגוף תאורה עם שש מנורות דולקות" data-alt-en="A Tohar Electric electrician on a ladder under a six-lamp pendant, all lamps lit" alt="חשמלאי מטוהר החשמל על סולם, מתחת לגוף תאורה עם שש מנורות דולקות" data-lamp-on>
-      <div class="blooms" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<!-- nav: a full bar that gathers into a floating wall-plate pill; the real logo sits on the plate -->
+<header class="nav" data-nav>
+  <div class="nav-in">
+    <a class="brand" href="#top" aria-label="טוהר החשמל" data-t-brand><img src="img/logo.png" width="214" height="83" alt=""></a>
+    <nav class="links" aria-label="ראשי" data-t-nav>
+      <a href="#panel"><span lang="he">העבודה</span><span lang="en">The work</span></a>
+      <a href="#services"><span lang="he">שירותים</span><span lang="en">Services</span></a>
+      <a href="#light"><span lang="he">תאורה</span><span lang="en">Lighting</span></a>
+      <a href="#msg"><span lang="he">הודעה לרועי</span><span lang="en">Message Roi</span></a>
+      <a href="#reviews"><span lang="he">ביקורות</span><span lang="en">Reviews</span></a>
+    </nav>
+    <div class="tools">
+      <button type="button" class="tgl" role="switch" aria-checked="true" data-motion-toggle><span class="rk" aria-hidden="true"><i></i></span><span lang="he">תנועה</span><span lang="en">Motion</span></button>
+      <button type="button" class="tgl lang" data-set-lang><span lang="he">EN</span><span lang="en">עב</span></button>
+      <a class="pill-btn" href="https://wa.me/972542725050" target="_blank" rel="noopener" data-wa-plain><svg aria-hidden="true"><use href="#i-wa"/></svg><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
     </div>
-    <p class="photo-tag"><span lang="he">מתוך העבודות של טוהר החשמל</span><span lang="en">From Tohar Electric’s own jobs</span></p>
-  </div>
-  <div class="hero-copy" id="main">
-    <h1><span lang="he">טוהר החשמל</span><span lang="en">Tohar Electric</span></h1>
-    <p class="lead"><span lang="he">רועי יונה, חשמלאי מוסמך בחיפה. לוחות חשמל, תאורה <em>ובית חכם.</em></span><span lang="en">Roi Yona, a licensed electrician in Haifa. Panels, lighting <em>and smart homes.</em></span></p>
-    <div class="acts" data-keep-clear>
-      <a class="btn" href="tel:+972542725050" data-t-call><span lang="he">התקשרו לרועי</span><span lang="en">Call Roi</span></a>
-      <a class="btn ghost" href="https://wa.me/972542725050" data-wa-plain><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
-    </div>
-    <p class="status" data-status></p>
   </div>
 </header>
 
-<section class="order" id="order" aria-labelledby="order-h">
-  <div class="order-track" data-track>
-    <div class="order-pin">
-      <div class="order-text">
-        <h2 id="order-h"><span lang="he">מסבך של חוטים, <em>ללוח מסודר.</em></span><span lang="en">From a tangle of wire <em>to a tidy board.</em></span></h2>
-        <div class="stage-lines" aria-live="polite">
-          <p data-line="0" class="on"><span lang="he">קיר פתוח, חוטים לכל כיוון.</span><span lang="en">An open wall, wires every way.</span></p>
-          <p data-line="1"><span lang="he">כל כבל במסלול, כל קופסה עטופה.</span><span lang="en">Every cable routed, every box wrapped.</span></p>
-          <p data-line="2"><span lang="he">לוח מסודר, וכל רכיב מסומן.</span><span lang="en">A tidy board, every part labelled.</span></p>
+<main class="page" id="main">
+
+<!-- HERO: his real photos are dealt off the stack, current runs along the logo's cable into the pendant he hung,
+     and the lamps in the real photo come on. The rocker beside it switches them. -->
+<section class="hero" id="top" data-hero>
+  <div class="ledring" aria-hidden="true"><i class="glow"></i><i class="tube"></i></div>
+  <div class="torch" aria-hidden="true" data-torch></div>
+  <svg class="cable" aria-hidden="true" data-cable><path class="wire" data-wire/><path class="wire hot" data-hotwire/><g class="plug" data-plug><rect x="-15" y="-11" width="30" height="22" rx="6"/><line x1="-6" y1="11" x2="-6" y2="20"/><line x1="6" y1="11" x2="6" y2="20"/></g><circle class="spark" r="5" data-spark/></svg>
+  <div class="h-grid">
+    <div class="h-copy">
+      <h1 class="h-title" data-split>
+        <span class="ln"><span lang="he">מהלוח,</span><span lang="en">From the panel</span></span>
+        <span class="ln acc"><span lang="he">ועד האור.</span><span lang="en">to the light.</span></span>
+      </h1>
+      <p class="h-lead" data-rise style="--d:520ms"><span lang="he">רועי יונה, חשמלאי מוסמך בחיפה. לוחות, תאורה, חשמל חכם ותקלות, בבית ובעסק.</span><span lang="en">Roi Yona, a licensed electrician in Haifa. Panels, lighting, smart homes and faults, at home and at work.</span></p>
+      <div class="h-acts" data-rise style="--d:640ms">
+        <a class="btn" href="https://wa.me/972542725050" target="_blank" rel="noopener" data-wa-plain><svg aria-hidden="true"><use href="#i-wa"/></svg><span lang="he">וואטסאפ לרועי</span><span lang="en">WhatsApp Roi</span></a>
+        <a class="btn ghost" href="tel:+972542725050"><svg aria-hidden="true"><use href="#i-phone"/></svg><span dir="ltr" class="num">054-272-5050</span></a>
+      </div>
+      <div class="h-chips" data-rise style="--d:760ms">
+        <a class="chip" href="https://maps.google.com/?cid=7855645850836706700" target="_blank" rel="noopener"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><b class="num">4.7</b><span lang="he">· 24 ביקורות בגוגל</span><span lang="en">· 24 Google reviews</span></a>
+        <span class="chip" data-status></span>
+      </div>
+    </div>
+    <div class="h-photo" data-hphoto>
+      <figure class="lampfig" data-lampfig>
+        <img class="l-off" src="img/hero-off.jpg" width="900" height="1200" alt="" fetchpriority="high">
+        <img class="l-on" src="img/hero-on.jpg" width="900" height="1200" alt="חשמלאי מטוהר החשמל על סולם, מתחת לגוף תאורה עם שש מנורות" data-alt-he="חשמלאי מטוהר החשמל על סולם, מתחת לגוף תאורה עם שש מנורות" data-alt-en="A Tohar Electric electrician on a ladder under a six-lamp pendant">
+        <div class="blooms" aria-hidden="true" data-blooms><i style="--x:13%;--y:47.5%"></i><i style="--x:28%;--y:47%"></i><i style="--x:43%;--y:46.5%"></i><i style="--x:58%;--y:46%"></i><i style="--x:74.5%;--y:45.5%"></i><i style="--x:91%;--y:45%"></i></div>
+        <figcaption><span lang="he">מתוך העבודות של טוהר החשמל</span><span lang="en">From Tohar Electric’s own jobs</span></figcaption>
+      </figure>
+      <button type="button" class="rocker" role="switch" aria-checked="false" data-rocker aria-label="הדלקת האור בתמונה"><span class="face"><i></i></span></button>
+      <div class="deck" aria-hidden="true" data-deck>
+        <figure class="dc" style="--i:0"><img src="img/s-board.jpg" width="720" height="960" alt=""></figure>
+        <figure class="dc" style="--i:1"><img src="img/g-rings.jpg" width="1400" height="681" alt=""></figure>
+        <figure class="dc" style="--i:2"><img src="img/g-roof.jpg" width="675" height="900" alt=""></figure>
+        <figure class="dc" style="--i:3"><img src="img/g-labels.jpg" width="573" height="573" alt=""></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PANEL: the signature. One job on his own photos, from an open wall to a finished three-phase board.
+     The photo opens out of its frame, each next photo spreads out of the junction box, labels type themselves,
+     and the board's phase lamps L1-L2-L3 are the stage controls. -->
+<section class="panel" id="panel" data-panel>
+  <div class="p-stage" data-pstage>
+    <div class="p-photo" data-pphoto>
+      <figure class="layer" data-layer="0"><img src="img/s-wall.jpg" width="720" height="960" loading="lazy" alt="קיר פתוח עם צרור חוטים צבעוניים שיוצא מקופסת לוח ריקה" data-alt-he="קיר פתוח עם צרור חוטים צבעוניים שיוצא מקופסת לוח ריקה" data-alt-en="An opened wall with a bundle of coloured wires coming out of an empty panel box"></figure>
+      <figure class="layer" data-layer="1"><img src="img/s-run.jpg" width="900" height="1200" loading="lazy" alt="כבלים ירוקים קשורים בצרורות בתוך תעלה בקיר, ושתי קופסאות עטופות בניילון" data-alt-he="כבלים ירוקים קשורים בצרורות בתוך תעלה בקיר, ושתי קופסאות עטופות בניילון" data-alt-en="Green cables tied in bundles in a wall chase, with two boxes wrapped in plastic"></figure>
+      <figure class="layer" data-layer="2"><img src="img/s-board.jpg" width="720" height="960" loading="lazy" alt="לוח חשמל תעשייתי מסודר: מפסקים בשורה, כבלי נחושת וכל רכיב עם תווית" data-alt-he="לוח חשמל תעשייתי מסודר: מפסקים בשורה, כבלי נחושת וכל רכיב עם תווית" data-alt-en="A tidy industrial panel: breakers in a row, copper cables and a label on every part"></figure>
+      <i class="wipe" aria-hidden="true" data-wipe></i>
+      <div class="callouts" data-callouts>
+        <span class="co" data-st="0" data-x=".45" data-y=".24" data-he="צרור חוטים" data-en="A bundle of wires"><i></i><b></b></span>
+        <span class="co" data-st="0" data-x=".5" data-y=".56" data-he="קופסת לוח ריקה" data-en="An empty panel box"><i></i><b></b></span>
+        <span class="co" data-st="1" data-x=".52" data-y=".26" data-he="קופסה עטופה בניילון" data-en="A box wrapped in plastic"><i></i><b></b></span>
+        <span class="co" data-st="1" data-x=".5" data-y=".47" data-he="כבלים בצרורות" data-en="Cables tied in bundles"><i></i><b></b></span>
+        <span class="co" data-st="2" data-x=".5" data-y=".25" data-he="מפסקים ראשיים" data-en="Main breakers"><i></i><b></b></span>
+        <span class="co" data-st="2" data-x=".34" data-y=".52" data-he="כבלי הזנה" data-en="Feed cables"><i></i><b></b></span>
+        <span class="co" data-st="2" data-x=".62" data-y=".67" data-he="כל רכיב עם תווית" data-en="Every part labelled"><i></i><b></b></span>
+      </div>
+      <p class="p-cap"><span lang="he">שלוש תמונות מעבודות של טוהר החשמל</span><span lang="en">Three photos from Tohar Electric’s jobs</span></p>
+    </div>
+    <div class="p-copy">
+      <h2 data-reveal><span lang="he">מסבך חוטים, <em>ללוח מסודר.</em></span><span lang="en">From a tangle <em>to a tidy board.</em></span></h2>
+      <div class="p-lines" aria-live="polite">
+        <p data-pline="0" class="on"><span lang="he">קיר פתוח, חוטים לכל כיוון.</span><span lang="en">An open wall, wires every way.</span></p>
+        <p data-pline="1"><span lang="he">כל כבל במסלול, כל קופסה עטופה.</span><span lang="en">Every cable routed, every box wrapped.</span></p>
+        <p data-pline="2"><span lang="he">לוח תלת-פאזי, וכל רכיב מסומן.</span><span lang="en">A three-phase board, every part labelled.</span></p>
+      </div>
+      <div class="phases" role="group" aria-label="שלבים" data-t-phases>
+        <button type="button" class="ph" data-goto="0" aria-pressed="true"><span class="lamp"></span><b>L1</b><span lang="he">קיר פתוח</span><span lang="en">Open wall</span></button>
+        <button type="button" class="ph" data-goto="1" aria-pressed="false"><span class="lamp"></span><b>L2</b><span lang="he">חיווט</span><span lang="en">Wiring</span></button>
+        <button type="button" class="ph" data-goto="2" aria-pressed="false"><span class="lamp"></span><b>L3</b><span lang="he">לוח</span><span lang="en">Board</span></button>
+      </div>
+      <div class="readout" data-readout><span class="rv num" data-volt>0</span><span class="ru">V</span><span class="rl" data-rl></span></div>
+      <div class="p-arrows">
+        <button type="button" class="arw" data-step="-1" aria-label="השלב הקודם" data-t-prev><span aria-hidden="true">‹</span></button>
+        <button type="button" class="arw" data-step="1" aria-label="השלב הבא" data-t-next><span aria-hidden="true">›</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES: the board itself. Nine circuits from his own list; each module switches on as it arrives,
+     each has its own living drawing in the logo's thin line, and a light follows the hand. -->
+<section class="svc" id="services" data-svc>
+  <div class="head">
+    <h2 data-reveal><span lang="he">תשעה מעגלים, <em>לוח אחד.</em></span><span lang="en">Nine circuits, <em>one board.</em></span></h2>
+    <p data-reveal style="--d:80ms"><span lang="he">מהשקע בסלון ועד לוח תלת-פאזי במפעל.</span><span lang="en">From a living-room socket to a three-phase board in a factory.</span></p>
+  </div>
+  <div class="bento" data-bento>
+    <article class="tile t-big t-photo" data-tile>
+      <img src="img/g-breaker.jpg" width="676" height="900" loading="lazy" alt="מפסקים תעשייתיים בלוח, עם תוויות Q12 ו-Q26" data-alt-he="מפסקים תעשייתיים בלוח, עם תוויות Q12 ו-Q26" data-alt-en="Industrial breakers in a panel, labelled Q12 and Q26">
+      <span class="brk" aria-hidden="true"><i></i></span>
+      <div class="tt"><h3><span lang="he">לוחות חשמל</span><span lang="en">Electrical panels</span></h3><p><span lang="he">התקנה, החלפה והגדלה, גם תלת-פאזי.</span><span lang="en">Installed, replaced and enlarged, three-phase too.</span></p></div>
+    </article>
+    <article class="tile t-wide" data-tile>
+      <svg class="viz v-home" viewBox="0 0 320 150" aria-hidden="true"><path class="ln" d="M40 140V70L110 22l70 48v70M70 140V96h28v44"/><rect class="win w1" x="122" y="80" width="34" height="26" rx="2"/><path class="ln" d="M180 140H300M240 140v-62h44v62"/><rect class="win w3" x="250" y="90" width="24" height="20" rx="2"/><circle class="ln" cx="215" cy="118" r="8"/><path class="bolt" d="M112 46l-8 11h6l-2 9 9-12h-6z"/></svg>
+      <span class="brk" aria-hidden="true"><i></i></span>
+      <div class="tt"><h3><span lang="he">עבודות חשמל לבית</span><span lang="en">Home electrical work</span></h3><p><span lang="he">איתור תקלות, לוח חד או תלת-פאזי, שקעים ומפסקים.</span><span lang="en">Fault finding, single or three-phase boards, sockets and switches.</span></p></div>
+    </article>
+    <article class="tile t-wide" data-tile>
+      <svg class="viz v-phase" viewBox="0 0 320 150" aria-hidden="true"><path class="ax" d="M10 75H310"/><path class="wv p1" data-wave="0"/><path class="wv p2" data-wave="1"/><path class="wv p3" data-wave="2"/><text x="14" y="22" class="pl">L1 L2 L3</text></svg>
+      <span class="brk" aria-hidden="true"><i></i></span>
+      <div class="tt"><h3><span lang="he">עסקים ותעשייה</span><span lang="en">Business &amp; industry</span></h3><p><span lang="he">חיווט לוחות, מנועים ופיקודים, אחזקה שוטפת למפעלים.</span><span lang="en">Panel wiring, motors and controls, ongoing factory upkeep.</span></p></div>
+    </article>
+    <article class="tile" data-tile>
+      <svg class="viz v-smart" viewBox="0 0 200 150" aria-hidden="true"><rect class="ln" x="72" y="12" width="56" height="112" rx="10"/><g class="tg tg1"><rect x="82" y="34" width="36" height="16" rx="8"/><circle cx="90" cy="42" r="5"/></g><g class="tg tg2"><rect x="82" y="58" width="36" height="16" rx="8"/><circle cx="90" cy="66" r="5"/></g><g class="tg tg3"><rect x="82" y="82" width="36" height="16" rx="8"/><circle cx="90" cy="90" r="5"/></g><path class="ln" d="M150 30h34v60h-34z"/><rect class="shut" x="150" y="30" width="34" height="60"/><path class="ln" d="M150 40h34M150 50h34M150 60h34M150 70h34M150 80h34"/></svg>
+      <span class="brk" aria-hidden="true"><i></i></span>
+      <div class="tt"><h3><span lang="he">חשמל חכם</span><span lang="en">Smart home</span></h3><p><span lang="he">תאורה, תריסים, דוד ומזגנים, בשליטה מרכזית.</span><span lang="en">Lights, shutters, heater and AC, from one central control.</span></p></div>
+    </article>
+    <article class="tile" data-tile>
+      <svg class="viz v-fault" viewBox="0 0 200 150" aria-hidden="true"><path class="ln" d="M14 92h58M128 92h58"/><path class="gap" d="M72 92h56"/><path class="arc" d="M74 92l8-10 6 14 8-16 6 18 8-12 6 8 10-2"/><rect class="ln" x="84" y="30" width="32" height="40" rx="4"/><rect class="lev" x="94" y="38" width="12" height="14" rx="2"/></svg>
+      <span class="brk" aria-hidden="true"><i></i></span>
+      <div class="tt"><h3><span lang="he">תקלות וקצרים</span><span lang="en">Faults &amp; shorts</span></h3><p><span lang="he">בבתים, במשרדים ובמפעלים.</span><span lang="en">In homes, offices and factories.</span></p></div>
+    </article>
+    <article class="tile" data-tile>
+      <svg class="viz v-load" viewBox="0 0 200 150" aria-hidden="true"><path class="ax" d="M30 124H170"/><rect class="bar b1" x="48" y="24" width="22" height="100" rx="3"/><rect class="bar b2" x="89" y="24" width="22" height="100" rx="3"/><rect class="bar b3" x="130" y="24" width="22" height="100" rx="3"/><path class="lvl" d="M40 64H160"/></svg>
+      <span class="brk" aria-hidden="true"><i></i></span>
+      <div class="tt"><h3><span lang="he">חלוקת עומסים</span><span lang="en">Load distribution</span></h3><p><span lang="he">נקודות חשמל חדשות, למזגן ולמכונת כביסה.</span><span lang="en">New points, AC and washing machine.</span></p></div>
+    </article>
+    <article class="tile" data-tile>
+      <svg class="viz v-data" viewBox="0 0 200 150" aria-hidden="true"><rect class="ln" x="56" y="22" width="88" height="104" rx="10"/><path class="ln" d="M78 54h44v34H78zM88 88v8h24v-8"/><path class="pins" d="M84 60v8M90 60v8M96 60v8M102 60v8M108 60v8M114 60v8"/><circle class="lk l1" cx="74" cy="112" r="4"/><circle class="lk l2" cx="126" cy="112" r="4"/></svg>
+      <span class="brk" aria-hidden="true"><i></i></span>
+      <div class="tt"><h3><span lang="he">נקודות תקשורת</span><span lang="en">Network points</span></h3><p><span lang="he">רשת, מצלמות וקווי טלפון.</span><span lang="en">Network, cameras and phone lines.</span></p></div>
+    </article>
+    <article class="tile t-wide t-photo" data-tile>
+      <img src="img/g-recessed.jpg" width="1100" height="619" loading="lazy" alt="תקרה מונמכת עם שורת גופי תאורה שקועים דולקים" data-alt-he="תקרה מונמכת עם שורת גופי תאורה שקועים דולקים" data-alt-en="A dropped ceiling with a row of lit recessed lights">
+      <span class="brk" aria-hidden="true"><i></i></span>
+      <div class="tt"><h3><span lang="he">אביזרים ותאורה</span><span lang="en">Fittings &amp; lighting</span></h3><p><span lang="he">גופי תאורה, תעלות ואביזרי חשמל.</span><span lang="en">Light fittings, trunking and accessories.</span></p></div>
+    </article>
+    <article class="tile t-wide" data-tile>
+      <svg class="viz v-heat" viewBox="0 0 320 150" aria-hidden="true"><rect class="ln" x="24" y="40" width="70" height="70" rx="35"/><path class="ln" d="M94 64h18M94 86h18"/><path class="coil" d="M112 64h150a11 11 0 0 1 0 22H112"/><path class="coil hot" d="M112 64h150a11 11 0 0 1 0 22H112"/><path class="ln" d="M52 40V24M66 40V24"/></svg>
+      <span class="brk" aria-hidden="true"><i></i></span>
+      <div class="tt"><h3><span lang="he">גופי חימום לדוד</span><span lang="en">Water-heater elements</span></h3><p><span lang="he">כשהדוד לא מחמם, או שאין זרם בגוף החימום.</span><span lang="en">When the heater won’t heat, or the element gets no current.</span></p></div>
+    </article>
+  </div>
+</section>
+
+<!-- LIGHT: the lights go down, the LED ring from his office job strikes on, and his photos hang from it and turn -->
+<section class="light" id="light" data-light>
+  <div class="head">
+    <h2 data-reveal><span lang="he">כל חדר, <em>באור שלו.</em></span><span lang="en">Every room, <em>in its own light.</em></span></h2>
+    <p data-reveal style="--d:80ms"><span lang="he">טבעות לד, תאורה שקועה וגופי תאורה תלויים, מהעבודות של טוהר החשמל.</span><span lang="en">LED rings, recessed lights and pendants, from Tohar Electric’s jobs.</span></p>
+  </div>
+  <div class="lum" data-lum>
+    <div class="lum-ring" aria-hidden="true"><i class="glow"></i><i class="tube"></i></div>
+    <div class="carousel" data-car>
+      <figure class="cc"><img src="img/g-rings.jpg" width="1400" height="681" loading="lazy" alt="" data-alt-he="טבעות לד תלויות מתקרת משרד" data-alt-en="LED rings hanging from an office ceiling"><i class="shade" aria-hidden="true"></i><figcaption><span lang="he">טבעות לד במשרד</span><span lang="en">LED rings, an office</span></figcaption></figure>
+      <figure class="cc"><img src="img/hero-on.jpg" width="900" height="1200" loading="lazy" alt="" data-alt-he="גוף תאורה עם שש מנורות" data-alt-en="A six-lamp pendant" style="object-position:50% 40%"><i class="shade" aria-hidden="true"></i><figcaption><span lang="he">גוף תאורה תלוי</span><span lang="en">A pendant light</span></figcaption></figure>
+      <figure class="cc"><img src="img/g-recessed.jpg" width="1100" height="619" loading="lazy" alt="" data-alt-he="תאורה שקועה בתקרה מונמכת" data-alt-en="Recessed lights in a dropped ceiling"><i class="shade" aria-hidden="true"></i><figcaption><span lang="he">תאורה שקועה</span><span lang="en">Recessed lights</span></figcaption></figure>
+      <figure class="cc"><img src="img/g-labels.jpg" width="573" height="573" loading="lazy" alt="" data-alt-he="לוח חשמל ביתי עם שמות בכתב יד" data-alt-en="A home panel with hand-written names"><i class="shade" aria-hidden="true"></i><figcaption><span lang="he">לוח ביתי</span><span lang="en">A home board</span></figcaption></figure>
+      <figure class="cc"><img src="img/g-roof.jpg" width="675" height="900" loading="lazy" alt="" data-alt-he="תעלת כבלים על גג, ליד ארון חשמל" data-alt-en="A cable tray on a roof, beside a switch cabinet"><i class="shade" aria-hidden="true"></i><figcaption><span lang="he">תעלת כבלים על גג</span><span lang="en">Cable tray, a rooftop</span></figcaption></figure>
+      <figure class="cc"><img src="img/s-board.jpg" width="720" height="960" loading="lazy" alt="" data-alt-he="לוח תעשייתי" data-alt-en="An industrial board"><i class="shade" aria-hidden="true"></i><figcaption><span lang="he">לוח תעשייתי</span><span lang="en">Industrial board</span></figcaption></figure>
+      <figure class="cc"><img src="img/g-breaker.jpg" width="676" height="900" loading="lazy" alt="" data-alt-he="מפסקים ראשיים" data-alt-en="Main breakers"><i class="shade" aria-hidden="true"></i><figcaption><span lang="he">מפסקים ראשיים</span><span lang="en">Main breakers</span></figcaption></figure>
+      <figure class="cc"><img src="img/work.jpg" width="675" height="900" loading="lazy" alt="" data-alt-he="עבודה בלוח תעשייתי" data-alt-en="Work in an industrial panel"><i class="shade" aria-hidden="true"></i><figcaption><span lang="he">בתוך הלוח</span><span lang="en">Inside the board</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ROI: a work light picks him out of the dim panel room; the figures roll like a meter -->
+<section class="roi" id="roi" data-roi>
+  <div class="r-grid">
+    <figure class="wl" data-litfig>
+      <img class="dim" src="img/work.jpg" width="675" height="900" loading="lazy" alt="חשמלאי מטוהר החשמל מהדק כבל בלוח תעשייתי עם מכבש הידראולי" data-alt-he="חשמלאי מטוהר החשמל מהדק כבל בלוח תעשייתי עם מכבש הידראולי" data-alt-en="A Tohar Electric electrician crimping a cable in an industrial panel with a hydraulic tool">
+      <div class="lens" aria-hidden="true" data-lens><img src="img/work.jpg" width="675" height="900" loading="lazy" alt=""></div>
+      <span class="co on" data-x=".66" data-y=".37" data-he="כלי לחיצה הידראולי" data-en="Hydraulic crimper"><i></i><b></b></span>
+      <span class="co on" data-x=".62" data-y=".16" data-he="כבלי הלוח" data-en="Panel cables"><i></i><b></b></span>
+      <figcaption><span lang="he">מתוך העבודות של טוהר החשמל</span><span lang="en">From Tohar Electric’s own jobs</span></figcaption>
+    </figure>
+    <div class="r-copy">
+      <h2 data-reveal><span lang="he">רועי יונה, <em>חשמלאי מוסמך.</em></span><span lang="en">Roi Yona, <em>licensed electrician.</em></span></h2>
+      <p class="r-line" data-reveal style="--d:80ms"><span lang="he">טוהר החשמל עובד בבתים, במשרדים ובמפעלים, מחשמל ביתי ועד חשמל לתעשייה.</span><span lang="en">Tohar Electric works in homes, offices and factories, from household power to industry.</span></p>
+      <div class="figs" data-reveal style="--d:160ms">
+        <div class="fg"><span class="odo" data-odo="4.7" aria-label="4.7">4.7</span><span class="cap" data-decode data-he="דירוג בגוגל" data-en="Google rating"></span></div>
+        <div class="fg"><span class="odo" data-odo="24" aria-label="24">24</span><span class="cap" data-decode data-he="ביקורות" data-en="Reviews"></span></div>
+        <div class="fg"><span class="odo plus" data-odo="200" aria-label="200+">200</span><span class="cap" data-decode data-he="לקוחות, לפי האתר שלו" data-en="Clients, per his site"></span></div>
+        <div class="fg"><span class="odo" data-odo="9" aria-label="9">9</span><span class="cap" data-decode data-he="תחומי עבודה" data-en="Kinds of work"></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MESSAGE: the live thing. Turn the meter's dial to the job, choose where, and the WhatsApp to Roi writes itself -->
+<section class="msg" id="msg" data-msgsec>
+  <div class="head">
+    <h2 data-reveal><span lang="he">ספרו לרועי <em>מה צריך.</em></span><span lang="en">Tell Roi <em>what you need.</em></span></h2>
+  </div>
+  <ol class="steps" data-steps>
+    <li data-step-li><span class="sn" aria-hidden="true"></span><span><span lang="he">בוחרים בחוגה את סוג העבודה</span><span lang="en">Turn the dial to the job</span></span></li>
+    <li data-step-li><span class="sn" aria-hidden="true"></span><span><span lang="he">בוחרים איפה</span><span lang="en">Choose where</span></span></li>
+    <li data-step-li><span class="sn" aria-hidden="true"></span><span><span lang="he">ההודעה יוצאת לרועי</span><span lang="en">The message goes to Roi</span></span></li>
+  </ol>
+  <div class="m-grid">
+    <div class="meter" data-meter>
+      <div class="lcd" aria-hidden="true"><span class="lcd-t" data-lcd></span><span class="lcd-v num">230V~</span></div>
+      <div class="dial" data-dial>
+        <div class="dial-face"><div class="knob" data-knob><i></i></div></div>
+        <div class="dial-opts" role="radiogroup" aria-label="סוג העבודה" data-t-dial>
+          <button type="button" role="radio" aria-checked="true" data-topic data-he="תקלה בחשמל" data-en="an electrical fault" data-short-he="תקלה" data-short-en="Fault"></button>
+          <button type="button" role="radio" aria-checked="false" data-topic data-he="לוח החשמל" data-en="the electrical panel" data-short-he="לוח" data-short-en="Panel"></button>
+          <button type="button" role="radio" aria-checked="false" data-topic data-he="תאורה" data-en="lighting" data-short-he="תאורה" data-short-en="Lights"></button>
+          <button type="button" role="radio" aria-checked="false" data-topic data-he="שקעים ונקודות חשמל" data-en="sockets and power points" data-short-he="שקעים" data-short-en="Sockets"></button>
+          <button type="button" role="radio" aria-checked="false" data-topic data-he="חשמל חכם" data-en="a smart-home system" data-short-he="חכם" data-short-en="Smart"></button>
+          <button type="button" role="radio" aria-checked="false" data-topic data-he="נקודות תקשורת" data-en="network points" data-short-he="תקשורת" data-short-en="Network"></button>
+          <button type="button" role="radio" aria-checked="false" data-topic data-he="גוף החימום בדוד" data-en="the water-heater element" data-short-he="דוד" data-short-en="Heater"></button>
+          <button type="button" role="radio" aria-checked="false" data-topic data-he="עבודת חשמל" data-en="an electrical job" data-short-he="אחר" data-short-en="Other"></button>
         </div>
-        <div class="stage-ctl">
-          <button class="arrow" type="button" data-step="-1"><span lang="he" aria-label="השלב הקודם">→</span><span lang="en" aria-label="Previous step">←</span></button>
-          <div class="thumbs" role="group" aria-label="שלבים">
-            <button type="button" data-goto="0" aria-pressed="true"><img src="img/t-wall.jpg" width="200" height="200" alt="" loading="lazy"><span class="vh" lang="he">קיר פתוח</span><span class="vh" lang="en">Open wall</span></button>
-            <button type="button" data-goto="1" aria-pressed="false"><img src="img/t-run.jpg" width="200" height="200" alt="" loading="lazy"><span class="vh" lang="he">כבלים במסלול</span><span class="vh" lang="en">Routed cables</span></button>
-            <button type="button" data-goto="2" aria-pressed="false"><img src="img/t-board.jpg" width="200" height="200" alt="" loading="lazy"><span class="vh" lang="he">לוח מסודר</span><span class="vh" lang="en">Tidy board</span></button>
-          </div>
-          <button class="arrow" type="button" data-step="1"><span lang="he" aria-label="השלב הבא">←</span><span lang="en" aria-label="Next step">→</span></button>
-        </div>
-        <p class="small"><span lang="he">שלוש תמונות מעבודות של טוהר החשמל</span><span lang="en">Three photos from Tohar Electric’s jobs</span></p>
       </div>
-      <div class="win" data-win>
-        <img class="s s1" src="img/s-wall.jpg" width="720" height="960" loading="lazy" data-s="0" data-alt-he="קיר פתוח עם צרור חוטים צבעוניים שיוצא מקופסת לוח ריקה" data-alt-en="An opened wall with a bundle of coloured wires coming out of an empty panel box" alt="קיר פתוח עם צרור חוטים צבעוניים שיוצא מקופסת לוח ריקה">
-        <img class="s s2" src="img/s-run.jpg" width="900" height="1200" loading="lazy" data-s="1" data-alt-he="כבלים ירוקים קשורים בצרורות בתוך תעלה בקיר, ושתי קופסאות עטופות בניילון" data-alt-en="Green cables tied in bundles in a wall chase, with two boxes wrapped in plastic" alt="כבלים ירוקים קשורים בצרורות בתוך תעלה בקיר, ושתי קופסאות עטופות בניילון">
-        <img class="s s3" src="img/s-board.jpg" width="720" height="960" loading="lazy" data-s="2" data-alt-he="לוח חשמל תעשייתי מסודר: מפסקים בשורה, כבלי נחושת וכל רכיב עם תווית" data-alt-en="A tidy industrial panel: breakers in a row, copper cables and a label on every part" alt="לוח חשמל תעשייתי מסודר: מפסקים בשורה, כבלי נחושת וכל רכיב עם תווית">
-        <div class="spark" aria-hidden="true"></div>
-        <div class="door" aria-hidden="true"><div class="louvre"></div><div class="plate"><span lang="he">טוהר החשמל</span><span lang="en">Tohar Electric</span></div><div class="lock"></div></div>
+      <div class="keys" role="radiogroup" aria-label="איפה" data-t-where>
+        <button type="button" role="radio" aria-checked="true" data-where data-he="בבית" data-en="at home"><span lang="he">בבית</span><span lang="en">Home</span></button>
+        <button type="button" role="radio" aria-checked="false" data-where data-he="במשרד" data-en="at the office"><span lang="he">במשרד</span><span lang="en">Office</span></button>
+        <button type="button" role="radio" aria-checked="false" data-where data-he="בעסק או במפעל" data-en="at a business or factory"><span lang="he">בעסק</span><span lang="en">Business</span></button>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="board" id="board" aria-labelledby="board-h">
-  <div class="board-head">
-    <h2 id="board-h"><span lang="he">מה צריך לחבר?</span><span lang="en">What needs wiring?</span></h2>
-    <p class="lead"><span lang="he">הרימו מפסק לכל נושא, וההודעה לרועי נכתבת לבד.</span><span lang="en">Flip a breaker for each job. Your note to Roi writes itself.</span></p>
-  </div>
-  <form class="panel" id="composer" onsubmit="return false">
-    <fieldset class="rail">
-      <legend class="vh"><span lang="he">נושאים</span><span lang="en">Jobs</span></legend>
-      <button type="button" class="brk" role="switch" aria-checked="false" data-k="fault"><span class="face"><i class="win-ind"></i><i class="slot"><b></b></i></span><span class="lbl"><span lang="he">תקלה בחשמל</span><span lang="en">A fault</span></span></button>
-      <button type="button" class="brk" role="switch" aria-checked="false" data-k="panel"><span class="face"><i class="win-ind"></i><i class="slot"><b></b></i></span><span class="lbl"><span lang="he">לוח חשמל</span><span lang="en">A panel</span></span></button>
-      <button type="button" class="brk" role="switch" aria-checked="false" data-k="light"><span class="face"><i class="win-ind"></i><i class="slot"><b></b></i></span><span class="lbl"><span lang="he">תאורה</span><span lang="en">Lighting</span></span></button>
-      <button type="button" class="brk" role="switch" aria-checked="false" data-k="socket"><span class="face"><i class="win-ind"></i><i class="slot"><b></b></i></span><span class="lbl"><span lang="he">שקעים ונקודות</span><span lang="en">Sockets</span></span></button>
-      <button type="button" class="brk" role="switch" aria-checked="false" data-k="smart"><span class="face"><i class="win-ind"></i><i class="slot"><b></b></i></span><span class="lbl"><span lang="he">בית חכם</span><span lang="en">Smart home</span></span></button>
-      <button type="button" class="brk" role="switch" aria-checked="false" data-k="data"><span class="face"><i class="win-ind"></i><i class="slot"><b></b></i></span><span class="lbl"><span lang="he">תקשורת</span><span lang="en">Network</span></span></button>
-      <button type="button" class="brk" role="switch" aria-checked="false" data-k="heater"><span class="face"><i class="win-ind"></i><i class="slot"><b></b></i></span><span class="lbl"><span lang="he">דוד חשמלי</span><span lang="en">Water heater</span></span></button>
-      <button type="button" class="brk" role="switch" aria-checked="false" data-k="biz"><span class="face"><i class="win-ind"></i><i class="slot"><b></b></i></span><span class="lbl"><span lang="he">עסק או מפעל</span><span lang="en">Business</span></span></button>
-    </fieldset>
-    <div class="slip">
-      <p class="slip-h"><span lang="he">ההודעה שלכם לרועי</span><span lang="en">Your message to Roi</span></p>
-      <p class="preview" data-preview aria-live="polite"></p>
-      <label class="name"><span class="vh" lang="he">השם שלכם</span><span class="vh" lang="en">Your name</span>
-        <input name="nm" type="text" autocomplete="given-name" maxlength="40" data-ph-he="השם שלכם (לא חובה)" data-ph-en="Your name (optional)" placeholder="השם שלכם (לא חובה)">
-      </label>
-      <div class="acts" data-keep-clear>
-        <a class="btn" href="https://wa.me/972542725050" data-send><span lang="he">שלחו לרועי בוואטסאפ</span><span lang="en">Send to Roi on WhatsApp</span></a>
-        <a class="link" href="tel:+972542725050"><span lang="he">או התקשרו: </span><span lang="en">or call: </span><span dir="ltr">054-272-5050</span></a>
-      </div>
-    </div>
-  </form>
-</section>
-
-<section class="work" id="work" aria-labelledby="work-h">
-  <aside class="facts">
-    <p><span lang="he">ארתור הנטקה 12, חיפה</span><span lang="en">12 Arthur Hantke St, Haifa</span></p>
-    <p><span lang="he">חשמלאי מוסמך</span><span lang="en">Licensed electrician</span></p>
-    <p><a href="mailto:royi@tohar-electric.co.il">royi@tohar-electric.co.il</a></p>
-    <img class="facts-img" src="img/g-breaker.jpg" width="676" height="900" loading="lazy" data-alt-he="מפסק תעשייתי במצב כבוי, עם תוויות Q26 ו-Q12 בלוח" data-alt-en="An industrial breaker switched off, labelled Q26 and Q12 in the panel" alt="מפסק תעשייתי במצב כבוי, עם תוויות Q26 ו-Q12 בלוח">
-  </aside>
-  <div class="work-body">
-    <h2 id="work-h"><span lang="he">מהבית <em>ועד המפעל.</em></span><span lang="en">From flats <em>to factories.</em></span></h2>
-    <p class="statement"><img class="cap" src="img/work.jpg" width="675" height="900" loading="lazy" data-alt-he="חשמלאי מטוהר החשמל מהדק כבל בלוח תעשייתי עם מכבש הידראולי" data-alt-en="A Tohar Electric electrician crimping a cable in an industrial panel with a hydraulic tool" alt="חשמלאי מטוהר החשמל מהדק כבל בלוח תעשייתי עם מכבש הידראולי"><span lang="he"><b>רועי יונה</b> עובד בבתים, במשרדים ובמפעלים.</span><span lang="en"><b>Roi Yona</b> works in homes, offices and factories.</span></p>
-    <p class="body-l"><span lang="he">לוחות חד ותלת פאזיים, חיווט, תאורה, נקודות תקשורת ובית חכם.</span><span lang="en">Single and three-phase panels, wiring, lighting, data points and smart homes.</span></p>
-  </div>
-</section>
-
-<section class="light" id="light" aria-labelledby="light-h">
-  <h2 id="light-h"><span lang="he">אור, כבלים, לוחות.</span><span lang="en">Light, cable, panels.</span></h2>
-  <div class="band" data-band>
-    <figure class="p p1"><img src="img/g-rings.jpg" width="1400" height="681" loading="lazy" data-alt-he="שלוש טבעות אור תלויות מתקרת משרד" data-alt-en="Three ring lights hanging from an office ceiling" alt="שלוש טבעות אור תלויות מתקרת משרד"><i class="halo h-ring" aria-hidden="true"></i><figcaption><span lang="he">טבעות אור במשרד</span><span lang="en">Ring lights, an office</span></figcaption></figure>
-    <figure class="p p2"><img src="img/g-labels.jpg" width="573" height="573" loading="lazy" data-alt-he="לוח חשמל ביתי פתוח, מפסקים בשלוש שורות עם שמות בכתב יד" data-alt-en="An open home panel, three rows of breakers with handwritten names" alt="לוח חשמל ביתי פתוח, מפסקים בשלוש שורות עם שמות בכתב יד"><figcaption><span lang="he">שמות בכתב יד</span><span lang="en">Hand-labelled</span></figcaption></figure>
-    <figure class="p p3"><img src="img/g-roof.jpg" width="675" height="900" loading="lazy" data-alt-he="תעלת כבלים עמוסה כבלים ירוקים על גג, ליד ארון חשמל" data-alt-en="A cable tray full of green cables on a roof, beside a switch cabinet" alt="תעלת כבלים עמוסה כבלים ירוקים על גג, ליד ארון חשמל"><figcaption><span lang="he">תעלת כבלים על גג</span><span lang="en">Cable tray, a rooftop</span></figcaption></figure>
-    <figure class="p p4"><img src="img/g-recessed.jpg" width="1100" height="619" loading="lazy" data-alt-he="תקרה מונמכת עם שורת גופי תאורה שקועים דולקים" data-alt-en="A dropped ceiling with a row of lit recessed lights" alt="תקרה מונמכת עם שורת גופי תאורה שקועים דולקים"><i class="halo h-dl" aria-hidden="true"></i><figcaption><span lang="he">תאורה שקועה בתקרה</span><span lang="en">Recessed ceiling lights</span></figcaption></figure>
-  </div>
-  <p class="small band-note"><span lang="he">כל התמונות באתר: טוהר החשמל, דרך Google Maps</span><span lang="en">Every photo here: Tohar Electric, via Google Maps</span></p>
-</section>
-
-<section class="reviews" id="reviews" aria-labelledby="rev-h">
-  <div class="meter-col">
-    <h2 id="rev-h"><span lang="he">4.7 בגוגל, מ-24 ביקורות.</span><span lang="en">4.7 on Google, from 24 reviews.</span></h2>
-    <svg class="meter" dir="ltr" viewBox="0 0 320 300" role="img" aria-label="4.7 מתוך 5" data-meter>
-      <rect x="6" y="6" width="308" height="288" rx="18" class="bezel"/>
-      <rect x="22" y="22" width="276" height="210" rx="8" class="dial"/>
-      <g class="ticks" data-ticks></g>
-      <text x="160" y="196" class="unit">GOOGLE</text>
-      <g data-needle transform="rotate(-50 160 220)"><path d="M158.6 220 L159.4 64 L160.6 64 L161.4 220 Z" class="needle"/><path d="M159.3 64 L160 52 L160.7 64 Z" class="tip"/></g>
-      <rect x="22" y="208" width="276" height="24" class="lip"/>
-      <circle cx="160" cy="220" r="9" class="pivot"/>
-      <text x="160" y="270" class="read" data-read>4.7</text>
-    </svg>
-    <a class="link" href="https://maps.google.com/?cid=7855645850836706700" rel="noopener" target="_blank"><span lang="he">כל הביקורות בגוגל</span><span lang="en">All reviews on Google</span></a>
-  </div>
-  <div class="letters">
-    <blockquote class="letter">
-      <p class="open"><span lang="he">יש חשמלאי טוב ויש חשמלאי מעולה.</span><span lang="en">There are good electricians, and there are excellent ones.</span></p>
-      <p><span lang="he">רועי הביא אור לבית ששכרתי באחד הרחובות הצדדיים בהר הכרמל… משום מה דווקא במדרגות שמובילות לבית לא היה אור. רועי מצא פתרון מקורי וביצע את עבודתו בצורה יוצאת דופן ובמקצועיות רבה. כל הכבוד ותודה מכל הלב.</span><span lang="en">Roi brought light to a house I rented on a side street on Mount Carmel… for some reason the steps leading up to it had no light. Roi found an original solution and did the job exceptionally well, very professionally. Well done, and thank you from the heart.</span></p>
-      <footer><span data-stars></span><cite>Alex Tsatskin</cite><span class="small"><span lang="he">ביקורת בגוגל</span><span lang="en">Google review, translated from Hebrew</span></span></footer>
-    </blockquote>
-    <div class="shorts">
-      <blockquote><p><span lang="he">רועי היה מקצועי, אמין ומאוד אדיב, בדק את כל השקעים בבית, את הארקה ותיקן את כל הליקויים.</span><span lang="en">Roi was professional, reliable and very kind. He checked every socket in the house and the earthing, and fixed every fault.</span></p><footer><span data-stars></span><cite>Orat Bash</cite></footer></blockquote>
-      <blockquote><p><span lang="he">הוא משקיע ודואג לפתור כל סוגיה ודרישה של הלקוח בצורה הטובה ביותר, עבור הלקוח ועבור תשתית החשמל.</span><span lang="en">He puts in the effort to solve every issue and request in the best way, for the customer and for the wiring itself.</span></p><footer><span data-stars></span><cite>Evyatar Shpilman</cite></footer></blockquote>
+    <div class="chat" data-chat>
+      <div class="c-top"><span class="c-av"><img src="img/logo.png" width="214" height="83" alt=""></span><div><b><span lang="he">רועי · טוהר החשמל</span><span lang="en">Roi · Tohar Electric</span></b><span class="c-st" data-status></span></div></div>
+      <div class="c-body"><p class="bub" aria-live="polite"><span data-msg></span><i class="caret" aria-hidden="true"></i></p></div>
+      <label class="c-name"><span class="vh"><span lang="he">השם שלכם</span><span lang="en">Your name</span></span><input type="text" name="nm" autocomplete="given-name" maxlength="40" placeholder="השם שלכם (לא חובה)" data-name></label>
+      <a class="btn send" href="https://wa.me/972542725050" target="_blank" rel="noopener" data-send><svg aria-hidden="true"><use href="#i-wa"/></svg><span lang="he">שליחה לרועי בוואטסאפ</span><span lang="en">Send to Roi on WhatsApp</span></a>
     </div>
   </div>
 </section>
 
-<section class="visit" id="visit" aria-labelledby="visit-h">
-  <div class="visit-copy">
-    <h2 id="visit-h"><span lang="he">ארתור הנטקה 12, <em>חיפה.</em></span><span lang="en">12 Arthur Hantke St, <em>Haifa.</em></span></h2>
-    <p class="status" data-status></p>
-    <table class="hours" data-hours></table>
-    <div class="acts" data-keep-clear>
-      <a class="btn" href="tel:+972542725050"><span lang="he">התקשרו לרועי</span><span lang="en">Call Roi</span></a>
-      <a class="btn ghost" href="https://wa.me/972542725050" data-wa-plain><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
-    </div>
+<!-- REVIEWS: cable tags clipped to the logo's cable, drifting past -->
+<section class="revs" id="reviews" data-revs>
+  <div class="head">
+    <h2 data-reveal><span lang="he">4.7, <em>מ-24 ביקורות.</em></span><span lang="en">4.7, <em>from 24 reviews.</em></span></h2>
+    <a class="gbadge" href="https://maps.google.com/?cid=7855645850836706700" target="_blank" rel="noopener" data-reveal style="--d:80ms"><b>Google</b><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><span lang="he">לכל הביקורות</span><span lang="en">Read them all</span></a>
   </div>
-  <div class="map">
-    <iframe title="מפה: ארתור הנטקה 12, חיפה" src="https://www.google.com/maps?q=%D7%90%D7%A8%D7%AA%D7%95%D7%A8%20%D7%94%D7%A0%D7%98%D7%A7%D7%94%2012%2C%20%D7%97%D7%99%D7%A4%D7%94&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <div class="line" data-line>
+    <i class="lcable" aria-hidden="true"></i>
+    <div class="tags" data-tags>
+      <blockquote class="tag"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p lang="he">יש חשמלאי טוב ויש חשמלאי מעולה… משום מה דווקא במדרגות שמובילות לבית לא היה אור. מה עכשיו? רועי מצא פתרון מקורי וביצע את עבודתו בצורה יוצאת דופן ובמקצועיות רבה.</p><p lang="en">There are good electricians and there are excellent ones… for some reason the steps leading up to the house had no light. What now? Roi found an original solution and did the job exceptionally well, very professionally.</p><footer><bdi>Alex Tsatskin</bdi><span lang="en" class="tr">translated from Hebrew</span></footer></blockquote>
+      <blockquote class="tag"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p lang="he">רועי היה מקצועי, אמין ומאוד אדיב, בדק את כל השקעים בבית, את הארקה ותיקן את כל הליקויים במהירות ומקצועיות, ממליצה בחום.</p><p lang="en">Roi was professional, reliable and very kind. He checked every socket in the house and the earthing, and fixed all the faults quickly and professionally. Warmly recommended.</p><footer><bdi>Orat Bash</bdi><span lang="en" class="tr">translated from Hebrew</span></footer></blockquote>
+      <blockquote class="tag"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p lang="he">הוא משקיע ודואג לפתור כל סוגיה ודרישה של הלקוח בצורה הטובה ביותר עבור הלקוח ועבור תשתית החשמל… מדובר בבן אדם שכיף וחוויה להיות בחברתו כשהוא עושה את העבודה.</p><p lang="en">He puts in the effort to solve every issue and request in the best way, for the customer and for the wiring itself… he’s a person it’s a pleasure to be around while he works.</p><footer><bdi>Evyatar Shpilman</bdi><span lang="en" class="tr">translated from Hebrew</span></footer></blockquote>
+      <blockquote class="tag"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p lang="he">רועי הוא זריז ומקצוען. כבר כמה וכמה פעמים הוא עזר לי עם תקלות שהיו לי בחשמל…</p><p lang="en">Roi is quick and a real professional. He has helped me with electrical faults several times already…</p><footer><bdi>ברוך בן דוד</bdi><span lang="en" class="tr">translated from Hebrew</span></footer></blockquote>
+    </div>
   </div>
 </section>
 
-<footer class="legend" id="legend">
-  <div class="card">
-    <p class="card-h"><span lang="he">מקרא הלוח</span><span lang="en">Panel legend</span></p>
-    <table>
-      <tr><th scope="row"><span lang="he">טלפון</span><span lang="en">Phone</span></th><td><a href="tel:+972542725050" dir="ltr">054-272-5050</a></td></tr>
-      <tr><th scope="row"><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></th><td><a href="https://wa.me/972542725050" data-wa-plain><span lang="he">הודעה לרועי</span><span lang="en">Message Roi</span></a></td></tr>
-      <tr><th scope="row"><span lang="he">אימייל</span><span lang="en">Email</span></th><td><a href="mailto:royi@tohar-electric.co.il">royi@tohar-electric.co.il</a></td></tr>
-      <tr><th scope="row"><span lang="he">כתובת</span><span lang="en">Address</span></th><td><span lang="he">ארתור הנטקה 12, חיפה</span><span lang="en">12 Arthur Hantke St, Haifa</span></td></tr>
-      <tr><th scope="row"><span lang="he">שעות</span><span lang="en">Hours</span></th><td><span lang="he">א׳–ד׳ <bdi dir="ltr">7:00–20:00</bdi> · ה׳ <bdi dir="ltr">7:00–19:00</bdi> · ו׳ <bdi dir="ltr">7:00–12:30</bdi> · שבת סגור</span><span lang="en">Sun–Wed 7:00–20:00 · Thu 7:00–19:00 · Fri 7:00–12:30 · Sat closed</span></td></tr>
-      <tr><th scope="row"><span lang="he">תמונות</span><span lang="en">Photos</span></th><td><span lang="he">טוהר החשמל, דרך Google Maps (תורמי Google Maps)</span><span lang="en">Tohar Electric, via Google Maps (Google Maps contributors)</span></td></tr>
-      <tr><th scope="row"><span lang="he">ביקורות</span><span lang="en">Reviews</span></th><td><span lang="he">מצוטטות מגוגל, בקיצור</span><span lang="en">Quoted from Google, shortened</span></td></tr>
-    </table>
-    <p class="small"><span lang="he">קונספט לדוגמה, לא האתר הרשמי של טוהר החשמל.</span><span lang="en">A sample concept, not Tohar Electric’s official website.</span>
-      <button class="motion small-sw" type="button" role="switch" aria-checked="true" data-motion-toggle><span class="sw" aria-hidden="true"><i></i></span><span lang="he">תנועה</span><span lang="en">Motion</span></button></p>
+<!-- FAQ: answers only from his own website -->
+<section class="faq" id="faq">
+  <div class="head"><h2 data-reveal><span lang="he">שאלות <em>מהשטח.</em></span><span lang="en">Questions <em>from the field.</em></span></h2></div>
+  <div class="qa">
+    <details data-reveal><summary><span lang="he">המאמ״ת קופץ. רועי מטפל בזה?</span><span lang="en">The breaker keeps tripping. Can Roi help?</span><span class="sw" aria-hidden="true"><i></i></span></summary><p><span lang="he">כן. תיקון תקלות וקצרים בבתים, במשרדים ובמפעלים, תיקון קצרים בלוחות חשמל והחלפת כבלים.</span><span lang="en">Yes. Faults and shorts in homes, offices and factories, shorts in electrical panels, and cable replacement.</span></p></details>
+    <details data-reveal style="--d:60ms"><summary><span lang="he">אפשר להגדיל לוח קיים?</span><span lang="en">Can an existing panel be enlarged?</span><span class="sw" aria-hidden="true"><i></i></span></summary><p><span lang="he">כן. התקנה, החלפה והגדלה של לוחות חשמל, כולל לוחות תלת-פאזיים.</span><span lang="en">Yes. Panels installed, replaced and enlarged, three-phase boards included.</span></p></details>
+    <details data-reveal style="--d:120ms"><summary><span lang="he">מה אפשר לחבר לחשמל חכם?</span><span lang="en">What can a smart home control?</span><span class="sw" aria-hidden="true"><i></i></span></summary><p><span lang="he">כמעט את כל הבית: תאורה, תריסים חשמליים, אבטחה ואזעקה, מצלמות, מזגנים, שער חשמלי, דוד חשמלי ותנורי בישול.</span><span lang="en">Almost the whole house: lights, electric shutters, security and alarm, cameras, air conditioners, an electric gate, the water heater and ovens.</span></p></details>
+    <details data-reveal style="--d:180ms"><summary><span lang="he">הדוד לא מחמם. מה עושים?</span><span lang="en">The water heater won’t heat. What now?</span><span class="sw" aria-hidden="true"><i></i></span></summary><p><span lang="he">טוהר החשמל מטפל בגופי חימום לדודים, למשל כשאין זרם בגוף החימום או כשהדוד לא מחמם.</span><span lang="en">Tohar Electric handles water-heater elements, for example when the element gets no current or the heater won’t heat.</span></p></details>
+    <details data-reveal style="--d:240ms"><summary><span lang="he">עובדים גם עם מפעלים?</span><span lang="en">Do you work with factories too?</span><span class="sw" aria-hidden="true"><i></i></span></summary><p><span lang="he">כן. תכנון וביצוע לעסקים ולתעשייה: חיווט לוחות, חיבורי מנועים ופיקודים ואחזקה שוטפת.</span><span lang="en">Yes. Planning and work for businesses and industry: panel wiring, motor and control connections, and ongoing upkeep.</span></p></details>
+  </div>
+</section>
+
+<!-- CONTACT: the rooftop cable run shrinks from full width into its frame, the contact cards rise around it -->
+<section class="reach" id="reach" aria-label="יצירת קשר" data-t-reach data-reach>
+  <div class="k-bento">
+    <figure class="k-photo" data-kphoto>
+      <img src="img/g-roof.jpg" width="675" height="900" loading="lazy" alt="" data-alt-he="תעלת כבלים על גג בחיפה, מעבודות טוהר החשמל" data-alt-en="A rooftop cable tray in Haifa, a Tohar Electric job">
+      <figcaption><h2><span lang="he">דברו <em>עם רועי.</em></span><span lang="en">Talk <em>to Roi.</em></span></h2></figcaption>
+    </figure>
+    <a class="k k-wa" href="https://wa.me/972542725050" target="_blank" rel="noopener" data-wa-plain data-k><svg aria-hidden="true"><use href="#i-wa"/></svg><b><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></b><span dir="ltr" class="num">054-272-5050</span></a>
+    <a class="k" href="tel:+972542725050" data-k><svg aria-hidden="true"><use href="#i-phone"/></svg><b><span lang="he">טלפון</span><span lang="en">Phone</span></b><span dir="ltr" class="num">054-272-5050</span></a>
+    <a class="k" href="mailto:royi@tohar-electric.co.il" data-k><svg aria-hidden="true"><use href="#i-mail"/></svg><b><span lang="he">אימייל</span><span lang="en">Email</span></b><span dir="ltr" class="em">royi@tohar-electric.co.il</span></a>
+    <a class="k" href="https://maps.google.com/?cid=7855645850836706700" target="_blank" rel="noopener" data-k><svg aria-hidden="true"><use href="#i-pin"/></svg><b><span lang="he">כתובת</span><span lang="en">Address</span></b><span><span lang="he">ארתור הנטקה 12, חיפה</span><span lang="en">12 Arthur Hantke St, Haifa</span></span></a>
+    <div class="k k-hours" data-k><b><span lang="he">שעות</span><span lang="en">Hours</span></b><span class="c-st" data-status></span><table class="hours" data-hours></table></div>
+    <div class="k k-map" data-k><iframe title="Google Maps: ארתור הנטקה 12, חיפה" src="https://www.google.com/maps?q=%D7%90%D7%A8%D7%AA%D7%95%D7%A8%20%D7%94%D7%A0%D7%98%D7%A7%D7%94%2012%2C%20%D7%97%D7%99%D7%A4%D7%94&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER: the page lifts like a curtain off his real logo on a wall plate; the LED ring rises behind it -->
+<footer class="foot" data-foot>
+  <div class="f-ring" aria-hidden="true"><i class="glow"></i><i class="tube"></i></div>
+  <div class="f-in">
+    <div class="f-plate"><img src="img/logo.png" width="214" height="83" loading="lazy" alt="הלוגו של טוהר החשמל" data-alt-he="הלוגו של טוהר החשמל" data-alt-en="The Tohar Electric logo"></div>
+    <div class="f-cols">
+      <div><p class="fh"><span lang="he">כתובת</span><span lang="en">Address</span></p><p><span lang="he">ארתור הנטקה 12, חיפה</span><span lang="en">12 Arthur Hantke St, Haifa</span></p></div>
+      <div><p class="fh"><span lang="he">קשר</span><span lang="en">Contact</span></p><p><a href="tel:+972542725050" dir="ltr">054-272-5050</a> · <a href="https://wa.me/972542725050" target="_blank" rel="noopener" data-wa-plain><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a><br><a href="mailto:royi@tohar-electric.co.il">royi@tohar-electric.co.il</a></p></div>
+      <div><p class="fh"><span lang="he">בעמוד</span><span lang="en">On this page</span></p><p><a href="#panel"><span lang="he">העבודה</span><span lang="en">The work</span></a> · <a href="#services"><span lang="he">שירותים</span><span lang="en">Services</span></a> · <a href="#light"><span lang="he">תאורה</span><span lang="en">Lighting</span></a> · <a href="#msg"><span lang="he">הודעה לרועי</span><span lang="en">Message Roi</span></a></p></div>
+      <div class="f-tools"><button type="button" class="tgl" role="switch" aria-checked="true" data-motion-toggle><span class="rk" aria-hidden="true"><i></i></span><span lang="he">תנועה</span><span lang="en">Motion</span></button><button type="button" class="tgl lang" data-set-lang><span lang="he">English</span><span lang="en">עברית</span></button></div>
+    </div>
+    <p class="f-legal"><span lang="he">קונספט לדוגמה · זה אינו האתר הרשמי של העסק. הלוגו מהאתר tohar-electric.co.il, התמונות מתמונות העסק ב-Google Maps (תורמי Google Maps), הביקורות מגוגל, מקוצרות.</span><span lang="en">Sample concept · not the business’s official website. Logo from tohar-electric.co.il, photos from the business’s Google Maps photos (Google Maps contributors), reviews from Google, shortened.</span></p>
   </div>
 </footer>
 
-<div class="plate-bar" data-tray>
-  <div class="wallplate">
-    <a class="rocker" href="tel:+972542725050" data-t-call2><span class="rk-face"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg><span lang="he">התקשרו</span><span lang="en">Call</span></span></a>
-    <a class="rocker" href="https://wa.me/972542725050" data-wa-plain><span class="rk-face"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.25-.12-1.47-.72-1.7-.8-.23-.09-.39-.13-.56.12-.16.25-.64.8-.79.97-.14.16-.29.18-.54.06a6.7 6.7 0 0 1-3.3-2.9c-.25-.43.25-.4.71-1.33.08-.16.04-.3-.02-.42l-.76-1.83c-.2-.48-.4-.41-.56-.42h-.47a.9.9 0 0 0-.65.3 2.7 2.7 0 0 0-.85 2.03 4.7 4.7 0 0 0 1 2.5 10.8 10.8 0 0 0 4.1 3.63c1.53.66 2.13.72 2.9.6.47-.07 1.46-.6 1.66-1.17.2-.58.2-1.07.15-1.17-.06-.1-.22-.16-.47-.28z"/></svg><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></span></a>
-  </div>
+<!-- on phones: the plug at the end of the logo's cable, its two pins are call and WhatsApp -->
+<div class="plug-bar" data-plugbar>
+  <a class="pin" href="tel:+972542725050" aria-label="התקשרו לרועי, 054-272-5050" data-t-call><svg aria-hidden="true"><use href="#i-phone"/></svg></a>
+  <span class="pb-bolt" aria-hidden="true"><svg><use href="#i-bolt"/></svg></span>
+  <a class="pin" href="https://wa.me/972542725050" target="_blank" rel="noopener" aria-label="וואטסאפ לרועי" data-t-wa data-wa-plain><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
 </div>
 
-<script src="js/site.js" defer></script>
+<script src="js/site.js"></script>
 </body>
 </html>
