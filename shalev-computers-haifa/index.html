@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#202334">
+<meta name="theme-color" content="#12142a">
 <meta name="color-scheme" content="dark">
 <title>שלו · שירותים למחשבים ולתקשורת · הרץ היינריך 2, חיפה</title>
 <meta name="description" content="קונספט לדוגמה לאתר של שלו – מתן שירותים למחשבים ותקשורת, עמרי שלו, חיפה: תיקון, תחזוקה, רשתות, מצלמות ואזעקות. 5.0 בגוגל מ-63 ביקורות.">
@@ -14,7 +14,7 @@
 var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage.getItem('sh-lang')}catch(e){}l=q==='en'||q==='he'?q:l==='en'?'en':'he';r.lang=l;r.dir=l==='he'?'rtl':'ltr';})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@300;400;500&family=Alef:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" href="img/logo-mark.png">
 <link rel="stylesheet" href="css/site.css">
 <link rel="preload" as="image" href="img/logo-mark.png">
@@ -27,271 +27,247 @@ var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage
   <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2zm0 17.9a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8.1 8.1 0 1 1 12 20.1zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.1 11.1 0 0 0 4.2 3.7c1.6.7 2.2.7 3 .6a2.5 2.5 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .1-1.2c-.1-.1-.2-.2-.4-.3z"/></symbol>
   <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="i-star" viewBox="0 0 16 16"><path d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
 </defs></svg>
 
 <div class="concept" data-concept="קונספט לדוגמה שנבנה עבור שלו – מתן שירותים למחשבים ותקשורת · זה אינו האתר הרשמי של העסק">
   <p><span lang="he">קונספט לדוגמה שנבנה עבור שלו – מתן שירותים למחשבים ותקשורת · זה אינו האתר הרשמי של העסק</span><span lang="en">A sample concept built for Shalev Computer &amp; Network Services · This is not the business’s official website</span></p>
 </div>
 
-<header class="bar" data-bar>
-  <a class="brand" href="#top" aria-label="שלו – מתן שירותים למחשבים" data-t-brand>
-    <img src="img/logo-mark.png" width="380" height="304" alt="">
-    <span class="bname"><span lang="he">שלו</span><span lang="en">Shalev</span></span>
-  </a>
-  <nav class="links" aria-label="ראשי" data-t-nav>
-    <a href="#omri"><span lang="he">עמרי</span><span lang="en">Omri</span></a>
-    <a href="#services"><span lang="he">שירותים</span><span lang="en">Services</span></a>
-    <a href="#cams"><span lang="he">מצלמות</span><span lang="en">Cameras</span></a>
-    <a href="#reviews"><span lang="he">ביקורות</span><span lang="en">Reviews</span></a>
-    <a href="#net"><span lang="he">הודעה לעמרי</span><span lang="en">Message Omri</span></a>
-  </nav>
-  <div class="tools">
-    <button type="button" class="tgl" role="switch" aria-checked="true" data-motion-toggle><span class="knob" aria-hidden="true"></span><span lang="he">תנועה</span><span lang="en">Motion</span></button>
-    <button type="button" class="tgl lang" data-set-lang><span lang="he">EN</span><span lang="en">עב</span></button>
-    <a class="act" href="https://wa.me/972525221010" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span lang="he">וואטסאפ לעמרי</span><span lang="en">WhatsApp Omri</span></a>
+<!-- nav: a full bar at the top that gathers into a floating pill once you scroll -->
+<header class="nav" data-nav>
+  <div class="nav-in">
+    <a class="brand" href="#top" aria-label="שלו – מתן שירותים למחשבים" data-t-brand>
+      <img src="img/logo-mark.png" width="380" height="304" alt="">
+      <span class="bname"><span lang="he">שלו</span><span lang="en">Shalev</span></span>
+    </a>
+    <nav class="links" aria-label="ראשי" data-t-nav>
+      <a href="#services"><span lang="he">שירותים</span><span lang="en">Services</span></a>
+      <a href="#omri"><span lang="he">עמרי</span><span lang="en">Omri</span></a>
+      <a href="#how"><span lang="he">איך זה עובד</span><span lang="en">How it works</span></a>
+      <a href="#reviews"><span lang="he">ביקורות</span><span lang="en">Reviews</span></a>
+      <a href="#faq"><span lang="he">שאלות</span><span lang="en">FAQ</span></a>
+    </nav>
+    <div class="tools">
+      <button type="button" class="tgl" role="switch" aria-checked="true" data-motion-toggle><span class="knob" aria-hidden="true"></span><span lang="he">תנועה</span><span lang="en">Motion</span></button>
+      <button type="button" class="tgl lang" data-set-lang><span lang="he">EN</span><span lang="en">עב</span></button>
+      <a class="pill-btn" href="https://wa.me/972525221010" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
+    </div>
   </div>
 </header>
 
 <main class="page" id="main">
 
-<!-- HERO: the real logo's own pixels become a living circuit brain; the logo's grid lights up under the hand -->
+<!-- HERO: his slogan above a slowly turning ring of his own cards, rising over a glowing horizon -->
 <section class="hero" id="top" data-hero>
-  <canvas class="lattice" aria-hidden="true" data-lattice></canvas>
+  <div class="horizon" aria-hidden="true"><i class="planet"></i><i class="rim"></i></div>
   <div class="h-copy">
     <h1 class="h-title" data-split>
       <span class="ln"><span lang="he">כל מחשב</span><span lang="en">Every computer</span></span>
-      <span class="ln"><span lang="he">מקבל יחס אישי</span><span lang="en">gets personal care</span></span>
+      <span class="ln"><span lang="he">מקבל יחס אישי.</span><span lang="en">gets personal care.</span></span>
     </h1>
-    <p class="h-lead" data-rise style="--d:700ms"><span lang="he">שלו – מתן שירותים למחשבים ולתקשורת. עמרי שלו, חיפה, מאז 2003.</span><span lang="en">Shalev Computer &amp; Network Services. Omri Shalev, Haifa, since 2003.</span></p>
-    <div class="h-acts" data-rise style="--d:820ms">
+    <p class="h-lead" data-rise style="--d:520ms"><span lang="he">עמרי שלו מטפל במחשבים, ברשתות ובמצלמות של עסקים ובתים בחיפה, מאז 2003.</span><span lang="en">Omri Shalev looks after the computers, networks and cameras of businesses and homes in Haifa, since 2003.</span></p>
+    <div class="h-acts" data-rise style="--d:640ms">
       <a class="btn" href="https://wa.me/972525221010" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"/></svg><span lang="he">וואטסאפ לעמרי</span><span lang="en">WhatsApp Omri</span></a>
       <a class="btn ghost" href="tel:+972525221010"><svg aria-hidden="true"><use href="#i-phone"/></svg><span dir="ltr" class="num">052-522-1010</span></a>
     </div>
-    <div class="h-chips" data-rise style="--d:940ms">
-      <a class="chip" href="https://maps.google.com/?cid=10330202893066167407" target="_blank" rel="noopener"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><b class="num">5.0</b><span lang="he">· 63 ביקורות בגוגל</span><span lang="en">· 63 Google reviews</span></a>
-      <span class="chip" data-status></span>
+  </div>
+  <div class="ring-wrap" data-ringwrap>
+    <div class="ring" data-ring>
+      <figure class="rc"><img src="img/omri.jpg" width="800" height="800" alt="" data-alt-he="עמרי שלו" data-alt-en="Omri Shalev"><figcaption><span lang="he">עמרי שלו</span><span lang="en">Omri Shalev</span></figcaption></figure>
+      <figure class="rc rc-brain" data-brain><canvas aria-hidden="true"></canvas><img class="brain-still" src="img/logo-mark.png" width="380" height="304" alt=""><figcaption><span lang="he">לאנשים שנהנים ממחשבים</span><span lang="en">For people who enjoy computers</span></figcaption></figure>
+      <figure class="rc"><img src="img/work-cameras.jpg" width="1100" height="2062" alt="" data-alt-he="מצלמות שעמרי התקין במחסן" data-alt-en="Cameras Omri installed in a warehouse" style="object-position:50% 30%"><figcaption><span lang="he">מצלמות במחסן</span><span lang="en">Warehouse cameras</span></figcaption></figure>
+      <figure class="rc rc-rate"><div class="big num">5.0</div><div class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></div><figcaption><span lang="he">63 ביקורות בגוגל</span><span lang="en">63 Google reviews</span></figcaption></figure>
+      <figure class="rc"><img src="img/office-view.jpg" width="1200" height="1500" alt="" data-alt-he="נוף לחיפה מתוך תמונות העסק" data-alt-en="View of Haifa from the business’s photos"><figcaption><span lang="he">חיפה</span><span lang="en">Haifa</span></figcaption></figure>
+      <figure class="rc"><img src="img/logo-card.jpg" width="861" height="687" alt="" data-alt-he="הלוגו של העסק" data-alt-en="The business’s logo"></figure>
+      <figure class="rc"><img src="img/old-card.jpg" width="791" height="680" alt="" data-alt-he="כרטיס הביקור הישן של העסק" data-alt-en="The business’s old business card"><figcaption><span lang="he">מאז 2003</span><span lang="en">Since 2003</span></figcaption></figure>
+      <figure class="rc rc-cctv"><img src="img/work-cameras.jpg" width="1100" height="2062" alt="" style="object-position:70% 42%"><span class="rec">REC</span><figcaption><span lang="he">מצלמה 02</span><span lang="en">Camera 02</span></figcaption></figure>
     </div>
   </div>
-  <div class="brain" data-brain>
-    <canvas aria-hidden="true"></canvas>
-    <img class="brain-still" src="img/logo-mark.png" width="380" height="304" alt="">
-  </div>
-  <div class="ticker" aria-hidden="true"><div class="tk" data-ticker>
-    <span lang="he">תיקון מחשבים · מחשבים ניידים · רשתות ו-Wi-Fi · מצלמות אבטחה · אזעקות · גיבוי ושחזור · תמיכה מרחוק · הרכבת מחשבים · הדרכות ושיעורים · </span><span lang="en">Computer repair · Laptops · Networks &amp; Wi-Fi · Security cameras · Alarms · Backup &amp; recovery · Remote support · Custom builds · Lessons &amp; training · </span>
-  </div></div>
 </section>
 
-<!-- OMRI: his real photos are dealt like cards; the portrait grows to front -->
-<section class="omri" id="omri" data-deal>
-  <div class="o-stage">
-    <div class="deck" data-deck>
-      <figure class="card c-old"><img src="img/old-card.jpg" width="791" height="680" loading="lazy" data-alt-he="כרטיס הביקור הישן של העסק" data-alt-en="The business’s old business card" alt="כרטיס הביקור הישן של העסק"></figure>
-      <figure class="card c-view"><img src="img/office-view.jpg" width="1200" height="1500" loading="lazy" data-alt-he="נוף לחיפה מתוך תמונות העסק" data-alt-en="View of Haifa from the business’s photos" alt="נוף לחיפה מתוך תמונות העסק"></figure>
-      <figure class="card c-cam"><img src="img/work-cameras.jpg" width="1100" height="2062" loading="lazy" data-alt-he="מצלמות שעמרי התקין במחסן" data-alt-en="Cameras Omri installed in a warehouse" alt="מצלמות שעמרי התקין במחסן"></figure>
-      <figure class="card c-logo"><img src="img/logo-card.jpg" width="861" height="687" loading="lazy" data-alt-he="הלוגו של העסק" data-alt-en="The business’s logo" alt="הלוגו של העסק"></figure>
-      <figure class="card c-omri"><img src="img/omri.jpg" width="800" height="800" loading="lazy" data-alt-he="עמרי שלו" data-alt-en="Omri Shalev" alt="עמרי שלו"><figcaption><span lang="he">עמרי שלו</span><span lang="en">Omri Shalev</span></figcaption></figure>
+<!-- SERVICES: a bento of living tiles -->
+<section class="svc" id="services">
+  <div class="head">
+    <h2 data-reveal><span lang="he">כל מה שמחובר לחשמל ולרשת.</span><span lang="en">Everything on power and on the network.</span></h2>
+    <p data-reveal style="--d:80ms"><span lang="he">מחשב בודד בבית או רשת שלמה במשרד: ייעוץ, תיקון, התקנה ותחזוקה.</span><span lang="en">One computer at home or a whole office network: advice, repair, installation and upkeep.</span></p>
+  </div>
+  <div class="bento" data-bento>
+    <article class="tile t-cctv" data-tile>
+      <div class="cctv" data-cctv>
+        <i style="--img:url(../img/work-cameras.jpg);--pos:50% 28%"></i>
+        <i style="--img:url(../img/office-view.jpg);--pos:50% 72%"></i>
+        <i style="--img:url(../img/work-cameras.jpg);--pos:85% 45%;--sz:230%"></i>
+        <i style="--img:url(../img/office-view.jpg);--pos:50% 15%"></i>
+        <span class="osd" aria-hidden="true"><b class="rec">REC</b><b data-clock>00:00:00</b></span>
+      </div>
+      <div class="tt"><h3><span lang="he">מצלמות אבטחה</span><span lang="en">Security cameras</span></h3><p><span lang="he">תכנון, פריסה ותחזוקה של מצלמות, במעגל פתוח וסגור.</span><span lang="en">Cameras planned, installed and maintained, open and closed circuit.</span></p></div>
+    </article>
+    <article class="tile" data-tile>
+      <svg class="viz v-pc" viewBox="0 0 200 150" aria-hidden="true"><rect x="62" y="12" width="76" height="126" rx="6" class="m"/><rect x="70" y="22" width="60" height="8" rx="2" class="d"/><circle cx="100" cy="82" r="30" class="d"/><g class="fan"><path d="M100 82 L100 56 A26 26 0 0 1 122 70Z"/><path d="M100 82 L124 92 A26 26 0 0 1 104 108Z"/><path d="M100 82 L78 98 A26 26 0 0 1 76 72Z"/></g><circle cx="100" cy="82" r="5" class="hub"/><circle cx="126" cy="128" r="3" class="led"/></svg>
+      <div class="tt"><h3><span lang="he">תיקון מחשבים</span><span lang="en">Computer repair</span></h3><p><span lang="he">חומרה ותוכנה.</span><span lang="en">Hardware and software.</span></p></div>
+    </article>
+    <article class="tile" data-tile>
+      <svg class="viz v-wifi" viewBox="0 0 200 150" aria-hidden="true"><path class="arc a3" d="M50 70 A70 70 0 0 1 150 70"/><path class="arc a2" d="M66 84 A48 48 0 0 1 134 84"/><path class="arc a1" d="M82 98 A26 26 0 0 1 118 98"/><rect x="60" y="112" width="80" height="22" rx="5" class="m"/><circle cx="76" cy="123" r="3" class="led"/><circle cx="88" cy="123" r="3" class="led l2"/><circle cx="100" cy="123" r="3" class="led l3"/><line x1="128" y1="112" x2="136" y2="94" class="ant"/></svg>
+      <div class="tt"><h3><span lang="he">רשתות ו-Wi-Fi</span><span lang="en">Networks &amp; Wi-Fi</span></h3><p><span lang="he">קוויות ואלחוטיות.</span><span lang="en">Wired and wireless.</span></p></div>
+    </article>
+    <article class="tile" data-tile>
+      <svg class="viz v-backup" viewBox="0 0 200 150" aria-hidden="true"><rect x="58" y="78" width="84" height="52" rx="6" class="m"/><rect x="68" y="112" width="64" height="8" rx="3" class="d"/><rect x="68" y="112" width="64" height="8" rx="3" class="fill"/><g class="files"><rect x="86" y="20" width="22" height="28" rx="3"/><rect x="60" y="8" width="22" height="28" rx="3"/><rect x="114" y="10" width="22" height="28" rx="3"/></g></svg>
+      <div class="tt"><h3><span lang="he">גיבוי ושחזור</span><span lang="en">Backup &amp; recovery</span></h3><p><span lang="he">המידע שלכם, שמור.</span><span lang="en">Your data, kept safe.</span></p></div>
+    </article>
+    <article class="tile" data-tile>
+      <svg class="viz v-remote" viewBox="0 0 200 150" aria-hidden="true"><rect x="30" y="20" width="140" height="92" rx="6" class="m"/><rect x="38" y="28" width="124" height="76" class="scr"/><rect x="48" y="38" width="40" height="26" rx="3" class="d"/><rect x="96" y="38" width="56" height="8" rx="3" class="d"/><rect x="96" y="52" width="40" height="8" rx="3" class="d"/><rect x="48" y="74" width="104" height="20" rx="3" class="d"/><path class="cur" d="M0 0 L0 16 L4 12 L8 20 L11 18 L7 11 L13 11Z"/><rect x="88" y="112" width="24" height="16" class="m"/><rect x="70" y="126" width="60" height="6" rx="3" class="m"/></svg>
+      <div class="tt"><h3><span lang="he">תמיכה מרחוק</span><span lang="en">Remote support</span></h3><p><span lang="he">עמרי מתחבר ועובד מהמשרד.</span><span lang="en">Omri connects from his office.</span></p></div>
+    </article>
+    <article class="tile t-net" data-tile>
+      <svg class="mini" viewBox="0 0 400 170" aria-hidden="true" data-mini>
+        <g class="mw"><line x1="200" y1="85" x2="60" y2="35"/><line x1="200" y1="85" x2="60" y2="135"/><line x1="200" y1="85" x2="340" y2="35"/><line x1="200" y1="85" x2="340" y2="135"/><line x1="200" y1="85" x2="200" y2="20"/><line x1="200" y1="85" x2="200" y2="150"/></g>
+        <g class="mn"><circle cx="60" cy="35" r="11"/><circle cx="60" cy="135" r="11"/><circle cx="340" cy="35" r="11"/><circle cx="340" cy="135" r="11"/><circle cx="200" cy="20" r="9"/><circle cx="200" cy="150" r="9"/></g>
+        <rect x="174" y="66" width="52" height="38" rx="9" class="mh"/>
+        <g class="pk" data-pk></g>
+      </svg>
+      <div class="tt"><h3><span lang="he">אינטרנט, מדפסות וקבצים</span><span lang="en">Internet, printers and files</span></h3><p><span lang="he">חיבור לאינטרנט ושיתוף מדפסות וקבצים בבית ובמשרד.</span><span lang="en">Internet connections and shared printers and files, at home and at work.</span></p></div>
+    </article>
+    <article class="tile" data-tile>
+      <svg class="viz v-alarm" viewBox="0 0 200 150" aria-hidden="true"><circle cx="100" cy="72" r="20" class="ring r1"/><circle cx="100" cy="72" r="20" class="ring r2"/><circle cx="100" cy="72" r="20" class="ring r3"/><rect x="78" y="50" width="44" height="44" rx="10" class="m"/><circle cx="100" cy="72" r="9" class="d"/><circle cx="100" cy="72" r="4" class="rec"/></svg>
+      <div class="tt"><h3><span lang="he">אזעקות</span><span lang="en">Alarms</span></h3><p><span lang="he">מערכות אלחוטיות.</span><span lang="en">Wireless systems.</span></p></div>
+    </article>
+    <article class="tile" data-tile>
+      <svg class="viz v-build" viewBox="0 0 200 150" aria-hidden="true"><rect x="50" y="30" width="100" height="100" rx="6" class="m"/><rect x="62" y="44" width="30" height="30" rx="3" class="d"/><g class="ram"><rect x="104" y="40" width="8" height="40" rx="2"/><rect x="118" y="40" width="8" height="40" rx="2"/><rect x="132" y="40" width="8" height="40" rx="2"/></g><rect x="62" y="96" width="76" height="12" rx="3" class="d"/><rect x="62" y="96" width="76" height="12" rx="3" class="gpu"/></svg>
+      <div class="tt"><h3><span lang="he">הרכבת מחשבים</span><span lang="en">Custom builds</span></h3><p><span lang="he">מחשב חדש מחלקים.</span><span lang="en">New computers from parts.</span></p></div>
+    </article>
+    <article class="tile t-wide" data-tile>
+      <svg class="viz v-lesson" viewBox="0 0 200 150" aria-hidden="true"><rect x="36" y="24" width="128" height="86" rx="6" class="m"/><rect x="44" y="32" width="112" height="70" class="scr"/><g class="lines"><rect x="54" y="42" width="80" height="6" rx="3"/><rect x="54" y="56" width="92" height="6" rx="3"/><rect x="54" y="70" width="60" height="6" rx="3"/><rect x="54" y="84" width="76" height="6" rx="3"/></g><rect class="hl" x="50" y="38" width="100" height="14" rx="4"/><circle cx="64" cy="130" r="10" class="m"/><circle cx="136" cy="130" r="10" class="m"/></svg>
+      <div class="tt"><h3><span lang="he">הדרכות ושיעורים</span><span lang="en">Lessons &amp; training</span></h3><p><span lang="he">ליחידים ולקבוצות, להבין את המחשב ולהפיק ממנו את המיטב.</span><span lang="en">For individuals and groups, to understand the computer and get the best from it.</span></p></div>
+    </article>
+    <article class="tile t-wide" data-tile>
+      <svg class="viz v-lap" viewBox="0 0 200 150" aria-hidden="true"><rect x="40" y="22" width="120" height="80" rx="5" class="m"/><rect x="48" y="30" width="104" height="64" class="scr"/><g class="code"><rect x="56" y="38" width="44" height="5" rx="2"/><rect x="56" y="49" width="70" height="5" rx="2"/><rect x="64" y="60" width="52" height="5" rx="2"/><rect x="64" y="71" width="30" height="5" rx="2"/><rect x="56" y="82" width="60" height="5" rx="2"/></g><path d="M28 106 H172 L162 118 H38Z" class="m"/></svg>
+      <div class="tt"><h3><span lang="he">מערכות הפעלה ותוכנות</span><span lang="en">Systems &amp; software</span></h3><p><span lang="he">התקנה, שדרוג ושיפור ביצועים, לנייח ולנייד.</span><span lang="en">Installs, upgrades and speed-ups, desktop and laptop.</span></p></div>
+    </article>
+  </div>
+</section>
+
+<!-- OMRI: his portrait, the rest of his photos fanning out behind it -->
+<section class="omri" id="omri">
+  <div class="o-grid">
+    <div class="fan" data-fan>
+      <figure class="fc"><img src="img/old-card.jpg" width="791" height="680" loading="lazy" alt="" data-alt-he="כרטיס הביקור הישן" data-alt-en="The old business card"></figure>
+      <figure class="fc"><img src="img/office-view.jpg" width="1200" height="1500" loading="lazy" alt="" data-alt-he="נוף מתמונות העסק" data-alt-en="A view from the business’s photos"></figure>
+      <figure class="fc"><img src="img/logo-card.jpg" width="861" height="687" loading="lazy" alt="" data-alt-he="הלוגו של העסק" data-alt-en="The business’s logo"></figure>
+      <figure class="fc"><img src="img/work-cameras.jpg" width="1100" height="2062" loading="lazy" alt="" data-alt-he="עבודת מצלמות" data-alt-en="A camera job" style="object-position:50% 30%"></figure>
+      <figure class="fc fc-front"><img src="img/omri.jpg" width="800" height="800" loading="lazy" alt="עמרי שלו" data-alt-he="עמרי שלו" data-alt-en="Omri Shalev"><figcaption><span lang="he">עמרי שלו</span><span lang="en">Omri Shalev</span></figcaption></figure>
     </div>
     <div class="o-copy">
-      <h2 data-reveal><span lang="he">עמרי שלו.</span><span lang="en">Omri Shalev.</span></h2>
-      <p class="o-lead" data-reveal style="--d:80ms"><span lang="he">מטפל במחשבים, ברשתות ובמצלמות של עסקים ובתים פרטיים בחיפה, מאז 2003.</span><span lang="en">Looking after the computers, networks and cameras of businesses and homes in Haifa since 2003.</span></p>
-      <blockquote class="o-quote" data-reveal style="--d:160ms">
+      <h2 data-reveal><span lang="he">מי שמטפל במחשב שלכם.</span><span lang="en">Who looks after your computer.</span></h2>
+      <blockquote class="o-quote" data-reveal style="--d:80ms">
         <p><span lang="he">“כאשר אנו מטפלים במחשב, היחס הינו כי זהו המחשב שלי.”</span><span lang="en">“When we work on a computer, we treat it as if it were my own.”</span></p>
-        <footer><span lang="he">מתוך האתר של עמרי</span><span lang="en">From Omri’s own website (translated)</span></footer>
+        <footer><span lang="he">עמרי שלו, מתוך האתר שלו</span><span lang="en">Omri Shalev, from his own website (translated)</span></footer>
       </blockquote>
-      <ul class="o-facts" data-reveal style="--d:240ms">
-        <li><b class="num">2003</b><span lang="he">שנת הפתיחה</span><span lang="en">founded</span></li>
-        <li><b class="num">63</b><span lang="he">ביקורות בגוגל</span><span lang="en">Google reviews</span></li>
-        <li><b><span lang="he">בבית · במשרד · מרחוק</span><span lang="en">Home · office · remote</span></b><span lang="he">וגם במעבדה</span><span lang="en">and in the lab</span></li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- SERVICES: a rail that slides sideways as you scroll; every card has its own small living machine -->
-<section class="svc" id="services" data-rail>
-  <div class="s-stage">
-    <div class="s-head">
-      <h2 data-reveal><span lang="he">מה עמרי עושה.</span><span lang="en">What Omri does.</span></h2>
-      <p data-reveal style="--d:80ms"><span lang="he">כל השירותים מהאתר שלו, ממחשב בודד ועד רשת של משרד.</span><span lang="en">Everything from his own site, from a single computer to an office network.</span></p>
-    </div>
-    <div class="track" data-track>
-      <article class="sc">
-        <svg class="viz v-pc" viewBox="0 0 200 150" aria-hidden="true"><rect x="62" y="12" width="76" height="126" rx="6" class="m"/><rect x="70" y="22" width="60" height="8" rx="2" class="d"/><circle cx="100" cy="82" r="30" class="d"/><g class="fan"><path d="M100 82 L100 56 A26 26 0 0 1 122 70Z"/><path d="M100 82 L124 92 A26 26 0 0 1 104 108Z"/><path d="M100 82 L78 98 A26 26 0 0 1 76 72Z"/></g><circle cx="100" cy="82" r="5" class="hub"/><circle cx="126" cy="128" r="3" class="led"/></svg>
-        <h3><span lang="he">תיקון מחשבים</span><span lang="en">Computer repair</span></h3>
-        <p><span lang="he">חומרה ותוכנה, במעבדה או אצלכם.</span><span lang="en">Hardware and software, in the lab or on site.</span></p>
-      </article>
-      <article class="sc">
-        <svg class="viz v-lap" viewBox="0 0 200 150" aria-hidden="true"><rect x="40" y="22" width="120" height="80" rx="5" class="m"/><rect x="48" y="30" width="104" height="64" class="scr"/><g class="code"><rect x="56" y="38" width="44" height="5" rx="2"/><rect x="56" y="49" width="70" height="5" rx="2"/><rect x="64" y="60" width="52" height="5" rx="2"/><rect x="64" y="71" width="30" height="5" rx="2"/><rect x="56" y="82" width="60" height="5" rx="2"/></g><path d="M28 106 H172 L162 118 H38Z" class="m"/></svg>
-        <h3><span lang="he">מחשבים ניידים</span><span lang="en">Laptops</span></h3>
-        <p><span lang="he">התקנות, שדרוג ושיפור ביצועים.</span><span lang="en">Installs, upgrades and speed-ups.</span></p>
-      </article>
-      <article class="sc">
-        <svg class="viz v-wifi" viewBox="0 0 200 150" aria-hidden="true"><path class="arc a3" d="M50 70 A70 70 0 0 1 150 70"/><path class="arc a2" d="M66 84 A48 48 0 0 1 134 84"/><path class="arc a1" d="M82 98 A26 26 0 0 1 118 98"/><rect x="60" y="112" width="80" height="22" rx="5" class="m"/><circle cx="76" cy="123" r="3" class="led"/><circle cx="88" cy="123" r="3" class="led l2"/><circle cx="100" cy="123" r="3" class="led l3"/><line x1="128" y1="112" x2="136" y2="94" class="ant"/></svg>
-        <h3><span lang="he">רשתות ו-Wi-Fi</span><span lang="en">Networks &amp; Wi-Fi</span></h3>
-        <p><span lang="he">קוויות ואלחוטיות, שיתוף מדפסות וקבצים.</span><span lang="en">Wired and wireless, shared printers and files.</span></p>
-      </article>
-      <article class="sc">
-        <svg class="viz v-cam" viewBox="0 0 200 150" aria-hidden="true"><path class="cone" d="M118 58 L196 30 L196 120Z"/><g class="head"><rect x="60" y="44" width="62" height="30" rx="8" class="m"/><circle cx="114" cy="59" r="8" class="d"/><circle cx="114" cy="59" r="3" class="lens"/></g><rect x="56" y="74" width="10" height="40" class="m"/><rect x="40" y="112" width="42" height="10" rx="3" class="m"/><circle cx="70" cy="52" r="2.5" class="rec"/></svg>
-        <h3><span lang="he">מצלמות אבטחה</span><span lang="en">Security cameras</span></h3>
-        <p><span lang="he">תכנון, פריסה ותחזוקה, במעגל פתוח וסגור.</span><span lang="en">Planning, installation and upkeep, open and closed circuit.</span></p>
-      </article>
-      <article class="sc">
-        <svg class="viz v-alarm" viewBox="0 0 200 150" aria-hidden="true"><circle cx="100" cy="72" r="20" class="ring r1"/><circle cx="100" cy="72" r="20" class="ring r2"/><circle cx="100" cy="72" r="20" class="ring r3"/><rect x="78" y="50" width="44" height="44" rx="10" class="m"/><circle cx="100" cy="72" r="9" class="d"/><circle cx="100" cy="72" r="4" class="rec"/></svg>
-        <h3><span lang="he">מערכות אזעקה</span><span lang="en">Alarm systems</span></h3>
-        <p><span lang="he">התקנה ותחזוקה של אזעקות אלחוטיות.</span><span lang="en">Wireless alarms, installed and maintained.</span></p>
-      </article>
-      <article class="sc">
-        <svg class="viz v-backup" viewBox="0 0 200 150" aria-hidden="true"><rect x="58" y="78" width="84" height="52" rx="6" class="m"/><rect x="68" y="112" width="64" height="8" rx="3" class="d"/><rect x="68" y="112" width="64" height="8" rx="3" class="fill"/><g class="files"><rect x="86" y="20" width="22" height="28" rx="3"/><rect x="60" y="8" width="22" height="28" rx="3"/><rect x="114" y="10" width="22" height="28" rx="3"/></g></svg>
-        <h3><span lang="he">גיבוי ושחזור</span><span lang="en">Backup &amp; recovery</span></h3>
-        <p><span lang="he">גיבוי המידע, ושחזור כשצריך.</span><span lang="en">Your data backed up, and restored when needed.</span></p>
-      </article>
-      <article class="sc">
-        <svg class="viz v-remote" viewBox="0 0 200 150" aria-hidden="true"><rect x="30" y="20" width="140" height="92" rx="6" class="m"/><rect x="38" y="28" width="124" height="76" class="scr"/><rect x="48" y="38" width="40" height="26" rx="3" class="d"/><rect x="96" y="38" width="56" height="8" rx="3" class="d"/><rect x="96" y="52" width="40" height="8" rx="3" class="d"/><rect x="48" y="74" width="104" height="20" rx="3" class="d"/><path class="cur" d="M0 0 L0 16 L4 12 L8 20 L11 18 L7 11 L13 11Z"/><rect x="88" y="112" width="24" height="16" class="m"/><rect x="70" y="126" width="60" height="6" rx="3" class="m"/></svg>
-        <h3><span lang="he">תמיכה מרחוק</span><span lang="en">Remote support</span></h3>
-        <p><span lang="he">עמרי מתחבר למחשב ועובד עליו מהמשרד.</span><span lang="en">Omri connects and works on your computer from his office.</span></p>
-      </article>
-      <article class="sc">
-        <svg class="viz v-build" viewBox="0 0 200 150" aria-hidden="true"><rect x="50" y="30" width="100" height="100" rx="6" class="m"/><rect x="62" y="44" width="30" height="30" rx="3" class="d"/><g class="ram"><rect x="104" y="40" width="8" height="40" rx="2"/><rect x="118" y="40" width="8" height="40" rx="2"/><rect x="132" y="40" width="8" height="40" rx="2"/></g><rect x="62" y="96" width="76" height="12" rx="3" class="d"/><rect x="62" y="96" width="76" height="12" rx="3" class="gpu"/></svg>
-        <h3><span lang="he">הרכבת מחשבים</span><span lang="en">Custom builds</span></h3>
-        <p><span lang="he">מחשב חדש מחלקים, לפי מה שצריך.</span><span lang="en">A new computer from parts, built for the job.</span></p>
-      </article>
-      <article class="sc">
-        <svg class="viz v-lesson" viewBox="0 0 200 150" aria-hidden="true"><rect x="36" y="24" width="128" height="86" rx="6" class="m"/><rect x="44" y="32" width="112" height="70" class="scr"/><g class="lines"><rect x="54" y="42" width="80" height="6" rx="3"/><rect x="54" y="56" width="92" height="6" rx="3"/><rect x="54" y="70" width="60" height="6" rx="3"/><rect x="54" y="84" width="76" height="6" rx="3"/></g><rect class="hl" x="50" y="38" width="100" height="14" rx="4"/><circle cx="64" cy="130" r="10" class="m"/><circle cx="136" cy="130" r="10" class="m"/></svg>
-        <h3><span lang="he">הדרכות ושיעורים</span><span lang="en">Lessons &amp; training</span></h3>
-        <p><span lang="he">ליחידים ולקבוצות, להבין את המחשב.</span><span lang="en">For individuals and groups, to understand the computer.</span></p>
-      </article>
-    </div>
-  </div>
-</section>
-
-<!-- CAMERAS: a live CCTV wall cut from his own photos, then one feed zooms into the full job photo -->
-<section class="cams" id="cams" data-cams>
-  <div class="c-stage">
-    <div class="wall" data-wall>
-      <div class="feed" style="--img:url(../img/work-cameras.jpg);--pos:50% 28%;--sz:cover"><i class="tag">CAM 01</i></div>
-      <div class="feed hot" data-hot style="--img:url(../img/work-cameras.jpg);--pos:50% 30%;--sz:cover"><i class="tag">CAM 02</i></div>
-      <div class="feed" style="--img:url(../img/office-view.jpg);--pos:50% 70%;--sz:cover"><i class="tag">CAM 03</i></div>
-      <div class="feed" style="--img:url(../img/work-cameras.jpg);--pos:30% 80%;--sz:220%"><i class="tag">CAM 04</i></div>
-      <div class="feed" style="--img:url(../img/office-view.jpg);--pos:50% 18%;--sz:cover"><i class="tag">CAM 05</i></div>
-      <div class="feed" style="--img:url(../img/work-cameras.jpg);--pos:80% 40%;--sz:240%"><i class="tag">CAM 06</i></div>
-    </div>
-    <div class="osd" aria-hidden="true"><span class="rec">REC</span><span class="clock" data-clock>00:00:00</span></div>
-    <figure class="w-fig" data-wfig>
-      <img src="img/work-cameras.jpg" width="1100" height="2062" loading="lazy" data-alt-he="שתי מצלמות אבטחה שעמרי התקין על קורות מדפים כחולים במחסן" data-alt-en="Two security cameras Omri installed on blue warehouse racking" alt="שתי מצלמות אבטחה שעמרי התקין על קורות מדפים כחולים במחסן">
-      <div class="spots" data-spots>
-        <button type="button" class="spot" data-x=".19" data-y=".288" data-he="מצלמת אבטחה" data-en="Security camera"><span class="pin"></span><span class="tag"></span></button>
-        <button type="button" class="spot" data-x=".285" data-y=".335" data-he="קופסת חיבורים" data-en="Junction box"><span class="pin"></span><span class="tag"></span></button>
-        <button type="button" class="spot" data-x=".785" data-y=".33" data-he="מצלמה שנייה" data-en="Second camera"><span class="pin"></span><span class="tag"></span></button>
-        <button type="button" class="spot" data-x=".5" data-y=".437" data-he="כבל לאורך הקורה" data-en="Cable along the beam"><span class="pin"></span><span class="tag"></span></button>
-      </div>
-    </figure>
-    <div class="c-copy">
-      <h2 data-reveal><span lang="he">מצלמות שעמרי מתקין.</span><span lang="en">Cameras Omri installs.</span></h2>
-      <p data-reveal style="--d:80ms"><span lang="he">עבודה שלו במחסן: שתי מצלמות על קורות המדפים, והכבלים לאורכן.</span><span lang="en">One of his jobs in a warehouse: two cameras on the racking beams, cables run along them.</span></p>
-      <p class="cap" data-reveal style="--d:160ms"><span lang="he">התמונות מתוך תמונות העסק בגוגל</span><span lang="en">Photos from the business’s Google listing</span></p>
-    </div>
-  </div>
-</section>
-
-<!-- REVIEWS: real figures roll like an odometer while the reviews land one over another -->
-<section class="revs" id="reviews" data-revs>
-  <div class="r-stage">
-    <div class="figs">
-      <h2 data-reveal><span lang="he">מה כותבים על עמרי.</span><span lang="en">What people write about Omri.</span></h2>
-      <div class="fig"><span class="odo" data-odo="5.0" aria-label="5.0">5.0</span><span lang="he">דירוג בגוגל</span><span lang="en">Google rating</span></div>
-      <div class="fig"><span class="odo" data-odo="63" aria-label="63">63</span><span lang="he">ביקורות</span><span lang="en">reviews</span></div>
-      <div class="fig"><span class="odo" data-odo="2003" aria-label="2003">2003</span><span lang="he">שנת הפתיחה</span><span lang="en">founded</span></div>
-      <a class="tl" href="https://maps.google.com/?cid=10330202893066167407" target="_blank" rel="noopener"><span lang="he">כל 63 הביקורות בגוגל</span><span lang="en">All 63 reviews on Google</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
-    </div>
-    <div class="pile" data-pile>
-      <blockquote class="rv">
-        <p lang="he">עומרי שלו הינו בעל מקצוע אמין ומעולה. הוא בעל ידע עצום בכל הקשור למחשבים ומערכות אלקטרוניות. הוא מאד יסודי ומדויק בעבודתו ויש לו יכולת הסברתית וסבלנות מירבית… כמו כן קבלתי מעומרי מספר שעורים שעזרו לי מאד בהבנת המחשב ופעולותיו.</p>
-        <p lang="en">Omri Shalev is a reliable, excellent professional. He has enormous knowledge of everything to do with computers and electronic systems. He is very thorough and precise, explains things well and has endless patience… Omri also gave me several lessons that helped me a lot in understanding the computer and how it works.</p>
-        <footer><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><bdi>ניצה יוכלמן</bdi><span lang="en" class="tr"> · translated from Hebrew</span></footer>
-      </blockquote>
-      <blockquote class="rv">
-        <p lang="he">עומרי מתחזק את מחשבי העסק וגם את המחשבים של כל המשפחה כבר מעל 15 שנים לשביעות רצוננו בשירות מעולה ובהפגנת מקצועיות בכל תחומי המחשבים.</p>
-        <p lang="en">Omri has maintained our business’s computers, and the whole family’s, for over 15 years, to our satisfaction, with excellent service and professionalism in every area of computing.</p>
-        <footer><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><bdi>שמחה רביב</bdi><span lang="en" class="tr"> · translated from Hebrew</span></footer>
-      </blockquote>
-      <blockquote class="rv">
-        <p lang="he">עמרי שלו – אדם אמין, מקצועי מאד מאד, ישר והגון, נותן שירות מכל הלב והנשמה… מנויה אצלו כבר עשרות שנים, ומעולם לא התאכזבתי ממנו.</p>
-        <p lang="en">Omri Shalev is trustworthy, very, very professional, honest and decent, and gives service with all his heart… I’ve been his subscriber for decades and he has never let me down.</p>
-        <footer><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><bdi>אטי שרירא</bdi><span lang="en" class="tr"> · translated from Hebrew</span></footer>
-      </blockquote>
-    </div>
-  </div>
-</section>
-
-<!-- the live thing: data keeps flowing on the wires; tap what needs care and Omri gets a tidy WhatsApp message -->
-<section class="net" id="net" aria-labelledby="net-h">
-  <div class="n-grid">
-    <div class="n-intro">
-      <h2 id="net-h" data-reveal><span lang="he">מה מחובר אצלכם?</span><span lang="en">What’s on your network?</span></h2>
-      <p data-reveal style="--d:80ms"><span lang="he">סמנו מה צריך טיפול ואיפה, ועמרי יקבל הודעה מסודרת בוואטסאפ.</span><span lang="en">Tap what needs care and where, and Omri gets a tidy WhatsApp message.</span></p>
-      <div class="where" role="radiogroup" aria-label="איפה" data-t-where>
-        <button type="button" role="radio" aria-checked="true" data-where data-he="בבית" data-en="at home"><span lang="he">בבית</span><span lang="en">At home</span></button>
-        <button type="button" role="radio" aria-checked="false" data-where data-he="במשרד" data-en="at the office"><span lang="he">במשרד</span><span lang="en">At the office</span></button>
-        <button type="button" role="radio" aria-checked="false" data-where data-he="במעבדה של עמרי" data-en="in Omri’s lab"><span lang="he">במעבדה</span><span lang="en">In the lab</span></button>
-        <button type="button" role="radio" aria-checked="false" data-where data-he="מרחוק" data-en="remotely"><span lang="he">מרחוק</span><span lang="en">Remotely</span></button>
-      </div>
-      <p class="msg" aria-live="polite" data-msg></p>
-      <div class="n-acts">
-        <a class="btn" href="https://wa.me/972525221010" target="_blank" rel="noopener" data-send><svg aria-hidden="true"><use href="#i-wa"/></svg><span lang="he">שליחה לעמרי בוואטסאפ</span><span lang="en">Send to Omri on WhatsApp</span></a>
-        <a class="tl" href="tel:+972525221010"><span lang="he">או התקשרו:</span><span lang="en">or call:</span> <span dir="ltr" class="num">052-522-1010</span></a>
-      </div>
-    </div>
-    <div class="map" data-map>
-      <svg class="wires" aria-hidden="true" data-wires></svg>
-      <div class="hub" data-hub><img src="img/logo-mark.png" width="380" height="304" alt=""><span lang="he">הרשת שלכם</span><span lang="en">Your network</span></div>
-      <div class="nodes" role="group" aria-label="מה צריך טיפול" data-t-nodes>
-        <button type="button" class="node" aria-pressed="false" data-node data-he="מחשב נייח" data-en="desktop computer"><span class="nl" data-scramble></span></button>
-        <button type="button" class="node" aria-pressed="false" data-node data-he="מחשב נייד" data-en="laptop"><span class="nl" data-scramble></span></button>
-        <button type="button" class="node" aria-pressed="false" data-node data-he="מדפסת" data-en="printer"><span class="nl" data-scramble></span></button>
-        <button type="button" class="node" aria-pressed="false" data-node data-he="ראוטר ו-Wi-Fi" data-en="router and Wi-Fi"><span class="nl" data-scramble></span></button>
-        <button type="button" class="node" aria-pressed="false" data-node data-he="מצלמות אבטחה" data-en="security cameras"><span class="nl" data-scramble></span></button>
-        <button type="button" class="node" aria-pressed="false" data-node data-he="אזעקה" data-en="alarm"><span class="nl" data-scramble></span></button>
-        <button type="button" class="node" aria-pressed="false" data-node data-he="טלפונים ומרכזייה" data-en="phones and PBX"><span class="nl" data-scramble></span></button>
-        <button type="button" class="node" aria-pressed="false" data-node data-he="גיבוי" data-en="backup"><span class="nl" data-scramble></span></button>
+      <div class="o-stats" data-reveal style="--d:160ms">
+        <div class="st"><span class="odo" data-odo="2003" aria-label="2003">2003</span><span lang="he">שנת הפתיחה</span><span lang="en">Founded</span></div>
+        <div class="st"><span class="odo" data-odo="63" aria-label="63">63</span><span lang="he">ביקורות בגוגל</span><span lang="en">Google reviews</span></div>
+        <div class="st"><span class="odo" data-odo="5.0" aria-label="5.0">5.0</span><span lang="he">דירוג ממוצע</span><span lang="en">Average rating</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- CONTACT: the view from the business's photos shrinks into its frame, the address rows rise beside it -->
+<!-- HOW IT WORKS: three steps light up while a chat to Omri writes itself (the live thing) -->
+<section class="how" id="how">
+  <div class="head">
+    <h2 data-reveal><span lang="he">מהודעה אחת, לטיפול.</span><span lang="en">From one message to the fix.</span></h2>
+  </div>
+  <div class="h-grid">
+    <ol class="steps" data-steps>
+      <li data-step><span class="sn">1</span><div><h3><span lang="he">מסמנים מה צריך טיפול</span><span lang="en">Tap what needs care</span></h3><p><span lang="he">מחשב, מדפסת, רשת, מצלמות או טלפונים.</span><span lang="en">A computer, printer, network, cameras or phones.</span></p></div></li>
+      <li data-step><span class="sn">2</span><div><h3><span lang="he">בוחרים איפה</span><span lang="en">Choose where</span></h3><p><span lang="he">בבית, במשרד, במעבדה של עמרי, או בתמיכה מרחוק.</span><span lang="en">At home, at the office, in Omri’s lab, or by remote support.</span></p></div></li>
+      <li data-step><span class="sn">3</span><div><h3><span lang="he">ההודעה יוצאת לעמרי</span><span lang="en">The message goes to Omri</span></h3><p><span lang="he">מסודרת בוואטסאפ, והוא חוזר אליכם לתאם.</span><span lang="en">Tidy, on WhatsApp, and he gets back to you to arrange it.</span></p></div></li>
+    </ol>
+    <div class="chat" data-chat>
+      <div class="c-top"><img src="img/omri.jpg" width="800" height="800" alt=""><div><b><span lang="he">עמרי שלו</span><span lang="en">Omri Shalev</span></b><span class="c-st" data-status></span></div></div>
+      <div class="c-body">
+        <p class="bub" aria-live="polite"><span data-msg></span><i class="caret" aria-hidden="true"></i></p>
+      </div>
+      <div class="c-picks">
+        <div class="chips" role="group" aria-label="מה צריך טיפול" data-t-nodes>
+          <button type="button" class="chip" aria-pressed="false" data-node data-he="מחשב נייח" data-en="desktop computer"><span lang="he">מחשב נייח</span><span lang="en">Desktop</span></button>
+          <button type="button" class="chip" aria-pressed="false" data-node data-he="מחשב נייד" data-en="laptop"><span lang="he">מחשב נייד</span><span lang="en">Laptop</span></button>
+          <button type="button" class="chip" aria-pressed="false" data-node data-he="מדפסת" data-en="printer"><span lang="he">מדפסת</span><span lang="en">Printer</span></button>
+          <button type="button" class="chip" aria-pressed="false" data-node data-he="ראוטר ו-Wi-Fi" data-en="router and Wi-Fi"><span lang="he">ראוטר ו-Wi-Fi</span><span lang="en">Router &amp; Wi-Fi</span></button>
+          <button type="button" class="chip" aria-pressed="false" data-node data-he="מצלמות אבטחה" data-en="security cameras"><span lang="he">מצלמות</span><span lang="en">Cameras</span></button>
+          <button type="button" class="chip" aria-pressed="false" data-node data-he="אזעקה" data-en="alarm"><span lang="he">אזעקה</span><span lang="en">Alarm</span></button>
+          <button type="button" class="chip" aria-pressed="false" data-node data-he="טלפונים ומרכזייה" data-en="phones and PBX"><span lang="he">טלפונים ומרכזייה</span><span lang="en">Phones &amp; PBX</span></button>
+          <button type="button" class="chip" aria-pressed="false" data-node data-he="גיבוי" data-en="backup"><span lang="he">גיבוי</span><span lang="en">Backup</span></button>
+        </div>
+        <div class="chips where" role="radiogroup" aria-label="איפה" data-t-where>
+          <button type="button" role="radio" aria-checked="true" data-where data-he="בבית" data-en="at home"><span lang="he">בבית</span><span lang="en">At home</span></button>
+          <button type="button" role="radio" aria-checked="false" data-where data-he="במשרד" data-en="at the office"><span lang="he">במשרד</span><span lang="en">At the office</span></button>
+          <button type="button" role="radio" aria-checked="false" data-where data-he="במעבדה של עמרי" data-en="in Omri’s lab"><span lang="he">במעבדה</span><span lang="en">In the lab</span></button>
+          <button type="button" role="radio" aria-checked="false" data-where data-he="מרחוק" data-en="remotely"><span lang="he">מרחוק</span><span lang="en">Remotely</span></button>
+        </div>
+        <a class="btn send" href="https://wa.me/972525221010" target="_blank" rel="noopener" data-send><svg aria-hidden="true"><use href="#i-wa"/></svg><span lang="he">שליחה לעמרי בוואטסאפ</span><span lang="en">Send to Omri on WhatsApp</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS: the five written reviews drift past under the rating -->
+<section class="revs" id="reviews">
+  <div class="head r-head">
+    <h2 data-reveal><span lang="he">5.0, מ-63 ביקורות.</span><span lang="en">5.0, from 63 reviews.</span></h2>
+    <a class="gbadge" href="https://maps.google.com/?cid=10330202893066167407" target="_blank" rel="noopener" data-reveal style="--d:80ms"><b>Google</b><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><span lang="he">לכל הביקורות</span><span lang="en">Read them all</span></a>
+  </div>
+  <div class="drift" data-drift>
+    <div class="dr-track" data-drtrack>
+      <blockquote class="rv"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p lang="he">משתפת שקיבלנו שירות מעמרי שלו, שהיה מקצועי ואכפתי, נתן שרות מכל הלב, בנדיבות, באמינות ובהגינות. אנחנו מרוצים מאוד. תודה עמרי.</p><p lang="en">We received service from Omri Shalev, who was professional and caring, and gave service wholeheartedly, generously, reliably and fairly. We’re very pleased. Thank you, Omri.</p><footer><bdi translate="no">Kim Rich</bdi><span lang="en" class="tr">translated from Hebrew</span></footer></blockquote>
+      <blockquote class="rv"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p lang="he">עומרי מתחזק את מחשבי העסק וגם את המחשבים של כל המשפחה כבר מעל 15 שנים לשביעות רצוננו בשירות מעולה ובהפגנת מקצועיות בכל תחומי המחשבים.</p><p lang="en">Omri has maintained our business’s computers, and the whole family’s, for over 15 years, to our satisfaction, with excellent service and professionalism in every area of computing.</p><footer><bdi>שמחה רביב</bdi><span lang="en" class="tr">translated from Hebrew</span></footer></blockquote>
+      <blockquote class="rv"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p lang="he">עומרי שלו הינו בעל מקצוע אמין ומעולה… יסודי ומדויק בעבודתו ויש לו יכולת הסברתית וסבלנות מירבית. כמו כן קבלתי מעומרי מספר שעורים שעזרו לי מאד בהבנת המחשב ופעולותיו.</p><p lang="en">Omri Shalev is a reliable, excellent professional… thorough and precise, he explains well and has endless patience. Omri also gave me several lessons that helped me a lot in understanding the computer.</p><footer><bdi>ניצה יוכלמן</bdi><span lang="en" class="tr">translated from Hebrew</span></footer></blockquote>
+      <blockquote class="rv"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p lang="he">את עמרי הכרתי לפני שנים רבות. מאז הוא מטפל בכל הבעיות והשאלות הקשורות במחשבים שלנו, בטלפונים, במצלמות האבטחה, במערכת הגלאים והמרכזיה, ובכל התוכנות.</p><p lang="en">I met Omri many years ago. Since then he has handled every problem and question about our computers, phones, security cameras, the detector system and the phone exchange, and all the software.</p><footer><bdi translate="no">Amos Tafla</bdi><span lang="en" class="tr">translated from Hebrew</span></footer></blockquote>
+      <blockquote class="rv"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p lang="he">עמרי שלו – אדם אמין, מקצועי מאד מאד, ישר והגון, נותן שירות מכל הלב והנשמה… מנויה אצלו כבר עשרות שנים, ומעולם לא התאכזבתי ממנו.</p><p lang="en">Omri Shalev is trustworthy, very, very professional, honest and decent, and gives service with all his heart… I’ve been his subscriber for decades and he has never let me down.</p><footer><bdi>אטי שרירא</bdi><span lang="en" class="tr">translated from Hebrew</span></footer></blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ: answers only from his own site -->
+<section class="faq" id="faq">
+  <div class="head"><h2 data-reveal><span lang="he">שאלות, ותשובות.</span><span lang="en">Questions, answered.</span></h2></div>
+  <div class="qa" data-qa>
+    <details data-reveal><summary><span lang="he">איפה עמרי נותן שירות?</span><span lang="en">Where does Omri work?</span><svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p><span lang="he">בבית הלקוח, במשרד, במעבדה שלו, ובתמיכה מרחוק.</span><span lang="en">At your home, at your office, in his lab, and by remote support.</span></p></details>
+    <details data-reveal style="--d:60ms"><summary><span lang="he">אפשר לבנות אצלו מחשב חדש?</span><span lang="en">Can he build a new computer?</span><svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p><span lang="he">כן. הרכבת מחשבים מחלקים, ומכירה של מחשבים, חלקים וציוד היקפי.</span><span lang="en">Yes. Computers assembled from parts, plus computers, parts and peripherals for sale.</span></p></details>
+    <details data-reveal style="--d:120ms"><summary><span lang="he">מה לגבי רשת במשרד?</span><span lang="en">What about an office network?</span><svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p><span lang="he">תכנון, בנייה, פריסה ותחזוקה של רשתות קוויות ואלחוטיות, ממחשב בודד ועד רשת מרובת משתמשים.</span><span lang="en">Planning, building, installing and maintaining wired and wireless networks, from one computer to a multi-user network.</span></p></details>
+    <details data-reveal style="--d:180ms"><summary><span lang="he">יש גם שיעורים?</span><span lang="en">Are there lessons too?</span><svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p><span lang="he">כן. קורסים, הדרכות והטמעות ליחידים ולקבוצות.</span><span lang="en">Yes. Courses, training and onboarding for individuals and groups.</span></p></details>
+    <details data-reveal style="--d:240ms"><summary><span lang="he">מתי אפשר להתקשר?</span><span lang="en">When can I call?</span><svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p><span lang="he">ראשון עד שישי, 8:00–20:00. בשבת סגור.</span><span lang="en">Sunday to Friday, 8:00–20:00. Closed on Saturday.</span></p></details>
+  </div>
+</section>
+
+<!-- CONTACT: everything in a bento -->
 <section class="reach" id="reach" aria-label="יצירת קשר" data-t-reach>
-  <div class="r-wrap"><div class="rs">
-    <figure class="r-photo" data-rphoto>
-      <img src="img/office-view.jpg" width="1200" height="1500" loading="lazy" data-alt-he="נוף לחיפה ולכרמל מתוך תמונות העסק" data-alt-en="View of Haifa and the Carmel, from the business’s photos" alt="נוף לחיפה ולכרמל מתוך תמונות העסק">
-      <figcaption><span lang="he">מתוך תמונות העסק בגוגל</span><span lang="en">From the business’s Google photos</span></figcaption>
-    </figure>
-    <div class="rows" data-rows>
-      <a class="row" href="https://maps.google.com/?cid=10330202893066167407" target="_blank" rel="noopener"><span lang="he">הרץ היינריך 2, אופיר 25</span><span lang="en">2 Heinrich Hertz, Ofir 25</span></a>
-      <p class="row"><span lang="he">חיפה</span><span lang="en">Haifa</span></p>
-      <p class="row hrs"><span lang="he">א׳–ו׳ · 8:00–20:00</span><span lang="en">Sun–Fri · 8:00–20:00</span><span class="st" data-status></span></p>
-      <a class="row" href="tel:+972525221010"><span dir="ltr" class="num">052-522-1010</span></a>
-      <a class="row mail" href="mailto:omri@shalevcsp.com"><span dir="ltr">omri@shalevcsp.com</span></a>
-      <p class="row hello"><span lang="he">שלום</span><span lang="en">Hello</span><a class="round" href="https://wa.me/972525221010" target="_blank" rel="noopener" aria-label="וואטסאפ לעמרי" data-t-round><svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
-    </div>
-  </div></div>
-  <div class="r-more">
-    <table class="hours" data-hours></table>
-    <iframe title="Google Maps: הרץ היינריך 2, חיפה" src="https://www.google.com/maps?q=%D7%94%D7%A8%D7%A5%20%D7%94%D7%99%D7%99%D7%A0%D7%A8%D7%99%D7%9A%202%2C%20%D7%97%D7%99%D7%A4%D7%94&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <div class="head"><h2 data-reveal><span lang="he">דברו עם עמרי.</span><span lang="en">Talk to Omri.</span></h2></div>
+  <div class="r-bento">
+    <a class="rb rb-wa" href="https://wa.me/972525221010" target="_blank" rel="noopener" data-tile><svg aria-hidden="true"><use href="#i-wa"/></svg><b><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></b><span dir="ltr" class="num">052-522-1010</span></a>
+    <a class="rb" href="tel:+972525221010" data-tile><svg aria-hidden="true"><use href="#i-phone"/></svg><b><span lang="he">טלפון</span><span lang="en">Phone</span></b><span dir="ltr" class="num">052-522-1010</span></a>
+    <a class="rb" href="mailto:omri@shalevcsp.com" data-tile><b><span lang="he">אימייל</span><span lang="en">Email</span></b><span dir="ltr">omri@shalevcsp.com</span></a>
+    <div class="rb rb-hours" data-tile><b><span lang="he">שעות</span><span lang="en">Hours</span></b><table class="hours" data-hours></table><span class="c-st" data-status></span></div>
+    <figure class="rb rb-photo" data-tile><img src="img/office-view.jpg" width="1200" height="1500" loading="lazy" alt="" data-alt-he="נוף לחיפה מתוך תמונות העסק" data-alt-en="View of Haifa from the business’s photos"><figcaption><span lang="he">מתוך תמונות העסק בגוגל</span><span lang="en">From the business’s Google photos</span></figcaption></figure>
+    <div class="rb rb-map" data-tile><b><span lang="he">הרץ היינריך 2, אופיר 25, חיפה</span><span lang="en">2 Heinrich Hertz St, Ofir 25, Haifa</span></b><iframe title="Google Maps: הרץ היינריך 2, חיפה" src="https://www.google.com/maps?q=%D7%94%D7%A8%D7%A5%20%D7%94%D7%99%D7%99%D7%A0%D7%A8%D7%99%D7%9A%202%2C%20%D7%97%D7%99%D7%A4%D7%94&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
   </div>
 </section>
 
 </main>
 
-<!-- the curtain: the page lifts away and uncovers the business's real logo -->
+<!-- FOOTER: black, the real logo, and the horizon rising under it -->
 <footer class="foot">
-  <div class="f-logo"><img src="img/logo-card.jpg" width="861" height="687" loading="lazy" data-alt-he="הלוגו של שלו – מתן שירותים למחשבים: לאנשים שנהנים ממחשבים" data-alt-en="The Shalev Computer Services logo: for people who enjoy computers" alt="הלוגו של שלו – מתן שירותים למחשבים: לאנשים שנהנים ממחשבים"></div>
-  <div class="f-cols">
-    <div><p class="fh"><span lang="he">כתובת</span><span lang="en">Address</span></p><p><span lang="he">הרץ היינריך 2, אופיר 25, חיפה</span><span lang="en">2 Heinrich Hertz St, Ofir 25, Haifa</span></p></div>
-    <div><p class="fh"><span lang="he">קשר</span><span lang="en">Contact</span></p><p><a href="tel:+972525221010" dir="ltr">052-522-1010</a> · <a href="https://wa.me/972525221010" target="_blank" rel="noopener"><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a><br><a href="mailto:omri@shalevcsp.com">omri@shalevcsp.com</a></p></div>
-    <div><p class="fh"><span lang="he">שעות</span><span lang="en">Hours</span></p><p><span lang="he">א׳–ו׳ 8:00–20:00 · שבת סגור</span><span lang="en">Sun–Fri 8:00–20:00 · Sat closed</span></p></div>
-    <div class="f-tools"><button type="button" class="tgl" role="switch" aria-checked="true" data-motion-toggle><span class="knob" aria-hidden="true"></span><span lang="he">תנועה</span><span lang="en">Motion</span></button><button type="button" class="tgl lang" data-set-lang><span lang="he">English</span><span lang="en">עברית</span></button></div>
+  <div class="f-top">
+    <img class="f-logo" src="img/logo-card.jpg" width="861" height="687" loading="lazy" alt="הלוגו של שלו – מתן שירותים למחשבים" data-alt-he="הלוגו של שלו – מתן שירותים למחשבים: לאנשים שנהנים ממחשבים" data-alt-en="The Shalev Computer Services logo: for people who enjoy computers">
+    <div class="f-cols">
+      <div><p class="fh"><span lang="he">כתובת</span><span lang="en">Address</span></p><p><span lang="he">הרץ היינריך 2, אופיר 25, חיפה</span><span lang="en">2 Heinrich Hertz St, Ofir 25, Haifa</span></p></div>
+      <div><p class="fh"><span lang="he">קשר</span><span lang="en">Contact</span></p><p><a href="tel:+972525221010" dir="ltr">052-522-1010</a><br><a href="https://wa.me/972525221010" target="_blank" rel="noopener"><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a> · <a href="mailto:omri@shalevcsp.com">omri@shalevcsp.com</a></p></div>
+      <div><p class="fh"><span lang="he">בעמוד</span><span lang="en">On this page</span></p><p><a href="#services"><span lang="he">שירותים</span><span lang="en">Services</span></a> · <a href="#omri"><span lang="he">עמרי</span><span lang="en">Omri</span></a> · <a href="#how"><span lang="he">איך זה עובד</span><span lang="en">How it works</span></a> · <a href="#reviews"><span lang="he">ביקורות</span><span lang="en">Reviews</span></a></p></div>
+      <div class="f-tools"><button type="button" class="tgl" role="switch" aria-checked="true" data-motion-toggle><span class="knob" aria-hidden="true"></span><span lang="he">תנועה</span><span lang="en">Motion</span></button><button type="button" class="tgl lang" data-set-lang><span lang="he">English</span><span lang="en">עברית</span></button></div>
+    </div>
   </div>
   <p class="f-legal"><span lang="he">קונספט לדוגמה · זה אינו האתר הרשמי של העסק. הלוגו, התמונות והתוכן שייכים לעסק (מהאתר shalevcsp.com ומתמונות העסק בגוגל). הביקורות מגוגל.</span><span lang="en">Sample concept · not the business’s official website. Logo, photos and wording belong to the business (shalevcsp.com and its Google photos). Reviews from Google.</span></p>
+  <div class="f-horizon" aria-hidden="true"><i class="planet"></i><i class="rim"></i></div>
 </footer>
 
 <!-- on phones: a wall network socket with two ports, call and WhatsApp -->
