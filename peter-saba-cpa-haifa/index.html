@@ -4,310 +4,373 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#121a21">
+<meta name="theme-color" content="#0b2536">
 <meta name="color-scheme" content="dark">
 <title>פיטר סאבא · רואה חשבון · שיבת ציון 6, חיפה</title>
 <meta name="description" content="קונספט לדוגמה לאתר של פיטר סאבא, רואה חשבון, שיבת ציון 6, חיפה. 5.0 בגוגל מ-31 ביקורות.">
 <script>document.documentElement.classList.add('js');
 // animations on/off: the visitor's choice wins; otherwise off for reduced motion, data saver, slow networks and weak devices
 (function(){var r=document.documentElement,s=null;try{s=localStorage.getItem('saba-motion')}catch(e){}var c=navigator.connection||{},why=matchMedia('(prefers-reduced-motion: reduce)').matches?'reduce':c.saveData?'data':/2g|3g/.test(c.effectiveType||'')?'slow':((navigator.deviceMemory>0&&navigator.deviceMemory<=2)||(navigator.hardwareConcurrency>0&&navigator.hardwareConcurrency<=2))?'device':'';var off=s?s==='off':!!why;r.classList.toggle('still',off);if(!s&&why)r.dataset.motionAuto=why;
-var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage.getItem('saba-lang')}catch(e){}l=q==='en'||q==='he'?q:l==='en'?'en':'he';r.lang=l;r.dir=l==='he'?'rtl':'ltr';})();</script>
+var q=new URLSearchParams(location.search).get('lang'),l=null;try{l=localStorage.getItem('saba-lang')}catch(e){}l=q==='en'||q==='he'?q:l==='en'?'en':'he';r.lang=l;r.dir=l==='he'?'rtl':'ltr';
+var seen=null;try{seen=sessionStorage.getItem('saba-intro')}catch(e){}if(!off&&!seen&&!/[?&]nointro/.test(location.search))r.classList.add('intro');})();</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre:wght@400;500;700&family=Rubik:wght@400;500&display=swap" rel="stylesheet">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2216%22 fill=%22%2314293a%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2213.5%22 fill=%22none%22 stroke=%22%23e2c77a%22 stroke-width=%221.4%22/%3E%3Ctext x=%2216%22 y=%2221%22 text-anchor=%22middle%22 font-family=%22Georgia,serif%22 font-size=%2214%22 fill=%22%23e2c77a%22%3ES%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;800&family=David+Libre:wght@500&family=Bodoni+Moda:ital,wght@1,500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="img/logo-96.png">
 <link rel="stylesheet" href="css/site.css">
 <link rel="preload" as="image" href="img/seal.jpg">
 </head>
 <body>
 <a class="skip" href="#main"><span lang="he">דלג לתוכן</span><span lang="en">Skip to content</span></a>
-
 <svg class="vh" aria-hidden="true" focusable="false"><defs>
   <symbol id="i-phone" viewBox="0 0 24 24"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></symbol>
   <symbol id="i-wa" viewBox="0 0 24 24"><path d="M12 2.2a9.8 9.8 0 0 0-8.4 14.8L2.3 21.7l4.8-1.3A9.8 9.8 0 1 0 12 2.2zm0 17.9a8.1 8.1 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8.1 8.1 0 1 1 12 20.1zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.6 6.6 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1 4.9 4.9 0 0 0 1 2.6 11.1 11.1 0 0 0 4.2 3.7c1.6.7 2.2.7 3 .6a2.5 2.5 0 0 0 1.7-1.2 2.1 2.1 0 0 0 .1-1.2c-.1-.1-.2-.2-.4-.3z"/></symbol>
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.6A2.6 2.6 0 1 1 12 6.4a2.6 2.6 0 0 1 0 5.2z"/></symbol>
   <symbol id="i-mail" viewBox="0 0 24 24"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1 2.3V17h16V7.3l-8 5.4zM5.6 7l6.4 4.3L18.4 7z"/></symbol>
+  <symbol id="i-fax" viewBox="0 0 24 24"><path d="M7 3h8l3 3v4h1a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h2zm2 2v5h7V7h-2V5zM5 12v7h14v-7zm2 2h4v2H7z"/></symbol>
   <symbol id="i-star" viewBox="0 0 16 16"><path d="M8 0l2.4 5 5.5.6-4.1 3.7 1.2 5.4L8 12l-5 2.7 1.2-5.4L.1 5.6 5.6 5z"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M12 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-tick" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
 </defs></svg>
+
+<!-- opening, motion on and once per visit: the real SABA seal fills like a gauge while the office's own pictures are dealt; the foil seal becomes the hero -->
+<div class="intro-lay" aria-hidden="true" data-intro>
+  <div class="deal" data-dealt>
+    <img src="img/banner.jpg" width="551" height="1200" alt="" class="dc dc1">
+    <img src="img/card.jpg" width="900" height="500" alt="" class="dc dc2">
+    <img src="img/ledger.jpg" width="1000" height="1721" alt="" class="dc dc3">
+    <img src="img/seal.jpg" width="1500" height="1000" alt="" class="dc dc4">
+  </div>
+  <div class="gauge">
+    <svg viewBox="0 0 200 200"><circle cx="100" cy="100" r="96" class="g-track"/><circle cx="100" cy="100" r="96" class="g-fill" pathLength="100"/></svg>
+    <img src="img/logo.png" width="560" height="560" alt="">
+  </div>
+  <p class="g-num"><span data-intro-n>0</span>%</p>
+</div>
 
 <div class="concept" data-concept="קונספט לדוגמה שנבנה עבור פיטר סאבא רואה חשבון · זה אינו האתר הרשמי של העסק">
   <p><span lang="he">קונספט לדוגמה שנבנה עבור פיטר סאבא רואה חשבון · זה אינו האתר הרשמי של העסק</span><span lang="en">A sample concept built for Peter Saba CPA · This is not the business’s official website</span></p>
 </div>
 
-<!-- the bar: the SABA mark, places on the page, motion, language, phone -->
-<header class="bar" data-bar>
-  <a class="mark" href="#top" translate="no"><span class="mark-w">SABA</span><span class="mark-c">CPA</span></a>
-  <nav class="links" aria-label="ראשי" data-nav>
-    <a href="#who"><span lang="he">פיטר</span><span lang="en">Peter</span></a>
-    <a href="#plain"><span lang="he">שירותים</span><span lang="en">Services</span></a>
-    <a href="#year"><span lang="he">השנה</span><span lang="en">The year</span></a>
-    <a href="#reviews"><span lang="he">ביקורות</span><span lang="en">Reviews</span></a>
-    <a href="#write"><span lang="he">כתבו לפיטר</span><span lang="en">Write to Peter</span></a>
-    <a href="#visit"><span lang="he">הגעה</span><span lang="en">Visit</span></a>
-  </nav>
-  <div class="tools">
-    <button type="button" class="tog" role="switch" aria-checked="true" data-motion-toggle>
-      <span class="tog-t" aria-hidden="true"><i></i></span>
-      <span class="tog-l"><span lang="he">תנועה</span><span lang="en">Motion</span></span>
-    </button>
-    <button type="button" class="langb" data-set-lang><span lang="he" aria-hidden="true">EN</span><span lang="en" aria-hidden="true">עב</span><span class="vh"><span lang="he">English</span><span lang="en">עברית</span></span></button>
-    <a class="btn btn-gold btn-s barcall" href="tel:+972508426958" data-t-call><svg aria-hidden="true"><use href="#i-phone"/></svg><span lang="he">התקשרו</span><span lang="en">Call</span></a>
+<!-- the business card's own navy band with its two gold stripes runs down the page; a gold tab marks how far you've read -->
+<div class="band" aria-hidden="true"><i class="band-tab" data-band-tab></i></div>
+
+<!-- nav: a bar over the hero that gathers into a floating pill -->
+<header class="nav" data-nav>
+  <div class="nav-in">
+    <a class="brand" href="#top" data-t-brand aria-label="פיטר סאבא, רואה חשבון">
+      <img src="img/logo-96.png" width="96" height="96" alt="">
+      <span class="bname"><span lang="he">פיטר סאבא</span><span lang="en">Peter Saba</span></span>
+    </a>
+    <nav class="links" aria-label="ראשי" data-t-nav>
+      <a href="#office"><span lang="he">המשרד</span><span lang="en">The office</span></a>
+      <a href="#services"><span lang="he">שירותים</span><span lang="en">Services</span></a>
+      <a href="#year"><span lang="he">השנה</span><span lang="en">The year</span></a>
+      <a href="#reviews"><span lang="he">ביקורות</span><span lang="en">Reviews</span></a>
+      <a href="#write"><span lang="he">כתבו לפיטר</span><span lang="en">Write to Peter</span></a>
+      <a href="#visit"><span lang="he">הגעה</span><span lang="en">Visit</span></a>
+    </nav>
+    <div class="tools">
+      <button type="button" class="tgl" role="switch" aria-checked="true" data-motion-toggle><span class="knob" aria-hidden="true"></span><span class="tl"><span lang="he">תנועה</span><span lang="en">Motion</span></span></button>
+      <button type="button" class="tgl lang" data-set-lang><span lang="he">EN</span><span lang="en">עב</span></button>
+      <a class="pill-btn" href="https://wa.me/972508426958" target="_blank" rel="noopener" data-wa><svg aria-hidden="true"><use href="#i-wa"/></svg><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
+    </div>
   </div>
 </header>
 
-<main id="main">
-<!-- THE SEAL. The office's own gold-foil SABA seal on dark paper (its own photo, regraded). It sits on a plate beside the
-     name; scroll, and the plate opens to the whole screen while the camera moves in and a light passes over the foil;
-     then the paper settles into the page's ground. Back up, it plays in reverse. Motion off: the plate, still. -->
-<section class="seal" id="top" data-seal aria-labelledby="h-hero">
-  <div class="seal-pin" data-seal-pin>
-    <div class="plate" data-plate>
-      <div class="cam" data-cam>
-        <img class="ph" src="img/seal.jpg" width="1500" height="1000" alt="" fetchpriority="high" data-alt-he="החותם של המשרד, SABA CPA בהטבעת זהב על נייר כהה" data-alt-en="The office's seal: SABA CPA in gold foil on dark paper">
-        <img class="ph ph-lit" src="img/seal-lit.jpg" width="1500" height="1000" alt="" data-lit aria-hidden="true">
-      </div>
-      <div class="plate-fade" data-fade aria-hidden="true"></div>
-    </div>
+<main class="page" id="main">
 
-    <div class="hero-copy" data-hero-copy>
-      <h1 id="h-hero" class="mask">
-        <span class="ln"><span><span lang="he">פיטר סאבא</span><span lang="en">Peter Saba</span></span></span>
-        <span class="ln"><span><span lang="he">רואה חשבון</span><span lang="en">Accountant, CPA</span></span></span>
-      </h1>
-      <p class="lead fade-in"><span lang="he">משרד רואה חשבון ברחוב שיבת ציון 6, חיפה.</span><span lang="en">A CPA office at 6 Shivat Zion Street, Haifa.</span></p>
-      <p class="meta fade-in">
-        <a class="rate" href="#reviews"><b>5.0</b><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><span lang="he">31 ביקורות בגוגל</span><span lang="en">31 Google reviews</span></a>
-        <span class="status" data-status aria-live="polite"></span>
-      </p>
-      <div class="acts fade-in">
-        <a class="btn btn-gold" href="https://wa.me/972508426958" data-wa target="_blank" rel="noopener" data-t-wa><svg aria-hidden="true"><use href="#i-wa"/></svg><span lang="he">וואטסאפ לפיטר</span><span lang="en">WhatsApp Peter</span></a>
-        <a class="btn btn-line" href="tel:+972508426958" data-t-call2><svg aria-hidden="true"><use href="#i-phone"/></svg><span class="num" dir="ltr">050-842-6958</span><span class="cw"><span lang="he">התקשרו</span><span lang="en">Call</span></span></a>
-      </div>
+<!-- HERO: his gold-foil seal on dark paper, lit by a light that follows the hand (it drifts by itself on a phone).
+     Scroll, and the camera pushes into the seal while the logo's navy disc opens out of it and fills the screen. -->
+<div class="hero-run" data-hero-run>
+<section class="hero" id="top" data-hero>
+  <div class="cam" data-cam>
+    <img class="seal" src="img/seal.jpg" width="1500" height="1000" alt="" fetchpriority="high" data-alt-he="החותם של המשרד: SABA CPA בהטבעת זהב על נייר כהה" data-alt-en="The office’s seal: SABA CPA in gold foil on dark paper">
+    <img class="seal seal-lit" src="img/seal-lit.jpg" width="1500" height="1000" alt="" aria-hidden="true">
+  </div>
+  <canvas class="dust" aria-hidden="true" data-dust></canvas>
+  <div class="scrim" aria-hidden="true"></div>
+  <div class="h-copy" data-hcopy>
+    <h1 class="h-title" data-stamp>
+      <span class="ln"><span lang="he">פיטר סאבא</span><span lang="en">Peter Saba</span></span>
+      <span class="ln acc"><span lang="he">רואה חשבון</span><span lang="en">Accountant, CPA</span></span>
+    </h1>
+    <p class="h-lead" data-rise style="--d:620ms"><span lang="he">משרד רואה חשבון בשיבת ציון 6, חיפה.</span><span lang="en">A CPA office at 6 Shivat Zion St, Haifa.</span></p>
+    <p class="decode" data-rise style="--d:720ms" aria-hidden="true"><span class="dline"></span><span data-decode></span></p>
+    <div class="h-acts" data-rise style="--d:820ms">
+      <a class="btn" href="https://wa.me/972508426958" target="_blank" rel="noopener" data-wa><svg aria-hidden="true"><use href="#i-wa"/></svg><span lang="he">וואטסאפ לפיטר</span><span lang="en">WhatsApp Peter</span></a>
+      <a class="btn ghost" href="tel:+972508426958"><svg aria-hidden="true"><use href="#i-phone"/></svg><span dir="ltr" class="num">050-842-6958</span></a>
+    </div>
+    <div class="h-chips" data-rise style="--d:920ms">
+      <a class="chip" href="https://maps.google.com/?cid=2860689642067994268" target="_blank" rel="noopener"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><b class="num">5.0</b><span lang="he">· 31 ביקורות בגוגל</span><span lang="en">· 31 Google reviews</span></a>
+      <span class="chip" data-status></span>
     </div>
   </div>
+  <div class="plate" aria-hidden="true" data-plate><i class="plate-ring" data-ring></i><img class="plate-logo" src="img/logo.png" width="560" height="560" alt="" data-plate-logo></div>
 </section>
+</div>
 
-<!-- WHO. No made-up portrait: Peter in his own words (from his office's site), his own business card, and a client of nine years -->
-<section class="who" id="who" aria-labelledby="h-who">
-  <div class="wrap who-grid">
-    <div class="who-copy">
-      <h2 id="h-who" data-reveal><span lang="he">מי עומד מאחורי המספרים</span><span lang="en">The person behind the numbers</span></h2>
-      <blockquote class="own" data-reveal>
-        <p><span lang="he">״פיטר סאבא, רואה חשבון מומחה למיסוי עסקים קטנים ובינוניים ולניהול משא ומתן עם רשויות המס.״</span><span lang="en">“Peter Saba, a CPA specialising in taxation for small and medium businesses and in negotiating with the tax authorities.”</span></p>
-        <footer><span lang="he">מתוך אתר המשרד</span><span lang="en">From the office’s own website, translated</span></footer>
+<!-- THE OFFICE: no made-up portrait. The office in its own words, and a card file of its own pictures that turns by itself, with the scroll and with a drag; his business card at the front -->
+<div class="stack" data-stack>
+<section class="office" id="office" data-office>
+  <div class="o-grid">
+    <div class="o-copy">
+      <h2 data-reveal><span lang="he">מי <em>מאחורי המספרים.</em></span><span lang="en">Who’s <em>behind the numbers.</em></span></h2>
+      <blockquote class="own" data-reveal style="--d:90ms">
+        <p><span lang="he">״פיטר סאבא, רואה חשבון מומחה למיסוי עסקים קטנים ובינוניים וניהול משא ומתן עם רשויות המס.״</span><span lang="en">“Peter Saba, a CPA specialising in taxation for small and medium businesses and in negotiating with the tax authorities.”</span></p>
+        <footer><span lang="he">מתוך אתר המשרד, דרך ארכיון האינטרנט</span><span lang="en">From the office’s website, via the Internet Archive, translated</span></footer>
       </blockquote>
-      <dl class="facts" data-reveal>
-        <div><dt><span lang="he">טלפון</span><span lang="en">Phone</span></dt><dd><a href="tel:+972508426958" dir="ltr">050-842-6958</a></dd></div>
-        <div><dt><span lang="he">דוא״ל</span><span lang="en">Email</span></dt><dd><a href="mailto:peter@saba-cpa.co.il" dir="ltr">peter@saba-cpa.co.il</a></dd></div>
-        <div><dt><span lang="he">משרד</span><span lang="en">Office</span></dt><dd><span lang="he">שיבת ציון 6, חיפה</span><span lang="en">6 Shivat Zion St, Haifa</span></dd></div>
-      </dl>
-    </div>
-    <div class="desk" data-desk>
-      <figure class="card" data-card data-reveal>
-        <img src="img/card.jpg" width="900" height="500" loading="lazy" decoding="async" alt="" data-alt-he="כרטיס הביקור של פיטר סאבא, רואה חשבון: שיבת ציון 6, חיפה, טלפון, פקס, דוא״ל ואתר" data-alt-en="Peter Saba's business card: CPA, 6 Shivat Zion St, Haifa, phone, fax, email and website">
-        <figcaption><span lang="he">כרטיס הביקור של פיטר</span><span lang="en">Peter’s business card</span></figcaption>
-      </figure>
-      <blockquote class="said said-9" data-reveal>
-        <p><span lang="he">״פיטר הוא רואה החשבון של העסק שלי (סוכנות נסיעות) מזה 9 שנים.״</span><span lang="en">“Peter has been the accountant of my business (a travel agency) for 9 years.”</span></p>
-        <footer><span class="who-n">kameel mansour</span> · <span lang="he">ביקורת בגוגל</span><span lang="en">Google review, translated from Hebrew</span></footer>
-      </blockquote>
-    </div>
-  </div>
-</section>
-
-<!-- THE OFFICE. A real merchant's ledger, panned slowly down its columns, beside the office's own list of services, ruled like an index -->
-<section class="plain" id="plain" aria-labelledby="h-plain">
-  <figure class="ledger" data-reveal>
-    <div class="ledger-win"><img src="img/ledger.jpg" width="1000" height="1721" loading="lazy" decoding="async" alt="" data-pan data-alt-he="דף מספר חשבונות של סוחר משנת 1833, טורי סכומים בכתב יד (להמחשה)" data-alt-en="A page from a merchant's ledger, 1833, with handwritten columns of sums (illustration)"></div>
-    <figcaption><span lang="he">ספר חשבונות של סוחר, 1833 · להמחשה</span><span lang="en">A merchant’s ledger, 1833 · illustration</span></figcaption>
-  </figure>
-  <div class="plain-copy">
-    <h2 id="h-plain" data-reveal><span lang="he">מספרים, במילים פשוטות</span><span lang="en">Numbers, in plain words</span></h2>
-    <p class="line" data-reveal><span lang="he">לעסקים, לחברות ולשכירים.</span><span lang="en">For businesses, companies and employees.</span></p>
-    <ol class="index" data-index>
-      <li data-reveal><span lang="he">הנהלת חשבונות וחשבות שכר</span><span lang="en">Bookkeeping and payroll</span></li>
-      <li data-reveal><span lang="he">דוחות שנתיים לחברות ולעצמאים</span><span lang="en">Annual reports for companies and the self-employed</span></li>
-      <li data-reveal><span lang="he">ביקורת דוחות כספיים</span><span lang="en">Audit of financial statements</span></li>
-      <li data-reveal><span lang="he">מיסוי חברות ועצמאים</span><span lang="en">Tax for companies and the self-employed</span></li>
-      <li data-reveal><span lang="he">הצהרות הון</span><span lang="en">Capital declarations</span></li>
-      <li data-reveal><span lang="he">פתיחת תיקים ברשויות המס</span><span lang="en">Opening files with the tax authorities</span></li>
-      <li data-reveal><span lang="he">החזרי מס לשכירים</span><span lang="en">Tax refunds for employees</span></li>
-    </ol>
-    <p class="src" data-reveal><span lang="he">הרשימה מתוך אתר המשרד.</span><span lang="en">The list is taken from the office’s own website.</span></p>
-  </div>
-</section>
-
-<!-- THE YEAR. One slider moves a sample of the books through a tax year: receipts, bookkeeping, reports, annual report -->
-<section class="year" id="year" aria-labelledby="h-year">
-  <div class="wrap">
-    <div class="year-head">
-      <h2 id="h-year" data-reveal><span lang="he">שנה שלמה, בטור אחד</span><span lang="en">A whole year, in one column</span></h2>
-      <p class="line" data-reveal><span lang="he">מהקבלה הראשונה ועד הדוח השנתי.</span><span lang="en">From the first receipt to the annual report.</span></p>
-    </div>
-
-    <div class="stage" data-stage="1" data-year>
-      <div class="clause" data-reveal>
-        <p class="clause-t" aria-live="polite" data-clause></p>
+      <div class="figs" data-reveal style="--d:180ms">
+        <p class="fig"><span class="odo" data-odo="5.0" aria-label="5.0">5.0</span><span lang="he">דירוג בגוגל</span><span lang="en">Google rating</span></p>
+        <p class="fig"><span class="odo" data-odo="31" aria-label="31">31</span><span lang="he">ביקורות</span><span lang="en">reviews</span></p>
+        <p class="fig"><span class="odo" data-odo="6" aria-label="6">6</span><span lang="he">ימי פעילות בשבוע</span><span lang="en">days open a week</span></p>
       </div>
+    </div>
+    <div class="file" data-file>
+      <div class="file-wheel" data-wheel>
+        <figure class="fc fc-photo"><img src="img/card.jpg" width="900" height="500" alt="" data-alt-he="כרטיס הביקור של פיטר סאבא, רואה חשבון: שיבת ציון 6, חיפה" data-alt-en="Peter Saba’s business card: CPA, 6 Shivat Zion St, Haifa"></figure>
+        <figure class="fc fc-photo"><img src="img/seal.jpg" width="1500" height="1000" alt="" style="object-position:44% 38%" data-alt-he="החותם של המשרד" data-alt-en="The office’s seal"></figure>
+        <figure class="fc fc-live fc-rate"><b class="num">5.0</b><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><figcaption><span lang="he">31 ביקורות בגוגל</span><span lang="en">31 Google reviews</span></figcaption></figure>
+        <figure class="fc fc-photo"><img src="img/banner.jpg" width="551" height="1200" alt="" style="object-position:50% 68%" data-alt-he="שלט המשרד: משרד רואה חשבון סאבא פיטר" data-alt-en="The office’s banner: Saba Peter CPA office"></figure>
+        <figure class="fc fc-live fc-hours"><span class="fc-k"><span lang="he">שעות</span><span lang="en">Hours</span></span><b><span lang="he">א׳–ה׳ 8:30–19:30</span><span lang="en">Sun–Thu 8:30–19:30</span></b><span class="fc-s" data-status></span></figure>
+        <figure class="fc fc-logo"><img src="img/logo.png" width="560" height="560" alt="" data-alt-he="הלוגו של המשרד, SABA CPA" data-alt-en="The office’s logo, SABA CPA"></figure>
+        <figure class="fc fc-live fc-quote"><p><span lang="he">״מסביר כל סוגיה בצורה הנכונה והפשוטה ביותר להבנה.״</span><span lang="en">“He explains every issue the right way, and in the simplest way to understand.”</span></p><figcaption>חגי סלק</figcaption></figure>
+        <figure class="fc fc-photo"><img src="img/ledger.jpg" width="1000" height="1721" alt="" style="object-position:50% 96%" data-alt-he="ספר חשבונות ישן, שורת הסיכום (להמחשה)" data-alt-en="An old ledger, the closing total (illustration)"></figure>
+      </div>
+      <i class="rail r1" aria-hidden="true"></i><i class="rail r2" aria-hidden="true"></i>
+      <p class="file-cap"><span lang="he">כרטיס הביקור, החותם והשלט: מתוך תמונות המשרד בגוגל</span><span lang="en">Business card, seal and banner: from the office’s Google photos</span></p>
+    </div>
+  </div>
+</section>
 
-      <div class="frag-wrap" data-reveal>
-        <div class="frag" data-ui data-frag>
-          <p class="frag-h"><span data-frag-title></span><span class="frag-tag"><span lang="he">דוגמה להמחשה</span><span lang="en">Illustration</span></span></p>
-          <ol class="rows" aria-hidden="true">
-            <li class="row" style="--i:0"><span class="r-n"><span lang="he">דלק</span><span lang="en">Fuel</span></span><span class="r-v">312.40</span></li>
-            <li class="row" style="--i:1"><span class="r-n"><span lang="he">ציוד משרדי</span><span lang="en">Office supplies</span></span><span class="r-v">89.90</span></li>
-            <li class="row" style="--i:2"><span class="r-n"><span lang="he">חשמל</span><span lang="en">Electricity</span></span><span class="r-v">468.00</span></li>
-            <li class="row" style="--i:3"><span class="r-n"><span lang="he">טלפון</span><span lang="en">Phone</span></span><span class="r-v">129.00</span></li>
-          </ol>
-          <p class="sum s-month" aria-hidden="true"><span><span lang="he">סה״כ אוקטובר</span><span lang="en">October total</span></span><span class="r-v">999.30</span></p>
-          <p class="sum s-vat" aria-hidden="true"><span><span lang="he">דיווח מע״מ · ספט׳–אוק׳</span><span lang="en">VAT report · Sep–Oct</span></span><span class="tick"><span lang="he">נשלח</span><span lang="en">Filed</span> <svg class="tk" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span></p>
-          <p class="sum s-year" aria-hidden="true"><span><span lang="he">דוח שנתי</span><span lang="en">Annual report</span></span><span class="tick"><span lang="he">הוגש</span><span lang="en">Submitted</span> <svg class="tk" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5"/></svg></span></p>
+<!-- SERVICES: a ledger spread of living tiles (the office's own list), a gold spotlight under the hand; it rides up and lands over the office -->
+<section class="svc" id="services" data-svc>
+  <div class="head">
+    <h2 data-reveal><span lang="he">הכול, <em>בספר אחד.</em></span><span lang="en">All of it, <em>in one book.</em></span></h2>
+    <p data-reveal style="--d:80ms"><span lang="he">השירותים, כפי שהמשרד מפרט אותם.</span><span lang="en">The services, as the office lists them.</span></p>
+  </div>
+  <div class="bento" data-bento>
+    <article class="tile t-big" data-tile>
+      <div class="t-ledger"><img src="img/ledger.jpg" width="1000" height="1721" loading="lazy" alt="" data-alt-he="דף מספר חשבונות של סוחר, 1833 (להמחשה)" data-alt-en="A page from a merchant’s ledger, 1833 (illustration)"><i class="scan" aria-hidden="true"></i></div>
+      <div class="tt"><h3><span lang="he">מיסוי עסקים קטנים ובינוניים</span><span lang="en">Tax for small and medium businesses</span></h3><p><span lang="he">וניהול משא ומתן עם רשויות המס: ההתמחות של המשרד.</span><span lang="en">And negotiating with the tax authorities: the office’s speciality.</span></p></div>
+    </article>
+    <article class="tile" data-tile>
+      <div class="viz v-rows" aria-hidden="true"><p><span lang="he">שכר</span><span lang="en">Payroll</span><b class="num">8,420.00</b></p><p><span lang="he">ספקים</span><span lang="en">Suppliers</span><b class="num">2,315.50</b></p><p><span lang="he">שכירות</span><span lang="en">Rent</span><b class="num">3,900.00</b></p><p class="tot"><span lang="he">סה״כ</span><span lang="en">Total</span><b class="num">14,635.50</b></p></div>
+      <div class="tt"><h3><span lang="he">הנהלת חשבונות</span><span lang="en">Bookkeeping</span></h3><p><span lang="he">וחשבות שכר.</span><span lang="en">And payroll.</span></p></div>
+    </article>
+    <article class="tile" data-tile>
+      <div class="viz v-report" aria-hidden="true"><i class="pg p1"></i><i class="pg p2"></i><i class="cover"><img src="img/logo-96.png" width="96" height="96" alt=""><b class="num">2026</b></i></div>
+      <div class="tt"><h3><span lang="he">דוחות שנתיים</span><span lang="en">Annual reports</span></h3><p><span lang="he">לחברות ולעצמאים.</span><span lang="en">For companies and the self-employed.</span></p></div>
+    </article>
+    <article class="tile" data-tile>
+      <div class="viz v-audit" aria-hidden="true"><p><i></i><svg><use href="#i-tick"/></svg></p><p><i></i><svg><use href="#i-tick"/></svg></p><p><i></i><svg><use href="#i-tick"/></svg></p><p><i></i><svg><use href="#i-tick"/></svg></p></div>
+      <div class="tt"><h3><span lang="he">ביקורת דוחות כספיים</span><span lang="en">Audits</span></h3><p><span lang="he">שורה אחר שורה.</span><span lang="en">Of financial statements.</span></p></div>
+    </article>
+    <article class="tile" data-tile>
+      <div class="viz v-tax" aria-hidden="true"><i style="--h:.34"></i><i style="--h:.5"></i><i style="--h:.66"></i><i style="--h:.82"></i><i style="--h:1"></i></div>
+      <div class="tt"><h3><span lang="he">מיסוי חברות</span><span lang="en">Company tax</span></h3><p><span lang="he">ועצמאים.</span><span lang="en">And the self-employed.</span></p></div>
+    </article>
+    <article class="tile" data-tile>
+      <div class="viz v-scale" aria-hidden="true"><svg viewBox="0 0 200 120"><g class="beam"><line x1="40" y1="34" x2="160" y2="34"/><g class="pan pl"><line x1="40" y1="34" x2="26" y2="78"/><line x1="40" y1="34" x2="54" y2="78"/><path d="M18 78h44a22 10 0 0 1-44 0z"/></g><g class="pan pr"><line x1="160" y1="34" x2="146" y2="78"/><line x1="160" y1="34" x2="174" y2="78"/><path d="M138 78h44a22 10 0 0 1-44 0z"/></g></g><line x1="100" y1="30" x2="100" y2="108"/><path d="M78 110h44"/><circle cx="100" cy="34" r="5"/></svg></div>
+      <div class="tt"><h3><span lang="he">הצהרות הון</span><span lang="en">Capital declarations</span></h3><p><span lang="he">נכסים מול התחייבויות.</span><span lang="en">Assets against liabilities.</span></p></div>
+    </article>
+    <article class="tile" data-tile>
+      <div class="viz v-file" aria-hidden="true"><i class="fold back"></i><i class="sheet"></i><i class="fold front"></i><i class="stamp"><span lang="he">נפתח</span><span lang="en">Opened</span></i></div>
+      <div class="tt"><h3><span lang="he">פתיחת תיקים</span><span lang="en">Opening tax files</span></h3><p><span lang="he">ורישום ברשויות המס.</span><span lang="en">And registering with the authorities.</span></p></div>
+    </article>
+    <article class="tile t-wide" data-tile>
+      <div class="viz v-refund" aria-hidden="true"><span class="form106"><b>106</b><i></i><i></i><i></i></span><svg class="arc" viewBox="0 0 120 60"><path d="M6 50 C 30 4, 90 4, 114 44"/><path class="hd" d="M104 36l10 8 2-12"/></svg><span class="amt"><span class="odo odo-sm" data-odo="1840" aria-label="1840">1840</span><span class="cur">₪</span></span></div>
+      <div class="tt"><h3><span lang="he">החזרי מס לשכירים</span><span lang="en">Tax refunds for employees</span></h3><p><span lang="he">יש לכם טופס 106? אפשר לבדוק. הסכום להמחשה.</span><span lang="en">Have a Form 106? It can be checked. The amount is an illustration.</span></p></div>
+    </article>
+  </div>
+</section>
+</div>
+
+<!-- THE YEAR (the signature): one tax year runs as you scroll. The camera walks down a real merchant's ledger while,
+     beside it, the steps light up and a live desk plays them: receipts fall, are entered row by row, the VAT slip
+     feeds out, and the annual report closes under the SABA seal. Motion off: a normal block with arrows. -->
+<section class="year" id="year" data-year>
+  <div class="head yh">
+    <h2 data-reveal><span lang="he">שנה אחת, <em>בספרים.</em></span><span lang="en">One year, <em>in the books.</em></span></h2>
+    <p data-reveal style="--d:80ms"><span lang="he">מהקבלה הראשונה ועד הדוח השנתי.</span><span lang="en">From the first receipt to the annual report.</span></p>
+  </div>
+  <div class="y-run" data-yrun>
+    <div class="y-stage" data-stage="0">
+      <div class="y-photo" aria-hidden="true"><img src="img/ledger.jpg" width="1000" height="1721" loading="lazy" alt="" data-ypan></div>
+      <ol class="steps" data-steps>
+        <li><button type="button" data-go="0"><b><span lang="he">קבלות</span><span lang="en">Receipts</span></b><span><span lang="he">מה שנאסף במהלך השנה.</span><span lang="en">What gathers through the year.</span></span></button></li>
+        <li><button type="button" data-go="1"><b><span lang="he">הנהלת חשבונות</span><span lang="en">Bookkeeping</span></b><span><span lang="he">כל קבלה בשורה שלה.</span><span lang="en">Every receipt on its own row.</span></span></button></li>
+        <li><button type="button" data-go="2"><b><span lang="he">דיווחים</span><span lang="en">Reports</span></b><span><span lang="he">מע״מ ומקדמות, לאורך השנה.</span><span lang="en">VAT and advances, through the year.</span></span></button></li>
+        <li><button type="button" data-go="3"><b><span lang="he">דוח שנתי</span><span lang="en">Annual report</span></b><span><span lang="he">הספרים נסגרים.</span><span lang="en">The books are closed.</span></span></button></li>
+      </ol>
+      <div class="desk" data-ui data-desk>
+        <div class="rcpts" aria-hidden="true">
+          <div class="rc" style="--x:-30cqw;--y:-12cqh;--r:-8deg;--i:0"><b><span lang="he">תחנת דלק</span><span lang="en">Fuel station</span></b><i></i><i></i><p><span lang="he">סה״כ</span><span lang="en">Total</span><span class="num">312.40</span></p></div>
+          <div class="rc" style="--x:-3cqw;--y:-20cqh;--r:5deg;--i:1"><b><span lang="he">ציוד משרדי</span><span lang="en">Office supplies</span></b><i></i><i></i><p><span lang="he">סה״כ</span><span lang="en">Total</span><span class="num">89.90</span></p></div>
+          <div class="rc" style="--x:27cqw;--y:-8cqh;--r:-3deg;--i:2"><b><span lang="he">חברת החשמל</span><span lang="en">Electricity</span></b><i></i><i></i><p><span lang="he">סה״כ</span><span lang="en">Total</span><span class="num">468.00</span></p></div>
+          <div class="rc" style="--x:-17cqw;--y:16cqh;--r:7deg;--i:3"><b><span lang="he">טלפון</span><span lang="en">Phone</span></b><i></i><i></i><p><span lang="he">סה״כ</span><span lang="en">Total</span><span class="num">129.00</span></p></div>
+          <div class="rc" style="--x:15cqw;--y:17cqh;--r:-6deg;--i:4"><b><span lang="he">ספק</span><span lang="en">Supplier</span></b><i></i><i></i><p><span lang="he">סה״כ</span><span lang="en">Total</span><span class="num">1,250.00</span></p></div>
         </div>
-      </div>
-
-      <div class="slide" data-reveal>
-        <label class="vh" for="yr"><span lang="he">שלב בשנה</span><span lang="en">Stage of the year</span></label>
-        <input id="yr" type="range" min="1" max="4" step="1" value="1" data-range>
-        <div class="stops" data-stops>
-          <button type="button" data-go="1"><span lang="he">קבלות</span><span lang="en">Receipts</span></button>
-          <button type="button" data-go="2"><span lang="he">הנהלת חשבונות</span><span lang="en">Bookkeeping</span></button>
-          <button type="button" data-go="3"><span lang="he">דיווחים</span><span lang="en">Reports</span></button>
-          <button type="button" data-go="4"><span lang="he">דוח שנתי</span><span lang="en">Annual report</span></button>
+        <div class="book" aria-hidden="true">
+          <p class="bk-h"><span lang="he">יומן · אוקטובר</span><span lang="en">Journal · October</span></p>
+          <p class="bk-r" style="--i:0"><span lang="he">דלק</span><span lang="en">Fuel</span><span class="num">312.40</span></p>
+          <p class="bk-r" style="--i:1"><span lang="he">ציוד משרדי</span><span lang="en">Office supplies</span><span class="num">89.90</span></p>
+          <p class="bk-r" style="--i:2"><span lang="he">חשמל</span><span lang="en">Electricity</span><span class="num">468.00</span></p>
+          <p class="bk-r" style="--i:3"><span lang="he">טלפון</span><span lang="en">Phone</span><span class="num">129.00</span></p>
+          <p class="bk-r" style="--i:4"><span lang="he">ספק</span><span lang="en">Supplier</span><span class="num">1,250.00</span></p>
+          <p class="bk-t"><span lang="he">סה״כ</span><span lang="en">Total</span><span class="num" data-runtot>0.00</span></p>
         </div>
+        <div class="slot" aria-hidden="true">
+          <i class="slot-mouth"></i>
+          <div class="slip"><b><span lang="he">דיווח מע״מ</span><span lang="en">VAT report</span></b><span><span lang="he">ספטמבר–אוקטובר</span><span lang="en">September–October</span></span><b class="sent"><svg><use href="#i-tick"/></svg><span lang="he">נשלח</span><span lang="en">Filed</span></b></div>
+        </div>
+        <div class="report" aria-hidden="true">
+          <i class="r-pages"></i>
+          <div class="r-cover"><b><span lang="he">דוח שנתי</span><span lang="en">Annual report</span></b><img src="img/logo.png" width="560" height="560" alt=""><span class="r-ok"><svg><use href="#i-tick"/></svg><span lang="he">הוגש</span><span lang="en">Submitted</span></span></div>
+          <i class="r-flash"></i>
+        </div>
+        <p class="d-tag"><span lang="he">דוגמה להמחשה</span><span lang="en">Illustration</span></p>
+      </div>
+      <div class="y-arrows">
+        <button type="button" class="ya" data-step-by="-1" aria-label="השלב הקודם" data-t-prev><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+        <p class="ya-now" aria-live="polite" data-ynow></p>
+        <button type="button" class="ya" data-step-by="1" aria-label="השלב הבא" data-t-next><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- THE BOTTOM LINE. The rating is the total, double-ruled the way an accountant closes a column; the reviews below it are a thread -->
-<section class="reviews" id="reviews" aria-labelledby="h-rev">
-  <div class="wrap rev-grid">
-    <div class="total" data-reveal>
-      <h2 id="h-rev"><span lang="he">השורה התחתונה</span><span lang="en">The bottom line</span></h2>
-      <p class="total-n"><span class="num">5.0</span><span class="dbl" aria-hidden="true"></span></p>
-      <p class="total-l"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><span lang="he">מתוך 31 ביקורות בגוגל</span><span lang="en">from 31 Google reviews</span></p>
-      <a class="txtlink" href="https://maps.google.com/?cid=2860689642067994268" target="_blank" rel="noopener"><span lang="he">לכל הביקורות בגוגל מפות</span><span lang="en">All reviews on Google Maps</span></a>
+<!-- THE BOTTOM LINE: the ledger's double-ruled total hands over to his: 5.0, rolled up and ruled twice; the five written reviews drift beneath -->
+<section class="reviews" id="reviews" data-revs>
+  <div class="total" data-reveal>
+    <h2><span lang="he">השורה <em>התחתונה.</em></span><span lang="en">The bottom <em>line.</em></span></h2>
+    <div class="sum">
+      <p class="sum-n"><span class="odo odo-xl" data-odo="5.0" aria-label="5.0">5.0</span></p>
+      <i class="dbl" aria-hidden="true"></i>
+      <p class="sum-l"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><span lang="he">מתוך 31 ביקורות בגוגל</span><span lang="en">from 31 Google reviews</span></p>
+      <a class="txt-link" href="https://maps.google.com/?cid=2860689642067994268" target="_blank" rel="noopener"><span lang="he">לכל הביקורות בגוגל מפות</span><span lang="en">All reviews on Google Maps</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </div>
-
-    <div class="thread">
-      <article class="cmt big" data-ui data-reveal>
-        <header><span class="disc" aria-hidden="true">AD</span><span class="nm">Ameer Dakwar</span><span class="dt"><span lang="he">דצמבר 2024</span><span lang="en">December 2024</span></span></header>
-        <p class="body"><span lang="he">רואה חשבון מקצועי, יסודי ואמין שתמיד זמין לתת מענה ברור ופתרונות יצירתיים – ממליץ בחום לכל מי שמחפש שירות אישי ומדויק!</span><span lang="en">A professional, thorough and reliable accountant, always available to give a clear answer and creative solutions. I warmly recommend him to anyone looking for personal, precise service!</span></p>
-        <p class="st"><span class="stars" role="img" aria-label="5 כוכבים" data-stars-l><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><span lang="he">ביקורת בגוגל</span><span lang="en">Google review, translated from Hebrew</span></p>
-      </article>
-      <article class="cmt reply" data-ui data-reveal>
-        <header><span class="disc" aria-hidden="true">י</span><span class="nm">ימית בראל</span><span class="dt"><span lang="he">דצמבר 2025</span><span lang="en">December 2025</span></span></header>
-        <p class="body"><span lang="he">פיטר רואה חשבון משכמו ומעלה, תמיד עונה על כל שאלה, ועוזר מעבר למה שצריך, אדם עם לב ענק, שירותי ואדיב!</span><span lang="en">Peter is an outstanding accountant. He always answers every question and helps beyond what’s needed; a man with a huge heart, helpful and kind!</span></p>
-        <p class="st"><span class="stars" role="img" aria-label="5 כוכבים" data-stars-l><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><span lang="he">ביקורת בגוגל</span><span lang="en">Google review, translated</span></p>
-      </article>
-      <article class="cmt reply" data-ui data-reveal>
-        <header><span class="disc" aria-hidden="true">ח</span><span class="nm">חגי סלק</span></header>
-        <p class="body"><span lang="he">תמיד קשוב, אכפתי, מסביר כל סוגיה בצורה הנכונה והפשוטה ביותר להבנה.</span><span lang="en">Always attentive and caring; he explains every issue the right way, and in the simplest way to understand.</span></p>
-        <p class="st"><span class="stars" role="img" aria-label="5 כוכבים" data-stars-l><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><span lang="he">ביקורת בגוגל</span><span lang="en">Google review, translated</span></p>
-      </article>
+  </div>
+  <div class="drift" data-drift>
+    <div class="lane" data-lane>
+      <blockquote class="rv"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p lang="he">פיטר רואה חשבון משכמו ומעלה, תמיד עונה על כל שאלה, ועוזר מעבר למה שצריך, אדם עם לב ענק, שירותי ואדיב!!</p><p lang="en">Peter is an outstanding accountant. He always answers every question and helps beyond what’s needed; a man with a huge heart, helpful and kind!!</p><footer><bdi>ימית בראל</bdi><span lang="he">דצמבר 2025</span><span lang="en">December 2025 · translated from Hebrew</span></footer></blockquote>
+      <blockquote class="rv"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p lang="he">רואה חשבון מקצועי, יסודי ואמין שתמיד זמין לתת מענה ברור ופתרונות יצירתיים – ממליץ בחום לכל מי שמחפש שירות אישי ומדויק!</p><p lang="en">A professional, thorough and reliable accountant, always available to give a clear answer and creative solutions. I warmly recommend him to anyone looking for personal, precise service!</p><footer><bdi translate="no">Ameer Dakwar</bdi><span lang="he">דצמבר 2024</span><span lang="en">December 2024 · translated from Hebrew</span></footer></blockquote>
+      <blockquote class="rv"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p lang="he">קודם כל בנאדם, אכפתי, מקצועי, איש שכולו נשמה טובה – אחר כך איש מקצוע מהמעלה הראשונה. תמיד קשוב, אכפתי, מסביר כל סוגיה בצורה הנכונה והפשוטה ביותר להבנה.</p><p lang="en">A mensch first: caring, professional, all good soul. Then a first-class professional: always attentive and caring, he explains every issue the right way and in the simplest way to understand.</p><footer><bdi>חגי סלק</bdi><span lang="he">דצמבר 2024</span><span lang="en">December 2024 · translated from Hebrew</span></footer></blockquote>
+    </div>
+    <div class="lane rev" data-lane>
+      <blockquote class="rv"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p lang="he">פיטר הוא רואה החשבון של העסק שלי (סוכנות נסיעות), מזה 9 שנים. אמין, זמין, איכפתי, ויוזם.</p><p lang="en">Peter has been the accountant of my business (a travel agency) for 9 years. Reliable, available, caring and proactive.</p><footer><bdi translate="no">kameel mansour</bdi><span lang="he">דצמבר 2024</span><span lang="en">December 2024 · translated from Hebrew</span></footer></blockquote>
+      <blockquote class="rv"><span class="stars" aria-hidden="true"><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg><svg><use href="#i-star"/></svg></span><p lang="he">שירות מקצועי, תמיד זמין, תמיד נחמד ויעיל. תחושה שיש על מי לסמוך. הכי חשוב, דאג לי להחזרים וביטול תשלומים עשרות אלפי שקלים.</p><p lang="en">Professional service, always available, always kind and efficient. A feeling that there’s someone to rely on. Most important, he got me refunds and cancelled payments worth tens of thousands of shekels.</p><footer><bdi translate="no">Tally</bdi><span lang="he">דצמבר 2024</span><span lang="en">December 2024 · translated from Hebrew</span></footer></blockquote>
     </div>
   </div>
 </section>
 
-<!-- WRITE TO PETER. The composer is an adding machine: press a key for who you are and one for what you need; = sends it -->
-<section class="write" id="write" aria-labelledby="h-write">
-  <div class="wrap write-grid">
-    <div class="write-copy">
-      <h2 id="h-write" data-reveal><span lang="he">כתבו לפיטר</span><span lang="en">Write to Peter</span></h2>
-      <p class="line" data-reveal><span lang="he">לחצו על כמה מקשים, וההודעה תיפתח בוואטסאפ.</span><span lang="en">Press a few keys and the message opens in WhatsApp.</span></p>
-      <figure class="keys-ph" data-reveal>
-        <video muted playsinline preload="none" poster="img/keys-poster.jpg" width="720" height="540" data-keys aria-hidden="true"><source src="img/keys.mp4" type="video/mp4"></video>
-        <figcaption><span lang="he">מכונת חישוב מכנית, מקשים בטורים · להמחשה</span><span lang="en">A mechanical calculator, keys in columns · illustration</span></figcaption>
-      </figure>
-    </div>
-
-    <form class="calc" data-ui data-calc data-reveal action="https://wa.me/972508426958" target="_blank">
-      <div class="disp" aria-live="polite"><p data-msg></p></div>
-      <fieldset class="krow">
-        <legend><span lang="he">מי אתם?</span><span lang="en">You are</span></legend>
-        <div class="keys k3">
-          <label class="key key-l"><input type="radio" name="who" value="self"><span><span lang="he">עצמאי/ת</span><span lang="en">Self-employed</span></span></label>
-          <label class="key key-l"><input type="radio" name="who" value="co"><span><span lang="he">חברה</span><span lang="en">A company</span></span></label>
-          <label class="key key-l"><input type="radio" name="who" value="emp"><span><span lang="he">שכיר/ה</span><span lang="en">Employee</span></span></label>
+<!-- WRITE TO PETER (the live thing): an office form. Tick a box in each row; the message writes itself on the carbon copy beside it; the stamp sends it to WhatsApp -->
+<section class="write" id="write">
+  <div class="head">
+    <h2 data-reveal><span lang="he">כתבו <em>לפיטר.</em></span><span lang="en">Write <em>to Peter.</em></span></h2>
+    <p data-reveal style="--d:80ms"><span lang="he">סמנו משבצת בכל שורה, וההודעה מוכנה לוואטסאפ.</span><span lang="en">Tick a box in each row and the message is ready for WhatsApp.</span></p>
+  </div>
+  <form class="w-grid" action="https://wa.me/972508426958" target="_blank" data-form>
+    <div class="sheet-form" data-ui data-reveal>
+      <p class="sf-h"><img src="img/logo-96.png" width="96" height="96" alt=""><b><span lang="he">פנייה למשרד</span><span lang="en">A note to the office</span></b></p>
+      <fieldset>
+        <legend><span lang="he">מי פונה?</span><span lang="en">Who’s writing?</span></legend>
+        <div class="boxes">
+          <label class="bx"><input type="radio" name="who" value="self"><i aria-hidden="true"><svg><use href="#i-tick"/></svg></i><span><span lang="he">עסק עצמאי</span><span lang="en">Self-employed</span></span></label>
+          <label class="bx"><input type="radio" name="who" value="co"><i aria-hidden="true"><svg><use href="#i-tick"/></svg></i><span><span lang="he">חברה</span><span lang="en">A company</span></span></label>
+          <label class="bx"><input type="radio" name="who" value="emp"><i aria-hidden="true"><svg><use href="#i-tick"/></svg></i><span><span lang="he">שכיר/ה</span><span lang="en">Employee</span></span></label>
         </div>
       </fieldset>
-      <fieldset class="krow">
-        <legend><span lang="he">על מה?</span><span lang="en">About</span></legend>
-        <div class="keys k2">
-          <label class="key key-l"><input type="radio" name="what" value="books"><span><span lang="he">הנהלת חשבונות</span><span lang="en">Bookkeeping</span></span></label>
-          <label class="key key-l"><input type="radio" name="what" value="annual"><span><span lang="he">דוח שנתי</span><span lang="en">Annual report</span></span></label>
-          <label class="key key-l"><input type="radio" name="what" value="refund"><span><span lang="he">החזר מס</span><span lang="en">Tax refund</span></span></label>
-          <label class="key key-l"><input type="radio" name="what" value="open"><span><span lang="he">פתיחת תיק</span><span lang="en">Opening a file</span></span></label>
+      <fieldset>
+        <legend><span lang="he">בנושא</span><span lang="en">About</span></legend>
+        <div class="boxes b6">
+          <label class="bx"><input type="radio" name="what" value="books"><i aria-hidden="true"><svg><use href="#i-tick"/></svg></i><span><span lang="he">הנהלת חשבונות</span><span lang="en">Bookkeeping</span></span></label>
+          <label class="bx"><input type="radio" name="what" value="annual"><i aria-hidden="true"><svg><use href="#i-tick"/></svg></i><span><span lang="he">דוח שנתי</span><span lang="en">Annual report</span></span></label>
+          <label class="bx"><input type="radio" name="what" value="refund"><i aria-hidden="true"><svg><use href="#i-tick"/></svg></i><span><span lang="he">החזר מס</span><span lang="en">Tax refund</span></span></label>
+          <label class="bx"><input type="radio" name="what" value="open"><i aria-hidden="true"><svg><use href="#i-tick"/></svg></i><span><span lang="he">פתיחת תיק</span><span lang="en">Opening a file</span></span></label>
+          <label class="bx"><input type="radio" name="what" value="capital"><i aria-hidden="true"><svg><use href="#i-tick"/></svg></i><span><span lang="he">הצהרת הון</span><span lang="en">Capital declaration</span></span></label>
+          <label class="bx"><input type="radio" name="what" value="tax"><i aria-hidden="true"><svg><use href="#i-tick"/></svg></i><span><span lang="he">מיסוי</span><span lang="en">Tax</span></span></label>
         </div>
       </fieldset>
-      <div class="nmrow">
+      <div class="nm">
         <label for="nm"><span lang="he">השם שלכם (לא חובה)</span><span lang="en">Your name (optional)</span></label>
         <input id="nm" name="nm" type="text" autocomplete="name" enterkeyhint="send" maxlength="40" data-ph-he="למשל: דנה כהן…" data-ph-en="e.g. Dana Cohen…" placeholder="למשל: דנה כהן…">
       </div>
-      <div class="ops">
-        <button type="reset" class="key key-c" data-clear><span lang="he">ניקוי</span><span lang="en">Clear</span></button>
-        <button type="submit" class="key key-eq"><b aria-hidden="true">=</b><span lang="he">שליחה בוואטסאפ</span><span lang="en">Send on WhatsApp</span></button>
-      </div>
-    </form>
+    </div>
+    <div class="carbon" data-reveal style="--d:120ms">
+      <div class="bubble" data-ui><p class="b-to"><img src="img/logo-96.png" width="96" height="96" alt=""><b><span lang="he">פיטר סאבא</span><span lang="en">Peter Saba</span></b><span class="b-st" data-status></span></p><p class="b-msg" aria-live="polite"><span data-msg></span><i class="caret" aria-hidden="true"></i></p></div>
+      <button type="submit" class="stamp-btn" data-send><span class="sb-ring" aria-hidden="true"></span><svg aria-hidden="true"><use href="#i-wa"/></svg><span lang="he">שליחה לפיטר בוואטסאפ</span><span lang="en">Send to Peter on WhatsApp</span></button>
+      <button type="reset" class="clear" data-clear><span lang="he">ניקוי</span><span lang="en">Clear</span></button>
+    </div>
+  </form>
+</section>
+
+<!-- FAQ: answers only from the office's own site and Google listing, filed like index tabs -->
+<section class="faq" id="faq">
+  <div class="head"><h2 data-reveal><span lang="he">שאלות, <em>בקצרה.</em></span><span lang="en">Questions, <em>briefly.</em></span></h2></div>
+  <div class="qa">
+    <details data-reveal><summary><span lang="he">במה המשרד מתמחה?</span><span lang="en">What does the office specialise in?</span><svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p><span lang="he">מיסוי עסקים קטנים ובינוניים, וניהול משא ומתן עם רשויות המס.</span><span lang="en">Tax for small and medium businesses, and negotiating with the tax authorities.</span></p></details>
+    <details data-reveal style="--d:60ms"><summary><span lang="he">אפשר לפתוח תיק דרך המשרד?</span><span lang="en">Can the office open a tax file for me?</span><svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p><span lang="he">כן. פתיחת תיקים ורישום ברשויות המס הם חלק משירותי המשרד.</span><span lang="en">Yes. Opening files and registering with the tax authorities are among the office’s services.</span></p></details>
+    <details data-reveal style="--d:120ms"><summary><span lang="he">גם שכירים יכולים לפנות?</span><span lang="en">Can employees come too?</span><svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p><span lang="he">כן. המשרד מטפל גם בהחזרי מס לשכירים.</span><span lang="en">Yes. The office also handles tax refunds for employees.</span></p></details>
+    <details data-reveal style="--d:180ms"><summary><span lang="he">אילו דוחות המשרד מכין?</span><span lang="en">Which reports does the office prepare?</span><svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p><span lang="he">דוחות שנתיים לחברות ולעצמאים, הצהרות הון וביקורת דוחות כספיים.</span><span lang="en">Annual reports for companies and the self-employed, capital declarations and audits of financial statements.</span></p></details>
+    <details data-reveal style="--d:240ms"><summary><span lang="he">מתי המשרד פתוח?</span><span lang="en">When is the office open?</span><svg aria-hidden="true"><use href="#i-plus"/></svg></summary><p><span lang="he">ראשון עד חמישי 8:30–19:30, שישי 8:00–15:30, שבת סגור.</span><span lang="en">Sunday to Thursday 8:30–19:30, Friday 8:00–15:30, closed on Saturday.</span></p></details>
   </div>
 </section>
 
-<!-- VISIT. The banker's lamp on the desk is lit while the office is open and dark when it's closed; hours, map, the street -->
-<section class="visit" id="visit" aria-labelledby="h-visit">
-  <div class="night" data-lamp>
-    <picture class="lamp-ph">
-      <source media="(min-width: 700px)" srcset="img/lamp-wide-off.jpg">
-      <img src="img/lamp-tall-off.jpg" width="1000" height="1309" alt="" loading="lazy" decoding="async">
-    </picture>
-    <picture class="lamp-ph lamp-on" data-lit-lamp>
-      <source media="(min-width: 700px)" srcset="img/lamp-wide.jpg">
-      <img src="img/lamp-tall.jpg" width="1000" height="1309" alt="" loading="lazy" decoding="async" data-alt-he="מנורת בנקאים ירוקה על שולחן עבודה (תמונה להמחשה)" data-alt-en="A green banker's lamp on a desk (illustrative photo)">
-    </picture>
-    <div class="night-copy">
-      <h2 id="h-visit" data-reveal><span lang="he">שיבת ציון 6, חיפה</span><span lang="en">6 Shivat Zion St, Haifa</span></h2>
-      <p class="line status-l" data-reveal><span data-status2></span></p>
-    </div>
-    <p class="photo-note" aria-hidden="true"><span lang="he">תמונה להמחשה</span><span lang="en">Illustrative photo</span></p>
-  </div>
-  <div class="wrap visit-grid">
-    <div class="tape" data-reveal>
-      <h3><span lang="he">שעות פעילות</span><span lang="en">Opening hours</span></h3>
+<!-- VISIT: the street, then a contact bento; the banker's lamp tile is lit while the office is open -->
+<section class="visit" id="visit">
+  <figure class="street" data-street>
+    <img src="img/street.jpg" width="1000" height="750" loading="lazy" alt="" data-alt-he="בית אבן ישן ועצי דקל ברחוב שיבת ציון בחיפה" data-alt-en="An old stone house and palm trees on Shivat Zion Street, Haifa">
+    <figcaption><span lang="he">רחוב שיבת ציון, חיפה</span><span lang="en">Shivat Zion Street, Haifa</span></figcaption>
+    <h2 data-reveal><span lang="he">שיבת ציון 6, <em>חיפה.</em></span><span lang="en">6 Shivat Zion St, <em>Haifa.</em></span></h2>
+  </figure>
+  <div class="cbento">
+    <a class="cb cb-wa" href="https://wa.me/972508426958" target="_blank" rel="noopener" data-wa data-reveal><svg aria-hidden="true"><use href="#i-wa"/></svg><b><span lang="he">וואטסאפ לפיטר</span><span lang="en">WhatsApp Peter</span></b><span dir="ltr" class="num">050-842-6958</span></a>
+    <a class="cb" href="tel:+972508426958" data-reveal style="--d:60ms"><svg aria-hidden="true"><use href="#i-phone"/></svg><b><span lang="he">טלפון</span><span lang="en">Phone</span></b><span dir="ltr" class="num">050-842-6958</span></a>
+    <a class="cb" href="mailto:peter@saba-cpa.co.il" data-reveal style="--d:120ms"><svg aria-hidden="true"><use href="#i-mail"/></svg><b><span lang="he">דוא״ל</span><span lang="en">Email</span></b><span dir="ltr">peter@saba-cpa.co.il</span></a>
+    <p class="cb" data-reveal style="--d:180ms"><svg aria-hidden="true"><use href="#i-fax"/></svg><b><span lang="he">פקס</span><span lang="en">Fax</span></b><span dir="ltr" class="num">077-470-1303</span></p>
+    <div class="cb cb-hours" data-reveal>
+      <b><span lang="he">שעות פעילות</span><span lang="en">Opening hours</span></b>
+      <span class="hs" data-status></span>
       <table><tbody data-hours></tbody></table>
-      <div class="v-acts">
-        <a class="btn btn-navy" href="https://maps.google.com/?cid=2860689642067994268" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg><span lang="he">ניווט למשרד</span><span lang="en">Directions</span></a>
-        <a class="btn btn-line" href="tel:+972508426958"><svg aria-hidden="true"><use href="#i-phone"/></svg><span dir="ltr">050-842-6958</span></a>
-      </div>
     </div>
-    <div class="map" data-reveal>
-      <iframe title="מפה: שיבת ציון 6, חיפה" data-t-map src="https://www.google.com/maps?q=%D7%A9%D7%99%D7%91%D7%AA%20%D7%A6%D7%99%D7%95%D7%9F%206%2C%20%D7%97%D7%99%D7%A4%D7%94&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-    <figure class="street" data-reveal>
-      <img src="img/street.jpg" width="1000" height="750" loading="lazy" decoding="async" alt="" data-alt-he="בית אבן ישן ועצי דקל ברחוב שיבת ציון בחיפה" data-alt-en="An old stone house and palm trees on Shivat Zion Street, Haifa">
-      <figcaption><span lang="he">רחוב שיבת ציון, חיפה</span><span lang="en">Shivat Zion Street, Haifa</span></figcaption>
+    <figure class="cb cb-lamp" data-lamp data-reveal style="--d:60ms">
+      <img class="lp" src="img/lamp-tall-off.jpg" width="1000" height="1309" loading="lazy" alt="">
+      <img class="lp lp-on" src="img/lamp-tall.jpg" width="1000" height="1309" loading="lazy" alt="" data-alt-he="מנורת בנקאים ירוקה על שולחן עבודה (תמונה להמחשה)" data-alt-en="A green banker’s lamp on a desk (illustrative photo)">
+      <figcaption><span lang="he">המנורה דולקת כשהמשרד פתוח · תמונה להמחשה</span><span lang="en">The lamp is on while the office is open · illustrative photo</span></figcaption>
     </figure>
+    <div class="cb cb-map" data-reveal style="--d:120ms">
+      <iframe title="מפה: שיבת ציון 6, חיפה" data-t-map src="https://www.google.com/maps?q=%D7%A9%D7%99%D7%91%D7%AA%20%D7%A6%D7%99%D7%95%D7%9F%206%2C%20%D7%97%D7%99%D7%A4%D7%94&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <a class="map-go" href="https://maps.google.com/?cid=2860689642067994268" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-pin"/></svg><span lang="he">ניווט למשרד</span><span lang="en">Directions</span></a>
+    </div>
   </div>
 </section>
 </main>
 
-<footer class="foot">
-  <div class="wrap foot-grid">
-    <p class="foot-name"><span class="mark-w" translate="no">SABA</span> <span lang="he">פיטר סאבא · רואה חשבון</span><span lang="en">Peter Saba · CPA</span></p>
-    <p class="foot-addr"><span lang="he">שיבת ציון 6, חיפה</span><span lang="en">6 Shivat Zion St, Haifa</span> · <a href="tel:+972508426958" dir="ltr">050-842-6958</a> · <a href="mailto:peter@saba-cpa.co.il" dir="ltr">peter@saba-cpa.co.il</a></p>
-    <p class="foot-note"><span lang="he">קונספט לדוגמה שנבנה עבור פיטר סאבא רואה חשבון · זה אינו האתר הרשמי של העסק.</span><span lang="en">A sample concept built for Peter Saba CPA · This is not the business’s official website.</span></p>
-    <p class="credits"><span lang="he">החותם וכרטיס הביקור: מתוך פרופיל המשרד בגוגל מפות (החותם עבר עיבוד צבע). תמונות להמחשה, לא של המשרד:</span><span lang="en">The seal and the business card: from the office’s Google Maps profile (the seal is colour-graded). Illustrative photos, not of the office:</span>
-      <span class="cr" dir="ltr"><a href="https://commons.wikimedia.org/wiki/File:Bankers_lamp_by_Rob_Pongsajapan.jpg">“Bankers lamp”</a> by Rob Pongsajapan, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>, regraded;
-      <a href="https://commons.wikimedia.org/wiki/File:Pittsboro_Merchant_Business_Ledger_-_DPLA_-_4cbfce8f8f08c14f851ab74af046c082_(page_258).jpg">“Pittsboro Merchant Business Ledger”</a>, public domain;
-      <a href="https://commons.wikimedia.org/wiki/File:Keystrokes_in_a_vintage_mechanical_calculator.webm">“Keystrokes in a vintage mechanical calculator”</a> (video) by Subhashish Panigrahi, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, trimmed and cropped;
-      <a href="https://commons.wikimedia.org/wiki/File:Shivat_Tziyon_St._Haifa_1.JPG">“Shivat Tziyon St. Haifa 1”</a> by Hanay, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>; all via Wikimedia Commons.</span></p>
+<!-- FOOTER: the page lifts like a curtain; gold foil flakes gather into the office's seal, then the real logo settles in -->
+<footer class="foot" data-foot>
+  <div class="f-seal">
+    <i class="f-ring" aria-hidden="true"></i>
+    <canvas class="f-flakes" aria-hidden="true" data-flakes></canvas>
+    <img class="f-logo" src="img/logo.png" width="560" height="560" alt="" data-flogo data-alt-he="הלוגו של המשרד, SABA CPA" data-alt-en="The office’s logo, SABA CPA">
+  </div>
+  <div class="f-body">
+    <p class="f-name"><span lang="he">פיטר סאבא · רואה חשבון</span><span lang="en">Peter Saba · CPA</span></p>
+    <p class="f-line"><span lang="he">שיבת ציון 6, חיפה</span><span lang="en">6 Shivat Zion St, Haifa</span> · <a href="tel:+972508426958" dir="ltr">050-842-6958</a> · <a href="mailto:peter@saba-cpa.co.il" dir="ltr">peter@saba-cpa.co.il</a></p>
+    <div class="f-tools"><button type="button" class="tgl" role="switch" aria-checked="true" data-motion-toggle><span class="knob" aria-hidden="true"></span><span class="tl"><span lang="he">תנועה</span><span lang="en">Motion</span></span></button><button type="button" class="tgl lang" data-set-lang><span lang="he">English</span><span lang="en">עברית</span></button></div>
+    <p class="f-note"><span lang="he">קונספט לדוגמה שנבנה עבור פיטר סאבא רואה חשבון · זה אינו האתר הרשמי של העסק. הביקורות מגוגל.</span><span lang="en">A sample concept built for Peter Saba CPA · This is not the business’s official website. Reviews from Google.</span></p>
+    <p class="credits"><span lang="he">הלוגו והטקסטים: מאתר המשרד saba-cpa.co.il (עותק בארכיון האינטרנט). כרטיס הביקור, החותם והשלט: מתמונות המשרד בגוגל מפות (החותם עבר עיבוד צבע). תמונות להמחשה, לא של המשרד:</span><span lang="en">Logo and wording: the office’s site saba-cpa.co.il (Internet Archive copy). Business card, seal and banner: the office’s Google Maps photos (the seal is colour-graded). Illustrative photos, not of the office:</span>
+      <span class="cr" dir="ltr"><a href="https://commons.wikimedia.org/wiki/File:Pittsboro_Merchant_Business_Ledger_-_DPLA_-_4cbfce8f8f08c14f851ab74af046c082_(page_258).jpg">“Pittsboro Merchant Business Ledger”</a>, public domain; <a href="https://commons.wikimedia.org/wiki/File:Bankers_lamp_by_Rob_Pongsajapan.jpg">“Bankers lamp”</a> by Rob Pongsajapan, <a href="https://creativecommons.org/licenses/by/2.0">CC BY 2.0</a>, regraded; <a href="https://commons.wikimedia.org/wiki/File:Shivat_Tziyon_St._Haifa_1.JPG">“Shivat Tziyon St. Haifa 1”</a> by Hanay, <a href="https://creativecommons.org/licenses/by-sa/3.0">CC BY-SA 3.0</a>; via Wikimedia Commons.</span></p>
   </div>
 </footer>
 
-<!-- phone: two adding-machine keys, bottom corner -->
+<!-- phone: two round seals in the corner, WhatsApp and call -->
 <div class="dock" data-dock>
-  <a class="dk" href="tel:+972508426958" data-t-call3><svg aria-hidden="true"><use href="#i-phone"/></svg><span class="vh"><span lang="he">התקשרו לפיטר</span><span lang="en">Call Peter</span></span></a>
-  <a class="dk dk-wa" href="https://wa.me/972508426958" data-wa target="_blank" rel="noopener" data-t-wa3><svg aria-hidden="true"><use href="#i-wa"/></svg><span class="vh"><span lang="he">וואטסאפ לפיטר</span><span lang="en">WhatsApp Peter</span></span></a>
+  <a class="seal-btn sb-call" href="tel:+972508426958" aria-label="התקשרו לפיטר, 050-842-6958" data-t-call><svg aria-hidden="true"><use href="#i-phone"/></svg></a>
+  <a class="seal-btn sb-wa" href="https://wa.me/972508426958" target="_blank" rel="noopener" aria-label="וואטסאפ לפיטר" data-t-wa data-wa><svg aria-hidden="true"><use href="#i-wa"/></svg></a>
 </div>
 
-<script src="js/site.js" defer></script>
+<script src="js/site.js"></script>
 </body>
 </html>
