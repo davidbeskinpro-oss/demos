@@ -1,0 +1,407 @@
+/* Nir Cohen, locksmith — a steel security door in the logo's own charcoal and red, warm light behind it, brass in the details. */
+:root{
+  --bg:#151719;
+  --bg-2:#0f1012;
+  --steel:#24282d;
+  --steel-2:#2e333a;
+  --steel-3:#3a4048;
+  --line:rgba(255,255,255,.09);
+  --ink:#eeebe6;
+  --soft:#c2c5c9;
+  --red:#c4202f;             /* the logo's red, on buttons */
+  --red-ink:#f05a68;         /* the same red, lifted for text on the dark steel */
+  --brass:#d6b46c;
+  --brass-2:#a98443;
+  --light:#ffcf8f;           /* warm light from behind the door */
+  --live:#7fdc9b;
+  --text:"IBM Plex Sans Hebrew","Arial Hebrew",Arial,sans-serif;
+  --serif:"Suez One","IBM Plex Sans Hebrew",Georgia,serif;
+  --serif-en:"DM Serif Display",Georgia,serif;
+  --s-small:15px;
+  --s-body:clamp(1.0625rem,1rem + .25vw,1.2rem);
+  --s-lead:clamp(1.15rem,1.02rem + .5vw,1.45rem);
+  --s-head:clamp(2.3rem,1.5rem + 2.8vw,4.3rem);
+  --m:clamp(16px,3vw,44px);
+  --ease:cubic-bezier(.23,1,.32,1);
+  --ease-io:cubic-bezier(.77,0,.175,1);
+  --navh:70px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--bg-2)}
+body{margin:0;background:var(--bg-2);color:var(--ink);font:400 var(--s-body)/1.55 var(--text);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;touch-action:manipulation}
+h1,h2,h3,p,figure,ol,ul,blockquote,fieldset{margin:0}
+fieldset{border:0;padding:0;min-width:0}
+ol,ul{padding:0;list-style:none}
+.vh{position:absolute;width:0;height:0;overflow:hidden}
+.num{font-variant-numeric:lining-nums tabular-nums}
+html[lang="he"] [lang="en"]:not(html), html[lang="en"] [lang="he"]:not(html){display:none!important}
+::selection{background:var(--red);color:#fff}
+:focus-visible{outline:3px solid var(--brass);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;inset-inline-start:var(--m);top:-60px;z-index:60;background:var(--red);color:#fff;padding:10px 16px;border-radius:999px;text-decoration:none}
+.skip:focus{top:44px}
+h2{font:700 var(--s-head)/1.04 var(--text);letter-spacing:-.03em;text-wrap:balance}
+h3{font:700 clamp(26px,2.4vw,38px)/1.1 var(--text);letter-spacing:-.02em}
+em{font:400 1em/1 var(--serif);font-style:normal;letter-spacing:-.01em;color:var(--red-ink)}  /* SETI-style accent word, in the logo's red */
+html[lang="en"] em{font-family:var(--serif-en);font-style:italic;letter-spacing:0}
+.head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 40px;margin-bottom:clamp(26px,3vw,40px)}
+.head p{max-width:42ch;font-size:var(--s-lead);line-height:1.4;color:var(--soft)}
+section{position:relative;padding:clamp(90px,10vw,150px) var(--m) 0}
+.stars{display:inline-flex;gap:2px}
+.stars svg{width:15px;height:15px;fill:var(--brass)}
+.page{position:relative;z-index:2;background:var(--bg);padding-bottom:clamp(90px,10vw,150px)}
+.plate{display:inline-grid;place-items:center;background:#ebe8e2;border-radius:10px}  /* the real logo, on a small light plate like a door sign */
+.plate img{width:100%;height:auto}
+
+.concept{position:relative;z-index:41;display:flex;align-items:center;justify-content:center;min-height:34px;padding:6px var(--m);background:var(--bg-2);color:var(--soft);font-size:var(--s-small);line-height:1.35;text-align:center}
+
+/* ---------------------------------------------------------------- nav: a bar over the door that gathers into a floating pill */
+.nav{position:sticky;top:0;z-index:40;height:var(--navh);margin-bottom:calc(var(--navh) * -1);padding:0 var(--m);transition:padding .45s var(--ease)}
+.nav-in{display:flex;align-items:center;gap:20px;max-width:2000px;margin:0 auto;height:var(--navh);padding:0 4px;border-radius:999px;border:1px solid transparent;transition:max-width .6s var(--ease),height .45s var(--ease),padding .45s var(--ease),background .4s ease,border-color .4s ease} /* taste-skill-ignore: the floating pill nav edge from the owner reference */
+.nav.pill{padding-top:10px}
+.nav.pill .nav-in{max-width:1080px;height:58px;padding:0 8px;background:rgba(30,33,37,.84);border-color:var(--line);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)} /* taste-skill-ignore: the owner's references use a floating frosted pill */
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand .plate{width:42px;height:42px;padding:3px}
+.bname{font:700 21px/1 var(--text);letter-spacing:-.01em}
+.links{display:flex;gap:2px;margin-inline-start:auto;font-size:16px}
+.links a{padding:8px 12px;border-radius:999px;text-decoration:none;color:var(--soft);transition:color .2s ease,background .2s ease}
+.tools{display:flex;align-items:center;gap:6px}
+.tgl{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;background:rgba(46,51,58,.9);color:var(--ink);font-size:15px;transition:transform .14s var(--ease),background .2s ease}
+.tgl .knob{position:relative;width:30px;height:18px;border-radius:999px;background:#4a5058;transition:background .2s ease}
+.tgl .knob::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:12px;height:12px;border-radius:50%;background:var(--ink);transition:transform .22s var(--ease)}
+.tgl[aria-checked="true"] .knob{background:var(--red)}
+.tgl[aria-checked="true"] .knob::after{transform:translateX(12px)}
+html[dir="rtl"] .tgl[aria-checked="true"] .knob::after{transform:translateX(-12px)}
+.tgl.lang{min-width:46px;justify-content:center;font-weight:700}
+.pill-btn,.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:0 18px;border-radius:999px;background:var(--red);color:#fff;text-decoration:none;font-weight:700;font-size:16px;overflow:hidden;transition:transform .14s var(--ease),background .2s ease}
+.btn{min-height:54px;padding:0 26px;font-size:17px}
+.btn.ghost{background:rgba(58,64,72,.92);color:var(--ink)}
+.pill-btn svg,.btn svg{width:20px;height:20px;fill:currentColor;flex:none}
+.btn:not(.ghost)::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,214,160,.32) 50%,transparent 70%);transform:translateX(-120%)} /* taste-skill-ignore: a brass glint across the button */
+html:not(.still) .btn:not(.ghost)::after{animation:glint 4.2s var(--ease-io) 2s infinite}
+@keyframes glint{0%{transform:translateX(-120%)}36%,100%{transform:translateX(120%)}}
+.pill-btn:active,.btn:active,.tgl:active,.chip:active,.opts button:active,.tile:active,.call:active,.strike a:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .links a:hover{color:var(--ink);background:rgba(58,64,72,.7)}
+  .btn:hover,.pill-btn:hover{background:#d42a3a} .btn.ghost:hover{background:#4a5059}
+  .tgl:hover{background:var(--steel-3)}
+}
+@media (max-width:1060px){ .links{display:none} .tools{margin-inline-start:auto} }
+@media (max-width:600px){
+  :root{--navh:62px}
+  .nav-in{gap:8px} .brand .plate{width:38px;height:38px} .bname{font-size:19px}
+  .tgl{padding:0 11px} .tgl > span[lang]{display:none!important}
+  html[lang="he"] .tgl.lang [lang="he"], html[lang="en"] .tgl.lang [lang="en"]{display:inline!important}
+  .pill-btn span{display:none} .pill-btn{width:44px;padding:0}
+}
+
+/* ---------------------------------------------------------------- THE DOOR */
+.door{position:relative;height:250svh;padding:0;background:var(--bg-2)}
+.stage{position:sticky;top:0;height:100svh;min-height:560px;overflow:hidden;perspective:1700px;perspective-origin:50% 50%;isolation:isolate}
+/* behind the door */
+.inside{position:absolute;inset:0;z-index:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr auto auto;align-items:center;justify-items:center;padding:calc(var(--navh) + 14px) var(--m) 22px;overflow:hidden;background:#1a1510}
+.in-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 40%;transform:scale(var(--inz,1.18))}
+.in-light{position:absolute;inset:0;background:radial-gradient(70% 55% at 50% 52%,rgba(255,196,120,.28),transparent 70%),linear-gradient(180deg,rgba(15,16,18,.55),transparent 30%,transparent 70%,var(--bg) 100%)} /* taste-skill-ignore: the warm light of the room behind the door, fading into the next section */
+.in-copy{position:relative;z-index:2;text-align:center}
+.in-copy h2{font-size:clamp(2.6rem,1.6rem + 3.6vw,5.6rem)}
+.in-copy p{margin-top:8px;font-size:var(--s-lead);color:#efe3cf}
+.drum-wrap{position:relative;z-index:1;width:100%;height:100%;min-height:200px;perspective:2200px;perspective-origin:50% 30%;cursor:grab;touch-action:pan-y}
+.drum-wrap.drag{cursor:grabbing}
+.drum{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d}
+.dc{--cw:clamp(130px,12.5vw,196px);position:absolute;left:0;top:0;width:var(--cw);aspect-ratio:4/5;margin:calc(var(--cw) * -.625) 0 0 calc(var(--cw) * -.5);overflow:hidden;border-radius:18px;background:var(--steel);border:1px solid rgba(214,180,108,.35);backface-visibility:hidden;will-change:transform;box-shadow:0 26px 50px rgba(0,0,0,.5)} /* taste-skill-ignore: cards floating in 3D */
+.dc img{width:100%;height:100%;object-fit:cover}
+.dc figcaption{position:absolute;inset:auto 0 0;padding:28px 12px 10px;font-size:15px;font-weight:700;text-align:start;background:linear-gradient(transparent,rgba(10,10,12,.86))} /* taste-skill-ignore: scrim under the caption */
+.dc-rate{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;background:var(--red)}
+.dc-rate .big{font:700 70px/1 var(--text);letter-spacing:-.04em}
+.dc-rate .stars svg{width:17px;height:17px;fill:#ffe2a6}
+.dc-rate figcaption{position:static;background:none;text-align:center;padding:0 8px}
+.dc-logo{display:grid;place-items:center;background:#ebe8e2}
+.dc-logo .plate{width:84%;background:none}
+.odos{position:relative;z-index:2;display:flex;justify-content:center;gap:clamp(22px,5vw,72px)}
+.st{display:flex;flex-direction:column;align-items:center;gap:2px;color:#efe3cf;font-size:15px}
+.st .odo{font:700 clamp(36px,4vw,58px)/1 var(--text);color:var(--ink);letter-spacing:-.03em}
+.in-note{position:relative;z-index:2;margin-top:10px;font-size:13px;color:#cdbfa8}
+/* the door leaf */
+.leaf{position:absolute;inset:0 14px 0 0;z-index:2;transform-origin:100% 50%;backface-visibility:hidden;will-change:transform;
+  background:linear-gradient(180deg,rgba(255,255,255,.05),transparent 45%,rgba(0,0,0,.28)),url(../img/steel.jpg) 0 0/512px 512px repeat,#2a2e33;  /* taste-skill-ignore: brushed steel of the door */
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)} /* taste-skill-ignore: edge of the steel door leaf */
+html[dir="ltr"] .leaf{inset:0 0 0 14px;transform-origin:0 50%}
+.sheen{position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.06) 48%,transparent 60%);transform:translateX(var(--sx,0%))} /* taste-skill-ignore: light moving across the steel */
+.leaf::after{content:"";position:absolute;inset:0;background:#07080a;opacity:var(--shade,0);pointer-events:none}
+.panel{position:absolute;border-radius:6px;box-shadow:inset 0 2px 0 rgba(255,255,255,.05),inset 0 -2px 0 rgba(0,0,0,.35),0 1px 0 rgba(255,255,255,.04);pointer-events:none} /* taste-skill-ignore: the pressed panels of a steel door */
+.panel.p1{inset:calc(var(--navh) + 18px) 7% 52% 7%}
+.panel.p2{inset:52% 7% 28px 7%}
+.filings{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.logo-src{display:none}
+.l-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:20px;height:100%;padding:calc(var(--navh) + 20px) calc(var(--m) + 4px) 40px;padding-inline-end:clamp(110px,10vw,150px)}
+.mark-slot{order:2;justify-self:center;width:min(32vw,58svh,500px);aspect-ratio:1}
+.mark-slot .plate.big{width:100%;height:100%;padding:8%;border-radius:22px}
+html.js:not(.still) .leaf.particles .mark-slot .plate{opacity:0}
+.h-copy{order:1;max-width:min(860px,100%)}
+.h-title{font:700 clamp(46px,6.2vw,112px)/.98 var(--text);letter-spacing:-.045em}
+.h-title .ln{display:block}
+.h-title .acc{font-family:var(--serif);font-weight:400;letter-spacing:-.02em;color:var(--red-ink);font-size:.9em;margin-top:.06em}
+html[lang="en"] .h-title{font-size:clamp(40px,4.6vw,88px)}
+html[lang="en"] .h-title .w{white-space:normal}
+html[lang="en"] .h-title .acc{font-family:var(--serif-en);font-style:italic;font-size:.98em;letter-spacing:-.01em}
+.h-title .w{display:inline-block;white-space:nowrap}
+.h-title .ch{display:inline-block}
+/* the headline shuts like a seam, then the letters fill from cold steel to warm white */
+html.js:not(.still) .h-title .ln{transform:translateY(var(--from));opacity:0}
+html.js:not(.still) .h-title .ln:first-child{--from:-.5em}
+html.js:not(.still) .h-title .ln.acc{--from:.5em}
+html.js:not(.still) .ready .h-title .ln{transform:none;opacity:1;transition:transform .9s var(--ease) .1s,opacity .5s ease .1s}
+html.js:not(.still) .h-title .ch{color:#5a6068}
+html.js:not(.still) .h-title .acc .ch{color:#6b3a40}
+html.js:not(.still) .ready .h-title .ch{color:inherit;transition:color .5s ease calc(380ms + var(--i)*34ms)}
+html.js:not(.still) .ready .h-title .acc .ch{color:var(--red-ink)}
+.h-lead{max-width:40ch;margin-top:16px;font-size:var(--s-lead);line-height:1.45;color:var(--soft)}
+.h-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.h-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 15px;border-radius:999px;background:rgba(20,22,25,.72);border:1px solid var(--line);font-size:15px;text-decoration:none} /* taste-skill-ignore: chip edge over the steel */
+.chip .dot,.c-st .dot{width:9px;height:9px;border-radius:50%;background:#7b8189;flex:none}
+.chip.open .dot,.c-st.open .dot{background:var(--live)}
+html:not(.still) .chip.open .dot{animation:ping 1.8s ease-out infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(127,220,155,.55)}100%{box-shadow:0 0 0 10px rgba(127,220,155,0)}} /* taste-skill-ignore: live status dot */
+html.js:not(.still) [data-rise]{opacity:0;transform:translateY(18px)}
+html.js:not(.still) .ready [data-rise]{opacity:1;transform:none;transition:opacity .7s var(--ease) var(--d),transform .7s var(--ease) var(--d)}
+/* the lock on the door's edge */
+.hardware{position:absolute;z-index:3;top:56%;inset-inline-end:clamp(26px,3vw,46px);width:64px;height:64px;transform:translateY(-50%)}
+.rose{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f2f3f4,#a9afb6 45%,#6c737b 100%);box-shadow:0 6px 14px rgba(0,0,0,.45),inset 0 -2px 3px rgba(0,0,0,.3)} /* taste-skill-ignore: polished steel rosette */
+.cyl{position:absolute;inset:18px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#f4dfa6,#c99f4c 55%,#8a6528);box-shadow:inset 0 1px 2px rgba(0,0,0,.4)} /* taste-skill-ignore: the brass plug of the cylinder */
+.kw{position:absolute;left:50%;top:50%;width:4px;height:18px;margin:-9px 0 0 -2px;border-radius:2px;background:#2b1e0c;transform:rotate(var(--kr,0deg));transition:transform .2s ease}
+.lever{position:absolute;top:50%;inset-inline-end:22px;width:clamp(90px,8vw,130px);height:20px;margin-top:-10px;transform-origin:10px 50%;transform:rotate(var(--lr,0deg))}
+html[dir="ltr"] .lever{transform-origin:calc(100% - 10px) 50%}
+.lever i{position:absolute;inset:0;border-radius:10px;background:linear-gradient(180deg,#f3f4f5,#b6bcc2 45%,#7a8189);box-shadow:0 8px 16px rgba(0,0,0,.45)} /* taste-skill-ignore: polished steel lever */
+.hardware .lever{top:auto;bottom:calc(100% + 22px)}
+.lockword{position:absolute;top:calc(100% + 14px);inset-inline-end:0;min-width:7ch;text-align:end;font:700 14px/1 var(--text);color:#d8dbde;white-space:nowrap}
+.lockword.open{color:var(--light)}
+.bolt{position:absolute;z-index:3;inset-inline-end:-14px;width:40px;height:22px;border-radius:5px;background:linear-gradient(180deg,#eef0f2,#aab0b7 45%,#6e757d);box-shadow:0 2px 4px rgba(0,0,0,.5);transform:translateX(var(--bx,0px))} /* taste-skill-ignore: steel bolts */
+.bolt.b1{top:16%}.bolt.b2{top:56%;margin-top:-11px}.bolt.b3{bottom:12%}
+html[dir="ltr"] .bolt{transform:translateX(calc(var(--bx,0px) * -1))}
+.hint{position:absolute;z-index:3;bottom:18px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;font-size:14px;color:var(--soft);opacity:var(--hint,1)}
+.hint i{width:2px;height:28px;border-radius:2px;background:linear-gradient(var(--brass),transparent)} /* taste-skill-ignore: a fading scroll cue */
+html:not(.still) .hint i{animation:drip 1.8s var(--ease) infinite}
+@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+/* the frame and the light in the gap */
+.frame{position:absolute;inset:0;z-index:1;pointer-events:none}
+.jamb{position:absolute;top:0;bottom:0;inset-inline-end:0;width:14px;background:linear-gradient(90deg,#0b0c0e,#202328)} /* taste-skill-ignore: the jamb */
+.seam{position:absolute;top:0;bottom:0;inset-inline-end:12px;width:3px;background:var(--light);opacity:.25;box-shadow:0 0 18px 4px rgba(255,190,110,.55)} /* taste-skill-ignore: light through the gap of the door */
+.seam::after{content:"";position:absolute;inset:0 -6px;background:#fff3dd;opacity:0;filter:blur(3px)}
+html:not(.still) .seam::after{animation:breathe 3.6s ease-in-out infinite alternate}
+@keyframes breathe{to{opacity:.6}}
+
+/* door, animations off or no script: two plain blocks, the hero then what is behind it */
+html.still .door,html:not(.js) .door{height:auto}
+html.still .stage,html:not(.js) .stage{position:relative;height:auto;min-height:0;overflow:visible;overflow-x:clip;perspective:none;display:flex;flex-direction:column}
+html.still .leaf,html:not(.js) .leaf{position:relative;inset:auto;order:1;min-height:100svh;transform:none!important}
+html.still .inside,html:not(.js) .inside{position:relative;inset:auto;order:2;min-height:0;grid-template-rows:auto auto auto auto;row-gap:22px;padding:90px var(--m) 40px}
+html.still .in-bg,html:not(.js) .in-bg{transform:none}
+html.still .frame,html:not(.js) .frame,html.still .hint,html:not(.js) .hint{display:none}
+html.still .drum-wrap,html:not(.js) .drum-wrap{width:100%;height:auto;min-height:0;perspective:none;cursor:auto}
+html.still .drum,html:not(.js) .drum{position:static;width:auto;height:auto;display:flex;gap:12px;overflow-x:auto;padding:10px 4px 20px;scroll-snap-type:x mandatory}
+html.still .dc,html:not(.js) .dc{position:relative;flex:0 0 170px;margin:0;transform:none!important;filter:none!important;scroll-snap-align:center}
+html.still .leaf .bolt{--bx:0px}
+
+@media (max-width:860px){
+  .door{height:240svh}
+  .leaf{inset:0 10px 0 0} html[dir="ltr"] .leaf{inset:0 0 0 10px}
+  .jamb{width:10px} .seam{inset-inline-end:8px;width:2px}
+  .l-grid{grid-template-columns:1fr;grid-template-rows:auto auto;align-content:center;gap:8px;padding:calc(var(--navh) + 6px) 18px 52px;padding-inline-end:58px}
+  .mark-slot{order:0;width:min(62vw,30svh);justify-self:center}
+  .h-copy{order:1}
+  .h-title{font-size:clamp(40px,11.4vw,64px)}
+  html[lang="en"] .h-title{font-size:clamp(36px,9.8vw,60px)}
+  .h-lead{margin-top:10px;font-size:17px}
+  .h-acts{margin-top:14px} .h-acts .btn{min-height:50px;padding:0 18px;font-size:16px}
+  .hardware{top:auto;bottom:21%;inset-inline-end:14px;width:40px;height:40px;transform:none}
+  .cyl{inset:11px} .kw{height:12px;margin-top:-6px}
+  .lever{width:56px;height:14px;inset-inline-end:16px} .hardware .lever{bottom:calc(100% + 14px)}
+  .lockword{font-size:12px}
+  .bolt{width:28px;height:16px;inset-inline-end:-10px}
+  .panel.p1{inset:calc(var(--navh) + 10px) 5% 50% 5%}.panel.p2{inset:50% 5% 18px 5%}
+  .hint{display:none}
+  .inside{padding-top:calc(var(--navh) + 6px)}
+  .dc{--cw:clamp(112px,30vw,150px)}
+}
+@media (max-width:860px) and (max-height:700px){
+  .mark-slot{width:min(52vw,24svh)}
+  .h-chips .chip:first-child{display:none}
+}
+
+/* ---------------------------------------------------------------- WORK: plates that land on one another */
+.work{padding-top:clamp(60px,7vw,110px)}
+.stack{display:grid;gap:0}
+.sc{position:sticky;top:calc(var(--navh) + 18px + var(--i) * 14px);height:min(74svh,720px);min-height:420px;margin-bottom:6svh;border-radius:28px;overflow:hidden;background:var(--steel);transform-origin:50% 0;will-change:transform}
+.sc:last-child{margin-bottom:0}
+.sc-fig{position:absolute;inset:0}
+.sc-fig img{width:100%;height:100%;object-fit:cover;transform:scale(var(--kz,1.06));transform-origin:var(--ox,50%) var(--oy,50%)}
+.sc::after{content:"";position:absolute;inset:0;background:#0b0c0e;opacity:var(--dim,0);pointer-events:none}
+.sc-copy{position:absolute;inset:auto 0 0;z-index:2;padding:80px clamp(20px,3vw,40px) clamp(20px,3vw,36px);background:linear-gradient(transparent,rgba(12,13,15,.9) 70%);pointer-events:none} /* taste-skill-ignore: scrim under the words on a photo */
+.sc-copy p{margin-top:6px;font-size:var(--s-lead);color:#e3e0da}
+.ill{position:absolute;z-index:3;top:14px;inset-inline-start:14px;padding:4px 10px;border-radius:999px;background:rgba(12,13,15,.7);font-size:13px;color:#ddd}
+/* labels that write themselves onto the photo, on a hairline leader */
+.call{position:absolute;z-index:2;width:44px;height:44px;margin:-22px 0 0 -22px;display:grid;place-items:center}
+.call .dot{width:14px;height:14px;border-radius:50%;background:var(--light);box-shadow:0 0 0 4px rgba(255,207,143,.28)} /* taste-skill-ignore: live callout marker */
+html:not(.still) .call .dot{animation:pulse 2.4s ease-out infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(255,207,143,.6)}100%{box-shadow:0 0 0 14px rgba(255,207,143,0)}} /* taste-skill-ignore: live callout pulse */
+.call .tag{position:absolute;bottom:calc(100% + 18px);left:50%;transform:translateX(-50%);padding:5px 11px;border-radius:8px;background:rgba(14,15,17,.86);color:#fff;font-size:15px;font-weight:700;white-space:nowrap;opacity:0;transition:opacity .2s ease}
+.call .tag::after{content:"";position:absolute;top:100%;left:50%;width:1.5px;height:16px;background:var(--light)}
+.call.on .tag{opacity:1}
+.call.edge-l .tag{left:4px;transform:none}.call.edge-l .tag::after{left:18px}
+.call.edge-r .tag{left:auto;right:4px;transform:none}.call.edge-r .tag::after{left:auto;right:18px}
+@media (hover:hover){ .call:hover .dot{background:#fff} }
+html.still .sc,html:not(.js) .sc{position:relative;top:auto;transform:none!important;margin-bottom:22px}
+@media (max-width:700px){
+  .sc{height:min(66svh,560px);min-height:380px;border-radius:22px;top:calc(var(--navh) + 10px + var(--i) * 10px)}
+  .sc-copy{padding:70px 18px 18px}
+  .call .tag{font-size:14px}
+}
+
+/* ---------------------------------------------------------------- MESSAGE: an engraved brass door plate */
+.m-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(22px,4vw,64px);align-items:start}
+.m-picks{display:grid;gap:26px}
+.q legend{display:flex;align-items:center;gap:10px;margin-bottom:12px;font-size:19px;font-weight:700}
+.sn{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--steel-2);color:var(--soft);font-size:15px;transition:background .3s ease,color .3s ease}
+.q.on .sn{background:var(--red);color:#fff}
+.opts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.opts.areas{grid-template-columns:repeat(4,minmax(0,1fr))}
+.opts button{position:relative;min-height:54px;padding:8px 10px;border-radius:10px;background:var(--steel);color:var(--ink);font-size:16px;font-weight:500;line-height:1.2;transition:transform .14s var(--ease),background .2s ease,color .2s ease} /* taste-skill-ignore: stamped steel buttons */
+.opts button[aria-checked="true"]{background:var(--brass);color:#2a1f0c;font-weight:700}
+@media (hover:hover) and (pointer:fine){ .opts button:not([aria-checked="true"]):hover{background:var(--steel-2)} }
+.m-out{position:sticky;top:calc(var(--navh) + 30px);display:grid;gap:14px}
+.brassplate{position:relative;min-height:200px;display:flex;align-items:center;padding:34px 38px;border-radius:16px;background:
+  repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 4px), /* taste-skill-ignore: brushed brass of a door plate */
+  linear-gradient(160deg,#ead08e 0%,#c9a257 45%,#a98443 100%);box-shadow:0 18px 40px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.5)} /* taste-skill-ignore: brushed brass of a door plate */
+.screw{position:absolute;width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff3d0,#a6833f 70%);box-shadow:inset 0 0 0 1px rgba(80,60,20,.4)} /* taste-skill-ignore: brass screw heads */
+.screw::after{content:"";position:absolute;left:2px;right:2px;top:6px;height:2px;background:rgba(70,50,15,.6);transform:rotate(var(--sr,30deg))}
+.s1{top:12px;left:12px}.s2{top:12px;right:12px;--sr:-20deg}.s3{bottom:12px;left:12px;--sr:70deg}.s4{bottom:12px;right:12px;--sr:10deg}
+.engr{position:relative;font:500 clamp(21px,2.1vw,32px)/1.45 var(--text);color:#4a3612} /* engraved: light below the cut, shade above */
+.spark{display:inline-block;width:8px;height:8px;margin-inline-start:3px;border-radius:50%;background:#fff6dc;box-shadow:0 0 10px 4px rgba(255,236,190,.9),0 0 24px 8px rgba(255,190,90,.5);vertical-align:middle;opacity:0} /* taste-skill-ignore: the engraver's spark */
+.engr.cut .spark{opacity:1}
+.send{width:100%}
+.m-note{font-size:15px;color:var(--soft)}
+@media (max-width:900px){
+  .m-grid{grid-template-columns:1fr}
+  .m-out{position:relative;top:auto}
+  .opts,.opts.areas{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .opts.areas{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .brassplate{min-height:170px;padding:30px 26px}
+}
+
+/* ---------------------------------------------------------------- REVIEWS: steel plates drifting past */
+.revs .head h2 .odo{color:var(--ink)}
+.gbadge{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 18px;border-radius:999px;background:var(--steel);text-decoration:none;font-size:16px}
+.rail{margin:0 calc(var(--m) * -1);overflow:hidden;padding:10px 0 20px}
+.row{display:flex;gap:18px;width:max-content;padding:0 var(--m);transform:translateX(var(--rx,0px));will-change:transform}
+.rv{position:relative;flex:0 0 clamp(290px,32vw,440px);display:flex;flex-direction:column;gap:14px;padding:28px 26px 24px;border-radius:20px;background:var(--steel);box-shadow:inset 0 1px 0 rgba(255,255,255,.06)} /* taste-skill-ignore: the edge of a steel plate */
+.rv p{font-size:18px;line-height:1.55}
+.rv footer{margin-top:auto;display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;font-weight:700;color:var(--brass)}
+.rv .tr{font-weight:400;font-size:13px;color:var(--soft)}
+.rivet{position:absolute;top:14px;inset-inline-end:14px;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#e9ecef,#666c73)} /* taste-skill-ignore: a rivet */
+html.still .rail,html:not(.js) .rail{overflow-x:auto;scroll-snap-type:x mandatory}
+html.still .row,html:not(.js) .row{transform:none}
+html.still .rv,html:not(.js) .rv{scroll-snap-align:start}
+@media (max-width:700px){ .rv{flex-basis:82vw} .rv p{font-size:17px} }
+
+/* ---------------------------------------------------------------- FAQ */
+.f-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(20px,4vw,60px);align-items:center}
+.qa{display:grid;gap:10px;align-content:start}
+.keyfig{position:relative;order:2;aspect-ratio:4/3;border-radius:24px;overflow:hidden;background:var(--steel);transform:perspective(900px) rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg));transition:transform .5s var(--ease)}
+.keyfig img{width:100%;height:100%;object-fit:cover;transform:scale(1.08) translate(var(--px,0px),var(--py,0px));transition:transform .5s var(--ease)}
+.keyfig .glare{position:absolute;inset:0;background:radial-gradient(260px circle at var(--gx,30%) var(--gy,25%),rgba(255,226,170,.28),transparent 70%);pointer-events:none} /* taste-skill-ignore: light moving across the brass */
+.keyfig figcaption{position:absolute;top:12px;inset-inline-start:12px;padding:4px 10px;border-radius:999px;background:rgba(12,13,15,.7);font-size:13px}
+@media (max-width:860px){ .f-grid{grid-template-columns:1fr} .keyfig{order:0;aspect-ratio:16/9} }
+.qa details{border-radius:16px;background:var(--steel);overflow:hidden}
+.qa summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;padding:12px 22px;cursor:pointer;list-style:none;font-size:clamp(18px,1.6vw,22px);font-weight:700}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary svg{width:22px;height:22px;flex:none;color:var(--brass);transition:transform .25s var(--ease)}
+.qa details[open] summary svg{transform:rotate(45deg)}
+.qa details p{max-width:60ch;padding:0 22px 20px;color:var(--soft);font-size:18px}
+
+/* ---------------------------------------------------------------- CONTACT bento: tiles with a lamp under the hand */
+.bento{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-areas:"wa wa wa call call call" "wa wa wa hours hours pay" "map map map map areas areas";gap:14px}
+.tile{position:relative;display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:22px;background:var(--steel);text-decoration:none;overflow:hidden;isolation:isolate;transition:transform .14s var(--ease)}
+.tile::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(300px circle at var(--mx,50%) var(--my,30%),rgba(255,207,143,.14),transparent 70%);opacity:0;transition:opacity .3s ease} /* taste-skill-ignore: a lamp that follows the hand */
+.tile.lit::before{opacity:1}
+@media (hover:none){ .tile::before{opacity:.7} }
+.tt{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700}
+.tt svg{width:22px;height:22px;fill:currentColor}
+.t-wa{grid-area:wa;flex-direction:row;align-items:center;gap:26px;background:var(--red);min-height:300px}
+.t-wa .tt{font-size:clamp(24px,2.4vw,34px)}
+.t-wa .c-st{display:inline-flex;align-items:center;gap:8px;margin-top:10px;font-size:16px}
+.t-wa .c-st .dot{background:#ffd5d9}
+.t-wa .c-st.open .dot{background:var(--live)}
+.padlock{width:clamp(90px,10vw,130px);flex:none;overflow:visible}
+.padlock .shackle{fill:none;stroke:#e6e9ec;stroke-width:12;stroke-linecap:round;transition:transform .7s var(--ease);transform-origin:90px 70px}
+.padlock .body{fill:var(--brass)}
+.padlock .hole{fill:#5a3f12}
+.padlock.open .shackle{transform:translateY(-16px) rotate(-24deg)}
+.t-call{grid-area:call}
+.t-call .big{font:700 clamp(30px,3.2vw,48px)/1 var(--text);letter-spacing:-.02em;text-align:start}
+.t-hours{grid-area:hours}
+.hours{border-collapse:collapse;font-size:16px}
+.hours td{padding:5px 0}
+.hours td:last-child{padding-inline-start:20px;text-align:end}
+.hours tr.today{color:var(--light);font-weight:700}
+.t-areas{grid-area:areas}
+.alist{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:18px}
+.alist li{color:var(--soft)}
+html:not(.still) .t-areas.on .alist li{animation:lamp 4.9s ease-in-out infinite;animation-delay:calc(var(--k) * .7s)}
+@keyframes lamp{0%,14%,100%{color:var(--soft)}6%{color:var(--light)}}
+.t-pay{grid-area:pay;justify-content:space-between}
+.card{width:84px}
+.card .cb{fill:var(--steel-3)}.card .chipm{fill:var(--brass)}.card .ln{fill:#5d646d}
+html:not(.still) .t-pay.on .card{animation:tap 3.2s var(--ease) infinite}
+@keyframes tap{0%,60%,100%{transform:none}70%{transform:translateY(-6px) rotate(-4deg)}80%{transform:none}}
+.t-map{grid-area:map;padding:0;min-height:340px}
+.t-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(.4) contrast(.95)}
+.addr{position:absolute;z-index:2;top:14px;inset-inline-start:14px;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;background:rgba(15,16,18,.88);text-decoration:none;font-weight:700}
+.addr svg{width:18px;height:18px;fill:var(--red-ink)}
+.c-st{display:inline-flex;align-items:center;gap:8px}
+@media (max-width:900px){
+  .bento{grid-template-columns:1fr 1fr;grid-template-areas:"wa wa" "call call" "hours pay" "areas areas" "map map"}
+  .t-wa{min-height:200px}
+}
+@media (max-width:520px){
+  .bento{grid-template-columns:1fr;grid-template-areas:"wa" "call" "hours" "pay" "areas" "map"}
+  .t-pay{flex-direction:row;align-items:center}
+}
+
+/* entrances */
+html.js:not(.still) [data-reveal],html.js:not(.still) [data-tile]{opacity:0;transform:translateY(24px);filter:blur(6px)}
+html.js:not(.still) [data-reveal].in,html.js:not(.still) [data-tile].in{opacity:1;transform:none;filter:none;transition:opacity .7s var(--ease) var(--d,0ms),transform .8s var(--ease) var(--d,0ms),filter .7s var(--ease) var(--d,0ms)}
+
+/* ---------------------------------------------------------------- FOOTER: uncovered like a curtain */
+.foot{position:sticky;bottom:0;z-index:1;padding:clamp(56px,6vw,90px) var(--m) 30px;background:var(--bg-2);overflow:hidden}
+.f-top{position:relative;z-index:2;display:grid;grid-template-columns:auto 1fr;gap:clamp(24px,4vw,60px);align-items:start}
+.f-logo{width:clamp(120px,12vw,170px);padding:10px;border-radius:16px}
+.f-cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;font-size:16px}
+.f-cols a{text-decoration:none}
+.fh{margin-bottom:6px;color:var(--brass);font-weight:700}
+.f-tools{display:flex;flex-wrap:wrap;gap:8px;align-content:start}
+.f-legal{position:relative;z-index:2;margin-top:34px;max-width:72ch;font-size:13px;line-height:1.6;color:#a9adb2}
+.f-legal a{color:#c9cdd1}
+.f-glow{position:absolute;left:0;right:0;bottom:0;height:6px;background:var(--light);box-shadow:0 0 60px 26px rgba(255,180,100,.35);transform:scaleX(var(--fg,1));transform-origin:50% 50%} /* taste-skill-ignore: warm light from under the door, at the foot of the page */
+@media (max-width:900px){ .f-top{grid-template-columns:1fr} .f-cols{grid-template-columns:1fr 1fr} }
+
+/* ---------------------------------------------------------------- phones: the strike plate */
+.strike{display:none}
+@media (max-width:700px){
+  body{padding-bottom:calc(78px + env(safe-area-inset-bottom))}
+  .strike{position:fixed;z-index:45;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:10px;height:62px;padding:0 10px;border-radius:31px 31px 31px 31px / 31px 31px 31px 31px;background:linear-gradient(180deg,#d9dde1,#9aa1a8);box-shadow:0 10px 30px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.7)} /* taste-skill-ignore: a polished steel strike plate */
+  .strike .sw{width:12px;height:12px;flex:none;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#7d848b);box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)} /* taste-skill-ignore: screw heads */
+  .hole-wa{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:44px;border-radius:8px;background:#1b1d20;color:#fff;font-weight:700;text-decoration:none} /* taste-skill-ignore: the strike plate cut-out (sticky bar) */
+  .hole-call{display:grid;place-items:center;width:46px;height:46px;flex:none;border-radius:50%;background:var(--red);color:#fff} /* taste-skill-ignore: the strike plate cut-out (sticky bar) */
+  .strike svg{width:20px;height:20px;fill:currentColor}
+}
+
+/* odometers: only the real number is text (aria-label); the digits roll in from CSS */
+.odo{display:inline-flex;direction:ltr;vertical-align:baseline}
+.odo .d{display:inline-block;height:1.08em;overflow:hidden;vertical-align:top}
+.odo .d > span{display:block;transition:transform 1.6s var(--ease)}
+.odo .d > span > b{display:block;height:1.08em;line-height:1.08;font-weight:inherit}
+.odo .d > span > b::before{content:attr(data-n)}
+.revs h2 .odo .d{vertical-align:-.04em}
