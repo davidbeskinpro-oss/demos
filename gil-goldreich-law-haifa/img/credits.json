@@ -1,0 +1,50 @@
+[
+ {
+  "file": "demo/img/view-of-haifa-downtown-and-bay.jpg",
+  "media": "image",
+  "ref": "openverse:23ad88fd-2e13-42c6-8a7c-0e246c980836",
+  "title": "View of Haifa downtown and bay",
+  "creator": "Danny Lyulyev",
+  "creatorUrl": "https://commons.wikimedia.org/w/index.php?title=User:Dindia&action=edit&redlink=1",
+  "date": null,
+  "license": "CC BY-SA 3.0",
+  "licenseCode": "by-sa",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+  "creditRequired": true,
+  "page": "https://commons.wikimedia.org/w/index.php?curid=27101790",
+  "via": "Wikimedia Commons",
+  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/View_of_Haifa_downtown_and_bay.JPG/1920px-View_of_Haifa_downtown_and_bay.JPG",
+  "width": 1920,
+  "height": 1335,
+  "bytes": 761226,
+  "credit": "\"View of Haifa downtown and bay\" by Danny Lyulyev, CC BY-SA 3.0, via Wikimedia Commons",
+  "notes": [
+   "Share-alike: an altered version (recoloured, combined with other pictures) must be shared under the same licence."
+  ],
+  "saved": "2026-10-25T20:49:32.812Z"
+ },
+ {
+  "file": "demo/img/old-district-courthouse-haifa-3.jpg",
+  "media": "image",
+  "ref": "openverse:a972b18a-ef0f-4d6d-adb5-dc96c2097e2f",
+  "title": "Old District Courthouse - Haifa 3",
+  "creator": "Danny Gershoni",
+  "creatorUrl": "https://commons.wikimedia.org/wiki/User:Danny_Gershoni",
+  "date": null,
+  "license": "CC BY-SA 4.0",
+  "licenseCode": "by-sa",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "creditRequired": true,
+  "page": "https://commons.wikimedia.org/w/index.php?curid=117554514",
+  "via": "Wikimedia Commons",
+  "image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6f/Old_District_Courthouse_-_Haifa_3.jpg/1920px-Old_District_Courthouse_-_Haifa_3.jpg",
+  "width": 1920,
+  "height": 1080,
+  "bytes": 833940,
+  "credit": "\"Old District Courthouse - Haifa 3\" by Danny Gershoni, CC BY-SA 4.0, via Wikimedia Commons",
+  "notes": [
+   "Share-alike: an altered version (recoloured, combined with other pictures) must be shared under the same licence."
+  ],
+  "saved": "2026-10-25T20:49:39.675Z"
+ }
+]
