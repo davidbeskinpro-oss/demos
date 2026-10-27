@@ -1,0 +1,338 @@
+/* Nail's by Marina Romi — the page is her colour chart: every chapter takes the colour of one of her own manicures
+   (ballet nude, pearl, the lamp's violet night, pink glitter, lilac, the blue of her blue French, blush), held together by
+   lace from her photos and the flourish of her door sign. */
+:root{
+  --nude:#ecd3d3; --nude-2:#e2c1c3;
+  --pearl:#e4dbea; --pearl-2:#d8cde2;
+  --night:#2b2147; --night-2:#231b3c; --violet:#9b82ff;
+  --pink:#e9b8c8; --cream:#efdcd4;
+  --lilac:#bdb3ec; --lilac-2:#aea3e4;
+  --cobalt:#34409c; --cobalt-2:#2c3787;
+  --blush:#f0d3d7; --blush-2:#e7c2c8;
+  --plum:#3b1e3a; --plum-2:#4a2549;
+  --ink:#3a1f3a; --ink-2:#5a3a58;
+  --paper:#f7eff1;
+  --berry:#8c2f6e;
+  --gold:#c9a46a;
+  --text:"Assistant","Arial Hebrew",Arial,sans-serif;
+  --serif-he:"Suez One","Frank Ruhl Libre",Georgia,serif;
+  --serif-en:"Cormorant Garamond",Georgia,serif;
+  --s-small:15px;
+  --s-body:clamp(1.0625rem,1rem + .25vw,1.2rem);
+  --s-lead:clamp(1.2rem,1.05rem + .55vw,1.5rem);
+  --s-head:clamp(2.2rem,1.4rem + 2.9vw,4.3rem);
+  --m:clamp(16px,3.2vw,48px);
+  --r:28px;
+  --ease:cubic-bezier(.23,1,.32,1);
+  --ease-io:cubic-bezier(.77,0,.175,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--nude)}
+body{margin:0;background:var(--nude);color:var(--ink);font:400 var(--s-body)/1.55 var(--text);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;touch-action:manipulation}
+h1,h2,h3,p,figure,ol,ul,blockquote{margin:0}
+.vh{position:absolute;width:0;height:0;overflow:hidden}
+.num{font-variant-numeric:lining-nums tabular-nums}
+html[lang="he"] [lang="en"]:not(html), html[lang="en"] [lang="he"]:not(html){display:none!important}
+::selection{background:var(--berry);color:#fff}
+:focus-visible{outline:3px solid var(--berry);outline-offset:3px;border-radius:8px}
+.skip{position:absolute;inset-inline-start:var(--m);top:-60px;z-index:60;background:var(--plum);color:var(--paper);padding:10px 16px;border-radius:999px;text-decoration:none}
+.skip:focus{top:44px}
+h2{font:800 var(--s-head)/1.02 var(--text);letter-spacing:-.03em;text-wrap:balance}
+html[lang="en"] h2{letter-spacing:-.025em}
+em{font-style:normal;font-family:var(--serif-he);font-weight:400;letter-spacing:-.01em;color:var(--berry)}
+html[lang="en"] em{font-family:var(--serif-en);font-style:italic;font-weight:600;letter-spacing:0;font-size:1.08em}  /* taste-skill-ignore: SETI-style serif accent */
+section{position:relative}
+.stars{display:inline-flex;gap:2px}
+.stars svg{width:15px;height:15px;fill:var(--gold)}
+
+.concept{position:relative;z-index:41;display:flex;align-items:center;justify-content:center;min-height:34px;padding:6px var(--m);background:var(--plum);color:#ecdbe6;font-size:var(--s-small);line-height:1.35;text-align:center}
+
+/* ---------------------------------------------------------------- nav: a bar that gathers into a floating pearl pill */
+.nav{position:sticky;top:0;z-index:40;padding:0 var(--m);transition:padding .45s var(--ease)}
+.nav-in{display:flex;align-items:center;gap:16px;max-width:2000px;margin:0 auto;height:72px;padding:0 4px;border-radius:999px;transition:max-width .6s var(--ease),height .45s var(--ease),padding .45s var(--ease),background-color .4s ease,box-shadow .4s ease}
+.nav.pill{padding-top:12px}
+.nav.pill .nav-in{max-width:1120px;height:62px;padding:0 10px 0 16px;background:rgba(247,239,241,.8);box-shadow:0 10px 30px -18px rgba(59,30,58,.55);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)} /* taste-skill-ignore: floating frosted pill from the owner's references */
+.brand{display:flex;align-items:center;text-decoration:none}
+.brand img{width:112px;height:auto}
+.chap{width:14px;height:24px;border-radius:50% 50% 45% 45%/62% 62% 38% 38%;background:var(--chapc,#ecd3d3);box-shadow:inset 0 0 0 1.5px rgba(59,30,58,.35),inset 3px 3px 0 rgba(255,255,255,.55);transition:background-color .5s var(--ease)} /* taste-skill-ignore: a tiny lacquered nail tip */
+.links{display:flex;gap:2px;margin-inline-start:auto;font-size:16px}
+.links a{padding:8px 12px;border-radius:999px;text-decoration:none;color:var(--ink-2);transition:color .2s ease,background-color .2s ease}
+.tools{display:flex;align-items:center;gap:6px}
+.tgl{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;background:rgba(255,255,255,.5);color:var(--ink);font-size:15px;font-weight:600;transition:transform .14s var(--ease),background-color .2s ease}
+.tgl .knob{position:relative;width:30px;height:18px;border-radius:999px;background:#c9b3c3;transition:background-color .2s ease}
+.tgl .knob::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:12px;height:12px;border-radius:50%;background:#fff;transition:transform .22s var(--ease)}
+.tgl[aria-checked="true"] .knob{background:var(--berry)}
+.tgl[aria-checked="true"] .knob::after{transform:translateX(12px)}
+html[dir="rtl"] .tgl[aria-checked="true"] .knob::after{transform:translateX(-12px)}
+.tgl.lang{min-width:46px;justify-content:center;font-weight:800}
+.pill-btn,.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:0 18px;border-radius:999px;background:var(--plum);color:var(--paper);text-decoration:none;font-weight:800;font-size:16px;overflow:hidden;transition:transform .14s var(--ease),background-color .2s ease}
+.btn{min-height:54px;padding:0 26px;font-size:17px}
+.btn.soft{background:rgba(255,255,255,.55);color:var(--ink)}
+.pill-btn svg,.btn svg{width:20px;height:20px;fill:currentColor;flex:none}
+.btn:not(.soft)::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,220,236,.38) 50%,transparent 70%);transform:translateX(-120%)} /* taste-skill-ignore: the shine of a top coat crossing the button */
+html:not(.still) .btn:not(.soft)::after{animation:sweep 4.2s var(--ease-io) 1.6s 3}
+@keyframes sweep{0%{transform:translateX(-120%)}40%,100%{transform:translateX(120%)}}
+.pill-btn:active,.btn:active,.tgl:active,.chip:active,.pearl:active,.lc:active,.arw:active,.r-stone:active,.r-call:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .links a:hover{color:var(--ink);background:rgba(255,255,255,.55)}
+  .btn:hover,.pill-btn:hover{background:var(--berry)}
+  .btn.soft:hover{background:rgba(255,255,255,.8)}
+  .tgl:hover{background:rgba(255,255,255,.8)}
+  .pearl:hover{transform:translateY(-2px)}
+  .chip:hover{background:rgba(255,255,255,.75)}
+}
+
+/* ---------------------------------------------------------------- hero */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);align-items:center;gap:20px;min-height:calc(100svh - 106px);padding:30px var(--m) 90px;background:var(--nude);overflow:hidden}
+.lace{position:absolute;color:#fff;opacity:.5;pointer-events:none}
+.lace-a{width:340px;height:340px;top:-90px;inset-inline-start:38%}
+.lace-b{width:220px;height:220px;bottom:40px;inset-inline-start:-60px;color:var(--pink)}
+.lace-c{width:160px;height:160px;top:28%;inset-inline-end:-40px}
+html:not(.still) .lace{animation:drift 26s ease-in-out infinite alternate}
+html:not(.still) .lace-b{animation-duration:31s;animation-direction:alternate-reverse}
+@keyframes drift{from{transform:rotate(0) translateY(0)}to{transform:rotate(40deg) translateY(18px)}}
+.h-copy{position:relative;z-index:3;max-width:640px}
+.h-title{font:800 clamp(3rem,1.7rem + 5.2vw,7.2rem)/.98 var(--text);letter-spacing:-.04em;color:var(--ink)}
+.h-title .ln{display:block}
+.h-title .acc{font-family:var(--serif-he);font-weight:400;letter-spacing:-.02em;color:var(--berry);font-size:.92em}
+html[lang="en"] .h-title{font-size:clamp(2.8rem,1.5rem + 4.6vw,6.4rem)}
+html[lang="en"] .h-title .acc{font-family:var(--serif-en);font-style:italic;font-weight:600;font-size:1em;letter-spacing:-.01em}
+.h-title .w{display:inline-block;white-space:nowrap}
+.h-title .ch{display:inline-block}
+html.js:not(.still) .h-title .ch{opacity:0;transform:translateY(.3em);filter:blur(10px)}
+html.js:not(.still) .ready .h-title .ch{opacity:1;transform:none;filter:none;transition:opacity .6s var(--ease) calc(var(--i)*28ms),transform .8s var(--ease) calc(var(--i)*28ms),filter .6s var(--ease) calc(var(--i)*28ms)}
+.h-lead{margin-top:22px;max-width:34ch;font-size:var(--s-lead);line-height:1.4;color:var(--ink)}
+.h-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.h-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 14px;border-radius:999px;background:rgba(255,255,255,.5);font-size:15px;text-decoration:none;color:var(--ink);transition:background-color .2s ease,transform .14s var(--ease)}
+.chip b{font-weight:800}
+[data-status] .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#b06a7a;margin-inline-end:7px;vertical-align:middle}
+[data-status].open .dot{background:#3f9b6d}
+html:not(.still) .chip [data-status].open .dot,html:not(.still) .chip.open .dot{animation:ping 1.8s ease-out 4}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(63,155,109,.5)}100%{box-shadow:0 0 0 9px rgba(63,155,109,0)}} /* taste-skill-ignore: a soft pulse ring, not a resting shadow */
+html.js:not(.still) [data-rise]{opacity:0;transform:translateY(18px)}
+html.js:not(.still) .ready [data-rise]{opacity:1;transform:none;transition:opacity .7s var(--ease) var(--d),transform .7s var(--ease) var(--d)}
+
+.fan-wrap{position:relative;height:min(720px,80svh);min-height:520px;touch-action:pan-y}
+.glitter{position:absolute;inset:-10% -12%;width:124%;height:120%;pointer-events:none}
+.fan{--w:clamp(110px,10.5vw,164px);position:absolute;inset:0}
+.tip{position:absolute;left:50%;bottom:calc(8% + var(--w)*1.4);width:var(--w);height:calc(var(--w)*2);margin-left:calc(var(--w)/-2);transform-origin:50% 170%;border-radius:50% 50% 46% 46%/34% 34% 14% 14%;background:var(--nude-2);box-shadow:0 18px 30px -18px rgba(59,30,58,.6),inset 0 0 0 2px rgba(255,255,255,.4);will-change:transform} /* taste-skill-ignore: each tip is a real object on the chart */
+.tip img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.tip::before{content:"";position:absolute;top:calc(100% - 6px);left:calc(50% - 3px);width:6px;height:calc(var(--w)*1.4 + 6px);border-radius:3px;background:#f6eef3}
+.tip::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(115deg,rgba(255,255,255,0) 30%,rgba(255,255,255,.55) calc(var(--g,40%) ),rgba(255,255,255,0) calc(var(--g,40%) + 16%));z-index:2;mix-blend-mode:soft-light;pointer-events:none} /* taste-skill-ignore: gloss on the lacquer, moves with the hand */
+.pin{position:absolute;left:50%;bottom:calc(8% - 20px);width:40px;height:40px;margin-left:-20px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#e7dde8 45%,#b9a9bd);box-shadow:0 6px 14px -6px rgba(59,30,58,.6);z-index:30} /* taste-skill-ignore: the chart's pearl pivot */
+.pin i{position:absolute;inset:13px;border-radius:50%;background:var(--gold)}
+.fan-cap{position:absolute;left:0;right:0;bottom:-6px;text-align:center;font-size:16px;font-weight:600;color:var(--ink-2);min-height:1.5em}
+html.still .fan-cap{display:none}
+.scallop{position:absolute;left:0;right:0;bottom:-1px;width:100%;height:28px;fill:var(--pearl)}
+
+/* ---------------------------------------------------------------- the door */
+.door{background:var(--pearl);padding:clamp(70px,8vw,130px) var(--m)}
+.d-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:center;max-width:1320px;margin:0 auto}
+.d-glass{position:relative;border-radius:200px 200px var(--r) var(--r);overflow:hidden;aspect-ratio:4/5;background:#cfc6d3;touch-action:pan-y}
+.d-glass img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.frost{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair}
+html.still .frost{display:none}
+.d-glass figcaption{position:absolute;inset-inline:14px;bottom:14px;padding:8px 14px;border-radius:999px;background:rgba(247,239,241,.86);font-size:14px;width:max-content;max-width:calc(100% - 28px)}
+.d-copy h2{max-width:13ch}
+.d-hint{margin-top:16px;font-size:var(--s-lead);color:var(--ink-2)}
+.hint-touch{display:none}
+@media (hover:none){.hint-fine{display:none!important}.hint-touch{display:inline}}
+html.still .d-hint{display:none}
+.d-names{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.nm{display:flex;flex-direction:column;min-width:150px;padding:16px 22px;border-radius:999px 999px 999px 999px/60px;background:var(--paper)}
+.nm b{font:400 30px/1.1 var(--serif-he);color:var(--berry)}
+html[lang="en"] .nm b{font:600 italic 34px/1.05 var(--serif-en)}
+.nm span{font-size:16px;color:var(--ink-2)}
+.d-quote{margin-top:30px;max-width:30ch;font-size:clamp(1.3rem,1.1rem + .8vw,1.8rem);line-height:1.35}
+.d-quote footer{margin-top:10px;font-size:16px;color:var(--ink-2)}
+
+/* ---------------------------------------------------------------- under the lamp */
+.lamp{background:var(--night);color:var(--paper)}
+.lamp em{color:#cbb8ff}
+html.js:not(.still) .lamp{height:330svh}
+.l-stage{position:relative;display:flex;flex-direction:column;padding:clamp(70px,7vw,110px) var(--m) 40px;overflow:hidden}
+html.js:not(.still) .l-stage{position:sticky;top:0;height:100svh;padding-top:clamp(84px,9svh,110px);padding-bottom:20px}
+.l-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:16px 40px;position:relative;z-index:4}
+.l-head h2{max-width:14ch}
+.l-chips{display:flex;flex-wrap:wrap;gap:8px}
+.lc{min-height:44px;padding:0 16px;border-radius:999px;background:rgba(255,255,255,.08);color:#e6dcf5;font-size:16px;font-weight:600;transition:transform .14s var(--ease)}
+.lc[aria-pressed="true"]{background:#cbb8ff;color:var(--night)}
+.l-scene{position:relative;flex:1;min-height:min(560px,62svh);display:grid;place-items:center;margin-top:10px}
+html.still .l-scene,html:not(.js) .l-scene{min-height:620px}
+.l-glow{position:absolute;left:50%;top:44%;width:min(900px,120vw);height:min(560px,80vw);transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(155,130,255,.42),rgba(155,130,255,0));opacity:var(--lit,.35);pointer-events:none} /* taste-skill-ignore: the lamp's violet light */
+.l-lamp{position:absolute;left:50%;top:2%;width:min(700px,100vw);transform:translateX(-50%);z-index:3;overflow:visible;filter:drop-shadow(0 20px 26px rgba(0,0,0,.35))} /* taste-skill-ignore: rendered lamp */
+.l-lamp .beam{opacity:var(--lit,.4)}
+.l-lamp .leds circle{fill:#d9ccff;opacity:calc(.35 + var(--lit,.4)*.65)}
+.l-lamp .secs{font:800 19px/1 var(--text);fill:#d9ccff;font-variant-numeric:tabular-nums}
+.l-cards{position:absolute;left:50%;top:calc(2% + min(700px,100vw)*.25);width:min(330px,56vw,34svh);aspect-ratio:4/5;transform:translateX(-50%);z-index:2}
+.lcard{position:absolute;inset:0;border-radius:24px;overflow:hidden;background:#3a2f5a;box-shadow:0 30px 50px -30px rgba(0,0,0,.8);will-change:transform,filter} /* taste-skill-ignore: a photo card under the lamp */
+.lcard img{width:100%;height:100%;object-fit:cover}
+.lcard::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(255,255,255,0) 35%,rgba(255,255,255,.5) 50%,rgba(255,255,255,0) 65%);transform:translateX(var(--sh,-130%));mix-blend-mode:soft-light} /* taste-skill-ignore: the top coat's shine as it sets */
+.lcard::before{content:"";position:absolute;inset:0;z-index:1;background:#9b82ff;mix-blend-mode:soft-light;opacity:var(--uv,0);pointer-events:none}
+html.still .lcard,html:not(.js) .lcard{opacity:0;transition:opacity .35s ease}
+html.still .lcard.cur,html:not(.js) .lcard:first-child{opacity:1}
+.l-label{position:absolute;left:0;right:0;top:calc(2% + min(700px,100vw)*.25 + min(330px,56vw,34svh)*1.25 + 16px);text-align:center;font:400 clamp(1.4rem,1.1rem + 1vw,2rem)/1.2 var(--serif-he);color:#f1e9ff;z-index:4}
+html[lang="en"] .l-label{font:600 italic clamp(1.6rem,1.2rem + 1.2vw,2.3rem)/1.2 var(--serif-en)}
+.l-arrows{display:none}
+html.still .l-arrows{display:flex;position:absolute;inset-inline:0;top:52%;justify-content:space-between;z-index:5;pointer-events:none}
+.arw{pointer-events:auto;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.14);color:#fff;transition:transform .14s var(--ease),background-color .2s ease}
+.arw svg{width:24px;height:24px}
+html[dir="rtl"] .arw svg{transform:scaleX(-1)}
+html[dir="rtl"] .arw.nx svg{transform:none}
+html[dir="ltr"] .arw.nx svg{transform:scaleX(-1)}
+.l-note{position:relative;z-index:4;margin-top:8px;font-size:14px;color:#cfc3e6;text-align:center}
+
+/* ---------------------------------------------------------------- hands and feet: two fields */
+.pair{z-index:1;background:var(--pink);padding:clamp(70px,7vw,110px) 0 0}
+.p-title{padding:0 var(--m);max-width:22ch;margin-bottom:clamp(28px,4vw,50px)}
+.p-grid{display:grid;grid-template-columns:1fr 1fr}
+.panel{position:relative;display:flex;flex-direction:column;min-height:min(92svh,980px);overflow:hidden}
+.pa{background:var(--pink)}
+.pb{background:var(--cream)}
+.p-photo{position:relative;flex:1;margin:0 clamp(16px,3vw,48px);border-radius:0 0 260px 260px/0 0 180px 180px;overflow:hidden;min-height:420px}
+.p-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.04) translate(var(--tx,0),var(--ty,0));transition:transform .6s var(--ease)}
+.sheen{position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx,50%) var(--my,30%),rgba(255,236,246,.35),rgba(255,236,246,0) 70%);pointer-events:none;mix-blend-mode:soft-light} /* taste-skill-ignore: soft shine under the hand */
+.call{position:absolute;left:calc(var(--x)*100%);top:calc(var(--y)*100%);z-index:2;display:flex;align-items:center;gap:8px}
+.call i{flex:none;width:14px;height:14px;border-radius:50%;background:var(--paper);box-shadow:0 0 0 5px rgba(247,239,241,.35)} /* taste-skill-ignore: a soft pulse ring, not a resting shadow */
+.call b{display:block;padding:6px 12px;border-radius:999px;background:rgba(247,239,241,.9);color:var(--ink);font-size:15px;font-weight:700;white-space:nowrap;min-height:1em}
+.call b:empty{display:none}
+html:not(.still) .call i{animation:ping2 2.6s ease-out 3}
+@keyframes ping2{0%{box-shadow:0 0 0 0 rgba(247,239,241,.6)}100%{box-shadow:0 0 0 14px rgba(247,239,241,0)}} /* taste-skill-ignore: a soft pulse ring, not a resting shadow */
+.p-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 20px;padding:24px clamp(16px,3vw,48px) 32px}
+.p-row p{display:flex;flex-direction:column;font-size:17px;color:var(--ink-2)}
+.p-row b{font:400 clamp(1.8rem,1.4rem + 1.2vw,2.5rem)/1.1 var(--serif-he);color:var(--ink)}
+html[lang="en"] .p-row b{font:600 italic clamp(2rem,1.5rem + 1.3vw,2.8rem)/1.05 var(--serif-en)}
+html.js:not(.still) .pair{position:sticky}
+
+/* ---------------------------------------------------------------- book: rides up over the pair */
+.book{z-index:2;overflow:hidden;background:var(--lilac);padding:clamp(70px,7vw,120px) var(--m);border-radius:var(--r) var(--r) 0 0;margin-top:-28px;box-shadow:0 -24px 40px -28px rgba(59,30,58,.55)} /* taste-skill-ignore: the chapter that lands over the last one */
+.book em{color:#5b2f8a}
+.b-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:clamp(28px,5vw,80px);align-items:center;max-width:1320px;margin:0 auto}
+.b-copy h2{max-width:13ch;margin-bottom:22px}
+.strand{position:relative;display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;padding-top:4px}
+.sl{flex-basis:100%;font-size:16px;font-weight:700;color:var(--ink-2);margin-bottom:2px}
+.pearl{position:relative;display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 18px;border-radius:999px;background:#f6f0f6;color:var(--ink);font-size:16px;font-weight:600;transition:transform .16s var(--ease),background-color .2s ease,color .2s ease}
+.pearl::after{content:"";position:absolute;top:7px;inset-inline-start:12px;width:7px;height:4px;border-radius:50%;background:#fff;opacity:.9}
+.pearl.sw::before{content:"";width:12px;height:20px;border-radius:50% 50% 45% 45%/62% 62% 38% 38%;background:var(--sw);outline:1px solid rgba(59,30,58,.25);outline-offset:-1px}
+.pearl[aria-checked="true"]{background:var(--plum);color:var(--paper)}
+.pearl[aria-checked="true"]::after{opacity:.25}
+.compact{position:relative;perspective:1400px;width:min(440px,calc(100% - 28px));margin:0 auto;aspect-ratio:1/1.08}
+.mirror{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;padding:16% 13%;border-radius:50%;background:radial-gradient(circle at 32% 26%,#ffffff,#f1ecf5 38%,#d9cfe4 100%);box-shadow:0 0 0 10px var(--gold),0 0 0 14px #b38f57,0 30px 50px -24px rgba(59,30,58,.6);text-align:center} /* taste-skill-ignore: the mirror glass and its gold rim */
+.mirror::after{content:"";position:absolute;inset:0;border-radius:50%;background:linear-gradient(125deg,rgba(255,255,255,0) 35%,rgba(255,255,255,.7) 45%,rgba(255,255,255,0) 55%);transform:translateX(var(--ref,0));pointer-events:none} /* taste-skill-ignore: reflection */
+.m-to{font-size:15px;font-weight:700;color:var(--ink-2)}
+.m-msg{position:relative;z-index:1;font-size:clamp(1.05rem,.95rem + .4vw,1.3rem);line-height:1.4;color:var(--ink);min-height:5.6em}
+.caret{display:inline-block;width:2px;height:1.05em;margin-inline-start:2px;vertical-align:-.15em;background:var(--berry)}
+html:not(.still) .caret{animation:blink 1s steps(2) 6}
+@keyframes blink{50%{opacity:0}}
+.send{position:relative;z-index:1}
+.cal{position:relative;z-index:1;display:inline-flex;align-items:center;gap:6px;font-size:15px;color:var(--ink-2);min-height:40px}
+.cal svg{width:18px;height:18px}
+.lid{position:absolute;inset:0;z-index:5;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 28%,#fbf5f8,#ead9e4 60%,#d4bccb);box-shadow:0 0 0 10px var(--gold),0 0 0 14px #b38f57;transform-origin:50% 0;transform:rotateX(var(--lid,0deg));backface-visibility:hidden;pointer-events:none} /* taste-skill-ignore: the compact's lid */
+.lid img{width:62%}
+html.still .lid,html:not(.js) .lid{display:none}
+
+/* ---------------------------------------------------------------- reviews */
+.revs,.visit{z-index:2}
+.revs{background:var(--cobalt);color:var(--paper);padding:clamp(80px,8vw,130px) var(--m)}
+.revs em{color:#c6cdfb}
+.r-head{display:flex;flex-wrap:wrap;align-items:center;gap:10px 40px;max-width:1320px;margin:0 auto clamp(40px,5vw,70px)}
+.score{font:400 clamp(6rem,4rem + 9vw,13rem)/1 var(--serif-he);color:#fff;letter-spacing:-.03em}
+.gl{display:inline-flex;align-items:center;gap:10px;margin-top:14px;min-height:44px;padding:0 16px;border-radius:999px;background:rgba(255,255,255,.12);text-decoration:none;font-weight:600}
+.r-list{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px) clamp(28px,4vw,70px);max-width:1320px;margin:0 auto}
+.rv{font-size:clamp(1.2rem,1.05rem + .55vw,1.55rem);line-height:1.45}
+.rv:nth-child(even){margin-top:clamp(0px,6vw,110px)}
+.rv footer{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px;font-size:16px;color:#dfe2fb}
+.rv .tr{font-size:14px;opacity:.85}
+.rv .wd{transition:opacity .3s ease}
+html.js:not(.still) .rv .wd{opacity:var(--o,.18)}
+.odo{display:inline-flex;direction:ltr}
+.odo .d{display:inline-block;height:1em;overflow:hidden;line-height:1}
+.odo .d>span{display:flex;flex-direction:column;transition:transform 1.4s var(--ease)}
+.odo .d b{display:block;height:1em;line-height:1;font-weight:400}
+.odo .d b::before{content:attr(data-n)}
+
+/* ---------------------------------------------------------------- visit */
+.visit{background:var(--blush);padding:clamp(80px,8vw,130px) var(--m)}
+.v-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,80px);max-width:1320px;margin:0 auto}
+.v-status{margin-top:14px;font-size:var(--s-lead);font-weight:600}
+.week{display:flex;gap:clamp(8px,1.4vw,18px);margin-top:30px;max-width:520px}
+.wk{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px}
+.wk .nail{position:relative;width:100%;max-width:58px;aspect-ratio:1/1.9;border-radius:50% 50% 44% 44%/34% 34% 16% 16%;background:#f6e4e2;overflow:hidden;box-shadow:inset 0 0 0 2px rgba(59,30,58,.12)} /* taste-skill-ignore: bare nail */
+.wk .coat{position:absolute;left:0;right:0;bottom:0;height:0;background:var(--berry);border-radius:inherit;transition:height 1.1s var(--ease) var(--d,0ms)}
+.wk .coat::after{content:"";position:absolute;top:10%;inset-inline-start:22%;width:18%;height:40%;border-radius:999px;background:rgba(255,255,255,.35)}
+.wk.today .nail{outline:3px solid var(--plum);outline-offset:2px}
+.wk small{font-size:15px;font-weight:700}
+.wk .t{font-size:13px;color:var(--ink-2);white-space:nowrap}
+.hours{margin-top:24px;border-collapse:collapse;font-size:16px;min-width:min(100%,320px)}
+.hours td{padding:6px 0}
+.hours td:last-child{text-align:end;padding-inline-start:30px}
+.hours tr.today{font-weight:800}
+.v-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.v-map{border-radius:var(--r);overflow:hidden;aspect-ratio:4/3.4;background:var(--blush-2)}
+.v-map iframe{display:block;width:100%;height:100%;border:0}
+.qa{margin-top:22px;display:flex;flex-direction:column;gap:8px}
+.qa details{border-radius:22px;background:rgba(255,255,255,.45)}
+.qa summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:0 20px;cursor:pointer;font-weight:700;list-style:none}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary svg{width:20px;height:20px;flex:none;transition:transform .25s var(--ease)}
+.qa details[open] summary svg{transform:rotate(45deg)}
+.qa details p{padding:0 20px 18px}
+
+/* ---------------------------------------------------------------- footer */
+.foot{position:relative;z-index:3;background:var(--plum);color:#f1e3ec;padding:0 0 120px;overflow:hidden}
+.f-lace{display:block;width:100%;height:40px}
+.f-lace path{fill:none;stroke:#e9b8c8;stroke-width:3;stroke-dasharray:6 7;vector-effect:non-scaling-stroke}
+.f-in{max-width:calc(1320px + var(--m)*2);margin:0 auto;padding-inline:var(--m);padding-top:clamp(40px,5vw,70px)}
+.plaque{width:min(560px,100%);margin:0 auto;padding:clamp(28px,4vw,48px) clamp(30px,5vw,64px);border-radius:50%/42%;background:var(--paper);box-shadow:0 0 0 6px var(--gold),0 0 0 9px #9c7b48} /* taste-skill-ignore: her sign on a pearl plaque with a gold rim */
+.plaque img{width:100%}
+html.js:not(.still) .plaque{transform:translateY(var(--py,40px)) scale(var(--ps,.94));opacity:var(--po,0)}
+.f-cols{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px 48px;margin-top:clamp(40px,5vw,70px)}
+.fh{font-weight:800;color:#fff;margin-bottom:4px}
+.f-cols a{text-decoration-color:rgba(241,227,236,.45);text-underline-offset:3px}
+.f-tools{display:flex;gap:8px;align-items:center}
+.foot .tgl{background:rgba(255,255,255,.12);color:#fff}
+.f-legal{margin-top:40px;font-size:15px;color:#d9c3d2;max-width:90ch}
+
+/* ---------------------------------------------------------------- phone ring */
+.ring{display:none}
+@media (max-width:860px){
+  .links{display:none}
+  .tools{margin-inline-start:auto}
+  .pill-btn{display:none}
+  .hero{grid-template-columns:1fr;padding-top:18px;padding-bottom:64px;min-height:auto;gap:0}
+  .fan-wrap{height:440px;min-height:0;margin-top:6px}
+  .fan{--w:100px}
+  .d-grid,.b-grid,.v-grid{grid-template-columns:minmax(0,1fr)}
+  .wk .t{display:none}
+  .d-glass{max-width:460px;width:100%;margin:0 auto;border-radius:160px 160px var(--r) var(--r)}
+  .p-grid{grid-template-columns:minmax(0,1fr)}
+  .panel{min-height:78svh}
+  .r-list{grid-template-columns:1fr}
+  .rv:nth-child(even){margin-top:0}
+  .ring{position:fixed;z-index:45;bottom:calc(14px + env(safe-area-inset-bottom));inset-inline-end:14px;display:flex;align-items:center;gap:0}
+  .r-stone{position:relative;display:flex;align-items:center;gap:8px;height:58px;padding:0 20px 0 18px;border-radius:999px;background:var(--plum);color:var(--paper);text-decoration:none;font-weight:800;font-size:16px;outline:4px solid var(--gold);transition:transform .14s var(--ease)} /* the ring's gold band around the stone */
+  .r-stone svg{width:22px;height:22px;fill:currentColor}
+  .r-call{position:relative;z-index:2;display:grid;place-items:center;width:50px;height:50px;margin-inline-end:-6px;border-radius:50%;background:#f6f0f6;color:var(--plum);outline:3px solid var(--gold);transition:transform .14s var(--ease)} /* taste-skill-ignore: a pearl on the band */
+  .r-call svg{width:20px;height:20px;fill:currentColor}
+  .foot{padding-bottom:110px}
+}
+@media (max-width:520px){
+  .brand img{width:92px}
+  .tools .tgl:not(.lang){padding:0 10px}
+  .h-title{font-size:clamp(2.7rem,13vw,4rem)}
+  html[lang="en"] .h-title{font-size:clamp(2.5rem,11.6vw,3.6rem)}
+  .btn{width:100%}
+  .h-acts .btn.soft{width:100%}
+  .l-chips{gap:6px}
+  .lc{padding:0 12px;font-size:15px}
+  .call b{font-size:14px}
+  .score{font-size:7rem}
+}
+@media (max-width:380px){.tools .tgl:not(.lang) [lang]{display:none!important}}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+html.js:not(.still) [data-reveal]{opacity:0;transform:translateY(24px)}
+html.js:not(.still) [data-reveal].in{opacity:1;transform:none;transition:opacity .8s var(--ease) var(--d,0ms),transform .8s var(--ease) var(--d,0ms)}
