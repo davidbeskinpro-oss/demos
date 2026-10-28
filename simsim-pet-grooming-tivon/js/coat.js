@@ -42,8 +42,30 @@
     this.cv.width = Math.round(W * dpr); this.cv.height = Math.round(H * dpr);
     this.u = Math.min(W * 0.62, H) / 520;
     var tall = H > W * 1.1; this.tb = tall ? 0.2 : 0.40; this.tk = tall ? 0.09 : 0.16;   // phones: the back line sits higher
+    this.cam = { x: W / 2, y: H / 2, z: 1 };
     this.build();
     this.draw();
+  };
+
+  // the camera follows whatever is working on the coat: comb, shower, lather, the drying front, the shears
+  C.camTarget = function () {
+    var p = this.p, W = this.W, H = this.H, u = this.u, P = this.pointer;
+    if (P.on && performance.now() - P.last < 1500) return { x: this.cam.x, y: this.cam.y, z: this.cam.z };
+    if (p > 0.03 && p < 0.97) { var a = this.combAt(); return { x: a.x, y: a.y, z: 1.28 }; }
+    if (p >= 0.97 && p < 1.3) return { x: this.showerAt().x, y: this.top(W / 2) + H * 0.08, z: 1.18 };
+    if (p >= 1.3 && p < 1.62) return { x: W / 2, y: this.top(W / 2) + (H - this.top(W / 2)) * 0.4, z: 1.32 };
+    if (p >= 1.62 && p < 2.0) return { x: W / 2, y: this.top(W / 2) + H * 0.12, z: 1.15 };
+    if (p >= 2.0 && p < 2.97) { var f = clamp(1.5 - (p - 2.1) * 2.3, 0, 1), fx = this.flip ? (1 - f) * W : f * W; return { x: fx, y: this.top(fx) + H * 0.04, z: 1.3 }; }
+    if (p >= 2.97 && p < 3.93) { var s = this.shearsAt(); return { x: s.x, y: s.y + 40 * u, z: 1.42 }; }
+    return { x: W / 2, y: H / 2, z: 1 };
+  };
+  C.combAt = function () {
+    var a = clamp(this.p, 0, 1), row = clamp(a * 1.35 - 0.1, 0, 1), sw = Math.sin(a * Math.PI * 10), W = this.W, H = this.H;
+    var x = W * (0.5 + 0.38 * sw); return { x: x, y: this.top(x) + row * (H - this.top(x)) * 0.9 + 26 * this.u, sw: sw };
+  };
+  C.shearsAt = function () {
+    var o = clamp((this.p - 3.06) / 0.84, 0, 1), W = this.W, sx = this.flip ? o * W : W - o * W;
+    return { x: sx, y: this.top(sx) - this.shell };
   };
 
   // the back line: a gentle arc, highest over the shoulders-to-hips middle
@@ -184,8 +206,8 @@
   // ---------------------------------------------------------------- input
   C.bind = function () {
     var self = this, cv = this.cv, P = this.pointer, down = false, lx = 0, ly = 0, has = false;
-    function pos(e) { var r = cv.getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
-    cv.addEventListener('pointerdown', function (e) { down = true; var q = pos(e); lx = q[0]; ly = q[1]; has = true; });
+    function pos(e) { var r = cv.getBoundingClientRect(), m = self.cam; return [(e.clientX - r.left - (self.W / 2 - m.x * m.z)) / m.z, (e.clientY - r.top - (self.H / 2 - m.y * m.z)) / m.z]; }
+    cv.addEventListener('pointerdown', function (e) { down = true; var q = pos(e); lx = q[0]; ly = q[1]; has = true; self.popAt(q[0], q[1]); });
     cv.addEventListener('pointermove', function (e) {
       var q = pos(e), x = q[0], y = q[1];
       if ((e.pointerType === 'mouse' || down) && has) {
@@ -221,6 +243,22 @@
     });
     if (this.removed() !== before) this.onChange();
   };
+  // tap the lather: the bubbles under the finger burst
+  C.popAt = function (x, y) {
+    var lath = sm((this.p - 1.3) / 0.14), rinse = sm((this.p - 1.6) / 0.32), now = performance.now(), hit = false, self = this;
+    if (lath < 0.5 || rinse > 0.6) return;
+    this.foam.forEach(function (f) { f.b.forEach(function (b, i) {
+      if (b.pt) return; var q = self.bubblePos(f, b, i, lath, rinse);
+      if (q && Math.hypot(q.x - x, q.y - y) < q.r + 9 * self.u) { b.pt = now; hit = true; }
+    }); });
+    if (hit) { this.busy = true; this.kick(); }
+  };
+  C.bubblePos = function (f, b, i, lath, rinse) {
+    var g = sm(lath * 1.4 - f.d * 0.4); if (g <= 0) return null;
+    var dy = rinse * rinse * this.H * 0.8 * f.drift, thin = sm((rinse - 0.25 - f.d * 0.3) / 0.4);
+    if (thin >= 1 || i / f.b.length < thin) return null;
+    return { x: f.x + b[0] * (1 + rinse * 0.3) + Math.sin(this.t * 2 + i) * 0.4 * this.u, y: f.y + b[1] + dy * (0.8 + (i % 5) * 0.06), r: b[2] * g };
+  };
   C.removed = function () { var n = 0; for (var i = 0; i < this.mats.length; i++) { var m = this.mats[i]; if (m.tuft.done >= 0 || this.autoC(this.cellAt(m.x, m.y)) > 0.72) n++; } return n; };
   C.reset = function () { this.userC.fill(0); this.dragW.fill(0); this.mats.forEach(function (m) { m.tuft.done = -1; }); this.onChange(); this.draw(); };
 
@@ -243,9 +281,13 @@
     var air = this.airOn(), airAng = this.flip ? 0 : Math.PI, tail = this.tail();
     c.setTransform(1, 0, 0, 1, 0, 0);
     c.clearRect(0, 0, this.cv.width, this.cv.height);
-    c.drawImage(this.under, 0, 0);
-    c.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
-    this.busy = false;
+    var T = this.camTarget(), m = this.cam, k = this.live ? 0.07 : 1;
+    m.z += (T.z - m.z) * k;
+    m.x += (clamp(T.x, W / (2 * m.z), W - W / (2 * m.z)) - m.x) * k; m.y += (clamp(T.y, H / (2 * m.z), H - H / (2 * m.z)) - m.y) * k;
+    m.x = clamp(m.x, W / (2 * m.z), W - W / (2 * m.z)); m.y = clamp(m.y, H / (2 * m.z), H - H / (2 * m.z));
+    var d = this.dpr; c.setTransform(d * m.z, 0, 0, d * m.z, d * (W / 2 - m.x * m.z), d * (H / 2 - m.y * m.z));
+    c.drawImage(this.under, 0, 0, W, H);
+    this.busy = Math.abs(T.z - m.z) > 0.002 || Math.abs(T.x - m.x) > 0.5;
     for (var i = 0; i < this.partX.length; i++) { this.partX[i] *= 0.9; this.partY[i] *= 0.9; }
 
     this.mats.forEach(function (m) {
@@ -438,15 +480,20 @@
       });
     }
     // lather: worked into the coat in patches, then the rinse carries it down until it breaks up
-    var lath = sm((p - 1.3) / 0.14), rinse = sm((p - 1.6) / 0.32);
+    var lath = sm((p - 1.3) / 0.14), rinse = sm((p - 1.6) / 0.32), now = performance.now();
+    if (lath <= 0) this.foam.forEach(function (f) { f.b.forEach(function (b) { b.pt = 0; }); });
     if (lath > 0 && rinse < 1) {
       this.foam.forEach(function (f) {
-        var g = sm(lath * 1.4 - f.d * 0.4); if (g <= 0) return;
-        var dy = rinse * rinse * H * 0.8 * f.drift, thin = sm((rinse - 0.25 - f.d * 0.3) / 0.4);
-        if (thin >= 1) return;
         f.b.forEach(function (b, i) {
-          if (i / f.b.length < thin) return;
-          var r = b[2] * g, x = f.x + b[0] * (1 + rinse * 0.3) + Math.sin(t * 2 + i) * 0.4 * u, y = f.y + b[1] + dy * (0.8 + (i % 5) * 0.06);
+          var q = self.bubblePos(f, b, i, lath, rinse); if (!q) return;
+          var r = q.r, x = q.x, y = q.y;
+          if (b.pt) {                                                   // a popped bubble: a ring and a few droplets, then nothing
+            var e = (now - b.pt) / 280; if (e >= 1) return; self.busy = true;
+            c.strokeStyle = 'rgba(255,255,255,' + (0.8 * (1 - e)) + ')'; c.lineWidth = 0.8 * u; c.beginPath(); c.arc(x, y, r * (1 + e * 0.9), 0, TAU); c.stroke();
+            c.fillStyle = 'rgba(235,245,252,' + (1 - e) + ')';
+            for (var k = 0; k < 5; k++) { var a = k / 5 * TAU + i; c.beginPath(); c.arc(x + Math.cos(a) * r * (1 + e * 2.2), y + Math.sin(a) * r * (1 + e * 2.2) + e * e * 10 * u, 0.9 * u, 0, TAU); c.fill(); }
+            return;
+          }
           c.fillStyle = 'rgba(250,251,252,.62)'; c.beginPath(); c.arc(x, y, r, 0, TAU); c.fill();
           c.strokeStyle = 'rgba(214,222,230,.55)'; c.lineWidth = 0.5 * u; c.stroke();
           c.fillStyle = 'rgba(255,255,255,.95)'; c.beginPath(); c.arc(x - r * 0.35, y - r * 0.4, r * 0.25, 0, TAU); c.fill();
@@ -500,9 +547,8 @@
     if (P.on && now - P.last < 900) {
       this.comb(c, P.x, P.y, Math.atan2(P.vy, P.vx) + Math.PI / 2, 1 - sm((now - P.last - 500) / 400)); this.busy = true;
     } else if (p > 0.02 && p < 0.99) {
-      var a = clamp(p, 0, 1), row = clamp(a * 1.35 - 0.1, 0, 1), sw = Math.sin(a * Math.PI * 10);
-      var x = W * (0.5 + 0.38 * sw), y = this.top(x) + row * (H - this.top(x)) * 0.9 + 26 * u;
-      this.comb(c, x, y, sw * 0.18 + (this.flip ? -0.15 : 0.15), sm(p / 0.04) * (1 - sm((p - 0.95) / 0.04)));
+      var ca = this.combAt();
+      this.comb(c, ca.x, ca.y, ca.sw * 0.18 + (this.flip ? -0.15 : 0.15), sm(p / 0.04) * (1 - sm((p - 0.95) / 0.04)));
     }
     var sh = sm((p - 0.92) / 0.08) * (1 - sm((p - 1.94) / 0.06));
     if (sh > 0.01) { var hd = this.showerAt(); this.shower(c, hd.x, hd.y - (1 - sh) * 90 * u, sh); }
