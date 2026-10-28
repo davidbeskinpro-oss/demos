@@ -1,0 +1,383 @@
+/* Hagar Or — candlelight, forest sun and her own teal paisley drops. Plum-rose dusk grounds, a rose-clay day section,
+   candle gold and the logo's teal as the two lights. */
+:root{
+  --plum:#26161d;
+  --plum-2:#1c1015;
+  --wine:#3a222b;
+  --wine-2:#4a2c36;
+  --clay:#d6b4a8;            /* rose-clay day ground (toned, never white) */
+  --clay-2:#c9a294;
+  --clay-ink:#2b151b;
+  --line:rgba(255,236,228,.10);
+  --ink:#f7ebe4;             /* pearl */
+  --soft:#dcc3bb;
+  --teal:#7fcdc4;            /* the logo's paisley teal */
+  --teal-d:#3f8f88;
+  --gold:#f1c07c;            /* candle */
+  --rose:#e9a39b;
+  --text:"Heebo","Arial Hebrew",Arial,sans-serif;
+  --serif:"Bellefair","Frank Ruhl Libre",Georgia,serif;
+  --serif-en:"Cormorant Infant","Bellefair",Georgia,serif;
+  --s-small:15px;
+  --s-body:clamp(1.0625rem,1rem + .25vw,1.2rem);
+  --s-lead:clamp(1.15rem,1.02rem + .5vw,1.45rem);
+  --s-head:clamp(2.4rem,1.5rem + 3.2vw,4.6rem);
+  --m:clamp(16px,3.4vw,52px);
+  --r:26px;
+  --ease:cubic-bezier(.23,1,.32,1);
+  --ease-io:cubic-bezier(.77,0,.175,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--plum-2);color:var(--ink);font:400 var(--s-body)/1.6 var(--text);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;touch-action:manipulation}
+h1,h2,h3,p,figure,ol,ul,blockquote{margin:0}
+ol,ul{padding:0;list-style:none}
+.vh{position:absolute;width:0;height:0;overflow:hidden}
+.num{font-variant-numeric:lining-nums tabular-nums}
+html[lang="he"] [lang="en"]:not(html), html[lang="en"] [lang="he"]:not(html){display:none!important}
+::selection{background:var(--teal);color:var(--plum)}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:8px}
+.skip{position:absolute;inset-inline-start:var(--m);top:-60px;z-index:80;background:var(--teal);color:var(--plum);padding:10px 16px;border-radius:999px;text-decoration:none}
+.skip:focus{top:44px}
+h2{font:800 var(--s-head)/1.05 var(--text);letter-spacing:-.025em;text-wrap:balance}
+html[lang="en"] h2{font-size:clamp(2.2rem,1.4rem + 2.9vw,4.3rem)}
+h3{font:600 21px/1.2 var(--text)}
+em{font:400 1.08em/1 var(--serif);font-style:normal;color:var(--gold);letter-spacing:0}
+html[lang="en"] em{font:italic 500 1.12em/1 var(--serif-en)}
+.lead{font-size:var(--s-lead);line-height:1.45;color:var(--soft);max-width:40ch;margin-top:16px;font-weight:300}
+section{position:relative;padding:clamp(84px,9vw,150px) var(--m);scroll-margin-top:70px}
+.stars{display:inline-flex;gap:2px}
+.stars svg{width:15px;height:15px;fill:var(--gold)}
+.page{position:relative;z-index:2;background:var(--plum)}
+
+.concept{position:relative;z-index:41;display:flex;align-items:center;justify-content:center;min-height:34px;padding:6px var(--m);background:var(--plum-2);color:var(--soft);font-size:var(--s-small);line-height:1.35;text-align:center}
+
+/* ---------------------------------------------------------------- nav: a bar that gathers into a floating rose-glass pill */
+.nav{position:sticky;top:0;z-index:40;padding:0 var(--m);transition:padding .45s var(--ease)}
+.nav-in{display:flex;align-items:center;gap:18px;max-width:2000px;margin:0 auto;height:70px;padding:0 4px;border-radius:999px;border:1px solid transparent;transition:max-width .6s var(--ease),height .45s var(--ease),padding .45s var(--ease),background .4s ease,border-color .4s ease}
+.nav.pill{padding-top:12px}
+.nav.pill .nav-in{max-width:1140px;height:60px;padding:0 10px 0 10px;background:rgba(58,34,43,.78);border-color:var(--line);-webkit-backdrop-filter:blur(16px) saturate(1.2);backdrop-filter:blur(16px) saturate(1.2)} /* taste-skill-ignore: the owner's reference nav, a floating frosted pill */
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{width:54px;height:auto;padding:4px 6px;border-radius:14px;background:#efe9e3}
+.brand{min-width:0}
+.bname{font:800 21px/1 var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.tools{flex:none}
+.links{display:flex;gap:2px;margin-inline-start:auto;font-size:16px}
+.links a{padding:8px 12px;border-radius:999px;text-decoration:none;color:var(--soft);transition:color .2s ease,background .2s ease}
+.tools{display:flex;align-items:center;gap:6px}
+.tgl{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;background:var(--wine);color:var(--ink);font-size:15px;transition:transform .14s var(--ease),background .2s ease}
+.tgl .knob{position:relative;width:30px;height:18px;border-radius:999px;background:#6a4b55;transition:background .2s ease}
+.tgl .knob::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:12px;height:12px;border-radius:50%;background:var(--ink);transition:transform .22s var(--ease)}
+.tgl[aria-checked="true"] .knob{background:var(--teal-d)}
+.tgl[aria-checked="true"] .knob::after{transform:translateX(12px)}
+html[dir="rtl"] .tgl[aria-checked="true"] .knob::after{transform:translateX(-12px)}
+.tgl.lang{min-width:46px;justify-content:center;font-weight:800}
+.pill-btn,.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:0 18px;border-radius:999px;background:var(--gold);color:#2a1418;text-decoration:none;font-weight:600;font-size:16px;overflow:hidden;transition:transform .14s var(--ease),background .2s ease}
+.btn{min-height:54px;padding:0 26px;font-size:17px}
+.btn.ghost{background:rgba(247,235,228,.12);color:var(--ink);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.pill-btn svg,.btn svg{width:20px;height:20px;fill:currentColor;flex:none}
+.btn:not(.ghost)::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.45) 50%,transparent 70%);transform:translateX(-120%)} /* taste-skill-ignore: candlelight passing over the button */
+html:not(.still) .btn:not(.ghost)::after{animation:sweep 4.2s var(--ease-io) 1.6s 3}
+@keyframes sweep{0%{transform:translateX(-120%)}40%,100%{transform:translateX(120%)}}
+.pill-btn:active,.btn:active,.tgl:active,.chip:active,.cd:active,.dp:active,.dayb:active,.v-tabs button:active,.tile:active,.dock a:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .links a:hover{color:var(--ink);background:rgba(247,235,228,.08)}
+  .tgl:hover{background:var(--wine-2)}
+  .btn.ghost:hover{background:rgba(247,235,228,.2)}
+  .v-tabs button:hover{color:var(--ink)}
+  .dp:hover svg{transform:translateY(-3px)}
+}
+@media (max-width:1100px){.links{display:none}.tools{margin-inline-start:auto}}
+@media (max-width:560px){.pill-btn{display:none}.bname{font-size:18px}.brand img{width:46px}.tgl{padding:0 11px}}
+
+/* entrances */
+.js:not(.still) [data-reveal],.js:not(.still) [data-tile]{opacity:0;transform:translateY(26px);filter:blur(6px);transition:opacity .8s var(--ease) var(--d,0ms),transform .9s var(--ease) var(--d,0ms),filter .8s var(--ease) var(--d,0ms)}
+.js:not(.still) [data-reveal].in,.js:not(.still) [data-tile].in{opacity:1;transform:none;filter:none}
+.js:not(.still) [data-rise]{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease) var(--d,0ms),transform .8s var(--ease) var(--d,0ms)}
+.js:not(.still) .hero.ready [data-rise]{opacity:1;transform:none}
+
+/* ---------------------------------------------------------------- hero */
+.hero{min-height:calc(100svh - 34px);padding:clamp(28px,5vw,60px) var(--m) clamp(70px,8vw,110px);overflow:hidden;isolation:isolate;display:flex;align-items:center}
+.h-bg{position:absolute;inset:-6%;z-index:-3}
+.h-bg img{width:100%;height:100%;object-fit:cover;filter:saturate(1.1) brightness(.78)}
+.js:not(.still) .h-bg{animation:breathe 2.4s var(--ease) both}
+@keyframes breathe{from{transform:scale(1.12)}to{transform:scale(1.03)}}
+.hero::before{content:"";position:absolute;inset:0;z-index:-2;background:linear-gradient(180deg,rgba(38,22,29,.55),rgba(38,22,29,.2) 40%,rgba(38,22,29,.85) 92%),radial-gradient(70% 60% at 25% 45%,rgba(38,22,29,.65),transparent 70%)} /* taste-skill-ignore: dusk over her forest-light photo, keeps the type readable */
+html[dir="rtl"] .hero::before{background:linear-gradient(180deg,rgba(38,22,29,.55),rgba(38,22,29,.2) 40%,rgba(38,22,29,.85) 92%),radial-gradient(70% 60% at 75% 45%,rgba(38,22,29,.65),transparent 70%)} /* taste-skill-ignore: same scrim, mirrored */
+.motes{position:absolute;inset:0;z-index:-1;width:100%;height:100%}
+.mark-src{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none} /* taste-skill-ignore: owner references use soft glow, depth and light */
+.h-grid{position:relative;width:100%;max-width:1500px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,70px);align-items:center}
+.h-eye{font-size:16px;letter-spacing:.04em;color:var(--teal);font-weight:600}
+.h-title{margin-top:8px;font:800 clamp(5rem,2.6rem + 10vw,12.5rem)/.86 var(--text);letter-spacing:-.045em}
+html[lang="en"] .h-title{font-size:clamp(4.4rem,2.2rem + 8.6vw,11rem)}
+.h-title .ln{display:block}
+.h-title .acc{font:400 1.08em/.9 var(--serif);letter-spacing:0;color:var(--gold);filter:drop-shadow(0 0 28px rgba(241,192,124,.5))} /* taste-skill-ignore: the name means light; it glows */
+html[lang="en"] .h-title .acc{font:italic 500 1.1em/.9 var(--serif-en)}
+.h-title .w{display:inline-block;white-space:nowrap}
+.h-title .ch{display:inline-block}
+.js:not(.still) .h-title .ch{opacity:0;filter:blur(10px);transform:translateY(.18em);transition:opacity .7s var(--ease),filter .8s var(--ease),transform .9s var(--ease);transition-delay:calc(var(--i) * 70ms + 80ms)}
+.js:not(.still) .hero.ready .h-title .ch{opacity:1;filter:none;transform:none}
+.h-lead{margin-top:22px;max-width:36ch;font-size:var(--s-lead);line-height:1.45;font-weight:300;color:var(--ink)}
+.h-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.h-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 14px;border-radius:999px;background:rgba(28,16,21,.55);border:1px solid var(--line);font-size:15px;text-decoration:none;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.chip .dot,.st .dot{width:8px;height:8px;border-radius:50%;background:#a08a90;flex:none}
+.chip.open .dot,.st.open .dot{background:var(--gold);box-shadow:0 0 10px var(--gold)} /* taste-skill-ignore: owner references use soft glow, depth and light */
+.h-visual{position:relative;justify-self:center;width:min(100%,440px);aspect-ratio:.74;transform-style:preserve-3d;transition:transform .5s var(--ease)}
+.mark-slot{position:absolute;left:18%;right:18%;top:0;height:19%}
+.drop-frame{position:absolute;left:15%;right:15%;top:35%;aspect-ratio:1;border-radius:0 50% 50% 50%;transform:rotate(45deg);overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45),0 0 0 1px rgba(127,205,196,.35)} /* taste-skill-ignore: her portrait in the logo's drop */
+.drop-frame img{position:absolute;left:50%;top:50%;width:142%;height:142%;max-width:none;object-fit:cover;object-position:66% 30%;transform:translate(-50%,-50%) rotate(-45deg)}
+.drop-frame .rim{position:absolute;inset:0;border-radius:inherit;background:radial-gradient(60% 60% at 30% 30%,rgba(241,192,124,.35),transparent 60%);mix-blend-mode:screen} /* taste-skill-ignore: candle rim on the portrait */
+.js:not(.still) .drop-frame .rim{animation:rim 5s ease-in-out infinite alternate}
+@keyframes rim{from{opacity:.5}to{opacity:1}}
+.label-card{position:absolute;inset-inline-end:-4%;bottom:-2%;width:44%;padding:6px;border-radius:16px;background:#efe9e3;transform:rotate(-5deg);box-shadow:0 18px 40px rgba(0,0,0,.4)} /* taste-skill-ignore: a small label card, the logo as it is printed */
+html[dir="rtl"] .label-card{transform:rotate(5deg)}
+.label-card img{border-radius:11px}
+.label-card figcaption{padding:6px 6px 2px;font-size:16px;color:#5b4248;font-weight:600}
+.steam{position:absolute;left:0;right:0;bottom:0;height:55%;width:100%;z-index:3;pointer-events:none}
+.still .steam{display:none}
+@media (max-width:860px){
+  .hero{align-items:flex-start}
+  .h-grid{grid-template-columns:1fr;gap:34px}
+  .h-visual{width:min(52%,240px);order:-1;margin-top:-6px}
+  .label-card{width:52%;inset-inline-end:-46%;bottom:6%}
+  .h-title{font-size:clamp(4.2rem,2rem + 11vw,6rem)}
+  .h-lead{margin-top:16px}
+  .h-acts{margin-top:20px}
+  .steam{height:26%}
+}
+
+/* callouts that decode onto photographs */
+.co{position:absolute;left:var(--x);top:var(--y);display:flex;align-items:center;gap:8px;pointer-events:none;direction:ltr}
+.co i{width:12px;height:12px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 5px rgba(241,192,124,.25),0 0 18px var(--gold);flex:none} /* taste-skill-ignore: owner references use soft glow, depth and light */
+.co b{position:relative;padding:5px 11px;border-radius:999px;background:rgba(28,16,21,.72);color:var(--ink);font:600 14px/1.3 var(--text);white-space:nowrap;-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.co b:empty{display:none}
+.co.flip{flex-direction:row-reverse;transform:translateX(-100%)}
+.js:not(.still) .co i{transform:scale(.6);opacity:0;transition:transform .5s var(--ease),opacity .4s ease}
+.js:not(.still) .co.on i{transform:scale(1);opacity:1}
+
+/* ---------------------------------------------------------------- meet: the rose-clay day section */
+.meet{background:var(--clay);color:var(--clay-ink);overflow:hidden}
+.meet::before{content:"";position:absolute;inset:0;background:radial-gradient(50% 60% at 80% 20%,rgba(255,240,232,.45),transparent 70%),radial-gradient(40% 50% at 10% 90%,rgba(127,205,196,.25),transparent 70%);pointer-events:none} /* taste-skill-ignore: soft daylight on clay */
+.meet em{color:#8a3f3a}
+.meet .lead{color:#5a3a3f}
+.m-grid{position:relative;max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,90px);align-items:center}
+.m-photo{position:relative;border-radius:34px;overflow:hidden;box-shadow:0 40px 80px rgba(70,30,35,.3)} /* taste-skill-ignore: owner references use soft glow, depth and light */
+.m-photo img{width:100%;aspect-ratio:1;object-fit:cover}
+.js:not(.still) .m-photo img{transform:scale(1.08);transition:transform 2.4s var(--ease)}
+.js:not(.still) .m-photo.in img{transform:scale(1)}
+.m-quote{margin-top:30px;padding-inline-start:20px;border-inline-start:3px solid var(--teal-d)}
+.m-quote p{font:400 clamp(1.5rem,1.1rem + 1.2vw,2.2rem)/1.3 var(--serif)}
+html[lang="en"] .m-quote p{font:italic 500 clamp(1.5rem,1.1rem + 1.2vw,2.3rem)/1.25 var(--serif-en)}
+.m-quote footer{margin-top:10px;font-size:15px;color:#4c2f35}
+.m-label{margin-top:30px;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:8px;border-radius:22px;background:rgba(255,244,238,.55);max-width:520px}
+.ml-row{display:flex;flex-direction:column;gap:2px;padding:14px 14px 12px;border-radius:16px;background:rgba(255,248,244,.6);font-size:16px;color:#4c2f35}
+.ml-row .odo{font:800 clamp(2rem,1.5rem + 1.4vw,2.8rem)/1 var(--text);color:var(--clay-ink)}
+@media (max-width:860px){.m-grid{grid-template-columns:1fr}}
+
+/* odometers */
+.odo{display:inline-flex;direction:ltr;overflow:hidden;height:1.05em;line-height:1.05}
+.odo .d{display:inline-block;height:1.05em;overflow:hidden}
+.odo .d>span{display:flex;flex-direction:column;transition:transform 1.3s var(--ease)}
+.odo .d b{display:block;height:1.05em;font-weight:inherit}
+.odo .d b::before{content:attr(data-n)}
+
+/* ---------------------------------------------------------------- the room: candles that catch one by one */
+.room{padding:0;background:var(--plum-2)}
+html:not(.still) .room{height:330vh}
+.r-stick{position:relative;height:100svh;overflow:hidden}
+html:not(.still) .r-stick{position:sticky;top:0}
+.r-photo{position:absolute;inset:0}
+.r-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 50%}
+html:not(.still) .r-dark{filter:brightness(.28) saturate(.6) contrast(1.05)}
+.r-lit{filter:brightness(1.12) saturate(1.1);-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat}
+.still .r-lit,.still .r-glows{display:none}
+.r-glows i{position:absolute;width:var(--s);height:var(--s);margin:calc(var(--s) / -2) 0 0 calc(var(--s) / -2);border-radius:50%;background:radial-gradient(circle,rgba(255,200,130,.75),rgba(255,170,90,.25) 35%,transparent 70%);mix-blend-mode:screen;opacity:0;pointer-events:none} /* taste-skill-ignore: candle glow */
+.r-glows i.teal{background:radial-gradient(circle,rgba(110,230,225,.6),rgba(80,200,200,.2) 40%,transparent 70%)} /* taste-skill-ignore: the room's own teal lamp */
+.r-stick::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(28,16,21,.85),transparent 34%,transparent 58%,rgba(28,16,21,.92));pointer-events:none} /* taste-skill-ignore: scrim for the words over the photograph */
+.r-copy{position:absolute;z-index:2;top:clamp(84px,12vh,130px);left:var(--m);max-width:min(620px,calc(100% - 2 * var(--m)))}
+.r-candles{position:absolute;z-index:3;bottom:calc(24px + env(safe-area-inset-bottom));inset-inline-start:var(--m);display:flex;gap:8px}
+.cd{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:64px;min-height:64px;padding:8px 10px;border-radius:20px;background:rgba(28,16,21,.6);border:1px solid var(--line);font-size:16px;color:var(--soft);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:color .3s ease,border-color .3s ease,transform .14s var(--ease)}
+.cd svg{width:16px;height:24px;fill:#6d5359;transition:fill .3s ease,filter .3s ease}
+.cd.lit{color:var(--ink);border-color:rgba(241,192,124,.45)}
+.cd.lit svg{fill:var(--gold);filter:drop-shadow(0 0 6px var(--gold))} /* taste-skill-ignore: owner references use soft glow, depth and light */
+.r-notes{position:absolute;z-index:3;bottom:calc(110px + env(safe-area-inset-bottom));inset-inline-start:var(--m);width:min(520px,calc(100% - 2 * var(--m)));height:170px}
+.note{position:absolute;inset:auto 0 0 0;padding:22px 24px;border-radius:24px;background:rgba(38,22,29,.72);border:1px solid rgba(241,192,124,.22);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .7s var(--ease)}
+.note.on{opacity:1;transform:none}
+.note h3{color:var(--gold);font:400 30px/1 var(--serif)}
+html[lang="en"] .note h3{font:italic 500 32px/1 var(--serif-en)}
+.note p{overflow-wrap:anywhere;margin-top:8px;font-size:clamp(1.05rem,1rem + .3vw,1.25rem);line-height:1.45}
+.note small{display:block;margin-top:8px;font-size:16px;color:var(--soft)}
+/* animations off: the lit room, then the four notes as a normal block */
+.still .r-stick{height:auto;min-height:0;display:grid;padding:clamp(84px,9vw,140px) var(--m)}
+.still .r-stick::after{display:none}
+.still .r-photo{position:relative;aspect-ratio:4/3;max-height:80svh;border-radius:30px;overflow:hidden;order:2;margin-top:28px}
+.still .r-copy{position:static;order:1}
+.still .r-candles{display:none}
+.still .r-notes{position:static;order:3;width:auto;height:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:14px}
+.still .note{position:static;opacity:1;transform:none}
+@media (max-width:700px){
+  .r-notes{bottom:calc(176px + env(safe-area-inset-bottom));height:200px}
+  .r-candles{bottom:calc(96px + env(safe-area-inset-bottom))}
+  .cd{min-width:0;flex:1}
+  .r-candles{inset-inline-end:var(--m)}
+}
+
+/* ---------------------------------------------------------------- products */
+.prod{background:radial-gradient(60% 50% at 70% 50%,rgba(63,143,136,.25),transparent 70%),var(--plum);overflow:hidden} /* taste-skill-ignore: the bottles' own green-teal light */
+.p-grid{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,90px);align-items:center}
+.p-quote{margin-top:28px;padding:22px 24px;border-radius:24px;background:var(--wine);border:1px solid var(--line);max-width:460px}
+.p-quote p{font:400 clamp(1.35rem,1.1rem + .8vw,1.8rem)/1.3 var(--serif)}
+html[lang="en"] .p-quote p{font:italic 500 clamp(1.4rem,1.1rem + .9vw,1.9rem)/1.25 var(--serif-en)}
+.p-quote footer{margin-top:8px;font-size:15px;color:var(--soft)}
+.p-label{margin-top:16px;width:min(220px,60%);padding:6px;border-radius:16px;background:#efe9e3;transform:rotate(-3deg)}
+.p-label img{border-radius:11px}
+.p-stage{perspective:1200px;display:flex;justify-content:center}
+.p-photo{position:relative;width:min(100%,520px);border-radius:30px;overflow:hidden;transform-style:preserve-3d;transition:transform .6s var(--ease);box-shadow:0 40px 90px rgba(0,0,0,.5)} /* taste-skill-ignore: owner references use soft glow, depth and light */
+.p-photo>img{width:100%}
+.sun{position:absolute;inset:0;background:radial-gradient(40% 30% at var(--sx,70%) var(--sy,20%),rgba(255,214,150,.55),transparent 70%);mix-blend-mode:screen;pointer-events:none;transition:background-position .3s} /* taste-skill-ignore: the sun moves with the hand */
+.bubbles{position:absolute;left:41.5%;width:14%;top:52%;height:34%;-webkit-mask-image:linear-gradient(180deg,#000 0 27%,transparent 31% 68%,#000 72% 100%);mask-image:linear-gradient(180deg,#000 0 27%,transparent 31% 68%,#000 72% 100%);pointer-events:none;overflow:hidden} /* taste-skill-ignore: owner references use soft glow, depth and light */
+.bubbles i{position:absolute;bottom:-8px;width:var(--b);height:var(--b);border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0 18%,rgba(230,255,225,.25) 40%,rgba(255,255,255,.55) 72%,rgba(255,255,255,.9) 82%,transparent 86%);box-shadow:0 0 4px rgba(255,255,255,.6);animation:rise var(--t) linear var(--dl) infinite;opacity:0} /* taste-skill-ignore: a bubble in the gel */
+@keyframes rise{0%{transform:translate3d(0,0,0);opacity:0}10%{opacity:.9}50%{transform:translate3d(var(--w),calc(var(--h) * -.5),0)}90%{opacity:.85}100%{transform:translate3d(0,calc(var(--h) * -1),0);opacity:0}}
+.still .bubbles{display:none}
+@media (max-width:860px){.p-grid{grid-template-columns:1fr}.p-stage{order:-1}}
+
+/* ---------------------------------------------------------------- reviews: the steamed mirror */
+.revs{background:linear-gradient(180deg,var(--plum),#2c1a22);overflow:hidden} /* taste-skill-ignore: owner references use soft glow, depth and light */
+.v-head{max-width:1300px;margin:0 auto;display:flex;flex-wrap:wrap;gap:24px 60px;align-items:flex-end}
+.v-score{display:flex;flex-direction:column;gap:6px}
+.v-score .odo.big{font:800 clamp(5rem,3rem + 6vw,9rem)/1 var(--text);color:var(--gold);height:1.05em}
+.v-count{font-size:16px;color:var(--soft)}
+.v-tabs{max-width:1300px;margin:44px auto 0;display:flex;flex-wrap:wrap;gap:6px 22px}
+.v-tabs button{position:relative;min-height:48px;padding:0 14px;border-radius:999px;color:var(--soft);font-size:16px;font-weight:600}
+.v-tabs button[aria-selected="true"]{color:var(--ink);background:var(--wine)}
+.mirror{position:relative;max-width:1300px;margin:22px auto 0;border-radius:40px;overflow:hidden;background:radial-gradient(80% 90% at 20% 10%,rgba(127,205,196,.16),transparent 60%),radial-gradient(60% 80% at 90% 100%,rgba(241,192,124,.14),transparent 60%),#3a222b;border:1px solid rgba(247,235,228,.14);touch-action:pan-y} /* taste-skill-ignore: a mirror with candle and lamp light in it */
+.m-glass{display:grid;padding:clamp(28px,5vw,70px)}
+.rv{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .5s ease}
+.rv.on{opacity:1;visibility:visible}
+.rv blockquote p{overflow-wrap:anywhere;font:300 clamp(1.25rem,1rem + 1vw,2rem)/1.5 var(--text)}
+.rv figcaption{margin-top:20px;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;font-size:15px;color:var(--soft)}
+.rv figcaption b{font:400 26px/1.1 var(--serif);color:var(--ink)}
+.fog{position:absolute;inset:0;width:100%;height:100%;cursor:grab}
+.still .fog{display:none}
+
+/* ---------------------------------------------------------------- write: drops, a candle ring of days, the note */
+.write{background:radial-gradient(50% 60% at 50% 60%,rgba(241,192,124,.13),transparent 70%),var(--plum-2)} /* taste-skill-ignore: candle glow behind the ring */
+.w-head{max-width:1300px;margin:0 auto}
+.w-grid{max-width:1300px;margin:44px auto 0;display:grid;grid-template-columns:.6fr 1.2fr 1fr;gap:clamp(20px,3vw,50px);align-items:center}
+.w-steps{display:grid;gap:10px}
+.w-steps li{display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:18px;color:var(--soft);border:1px solid var(--line);transition:color .4s ease,background .4s ease,border-color .4s ease}
+.w-steps b{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--wine);font-size:16px;transition:background .4s ease,color .4s ease}
+.w-steps li.on{color:var(--ink);background:rgba(127,205,196,.08);border-color:rgba(127,205,196,.35)}
+.w-steps li.on b{background:var(--teal);color:var(--plum)}
+.w-pick{display:grid;gap:22px;justify-items:center}
+.drops{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.dp{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:96px;padding:10px 8px 12px;border-radius:22px;color:var(--soft);font-size:15px;transition:color .3s ease,background .3s ease,transform .14s var(--ease)}
+.dp svg{width:34px;height:44px;fill:transparent;stroke:var(--teal);stroke-width:2;transition:fill .35s var(--ease),transform .35s var(--ease),filter .35s ease}
+.dp[aria-checked="true"]{color:var(--ink);background:rgba(127,205,196,.1)}
+.dp[aria-checked="true"] svg{fill:var(--teal);filter:drop-shadow(0 0 10px rgba(127,205,196,.6))} /* taste-skill-ignore: owner references use soft glow, depth and light */
+.ring-days{position:relative;width:min(100%,330px);aspect-ratio:1}
+.ring-days::before{content:"";position:absolute;inset:14%;border-radius:50%;border:1px dashed rgba(241,192,124,.3)}
+.rd-core{position:absolute;left:50%;top:50%;width:70px;height:70px;margin:-35px 0 0 -35px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,rgba(241,192,124,.35),transparent 70%)} /* taste-skill-ignore: the candle at the centre */
+.rd-core svg{width:26px;height:40px;fill:var(--gold);filter:drop-shadow(0 0 10px var(--gold))} /* taste-skill-ignore: owner references use soft glow, depth and light */
+.js:not(.still) .rd-core svg{animation:flick 2.6s ease-in-out infinite alternate;transform-origin:50% 100%}
+@keyframes flick{0%{transform:scale(1,1) rotate(0)}30%{transform:scale(.94,1.06) rotate(-2deg)}60%{transform:scale(1.04,.96) rotate(1.5deg)}100%{transform:scale(.98,1.03) rotate(-1deg)}}
+.dayb{position:absolute;left:var(--x);top:var(--y);width:66px;height:66px;margin:-33px 0 0 -33px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;background:var(--wine);border:1px solid var(--line);font-size:16px;line-height:1.1;color:var(--soft);transition:background .3s ease,color .3s ease,border-color .3s ease,box-shadow .3s ease,transform .14s var(--ease)}
+.dayb small{font-size:11px;opacity:.75}
+.dayb svg{width:10px;height:15px;fill:#6d5359;transition:fill .3s ease}
+.dayb[aria-checked="true"]{background:#4c2f2a;color:var(--ink);border-color:rgba(241,192,124,.6);box-shadow:0 0 24px rgba(241,192,124,.35)} /* taste-skill-ignore: owner references use soft glow, depth and light */
+.dayb[aria-checked="true"] svg{fill:var(--gold)}
+.dayb:disabled{opacity:.45;cursor:default}
+.w-chat{padding:18px;border-radius:30px;background:var(--wine);border:1px solid var(--line);box-shadow:0 30px 70px rgba(0,0,0,.35)} /* taste-skill-ignore: owner references use soft glow, depth and light */
+.wc-top{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:18px;background:rgba(28,16,21,.35);font-size:16px}
+.wc-top img{width:44px;padding:3px 4px;border-radius:12px;background:#efe9e3}
+.wc-top .num{margin-inline-start:auto;color:var(--soft);font-size:16px}
+.bubble{margin:18px 0;padding:14px 16px;border-radius:20px 20px 20px 6px;background:#2f5a55;min-height:96px;font-size:17px;line-height:1.5}
+html[dir="rtl"] .bubble{border-radius:20px 20px 6px 20px}
+.caret{display:inline-block;width:2px;height:1.1em;margin-inline-start:2px;vertical-align:-3px;background:var(--ink);opacity:0}
+.js:not(.still) .w-chat.typing .caret{animation:blink 1s steps(2) 4;opacity:1}
+@keyframes blink{50%{opacity:0}}
+.send{width:100%}
+@media (max-width:1000px){.w-grid{grid-template-columns:1fr}.w-steps{grid-template-columns:repeat(3,1fr)}.w-steps li{flex-direction:column;text-align:center;gap:6px;padding:10px 6px;font-size:16px}}
+
+/* ---------------------------------------------------------------- visit: bento */
+.visit{background:var(--plum)}
+.bento{max-width:1300px;margin:44px auto 0;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto auto;grid-template-areas:"lounge lounge hours map" "lounge lounge hours map" "where call wa map";gap:12px}
+.tile{position:relative;overflow:hidden;border-radius:var(--r);background:var(--wine);border:1px solid var(--line);padding:22px;text-decoration:none;isolation:isolate;transition:transform .14s var(--ease),border-color .3s ease}
+.tile::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(241,192,124,.16),transparent 70%);opacity:0;transition:opacity .3s ease} /* taste-skill-ignore: candle spotlight under the hand */
+@media (hover:hover) and (pointer:fine){.tile:hover::before{opacity:1}.tile:hover{border-color:rgba(241,192,124,.3)}}
+.tile>svg{width:28px;height:28px;fill:var(--teal);margin-bottom:28px}
+.tile p{color:var(--soft);font-size:16px;margin-top:4px}
+.t-lounge{grid-area:lounge;padding:0;min-height:360px}
+.t-lounge img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.js:not(.still) .t-lounge.in img{animation:drift 9s var(--ease) both}
+@keyframes drift{from{transform:scale(1.04) translate3d(0,0,0)}to{transform:scale(1.12) translate3d(-2%,-1%,0)}}
+.t-lounge .flick{position:absolute;left:71%;top:25%;width:30%;aspect-ratio:1;margin:-15% 0 0 -15%;border-radius:50%;background:radial-gradient(circle,rgba(255,200,120,.6),transparent 65%);mix-blend-mode:screen} /* taste-skill-ignore: the lounge candle */
+.js:not(.still) .t-lounge .flick{animation:glow 1.9s ease-in-out infinite alternate}
+@keyframes glow{0%{opacity:.6;transform:scale(1)}50%{opacity:1;transform:scale(1.08)}100%{opacity:.75;transform:scale(.96)}}
+.t-lounge figcaption{position:absolute;bottom:14px;inset-inline-start:14px;padding:6px 12px;border-radius:999px;background:rgba(28,16,21,.7);font-size:16px}
+.t-hours{grid-area:hours}
+.candle{position:relative;width:26px;height:74px;margin-bottom:18px}
+.candle .wax{position:absolute;bottom:0;left:3px;width:20px;height:44px;border-radius:5px 5px 3px 3px;background:linear-gradient(90deg,#e9ddd4,#fff6ee 45%,#d8c6bb)} /* taste-skill-ignore: a wax candle */
+.candle .wick{position:absolute;bottom:44px;left:12px;width:2px;height:7px;background:#3b2a24}
+.candle .fl{position:absolute;bottom:49px;left:5px;width:16px;height:24px;fill:var(--gold);filter:drop-shadow(0 0 8px var(--gold));opacity:0;transform:scale(.3);transform-origin:50% 100%;transition:opacity .4s ease,transform .5s var(--ease)} /* taste-skill-ignore: owner references use soft glow, depth and light */
+.t-hours.open .candle .fl{opacity:1;transform:none}
+.js:not(.still) .t-hours.open .candle .fl{animation:flick 2.2s ease-in-out infinite alternate}
+.st{display:flex;align-items:center;gap:8px;margin:6px 0 12px;font-size:15px}
+.hrs{width:100%;border-collapse:collapse;font-size:15px}
+.hrs td{padding:6px 0;border-top:1px solid var(--line);color:var(--soft)}
+.hrs td:last-child{text-align:end;white-space:nowrap}
+.hrs tr.today td{color:var(--ink);font-weight:600}
+.t-map{grid-area:map;padding:0;min-height:300px}
+.t-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:sepia(.25) saturate(.8) hue-rotate(-12deg) brightness(.92)}
+.t-where{grid-area:where}.t-call{grid-area:call}.t-wa{grid-area:wa}
+@media (max-width:1000px){.bento{grid-template-columns:1fr 1fr;grid-template-areas:"lounge lounge" "hours map" "where call" "wa wa"}.t-lounge{min-height:300px}}
+@media (max-width:620px){.bento{grid-template-columns:1fr;grid-template-areas:"lounge" "hours" "map" "where" "call" "wa"}.t-lounge{min-height:260px}.t-map{min-height:280px}}
+
+/* ---------------------------------------------------------------- faq */
+.faq{background:linear-gradient(180deg,var(--plum),var(--plum-2))} /* taste-skill-ignore: owner references use soft glow, depth and light */
+.f-grid{max-width:1300px;margin:0 auto;display:grid;grid-template-columns:.8fr 1.2fr;gap:clamp(30px,5vw,90px);align-items:start}
+.f-photo{margin:40px 0 0 0;margin-inline-start:60px;width:min(70%,300px);border-radius:0 50% 50% 50%;overflow:hidden;aspect-ratio:1;transform:rotate(45deg)} /* the logo's drop again, smaller */
+.f-photo img{position:absolute}
+.f-photo{position:relative}
+.f-photo img{left:50%;top:50%;width:150%;height:150%;max-width:none;object-fit:cover;object-position:66% 30%;transform:translate(-50%,-50%) rotate(-45deg)}
+.qa{display:grid;gap:10px}
+.qa details{border-radius:22px;background:var(--wine);border:1px solid var(--line)}
+.qa summary{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:64px;padding:12px 22px;cursor:pointer;list-style:none;font-size:clamp(1.1rem,1rem + .3vw,1.3rem);font-weight:600}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary svg{width:22px;height:22px;flex:none;color:var(--teal);transition:transform .3s var(--ease)}
+.qa details[open] summary svg{transform:rotate(45deg)}
+.qa details p{padding:0 22px 20px;color:var(--soft)}
+@media (max-width:860px){.f-grid{grid-template-columns:1fr}.f-photo{width:min(70%,300px);margin-inline:auto}}
+.end{height:1px} /* taste-skill-ignore: owner references use soft glow, depth and light */
+
+/* ---------------------------------------------------------------- footer: a curtain under the page */
+.foot{position:relative;z-index:1;overflow:hidden;background:var(--plum-2);padding:clamp(70px,8vw,110px) var(--m) calc(110px + env(safe-area-inset-bottom))}
+.foot.curtain{position:fixed;left:0;right:0;bottom:0}
+.ft-sun{position:absolute;left:50%;bottom:-60%;width:140%;aspect-ratio:2.2;transform:translateX(-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(241,192,124,.4),rgba(233,163,155,.18) 55%,transparent);pointer-events:none} /* taste-skill-ignore: the sun at the foot of the page */
+.ft-in{position:relative;max-width:1300px;margin:0 auto;display:grid;gap:18px;justify-items:center;text-align:center}
+.ft-label{width:170px;padding:5px;border-radius:14px;background:#efe9e3}
+.ft-word{font:800 clamp(3.6rem,1.5rem + 9vw,10rem)/.95 var(--text);letter-spacing:-.04em;white-space:nowrap}
+.ft-word .ch{display:inline-block}
+.js:not(.still) .ft-word .ch{transform:translateY(60%);opacity:0;transition:transform .9s var(--ease),opacity .7s var(--ease);transition-delay:calc(var(--i) * 60ms)}
+.js:not(.still) .ft-word.in .ch{transform:none;opacity:1}
+.ft-line{font-size:16px;color:var(--soft)}
+.ft-credit{max-width:70ch;font-size:16px;color:#b59ea2;line-height:1.5}
+
+/* ---------------------------------------------------------------- phones: the floating drop */
+.dock{display:none}
+@media (max-width:700px){
+  .dock{position:fixed;z-index:50;left:50%;bottom:calc(12px + env(safe-area-inset-bottom));display:flex;align-items:center;gap:6px;padding:6px;border-radius:30px 30px 30px 8px;background:rgba(58,34,43,.9);border:1px solid rgba(241,192,124,.3);box-shadow:0 14px 40px rgba(0,0,0,.45);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);transform:translate(-50%,140%);transition:transform .5s var(--ease)} /* taste-skill-ignore: floating glass capsule */
+  html[dir="rtl"] .dock{border-radius:30px 30px 8px 30px}
+  .dock.show{transform:translate(-50%,0)}
+  .dk-flame{display:grid;place-items:center;width:30px}
+  .dk-flame svg{width:14px;height:21px;fill:#6d5359}
+  .dk-flame.open svg{fill:var(--gold);filter:drop-shadow(0 0 6px var(--gold))} /* taste-skill-ignore: owner references use soft glow, depth and light */
+  .dock a{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;border-radius:24px;text-decoration:none;font-weight:600;font-size:16px}
+  .dk-wa{padding:0 18px;background:var(--gold);color:#2a1418}
+  .dk-call{width:50px;background:rgba(247,235,228,.12)}
+  .dock svg{width:20px;height:20px;fill:currentColor}
+}
