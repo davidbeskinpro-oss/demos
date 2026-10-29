@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#101311">
+<title>מאיר חשמל · חשמלאי מוסמך וראשי · הנרייטה סולד 16, קריית אתא</title>
+<meta name="description" content="מאיר חשמל: חשמלאי מוסמך וראשי בקריות ובחיפה. לוחות חשמל, מפסקי פחת, חלוקת עומסים, תאורה, עמדות טעינה לרכב ודודי חשמל.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;600;800&family=Noto+Serif+Hebrew:wght@500&family=Schibsted+Grotesk:wght@400;600;800&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<script>
+/* language + motion decided before paint, so nothing flashes */
+(function () {
+  var r = document.documentElement, q = new URLSearchParams(location.search), l = q.get('lang');
+  try { l = l || localStorage.getItem('meir-lang'); } catch (e) {}
+  if (l === 'en') { r.lang = 'en'; r.dir = 'ltr'; }
+  var m = null; try { m = localStorage.getItem('meir-motion'); } catch (e) {}
+  var c = navigator.connection || {}, slow = c.saveData || /(^|-)(2g|3g)$/.test(c.effectiveType || '') ||
+    (navigator.deviceMemory && navigator.deviceMemory <= 2) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2) ||
+    matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (m === 'off' || (m !== 'on' && slow)) r.classList.add('still');
+  r.classList.add('js');
+})();
+</script>
+</head>
+<body>
+
+<div class="concept" data-concept="קונספט לדוגמה שנבנה עבור מאיר חשמל · זה אינו האתר הרשמי של העסק">
+  <p><span lang="he">קונספט לדוגמה שנבנה עבור מאיר חשמל · זה אינו האתר הרשמי של העסק</span><span lang="en">A sample concept built for Meir Electric · This is not the business’s official website</span></p>
+</div>
+
+<!-- HERO: the board. Name band, link tiles, a rail of his panel photo + his list, his lit room in the middle
+     with callouts that type onto the lights, and a dimmer run of five tiles that ends in the action -->
+<header class="board hero" id="top">
+  <div class="tile band">
+    <h1 class="name" data-fit><span lang="he" data-letters>מאיר חשמל</span><span lang="en" data-letters>Meir Electric</span></h1>
+  </div>
+
+  <nav class="links" aria-label="ניווט">
+    <a class="tile link" href="#work"><span lang="he">הלוח</span><span lang="en">The board</span></a>
+    <a class="tile link" href="#load"><span lang="he">מחשבון עומס</span><span lang="en">Load check</span></a>
+    <a class="tile link" href="#services"><span lang="he">מה מאיר עושה</span><span lang="en">What Meir does</span></a>
+    <a class="tile link" href="#reviews"><span lang="he">ביקורות</span><span lang="en">Reviews</span></a>
+    <div class="tile ctrl">
+      <button type="button" class="lang-btn" data-set-lang aria-label="Switch to English"><span lang="he">English</span><span lang="en">עברית</span></button>
+      <button type="button" class="rocker" role="switch" aria-checked="true" data-motion>
+        <span class="rk" aria-hidden="true"><i></i></span><span lang="he">תנועה</span><span lang="en">Motion</span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="rail rail-a">
+    <figure class="tile photo hold">
+      <img src="img/panel.jpg" width="1100" height="1466" data-alt-he="מאיר מחזיק מפסק ABB מול לוח חשמל פתוח" data-alt-en="Meir holding an ABB breaker in front of an open panel" alt="מאיר מחזיק מפסק ABB מול לוח חשמל פתוח">
+      <figcaption><span lang="he">מהתמונות של מאיר</span><span lang="en">From Meir’s photos</span></figcaption>
+    </figure>
+    <div class="tile list">
+      <ul>
+        <li><span lang="he">לוחות ומפסקי פחת</span><span lang="en">Panels and RCDs</span></li>
+        <li><span lang="he">חלוקת עומסים</span><span lang="en">Load distribution</span></li>
+        <li><span lang="he">תאורה בבית ובגינה</span><span lang="en">Home and garden lighting</span></li>
+        <li><span lang="he">עמדות טעינה לרכב</span><span lang="en">EV chargers</span></li>
+        <li><span lang="he">דודי חשמל ודודי שמש</span><span lang="en">Electric and solar heaters</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tile stage" data-stage>
+    <div class="drift">
+      <img class="room" src="img/living.jpg" width="1200" height="1600" data-alt-he="סלון ומטבח עם גופי תאורה עגולים ופס תאורה, מתמונות העבודה של מאיר" data-alt-en="Living room and kitchen with round ceiling lights and a linear light, from Meir’s job photos" alt="סלון ומטבח עם גופי תאורה עגולים ופס תאורה, מתמונות העבודה של מאיר" fetchpriority="high">
+      <div class="glows" aria-hidden="true"></div>
+      <div class="callouts" aria-hidden="true"></div>
+    </div>
+    <p class="statement">
+      <span lang="he">חשמלאי מוסמך וראשי לבית ולגינה, בקריות ובחיפה.</span>
+      <span lang="en">Licensed master electrician for homes and gardens, in the Krayot and Haifa.</span>
+    </p>
+  </div>
+
+  <div class="rail rail-b">
+    <div class="tile run r1"><b class="odo" data-odo="5.0">5.0</b><span lang="he">דירוג בגוגל</span><span lang="en">Google rating</span></div>
+    <div class="tile run r2"><b>27</b><span lang="he">ביקורות</span><span lang="en">reviews</span></div>
+    <div class="tile run r3"><span class="status" data-status></span></div>
+    <div class="tile run r4"><span lang="he">הנרייטה סולד 16, קריית אתא</span><span lang="en">16 Henrietta Szold St, Kiryat Ata</span></div>
+    <div class="tile run r5 act">
+      <a class="btn-wa" href="https://wa.me/972584203328" target="_blank" rel="noopener"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg><span lang="he">וואטסאפ למאיר</span><span lang="en">WhatsApp Meir</span></a>
+      <a class="btn-call" href="tel:+972584203328"><span lang="he">חייגו למאיר</span><span lang="en">Call Meir</span> <bdi>058-420-3328</bdi></a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- THE BOARD: his panel photo cut into tiles; each piece flips up into place like a breaker lever, right to left,
+     the way breakers are numbered. Scroll-linked both ways. Five colour tiles carry the words -->
+<section class="work" id="work" aria-labelledby="work-h">
+  <div class="mosaic" data-mosaic>
+    <div class="ct ct-h" data-ct="h"><h2 id="work-h"><span lang="he">מפסק אחר מפסק</span><span lang="en">Breaker by breaker</span></h2></div>
+    <div class="ct ct-f1" data-ct="f1"><p><span lang="he">מפסקי פחת</span><span lang="en">Residual-current breakers</span></p></div>
+    <div class="ct ct-f2" data-ct="f2"><p><span lang="he">חלוקת עומסים לקווים</span><span lang="en">Loads split across circuits</span></p></div>
+    <div class="ct ct-f3" data-ct="f3"><p><span lang="he">נקודות בבית ובגינה</span><span lang="en">Points in house and garden</span></p></div>
+    <a class="ct ct-a" data-ct="a" href="https://wa.me/972584203328?text=%D7%94%D7%99%D7%99%20%D7%9E%D7%90%D7%99%D7%A8%2C%20%D7%A9%D7%95%D7%9C%D7%97%20%D7%AA%D7%9E%D7%95%D7%A0%D7%94%20%D7%A9%D7%9C%20%D7%94%D7%9C%D7%95%D7%97%20%D7%A9%D7%9C%D7%99" target="_blank" rel="noopener" data-wa-photo><span lang="he">שלחו למאיר תמונה של הלוח</span><span lang="en">Send Meir a photo of your board</span></a>
+  </div>
+</section>
+
+<!-- LIVE THING: what is on one circuit right now. Real arithmetic (watts / 230 V) against a C16 breaker,
+     then the loads are split across three circuits, the way Meir's reviews describe his work -->
+<section class="load" id="load" aria-labelledby="load-h">
+  <div class="load-head">
+    <h2 id="load-h"><span lang="he">כמה עובר בקו אחד?</span><span lang="en">How much is on one circuit?</span></h2>
+    <p><span lang="he">סמנו מה עובד יחד. מעל 16 אמפר, מפסק C16 עלול לקפוץ.</span><span lang="en">Tick what runs together. Above 16 A, a C16 breaker may trip.</span></p>
+  </div>
+  <div class="load-grid">
+    <div class="meter tile">
+      <svg class="gauge" viewBox="0 0 320 190" aria-hidden="true">
+        <defs>
+          <linearGradient id="bezel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b6157"/><stop offset=".5" stop-color="#2a2e28"/><stop offset="1" stop-color="#454a41"/></linearGradient>
+          <radialGradient id="face" cx=".5" cy=".95" r=".9"><stop offset="0" stop-color="#26302a"/><stop offset="1" stop-color="#141814"/></radialGradient>
+        </defs>
+        <path d="M14 172a146 146 0 0 1 292 0Z" fill="url(#bezel)"/>
+        <path d="M24 170a136 136 0 0 1 272 0Z" fill="url(#face)"/>
+        <path class="zone" d="M160 46a124 124 0 0 1 124 124" fill="none" stroke="#d0644a" stroke-width="9" opacity=".75"/>
+        <g class="ticks" stroke="#cfd6c8" stroke-linecap="round"></g>
+        <g class="nums" fill="#cfd6c8" font-size="13" font-family="Schibsted Grotesk, sans-serif" text-anchor="middle"></g>
+        <text x="160" y="128" text-anchor="middle" fill="#8f9a8a" font-size="12" font-family="Schibsted Grotesk, sans-serif">A · C16</text>
+        <g class="needle" style="transform-origin:160px 170px">
+          <path d="M157.5 172 L160 56 L162.5 172 Z" fill="#f2e6c9"/>
+        </g>
+        <circle cx="160" cy="170" r="10" fill="#3a3f37" stroke="#7a8274" stroke-width="2"/>
+      </svg>
+      <p class="readout"><b data-amps>0.0</b> <span>A</span></p>
+      <p class="verdict" data-verdict aria-live="polite"></p>
+      <div class="lines" data-lines>
+        <div class="ln"><span class="lbl" data-lbl="1"></span><i><b></b></i><span class="amp"></span></div>
+        <div class="ln"><span class="lbl" data-lbl="2"></span><i><b></b></i><span class="amp"></span></div>
+        <div class="ln"><span class="lbl" data-lbl="3"></span><i><b></b></i><span class="amp"></span></div>
+      </div>
+      <button type="button" class="split" data-split aria-pressed="false"><span lang="he">חלוקת עומסים לשלושה קווים</span><span lang="en">Split across three circuits</span></button>
+    </div>
+    <div class="apps" data-apps role="group" aria-label="מכשירים">
+      <button type="button" class="app" data-w="2000" aria-pressed="true"><b lang="he">קומקום</b><b lang="en">Kettle</b><small>2,000W</small></button>
+      <button type="button" class="app" data-w="2400" aria-pressed="true"><b lang="he">תנור אפייה</b><b lang="en">Oven</b><small>2,400W</small></button>
+      <button type="button" class="app" data-w="2000" aria-pressed="true"><b lang="he">מכונת כביסה</b><b lang="en">Washing machine</b><small>2,000W</small></button>
+      <button type="button" class="app" data-w="2500" aria-pressed="false"><b lang="he">מייבש כביסה</b><b lang="en">Tumble dryer</b><small>2,500W</small></button>
+      <button type="button" class="app" data-w="1000" aria-pressed="false"><b lang="he">מזגן בחדר</b><b lang="en">Room AC</b><small>1,000W</small></button>
+      <button type="button" class="app" data-w="1100" aria-pressed="false"><b lang="he">מיקרוגל</b><b lang="en">Microwave</b><small>1,100W</small></button>
+      <button type="button" class="app" data-w="2000" aria-pressed="false"><b lang="he">תנור חימום</b><b lang="en">Heater</b><small>2,000W</small></button>
+      <button type="button" class="app" data-w="3700" aria-pressed="false"><b lang="he">טעינת רכב</b><b lang="en">EV charging</b><small>3,700W</small></button>
+      <figure class="tile app-photo"><img src="img/panel-wide.jpg" width="1500" height="1000" loading="lazy" data-alt-he="מפסקי C16 ו־C10 בלוח, ומפסק C25 ביד" data-alt-en="C16 and C10 breakers in a board, and a C25 breaker in hand" alt="מפסקי C16 ו־C10 בלוח, ומפסק C25 ביד"><figcaption><span lang="he">C16, C10, C25: כל קו והמפסק שלו</span><span lang="en">C16, C10, C25: each line, its own breaker</span></figcaption></figure>
+      <p class="note"><span lang="he">הספקים טיפוסיים, להמחשה. ‏230 וולט.</span><span lang="en">Typical ratings, for illustration. 230 V.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES: a toned statement cell with a zigzag heading, butted against dark rows; each row has its own small living picture -->
+<section class="services" id="services" aria-labelledby="svc-h">
+  <div class="cell">
+    <h2 id="svc-h" class="zig">
+      <span lang="he"><span class="z">מהלוח ועד</span><span class="z r">הנקודה האחרונה</span></span>
+      <span lang="en"><span class="z">From the board</span><span class="z r">to the last <em>point</em></span></span>
+    </h2>
+    <div class="cell-foot">
+      <p><span lang="he">דירוג 5.0 מ־27 ביקורות בגוגל. בקריית אתא, בקריות ובחיפה.</span><span lang="en">Rated 5.0 from 27 Google reviews. Kiryat Ata, the Krayot and Haifa.</span></p>
+      <a class="btn-wa sm" href="#contact"><span lang="he">לכתוב למאיר</span><span lang="en">Write to Meir</span></a>
+    </div>
+  </div>
+  <div class="rows">
+    <article class="row" data-reveal>
+      <div class="mini mini-brk" aria-hidden="true"><span class="lever"></span><span class="lever"></span><span class="lever"></span></div>
+      <h3><span lang="he">לוחות ומפסקי פחת</span><span lang="en">Panels and RCDs</span></h3>
+      <p><span lang="he">לוחות חשמל, מפסקים ומפסקי פחת.</span><span lang="en">Boards, breakers and RCDs.</span></p>
+      <p class="terms"><span lang="he">מפסקי פחת, החלפת מפסקים, בדיקת לוח</span><span lang="en">RCDs, breaker swaps, board checks</span></p>
+    </article>
+    <article class="row" data-reveal>
+      <div class="mini mini-bal" aria-hidden="true"><i></i><i></i><i></i></div>
+      <h3><span lang="he">חלוקת עומסים</span><span lang="en">Load distribution</span></h3>
+      <p><span lang="he">כל מכשיר כבד על הקו שלו.</span><span lang="en">Each heavy appliance on its own line.</span></p>
+      <p class="terms"><span lang="he">בית, גינה, קווים נפרדים</span><span lang="en">House, garden, separate circuits</span></p>
+    </article>
+    <article class="row" data-reveal>
+      <div class="mini mini-pic mini-lamp" aria-hidden="true"><img src="img/kitchen.jpg" width="1200" height="1600" alt="" loading="lazy"><span class="halo"></span></div>
+      <h3><span lang="he">תאורה</span><span lang="en">Lighting</span></h3>
+      <p><span lang="he">גופים עגולים, פסי תאורה, נקודות בגינה.</span><span lang="en">Round fittings, linear lights, garden points.</span></p>
+      <p class="terms"><span lang="he">סלון, מטבח, חוץ</span><span lang="en">Living room, kitchen, outdoors</span></p>
+    </article>
+    <article class="row" data-reveal>
+      <div class="mini mini-pic mini-ev" aria-hidden="true"><img src="img/ev.jpg" width="1200" height="800" alt="" loading="lazy"><span class="charge"><i></i></span></div>
+      <h3><span lang="he">עמדת טעינה לרכב חשמלי</span><span lang="en">EV charging point</span></h3>
+      <p><span lang="he">התקנה בבית, מחוברת ללוח.</span><span lang="en">Installed at home, wired to the board.</span></p>
+      <p class="terms"><span lang="he">חנייה, קו ייעודי, מפסק</span><span lang="en">Driveway, dedicated line, breaker</span></p>
+    </article>
+    <article class="row" data-reveal>
+      <div class="mini mini-pic mini-heat" aria-hidden="true"><img src="img/heater.jpg" width="1000" height="756" alt="" loading="lazy"><span class="element"></span></div>
+      <h3><span lang="he">דודי חשמל ודודי שמש</span><span lang="en">Water heaters</span></h3>
+      <p><span lang="he">אבחון תקלה והחלפת פלאנג׳.</span><span lang="en">Fault diagnosis and flange replacement.</span></p>
+      <p class="terms"><span lang="he">גוף חימום, תרמוסטט, חיבור חשמלי</span><span lang="en">Element, thermostat, wiring</span></p>
+    </article>
+    <article class="row" data-reveal>
+      <div class="mini mini-trace" aria-hidden="true">
+        <svg viewBox="0 0 120 60"><path d="M8 48H40V14H78V44H112" fill="none" stroke="#5f6b58" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle class="probe" r="5" fill="#b8d483"/></svg>
+      </div>
+      <h3><span lang="he">איתור תקלות</span><span lang="en">Fault finding</span></h3>
+      <p><span lang="he">בודקים קו אחרי קו עד המקור.</span><span lang="en">Line after line, back to the source.</span></p>
+      <p class="terms"><span lang="he">מפסק שקופץ, קצר, שקע מת</span><span lang="en">Tripping breaker, short, dead socket</span></p>
+    </article>
+  </div>
+</section>
+
+<!-- SEAM: his kitchen photo fills the screen, then closes into the round shape of the light he hung -->
+<section class="shrink" id="light" aria-labelledby="light-h">
+  <div class="shrink-pin">
+    <div class="disc" data-disc>
+      <img src="img/kitchen.jpg" width="1200" height="1600" loading="lazy" data-alt-he="מטבח עם גוף תאורה עגול גדול, מתמונות העבודה של מאיר" data-alt-en="Kitchen with a large round ceiling light, from Meir’s job photos" alt="מטבח עם גוף תאורה עגול גדול, מתמונות העבודה של מאיר">
+    </div>
+    <div class="shrink-text">
+      <h2 id="light-h"><span lang="he">אור עגול, תקרה <em>נקייה</em></span><span lang="en">A round light, a <em>clean</em> ceiling</span></h2>
+      <p><span lang="he">מטבח מהתמונות של מאיר בגוגל.</span><span lang="en">A kitchen from Meir’s Google photos.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS: the 5.0 rolls up, five real Google reviews drift past in a row you can also swipe -->
+<section class="reviews" id="reviews" aria-labelledby="rev-h">
+  <div class="rev-head">
+    <p class="rev-score"><b class="odo big" data-odo="5.0">5.0</b><span class="stars" aria-hidden="true"></span></p>
+    <h2 id="rev-h"><span lang="he">27 ביקורות בגוגל</span><span lang="en">27 Google reviews</span></h2>
+  </div>
+  <div class="rev-row" data-drift tabindex="0" aria-label="ביקורות">
+    <figure class="rev"><blockquote><p lang="he">ביצע עבודות חשמל מורכבות כולל מפסקי פחת וחלוקת עומסים בעשרות רבות של נקודות בבית ובגינה. אחראי, מקצועי, מסור ללא דופי.</p><p lang="en">“He carried out complex electrical work, including RCDs and load distribution across dozens of points in the house and garden. Responsible, professional, devoted.” <small>Translated from Hebrew</small></p></blockquote><figcaption>אשר וולך</figcaption></figure>
+    <figure class="rev"><blockquote><p lang="he">מאיר הוא בעל מקצוע מעולה ובקיא מאוד בתחום החשמל. מאיר מאוד שירותי, אדיב, נותן תחושת ביטחון בעבודתו.</p><p lang="en">“Meir is an excellent professional who really knows electrics. Very service-minded and kind, and his work gives you a sense of confidence.” <small>Translated from Hebrew</small></p></blockquote><figcaption>זהר דונסקי</figcaption></figure>
+    <figure class="rev"><blockquote><p lang="he">מאיר התקין לי עמדת טעינה לרכב חשמלי. הוא בעל מקצוע אמין ונעים הליכות. אני ממליץ עליו מאוד.</p><p lang="en">“Meir installed an EV charging point for me. A reliable, pleasant professional. I recommend him highly.” <small>Translated from Hebrew</small></p></blockquote><figcaption>Shimon Nirkin</figcaption></figure>
+    <figure class="rev"><blockquote><p lang="he">חשמלאי וטכנאי דודי שמש מקצועי ואמין. אבחן את הבעיה בצורה יסודית ומקצועית, והחליף פלאנג׳ בצורה נקייה ומדויקת.</p><p lang="en">“A professional, reliable electrician and solar-heater technician. He diagnosed the problem thoroughly and replaced the flange cleanly and precisely.” <small>Translated from Hebrew</small></p></blockquote><figcaption>noam sussman</figcaption></figure>
+    <figure class="rev"><blockquote><p lang="he">חשמלאי מקצועי ומקצוען. צעד אחר צעד עד לגילוי התקלה ותיקונה. חייכן, נעים הליכות, וכך גם עבודתו.</p><p lang="en">“A professional through and through. Step by step until the fault was found and fixed. Smiling and pleasant, and so is his work.” <small>Translated from Hebrew</small></p></blockquote><figcaption>יורם הורוביץ</figcaption></figure>
+  </div>
+</section>
+
+<!-- CONTACT: a strip of his photos, then three cells: hours with a live status, the map, and a rotary selector that writes the WhatsApp message -->
+<section class="contact" id="contact" aria-labelledby="ct-h">
+  <div class="strip" aria-hidden="true">
+    <img src="img/panel-wide.jpg" width="1500" height="1000" alt="" loading="lazy">
+    <img src="img/living.jpg" width="1200" height="1600" alt="" loading="lazy">
+    <img src="img/heater.jpg" width="1000" height="756" alt="" loading="lazy">
+    <img src="img/kitchen.jpg" width="1200" height="1600" alt="" loading="lazy">
+  </div>
+  <h2 id="ct-h" class="ct-title"><span lang="he">מדברים עם מאיר</span><span lang="en">Talk to Meir</span></h2>
+  <div class="cells">
+    <div class="tile cell-hours">
+      <h3><span lang="he">שעות</span><span lang="en">Hours</span></h3>
+      <p class="status big" data-status></p>
+      <table data-hours></table>
+    </div>
+    <div class="tile cell-map">
+      <h3><span lang="he">הנרייטה סולד 16, קריית אתא</span><span lang="en">16 Henrietta Szold St, Kiryat Ata</span></h3>
+      <iframe title="Google Maps: הנרייטה סולד 16, קריית אתא" src="https://www.google.com/maps?q=%D7%94%D7%A0%D7%A8%D7%99%D7%99%D7%98%D7%94%20%D7%A1%D7%95%D7%9C%D7%93%2016%2C%20%D7%A7%D7%A8%D7%99%D7%AA%20%D7%90%D7%AA%D7%90&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <a class="maplink" href="https://maps.google.com/?cid=1209959883102502678" target="_blank" rel="noopener"><span lang="he">פתיחה בגוגל מפות</span><span lang="en">Open in Google Maps</span></a>
+    </div>
+    <form class="tile cell-compose" data-compose>
+      <h3><span lang="he">על מה מדובר?</span><span lang="en">What is it about?</span></h3>
+      <div class="rotary">
+        <button type="button" class="knob" data-knob aria-label="הנושא הבא"><span class="knob-grip"><i></i></span></button>
+        <div class="positions" role="radiogroup" aria-label="נושא" data-positions>
+          <button type="button" role="radio" aria-checked="true" data-topic="0"><span lang="he">לוח או תקלה</span><span lang="en">Board or fault</span></button>
+          <button type="button" role="radio" aria-checked="false" data-topic="1"><span lang="he">תאורה</span><span lang="en">Lighting</span></button>
+          <button type="button" role="radio" aria-checked="false" data-topic="2"><span lang="he">עמדת טעינה</span><span lang="en">EV charger</span></button>
+          <button type="button" role="radio" aria-checked="false" data-topic="3"><span lang="he">דוד חשמל</span><span lang="en">Water heater</span></button>
+          <button type="button" role="radio" aria-checked="false" data-topic="4"><span lang="he">משהו אחר</span><span lang="en">Something else</span></button>
+        </div>
+      </div>
+      <label class="fld"><span lang="he">כמה מילים (לא חובה)</span><span lang="en">A few words (optional)</span>
+        <input type="text" name="d" autocomplete="off" maxlength="160" data-details>
+      </label>
+      <p class="preview" data-preview aria-live="polite"></p>
+      <a class="btn-wa" href="https://wa.me/972584203328" target="_blank" rel="noopener" data-send><span lang="he">שליחה בוואטסאפ</span><span lang="en">Send on WhatsApp</span></a>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="foot-board">
+    <div class="tile f-name">
+      <p class="f-mark"><span lang="he">מאיר חשמל</span><span lang="en">Meir Electric</span></p>
+      <p><span lang="he">Meir electric · חשמלאי מוסמך וראשי, קריות, חיפה והסביבה</span><span lang="en">Meir electric · licensed master electrician, the Krayot, Haifa and around</span></p>
+    </div>
+    <div class="tile f-reach">
+      <a href="tel:+972584203328"><bdi>058-420-3328</bdi></a>
+      <a href="https://wa.me/972584203328" target="_blank" rel="noopener"><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
+      <p><span lang="he">הנרייטה סולד 16, קריית אתא</span><span lang="en">16 Henrietta Szold St, Kiryat Ata</span></p>
+    </div>
+    <div class="tile f-credit">
+      <p><span lang="he">תמונות העבודה: מאיר חשמל, Google Maps. ביקורות: Google.</span><span lang="en">Job photos: Meir Electric, Google Maps. Reviews: Google.</span></p>
+      <p><span lang="he">תמונת עמדת הטעינה להמחשה:</span><span lang="en">EV charger photo, for illustration:</span> <a href="https://commons.wikimedia.org/wiki/File:BMW_i3_home_charging_L2_CRI_07_2021_9745.jpg" target="_blank" rel="noopener">“BMW i3 home charging L2 CRI 07 2021 9745”</a>, Mariordo (Mario Roberto Durán Ortiz), <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a>, Wikimedia Commons.</p>
+    </div>
+    <div class="tile f-ctrl">
+      <button type="button" class="lang-btn" data-set-lang aria-label="Switch to English"><span lang="he">English</span><span lang="en">עברית</span></button>
+      <button type="button" class="rocker" role="switch" aria-checked="true" data-motion><span class="rk" aria-hidden="true"><i></i></span><span lang="he">תנועה</span><span lang="en">Motion</span></button>
+      <p><span lang="he">קונספט לדוגמה, אינו האתר הרשמי.</span><span lang="en">Sample concept, not the official site.</span></p>
+    </div>
+  </div>
+  <div class="dim-run" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+</footer>
+
+<!-- sticky contact: two square tiles at the corner, the board's own shape -->
+<div class="dock" data-dock>
+  <a class="d-wa" href="https://wa.me/972584203328" target="_blank" rel="noopener" aria-label="וואטסאפ למאיר"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg><span lang="he">מאיר</span><span lang="en">Meir</span></a>
+  <a class="d-call" href="tel:+972584203328" aria-label="חייגו למאיר"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1Z"/></svg></a>
+</div>
+
+<script src="js/site.js" defer></script>
+</body>
+</html>
