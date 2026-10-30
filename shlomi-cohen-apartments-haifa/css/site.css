@@ -1,0 +1,399 @@
+/* Shlomi Cohen — from the ZOHAR logo: its navy rising columns become Haifa's apartment blocks, its orange sweep
+   becomes the warm light of a window and the orange of the for-sale sign on a Carmel balcony. Limestone ink. */
+:root{
+  --bg:#0e1b33;
+  --bg-2:#0a1428;
+  --card:#15264a;
+  --card-2:#1d3260;
+  --navy:#233e7a;            /* the logo's column navy */
+  --line:rgba(241,235,224,.1);
+  --ink:#f3ede2;             /* Haifa limestone */
+  --soft:#cdc5b6;
+  --amber:#e8962e;           /* the logo's orange */
+  --amber-2:#f2b25c;
+  --paper:#ece2d0;
+  --paper-ink:#1b2a4a;
+  --live:#7fe0a8;
+  --text:"Heebo","Arial Hebrew",Arial,sans-serif;
+  --serif:"David Libre","Frank Ruhl Libre",Georgia,serif;
+  --s-small:15px;
+  --s-body:clamp(1.0625rem,1rem + .25vw,1.1875rem);
+  --s-lead:clamp(1.2rem,1.08rem + .6vw,1.5rem);
+  --s-head:clamp(2.4rem,1.5rem + 3.2vw,4.6rem);
+  --m:clamp(16px,3.4vw,52px);
+  --r:20px;
+  --ease:cubic-bezier(.23,1,.32,1);
+  --ease-io:cubic-bezier(.77,0,.175,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--s-body)/1.55 var(--text);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button,select{font:inherit;color:inherit}
+button{background:none;border:0;padding:0;cursor:pointer;touch-action:manipulation}
+h1,h2,h3,p,figure,ol,ul,blockquote,dl,dd{margin:0}
+ol,ul{padding:0;list-style:none}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.num{font-variant-numeric:lining-nums tabular-nums}
+html[lang="he"] [lang="en"]:not(html), html[lang="en"] [lang="he"]:not(html){display:none!important}
+::selection{background:var(--amber);color:var(--bg)}
+:focus-visible{outline:3px solid var(--amber-2);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;inset-inline-start:var(--m);top:-60px;z-index:60;background:var(--amber);color:var(--bg);padding:10px 16px;border-radius:999px;text-decoration:none}
+.skip:focus{top:44px}
+h2{font:800 var(--s-head)/1.02 var(--text);letter-spacing:-.03em}
+html[lang="en"] h2{letter-spacing:-.035em}
+h3{font:800 22px/1.15 var(--text);letter-spacing:-.01em}
+em{font:700 1.06em/1 var(--serif);font-style:normal;letter-spacing:-.01em;color:var(--amber-2)}  /* taste-skill-ignore: the SETI-style serif accent the owner asked for, in the logo's orange */
+.head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 40px;margin-bottom:34px}
+.head p{max-width:42ch;font-size:var(--s-lead);line-height:1.4}
+section{position:relative;padding:clamp(90px,10vw,170px) var(--m) 0}
+.stars{display:inline-flex;gap:2px}
+.stars svg{width:15px;height:15px;fill:var(--amber-2)}
+.page{position:relative;z-index:2;background:var(--bg)}
+.plate{display:inline-block;background:#fff;border-radius:10px;overflow:hidden}
+.plate img{width:100%;height:auto}
+
+.concept{position:relative;z-index:41;display:flex;align-items:center;justify-content:center;min-height:34px;padding:6px var(--m);background:var(--bg-2);color:var(--soft);font-size:var(--s-small);line-height:1.35;text-align:center}
+
+/* ---------------------------------------------------------------- nav: a bar that gathers into a floating pill */
+.nav{position:sticky;top:0;z-index:40;padding:0 var(--m);transition:padding .45s var(--ease)}
+.nav-in{display:flex;align-items:center;gap:20px;max-width:2000px;margin:0 auto;height:72px;padding:0 4px;border-radius:999px;border:1px solid transparent;transition:max-width .6s var(--ease),height .45s var(--ease),padding .45s var(--ease),background .4s ease,border-color .4s ease} /* taste-skill-ignore: the owner's references gather the bar into a pill */
+.nav.pill{padding-top:12px}
+.nav.pill .nav-in{max-width:1120px;height:62px;padding:0 10px;background:rgba(21,38,74,.86);border-color:var(--line);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)} /* taste-skill-ignore: floating frosted pill from the owner's references */
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand .plate{width:62px;border-radius:9px}
+.bname{font:800 21px/1 var(--text);white-space:nowrap}
+.links{display:flex;gap:2px;margin-inline-start:auto;font-size:16px}
+.links a{white-space:nowrap;padding:8px 12px;border-radius:999px;text-decoration:none;color:var(--soft);transition:color .2s ease,background .2s ease}
+.tools{display:flex;align-items:center;gap:6px}
+.tgl{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;background:var(--card);color:var(--ink);font-size:15px;transition:transform .14s var(--ease),background .2s ease}
+.tgl .knob{position:relative;width:30px;height:18px;border-radius:999px;background:#3a4767;transition:background .2s ease}
+.tgl .knob::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:12px;height:12px;border-radius:50%;background:var(--ink);transition:transform .22s var(--ease)}
+.tgl[aria-checked="true"] .knob{background:var(--amber)}
+.tgl[aria-checked="true"] .knob::after{transform:translateX(12px)}
+html[dir="rtl"] .tgl[aria-checked="true"] .knob::after{transform:translateX(-12px)}
+.tgl.lang{min-width:46px;justify-content:center;font-weight:800}
+.pill-btn,.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:0 18px;border-radius:999px;background:var(--amber);color:#14213d;text-decoration:none;font-weight:800;font-size:16px;overflow:hidden;transition:transform .14s var(--ease),background .2s ease}
+.btn{min-height:54px;padding:0 26px;font-size:17px}
+.btn.ghost{background:var(--card-2);color:var(--ink)}
+.pill-btn svg,.btn svg{width:20px;height:20px;fill:currentColor;flex:none}
+.btn:not(.ghost)::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,240,214,.45) 50%,transparent 70%);transform:translateX(-120%)} /* taste-skill-ignore: a warm light sweep across the button */
+html:not(.still) .btn:not(.ghost)::after{animation:sweep 4.2s var(--ease-io) 1.8s 3}
+@keyframes sweep{0%{transform:translateX(-120%)}40%,100%{transform:translateX(120%)}}
+.pill-btn:active,.btn:active,.tgl:active,.chip:active,.seg button:active,.rb:active,.cell:active,.hang a:active,.p-steps button:active,.arr:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .links a:hover{color:var(--ink);background:var(--card)}
+  .btn:hover,.pill-btn:hover{background:var(--amber-2)} .btn.ghost:hover{background:#27407a}
+  .tgl:hover{background:var(--card-2)}
+}
+@media (max-width:1100px){ .links{display:none} .tools{margin-inline-start:auto} }
+@media (max-width:1320px){ html[lang="en"] .links{display:none} html[lang="en"] .tools{margin-inline-start:auto} }
+@media (max-width:600px){
+  .nav-in{gap:8px;height:62px} .brand .plate{width:50px} .bname{font-size:18px}
+  .tgl{padding:0 11px} .tgl > span[lang]{display:none!important}
+  html[lang="he"] .tgl.lang [lang="he"], html[lang="en"] .tgl.lang [lang="en"]{display:inline!important}
+  .pill-btn span{display:none} .pill-btn{width:44px;padding:0}
+}
+
+/* ---------------------------------------------------------------- hero: stepped title between two photographs */
+.hero{position:relative;min-height:calc(100svh - 34px - 72px);padding:clamp(18px,3vw,40px) var(--m) 0;overflow:hidden;isolation:isolate;
+  display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(10px,1.6vw,24px);grid-template-rows:auto auto 1fr;align-content:start}
+.skyline{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.logo-src{display:none}
+.h-land{grid-column:1/6;grid-row:1;position:relative;z-index:2;aspect-ratio:16/10;overflow:hidden;border-radius:4px}
+.h-land img,.h-port img{width:100%;height:100%;object-fit:cover}
+.h-land img{transform:scale(1.08)}
+html:not(.still) .h-land img{animation:drift 14s ease-in-out 2 alternate both}
+@keyframes drift{from{transform:scale(1.08) translateX(-1.5%)}to{transform:scale(1.14) translateX(1.5%)}}
+.h-land figcaption,.h-port figcaption{position:absolute;inset-inline-start:12px;bottom:10px;padding:3px 10px;border-radius:8px;background:rgba(14,27,51,.78);font-size:14px;color:#fff}
+.h-title{grid-column:1/10;grid-row:2;position:relative;z-index:3;margin:clamp(14px,2.4vw,34px) 0 clamp(18px,2.4vw,30px);font:800 clamp(52px,7.4vw,124px)/.98 var(--text);letter-spacing:-.045em}
+html[lang="en"] .h-title{font-size:clamp(44px,5.6vw,100px);letter-spacing:-.04em}
+.h-title .ln{display:block;white-space:nowrap}
+.h-title .l1{padding-inline-start:4%}
+.h-title .l2{padding-inline-start:20%}
+.h-title .acc{font-family:var(--serif);font-weight:700;letter-spacing:-.02em;color:var(--amber-2);font-size:1.04em}
+.h-title .w{display:inline-block;white-space:nowrap}
+.h-title .ch{display:inline-block}
+html.js:not(.still) .h-title .ch{opacity:0;transform:translateY(.32em);filter:blur(10px)}
+html.js:not(.still) .ready .h-title .ch{opacity:1;transform:none;filter:none;transition:opacity .6s var(--ease) calc(var(--i)*18ms),transform .8s var(--ease) calc(var(--i)*18ms),filter .6s var(--ease) calc(var(--i)*18ms)}
+.h-port{grid-column:9/13;grid-row:1/4;position:relative;z-index:2;align-self:start;aspect-ratio:4/5;overflow:hidden;border-radius:4px;margin-top:clamp(24px,4vw,64px)}
+.h-port figcaption{display:flex;flex-direction:column;gap:2px;bottom:14px;padding:10px 14px;border-radius:12px;background:rgba(14,27,51,.72);text-shadow:none}
+.h-port figcaption b{font-size:18px}
+.h-side{grid-column:1/9;grid-row:3;padding-inline-start:4%;position:relative;z-index:3;padding-bottom:56px}
+.h-lead{max-width:38ch;font-size:var(--s-lead);line-height:1.45;color:var(--ink)}
+.h-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.h-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 16px;border-radius:999px;background:rgba(21,38,74,.85);border:1px solid var(--line);font-size:15px;text-decoration:none} /* taste-skill-ignore: status chip */
+.chip .dot,.c-st .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:#7b8399;margin-inline-end:7px;vertical-align:middle}
+.chip.open .dot,.c-st.open .dot{background:var(--live)}
+html:not(.still) .chip.open .dot{animation:ping 1.8s ease-out 4}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(127,224,168,.55)}100%{box-shadow:0 0 0 10px rgba(127,224,168,0)}} /* taste-skill-ignore: live status dot */
+html.js:not(.still) [data-rise]{opacity:0;transform:translateY(18px)}
+html.js:not(.still) .ready [data-rise]{opacity:1;transform:none;transition:opacity .7s var(--ease) var(--d),transform .7s var(--ease) var(--d)}
+html.js:not(.still) .h-land,html.js:not(.still) .h-port{clip-path:inset(100% 0 0 0)}
+html.js:not(.still) .ready .h-land,html.js:not(.still) .ready .h-port{clip-path:inset(0 0 0 0);transition:clip-path 1.1s var(--ease-io) .15s}
+html.js:not(.still) .ready .h-port{transition-delay:.35s}
+[data-tilt]{transition:transform .5s var(--ease)}
+@media (max-width:900px){
+  .hero{grid-template-rows:auto auto auto auto}
+  .h-land{grid-column:6/13;grid-row:1}
+  .h-title{grid-column:1/13}
+  .h-title .l1{padding-inline-start:0}
+  .h-title .l2{padding-inline-start:18%}
+  .h-port{grid-column:1/9;grid-row:3;margin-top:0}
+  .h-side{grid-column:1/13;grid-row:4;padding:22px 0 64px}
+}
+@media (max-width:600px){
+  .h-land{grid-column:6/13}
+  .h-title{font-size:12.4vw;margin:16px 0 18px}
+  html[lang="en"] .h-title{font-size:10.4vw}
+  .h-title .l2{padding-inline-start:12%}
+  html[lang="en"] .h-title .l2{padding-inline-start:4%}
+  .h-port{grid-column:1/10}
+  .btn{width:100%}
+}
+
+/* ---------------------------------------------------------------- about */
+.a-head{max-width:880px}
+.a-head p{margin-top:20px;max-width:46ch;font-size:var(--s-lead);line-height:1.45}
+.a-mosaic{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px;margin-top:clamp(40px,5vw,72px)}
+.a-wide{grid-column:1/9;grid-row:1/3;min-height:420px;position:relative;overflow:hidden;border-radius:10px}
+.a-wide img{width:100%;height:100%;object-fit:cover;object-position:60% 40%}
+.a-note{position:absolute;top:0;inset-inline-end:0;width:min(320px,60%);padding:18px 20px;background:var(--paper);color:var(--paper-ink);font-size:16px;line-height:1.45;border-end-start-radius:10px}
+.a-facade{grid-column:9/13;display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px;border-radius:10px;background:var(--navy);align-self:start}
+.win{position:relative;aspect-ratio:3/4;overflow:hidden;border-radius:3px;background:var(--bg-2);box-shadow:inset 0 0 0 4px #d8cdb9} /* taste-skill-ignore: a window frame */
+.win img{width:100%;height:100%;object-fit:cover}
+.win.w-logo{background:#fff}
+.win.w-logo img{object-fit:contain;padding:8px}
+/* the roller shutter: slats from its box at the top, rolled by --roll (0 shut, 1 open) */
+.shutter{position:absolute;inset:0;transform:translateY(calc(var(--roll,1) * -100%));background:repeating-linear-gradient(180deg,#c9bea8 0 9px,#a99d86 9px 11px);box-shadow:inset 0 -6px 0 #8e826c} /* taste-skill-ignore: the slats of a Haifa roller shutter */
+.a-facts{grid-column:9/13;display:grid;grid-template-columns:1fr 1fr;gap:18px 16px;margin-top:4px}
+.a-facts dt{font-size:15px;color:var(--soft)}
+.a-facts dd{font:800 clamp(30px,2.6vw,42px)/1.1 var(--text)}
+@media (max-width:900px){
+  .a-wide{grid-column:1/13;grid-row:auto;min-height:0}
+  .a-note{position:static;width:auto;border-radius:0 0 10px 10px}
+  .a-wide img{aspect-ratio:4/3}
+  .a-facade{grid-column:1/13;grid-template-columns:repeat(4,1fr)}
+  .a-facts{grid-column:1/13;grid-template-columns:repeat(4,1fr)}
+}
+@media (max-width:600px){
+  .a-facade{grid-template-columns:1fr 1fr}
+  .a-facts{grid-template-columns:1fr 1fr}
+}
+
+/* ---------------------------------------------------------------- odometers */
+.odo{display:inline-flex;direction:ltr}
+.odo .d{display:inline-block;height:1.1em;overflow:hidden;line-height:1.1}
+.odo .d > span{display:flex;flex-direction:column;transition:transform 1.4s var(--ease)}
+.odo b{display:block;height:1.1em;font-weight:inherit}
+.odo b::before{content:attr(data-n)}
+
+/* ---------------------------------------------------------------- the path: one sticky scene */
+.path{padding:clamp(70px,7vw,120px) 0 0;height:calc(100svh * 5)}
+.p-stage{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--bg-2)}
+.p-shots,.shot{position:absolute;inset:0}
+.shot{opacity:0;will-change:transform,opacity}
+.shot:first-child{opacity:1}
+.shot > img{width:100%;height:100%;object-fit:cover}
+.p-scrim{position:absolute;inset:0 0 auto;height:60%;background:linear-gradient(180deg,rgba(10,20,40,.92),rgba(10,20,40,.72) 55%,rgba(10,20,40,0));pointer-events:none} /* taste-skill-ignore: neutral scrim under the statements */
+.p-copy{position:absolute;inset:0 0 auto;padding:clamp(80px,9vh,110px) var(--m) 0;text-align:center}
+.p-copy h2{font-size:clamp(2.1rem,1.4rem + 2.6vw,3.8rem)}
+.p-steps{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:16px}
+.p-steps button{min-height:40px;padding:4px 14px;border-radius:999px;font-size:clamp(17px,1.2vw,20px);color:var(--soft);transition:color .3s ease,background .3s ease}
+.p-steps button.on{color:var(--bg);background:var(--amber-2);font-weight:800}
+.p-cap{position:absolute;inset-inline-start:var(--m);bottom:22px;max-width:70%;font-size:14px;color:#fff;padding:3px 10px;border-radius:8px;background:rgba(10,20,40,.78)}
+.p-arrows{position:absolute;inset-inline-end:var(--m);bottom:18px;display:none;gap:8px}
+.arr{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--amber);color:#14213d;transition:transform .14s var(--ease)}
+.arr svg{width:22px;height:22px}
+html[dir="rtl"] .arr svg{transform:scaleX(-1)}
+.arr.prev svg{transform:scaleX(-1)}
+html[dir="rtl"] .arr.prev svg{transform:none}
+/* the for-sale sign on the balcony railing */
+.forsale{position:absolute;left:47%;top:44%;width:clamp(120px,15vw,220px);transform-origin:50% 0;opacity:0}
+.forsale .cord,.mini-sign .cord,.big-sign .cord,.hang .cord{position:absolute;top:0;width:2px;height:18px;background:#5d5446}
+.big-sign .cord,.mini-sign .cord{background:#d9d2c2}
+.forsale .cord:first-child,.mini-sign .cord:first-child,.big-sign .cord:first-child,.hang .cord:first-child{left:18%}
+.forsale .cord:nth-child(2),.mini-sign .cord:nth-child(2),.big-sign .cord:nth-child(2),.hang .cord:nth-child(2){right:18%}
+.fs-plate{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:16px;padding:10px 12px;border-radius:6px;background:var(--amber);color:#14213d;text-align:center;box-shadow:0 10px 24px rgba(0,0,0,.35)} /* taste-skill-ignore: the sign really hangs off the railing */
+.forsale .fs-plate b{font:800 clamp(22px,2.6vw,38px)/1 var(--text)}
+.forsale .fs-plate span{font-size:clamp(13px,1vw,15px);font-weight:800}
+.path.still-mode{height:auto}
+html.still .path{height:auto}
+html.still .p-stage{position:relative;height:min(100svh,860px)}
+html.still .p-arrows{display:flex}
+@media (max-width:900px){
+  .shot > img{height:64%}
+  .p-scrim{inset:auto 0 0;height:52%;background:linear-gradient(0deg,var(--bg-2) 70%,rgba(10,20,40,0))} /* taste-skill-ignore: neutral scrim under the statements */
+  .p-copy{inset:auto 0 0;padding:0 var(--m) 84px;text-align:start}
+  .p-steps{align-items:flex-start}
+  .p-steps button{text-align:start;padding:4px 10px;font-size:17px}
+  .p-cap{top:16px;bottom:auto;max-width:90%}
+}
+
+/* ---------------------------------------------------------------- bento */
+.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(230px,auto);gap:14px}
+.tile{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:10px;min-height:230px;padding:22px;border-radius:var(--r);background:var(--card);overflow:hidden;isolation:isolate}
+.tile::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(360px circle at var(--mx,-400px) var(--my,-400px),rgba(242,178,92,.16),transparent 60%);opacity:0;transition:opacity .3s ease} /* taste-skill-ignore: a warm light under the hand (horizonx) */
+.tile:hover::after{opacity:1}
+.tile .tt{position:relative;z-index:3}
+.tile .tt p{margin-top:4px;color:var(--ink)}
+.t-pic{position:absolute;inset:0;z-index:-1}
+.t-pic img{width:100%;height:100%;object-fit:cover;transform:scale(1.04);transition:transform 1.2s var(--ease)}
+.t-pic::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,20,40,.92) 8%,rgba(10,20,40,.2) 70%)} /* taste-skill-ignore: neutral scrim under tile text */
+@media (hover:hover) and (pointer:fine){ .tile:hover .t-pic img{transform:scale(1.1)} }
+.t-sell{grid-column:span 2;grid-row:span 2}
+.t-buy{grid-column:span 2}
+.t-street{grid-column:span 3}
+.mini-sign{position:absolute;top:22%;inset-inline-start:50%;width:min(56%,260px);transform:translateX(50%);transform-origin:50% 0;z-index:1}
+html[dir="ltr"] .mini-sign{transform:translateX(-50%)}
+.mini-sign .fs-plate{padding:18px 14px}
+.mini-sign .fs-plate b{font:800 clamp(30px,3.4vw,52px)/1 var(--text)}
+html:not(.still) .who.on .mini-sign .fs-plate{animation:swing 3.2s ease-in-out 6 alternate;transform-origin:50% -16px}
+@keyframes swing{from{transform:rotate(-2.4deg)}to{transform:rotate(2.4deg)}}
+.t-hours .block{width:120px;height:auto;margin-bottom:auto}
+.block .wall{fill:var(--navy)}
+.block .w{fill:#2f4c86;transition:fill .6s ease}
+.block .w.lit{fill:var(--amber-2)}
+.t-rate .big{font:800 clamp(64px,6vw,96px)/1 var(--text);color:var(--amber-2)}
+.t-logo{background:var(--card-2)}
+.t-logo .big-plate{width:min(100%,260px);margin-bottom:auto;border-radius:12px}
+.c-st{font-size:15px;color:var(--soft)}
+@media (max-width:1000px){ .bento{grid-template-columns:repeat(2,minmax(0,1fr))} .t-sell{grid-row:span 1;min-height:380px} .t-street,.t-logo{grid-column:span 2} }
+@media (max-width:600px){ .bento{grid-template-columns:1fr} .t-sell,.t-buy,.t-street,.t-logo{grid-column:auto} .t-sell{min-height:400px} }
+
+/* ---------------------------------------------------------------- compose: the sign is the form */
+.c-grid{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr) minmax(0,1fr);gap:clamp(18px,2.4vw,36px);align-items:start}
+.steps{display:flex;flex-direction:column;gap:12px;counter-reset:st}
+.steps li{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:16px;background:var(--card);color:var(--soft);transition:background .4s ease,color .4s ease;counter-increment:st}
+.steps .sn{display:grid;place-items:center;flex:none;width:38px;height:38px;border-radius:50%;background:var(--card-2);font-weight:800;transition:background .4s ease,color .4s ease}
+.steps .sn::before{content:counter(st)}
+.steps li.on{background:var(--card-2);color:var(--ink)}
+.steps li.on .sn{background:var(--amber);color:#14213d}
+.board{position:relative;padding:0 0 22px;border-radius:var(--r);background:var(--card);overflow:hidden}
+.rail{height:20px;background:repeating-linear-gradient(90deg,#c9bea8 0 6px,transparent 6px 26px),linear-gradient(#c9bea8,#c9bea8) top/100% 5px no-repeat;opacity:.9} /* taste-skill-ignore: the balcony railing the sign hangs from */
+.big-sign{position:relative;width:min(84%,380px);margin:0 auto;transform-origin:50% 0}
+.big-sign .fs-plate{padding:22px 16px 18px;gap:6px}
+.big-sign b{font:800 clamp(40px,4vw,62px)/1 var(--text);letter-spacing:-.02em}
+.fs-line{font-weight:800;font-size:clamp(18px,1.5vw,22px);min-height:1.3em}
+.fs-tel{font-weight:800;font-size:18px;padding-top:6px;border-top:3px solid rgba(20,33,61,.8);width:80%}
+.controls{display:flex;flex-direction:column;gap:12px;padding:22px 22px 0}
+.seg{display:grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:14px;background:var(--bg-2)}
+.seg button{min-height:48px;border-radius:10px;font-weight:800;color:var(--soft);transition:background .2s ease,color .2s ease,transform .14s var(--ease)}
+.seg button[aria-checked="true"]{background:var(--amber);color:#14213d}
+.rooms{display:flex;align-items:center;gap:12px;padding:6px;border-radius:14px;background:var(--bg-2)}
+.rb{display:grid;place-items:center;width:48px;height:48px;border-radius:10px;background:var(--card-2);transition:transform .14s var(--ease),background .2s ease}
+.rb svg{width:22px;height:22px}
+.rv{font:800 30px/1 var(--text);min-width:1.4em;text-align:center}
+.rl{flex:1;color:var(--soft)}
+.hood select{width:100%;min-height:52px;padding:0 14px;border-radius:14px;border:0;background:var(--bg-2);color:var(--ink);font-size:16px;font-weight:500}
+.chat{border-radius:var(--r);background:var(--card);overflow:hidden;display:flex;flex-direction:column}
+.c-top{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--card-2)}
+.c-top img{width:46px;height:46px;border-radius:50%;object-fit:cover;object-position:50% 30%}
+.c-top b{display:block}
+.c-body{flex:1;min-height:200px;padding:18px 16px}
+.bub{position:relative;max-width:92%;padding:12px 14px;border-radius:14px;border-start-end-radius:4px;background:#1f5c4b;color:#f1fff8;font-size:17px;line-height:1.5;margin-inline-start:auto}
+.caret{display:inline-block;width:2px;height:1.1em;margin-inline-start:2px;vertical-align:-.15em;background:currentColor}
+html:not(.still) .caret{animation:blink 1s steps(1) 5}
+@keyframes blink{50%{opacity:0}}
+.send{margin:0 16px 16px}
+@media (hover:hover) and (pointer:fine){ .rb:hover{background:#27407a} .seg button:not([aria-checked="true"]):hover{color:var(--ink)} }
+@media (max-width:1100px){ .c-grid{grid-template-columns:1fr 1fr} .steps{grid-column:1/-1;flex-direction:row;flex-wrap:wrap} .steps li{flex:1 1 200px} }
+@media (max-width:700px){ .c-grid{grid-template-columns:1fr} }
+
+/* ---------------------------------------------------------------- reviews land like signed pages */
+.revs{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,4vw,64px);align-items:start}
+.r-side{position:sticky;top:110px}
+.gbadge{display:inline-flex;align-items:center;gap:10px;min-height:48px;margin-top:24px;padding:0 18px;border-radius:999px;background:var(--card);text-decoration:none;font-size:16px}
+.pages{display:flex;flex-direction:column;gap:clamp(18px,2.4vw,28px)}
+.pg{position:relative;padding:clamp(22px,2.6vw,34px);border-radius:6px;background:var(--paper);color:var(--paper-ink);transform:rotate(var(--r))}
+.pg p{margin-top:12px;font:500 clamp(18px,1.25vw,21px)/1.6 var(--text)}
+.pg footer{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-top:18px;font-weight:800}
+.pg .tr{font-weight:400;font-size:15px;color:#4a5878}
+.pen{width:110px;height:16px;flex:none}
+.pen path{fill:none;stroke:var(--navy);stroke-width:2.2;stroke-linecap:round;stroke-dasharray:240;stroke-dashoffset:0}
+.pg .stars svg{fill:#c97a14}
+html.js:not(.still) .pg{opacity:0;transform:translateY(70px) rotate(calc(var(--r) * 4)) scale(.96)}
+html.js:not(.still) .pg.in{opacity:1;transform:rotate(var(--r));transition:opacity .6s var(--ease),transform .9s var(--ease)}
+html.js:not(.still) .pg .pen path{stroke-dashoffset:240}
+html.js:not(.still) .pg.in .pen path{stroke-dashoffset:0;transition:stroke-dashoffset 1.1s var(--ease) .5s}
+@media (max-width:800px){ .revs{grid-template-columns:1fr} .r-side{position:static} }
+
+/* ---------------------------------------------------------------- faq beside a tall photograph */
+.faq{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,4vw,64px);align-items:start}
+.f-photo{position:sticky;top:110px;aspect-ratio:3/4;overflow:hidden;border-radius:10px}
+.f-photo img{width:100%;height:100%;object-fit:cover}
+.qa h2{margin-bottom:26px}
+.qa details{border-radius:16px;background:var(--card);margin-bottom:10px}
+.qa summary{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:64px;padding:12px 20px;font:800 clamp(18px,1.4vw,22px)/1.3 var(--text);cursor:pointer;list-style:none}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary svg{flex:none;width:24px;height:24px;color:var(--amber-2);transition:transform .3s var(--ease)}
+.qa details[open] summary svg{transform:rotate(45deg)}
+.qa details p{padding:0 20px 20px;max-width:56ch}
+@media (max-width:800px){ .faq{grid-template-columns:1fr} .f-photo{position:relative;top:0;aspect-ratio:16/10} }
+
+/* ---------------------------------------------------------------- contact bento */
+.reach{padding-bottom:clamp(90px,10vw,150px)}
+.rb-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:auto auto;gap:14px}
+.cell{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;min-height:170px;padding:22px;border-radius:var(--r);background:var(--card);text-decoration:none;overflow:hidden;transition:transform .14s var(--ease),background .2s ease}
+.cell svg{width:30px;height:30px;fill:var(--amber-2);margin-bottom:auto}
+.cell b{display:block;font-size:21px;line-height:1.2}
+.cell > span{display:block;font-size:17px}
+.c-map{grid-column:span 2;grid-row:span 2;padding:0;min-height:420px}
+.c-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:saturate(.8)}
+.c-wa{background:var(--amber);color:#14213d}
+.c-wa svg{fill:#14213d}
+.c-hours{justify-content:flex-start}
+.hours{border-collapse:collapse;margin-top:8px;font-size:16px;width:100%}
+.hours td{padding:4px 0}
+.hours td:last-child{text-align:end}
+.hours tr.today td{color:var(--amber-2);font-weight:800}
+.c-addr .go{margin-top:6px;color:var(--amber-2);font-weight:500}
+@media (hover:hover) and (pointer:fine){ .cell:not(.c-map):hover{background:var(--card-2)} .c-wa:hover{background:var(--amber-2)} }
+@media (max-width:1000px){ .rb-grid{grid-template-columns:1fr 1fr} .c-map{grid-column:1/-1;grid-row:auto;min-height:320px} }
+@media (max-width:520px){ .rb-grid{grid-template-columns:1fr} }
+
+/* ---------------------------------------------------------------- footer: the logo's arc rises as a horizon */
+.foot{position:relative;overflow:hidden;background:var(--bg-2);padding:clamp(150px,16vw,240px) var(--m) calc(40px + env(safe-area-inset-bottom))}
+.f-sky{position:absolute;inset:0 0 auto;height:clamp(150px,16vw,240px);pointer-events:none}
+.f-arc{position:absolute;inset:0;width:100%;height:100%}
+.f-arc path{fill:none;stroke:var(--amber);stroke-width:5;stroke-dasharray:1400;stroke-dashoffset:0;vector-effect:non-scaling-stroke;filter:drop-shadow(0 0 10px rgba(232,150,46,.7))} /* taste-skill-ignore: the logo's sweep as a glowing horizon */
+.f-cols{position:absolute;inset-inline-end:8%;bottom:0;display:flex;align-items:flex-end;gap:clamp(6px,1vw,14px);height:100%}
+html[dir="ltr"] .f-cols{inset-inline-end:auto;right:8%}
+html[dir="rtl"] .f-cols{inset-inline-end:auto;right:8%}
+.f-cols i{display:block;width:clamp(14px,2.2vw,34px);height:calc(var(--h) * 92%);background:var(--navy);transform-origin:50% 100%}
+html.js:not(.still) .foot .f-cols i{transform:scaleY(.05);transition:transform 1s var(--ease)}
+html.js:not(.still) .foot.on .f-cols i{transform:none}
+html.js:not(.still) .foot .f-cols i:nth-child(n){transition-delay:calc(var(--h) * 500ms)}
+html.js:not(.still) .foot .f-arc path{stroke-dashoffset:1400}
+html.js:not(.still) .foot.on .f-arc path{stroke-dashoffset:0;transition:stroke-dashoffset 1.8s var(--ease) .2s}
+.f-in{position:relative;max-width:1400px;margin:0 auto}
+.f-plate{width:min(320px,70%);border-radius:14px}
+.f-cols-t{display:grid;grid-template-columns:1fr 1fr auto;gap:24px;margin-top:34px}
+.fh{font-weight:800;margin-bottom:4px}
+.f-tools{display:flex;gap:8px;align-items:flex-start}
+.f-legal{margin-top:34px;font-size:15px;color:var(--soft);max-width:110ch}
+@media (max-width:800px){ .f-cols-t{grid-template-columns:1fr} }
+
+/* ---------------------------------------------------------------- on phones: the hanging for-sale sign */
+.hang{display:none}
+@media (max-width:700px){
+  body{padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+  .hang{display:block;position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:45;transform-origin:50% -20px;transition:transform .5s var(--ease),opacity .4s ease}
+  .hang .cord{top:-14px;height:16px}
+  .hang-plate{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:5px;border-radius:12px;background:var(--amber);box-shadow:0 12px 30px rgba(0,0,0,.45)} /* taste-skill-ignore: the sign floats over the page */
+  .hang a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:54px;border-radius:9px;color:#14213d;font-weight:800;font-size:17px;text-decoration:none;transition:transform .14s var(--ease),background .2s ease}
+  .hang a + a{background:#14213d;color:var(--amber-2)}
+  .hang svg{width:22px;height:22px;fill:currentColor}
+  .hang.away{transform:translateY(140%)}
+  html:not(.still) .hang.nudge{animation:nudge 1.6s ease-in-out 1}
+}
+@keyframes nudge{0%,100%{transform:rotate(0)}25%{transform:rotate(-1.6deg)}60%{transform:rotate(1.1deg)}}
+
+/* ---------------------------------------------------------------- entrances */
+html.js:not(.still) [data-reveal]{opacity:0;transform:translateY(24px)}
+html.js:not(.still) [data-reveal].in{opacity:1;transform:none;transition:opacity .7s var(--ease) var(--d,0ms),transform .8s var(--ease) var(--d,0ms)}
+html.js:not(.still) [data-tile]{opacity:0;transform:translateY(26px) scale(.98);filter:blur(6px)}
+html.js:not(.still) [data-tile].in{opacity:1;transform:none;filter:none;transition:opacity .7s var(--ease) var(--d,0ms),transform .8s var(--ease) var(--d,0ms),filter .7s var(--ease) var(--d,0ms)}
+@media (prefers-reduced-motion:reduce){ *,*::before,*::after{scroll-behavior:auto!important} }
