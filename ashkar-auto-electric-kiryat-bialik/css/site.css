@@ -1,0 +1,428 @@
+/* Ashkar Auto Electric — the instrument cluster at night. One motif: the round gauge dial.
+   Black of the cluster, the red of their street sign, the sign's yellow for needles, warning-lamp amber, their shutter's blue. */
+:root{
+  --bg:#0c0c0e;
+  --bg-2:#070708;
+  --panel:#151519;
+  --panel-2:#1d1d23;
+  --panel-3:#26262e;
+  --line:rgba(255,255,255,.07);
+  --ink:#f1ede6;
+  --soft:#bdb7ae;
+  --red:#d42a32;             /* their sign */
+  --red-hi:#ff5a4f;          /* the dial's red backlight, for text */
+  --yellow:#f3c62b;          /* the sign's lettering: needles */
+  --amber:#ffae1f;           /* engine and ABS lamps */
+  --lamp-red:#ff3b30;        /* battery, oil, brake lamps */
+  --blue:#4d76a6;            /* their roller shutter */
+  --display:"Miriam Libre","Arial Hebrew",Arial,sans-serif;
+  --text:"IBM Plex Sans Hebrew","Arial Hebrew",Arial,sans-serif;
+  --serif:"Frank Ruhl Libre",Georgia,serif;
+  --s-small:15px;
+  --s-body:clamp(1.0625rem,1rem + .25vw,1.2rem);
+  --s-lead:clamp(1.2rem,1.05rem + .55vw,1.5rem);
+  --s-head:clamp(2.3rem,1.4rem + 3vw,4.4rem);
+  --m:clamp(16px,3vw,44px);
+  --r:22px;
+  --ease:cubic-bezier(.23,1,.32,1);
+  --ease-io:cubic-bezier(.77,0,.175,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--s-body)/1.55 var(--text);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;touch-action:manipulation;-webkit-user-select:none;user-select:none}
+h1,h2,h3,p,figure,blockquote{margin:0}
+.vh{position:absolute;width:0;height:0;overflow:hidden}
+.num{font-variant-numeric:lining-nums tabular-nums}
+html[lang="he"] [lang="en"]:not(html), html[lang="en"] [lang="he"]:not(html){display:none!important}
+::selection{background:var(--red);color:#fff}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:8px}
+.skip{position:absolute;inset-inline-start:var(--m);top:-60px;z-index:120;background:var(--red);color:#fff;padding:10px 16px;border-radius:999px;text-decoration:none}
+.skip:focus{top:44px}
+h2{font:700 var(--s-head)/1.04 var(--display);letter-spacing:-.025em;text-wrap:balance}
+h3{font:700 22px/1.15 var(--display);letter-spacing:-.01em}
+em{font:900 1em/1 var(--serif);font-style:normal;color:var(--red-hi);letter-spacing:-.01em}  /* the SETI-style serif accent, lit like the dial's red */
+section{position:relative;padding:clamp(90px,10vw,160px) var(--m) 0}
+.head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px;margin-bottom:clamp(30px,4vw,52px)}
+.head p{max-width:44ch;font-size:var(--s-lead);line-height:1.42}
+.stars{display:inline-flex;gap:2px}
+.stars svg{width:15px;height:15px;fill:var(--yellow)}
+.stars svg.part{fill:none;stroke:var(--yellow);stroke-width:1.2}
+.page{position:relative;z-index:2;background:var(--bg)}
+
+.concept{position:relative;z-index:41;display:flex;align-items:center;justify-content:center;min-height:34px;padding:6px var(--m);background:var(--bg-2);color:var(--soft);font-size:var(--s-small);line-height:1.35;text-align:center}
+
+/* ---------------------------------------------------------------- opening: the dash self-check (pure CSS, ends by itself) */
+.boot{display:none}
+html.js:not(.still) .boot{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;background:var(--bg-2);animation:bootOut .5s var(--ease-io) 1.05s forwards}
+html.js .boot.gone{animation:bootOut .25s ease forwards}
+@keyframes bootOut{to{opacity:0;visibility:hidden;transform:scale(1.04)}}
+.boot-deck{position:relative;width:min(56vw,300px);aspect-ratio:4/3}
+.boot-deck img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:var(--r);opacity:0;animation:deal .55s var(--ease) forwards}
+.boot-deck img:nth-child(1){--rz:-9deg;--tx:-26%;animation-delay:.05s}
+.boot-deck img:nth-child(2){--rz:7deg;--tx:24%;animation-delay:.22s}
+.boot-deck img:nth-child(3){--rz:0deg;--tx:0%;animation-delay:.4s}
+@keyframes deal{from{opacity:0;transform:translateY(60%) rotate(calc(var(--rz) * 3))}to{opacity:1;transform:translateX(var(--tx)) rotate(var(--rz))}}
+.boot-lamps{display:flex;gap:14px}
+.boot-lamps .lp{width:30px;height:30px;color:#2d2d33;animation:lampOn .1s linear .12s forwards,lampOff .15s ease forwards}
+.boot-lamps .lp.r{--c:var(--lamp-red)} .boot-lamps .lp.a{--c:var(--amber)}
+.boot-lamps .lp:nth-child(1){animation-delay:.12s,.95s} .boot-lamps .lp:nth-child(2){animation-delay:.12s,.55s}
+.boot-lamps .lp:nth-child(3){animation-delay:.12s,.65s} .boot-lamps .lp:nth-child(4){animation-delay:.12s,.72s}
+.boot-lamps .lp:nth-child(5){animation-delay:.12s,.8s} .boot-lamps .lp:nth-child(6){animation-delay:.12s,.6s}
+@keyframes lampOn{to{color:var(--c);filter:drop-shadow(0 0 6px var(--c))}} /* taste-skill-ignore: a lit lamp glows */
+@keyframes lampOff{to{color:#2d2d33;filter:none}}
+
+/* ---------------------------------------------------------------- nav: a bar that gathers into a floating pill */
+.nav{position:sticky;top:0;z-index:40;padding:0 var(--m);transition:padding .45s var(--ease)}
+.nav-in{display:flex;align-items:center;gap:20px;max-width:2000px;margin:0 auto;height:70px;padding:0 4px;border-radius:999px;border:1px solid transparent;transition:max-width .6s var(--ease),height .45s var(--ease),padding .45s var(--ease),background .4s ease,border-color .4s ease} /* taste-skill-ignore: transparent until it gathers into the pill */
+.nav.pill{padding-top:12px}
+.nav.pill .nav-in{max-width:1120px;height:60px;padding:0 10px;background:rgba(21,21,25,.86);border-color:var(--line);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)} /* taste-skill-ignore: the owner's references use a floating frosted pill */
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0}
+.brand-dial{position:relative;flex:none;width:36px;height:36px;border-radius:50%;background:var(--panel-2);box-shadow:inset 0 0 0 2px var(--red)} /* taste-skill-ignore: the dial's rim */
+.brand-dial i{position:absolute;left:50%;top:50%;width:14px;height:2.5px;margin-top:-1.25px;border-radius:2px;background:var(--yellow);transform-origin:0 50%;transform:rotate(-140deg);animation:idle 2.4s ease-in-out infinite alternate}
+html.still .brand-dial i{animation:none}
+@keyframes idle{to{transform:rotate(-122deg)}}
+.bname{font:700 20px/1 var(--display);white-space:nowrap}
+.links{display:flex;gap:4px;margin-inline-start:auto;font-size:16px}
+.links a{padding:8px 12px;border-radius:999px;text-decoration:none;color:var(--soft);transition:color .2s ease,background .2s ease}
+.tools{display:flex;align-items:center;gap:6px}
+.tgl{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;background:var(--panel-2);color:var(--ink);font-size:15px;transition:transform .14s var(--ease),background .2s ease}
+.tgl .knob{position:relative;width:30px;height:18px;border-radius:999px;background:#44444e;transition:background .2s ease}
+.tgl .knob::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:12px;height:12px;border-radius:50%;background:var(--ink);transition:transform .22s var(--ease)}
+.tgl[aria-checked="true"] .knob{background:var(--red)}
+.tgl[aria-checked="true"] .knob::after{transform:translateX(12px)}
+html[dir="rtl"] .tgl[aria-checked="true"] .knob::after{transform:translateX(-12px)}
+.tgl.lang{min-width:46px;justify-content:center;font-weight:600}
+.pill-btn,.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:0 18px;border-radius:999px;background:var(--red);color:#fff;text-decoration:none;font-weight:600;font-size:16px;overflow:hidden;transition:transform .14s var(--ease),background .2s ease}
+.btn{min-height:54px;padding:0 26px;font-size:17px}
+.btn.ghost{background:var(--panel-3);color:var(--ink)}
+.pill-btn svg,.btn svg{width:20px;height:20px;fill:currentColor;flex:none}
+.pill-btn:active,.btn:active,.tgl:active,.stp:active,.kp:active,.lb:active,.rk:active,.cb-t:active,.st-wa:active,.st-call:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .links a:hover{color:var(--ink);background:var(--panel-2)}
+  .btn:hover,.pill-btn:hover{background:#e33840}
+  .btn.ghost:hover{background:#30303a}
+  .tgl:hover{background:var(--panel-3)}
+}
+@media (max-width:1060px){ .links{display:none} .tools{margin-inline-start:auto} }
+@media (max-width:560px){
+  .nav-in{height:60px;gap:8px} .bname{font-size:17px}
+  .tgl{padding:0 11px} .tgl > span[lang]{display:none!important}
+  html[lang="he"] .tgl.lang [lang="he"], html[lang="en"] .tgl.lang [lang="en"]{display:inline!important}
+  .pill-btn{display:none}
+}
+@media (max-width:380px){ .bname{font-size:15px} }
+
+/* ---------------------------------------------------------------- hero: their garage inside a huge tachometer */
+.hero{position:relative;display:flex;align-items:center;min-height:calc(100svh - 104px);padding:clamp(30px,5vw,80px) var(--m);overflow:hidden}
+.dial{--S:min(118svh,68vw);position:absolute;top:50%;inset-inline-end:calc(var(--S) * -.24);width:var(--S);aspect-ratio:1;transform:translateY(-50%)}
+.dial-photo{position:absolute;inset:12%;border-radius:50%;overflow:hidden;background:var(--panel)}
+.dial-photo img{width:100%;height:100%;object-fit:cover;object-position:46% 60%;transform:scale(1.08) translate(var(--px,0),var(--py,0));transition:transform .9s var(--ease)}
+html:not(.still) .dial-photo img{animation:kb 18s ease-in-out infinite alternate}
+@keyframes kb{to{scale:1.07}}
+.beam{position:absolute;inset:0;background:radial-gradient(circle at var(--bx,50%) var(--by,55%),rgba(0,0,0,0) 0,rgba(0,0,0,0) 22%,rgba(8,8,10,.5) 52%,rgba(8,8,10,.74) 80%)} /* taste-skill-ignore: a headlight beam that follows the hand over the real photo */
+.dial-ring{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.dial-ring .tk{stroke:#4a4a52;stroke-width:1.1;stroke-linecap:round;transition:stroke .25s ease}
+.dial-ring .tk.maj{stroke-width:2.2}
+.dial-ring .tk.red{stroke:#7a2226}
+.dial-ring .tk.lit{stroke:var(--red-hi)}
+.dial-ring .lbl{fill:var(--soft);font:600 8px/1 var(--text);text-anchor:middle;dominant-baseline:middle}
+.needle path{fill:var(--yellow)}
+.dial-ring .needle{filter:drop-shadow(0 0 3px rgba(243,198,43,.6))} /* taste-skill-ignore: a lit needle */
+.hub{fill:#1b1b20;stroke:var(--yellow);stroke-width:1.5}
+.dial-read{position:absolute;bottom:17%;left:50%;transform:translateX(-50%);display:flex;align-items:baseline;gap:6px;padding:6px 14px;border-radius:999px;background:rgba(8,8,10,.78);color:var(--ink);font-size:15px;direction:ltr}
+.dial-read b{font:700 22px/1 var(--display);color:var(--yellow);min-width:3.2ch;text-align:end}
+.h-copy{position:relative;z-index:2;max-width:min(720px,46vw)}
+.h-lead{max-width:36ch}
+.h-title{font:700 clamp(3.4rem,1.8rem + 6.2vw,8.6rem)/.92 var(--display);letter-spacing:-.035em}
+.h-title .ln{display:block;white-space:nowrap}
+.h-title .acc{color:var(--red-hi);font-family:var(--serif);font-weight:900;letter-spacing:-.02em}
+html[lang="en"] .h-title{font-size:clamp(3rem,1.6rem + 5vw,7rem)}
+.h-title .w{display:inline-block;white-space:nowrap}
+.h-title .ch{display:inline-block}
+html.js:not(.still) .h-title .ch{opacity:0;transform:translateY(.3em);filter:blur(10px);animation:chIn .8s var(--ease) forwards;animation-delay:calc(900ms + var(--i) * 45ms)}
+@keyframes chIn{to{opacity:1;transform:none;filter:none}}
+.h-lead{margin-top:26px;max-width:36ch;font-size:var(--s-lead);line-height:1.42}
+.h-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:30px}
+.h-facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.fact{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:6px 14px;border-radius:999px;background:var(--panel-2);font-size:var(--s-small);text-decoration:none;color:var(--ink)}
+.fact b{font-weight:600}
+.fact .dot{width:8px;height:8px;border-radius:50%;background:var(--amber);flex:none}
+.fact.open .dot{background:#4ad07a}
+html.js:not(.still) [data-rise]{opacity:0;transform:translateY(18px);animation:rise .8s var(--ease) forwards;animation-delay:calc(900ms + var(--d))}
+@keyframes rise{to{opacity:1;transform:none}}
+@media (max-width:760px){
+  .hero{display:block;min-height:0;padding-top:0}
+  .dial{--S:116vw;position:relative;top:auto;inset-inline-end:auto;margin:-24vw -8vw 0;transform:none}
+  .dial-read{bottom:14%}
+  .h-copy{max-width:none;margin-top:4px}
+  .h-title{font-size:clamp(3rem,15vw,4.6rem)}
+  html[lang="en"] .h-title{font-size:clamp(2.6rem,12.4vw,4rem)}
+  .h-lead{margin-top:18px}
+  .h-acts .btn{flex:1 1 auto}
+}
+
+/* ---------------------------------------------------------------- ignition: the cluster story */
+.ign{padding:0;margin-top:clamp(60px,8vw,120px)}
+html:not(.still) .ign{height:340vh}
+.ign-stick{position:relative;overflow:hidden}
+html:not(.still) .ign-stick{position:sticky;top:0;height:100svh}
+.ign-bg{position:absolute;inset:0;background:var(--bg);clip-path:circle(var(--rv,150%) at 50% 52%)}
+.ign-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:var(--o,0);transform:scale(calc(1.04 + var(--o,0) * .04));transition:opacity .5s ease}
+.ign-bg img[data-bg="0"]{--o:1}
+.ign-bg::after{content:"";position:absolute;inset:0;background:rgba(9,9,11,.84)}
+.ign-stick::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22%;background:linear-gradient(to bottom,rgba(12,12,14,0),var(--bg));pointer-events:none} /* taste-skill-ignore: the photo dissolves into the next section, no hard edge */
+.ign-stick::before{content:"";position:absolute;left:0;right:0;top:0;height:14%;z-index:1;background:linear-gradient(to top,rgba(12,12,14,0),var(--bg));pointer-events:none} /* taste-skill-ignore: soft top edge */
+.ign-in{position:relative;display:grid;grid-template-rows:auto 1fr auto auto;gap:clamp(10px,2svh,26px);height:100%;max-width:1180px;margin:0 auto;padding:clamp(70px,11svh,120px) var(--m) clamp(20px,4svh,40px)}
+html.still .ign-in{padding-top:clamp(80px,9vw,140px);padding-bottom:60px}
+.ign-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:10px 40px}
+.ign-head p{max-width:40ch;font-size:var(--s-lead);line-height:1.4}
+.cluster{display:flex;align-items:center;justify-content:center;min-height:0}
+.cluster svg{width:100%;max-width:880px;max-height:100%;overflow:visible}
+.gauge .face{fill:rgba(12,12,15,.82);stroke:#2e2e36;stroke-width:2}
+.gauge .tk{stroke:#6a6a74;stroke-width:2;stroke-linecap:round}
+.gauge .tk.maj{stroke:var(--ink);stroke-width:4}
+.gauge .tk.red{stroke:var(--red)}
+.gauge .lbl{fill:var(--ink);font:600 21px/1 var(--display);text-anchor:middle;dominant-baseline:middle}
+.gauge .unit{fill:var(--soft);font:600 14px/1 var(--text);letter-spacing:.04em}
+.gauge .lcd{fill:var(--yellow);font:700 26px/1 var(--display)}
+.gauge .band{fill:none;stroke-width:7}
+.cluster .needle{filter:drop-shadow(0 0 5px rgba(243,198,43,.55))} /* taste-skill-ignore: a lit needle */
+.cluster .hub{stroke-width:3}
+.cluster[data-back] .gauge .lbl{opacity:var(--back,1)}
+.lamp{color:#2b2b31}
+.lamp.on.r{color:var(--lamp-red)} .lamp.on.a{color:var(--amber)}
+.lamp.on{filter:drop-shadow(0 0 5px currentColor)} /* taste-skill-ignore: a lit lamp glows */
+.ign-ctl{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:clamp(14px,3vw,40px)}
+.keyswitch{position:relative;width:210px;height:150px}
+.cyl{position:absolute;left:50%;top:62%;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;background:radial-gradient(circle at 38% 32%,#4a4a54,#1c1c22 70%);box-shadow:inset 0 0 0 3px #3a3a44,0 6px 20px rgba(0,0,0,.5)} /* taste-skill-ignore: a turned-metal lock cylinder */
+.key{position:absolute;left:50%;top:50%;width:14px;height:70px;margin:-35px 0 0 -7px;border-radius:5px;background:#c9c6c0;box-shadow:inset 0 0 0 2px #8d8a84;transform:rotate(var(--k,-62deg));transition:transform .5s var(--ease)} /* taste-skill-ignore: the key's metal edge */
+.kp{position:absolute;left:50%;top:62%;min-width:58px;min-height:36px;margin:-18px 0 0 -29px;padding:0 8px;border-radius:999px;color:var(--soft);font:600 14px/36px var(--text);direction:ltr;transform:rotate(var(--a)) translateY(-78px) rotate(calc(var(--a) * -1));transition:color .2s ease,background .2s ease}
+.kp.on{color:#fff;background:var(--red)}
+.kp-fix.on{background:#2f8f55}
+.captions{display:grid}
+.cap{grid-area:1/1;max-width:46ch;font-size:var(--s-lead);line-height:1.42;opacity:0;transform:translateY(10px);transition:opacity .4s ease,transform .5s var(--ease)}
+.cap.on{opacity:1;transform:none}
+.steppers{display:flex;gap:8px}
+.stp{display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;border-radius:50%;background:var(--panel-3);font:400 30px/1 var(--text);transition:transform .14s var(--ease),background .2s ease}
+html[dir="rtl"] .stp span{display:inline-block;transform:scaleX(-1)}
+@media (hover:hover) and (pointer:fine){ .stp:hover,.kp:hover{background:var(--panel-3);color:var(--ink)} .kp.on:hover{background:var(--red)} }
+html:not(.still) .ign .steppers{display:none}
+.ign-note{color:var(--soft);font-size:var(--s-small)}
+@media (max-width:760px){
+  .ign-in{grid-template-rows:auto auto auto auto;align-content:start;gap:12px;padding-top:max(76px,10svh)}
+  .ign-head h2{font-size:clamp(2rem,9vw,2.6rem)}
+  .ign-head p{font-size:17px}
+  .ign-ctl{grid-template-columns:150px 1fr;gap:10px 14px}
+  .keyswitch{width:150px;height:118px}
+  .cyl{width:72px;height:72px;margin:-36px 0 0 -36px;top:66%}
+  .key{height:52px;margin-top:-26px;width:12px;margin-left:-6px}
+  .kp{top:66%;min-width:50px;min-height:32px;margin:-16px 0 0 -25px;font-size:13px;line-height:32px;transform:rotate(var(--a)) translateY(-58px) rotate(calc(var(--a) * -1))}
+  .cap{font-size:17px}
+  .steppers{grid-column:1/-1}
+}
+
+/* ---------------------------------------------------------------- work: a bento of living tiles */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:clamp(220px,19vw,280px);gap:14px}
+.tile{position:relative;overflow:hidden;border-radius:var(--r);background:var(--panel);isolation:isolate}
+.tile > img,.tile .winbox img,.tile .altbox img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tile::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(to top,rgba(8,8,10,.92) 0,rgba(8,8,10,.55) 42%,rgba(8,8,10,.05) 75%)} /* taste-skill-ignore: a scrim so the text reads on the real photo */
+.tile::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;background:radial-gradient(260px circle at var(--mx,50%) var(--my,50%),rgba(255,90,79,.16),transparent 70%);transition:opacity .3s ease} /* taste-skill-ignore: a spotlight under the hand */
+@media (hover:hover) and (pointer:fine){ .tile:hover::after{opacity:1} }
+.t-txt{position:absolute;inset-inline:22px;bottom:20px;z-index:2}
+.t-txt p{margin-top:6px;color:var(--ink);max-width:34ch}
+.ill{position:absolute;top:14px;inset-inline-end:14px;z-index:2;padding:3px 10px;border-radius:999px;background:rgba(8,8,10,.7);color:var(--soft);font-size:13px}
+.t-batt{grid-column:span 2;grid-row:span 2}
+.t-batt h3{font-size:clamp(28px,2.6vw,40px)}
+.t-win{grid-column:span 2}
+.t-tow,.t-mech{grid-column:span 2}
+.charge{position:absolute;top:18px;inset-inline-start:18px;z-index:2;display:flex;align-items:center;gap:5px;padding:8px 12px;border-radius:14px;background:rgba(8,8,10,.74);direction:ltr}
+.charge i{width:12px;height:22px;border-radius:3px;background:#34343c}
+html:not(.still) .charge i{animation:seg 3.2s steps(1) infinite}
+.charge i:nth-child(2){animation-delay:.25s!important} .charge i:nth-child(3){animation-delay:.5s!important} .charge i:nth-child(4){animation-delay:.75s!important} .charge i:nth-child(5){animation-delay:1s!important}
+html.still .charge i{background:#4ad07a}
+@keyframes seg{0%{background:#34343c}10%,85%{background:#4ad07a}}
+.charge b{margin-inline-start:6px;font:700 18px/1 var(--display);color:var(--yellow);min-width:4.3ch}
+.winbox,.altbox{position:absolute;inset:0}
+.glass{position:absolute;left:42%;top:58%;z-index:2;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;box-shadow:0 0 0 2px var(--yellow)} /* taste-skill-ignore: a ring that marks the AUTO switch */
+html:not(.still) .glass{animation:press 2.6s var(--ease) infinite}
+@keyframes press{0%{transform:scale(.6);opacity:0}25%{opacity:1}70%,100%{transform:scale(1.5);opacity:0}}
+.code{position:absolute;top:16px;inset-inline-start:16px;z-index:2;padding:6px 12px;border-radius:10px;background:rgba(8,8,10,.78);color:var(--amber);font:600 14px/1.2 var(--text);letter-spacing:.04em;direction:ltr;font-variant-numeric:tabular-nums}
+.altbox img{object-position:50% 62%}
+.pulley{position:absolute;z-index:1;border-radius:50%;background-image:url(../img/alternator.jpg);background-repeat:no-repeat;-webkit-mask:radial-gradient(circle,#000 62%,transparent 71%);mask:radial-gradient(circle,#000 62%,transparent 71%)} /* taste-skill-ignore: a soft mask cut around the real pulley */
+html:not(.still) .pulley{animation:spin 1.6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.t-tow{background:#121216}
+.hazard{position:absolute;inset:0 0 40% 0;display:flex;align-items:center;justify-content:center;gap:clamp(60px,10vw,160px)}
+.hazard i{width:64px;height:56px;background:var(--amber);clip-path:polygon(50% 0,100% 100%,0 100%);opacity:.18}
+html:not(.still) .hazard i{animation:blink 1.3s steps(1) infinite}
+html.still .hazard i{opacity:1}
+@keyframes blink{0%{opacity:1;filter:drop-shadow(0 0 14px var(--amber))}50%{opacity:.16;filter:none}} /* taste-skill-ignore: hazard lamps */
+.t-mech img{transform-origin:40% 60%}
+html:not(.still) .t-mech img{animation:kb 14s ease-in-out infinite alternate}
+html.js:not(.still) [data-tile]{opacity:0;transform:translateY(28px) scale(.98);filter:blur(8px)}
+html.js:not(.still) [data-tile].in{opacity:1;transform:none;filter:none;transition:opacity .8s var(--ease) var(--d,0ms),transform .8s var(--ease) var(--d,0ms),filter .8s var(--ease) var(--d,0ms)}
+@media (max-width:1000px){ .bento{grid-template-columns:repeat(2,1fr)} .t-tow,.t-mech{grid-column:span 1} }
+@media (max-width:600px){
+  .bento{grid-template-columns:1fr;grid-auto-rows:240px}
+  .t-batt,.t-win,.t-tow,.t-mech{grid-column:auto}
+  .t-batt{grid-row:span 1;height:300px}
+}
+
+/* ---------------------------------------------------------------- garage: a dial of photos turning under a fixed needle */
+.garage{z-index:3;margin-top:clamp(70px,8vw,120px);padding-top:clamp(60px,7vw,100px);padding-bottom:20px;border-radius:40px 40px 0 0;background:var(--panel);transform:translateY(var(--lift,0)) scale(var(--ls,1));transform-origin:50% 0}
+html:not(.still) .garage{height:calc(var(--gh,700px) + 120vh)}
+html:not(.still) .g-stick{position:sticky;top:max(70px,calc((100svh - var(--gh,700px)) / 2 + 30px))}
+.arc{position:relative;height:var(--ah);--cw:clamp(200px,24vw,340px);--ch:calc(var(--cw) * .72);--R:clamp(380px,54vw,820px);--ah:calc(var(--ch) * 1.14 + var(--R) * .2 + 90px);overflow:hidden;margin-inline:calc(var(--m) * -1);touch-action:pan-y;cursor:grab}
+.arc.drag{cursor:grabbing}
+.arc-turn{position:absolute;left:50%;top:calc(30px + var(--ch) / 2 + var(--R));width:0;height:0}
+.ac{position:absolute;left:0;top:0;width:var(--cw);aspect-ratio:1/.72;border-radius:var(--r);overflow:hidden;background:var(--panel-2);transform:translate(-50%,-50%) rotate(var(--t,0deg)) translateY(calc(var(--R) * -1)) scale(var(--s,1));filter:brightness(var(--b,1));transition:filter .3s ease}
+html.still .ac{transition:transform .7s var(--ease),filter .3s ease}
+.ac img{width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.ac figcaption{position:absolute;bottom:10px;inset-inline-start:10px;padding:4px 12px;border-radius:999px;background:rgba(8,8,10,.78);font-size:14px}
+.arc-needle{position:absolute;left:50%;top:calc(46px + var(--ch) * 1.08);bottom:0;width:6px;margin-left:-3px;border-radius:3px 3px 0 0;background:var(--yellow);pointer-events:none;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.arc-needle::after{content:"";position:absolute;left:50%;bottom:-14px;width:30px;height:30px;margin-left:-15px;border-radius:50%;background:#1b1b20;box-shadow:inset 0 0 0 3px var(--yellow)} /* taste-skill-ignore: the needle hub */
+.arc-ctl{position:absolute;bottom:14px;inset-inline-end:var(--m);display:flex;gap:8px}
+@media (max-width:600px){ .arc{--cw:60vw;--R:118vw} }
+.arc-needle{clip-path:none;background:linear-gradient(var(--yellow),var(--yellow)) 50% 0/6px 100% no-repeat;width:30px;margin-left:-15px;border-radius:0} /* taste-skill-ignore: a 6px needle shaft */
+
+/* ---------------------------------------------------------------- reviews: the rating on its own gauge; quotes land on the stack */
+.reviews{padding-top:clamp(40px,5vw,70px);display:grid;grid-template-columns:minmax(260px,.8fr) 1.2fr;gap:clamp(30px,6vw,90px);align-items:center;background:var(--panel);padding-bottom:clamp(80px,9vw,130px)}
+.rv-gauge{position:relative;text-align:center}
+.rv-gauge svg{width:100%;max-width:440px;margin:0 auto;overflow:visible}
+.rv-gauge .tk{stroke:#55555e;stroke-width:1.4;stroke-linecap:round}
+.rv-gauge .tk.maj{stroke:var(--ink);stroke-width:2.6}
+.rv-gauge .tk.lit{stroke:var(--red-hi)}
+.rv-gauge .lbl{fill:var(--soft);font:600 10px/1 var(--text);text-anchor:middle;dominant-baseline:middle}
+.rv-num{margin-top:-6px}
+.odo{display:inline-flex;font:700 clamp(4.4rem,3rem + 5vw,8rem)/1 var(--display);letter-spacing:-.04em;direction:ltr}
+.odo .d{display:inline-block;height:1em;overflow:hidden}
+.odo .d > span{display:flex;flex-direction:column;transition:transform 1.4s var(--ease)}
+.odo i{display:block;height:1em;font-style:normal}
+.odo i::before{content:attr(data-n)}
+.rv-of{display:block;margin-top:8px;color:var(--soft)}
+.rv-copy h2{margin-bottom:28px}
+.rv-stack{display:grid}
+.rv{grid-area:1/1;align-self:start;padding:clamp(22px,3vw,34px);border-radius:var(--r);background:var(--panel-2);opacity:0;transform:translateY(-26px) rotate(-1.5deg);pointer-events:none;transition:opacity .5s ease,transform .7s var(--ease)}
+.rv.on{opacity:1;transform:none;pointer-events:auto}
+.rv.out{opacity:0;transform:translateY(22px) rotate(1deg)}
+.rv p{margin-top:12px;font-size:var(--s-lead);line-height:1.45}
+.rv footer{margin-top:16px;color:var(--soft);font-size:var(--s-small)}
+.rv .tr{margin-inline-start:8px}
+.rv-ctl{display:flex;align-items:center;gap:14px;margin-top:18px}
+.rv-count{color:var(--soft)}
+@media (max-width:860px){ .reviews{grid-template-columns:1fr} .rv-gauge svg{max-width:340px} }
+
+/* ---------------------------------------------------------------- lamps: the composer */
+.lamps{background:var(--bg)}
+.cmp{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(18px,3vw,40px);align-items:start}
+.cmp-panel{display:grid;gap:18px;padding:clamp(18px,2.6vw,30px);border-radius:28px;background:var(--panel)}
+.lamp-board{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;padding:16px;border-radius:20px;background:#0a0a0c}
+.lb{display:flex;flex-direction:column;align-items:center;gap:6px;min-height:84px;padding:10px 4px;border-radius:14px;background:#141418;color:#4a4a52;font-size:14px;transition:transform .14s var(--ease),color .2s ease,background .2s ease}
+.lb svg{width:38px;height:38px}
+.lb span{color:var(--soft)}
+.lb[aria-pressed="true"].r{color:var(--lamp-red);background:#1d1013}
+.lb[aria-pressed="true"].a{color:var(--amber);background:#1d1810}
+.lb[aria-pressed="true"] svg{filter:drop-shadow(0 0 8px currentColor)} /* taste-skill-ignore: a lit lamp glows */
+.rockers{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.rk{display:flex;flex-direction:column;align-items:center;gap:10px;min-height:96px;padding:12px 6px;border-radius:16px;background:var(--panel-2);font-size:15px;line-height:1.2;text-align:center;transition:transform .14s var(--ease),background .2s ease}
+.rk i{position:relative;width:30px;height:46px;border-radius:9px;background:#0d0d10;box-shadow:inset 0 0 0 2px #34343c} /* taste-skill-ignore: the rocker's bezel */
+.rk i::before{content:"";position:absolute;inset:4px 4px 50%;border-radius:6px 6px 2px 2px;background:#3a3a42;transition:inset .2s var(--ease),background .2s ease}
+.rk i::after{content:"";position:absolute;left:50%;bottom:7px;width:8px;height:4px;margin-left:-4px;border-radius:2px;background:#2a2a30;transition:background .2s ease}
+.rk[aria-checked="true"]{background:var(--panel-3)}
+.rk[aria-checked="true"] i::before{inset:50% 4px 4px;border-radius:2px 2px 6px 6px;background:#55555f}
+.rk[aria-checked="true"] i::after{bottom:auto;top:7px;background:var(--red-hi)}
+.car{display:grid;gap:8px;font-size:var(--s-small);color:var(--soft)}
+.car input{width:100%;min-height:52px;padding:0 16px;border-radius:14px;border:0;background:var(--panel-2);color:var(--ink);font:400 16px var(--text)}
+.car input::placeholder{color:#8f8a83}
+.car input:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.phone-ui{position:sticky;top:96px;display:grid;gap:14px;padding:16px;border-radius:30px;background:#101a17;box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)} /* taste-skill-ignore: the phone's own frame */
+.pu-top{display:flex;align-items:center;gap:12px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.08)} /* taste-skill-ignore: the chat app's own header line */
+.pu-top b{display:block;font-weight:600}
+.pu-top small{color:var(--soft);font-size:14px}
+.pu-av{position:relative;width:42px;height:42px;border-radius:50%;background:var(--panel-3);box-shadow:inset 0 0 0 2px var(--red)} /* taste-skill-ignore: a dial avatar */
+.pu-av i{position:absolute;left:50%;top:50%;width:15px;height:2.5px;margin-top:-1.25px;background:var(--yellow);transform-origin:0 50%;transform:rotate(-140deg)}
+.pu-chat{min-height:230px;padding:16px;border-radius:18px;background:#0b1310}
+.bubble{max-width:92%;padding:12px 14px;border-radius:14px 14px 4px 14px;background:#1f5c45;color:#eef7f1;white-space:pre-line;font-size:16px;line-height:1.5;min-height:3em;margin-inline-start:auto}
+html[dir="rtl"] .bubble{border-radius:14px 14px 14px 4px}
+.bubble .caret{display:inline-block;width:2px;height:1.05em;margin-inline-start:2px;vertical-align:-2px;background:#eef7f1;animation:caret 1s steps(1) infinite}
+@keyframes caret{50%{opacity:0}}
+.send{width:100%}
+@media (max-width:900px){ .cmp{grid-template-columns:1fr} .phone-ui{position:relative;top:auto} }
+@media (max-width:560px){
+  .lamp-board{grid-template-columns:repeat(3,1fr);padding:10px}
+  .rockers{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ---------------------------------------------------------------- faq: blade fuses */
+.faq-grid{display:grid;grid-template-columns:1.3fr .7fr;gap:clamp(24px,4vw,60px);align-items:center}
+.fuses{display:grid;gap:10px}
+.faq-fig{position:relative;aspect-ratio:1;border-radius:50%;overflow:hidden;box-shadow:0 0 0 10px var(--panel),0 0 0 13px var(--red)} /* taste-skill-ignore: the dial rim around the photo */
+.faq-fig img{width:100%;height:100%;object-fit:cover;object-position:38% 50%}
+html:not(.still) .faq-fig img{animation:kb 16s ease-in-out infinite alternate}
+.faq-fig figcaption{position:absolute;left:50%;bottom:12%;transform:translateX(-50%);white-space:nowrap;padding:5px 14px;border-radius:999px;background:rgba(8,8,10,.8);font-size:15px}
+@media (max-width:860px){ .faq-grid{grid-template-columns:1fr} .faq-fig{width:min(78vw,380px);margin:20px auto 0} }
+.fz{border-radius:18px;background:var(--panel);transition:background .2s ease}
+.fz[open]{background:var(--panel-2)}
+.fz summary{display:flex;align-items:center;gap:18px;min-height:72px;padding:14px 22px;cursor:pointer;list-style:none;font:600 var(--s-lead)/1.3 var(--text)}
+.fz summary::-webkit-details-marker{display:none}
+.blade{position:relative;flex:none;width:30px;height:40px;transition:transform .35s var(--ease)}
+.blade::before{content:"";position:absolute;inset:0 0 12px;border-radius:5px 5px 2px 2px;background:var(--fz)}
+.blade::after{content:"";position:absolute;bottom:0;left:6px;right:6px;height:14px;background:linear-gradient(90deg,#b9b4ab 0 6px,transparent 6px 12px,#b9b4ab 12px)} /* taste-skill-ignore: the fuse's two metal legs */
+.blade b{position:absolute;inset:0 0 12px;display:flex;align-items:center;justify-content:center;font:700 13px/1 var(--text);color:#111}
+.fz:not([open]) .blade{transform:translateY(-8px) rotate(-8deg)}
+.fz p{padding:0 22px 22px calc(22px + 30px + 18px);max-width:70ch}
+@media (max-width:560px){ .fz p{padding-inline-start:22px} .fz summary{gap:14px;padding:14px 16px} }
+
+/* ---------------------------------------------------------------- contact bento */
+.contact{padding-bottom:clamp(90px,10vw,150px)}
+.cb{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cb-t{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;min-height:190px;padding:22px;border-radius:var(--r);background:var(--panel);text-decoration:none;color:var(--ink);overflow:hidden;transition:transform .14s var(--ease),background .2s ease}
+.cb-t svg{position:absolute;top:22px;inset-inline-start:22px;width:30px;height:30px;fill:currentColor}
+.cb-t b{font:700 clamp(20px,1.6vw,26px)/1.15 var(--display)}
+.cb-wa{grid-column:span 2;background:var(--red);color:#fff}
+.cb-hours p{color:var(--ink)}
+.cb-hours .fact{align-self:flex-start;background:var(--panel-3)}
+.cb-map{grid-column:span 3;padding:0;min-height:320px}
+.cb-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(.4) contrast(1.05)}
+@media (hover:hover) and (pointer:fine){ a.cb-t:hover{background:var(--panel-2)} .cb-wa:hover{background:#e33840!important} }
+@media (max-width:900px){ .cb{grid-template-columns:repeat(2,1fr)} .cb-map{grid-column:span 2} }
+@media (max-width:560px){ .cb{grid-template-columns:1fr} .cb-wa,.cb-map{grid-column:auto} .cb-t{min-height:150px} }
+
+html.js:not(.still) [data-reveal]{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease) var(--d,0ms),transform .8s var(--ease) var(--d,0ms)}
+html.js:not(.still) [data-reveal].in{opacity:1;transform:none}
+
+/* ---------------------------------------------------------------- footer: the shutter rolls up */
+.foot{position:relative;z-index:1;overflow:hidden;background:var(--bg-2)}
+.shutter{position:absolute;inset:0;z-index:3;background:repeating-linear-gradient(to bottom,#5a83b3 0,#4d76a6 9px,#3b5f88 16px,#2f4e72 18px);transform:translateY(calc(var(--up,0) * -101%));will-change:transform} /* taste-skill-ignore: their blue corrugated roller shutter */
+.shutter::after{content:"";position:absolute;left:0;right:0;bottom:0;height:16px;background:#26405f}
+.sh-lock{position:absolute;left:50%;bottom:22px;width:46px;height:20px;margin-left:-23px;border-radius:5px;background:#1d2f45}
+html.still .shutter{display:none}
+.foot-in{padding:clamp(70px,8vw,120px) var(--m) calc(40px + env(safe-area-inset-bottom))}
+.sign{display:block;padding:.18em .32em .22em;border-radius:14px;background:var(--red);color:var(--yellow);font:700 80px/1 var(--display);letter-spacing:-.03em;white-space:nowrap;text-align:center;overflow:hidden}
+.foot-line{margin-top:26px;font-size:var(--s-lead)}
+.credits{display:grid;gap:8px;margin-top:30px;color:var(--soft);font-size:var(--s-small);max-width:110ch}
+.credits a{color:var(--ink)}
+
+/* ---------------------------------------------------------------- phones: two round push-start buttons */
+.start{display:none}
+@media (max-width:760px){
+  .start{position:fixed;bottom:calc(14px + env(safe-area-inset-bottom));inset-inline-end:14px;z-index:50;display:flex;align-items:center;gap:10px;transition:transform .4s var(--ease),opacity .3s ease}
+  .start.hide{transform:translateY(130%);opacity:0}
+  .st-wa,.st-call{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:50%;text-decoration:none;color:#fff;transition:transform .14s var(--ease)}
+  .st-wa{width:76px;height:76px;gap:2px;background:var(--red);outline:2px solid #6b2025;outline-offset:3px;font-size:12px;font-weight:600}
+  .st-wa svg{width:26px;height:26px;fill:currentColor}
+  .st-call{width:58px;height:58px;background:var(--panel-3);outline:2px solid #3a3a44;outline-offset:3px}
+  .st-call svg{width:24px;height:24px;fill:currentColor}
+  .foot-in{padding-bottom:calc(110px + env(safe-area-inset-bottom))}
+}
+@media (prefers-reduced-motion:reduce){ html.js:not(.still) [data-reveal]{transform:none} }
+
+@media (max-width:760px){
+  .cluster{margin-inline:-10px}
+  .gauge .lbl{font-size:30px}
+  .gauge .unit{font-size:19px}
+  .gauge .lcd{font-size:40px}
+}
