@@ -1,0 +1,402 @@
+/* AS Electrical Works — one cable runs the page: its cut face is the horizon, its jacket is stripped, its cores feed the work. */
+:root{
+  --bg:#0b2033;              /* the neutral core's blue, deepened */
+  --bg-2:#081827;
+  --card:#11304b;
+  --card-2:#173a59;
+  --line:rgba(176,206,236,.16);
+  --ink:#eef3f8;
+  --soft:#b6c6d7;
+  --cu:#d98b52;              /* copper strands */
+  --cu-hi:#ffd3a6;
+  --brown:#8b5a3a;           /* live core */
+  --blue:#2f6fbf;            /* neutral core */
+  --yel:#e7d43f;             /* earth: yellow ... */
+  --grn:#3aa35a;             /* ... and green */
+  --jacket:#5e6b78;
+  --live:#7fe0a0;
+  --text:"Heebo","Arial Hebrew",Arial,sans-serif;
+  --disp:"Secular One","Heebo",Arial,sans-serif;
+  --serif-he:"Bellefair",Georgia,serif;
+  --serif-en:"Fraunces",Georgia,serif;
+  --num:"Heebo",Arial,sans-serif;
+  --s-small:15px;
+  --s-body:clamp(1.0625rem,1rem + .25vw,1.2rem);
+  --s-lead:clamp(1.15rem,1.02rem + .5vw,1.45rem);
+  --s-head:clamp(2.3rem,1.4rem + 3vw,4.4rem);
+  --m:clamp(16px,3.2vw,48px);
+  --r:24px;
+  --ease:cubic-bezier(.23,1,.32,1);
+  --ease-io:cubic-bezier(.77,0,.175,1);
+  --earth:repeating-linear-gradient(125deg,var(--yel) 0 12px,var(--grn) 12px 20px);  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg-2);color:var(--ink);font:400 var(--s-body)/1.55 var(--text);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;touch-action:manipulation}
+h1,h2,h3,p,figure,ol,ul,blockquote{margin:0}
+ol,ul{padding:0;list-style:none}
+svg{fill:currentColor}
+.vh{position:absolute;width:0;height:0;overflow:hidden}
+html[lang="he"] [lang="en"]:not(html), html[lang="en"] [lang="he"]:not(html){display:none!important}
+:focus-visible{outline:2px solid var(--cu-hi);outline-offset:3px;border-radius:8px}
+::selection{background:var(--cu);color:#1a0d04}
+.skip{position:absolute;inset-inline-start:var(--m);top:-60px;z-index:60;background:var(--cu);color:#1a0d04;padding:10px 16px;border-radius:999px;text-decoration:none}
+.skip:focus{top:44px}
+em{font-style:normal;font-family:var(--serif-he);font-weight:400;color:var(--cu-hi)}
+html[lang="en"] em{font-family:var(--serif-en);font-style:italic;font-weight:500}  /* taste-skill-ignore: owner reference (SETI) mixes a serif accent word */
+h2{font:400 var(--s-head)/1.04 var(--disp);letter-spacing:-.01em;text-wrap:balance}
+h2 em{font-size:1.08em;line-height:.9}
+h3{font:700 clamp(1.15rem,1rem + .4vw,1.4rem)/1.2 var(--text)}
+
+/* ---------------------------------------------------------------- concept bar + nav */
+.concept{position:relative;z-index:41;display:flex;align-items:center;justify-content:center;min-height:34px;padding:6px var(--m);background:#06121e;color:var(--soft);font-size:14px;line-height:1.35;text-align:center}
+.nav{position:sticky;top:0;z-index:40;padding:0 var(--m);transition:padding .45s var(--ease)}
+.nav-in{display:flex;align-items:center;gap:18px;max-width:1500px;margin:0 auto;padding:12px 0;transition:max-width .45s var(--ease),padding .45s var(--ease),background-color .45s,border-color .45s;border:1px solid transparent;border-radius:999px}
+.nav.pill{padding-top:10px}
+.nav.pill .nav-in{max-width:1080px;padding:8px 10px 8px 14px;background:rgba(10,30,48,.72);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);border-color:var(--line);box-shadow:0 18px 50px -20px rgba(0,0,0,.6)}  /* taste-skill-ignore: horizonx floating pill */
+html[dir="rtl"] .nav.pill .nav-in{padding:8px 14px 8px 10px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+.brand .core3{width:34px;height:34px}
+.bname{font:400 26px/1 var(--disp);letter-spacing:.02em}
+.bsub{font-size:14px;color:var(--soft);white-space:nowrap}
+.links{display:flex;gap:4px;margin-inline-start:auto}
+.links a{padding:8px 12px;border-radius:999px;text-decoration:none;font-size:15px;color:var(--soft);transition:color .2s,background-color .2s}
+@media (hover:hover){.links a:hover{color:var(--ink);background:rgba(255,255,255,.06)}}
+.tools{display:flex;align-items:center;gap:8px;margin-inline-start:auto}
+.links + .tools{margin-inline-start:12px}
+.tgl{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 12px;border-radius:999px;border:1px solid var(--line);font-size:14px;color:var(--soft);transition:transform .14s var(--ease),border-color .2s}
+.tgl:active{transform:scale(.96)}
+.tgl .knob{position:relative;width:30px;height:18px;border-radius:999px;background:rgba(255,255,255,.12)}
+.tgl .knob::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:12px;height:12px;border-radius:50%;background:var(--soft);transition:transform .22s var(--ease),background-color .22s}
+.tgl[aria-checked="true"] .knob{background:var(--earth)}
+.tgl[aria-checked="true"] .knob::after{transform:translateX(12px);background:#fff}
+html[dir="rtl"] .tgl[aria-checked="true"] .knob::after{transform:translateX(-12px)}
+.tgl.lang{min-width:44px;justify-content:center;font-weight:700;color:var(--ink)}
+.pill-btn{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border-radius:999px;background:var(--cu);color:#1d0e04;font-weight:700;font-size:15px;text-decoration:none;transition:transform .14s var(--ease)}
+.pill-btn svg{width:18px;height:18px}
+.pill-btn:active{transform:scale(.96)}
+@media (max-width:1100px){.links{display:none}}
+@media (max-width:560px){.bsub,.pill-btn{display:none}.tgl{padding:0 10px}.nav-in{gap:10px}}
+
+/* buttons and chips */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 26px;border-radius:999px;background:var(--cu);color:#1d0e04;font-weight:700;font-size:17px;text-decoration:none;overflow:hidden;transition:transform .14s var(--ease)}
+.btn svg{width:20px;height:20px;flex:none}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:rgba(255,255,255,.04);color:var(--ink);border:1px solid rgba(255,255,255,.22);box-shadow:none}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.btn:not(.ghost)::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-120%)}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+html:not(.still) .btn:not(.ghost)::after{animation:sweep 4.6s var(--ease-io) 1.6s infinite}
+@keyframes sweep{0%,70%{transform:translateX(-120%)}100%{transform:translateX(120%)}}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:6px 14px;border-radius:999px;background:rgba(8,24,39,.6);border:1px solid var(--line);font-size:15px;color:var(--soft);text-decoration:none}
+.chip svg{width:15px;height:15px;color:var(--yel)}
+.chip .dot{width:8px;height:8px;border-radius:50%;background:#e7745a;flex:none}
+.chip.open .dot{background:var(--live)}
+html:not(.still) .chip.open .dot{animation:ping 1.8s ease-out infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(127,224,160,.6)}100%{box-shadow:0 0 0 10px rgba(127,224,160,0)}}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+
+/* ---------------------------------------------------------------- HERO */
+.hero{position:relative;min-height:calc(100svh - 34px);display:flex;flex-direction:column;align-items:center;padding:clamp(28px,6vh,72px) var(--m) 0;overflow:hidden;isolation:isolate;
+  background:radial-gradient(120% 70% at 50% 100%,#3a2a24 0%,#15283c 45%,var(--bg) 70%)}  /* taste-skill-ignore: warm light rising off the copper */
+.xsec{position:absolute;left:50%;bottom:0;width:min(1500px,170vw);aspect-ratio:1;transform:translate(-50%,58%);z-index:-1;transition:transform 1.6s var(--ease)}
+.xsec svg{width:100%;height:100%;display:block;overflow:visible}
+html.js:not(.still) .hero:not(.ready) .xsec{transform:translate(-50%,85%)}
+.xsec .halo{opacity:.75;transition:opacity .4s}
+.xsec .cores{opacity:.66}
+.h-copy::before{content:"";position:absolute;inset:-60px -120px -40px;z-index:-1;background:radial-gradient(closest-side,rgba(11,32,51,.82),rgba(11,32,51,.5) 60%,transparent);pointer-events:none}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+html:not(.still) .xsec .halo{animation:breathe 4.8s ease-in-out infinite alternate}
+@keyframes breathe{from{opacity:.55}to{opacity:.95}}
+html:not(.still) .xsec .glint{animation:glint 4.2s ease-in-out infinite}
+html:not(.still) .xsec .g2{animation-delay:1.4s} html:not(.still) .xsec .g3{animation-delay:2.8s}
+@keyframes glint{0%,100%{opacity:0}45%{opacity:.55}}
+.sparks{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.h-copy{position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center;max-width:1100px}
+.h-kicker{font-size:var(--s-lead);color:var(--soft)}  /* taste-skill-ignore: the trade title from their own listing name, not a decorative eyebrow */
+.h-kicker em{font-size:1.2em}
+.h-title{margin-top:10px;font:400 clamp(3rem,1.5rem + 7.2vw,8.6rem)/.98 var(--disp);letter-spacing:-.015em;text-wrap:balance}
+html[lang="en"] .h-title{font-size:clamp(2.8rem,1.2rem + 6.4vw,7.6rem)}
+.h-title .w{display:inline-block;white-space:nowrap}
+.h-title .ch{display:inline-block}
+html.js:not(.still) .h-title .ch{opacity:.12;filter:blur(10px);transform:translateY(.22em)}
+html.js:not(.still) .ready .h-title .ch{opacity:1;filter:none;transform:none;transition:opacity .55s var(--ease) calc(var(--i)*38ms),filter .6s var(--ease) calc(var(--i)*38ms),transform .7s var(--ease) calc(var(--i)*38ms)}
+.h-lead{margin-top:16px;max-width:40ch;font-size:var(--s-lead);color:var(--soft);text-wrap:balance}
+.h-cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:26px}
+.h-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:16px}
+html.js:not(.still) [data-rise]{opacity:0;transform:translateY(16px)}
+html.js:not(.still) .ready [data-rise]{opacity:1;transform:none;transition:opacity .7s var(--ease) var(--d),transform .7s var(--ease) var(--d)}
+
+/* the arc of their photos */
+.arc-wrap{position:relative;z-index:2;width:100%;height:clamp(250px,34vh,360px);margin-top:auto;perspective:1500px;cursor:grab;touch-action:pan-y}
+.arc-wrap.drag{cursor:grabbing}
+.arc{position:absolute;left:50%;top:46%;width:0;height:0;transform-style:preserve-3d}
+.rc{position:absolute;width:clamp(150px,13vw,210px);aspect-ratio:3/4;margin:0;transform:translate(-50%,-50%);border-radius:18px;overflow:hidden;background:var(--card);border:1px solid rgba(255,211,166,.28);box-shadow:0 24px 60px -24px rgba(0,0,0,.8);backface-visibility:hidden}  /* taste-skill-ignore: photo cards lift off the copper glow */
+.rc img{width:100%;height:100%;object-fit:cover;pointer-events:none;-webkit-user-drag:none}
+.rc figcaption{position:absolute;inset-inline:8px;bottom:8px;padding:4px 10px;border-radius:999px;background:rgba(8,24,39,.7);font-size:13px;width:max-content;max-width:calc(100% - 16px)}
+html.still .arc-wrap,html:not(.js) .arc-wrap{height:auto;perspective:none;cursor:auto;margin-top:36px;padding-bottom:40px}
+html.still .arc,html:not(.js) .arc{position:static;width:auto;height:auto;display:flex;gap:12px;overflow-x:auto;padding:10px 4px 20px;scroll-snap-type:x mandatory}
+html.still .rc,html:not(.js) .rc{position:relative;flex:0 0 170px;transform:none!important;scroll-snap-align:center}
+@media (max-width:700px){
+  .hero{padding-top:28px}
+  .h-title{font-size:clamp(2.7rem,13vw,4rem)}
+  html[lang="en"] .h-title{font-size:clamp(2.3rem,11vw,3.4rem)}
+  .h-cta .btn{flex:1 1 100%}
+  .arc-wrap{height:230px}
+  .rc{width:128px}
+  .xsec{transform:translate(-50%,62%)}
+}
+
+/* ---------------------------------------------------------------- SERVICES: the stripped cable and its tiles */
+.svc{position:relative;padding:clamp(60px,7vw,100px) var(--m) clamp(70px,9vw,120px);background:linear-gradient(180deg,#0f1c29 0,var(--bg) 220px)}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.strip{overflow:hidden;height:clamp(110px,14vw,210px);margin:0 calc(var(--m) * -1) -4px}
+.strip svg{width:100%;height:100%;display:block;overflow:visible}
+html[dir="rtl"] .strip svg{transform:scaleX(-1)}
+.w{fill:none;stroke-width:12px;stroke-linecap:round}
+.w1{stroke:var(--brown)} .w2{stroke:var(--blue)} .w3{stroke:url(#earth)}
+.svc-in{max-width:1400px;margin:0 auto}
+.s-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 40px;margin:0 0 10px}
+.s-head p{color:var(--soft);font-size:var(--s-lead);max-width:34ch}
+html.js:not(.still) [data-reveal]{opacity:0;transform:translateY(24px)}
+html.js:not(.still) [data-reveal].in{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .8s var(--ease)}
+
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:280px 280px 230px;gap:14px;grid-template-areas:"rcd rcd lamp lamp" "rcd rcd fan fan" "level level meter rate"}
+.t-rcd{grid-area:rcd} .t-lamp{grid-area:lamp} .t-fan{grid-area:fan} .t-level{grid-area:level} .t-meter{grid-area:meter} .t-rate{grid-area:rate}
+.tile{position:relative;overflow:hidden;border-radius:var(--r);background:var(--card);border:1px solid var(--line);isolation:isolate;--mx:50%;--my:50%}
+.tile::before{content:"";position:absolute;inset:0;z-index:4;pointer-events:none;background:radial-gradient(380px circle at var(--mx) var(--my),rgba(255,211,166,.14),transparent 60%);opacity:0;transition:opacity .3s}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+@media (hover:hover){.tile:hover::before{opacity:1}}
+.tile::after{content:"";position:absolute;inset-inline:0;top:0;height:3px;z-index:5;background:linear-gradient(90deg,transparent,var(--cu-hi),transparent);opacity:0;transition:opacity .6s}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.bento.live .tile::after{opacity:.9}
+.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;transition:filter .5s var(--ease),transform 1.2s var(--ease)}
+.t-shade,.t-lamp::after,.t-fan::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(0deg,rgba(6,18,30,.92) 0,rgba(6,18,30,.35) 45%,transparent 70%)}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.t-text{position:absolute;inset-inline:22px;bottom:20px;z-index:3}
+.t-text p{margin-top:6px;color:var(--soft);font-size:16px}
+html.js:not(.still) [data-tile]{opacity:0;transform:translateY(30px) scale(.97);filter:blur(6px)}
+html.js:not(.still) [data-tile].in{opacity:1;transform:none;filter:none;transition:opacity .8s var(--ease) var(--d,0ms),transform .8s var(--ease) var(--d,0ms),filter .8s var(--ease) var(--d,0ms)}
+
+/* RCD tile: press T, the lever drops, the room goes dark; lift it back */
+.t-rcd .ph{object-position:50% 30%}
+.t-rcd.trip .ph{filter:brightness(.22) saturate(.3)}
+.rcd-ctl{position:absolute;top:18px;inset-inline-end:18px;z-index:3;display:flex;align-items:center;gap:12px;padding:12px;border-radius:18px;background:linear-gradient(180deg,#e9edf0,#c4cbd2);box-shadow:0 14px 34px -12px rgba(0,0,0,.7),inset 0 1px 0 #fff}  /* taste-skill-ignore: a moulded RCD front */
+.tbtn{width:52px;height:52px;border-radius:10px;background:linear-gradient(180deg,#3a3f45,#1d2126);box-shadow:inset 0 -3px 0 #0c0e10,0 2px 0 #9aa3ab;color:#d7dde2;font:500 22px/1 var(--num);display:grid;place-items:center;transition:transform .12s var(--ease),box-shadow .12s}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.tbtn:active,.tbtn.press{transform:translateY(2px);box-shadow:inset 0 -1px 0 #0c0e10,0 0 0 #9aa3ab}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+html:not(.still) .t-rcd:not(.trip):not(.tested) .tbtn{animation:hint 2.4s ease-in-out 1.2s 3}
+@keyframes hint{0%,100%{box-shadow:inset 0 -3px 0 #0c0e10,0 0 0 0 rgba(217,139,82,.0)}50%{box-shadow:inset 0 -3px 0 #0c0e10,0 0 0 8px rgba(217,139,82,.45)}}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.lever{position:relative;width:44px;height:84px;border-radius:10px;background:#d4dade;box-shadow:inset 0 2px 6px rgba(0,0,0,.35)}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.lever .lv{position:absolute;left:6px;right:6px;top:6px;height:38px;border-radius:7px;background:linear-gradient(180deg,#30353b,#121518);box-shadow:0 3px 0 #000;transition:transform .32s var(--ease)}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.lever .lv i{position:absolute;left:8px;right:8px;top:8px;height:4px;border-radius:2px;background:#5b636b}
+.lever[aria-pressed="false"] .lv{transform:translateY(34px)}
+.lever b{position:absolute;inset-inline-start:-18px;font:500 13px/1 var(--num);color:#2a3138}
+.lever .l1{top:10px} .lever .l0{bottom:10px}
+.t-rcd .t-text p{color:var(--ink)}
+.t-rcd.trip .t-text p{color:var(--cu-hi)}
+
+/* lamp tile: a real pendant, lit by the dimmer */
+.t-lamp{--dim:.7}
+.t-lamp .ph{object-position:50% 35%;filter:brightness(calc(.38 + var(--dim) * .7)) saturate(calc(.6 + var(--dim) * .5))}
+.glow{position:absolute;left:41%;top:30%;width:70%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;z-index:-1;background:radial-gradient(circle,rgba(255,214,150,.85) 0,rgba(255,190,110,.35) 22%,transparent 62%);mix-blend-mode:screen;opacity:var(--dim);pointer-events:none}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+html[dir="rtl"] .glow{left:41%}
+.dim{display:flex;align-items:center;gap:12px;margin-top:10px;font-size:15px;color:var(--soft)}
+.dim input{flex:1;max-width:220px;height:32px;accent-color:var(--cu);font-size:16px;touch-action:pan-y}
+
+/* fan tile: air drifting down from the real fan */
+.t-fan .ph{object-position:50% 20%}
+html:not(.still) .t-fan.on .ph{transform:scale(1.06)}
+.air{position:absolute;left:48%;top:20%;width:46%;height:70%;transform:translateX(-50%);z-index:-1;pointer-events:none}
+.air i{position:absolute;top:0;width:2px;height:40%;border-radius:2px;background:linear-gradient(180deg,rgba(220,236,255,0),rgba(220,236,255,.55),rgba(220,236,255,0));opacity:0}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.air i:nth-child(1){left:8%} .air i:nth-child(2){left:24%} .air i:nth-child(3){left:40%} .air i:nth-child(4){left:58%} .air i:nth-child(5){left:74%} .air i:nth-child(6){left:90%}
+html:not(.still) .t-fan.on .air i{animation:air 2.6s linear infinite}
+.air i:nth-child(2n){animation-delay:.9s!important} .air i:nth-child(3n){animation-delay:1.7s!important}
+@keyframes air{0%{transform:translateY(-10%) scaleY(.6);opacity:0}30%{opacity:.9}100%{transform:translateY(150%) scaleY(1.2);opacity:0}}
+html.still .air i{opacity:.4;top:20%}
+
+/* level tile */
+.t-level{background:linear-gradient(160deg,#173a59,#0f2a42)}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.lvl{position:absolute;inset-inline:6%;top:16%;width:88%;height:auto;filter:drop-shadow(0 18px 24px rgba(0,0,0,.45))}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.bub{transition:transform .5s var(--ease)}
+
+/* meter tile */
+.t-meter{background:linear-gradient(160deg,#2a2f36,#151a20)}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.lcd{position:absolute;top:22px;inset-inline:20px;font-variant-numeric:tabular-nums;display:flex;align-items:baseline;justify-content:center;gap:6px;direction:ltr;padding:16px 10px;border-radius:12px;background:#9fb59a;box-shadow:inset 0 3px 10px rgba(0,0,0,.45);color:#1d2a1b;font:500 clamp(30px,3vw,46px)/1 var(--num)}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.lcd .u{font-size:.5em}
+/* rating tile */
+.t-rate{background:linear-gradient(160deg,#3a2a20,#1b1410);display:flex;align-items:flex-start;padding:22px}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.t-rate .stars{display:flex;gap:3px;margin-top:8px;color:var(--yel)}
+.stars svg{width:16px;height:16px}
+.odo{display:inline-flex;direction:ltr;font:400 clamp(54px,5.4vw,84px)/1 var(--disp);color:var(--cu-hi)}
+.odo .d{display:inline-block;height:1.1em;overflow:hidden;vertical-align:top}
+.odo .d > span{display:block;transition:transform 1.6s var(--ease)}
+.odo .d > span > b{display:block;height:1.1em;line-height:1.1;font-weight:inherit}
+.odo .d > span > b::before{content:attr(data-n)}
+@media (max-width:1000px){
+  .bento{grid-template-columns:1fr 1fr;grid-template-rows:440px 280px 220px 210px;grid-template-areas:"rcd rcd" "lamp fan" "level level" "meter rate"}
+}
+@media (max-width:640px){
+  .bento{grid-template-columns:1fr 1fr;grid-template-rows:460px 260px 260px 200px 200px;grid-template-areas:"rcd rcd" "lamp lamp" "fan fan" "level level" "meter rate";gap:10px}
+  .t-text{inset-inline:16px;bottom:14px}
+  .t-meter .t-text p{display:none}
+  .t-rate .t-text h3{font-size:15px}
+  .lcd{inset-inline:12px;font-size:28px;padding:12px 6px}
+  .t-rate{padding:16px}
+  .odo{font-size:54px}
+}
+
+/* ---------------------------------------------------------------- INSIDE THE PANEL (scroll-driven camera) */
+.zoom{position:relative;overflow-x:clip;background:radial-gradient(90% 60% at 70% 40%,#16314a,var(--bg-2) 70%)}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+html.js:not(.still) .zoom{height:320svh}
+.z-stage{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1fr);align-items:center;gap:clamp(24px,5vw,80px);max-width:1400px;margin:0 auto;padding:clamp(60px,8vw,110px) var(--m)}
+html.js:not(.still) .z-stage{position:sticky;top:0;height:100svh;padding-top:70px;padding-bottom:24px}
+.z-stage{position:relative;isolation:isolate}
+.z-bg{position:absolute;top:0;bottom:0;left:calc(50% - 50vw);width:100vw;z-index:-1;overflow:hidden;pointer-events:none}
+.z-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(70% 80% at 50% 50%,rgba(8,24,39,.35),rgba(8,24,39,.92))}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.z-bg img{width:100%;height:100%;object-fit:cover;filter:blur(34px) brightness(.5) saturate(1.3);transform:scale(1.25)}
+.z-copy p{margin-top:14px;color:var(--soft);font-size:var(--s-lead);max-width:30ch}
+.z-steps{display:flex;flex-direction:column;gap:10px;margin-top:30px}
+.z-steps li{display:flex;align-items:center;gap:14px;font-size:18px;color:var(--soft);transition:color .3s}
+.z-steps li::before{content:"";width:44px;height:8px;border-radius:4px;background:rgba(255,255,255,.12);transition:background .4s}
+.z-steps li:nth-child(1).on::before{background:var(--brown)} .z-steps li:nth-child(2).on::before{background:var(--blue)} .z-steps li:nth-child(3).on::before{background:var(--earth)}
+.z-steps li.on{color:var(--ink)}
+.z-frame{position:relative;justify-self:center;height:min(80svh,820px);aspect-ratio:3/4;max-width:100%;border-radius:28px;overflow:hidden;border:1px solid rgba(255,211,166,.25);box-shadow:0 40px 90px -40px #000,0 0 0 8px rgba(255,255,255,.03)}  /* taste-skill-ignore: framed real photo */
+.z-cam{position:absolute;inset:0;transform-origin:0 0;--inv:1}
+.z-cam img{width:100%;height:100%;object-fit:cover}
+.pin{position:absolute;left:calc(var(--x) * 100%);top:calc(var(--y) * 100%);width:0;height:0}
+.pin i{position:absolute;left:-8px;top:-8px;width:16px;height:16px;border-radius:50%;background:var(--cu-hi);box-shadow:0 0 0 4px rgba(217,139,82,.35);transform:scale(var(--inv));opacity:0;transition:opacity .3s}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.pin .tag{position:absolute;left:14px;top:-15px;transform-origin:-14px 15px;transform:scale(var(--inv));white-space:nowrap;padding:5px 12px;border-radius:999px;background:rgba(8,24,39,.86);border:1px solid rgba(255,211,166,.35);font:500 14px/1.4 var(--num);color:var(--ink);opacity:0;transition:opacity .25s}
+html[lang="he"] .pin .tag{font-family:var(--text);font-weight:500;font-size:15px}
+.pin.flip .tag{left:auto;right:14px;transform-origin:calc(100% + 14px) 15px}
+.pin.on i,.pin.on .tag{opacity:1}
+html:not(.still) .pin.on i{animation:ping2 1.8s ease-out infinite}
+@keyframes ping2{0%{box-shadow:0 0 0 0 rgba(255,211,166,.7)}100%{box-shadow:0 0 0 14px rgba(255,211,166,0)}}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.z-note{position:absolute;bottom:12px;inset-inline-start:12px;padding:4px 10px;border-radius:999px;background:rgba(8,24,39,.7);font-size:12px;color:var(--soft)}
+@media (max-width:860px){
+  .z-stage{grid-template-columns:1fr;gap:18px;align-content:start}
+  html.js:not(.still) .z-stage{padding-top:72px}
+  .z-copy p{font-size:16px;margin-top:8px}
+  .z-steps{flex-direction:row;flex-wrap:wrap;gap:8px 16px;margin-top:14px}
+  .z-steps li{font-size:15px;gap:8px}
+  .z-steps li::before{width:24px;height:6px}
+  .z-frame{height:auto;width:min(100%,calc((100svh - 300px) * .75));min-width:240px}
+}
+
+/* ---------------------------------------------------------------- REVIEWS: modules landing on a DIN rail */
+.revs{position:relative;padding:clamp(60px,7vw,100px) var(--m);background:linear-gradient(180deg,var(--bg-2),#0e2235 40%,var(--bg))}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.r-head{display:flex;align-items:center;gap:clamp(18px,3vw,40px);max-width:1400px;margin:0 auto 40px}
+.r-head p{margin-top:8px;color:var(--soft);font-size:var(--s-lead)}
+.odo.big{font-size:clamp(84px,10vw,160px)}
+.rail-wrap{position:relative;max-width:1400px;margin:0 auto}
+.din{position:absolute;inset-inline:-2%;top:30px;height:30px;border-radius:4px;background:linear-gradient(180deg,#d7dee5,#8d99a5 45%,#c3ccd5 55%,#6c7884);box-shadow:0 10px 30px -10px #000}  /* taste-skill-ignore: rendered steel rail */
+.din::after{content:"";position:absolute;inset:11px 0;background:repeating-linear-gradient(90deg,transparent 0 46px,rgba(0,0,0,.35) 46px 60px)}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.mods{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.mod{position:relative;display:flex;flex-direction:column;gap:14px;padding:0 22px 24px;border-radius:16px;background:linear-gradient(180deg,#1b3550,#13283d);border:1px solid var(--line);box-shadow:0 30px 60px -30px #000}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.m-top{display:flex;align-items:center;justify-content:space-between;margin:0 -22px;padding:14px 18px;border-radius:16px 16px 0 0;background:linear-gradient(180deg,#e3e8ec,#bfc7ce);color:#28313a}  /* taste-skill-ignore: moulded breaker cap */
+.m-top b{width:34px;height:12px;border-radius:3px;background:#c8323a;opacity:.2;transition:opacity .3s .5s}
+.m-lv{position:relative;width:26px;height:44px;border-radius:6px;background:#9aa3ab;box-shadow:inset 0 2px 4px rgba(0,0,0,.4)}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.m-lv::after{content:"";position:absolute;left:3px;right:3px;top:3px;height:20px;border-radius:4px;background:#1b1f23;transform:translateY(18px);transition:transform .35s var(--ease) .45s}
+.mod.in .m-lv::after,html.still .m-lv::after,html:not(.js) .m-lv::after{transform:none}
+.mod.in .m-top b,html.still .m-top b{opacity:1}
+.mod .stars{display:flex;gap:3px;color:var(--yel)}
+.mod blockquote{font-size:17px;line-height:1.6}
+.mod cite{margin-top:auto;font-style:normal;font-weight:700;color:var(--cu-hi)}
+html.js:not(.still) .mod{opacity:0;transform:translateY(-70px) rotate(-2.5deg)}
+html.js:not(.still) .mod:nth-child(2n){transform:translateY(-90px) rotate(2deg)}
+html.js:not(.still) .mod.in{opacity:1;transform:none;transition:opacity .5s var(--ease) var(--d,0ms),transform .9s var(--ease) var(--d,0ms)}
+.r-note{margin-top:18px;font-size:14px;color:var(--soft)}
+@media (max-width:1100px){.mods{grid-template-columns:1fr 1fr}.din{display:none}}
+@media (max-width:640px){.mods{grid-template-columns:1fr}.r-head{gap:16px}}
+
+/* ---------------------------------------------------------------- MESSAGE: wall plate of rocker switches */
+.msg{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(30px,5vw,80px);align-items:center;max-width:1400px;margin:0 auto;padding:clamp(60px,7vw,100px) var(--m)}
+.m-steps{display:flex;flex-direction:column;gap:14px;margin-top:30px}
+.m-steps li{display:flex;align-items:center;gap:14px;font-size:19px;color:var(--soft);transition:color .3s}
+.m-steps b{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);font:500 16px/1 var(--num);transition:background .3s,color .3s}
+.m-steps li.on{color:var(--ink)} .m-steps li.on b{background:var(--cu);color:#1d0e04;border-color:transparent}
+.m-board{display:grid;grid-template-columns:1fr 1fr;grid-template-areas:"what phone" "when phone";gap:16px;align-items:start}
+.plate{grid-area:what;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:14px;border-radius:22px;background:linear-gradient(160deg,#e9e5dc,#cfc9bd);box-shadow:0 30px 60px -30px #000,inset 0 1px 0 #fff}  /* taste-skill-ignore: a wall switch plate */
+.plate.small{grid-area:when;grid-template-columns:repeat(3,1fr)}
+.rocker{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:end;gap:8px;min-height:118px;padding:10px 6px 12px;border-radius:12px;background:linear-gradient(180deg,#f3f0ea,#dcd6cb);box-shadow:inset 0 0 0 1px rgba(0,0,0,.08);color:#2c2a26;font-size:15px;font-weight:500;transition:transform .14s var(--ease)}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.plate.small .rocker{min-height:92px}
+.rocker:active{transform:scale(.97)}
+.rk{position:relative;width:48px;height:56px;border-radius:8px;background:linear-gradient(180deg,#fbfaf7 0,#e4dfd5 50%,#cfc8bb 51%,#ece8e0 100%);box-shadow:0 2px 3px rgba(0,0,0,.25);transition:background .2s}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.plate.small .rk{height:40px;width:40px}
+.rk::after{content:"";position:absolute;left:50%;top:8px;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:#b8b2a6;transition:background .2s,box-shadow .2s}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.rocker[aria-pressed="true"] .rk,.rocker[aria-checked="true"] .rk{background:linear-gradient(180deg,#d6d0c4 0,#ebe7df 49%,#fbfaf7 50%,#e4dfd5 100%)}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.rocker[aria-pressed="true"] .rk::after,.rocker[aria-checked="true"] .rk::after{background:#ff8a3c;box-shadow:0 0 10px 2px rgba(255,138,60,.8)}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.phone{grid-area:phone;display:flex;flex-direction:column;gap:14px;padding:16px;border-radius:30px;background:#0a1621;border:1px solid var(--line);min-height:290px;box-shadow:0 40px 80px -40px #000}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.ph-top{display:flex;align-items:center;gap:10px;padding-bottom:6px;font-size:15px}
+.ph-top .core3{width:30px;height:30px}
+.bubble{position:relative;align-self:flex-start;max-width:94%;padding:12px 14px;border-radius:16px 16px 16px 4px;background:#1f5b45;color:#eafff3;font-size:16px;line-height:1.5;min-height:3em}
+html[dir="rtl"] .bubble{border-radius:16px 16px 4px 16px}
+.caret{display:inline-block;width:2px;height:1.1em;margin-inline-start:2px;vertical-align:text-bottom;background:#eafff3}
+html:not(.still) .caret{animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.send{margin-top:auto}
+@media (max-width:960px){
+  .msg{grid-template-columns:1fr}
+  .m-steps{flex-direction:row;flex-wrap:wrap;gap:10px 18px;margin-top:18px}
+  .m-steps li{font-size:16px;gap:8px} .m-steps b{width:30px;height:30px;font-size:14px}
+}
+@media (max-width:640px){
+  .m-board{grid-template-columns:1fr;grid-template-areas:"what" "when" "phone"}
+  .rocker{min-height:100px}
+}
+
+/* ---------------------------------------------------------------- CONTACT bento */
+.reach{position:relative;overflow-x:clip;padding:clamp(60px,7vw,100px) var(--m) clamp(70px,8vw,120px);background:linear-gradient(180deg,var(--bg),#0d2a44)}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.reach h2{max-width:1400px;margin:0 auto 34px}
+.cb{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:auto auto;gap:14px;max-width:1400px;margin:0 auto;grid-template-areas:"map hours hours" "map wa call"}
+.cb > *{min-width:0;border-radius:var(--r);border:1px solid var(--line);background:var(--card);overflow:hidden}
+.c-map{grid-area:map;position:relative;min-height:420px}
+.c-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:saturate(.7) brightness(.85)}
+.c-dir{position:absolute;bottom:14px;inset-inline-start:14px;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;background:rgba(8,24,39,.88);text-decoration:none;font-size:15px}
+.c-dir svg{width:18px;height:18px;color:var(--cu-hi)}
+.c-hours{grid-area:hours;padding:24px}
+.c-hours .chip{margin:12px 0 10px}
+.c-hours table{width:100%;border-collapse:collapse;font-size:17px}
+.c-hours td{padding:9px 0;border-top:1px solid var(--line)}
+.c-hours td:last-child{text-align:end;color:var(--soft)}
+.c-hours tr.today td{color:var(--cu-hi);font-weight:700}
+.c-wa,.c-call{display:flex;flex-direction:column;justify-content:space-between;gap:30px;min-height:170px;padding:24px;text-decoration:none;font-weight:700;font-size:19px;transition:transform .14s var(--ease)}
+.c-wa{grid-area:wa;background:linear-gradient(160deg,#1f6b4d,#124432)}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.c-call{grid-area:call;background:linear-gradient(160deg,#3a2a20,#1d140e);position:relative}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.c-call::after{content:"";position:absolute;inset-inline:0;bottom:0;height:10px;background:var(--earth)}
+.c-wa svg,.c-call svg{width:34px;height:34px}
+.c-call .num{font:400 clamp(24px,2.2vw,32px)/1 var(--disp)}
+.c-wa:active,.c-call:active{transform:scale(.98)}
+html.js:not(.still) .cb [data-tile]{transform:translateX(40px);filter:none}
+html.js:not(.still)[dir="rtl"] .cb [data-tile]{transform:translateX(-40px)}
+html.js:not(.still) .cb [data-tile].in{transform:none}
+@media (max-width:900px){
+  .cb{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"hours hours" "map map" "wa call"}
+  .c-call .num{font-size:clamp(19px,5.6vw,26px);white-space:nowrap}
+  .c-wa,.c-call{padding:18px 16px;font-size:17px}
+  .c-map{min-height:320px}
+}
+
+/* ---------------------------------------------------------------- FOOTER: a curtain under the page */
+.page{position:relative;z-index:1;background:var(--bg);box-shadow:0 30px 60px rgba(0,0,0,.5)}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.foot{position:sticky;bottom:0;z-index:0;overflow:hidden;padding:clamp(70px,9vw,110px) var(--m) calc(40px + env(safe-area-inset-bottom));background:radial-gradient(90% 90% at 50% 120%,#3a2a24,#081827 60%);text-align:center}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+.f-xsec{position:absolute;left:50%;bottom:0;width:min(900px,140vw);aspect-ratio:1;transform:translate(-50%,calc(66% + var(--rise,0px)));opacity:.55;pointer-events:none}
+.f-xsec svg{width:100%;height:100%;overflow:visible}
+.f-in{position:relative;display:flex;flex-direction:column;align-items:center;gap:10px;max-width:900px;margin:0 auto;color:var(--soft);font-size:16px}
+.f-name{font:400 clamp(2.2rem,1.4rem + 3vw,4rem)/1 var(--disp);color:var(--ink);margin-bottom:6px}
+.f-small{font-size:14px}
+.f-in a{color:var(--cu-hi)}
+
+/* ---------------------------------------------------------------- DOCK (phones) */
+.dock{display:none}
+@media (max-width:760px){
+  body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+  .dock{position:fixed;z-index:45;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));display:flex;gap:8px;padding:6px;border-radius:999px;background:rgba(8,24,39,.86);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--line);box-shadow:0 20px 40px -14px #000;transform:translateY(140%);transition:transform .45s var(--ease)}  /* taste-skill-ignore: floating dock */
+  .dock.show{transform:none}
+  .d-wa{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;border-radius:999px;background:var(--cu);color:#1d0e04;font-weight:700;text-decoration:none;user-select:none}
+  .d-call{position:relative;flex:none;display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:#0b2033;color:var(--ink);box-shadow:0 0 0 3px transparent}  /* taste-skill-ignore: rendered metal, copper glow and depth from the trade (CLAUDE.md g0, owner SETI/horizonx refs) */
+  .d-call::before{content:"";position:absolute;inset:-3px;border-radius:50%;background:var(--earth);z-index:-1}
+  .d-call{isolation:isolate}
+  .d-wa svg,.d-call svg{width:22px;height:22px}
+  .d-wa:active,.d-call:active{transform:scale(.96)}
+}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+
+.resting{display:none}
+html.still .resting,html:not(.js) .resting{display:block}
+html.still .moving,html:not(.js) .moving{display:none}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;z-index:4;pointer-events:none;background:linear-gradient(180deg,rgba(15,28,41,0),#0f1c29)}  /* taste-skill-ignore: seamless seam into the next section */
