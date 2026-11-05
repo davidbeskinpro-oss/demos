@@ -1,0 +1,402 @@
+/* STEPS — built from the logo: its turquoise name, its coral roof line, its five rising dots (footprints climbing steps). */
+:root{
+  --bg:#0f2629;
+  --bg-2:#0b1e21;
+  --card:#163539;
+  --card-2:#1d444a;
+  --line:rgba(239,230,216,.1);
+  --ink:#efe6d8;             /* warm marble, from the banner wall behind them */
+  --soft:#b6cdcb;
+  --teal:#3bc1cd;            /* the logo's STEPS */
+  --coral:#f68b62;           /* the logo's roof and נדל״ן */
+  --live:#7ee0a4;
+  --text:"Rubik","Arial Hebrew",Arial,sans-serif;
+  --display:"Secular One","Rubik",Arial,sans-serif;
+  --serif:"Suez One",Georgia,serif;
+  --s-small:15px;
+  --s-body:clamp(1.0625rem,1rem + .25vw,1.2rem);
+  --s-lead:clamp(1.15rem,1.05rem + .5vw,1.45rem);
+  --s-head:clamp(2.3rem,1.5rem + 2.8vw,4.2rem);
+  --m:clamp(16px,3vw,44px);
+  --r:22px;
+  --ease:cubic-bezier(.23,1,.32,1);
+  --ease-io:cubic-bezier(.77,0,.175,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg-2);color:var(--ink);font:400 var(--s-body)/1.55 var(--text);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;touch-action:manipulation}
+h1,h2,h3,p,figure,ol,ul,blockquote,fieldset{margin:0}
+fieldset{border:0;padding:0;min-width:0}
+ol,ul{padding:0;list-style:none}
+.vh{position:absolute;width:0;height:0;overflow:hidden}
+.num{font-variant-numeric:lining-nums tabular-nums}
+html[lang="he"] [lang="en"]:not(html), html[lang="en"] [lang="he"]:not(html){display:none!important}
+::selection{background:var(--teal);color:var(--bg-2)}
+:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;inset-inline-start:var(--m);top:-60px;z-index:60;background:var(--teal);color:var(--bg-2);padding:10px 16px;border-radius:999px;text-decoration:none}
+.skip:focus{top:44px}
+h2{font:400 var(--s-head)/1.05 var(--display);letter-spacing:-.02em}
+h3{font:500 21px/1.2 var(--text)}
+em{font:400 1em/1 var(--serif);font-style:normal;color:var(--teal)}   /* taste-skill-ignore: serif accent words, the owner's SETI reference */
+.head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 40px;margin-bottom:34px}
+.head p{max-width:42ch;font-size:var(--s-lead);line-height:1.4;color:var(--soft)}
+section{position:relative;padding:clamp(80px,9vw,130px) var(--m) 0}
+.stars{display:inline-flex;gap:2px}
+.stars svg{width:15px;height:15px;fill:#f5c35b}
+.page{position:relative;z-index:2;background:var(--bg)}
+
+.concept{position:relative;z-index:41;display:flex;align-items:center;justify-content:center;min-height:34px;padding:6px var(--m);background:var(--bg-2);color:var(--soft);font-size:var(--s-small);line-height:1.35;text-align:center}
+
+/* ---------------------------------------------------------------- nav: a bar that gathers into a floating pill */
+.nav{position:sticky;top:0;z-index:40;padding:0 var(--m);background:var(--bg);transition:padding .45s var(--ease),background .3s ease}
+.nav.pill{padding-top:12px;background:transparent}
+.nav-in{display:flex;align-items:center;gap:18px;max-width:2000px;margin:0 auto;height:70px;padding:0 4px;border-radius:999px;border:1px solid transparent;transition:max-width .6s var(--ease),height .45s var(--ease),padding .45s var(--ease),background .4s ease,border-color .4s ease}
+.nav.pill .nav-in{max-width:1080px;height:60px;padding:0 12px;background:rgba(22,53,57,.86);border-color:var(--line);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)} /* taste-skill-ignore: the owner's references use a floating frosted pill */
+.brand{display:flex;align-items:center;text-decoration:none}
+.brand img{width:118px;height:auto}
+.links{display:flex;gap:2px;margin-inline-start:auto;font-size:16px}
+.links a{padding:8px 12px;border-radius:999px;text-decoration:none;color:var(--soft);transition:color .2s ease,background .2s ease}
+.tools{display:flex;align-items:center;gap:6px}
+.tgl{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;background:var(--card);color:var(--ink);font-size:15px;transition:transform .14s var(--ease),background .2s ease}
+.tgl .knob{position:relative;width:30px;height:18px;border-radius:999px;background:#35585c;transition:background .2s ease}
+.tgl .knob::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:12px;height:12px;border-radius:50%;background:var(--ink);transition:transform .22s var(--ease)}
+.tgl[aria-checked="true"] .knob{background:var(--teal)}
+.tgl[aria-checked="true"] .knob::after{transform:translateX(12px)}
+html[dir="rtl"] .tgl[aria-checked="true"] .knob::after{transform:translateX(-12px)}
+.tgl.lang{min-width:46px;justify-content:center;font-weight:700}
+.pill-btn,.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:44px;padding:0 18px;border-radius:999px;background:var(--teal);color:#08292d;text-decoration:none;font-weight:700;font-size:16px;overflow:hidden;transition:transform .14s var(--ease),background .2s ease}
+.btn{min-height:54px;padding:0 26px;font-size:17px}
+.btn.ghost{background:var(--card-2);color:var(--ink)}
+.pill-btn svg,.btn svg{width:20px;height:20px;fill:currentColor}
+.pill-btn:active,.btn:active,.tgl:active,.chip:active,.opts button:active,.rb:active,.arw:active,.dk:active,.send:active{transform:scale(.97)}
+@media (hover:hover) and (pointer:fine){
+  .links a:hover{color:var(--ink);background:var(--card)}
+  .btn:hover,.pill-btn:hover{background:#62d3dc} .btn.ghost:hover{background:#255259}
+  .tgl:hover{background:var(--card-2)}
+}
+@media (max-width:1060px){ .links{display:none} .tools{margin-inline-start:auto} }
+@media (max-width:600px){
+  .nav-in{gap:8px;height:62px} .brand img{width:96px}
+  .tgl{padding:0 11px} .tgl > span[lang]{display:none!important}
+  html[lang="he"] .tgl.lang [lang="he"], html[lang="en"] .tgl.lang [lang="en"]{display:inline!important}
+  .pill-btn span{display:none} .pill-btn{width:44px;padding:0}
+}
+
+/* ---------------------------------------------------------------- hero: copy on one side, the house on the other */
+.hero{display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:clamp(20px,4vw,70px);min-height:calc(100svh - 104px);padding:clamp(20px,3vw,40px) var(--m) clamp(90px,9vw,130px);overflow:hidden;isolation:isolate}
+.feet{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.glow{position:absolute;z-index:0;inset-inline-end:-10%;top:8%;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(closest-side,rgba(59,193,205,.30),rgba(59,193,205,.08) 55%,transparent);pointer-events:none} /* taste-skill-ignore: window light behind the house */
+html:not(.still) .glow{animation:breathe 7s ease-in-out infinite alternate}
+@keyframes breathe{from{transform:scale(.92);opacity:.75}to{transform:scale(1.06);opacity:1}}
+.h-copy{position:relative;z-index:3}
+.h-title{font:400 clamp(46px,6.2vw,104px)/1.02 var(--display);letter-spacing:-.02em}
+html[lang="en"] .h-title{font-size:clamp(42px,5.4vw,92px)}
+.h-title .ln{display:block}
+.h-title .acc{color:var(--teal)}
+.h-title .acc [lang]{font-family:var(--serif)}
+.h-title .w{display:inline-block;white-space:nowrap}
+.h-title .ch{display:inline-block}
+html.js:not(.still) .h-title .ch{opacity:0;transform:translateY(.4em);filter:blur(10px)}
+html.js:not(.still) .ready .h-title .ch{opacity:1;transform:none;filter:none;transition:opacity .6s var(--ease) calc(var(--i)*30ms),transform .8s var(--ease) calc(var(--i)*30ms),filter .6s var(--ease) calc(var(--i)*30ms)}
+.h-lead{max-width:40ch;margin-top:22px;font-size:var(--s-lead);line-height:1.45;color:var(--soft)}
+.h-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.h-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border-radius:999px;background:rgba(22,53,57,.8);border:1px solid var(--line);font-size:15px;text-decoration:none;color:var(--ink)}
+.chip .dot{width:8px;height:8px;border-radius:50%;background:#e78a6a}
+.chip.open .dot{background:var(--live)}
+html:not(.still) .chip.open .dot{animation:ping 1.8s ease-out infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(126,224,164,.6)}100%{box-shadow:0 0 0 10px rgba(126,224,164,0)}} /* taste-skill-ignore: status ping / pin halo / glowing footprint / edge fade mask / floating dock over content */
+html.js:not(.still) [data-rise]{opacity:0;transform:translateY(18px)}
+html.js:not(.still) .ready [data-rise]{opacity:1;transform:none;transition:opacity .7s var(--ease) var(--d),transform .7s var(--ease) var(--d)}
+
+/* the house: the logo's roof line drawn over two portraits standing on two steps */
+.house{position:relative;z-index:2;width:min(100%,560px);margin-inline:auto;aspect-ratio:10/11;perspective:900px}
+.roof{position:absolute;z-index:3;left:-4%;top:-2%;width:108%;height:auto;aspect-ratio:400/150;overflow:visible}
+.roof polyline,.s-roof polyline,.r-roof polyline{fill:none;stroke:var(--coral);stroke-width:9;stroke-linejoin:miter}
+.roof polyline{stroke-width:7;stroke-dasharray:1;stroke-dashoffset:0}
+html.js:not(.still) .roof polyline{stroke-dashoffset:1}
+html.js:not(.still) .ready .roof polyline{stroke-dashoffset:0;transition:stroke-dashoffset 1.6s var(--ease-io) .25s}
+.p{position:absolute;bottom:13%;width:40%;border-radius:20px;overflow:hidden;background:#d9d4cc;box-shadow:0 30px 60px -20px rgba(0,0,0,.6);transform-style:preserve-3d;will-change:transform} /* taste-skill-ignore: photo cards lifted off the steps */
+.p img{width:100%;aspect-ratio:3/4.6;object-fit:cover;object-position:50% 0}
+.p::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(15,38,41,.55),transparent 38%),linear-gradient(to bottom,rgba(15,38,41,.25),transparent 30%);pointer-events:none} /* taste-skill-ignore: tones the bright marble down into the page */
+.p1{inset-inline-start:7%}
+.p2{inset-inline-end:7%;bottom:24%}
+.treads{position:absolute;inset:auto 0 0;height:24%}
+.treads i{position:absolute;bottom:0;border-radius:6px 6px 0 0;background:linear-gradient(to bottom,var(--card-2),var(--card))} /* taste-skill-ignore: the stone step, lit from above */
+.treads i::before{content:"";position:absolute;inset:0 0 auto;height:4px;border-radius:6px 6px 0 0;background:var(--teal);opacity:.7}
+.treads i:first-child{inset-inline-start:0;width:52%;height:54%}
+.treads i:last-child{inset-inline-end:0;width:52%;height:100%}
+.h-tag{position:absolute;inset-inline-start:0;bottom:-46px;font-size:15px;color:var(--soft)}
+.h-tag::before{content:"";display:inline-block;width:26px;height:2px;margin-inline-end:10px;vertical-align:middle;background:var(--coral)}
+html.js:not(.still) .p{opacity:0;transform:translateY(40px) rotate(-3deg)}
+html.js:not(.still) .ready .p{opacity:1;transform:var(--tilt,none);transition:opacity .8s var(--ease) .5s,transform 1s var(--ease) .5s}
+html.js:not(.still) .ready .p2{transition-delay:.68s}
+html.js:not(.still) .ready .p.live{transition:transform .5s var(--ease)}
+
+/* seam: eight blocks climb up like stairs and become the next section */
+.climb{position:absolute;inset:auto 0 0;height:min(28vw,220px);display:flex;align-items:flex-end;pointer-events:none;z-index:4}
+.climb i{flex:1;height:100%;background:var(--bg-2);transform-origin:50% 100%;transform:scaleY(var(--h,0))}
+html.still .climb{display:none}
+
+@media (max-width:900px){
+  .hero{grid-template-columns:1fr;gap:56px;padding-bottom:110px;min-height:0}
+  .house{width:min(100%,420px)}
+  .glow{width:120%;inset-inline-end:-30%;top:40%}
+}
+
+/* ---------------------------------------------------------------- people: the camera walks through the office door */
+.people{background:var(--bg-2);padding-inline:0;padding-top:clamp(20px,3vw,40px)}
+.pp-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:12px 40px;padding:0 var(--m) 36px}
+.pp-head p{max-width:38ch;font-size:var(--s-lead);color:var(--soft);line-height:1.4}
+html.js:not(.still) .door{height:210svh}
+.d-stage{position:relative;height:88svh;overflow:hidden;background:var(--bg-2)}
+html.js:not(.still) .d-stage{position:sticky;top:0;height:100svh}
+.d-stage::before{content:"";position:absolute;inset:-40px;background:url(../img/office-door.jpg) 50% 40%/cover;filter:blur(30px) brightness(.4) saturate(.8)} /* the same room, out of focus around the frame */
+.d-cam{position:absolute;top:50%;left:50%;height:92%;aspect-ratio:1000/1910;transform:translate(-50%,-50%);transform-origin:var(--ox,70%) var(--oy,44%);border-radius:24px;overflow:hidden;box-shadow:0 40px 90px -30px rgba(0,0,0,.7);will-change:transform} /* taste-skill-ignore: framed photo floating in its own blurred room */
+.d-cam img{width:100%;height:100%;object-fit:cover}
+.d-shade{position:absolute;inset:0;background:var(--bg);opacity:0;pointer-events:none}
+.d-labels{position:absolute;inset:0;pointer-events:none}
+.lb{position:absolute;left:0;top:0;display:flex;align-items:center;gap:10px;font:500 15px/1.2 var(--text);white-space:nowrap;opacity:0;transition:opacity .4s ease}
+.lb.on{opacity:1}
+.lb i{flex:none;width:14px;height:14px;border-radius:50%;background:var(--coral);box-shadow:0 0 0 6px rgba(246,139,98,.25)} /* taste-skill-ignore: status ping / pin halo / glowing footprint / edge fade mask / floating dock over content */
+.lb .t{padding:7px 12px;border-radius:999px;background:rgba(11,30,33,.82);border:1px solid var(--line)}
+.lb.flip{flex-direction:row-reverse}
+.d-card{position:absolute;inset-inline-start:var(--m);bottom:clamp(24px,6vh,60px);max-width:min(440px,80vw);padding:20px 24px;border-radius:var(--r);background:rgba(11,30,33,.84);border:1px solid var(--line);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)} /* taste-skill-ignore: frosted caption */
+.d-k{font-size:15px;color:var(--coral)}
+.d-big{margin-top:4px;font:400 clamp(26px,2.6vw,38px)/1.15 var(--display)}
+html.js:not(.still) .d-card{opacity:var(--dc,0);transform:translateY(calc((1 - var(--dc,0)) * 24px))}
+html.still .lb{opacity:1}
+@media (max-width:700px){
+  .d-cam{height:100%;border-radius:0}
+  .d-card{inset-inline:16px;max-width:none;bottom:24px}
+}
+
+/* ---------------------------------------------------------------- stairs: four treads, a footprint climbs them */
+.stairs{background:var(--bg);padding:0}
+html.js:not(.still) .stairs{height:340svh}
+.s-stage{display:grid;grid-template-columns:.9fr 1.1fr;align-items:center;gap:clamp(24px,4vw,70px);min-height:100svh;padding:clamp(70px,8vw,110px) var(--m)}
+html.js:not(.still) .s-stage{position:sticky;top:0;height:100svh;padding-block:max(90px,12svh) calc(6svh + 30px);align-items:start}
+html.still .what{margin-top:0}
+.s-line{margin-top:14px;max-width:34ch;font-size:var(--s-lead);color:var(--soft);line-height:1.4}
+.s-list{margin-top:30px;display:grid;gap:8px}
+.s-list li{display:flex;gap:16px;align-items:flex-start;padding:14px 16px;border-radius:16px;border:1px solid transparent;color:var(--soft);transition:background .4s ease,border-color .4s ease,color .4s ease}
+.s-list li::before{content:"";flex:none;width:12px;height:12px;margin-top:7px;border-radius:50%;background:#35585c;transition:background .4s ease}
+.s-list li.on::before{background:var(--teal)}
+.s-list strong{display:block;font:500 20px/1.3 var(--text)}
+.s-list small{display:block;font-size:16px;line-height:1.4;margin-top:2px}
+.s-list li.on{color:var(--ink);background:var(--card);border-color:var(--line)}
+.s-list li.now{border-color:rgba(59,193,205,.5)}
+.s-nav{display:none;gap:8px;margin-top:16px}
+html.still .s-nav{display:flex}
+.arw{width:48px;height:48px;border-radius:50%;background:var(--card-2);font-size:26px;line-height:1}
+.s-scene{position:relative;height:min(64svh,560px)}
+.flight{position:absolute;inset:26% 0 0;display:flex;align-items:flex-end;gap:6px}
+.tr{position:relative;flex:1;border-radius:10px 10px 0 0;background:linear-gradient(to bottom,#24525a,var(--card));transition:background .5s ease} /* taste-skill-ignore: stone treads lit from above */
+.tr::before{content:"";position:absolute;inset:0 0 auto;height:6px;border-radius:10px 10px 0 0;background:var(--line);transition:background .5s ease,box-shadow .5s ease}
+.t1{height:25%}.t2{height:48%}.t3{height:72%}.t4{height:96%}
+.tr.on::before{background:var(--teal);box-shadow:0 0 30px rgba(59,193,205,.6)} /* taste-skill-ignore: the step lights as it is reached */
+.walker{position:absolute;left:0;bottom:0;width:96px;height:60px;fill:var(--teal);filter:drop-shadow(0 0 10px rgba(59,193,205,.6));transition:transform .7s var(--ease);pointer-events:none} /* taste-skill-ignore: status ping / pin halo / glowing footprint / edge fade mask / floating dock over content */
+.s-roof{position:absolute;left:-3%;top:0;width:106%;height:auto;aspect-ratio:400/150;overflow:visible}
+.s-roof polyline{stroke-dasharray:1;stroke-dashoffset:var(--roof,1)}
+html.still .s-roof polyline{stroke-dashoffset:0}
+@media (max-width:900px){
+  .s-stage{grid-template-columns:1fr;gap:18px;align-content:start}
+  html.js:not(.still) .s-stage{padding-block:76px 20px}
+  .s-list{margin-top:16px;gap:4px}
+  .s-list li{padding:9px 12px}
+  .s-list strong{font-size:17px}
+  html.js:not(.still) .s-list small{display:none}
+  html.js:not(.still) .s-list li.now small{display:block}
+  .s-scene{height:30svh;max-height:280px}
+  .s-line{font-size:17px}
+}
+
+/* ---------------------------------------------------------------- what: a bento that lands over the stairs like a card */
+.what{background:var(--bg-2);border-radius:36px 36px 0 0;margin-top:-6svh;box-shadow:0 -30px 60px -20px rgba(0,0,0,.5);transform-origin:50% 0;z-index:3} /* taste-skill-ignore: the card that lands on the stack */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(210px,auto);gap:14px}
+.tile{position:relative;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;padding:24px;border-radius:var(--r);background:var(--card);border:1px solid var(--line);overflow:hidden;isolation:isolate}
+.tile::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(260px circle at var(--mx,-300px) var(--my,-300px),rgba(59,193,205,.16),transparent 70%);pointer-events:none} /* taste-skill-ignore: cursor spotlight from the horizonx reference */
+.tile p{color:var(--soft);font-size:16px;line-height:1.4}
+.tile.big{grid-column:span 2;grid-row:span 2}
+.tile.logo{grid-column:span 2;flex-direction:row;align-items:center;justify-content:space-between;gap:20px}
+.tile.logo img{width:min(260px,60%)}
+.tile.logo p{max-width:18ch}
+.viz{width:100%;margin-bottom:auto;overflow:visible}
+.big .viz{height:auto;max-height:320px}
+.v-ledger .grid line{stroke:var(--line);stroke-width:1}
+.v-ledger .bars rect{fill:#24525a;transform-box:fill-box;transform-origin:50% 100%}
+.v-ledger .trend{fill:none;stroke:var(--teal);stroke-width:3;stroke-dasharray:1;stroke-dashoffset:0}
+.v-ledger .tip{fill:var(--coral)}
+html:not(.still) .on .v-ledger .bars rect{animation:grow 4s var(--ease) infinite}
+html:not(.still) .on .v-ledger .bars rect:nth-child(2){animation-delay:.12s} html:not(.still) .on .v-ledger .bars rect:nth-child(3){animation-delay:.24s}
+html:not(.still) .on .v-ledger .bars rect:nth-child(4){animation-delay:.36s} html:not(.still) .on .v-ledger .bars rect:nth-child(5){animation-delay:.48s}
+html:not(.still) .on .v-ledger .bars rect:nth-child(6){animation-delay:.6s}
+html:not(.still) .on .v-ledger .trend{animation:draw 4s var(--ease-io) infinite}
+html:not(.still) .on .v-ledger .tip{animation:tip 4s var(--ease) infinite}
+@keyframes grow{0%{transform:scaleY(.15)}30%,100%{transform:scaleY(1)}}
+@keyframes draw{0%{stroke-dashoffset:1}45%,100%{stroke-dashoffset:0}}
+@keyframes tip{0%,40%{opacity:0;transform:scale(.4)}55%,100%{opacity:1;transform:none}}
+.v-ledger .tip{transform-box:fill-box;transform-origin:center}
+.v-door .frame{fill:#0b1e21;stroke:var(--coral);stroke-width:3}
+.v-door .leaf{fill:#24525a;transform-box:fill-box;transform-origin:100% 50%}
+.v-door .knob{fill:var(--ink)}
+.v-door .light{fill:rgba(59,193,205,.0)}
+html:not(.still) .on .v-door .leaf{animation:open 4.4s var(--ease-io) infinite}
+html:not(.still) .on .v-door .knob{animation:open 4.4s var(--ease-io) infinite;transform-box:view-box;transform-origin:136px 70px}
+html:not(.still) .on .v-door .frame{fill:#123f45;animation:lit 4.4s ease infinite}
+@keyframes open{0%,15%{transform:scaleX(1)}45%,75%{transform:scaleX(.18)}100%{transform:scaleX(1)}}
+@keyframes lit{0%,15%{fill:#0b1e21}45%,75%{fill:#3bc1cd}100%{fill:#0b1e21}}
+.v-deal .rail{stroke:var(--line);stroke-width:3;stroke-linecap:round}
+.v-deal rect{fill:#24525a}
+.v-deal path{stroke:var(--ink);stroke-width:3;stroke-linecap:round}
+.v-deal .bid rect{fill:var(--teal)} .v-deal .bid path{stroke:#08292d}
+.v-deal .meet{fill:var(--coral);transform-box:fill-box;transform-origin:center;opacity:0}
+html:not(.still) .on .v-deal .bid{animation:bid 4s var(--ease-io) infinite}
+html:not(.still) .on .v-deal .ask{animation:ask 4s var(--ease-io) infinite}
+html:not(.still) .on .v-deal .meet{animation:meet 4s var(--ease) infinite}
+html.still .v-deal .meet{opacity:1}
+@keyframes bid{0%,10%{transform:translateX(0)}50%,80%{transform:translateX(30px)}100%{transform:translateX(0)}}
+@keyframes ask{0%,10%{transform:translateX(0)}50%,80%{transform:translateX(-30px)}100%{transform:translateX(0)}}
+@keyframes meet{0%,45%{opacity:0;transform:scale(.3)}55%,80%{opacity:1;transform:scale(1)}100%{opacity:0}}
+.rate{justify-content:center;background:linear-gradient(160deg,#1d444a,var(--card))} /* taste-skill-ignore: tonal tile */
+.odo-row{display:flex;align-items:center;gap:12px}
+.odo{display:inline-flex;font:400 clamp(56px,6vw,86px)/1 var(--display);direction:ltr;color:var(--ink)}
+.odo.sm{font-size:21px;font-family:var(--text);font-weight:500;vertical-align:-3px}
+.odo .d{display:inline-block;height:1em;overflow:hidden}
+.odo .d > span{display:flex;flex-direction:column;transition:transform 1.3s var(--ease)}
+.odo b{display:block;height:1em;font-weight:inherit}
+.odo b::before{content:attr(data-n)}
+.rate .stars svg{width:20px;height:20px}
+.open .chip{align-self:flex-start;margin-bottom:auto}
+html.js:not(.still) [data-tile]{opacity:0;transform:translateY(28px) scale(.97);filter:blur(6px)}
+html.js:not(.still) [data-tile].in{opacity:1;transform:none;filter:none;transition:opacity .8s var(--ease) var(--d,0ms),transform .8s var(--ease) var(--d,0ms),filter .8s var(--ease) var(--d,0ms)}
+@media (max-width:1000px){ .bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:minmax(190px,auto)} }
+@media (max-width:560px){
+  .bento{gap:10px}
+  .tile{padding:18px}
+  .tile.big,.tile.logo,.tile.open{grid-column:span 2}
+  .tile.big{grid-row:auto}
+  .tile.logo{flex-direction:column;align-items:flex-start}
+  .tile h3{font-size:18px}
+}
+
+/* ---------------------------------------------------------------- write: the live message */
+.write{background:var(--bg-2)}
+.w-grid{display:grid;grid-template-columns:1fr minmax(300px,420px);gap:clamp(24px,5vw,80px);align-items:center;max-width:1240px;margin:0 auto}
+.w-line{margin-top:12px;font-size:var(--s-lead);color:var(--soft)}
+.dial{margin-top:26px}
+.dial legend{font-size:15px;color:var(--soft);margin-bottom:10px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts button{min-height:46px;padding:0 18px;border-radius:14px;background:var(--card);border:1px solid var(--line);font-size:16px;transition:transform .14s var(--ease),background .25s ease,color .25s ease,border-color .25s ease}
+.opts button[aria-checked="true"]{background:var(--teal);color:#08292d;border-color:var(--teal);font-weight:500}
+@media (hover:hover) and (pointer:fine){ .opts button:hover{border-color:rgba(59,193,205,.6)} }
+.phone{position:relative;padding:14px;border-radius:34px;background:#091a1c;border:1px solid var(--line);box-shadow:0 40px 80px -30px rgba(0,0,0,.7)} /* taste-skill-ignore: phone body */
+.ph-top{display:flex;align-items:center;gap:12px;padding:10px 12px 14px;background:rgba(255,255,255,.03);border-radius:20px}
+.ph-top img{width:42px;height:42px;border-radius:50%;object-fit:cover;object-position:50% 8%}
+.ph-top b{display:block;font:400 18px/1.1 var(--display)}
+.ph-top small{color:var(--soft);font-size:14px}
+.ph-body{display:flex;flex-direction:column;gap:10px;min-height:250px;padding:18px 6px;background:radial-gradient(circle at 30% 20%,rgba(59,193,205,.08),transparent 60%)} /* taste-skill-ignore: chat wallpaper */
+.bub{max-width:86%;padding:11px 14px;border-radius:16px;font-size:16px;line-height:1.45}
+.bub.in{align-self:flex-start;background:var(--card)}
+.bub.out{align-self:flex-end;background:#1f6a70;min-height:48px}
+.caret{display:inline-block;width:2px;height:1em;margin-inline-start:2px;vertical-align:-2px;background:var(--ink)}
+html:not(.still) .caret{animation:blink 1s steps(2) infinite}
+html.still .caret{display:none}
+@keyframes blink{50%{opacity:0}}
+.send{display:flex;align-items:center;justify-content:center;gap:10px;min-height:54px;margin-top:6px;border-radius:18px;background:var(--teal);color:#08292d;font-weight:700;text-decoration:none;transition:transform .14s var(--ease)}
+.send svg{width:22px;height:22px;fill:currentColor}
+@media (max-width:860px){ .w-grid{grid-template-columns:1fr} .phone{max-width:440px;width:100%;margin-inline:auto} }
+
+/* ---------------------------------------------------------------- reviews drift */
+.reviews{background:var(--bg-2);padding-inline:0}
+.reviews .head{padding:0 var(--m)}
+.gbadge{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 18px;border-radius:999px;background:var(--card);border:1px solid var(--line);text-decoration:none}
+.gbadge b{font:400 24px/1 var(--display);color:var(--teal)}
+.drift{display:grid;gap:14px;overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)} /* taste-skill-ignore: status ping / pin halo / glowing footprint / edge fade mask / floating dock over content */
+.row{display:flex;gap:14px;width:max-content}
+.rv{flex:0 0 auto;width:min(420px,82vw);display:flex;flex-direction:column;gap:12px;padding:24px;border-radius:var(--r);background:var(--card);border:1px solid var(--line)}
+.rv p{font-size:17px;line-height:1.5}
+.rv footer{margin-top:auto;font-size:15px;color:var(--soft)}
+.rv footer bdi{color:var(--ink);font-weight:500}
+.rv .tr{display:block;font-size:13px;opacity:.8}
+html:not(.still) .row{animation:drift 60s linear infinite}
+html:not(.still) .row.r2{animation-duration:72s;animation-direction:reverse}
+html[dir="rtl"]:not(.still) .row{animation-name:driftr}
+@keyframes drift{to{transform:translateX(-50%)}}
+@keyframes driftr{to{transform:translateX(50%)}}
+@media (hover:hover){ .drift:hover .row{animation-play-state:paused} }
+html.still .drift{overflow-x:auto;-webkit-mask:none;mask:none;padding:0 var(--m) 10px}
+html.still .row{width:auto}
+
+/* ---------------------------------------------------------------- faq */
+.faq{background:var(--bg-2)}
+.faq-in{max-width:1000px;margin:0 auto}
+.qa{margin-top:30px;display:grid;gap:10px}
+.qa details{border-radius:18px;background:var(--card);border:1px solid var(--line)}
+.qa summary{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:60px;padding:0 22px;cursor:pointer;font:500 19px/1.3 var(--text);list-style:none}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"+";flex:none;font:400 26px/1 var(--display);color:var(--teal);transition:transform .25s var(--ease)}
+.qa details[open] summary::after{transform:rotate(45deg)}
+.qa p{padding:0 22px 20px;color:var(--soft)}
+html.js:not(.still) [data-reveal]{opacity:0;transform:translateY(22px)}
+html.js:not(.still) [data-reveal].in{opacity:1;transform:none;transition:opacity .8s var(--ease) var(--d,0ms),transform .8s var(--ease) var(--d,0ms)}
+
+/* ---------------------------------------------------------------- reach: the roof closes over the contact bento */
+.reach{background:var(--bg-2);padding-bottom:clamp(70px,8vw,120px)}
+.r-roof{display:block;width:min(86%,620px);height:auto;aspect-ratio:400/150;margin:0 auto 6px;overflow:visible}
+.r-roof polyline{stroke-dasharray:1;stroke-dashoffset:var(--rr,0)}
+.reach h2{max-width:1240px;margin:0 auto 26px;text-align:center}
+.r-bento{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto auto;gap:14px;max-width:1240px;margin:0 auto}
+.rb{display:flex;flex-direction:column;justify-content:flex-end;gap:6px;min-height:150px;padding:22px;border-radius:var(--r);background:var(--card);border:1px solid var(--line);text-decoration:none;transition:transform .14s var(--ease),border-color .25s ease}
+.rb svg{width:28px;height:28px;fill:var(--teal);margin-bottom:auto}
+.rb b{font:400 22px/1.2 var(--display)}
+.rb.wa{background:var(--teal);color:#08292d}
+.rb.wa svg{fill:#08292d}
+.rb.hours{grid-row:span 2;justify-content:flex-start;gap:12px}
+.rb.hours .chip{align-self:flex-start}
+.rb table{width:100%;border-collapse:collapse;font-size:16px}
+.rb td{padding:7px 0;border-bottom:1px solid var(--line)}
+.rb td:last-child{text-align:end}
+.rb tr.today td{color:var(--teal);font-weight:500}
+.rb.addr span{color:var(--soft)}
+.rb.map{grid-column:span 2;grid-row:span 2;padding:0;overflow:hidden;min-height:320px}
+.rb.map iframe{width:100%;height:100%;min-height:320px;border:0;filter:grayscale(.3) brightness(.9)}
+.r-bento .wa{order:1}.r-bento .rb:nth-child(2){order:2}.r-bento .map{order:3}.r-bento .addr{order:4}.r-bento .hours{order:5}
+@media (hover:hover) and (pointer:fine){ .rb:hover{border-color:rgba(59,193,205,.6)} }
+@media (max-width:900px){
+  .r-bento{grid-template-columns:1fr 1fr}
+  .rb.map{grid-column:span 2;grid-row:auto}
+  .rb.hours{grid-column:span 2;grid-row:auto}
+  .rb.addr{grid-column:span 2}
+  .rb{min-height:120px}
+}
+
+/* ---------------------------------------------------------------- footer: a curtain behind the page */
+.foot{position:relative;z-index:1;display:grid;justify-items:center;gap:22px;padding:60px var(--m) 40px;background:var(--bg);text-align:center;overflow:hidden}
+html.js:not(.still) .foot{position:sticky;bottom:0}
+.f-walk{width:100%;height:40px}
+.f-walk use{fill:var(--teal);opacity:.15}
+html:not(.still) .f-walk use{animation:stepin 3.2s ease-in-out infinite;animation-delay:calc(var(--k) * 200ms)}
+@keyframes stepin{0%,100%{opacity:.12}20%{opacity:.9}}
+.f-logo{width:min(420px,80vw)}
+.f-cols{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:16px 40px;color:var(--soft)}
+.f-cols a{color:var(--ink)}
+.f-tools{display:flex;gap:8px}
+.f-legal{max-width:70ch;font-size:14px;line-height:1.5;color:var(--soft);opacity:.85}
+html.js:not(.still) .f-logo{transform:translateY(var(--fl,0px))}
+
+/* ---------------------------------------------------------------- phone dock: two buttons on two steps */
+.dock{display:none}
+@media (max-width:900px){
+  body{padding-bottom:0}
+  .dock{position:fixed;z-index:45;inset-inline-end:14px;bottom:calc(14px + env(safe-area-inset-bottom));display:flex;align-items:flex-end;gap:8px;transition:transform .4s var(--ease),opacity .3s ease}
+  .dock.hide{transform:translateY(120%);opacity:0}
+  .dk{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:54px;border-radius:999px;text-decoration:none;font-weight:700;border:3px solid var(--bg-2);transition:transform .14s var(--ease)} /* taste-skill-ignore: status ping / pin halo / glowing footprint / edge fade mask / floating dock over content */
+  .dk svg{width:22px;height:22px;fill:currentColor}
+  .dk.wa{padding:0 20px;background:var(--teal);color:#08292d;margin-bottom:14px}
+  .dk.call{width:54px;background:var(--coral);color:#2a120a}
+  .foot{padding-bottom:110px}
+}
