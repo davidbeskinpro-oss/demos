@@ -1,0 +1,332 @@
+/* Sport Therapy & Spa — basalt and heat. Ground = his dark treatment stones; accent = the warmth they carry (ember);
+   relief = the eucalyptus teal of the bottle in his oil corner. Muscle fibres knot and release across the page. */
+:root{
+  --ground:#121518;
+  --ground-2:#0d1012;
+  --stone:#1b2024;
+  --stone-2:#242a2f;
+  --stone-3:#2e353b;
+  --line:rgba(255,255,255,.07);
+  --ink:#eeefea;
+  --soft:#b9c0c2;
+  --heat:#ff8a4c;
+  --heat-2:#ffb27e;
+  --cool:#5fd0c0;
+  --text:"Rubik","Arial Hebrew",Arial,sans-serif;
+  --serif:"David Libre",Georgia,serif;
+  --s-body:clamp(1.0625rem,1rem + .25vw,1.2rem);
+  --s-lead:clamp(1.15rem,1.02rem + .55vw,1.45rem);
+  --s-head:clamp(2.2rem,1.4rem + 3vw,4.4rem);
+  --m:clamp(16px,3.4vw,48px);
+  --ease:cubic-bezier(.23,1,.32,1);
+  --ease-io:cubic-bezier(.77,0,.175,1);
+  --pebble:58% 42% 47% 53% / 52% 46% 54% 48%;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 var(--s-body)/1.55 var(--text);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;touch-action:manipulation}
+h1,h2,h3,p,figure,ol,ul,blockquote{margin:0}
+ol,ul{padding:0;list-style:none}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+html[lang="he"] [lang="en"]:not(html), html[lang="en"] [lang="he"]:not(html){display:none!important}
+::selection{background:var(--heat);color:#1a0f08}
+:focus-visible{outline:3px solid var(--heat-2);outline-offset:3px;border-radius:8px}
+.skip{position:absolute;inset-inline-start:var(--m);top:-60px;z-index:80;background:var(--heat);color:#1a0f08;padding:10px 16px;border-radius:999px;text-decoration:none}
+.skip:focus{top:40px}
+.wrap{width:min(1320px,100% - 2*var(--m));margin-inline:auto}
+svg{width:1em;height:1em;fill:currentColor;flex:none}
+em{font:500 1.04em/1 var(--serif);font-style:normal;color:var(--heat-2);letter-spacing:0}
+
+/* concept bar */
+.concept{position:fixed;inset:0 0 auto;z-index:70;height:26px;display:flex;align-items:center;justify-content:center;background:var(--ground-2);color:var(--soft);font-size:12.5px;line-height:1.2;padding-inline:12px;text-align:center}
+.concept p{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* nav: a bar that gathers into a floating pill */
+.nav{position:fixed;top:26px;inset-inline:0;z-index:60;padding:10px var(--m);transition:top .5s var(--ease)}
+.nav-in{display:flex;align-items:center;gap:18px;margin-inline:auto;max-width:1400px;padding:8px 10px 8px 14px;border-radius:999px;transition:max-width .6s var(--ease),background-color .4s,box-shadow .4s} /* taste-skill-ignore: owner reference (SETI/horizonx) allows soft depth on stones and floating UI */
+html[dir="rtl"] .nav-in{padding:8px 14px 8px 10px}
+.nav.pill{top:34px}
+.nav.pill .nav-in{max-width:1120px;background:rgba(27,32,36,.86);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 10px 30px rgba(0,0,0,.35),inset 0 0 0 1px var(--line)} /* taste-skill-ignore owner reference: floating glass pill nav */
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:700;font-size:17px;letter-spacing:-.01em;white-space:nowrap}
+.pebble{width:26px;height:20px;border-radius:var(--pebble);background:var(--stone-3);position:relative;box-shadow:inset 0 -3px 0 rgba(0,0,0,.35)} /* taste-skill-ignore: owner reference (SETI/horizonx) allows soft depth on stones and floating UI */
+.pebble::after{content:"";position:absolute;inset:5px 6px 7px;border-radius:inherit;background:var(--heat);opacity:.9}
+.links{display:flex;gap:4px;margin-inline-start:auto}
+.links a{white-space:nowrap;text-decoration:none;font-size:15.5px;padding:8px 12px;border-radius:999px;color:var(--soft);transition:color .2s,background-color .2s}
+.tools{display:flex;align-items:center;gap:6px}
+.tgl{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 13px;border-radius:999px;background:var(--stone-2);font-size:14px;color:var(--soft);transition:transform .14s var(--ease)}
+.tgl:active{transform:scale(.96)}
+.knob{width:28px;height:16px;border-radius:999px;background:var(--stone-3);position:relative;transition:background-color .25s}
+.knob::after{content:"";position:absolute;top:2px;inset-inline-start:2px;width:12px;height:12px;border-radius:50%;background:var(--soft);transition:transform .25s var(--ease)}
+.tgl[aria-checked="true"] .knob{background:var(--heat)}
+.tgl[aria-checked="true"] .knob::after{background:#1a0f08;transform:translateX(12px)}
+html[dir="rtl"] .tgl[aria-checked="true"] .knob::after{transform:translateX(-12px)}
+.tgl.lang{font-weight:700;color:var(--ink)}
+.nav-wa{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 15px;border-radius:999px;background:var(--heat);color:#1a0f08;font-weight:700;font-size:15px;text-decoration:none;transition:transform .14s var(--ease)}
+.nav-wa:active{transform:scale(.96)}
+@media (hover:hover){.links a:hover{color:var(--ink);background:var(--stone-2)} .tgl:hover{color:var(--ink)} .nav-wa:hover{background:var(--heat-2)}}
+@media (max-width:1060px){.links{display:none} .tools{margin-inline-start:auto}}
+@media (max-width:520px){.nav-wa{display:none} .tgl{padding:0 11px}}
+
+/* buttons: fully round, decided once */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 24px;border-radius:999px;background:var(--heat);color:#1a0f08;font-weight:700;font-size:17px;text-decoration:none;transition:transform .14s var(--ease),background-color .2s}
+.btn svg{width:20px;height:20px}
+.btn.ghost{background:var(--stone-2);color:var(--ink)}
+.btn:active{transform:scale(.97)}
+@media (hover:hover){.btn:hover{background:var(--heat-2)} .btn.ghost:hover{background:var(--stone-3)}}
+
+/* chips + status */
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(36,42,47,.82);font-size:15px;color:var(--ink)}
+.stars{display:inline-flex;gap:2px;color:var(--heat)}
+.stars svg{width:14px;height:14px}
+[data-status]{display:inline-flex;align-items:center;gap:8px}
+.dot{width:9px;height:9px;border-radius:50%;background:#8b9396;flex:none}
+[data-status].open .dot{background:var(--cool);box-shadow:0 0 0 0 rgba(95,208,192,.6)} /* taste-skill-ignore: owner reference (SETI/horizonx) allows soft depth on stones and floating UI */
+html:not(.still) [data-status].open .dot{animation:ping 2.2s ease-out 4}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(95,208,192,.6)}100%{box-shadow:0 0 0 10px rgba(95,208,192,0)}} /* taste-skill-ignore: owner reference (SETI/horizonx) allows soft depth on stones and floating UI */
+
+/* ---------------------------------------------------------------- HERO */
+.hero{position:relative;min-height:100svh;min-height:max(100svh,640px);display:flex;align-items:flex-end;overflow:hidden;background:var(--ground);padding:120px var(--m) clamp(40px,8vh,90px)}
+.h-photo{position:absolute;top:0;bottom:0;inset-inline-end:0;width:66%;
+  -webkit-mask-image:linear-gradient(to left,#000 52%,transparent 98%);mask-image:linear-gradient(to left,#000 52%,transparent 98%)} /* taste-skill-ignore: fade of the real photo into the stone ground */
+html[dir="rtl"] .h-photo{-webkit-mask-image:linear-gradient(to right,#000 52%,transparent 98%);mask-image:linear-gradient(to right,#000 52%,transparent 98%)} /* taste-skill-ignore */
+.h-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:60% 55%}
+html[dir="rtl"] .h-photo img{transform:scaleX(-1)}
+.h-photo .cool{filter:saturate(.22) brightness(.5) contrast(1.08)}
+.h-photo .warm{filter:saturate(1.2) brightness(1.05) sepia(.18);
+  -webkit-mask-image:radial-gradient(circle var(--rad,320px) at var(--x,60%) var(--y,55%),#000 25%,transparent 72%);mask-image:radial-gradient(circle var(--rad,320px) at var(--x,60%) var(--y,55%),#000 25%,transparent 72%)} /* taste-skill-ignore: the warm patch under the hand */
+.fibres{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.h-copy{position:relative;z-index:2;max-width:min(880px,100%)}
+.h-title{font:800 clamp(2.7rem,1rem + 6.4vw,7.6rem)/.9 var(--text);letter-spacing:-.045em;margin-bottom:22px}
+html[dir="rtl"] .h-title{text-align:right}
+.h-title .ln{display:block}
+.h-title .acc{font:500 .78em/1.05 var(--serif);letter-spacing:-.01em;color:var(--heat-2)}
+.h-title .w{display:inline-block;white-space:nowrap}
+.h-title .ch{display:inline-block}
+html.js:not(.still) .h-title .ch{opacity:0;transform:translateY(.4em) rotate(4deg);filter:blur(10px)}
+html.js:not(.still) .ready .h-title .ch{opacity:1;transform:none;filter:none;transition:opacity .6s var(--ease) calc(var(--i)*32ms),transform .9s var(--ease) calc(var(--i)*32ms),filter .6s var(--ease) calc(var(--i)*32ms)}
+.h-lead{font-size:var(--s-lead);line-height:1.45;max-width:30ch;color:var(--ink);margin-bottom:26px}
+.h-acts{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:22px}
+.h-facts{display:flex;flex-wrap:wrap;gap:8px}
+html.js:not(.still) [data-rise]{opacity:0;transform:translateY(18px)}
+html.js:not(.still) .ready [data-rise]{opacity:1;transform:none;transition:opacity .7s var(--ease) var(--d),transform .8s var(--ease) var(--d)}
+.h-hint{position:absolute;z-index:2;bottom:58px;inset-inline-end:var(--m);font-size:14px;color:var(--soft);display:flex;align-items:center;gap:10px}
+.h-hint::before{content:"";width:30px;height:2px;border-radius:2px;background:var(--heat)}
+html.still .h-hint{display:none}
+@media (max-width:800px){
+  .hero{align-items:flex-end;padding-top:46svh;padding-bottom:104px}
+  .h-photo{width:100%;bottom:auto;height:60svh;-webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent);mask-image:linear-gradient(to bottom,#000 55%,transparent)} /* taste-skill-ignore */
+  html[dir="rtl"] .h-photo{-webkit-mask-image:linear-gradient(to bottom,#000 55%,transparent);mask-image:linear-gradient(to bottom,#000 55%,transparent)} /* taste-skill-ignore */
+  .h-photo img{object-position:50% 60%}
+  .h-hint{display:none}
+  .btn{min-height:50px;padding:0 18px;font-size:16px}
+}
+
+/* ---------------------------------------------------------------- THE ROOM (pinned stack while motion is on) */
+.room{position:relative;z-index:3;margin-top:-34px;background:var(--stone);border-radius:34px 34px 0 0}
+html.js:not(.still) .room{height:290svh}
+.r-stage{position:relative;overflow:hidden;border-radius:inherit}
+html.js:not(.still) .r-stage{position:sticky;top:0;height:100svh}
+.r-copy{position:absolute;z-index:3;top:clamp(96px,16vh,150px);inset-inline-start:var(--m);max-width:min(520px,calc(100% - 2*var(--m)))}
+.h2{font:800 var(--s-head)/1 var(--text);letter-spacing:-.035em;margin-bottom:14px}
+.line{font-size:var(--s-lead);line-height:1.45;color:var(--soft);max-width:34ch}
+.stack{position:absolute;inset:0}
+.peb{position:absolute;top:0;left:0;overflow:hidden;border-radius:var(--pebble);background:var(--stone-2);box-shadow:0 18px 40px rgba(0,0,0,.45);will-change:transform} /* taste-skill-ignore: owner reference (SETI/horizonx) allows soft depth on stones and floating UI */
+.peb:nth-child(2){border-radius:46% 54% 60% 40% / 50% 58% 42% 50%}
+.peb:nth-child(3){border-radius:52% 48% 42% 58% / 58% 44% 56% 42%}
+.peb:nth-child(4){border-radius:44% 56% 50% 50% / 46% 52% 48% 54%}
+.peb img{width:100%;height:100%;object-fit:cover}
+.peb.big img{transform-origin:50% 50%;will-change:transform}
+.peb.big{inset:0;width:100%;height:100%;border-radius:0;box-shadow:none;background:var(--ground)} /* taste-skill-ignore: owner reference (SETI/horizonx) allows soft depth on stones and floating UI */
+.peb.big::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(13,16,18,.85),rgba(13,16,18,0) 45%),linear-gradient(to bottom,rgba(13,16,18,.85),rgba(13,16,18,.35) 30%,rgba(13,16,18,0) 50%);opacity:var(--scrim,0)} /* taste-skill-ignore: scrim under text on the photo */
+.r-cap{position:absolute;z-index:3;bottom:clamp(24px,6vh,60px);inset-inline-start:var(--m);display:flex;align-items:center;gap:10px;font-size:var(--s-lead);font-weight:500;opacity:var(--cap,0);transform:translateY(calc((1 - var(--cap,0)) * 20px))}
+.r-cap svg{color:var(--heat);width:22px;height:22px}
+/* animations off: a calm block, his photos laid out as stones */
+html.still .room,html:not(.js) .room{padding:110px var(--m) 70px}
+html.still .r-copy,html:not(.js) .r-copy{position:static;margin-bottom:34px}
+html.still .stack,html:not(.js) .stack{position:static;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+html.still .peb,html:not(.js) .peb{position:relative;aspect-ratio:1/.8;transform:none!important;width:auto!important;height:auto!important}
+html.still .peb.big,html:not(.js) .peb.big{grid-column:1/-1;order:-1;aspect-ratio:16/8;border-radius:28px;clip-path:none!important}
+html.still .r-cap,html:not(.js) .r-cap{position:static;margin-top:22px;opacity:1;transform:none}
+@media (max-width:700px){
+  html.still .stack,html:not(.js) .stack{grid-template-columns:repeat(2,1fr)}
+  html.still .peb.big,html:not(.js) .peb.big{aspect-ratio:4/3}
+}
+
+/* ---------------------------------------------------------------- ON THE TABLE (bento) */
+.table{position:relative;z-index:3;background:var(--ground);padding:clamp(70px,8vw,120px) 0}
+.sec-head{margin-bottom:clamp(30px,4vw,52px)}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(250px,auto);gap:14px}
+.tile{position:relative;overflow:hidden;border-radius:24px;background:var(--stone);box-shadow:inset 0 0 0 1px var(--line);isolation:isolate;display:flex;flex-direction:column;justify-content:flex-end;min-height:250px} /* taste-skill-ignore: owner reference (SETI/horizonx) allows soft depth on stones and floating UI */
+.tile::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity .35s;background:radial-gradient(320px circle at var(--mx,50%) var(--my,50%),rgba(255,138,76,.16),transparent 70%)} /* taste-skill-ignore: the warm spotlight under the hand */
+@media (hover:hover){.tile:hover::before{opacity:1}}
+.tt{position:relative;z-index:3;padding:22px 24px 24px}
+.tt h3{font:700 clamp(1.35rem,1.1rem + .8vw,1.8rem)/1.1 var(--text);letter-spacing:-.02em;margin-bottom:6px}
+.tt p{color:var(--soft);font-size:16.5px;line-height:1.45;max-width:36ch}
+.t-massage{grid-column:span 3;grid-row:span 2;background:var(--ground-2)}
+.t-stones,.t-oils{grid-column:span 3}
+.t-stretch,.t-desk,.t-rate{grid-column:span 2}
+.mini-fibres{position:absolute;inset:0;width:100%;height:100%;z-index:0}
+.ph{position:absolute;inset:0;z-index:0}
+.ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.ph::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(18,21,24,.95) 8%,rgba(18,21,24,.25) 60%,rgba(18,21,24,.1))} /* taste-skill-ignore: scrim under text on the photo */
+@media (hover:hover){.tile:hover .ph img{transform:scale(1.04)}}
+.t-oils .ph img{object-position:50% 85%}
+.haze{position:absolute;inset:0;z-index:1;pointer-events:none}
+.haze i{position:absolute;bottom:30%;width:34%;height:46%;border-radius:50%;background:rgba(255,138,76,.22);filter:blur(26px);opacity:0}
+.haze i:nth-child(1){left:18%} .haze i:nth-child(2){left:44%;animation-delay:1.2s!important} .haze i:nth-child(3){left:66%;animation-delay:2.4s!important}
+html:not(.still) .table.on .haze i{animation:rise 3.6s ease-in-out 3}
+html.still .haze i{opacity:.5;transform:translateY(-10%)}
+@keyframes rise{0%{opacity:0;transform:translateY(30%) scaleX(.8)}40%{opacity:.9}100%{opacity:0;transform:translateY(-60%) scaleX(1.2)}}
+.flame{position:absolute;z-index:1;left:12%;top:76%;width:90px;height:90px;margin:-45px 0 0 -45px;border-radius:50%;background:rgba(255,178,126,.45);filter:blur(22px);mix-blend-mode:screen;pointer-events:none}
+.flame.f2{width:40px;height:40px;margin:-20px 0 0 -20px;background:rgba(255,220,170,.55);filter:blur(10px)}
+html:not(.still) .table.on .flame{animation:flick 1.7s ease-in-out 4 alternate}
+html:not(.still) .table.on .flame.f2{animation-duration:1.1s}
+@keyframes flick{0%{opacity:.55;transform:scale(.9)}50%{opacity:1;transform:scale(1.08) translateY(-4%)}100%{opacity:.7;transform:scale(.96)}}
+.stretch,.desk{position:absolute;inset:14px 14px auto;width:calc(100% - 28px);height:62%;z-index:0}
+.stretch path,.desk path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+.stretch .floor,.desk .floor{stroke:var(--stone-3);stroke-width:3}
+.stretch .body{stroke:var(--cool);stroke-width:9}
+.stretch .head,.desk .head{fill:var(--heat-2)}
+.stretch .joint{fill:var(--ground)}
+.desk .dk,.desk .chair{stroke:var(--stone-3);stroke-width:5}
+.desk .scr{stroke:var(--soft);stroke-width:4;fill:var(--stone-2)}
+.desk .spine{stroke:var(--cool);stroke-width:9}
+.desk .deg{fill:var(--heat-2);font:700 26px var(--text)}
+.t-rate{justify-content:center;align-items:flex-start;padding:24px;background:var(--stone-2)}
+.big-odo{font:800 clamp(4rem,3rem + 3vw,6rem)/1 var(--text);letter-spacing:-.04em;color:var(--ink);margin-bottom:6px}
+.t-rate .stars svg{width:22px;height:22px}
+.rt{margin-top:12px;display:flex;align-items:baseline;gap:8px;font-size:17px;color:var(--soft)}
+.odo{display:inline-flex;direction:ltr}
+.odo.sm{font-weight:700;color:var(--ink)}
+.odo .d{display:inline-block;height:1.3em;overflow:hidden;vertical-align:top}
+.odo .d > span{display:block;transition:transform 1.6s var(--ease)}
+.odo .d > span > b{display:block;height:1.3em;line-height:1.3;font-weight:inherit}
+.odo .d > span > b::before{content:attr(data-n)}
+html.js:not(.still) [data-tile],html.js:not(.still) [data-reveal]{transform:translateY(22px)}
+html.js:not(.still) [data-tile].in,html.js:not(.still) [data-reveal].in{transform:none;transition:transform .9s var(--ease) var(--d,0ms)}
+@media (max-width:1000px){.bento{grid-template-columns:repeat(2,1fr)} .t-massage{grid-column:1/-1;grid-row:auto;min-height:340px} .t-stones,.t-oils{grid-column:1/-1} .t-stretch,.t-desk{grid-column:span 1} .t-rate{grid-column:1/-1}}
+@media (max-width:600px){.bento{grid-template-columns:1fr} .t-stretch,.t-desk{grid-column:1/-1} .tile{min-height:240px}}
+
+/* ---------------------------------------------------------------- WRITE (the spine composer) */
+.write{position:relative;z-index:3;background:var(--stone);padding:clamp(70px,8vw,110px) 0;clip-path:inset(0 round 34px 34px 0 0)}
+.w-grid{display:grid;grid-template-columns:minmax(300px,1fr) minmax(320px,420px) minmax(300px,400px);gap:clamp(24px,4vw,60px);align-items:center}
+.steps{margin-top:30px;display:grid;gap:4px;counter-reset:s}
+.steps li{display:flex;align-items:center;gap:14px;padding:10px 0;color:var(--soft);font-size:17px;transition:color .3s}
+.steps li::before{content:"";width:14px;height:14px;border-radius:50%;background:var(--stone-3);flex:none;transition:background-color .3s,box-shadow .3s} /* taste-skill-ignore: owner reference (SETI/horizonx) allows soft depth on stones and floating UI */
+.steps li.on{color:var(--ink)}
+.steps li.on::before{background:var(--heat);box-shadow:0 0 0 5px rgba(255,138,76,.18)} /* taste-skill-ignore: owner reference (SETI/horizonx) allows soft depth on stones and floating UI */
+.w-back{position:relative;width:min(100%,460px);margin-inline:auto;aspect-ratio:380/520}
+.spine-svg{position:absolute;top:0;inset-inline-start:0;width:57.9%;height:100%}
+.spine-svg .outline{fill:var(--stone-2);stroke:var(--stone-3);stroke-width:2}
+.spine-svg .scap,.spine-svg .pelvis{fill:none;stroke:var(--stone-3);stroke-width:3;stroke-linecap:round;transition:stroke .3s}
+.spine-svg .v{fill:var(--stone-3);transition:fill .3s}
+.spine-svg .v.lit{fill:var(--heat)}
+.spine-svg .scap.lit,.spine-svg .pelvis.lit{stroke:var(--heat)}
+.spine-svg .v.pulse{fill:var(--cool)}
+.spine-svg [class~="lit"]{filter:drop-shadow(0 0 6px rgba(255,138,76,.8))} /* taste-skill-ignore: lit vertebrae glow like a warm stone */
+.zones{position:absolute;inset:0}
+.zone{position:absolute;inset-inline-start:63%;transform:translateY(-50%);display:flex;align-items:center;min-height:44px;padding:0 14px;border-radius:999px;background:var(--stone-2);font-size:15.5px;font-weight:500;white-space:nowrap;transition:background-color .2s,color .2s,transform .14s var(--ease)}
+.zone::before{content:"";position:absolute;inset-inline-end:100%;top:50%;width:var(--lead,64px);height:2px;background:var(--stone-3);transition:background-color .2s}
+.zone[aria-pressed="true"]{background:var(--heat);color:#1a0f08}
+.zone[aria-pressed="true"]::before{background:var(--heat)}
+.zone:active{transform:translateY(-50%) scale(.96)}
+@media (hover:hover){.zone:hover{background:var(--stone-3)} .zone[aria-pressed="true"]:hover{background:var(--heat-2)}}
+.w-ui{display:grid;gap:20px}
+.ctl{display:grid;gap:10px}
+.ctl-l{font-size:16px;color:var(--soft)}
+.ctl-l b{color:var(--ink);font-weight:700}
+.range{-webkit-appearance:none;appearance:none;width:100%;height:44px;background:transparent;font-size:16px;margin:0}
+.range::-webkit-slider-runnable-track{height:8px;border-radius:8px;background:var(--stone-3)}
+.range::-moz-range-track{height:8px;border-radius:8px;background:var(--stone-3)}
+.range::-webkit-slider-thumb{-webkit-appearance:none;width:30px;height:24px;margin-top:-8px;border-radius:var(--pebble);background:var(--heat);box-shadow:0 0 0 6px rgba(255,138,76,.18)} /* taste-skill-ignore: owner reference (SETI/horizonx) allows soft depth on stones and floating UI */
+.range::-moz-range-thumb{width:30px;height:24px;border:0;border-radius:var(--pebble);background:var(--heat)}
+.when{display:flex;gap:8px;flex-wrap:wrap}
+.when button{min-height:44px;padding:0 18px;border-radius:999px;background:var(--stone-2);font-size:16px;transition:background-color .2s,transform .14s var(--ease)}
+.when button[aria-checked="true"]{background:var(--cool);color:#062420;font-weight:700}
+.when button:active{transform:scale(.96)}
+.chat{background:var(--ground-2);border-radius:22px;padding:16px 16px 20px;min-height:170px}
+.to{font-size:13.5px;color:var(--soft);margin-bottom:12px}
+.bubble{background:#0f3b33;color:#e7f5f1;border-radius:16px 16px 16px 4px;padding:12px 14px;font-size:16px;line-height:1.5;min-height:3em;white-space:pre-wrap}
+html[dir="rtl"] .bubble{border-radius:16px 16px 4px 16px}
+.bubble::after{content:"";display:inline-block;width:2px;height:1.05em;margin-inline-start:2px;vertical-align:-2px;background:var(--cool);opacity:0}
+.bubble.typing::after{opacity:1}
+.send{width:100%}
+@media (max-width:1100px){.w-grid{grid-template-columns:1fr 1fr} .w-copy{grid-column:1/-1}}
+@media (max-width:700px){.w-grid{grid-template-columns:1fr} .w-back{width:min(100%,340px)}}
+
+/* ---------------------------------------------------------------- REVIEWS: stones settling on a pile */
+.revs{position:relative;z-index:3;background:var(--ground);padding:clamp(70px,8vw,110px) 0}
+.pile{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;align-items:start}
+.rv{position:relative;margin:0;padding:clamp(26px,3vw,40px);background:var(--stone-2);border-radius:38px 64px 44px 70px / 52px 40px 64px 46px;box-shadow:0 20px 50px rgba(0,0,0,.4),inset 0 -6px 0 rgba(0,0,0,.18);will-change:transform} /* taste-skill-ignore: owner reference (SETI/horizonx) allows soft depth on stones and floating UI */
+.rv:nth-child(2){border-radius:60px 40px 70px 44px / 44px 60px 46px 64px;margin-top:40px}
+.rv:nth-child(3){border-radius:50px 70px 40px 60px / 60px 44px 56px 40px;margin-top:-20px}
+.rv:nth-child(4){border-radius:70px 46px 60px 40px / 40px 64px 44px 58px;margin-top:20px}
+.rv .stars{margin-bottom:14px}
+.rv p{font-size:clamp(1.05rem,1rem + .3vw,1.25rem);line-height:1.55}
+.rv footer{margin-top:16px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;font-weight:700;color:var(--heat-2)}
+.rv .tr{font-weight:400;font-size:13.5px;color:var(--soft)}
+@media (max-width:800px){.pile{grid-template-columns:1fr} .rv:nth-child(n){margin-top:0}}
+
+/* ---------------------------------------------------------------- FAQ */
+.faq{position:relative;z-index:3;background:var(--stone);padding:clamp(80px,10vw,140px) 0;border-radius:34px}
+.f-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(24px,5vw,80px);align-items:start}
+.qa details{background:var(--stone-2);border-radius:22px;margin-bottom:10px;transition:background-color .2s}
+.qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:20px 24px;font-size:clamp(1.05rem,1rem + .4vw,1.3rem);font-weight:500}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary::after{content:"";width:16px;height:16px;flex:none;border-radius:var(--pebble);background:var(--heat);transition:transform .3s var(--ease)}
+.qa details[open] summary::after{transform:scaleY(.45)}
+.qa details p{padding:0 24px 22px;color:var(--soft);max-width:52ch}
+@media (hover:hover){.qa details:hover{background:var(--stone-3)}}
+@media (max-width:800px){.f-grid{grid-template-columns:1fr}}
+
+/* ---------------------------------------------------------------- VISIT (contact bento) */
+.visit{position:relative;z-index:3;background:var(--ground);padding:clamp(90px,12vw,160px) 0 clamp(80px,10vw,140px)}
+.vb{display:grid;grid-template-columns:1fr 1fr 1.4fr;grid-template-rows:auto;gap:14px}
+.vb > div{border-radius:24px;background:var(--stone);box-shadow:inset 0 0 0 1px var(--line);padding:24px;overflow:hidden} /* taste-skill-ignore: owner reference (SETI/horizonx) allows soft depth on stones and floating UI */
+.v-reach{display:flex;flex-direction:column;gap:10px;justify-content:flex-end;background:var(--stone-2)!important}
+.vr-t{font:700 clamp(1.4rem,1.1rem + 1vw,2rem)/1.1 var(--text);letter-spacing:-.02em;margin-bottom:auto;padding-bottom:30px}
+.status.big{font-size:18px;font-weight:700;margin-bottom:14px}
+.hours{width:100%;border-collapse:collapse;font-size:16.5px}
+.hours td{padding:9px 0}
+.hours td:last-child{text-align:end;font-variant-numeric:tabular-nums}
+.hours tr.today td{color:var(--heat-2);font-weight:700}
+.v-map{padding:0!important;min-height:320px}
+.v-map iframe{width:100%;height:100%;min-height:320px;border:0;display:block;filter:grayscale(.6) invert(.9) hue-rotate(180deg) contrast(.9)}
+@media (max-width:1000px){.vb{grid-template-columns:1fr 1fr} .v-map{grid-column:1/-1}}
+@media (max-width:600px){.vb{grid-template-columns:1fr}}
+
+/* ---------------------------------------------------------------- FOOTER: a curtain, a heated stone, the name rising */
+.page{position:relative;z-index:2;background:var(--ground);overflow-x:clip}
+.foot{position:relative;z-index:1;background:var(--ground-2);overflow:hidden;padding:clamp(70px,10vw,120px) 0 calc(110px + env(safe-area-inset-bottom))}
+@media (min-width:901px) and (min-height:640px){.foot{position:sticky;bottom:0;padding-bottom:50px}}
+.f-heat{position:absolute;left:50%;bottom:-38%;width:min(1100px,130vw);aspect-ratio:2.4/1;transform:translateX(-50%);pointer-events:none}
+.f-heat .stone{position:absolute;inset:0;border-radius:50%;background:var(--stone);box-shadow:0 -2px 0 rgba(255,255,255,.04)} /* taste-skill-ignore: owner reference (SETI/horizonx) allows soft depth on stones and floating UI */
+.f-heat .stone::after{content:"";position:absolute;inset:0;border-radius:50%;background:radial-gradient(60% 55% at 50% 30%,rgba(255,138,76,.55),rgba(255,138,76,.12) 55%,transparent 75%);opacity:var(--heat-v,1)} /* taste-skill-ignore: the stone heating up, the footer's light source */
+.f-in{position:relative}
+.wordmark{font:800 clamp(2.4rem,9vw,9rem)/.95 var(--text);letter-spacing:-.05em;white-space:nowrap;margin-bottom:30px}
+html[dir="rtl"] .wordmark{text-align:right}
+.wordmark .ch{display:inline-block}
+html.js:not(.still) .wordmark .ch{transform:translateY(60%);opacity:0}
+html.js:not(.still) .foot.in .wordmark .ch{transform:none;opacity:1;transition:transform .9s var(--ease) calc(var(--i)*34ms),opacity .6s var(--ease) calc(var(--i)*34ms)}
+.f-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px;color:var(--soft)}
+.f-row a{color:var(--ink)}
+.f-tools{display:flex;gap:8px}
+.credits{font-size:14px;color:var(--soft);max-width:80ch}
+
+/* ---------------------------------------------------------------- phone dock: two stacked stones */
+.dock{display:none}
+@media (max-width:900px){
+  .dock{display:block;position:fixed;z-index:65;bottom:calc(14px + env(safe-area-inset-bottom));inset-inline-end:14px;width:200px;height:112px;pointer-events:none}
+  .dock a{position:absolute;pointer-events:auto;display:flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;transition:transform .14s var(--ease)}
+  .d-wa{bottom:0;inset-inline-end:0;height:60px;padding:0 20px;background:var(--heat);color:#1a0f08;font-weight:700;font-size:16px;border-radius:46% 54% 50% 50% / 58% 56% 44% 42%;white-space:nowrap}
+  .d-wa svg{width:22px;height:22px}
+  .d-call{bottom:52px;inset-inline-end:26px;width:58px;height:46px;background:var(--stone-3);color:var(--ink);border-radius:var(--pebble);transform:rotate(-6deg)}
+  .d-call svg{width:20px;height:20px}
+  .d-wa:active{transform:scale(.96)} .d-call:active{transform:rotate(-6deg) scale(.94)}
+}
+.write .h2{font-size:clamp(2.1rem,1.4rem + 1.6vw,2.9rem)}
+.r-copy .line{color:var(--ink)}
+.peb.big::after{background:linear-gradient(to top,rgba(13,16,18,.85),rgba(13,16,18,0) 45%),linear-gradient(to bottom,rgba(13,16,18,.92),rgba(13,16,18,.5) 32%,rgba(13,16,18,0) 55%)} /* taste-skill-ignore: scrim under text on the photo */
