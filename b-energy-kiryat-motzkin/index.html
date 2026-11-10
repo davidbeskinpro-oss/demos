@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#151719">
+<title>B ENERGY · מועדון כושר ותזונה · דרך עכו 61, קריית מוצקין</title>
+<meta name="description" content="B ENERGY, מועדון כושר ותזונה של איגור פרלרויזין: אימון פונקציונלי, תפריט אישי ומעקב. דרך עכו 61, קריית מוצקין.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Karantina:wght@400;700&family=Noto+Sans+Hebrew:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+<script>
+(function(){var r=document.documentElement,q=new URLSearchParams(location.search).get('lang'),l=q;
+try{if(!l)l=localStorage.getItem('be-lang');}catch(e){}
+if(l==='en'){r.lang='en';r.dir='ltr';}
+var m=null;try{m=localStorage.getItem('be-motion');}catch(e){}
+if(!m){var c=navigator.connection||{},slow=/(^|-)(2g|3g)$/.test(c.effectiveType||'');
+m=(matchMedia('(prefers-reduced-motion: reduce)').matches||c.saveData||slow||(navigator.deviceMemory&&navigator.deviceMemory<=2)||(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=2))?'off':'on';}
+if(m==='off')r.classList.add('still');r.classList.add('js');})();
+</script>
+</head>
+<body>
+<a class="skip" href="#training"><span lang="he">דילוג לתוכן</span><span lang="en">Skip to content</span></a>
+<div class="concept" data-concept="קונספט לדוגמה שנבנה עבור B ENERGY · זה אינו האתר הרשמי של העסק">
+  <span lang="he">קונספט לדוגמה שנבנה עבור B ENERGY · זה אינו האתר הרשמי של העסק</span>
+  <span lang="en">A sample concept made for B ENERGY · This is not the business's official website</span>
+</div>
+
+<header class="nav" id="nav">
+  <a class="nav-logo" href="#top" aria-label="B ENERGY"><img src="img/logo.jpg" width="850" height="188" alt="B ENERGY"></a>
+  <nav class="nav-links" aria-label="ניווט">
+    <a href="#training"><span lang="he">אימונים</span><span lang="en">Training</span></a>
+    <a href="#nutrition"><span lang="he">תזונה</span><span lang="en">Nutrition</span></a>
+    <a href="#igor"><span lang="he">איגור</span><span lang="en">Igor</span></a>
+    <a href="#reviews"><span lang="he">ביקורות</span><span lang="en">Reviews</span></a>
+    <a href="#visit"><span lang="he">הגעה</span><span lang="en">Visit</span></a>
+  </nav>
+  <div class="nav-tools">
+    <button class="motion" type="button" role="switch" aria-checked="true" data-motion>
+      <span class="motion-track"><span class="motion-knob"></span></span>
+      <span lang="he">תנועה</span><span lang="en">Motion</span>
+    </button>
+    <button class="lang" type="button" data-set-lang><span lang="he">EN</span><span lang="en">עב</span></button>
+    <a class="nav-wa" href="https://wa.me/972542393775" data-wa><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></a>
+  </div>
+</header>
+
+<!-- opening: their photos are dealt like cards, the last one lands as the stage -->
+<div class="deal" id="deal" aria-hidden="true">
+  <img src="img/trx-wall.jpg" alt="" width="1400" height="784">
+  <img src="img/dumbbells.jpg" alt="" width="900" height="640">
+  <img src="img/floor-group.jpg" alt="" width="1400" height="758">
+  <img src="img/neon-floor.jpg" alt="" width="1600" height="1200">
+</div>
+
+<div class="thread" aria-hidden="true"><i class="thread-fill"></i></div>
+
+<main id="top">
+<section class="split">
+  <div class="stage" id="stage">
+    <div class="stage-frame">
+      <img class="sp on" src="img/neon-floor.jpg" width="1600" height="1200" fetchpriority="high" alt="" data-alt-he="רצפת האימון של B ENERGY בתאורת הניאון הירוקה" data-alt-en="The B ENERGY training floor under its green neon light">
+      <img class="sp" src="img/trx-wall.jpg" width="1400" height="784" alt="" loading="lazy" data-alt-he="קיר הרצועות והטבעות עם הלוגו של B ENERGY" data-alt-en="The strap and ring wall with the B ENERGY logo">
+      <img class="sp" src="img/floor-group.jpg" width="1400" height="758" alt="" loading="lazy" data-alt-he="אימון קבוצתי על רצפת הגומי בסטודיו" data-alt-en="A group session on the studio's rubber floor">
+      <canvas class="dust" id="dust"></canvas>
+      <div class="spot" id="spot"></div>
+      <svg class="tube" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true"><path d="M0 22 C120 14 240 26 360 18 S540 12 600 20"/></svg>
+      <div class="stage-bar">
+        <span class="status" data-status></span>
+        <span class="stage-addr"><span lang="he">דרך עכו 61, קריית מוצקין</span><span lang="en">61 Derech Akko, Kiryat Motzkin</span></span>
+      </div>
+      <div class="led" aria-hidden="true"><b data-led>0:40</b><span data-led-phase>WORK</span></div>
+    </div>
+  </div>
+
+  <div class="sheet">
+    <div class="hero">
+      <h1 class="h1" data-fill>
+        <span lang="he"><span class="ln">כוח, תזונה</span><span class="ln acc">ואנרגיה טובה</span></span>
+        <span lang="en"><span class="ln">Strength, nutrition</span><span class="ln acc">and good energy</span></span>
+      </h1>
+      <p class="lead">
+        <span lang="he">B ENERGY, מועדון כושר ותזונה של איגור פרלרויזין. אימון פונקציונלי בדרך עכו 61, קריית מוצקין.</span>
+        <span lang="en">B ENERGY is Igor Perelroizin's fitness and nutrition club: functional training at 61 Derech Akko, Kiryat Motzkin.</span>
+      </p>
+      <div class="cta">
+        <a class="btn btn-wa" href="https://wa.me/972542393775" data-wa>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.4 1.8 2.2 1.2 1.1 2.2 1.4 2.5 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.1.1.6-.1 1.2Z"/></svg>
+          <span lang="he">וואטסאפ לאיגור</span><span lang="en">WhatsApp Igor</span>
+        </a>
+        <a class="btn btn-call" href="tel:+972542393775">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></svg>
+          <span dir="ltr">054-239-3775</span>
+        </a>
+      </div>
+      <a class="rate" href="#reviews"><b>5.0</b><span class="stars" aria-hidden="true">★★★★★</span><span lang="he">96 ביקורות בגוגל</span><span lang="en">96 Google reviews</span></a>
+      <figure class="m-photo"><img src="img/neon-floor.jpg" width="1600" height="1200" alt="" data-alt-he="רצפת האימון של B ENERGY בתאורת הניאון" data-alt-en="The B ENERGY training floor under neon light"></figure>
+    </div>
+
+    <section class="chapter" id="training" data-stage="1">
+      <h2 class="h2" data-reveal><span lang="he">אימון <em>פונקציונלי</em></span><span lang="en">Functional <em>training</em></span></h2>
+      <p class="line" data-reveal><span lang="he">רצועות, טבעות, קטלבלים ומשקולות חופשיות. אימונים מגוונים ומאתגרים, באווירה טובה.</span><span lang="en">Straps, rings, kettlebells and free weights. Varied, challenging sessions in a good atmosphere.</span></p>
+      <div class="kit" data-run>
+        <figure class="tile" data-tile>
+          <svg viewBox="0 0 200 150" class="v-trx" aria-hidden="true">
+            <defs><linearGradient id="gSteel" x1="0" x2="1"><stop offset="0" stop-color="#5a6066"/><stop offset=".5" stop-color="#d8dde1"/><stop offset="1" stop-color="#4b5056"/></linearGradient></defs>
+            <rect x="10" y="8" width="180" height="7" rx="3.5" fill="url(#gSteel)"/>
+            <g class="sw sw1"><rect x="62" y="15" width="6" height="88" fill="#1d1f22"/><rect x="60" y="40" width="10" height="16" rx="2" fill="#f2d23b"/><path d="M50 103h30l-4 22H54z" fill="#2a2d31" stroke="#45494e" stroke-width="2"/><rect x="47" y="122" width="36" height="8" rx="4" fill="#111"/></g>
+            <g class="sw sw2"><rect x="132" y="15" width="6" height="82" fill="#3b6fd1"/><circle cx="135" cy="112" r="16" fill="none" stroke="#141517" stroke-width="7"/><circle cx="135" cy="112" r="16" fill="none" stroke="#3a3e43" stroke-width="1.5"/></g>
+          </svg>
+          <figcaption><span lang="he">רצועות וטבעות</span><span lang="en">Straps &amp; rings</span></figcaption>
+        </figure>
+        <figure class="tile" data-tile>
+          <svg viewBox="0 0 200 150" class="v-bar" aria-hidden="true">
+            <defs>
+              <radialGradient id="gIron" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#4a4f55"/><stop offset=".7" stop-color="#202326"/><stop offset="1" stop-color="#0e0f11"/></radialGradient>
+            </defs>
+            <rect x="0" y="70" width="200" height="10" fill="url(#gSteel)"/>
+            <rect x="118" y="64" width="8" height="22" rx="2" fill="url(#gSteel)"/>
+            <g class="pl pl1"><rect x="128" y="20" width="16" height="110" rx="5" fill="url(#gIron)" stroke="#9fd13a" stroke-width="1.2"/></g>
+            <g class="pl pl2"><rect x="146" y="34" width="13" height="82" rx="4" fill="url(#gIron)" stroke="#e2277f" stroke-width="1.2"/></g>
+            <g class="pl pl3"><rect x="161" y="46" width="10" height="58" rx="3" fill="url(#gIron)" stroke="#d8dde1" stroke-width="1"/></g>
+            <g class="cl"><rect x="173" y="62" width="9" height="26" rx="2" fill="#c8c9c4"/><rect x="175" y="58" width="5" height="8" fill="#9fd13a"/></g>
+          </svg>
+          <figcaption><span lang="he">מוטות ומשקולות</span><span lang="en">Bars &amp; plates</span></figcaption>
+        </figure>
+        <figure class="tile" data-tile>
+          <svg viewBox="0 0 200 150" class="v-kb" aria-hidden="true">
+            <defs><radialGradient id="gKb" cx=".35" cy=".35" r=".75"><stop offset="0" stop-color="#ff7aa8"/><stop offset=".45" stop-color="#e2277f"/><stop offset="1" stop-color="#6c0f3a"/></radialGradient></defs>
+            <circle cx="100" cy="12" r="4" fill="#d8dde1"/>
+            <g class="kb">
+              <path d="M78 58c0-26 44-26 44 0" fill="none" stroke="url(#gSteel)" stroke-width="9" stroke-linecap="round"/>
+              <circle cx="100" cy="92" r="36" fill="url(#gKb)"/>
+              <ellipse cx="88" cy="78" rx="10" ry="6" fill="#fff" opacity=".22"/>
+              
+            </g>
+          </svg>
+          <figcaption><span lang="he">קטלבלים</span><span lang="en">Kettlebells</span></figcaption>
+        </figure>
+        <figure class="tile" data-tile>
+          <svg viewBox="0 0 200 150" class="v-lad" aria-hidden="true">
+            <path d="M70 140 92 20M130 140 108 20" stroke="#0b0c0d" stroke-width="2.5" fill="none"/>
+            <g class="rungs" stroke-width="5" stroke-linecap="round">
+              <line x1="72" y1="128" x2="128" y2="128"/><line x1="76" y1="104" x2="124" y2="104"/><line x1="80" y1="82" x2="120" y2="82"/><line x1="84" y1="62" x2="116" y2="62"/><line x1="87" y1="45" x2="113" y2="45"/><line x1="90" y1="30" x2="110" y2="30"/>
+            </g>
+          </svg>
+          <figcaption><span lang="he">סולם זריזות</span><span lang="en">Agility ladder</span></figcaption>
+        </figure>
+      </div>
+      <figure class="m-photo"><img src="img/trx-wall.jpg" width="1400" height="784" alt="" loading="lazy" data-alt-he="קיר הרצועות והטבעות בסטודיו" data-alt-en="The strap and ring wall at the studio"></figure>
+    </section>
+
+    <section class="chapter" id="nutrition" data-stage="2">
+      <h2 class="h2" data-reveal><span lang="he">תזונה <em>ומעקב</em></span><span lang="en">Nutrition, <em>tracked</em></span></h2>
+      <p class="line" data-reveal><span lang="he">תפריט אישי, שקילה ומדידות, וליווי לאורך כל תקופת האימונים.</span><span lang="en">A personal meal plan, weigh-ins and measurements, and guidance through your whole training period.</span></p>
+      <div class="printer">
+        <div class="slot"></div>
+        <div class="slip-clip"><div class="slip" id="slip">
+          <p class="slip-head">B ENERGY · <span lang="he">כרטיס מתאמן</span><span lang="en">trainee card</span></p>
+          <ul>
+            <li><span lang="he">שיחה עם איגור</span><span lang="en">A chat with Igor</span><i></i><b><span lang="he">וואטסאפ</span><span lang="en">WhatsApp</span></b></li>
+            <li><span lang="he">שקילה ומדידות</span><span lang="en">Weigh-in &amp; measurements</span><i></i><b><span lang="he">בסטודיו</span><span lang="en">at the studio</span></b></li>
+            <li><span lang="he">תפריט תזונה אישי</span><span lang="en">Personal meal plan</span><i></i><b><span lang="he">מותאם לך</span><span lang="en">made for you</span></b></li>
+            <li><span lang="he">אימונים פונקציונליים</span><span lang="en">Functional sessions</span><i></i><b><span lang="he">על הרצפה</span><span lang="en">on the floor</span></b></li>
+            <li><span lang="he">מעקב לאורך הדרך</span><span lang="en">Follow-up</span><i></i><b><span lang="he">שוטף</span><span lang="en">ongoing</span></b></li>
+          </ul>
+          <p class="slip-foot"><span lang="he">דרך עכו 61, קריית מוצקין</span><span lang="en">61 Derech Akko, Kiryat Motzkin</span></p>
+        </div></div>
+      </div>
+      <figure class="m-photo"><img src="img/floor-group.jpg" width="1400" height="758" alt="" loading="lazy" data-alt-he="אימון קבוצתי בסטודיו" data-alt-en="A group session at the studio"></figure>
+    </section>
+  </div>
+</section>
+
+<section class="igor" id="igor">
+  <div class="igor-in">
+    <figure class="cert" id="cert">
+      <img src="img/certificate.jpg" width="800" height="797" loading="lazy" alt="" data-alt-he="תעודת תחרות הרמת כוח על שם איגור פרלרויזין, תלויה על קיר הסטודיו" data-alt-en="A powerlifting certificate in Igor Perelroizin's name on the studio wall">
+      <i class="sheen"></i>
+      <figcaption><span lang="he">מהקיר בסטודיו</span><span lang="en">From the studio wall</span></figcaption>
+    </figure>
+    <div class="igor-copy">
+      <h2 class="h2" data-reveal><span lang="he">איגור <em>פרלרויזין</em></span><span lang="en">Igor <em>Perelroizin</em></span></h2>
+      <p class="line" data-reveal><span lang="he">מנהל את B ENERGY ומאמן על הרצפה. על הקיר בסטודיו: תעודות מלימודים ומתחרויות בהרמת כוח.</span><span lang="en">He runs B ENERGY and coaches on the floor. On the studio wall: his diplomas and powerlifting certificates.</span></p>
+      <blockquote class="pull" data-reveal>
+        <p lang="he">״איגור מאמן בחסד עליון, עם ידע מטורף, אימונים פונקציונליים מגוונים, ליווי תזונה מוקפד שמותאם אישית לכל מתאמן ואווירה אישית וכייפית.״</p>
+        <p lang="en">“Igor is a gifted coach with incredible knowledge: varied functional workouts, careful nutrition guidance tailored to each trainee, and a personal, fun atmosphere.” <small>(translated from Hebrew)</small></p>
+        <footer>Eytana Pearlman · ★★★★★</footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="reviews" id="reviews">
+  <div class="rev-head">
+    <svg class="plate" id="plate" viewBox="0 0 220 220" aria-hidden="true">
+      <defs>
+        <radialGradient id="gPlate" cx=".38" cy=".32" r=".8"><stop offset="0" stop-color="#4b5157"/><stop offset=".55" stop-color="#23272b"/><stop offset="1" stop-color="#0c0d0f"/></radialGradient>
+        <linearGradient id="gHub" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e9ecee"/><stop offset=".5" stop-color="#8a9096"/><stop offset="1" stop-color="#dfe3e6"/></linearGradient>
+      </defs>
+      <circle cx="110" cy="110" r="106" fill="url(#gPlate)"/>
+      <circle cx="110" cy="110" r="98" fill="none" stroke="#9fd13a" stroke-width="3" opacity=".9"/>
+      <circle cx="110" cy="110" r="70" fill="none" stroke="#000" stroke-opacity=".45" stroke-width="10"/>
+      <circle cx="110" cy="110" r="85" fill="none" stroke="#6b7177" stroke-width="5" stroke-dasharray="2 12.83"/>
+      <g fill="#0b0c0d" stroke="#3b4046" stroke-width="1.5">
+        <rect x="96" y="36" width="28" height="22" rx="11"/>
+        <rect x="96" y="36" width="28" height="22" rx="11" transform="rotate(120 110 110)"/>
+        <rect x="96" y="36" width="28" height="22" rx="11" transform="rotate(240 110 110)"/>
+      </g>
+      <text x="110" y="168" text-anchor="middle" fill="#9fd13a" font-family="Karantina, sans-serif" font-size="20" font-weight="700" letter-spacing="1">B ENERGY</text>
+      <circle cx="110" cy="110" r="22" fill="url(#gHub)"/>
+      <circle cx="110" cy="110" r="12" fill="#0c0d0f"/>
+    </svg>
+    <div class="rev-score">
+      <p class="odo" role="img" aria-label="5.0"><span class="odo-d" data-odo="5"></span><span>.</span><span class="odo-d" data-odo="0"></span></p>
+      <p class="rev-sub"><span lang="he">מתוך <b data-count="96">96</b> ביקורות בגוגל</span><span lang="en">from <b data-count="96">96</b> Google reviews</span></p>
+    </div>
+    <h2 class="h2 rev-h" data-reveal><span lang="he">מה המתאמנים <em>כותבים</em></span><span lang="en">What trainees <em>write</em></span></h2>
+  </div>
+
+  <div class="drift" aria-label="ביקורות">
+    <div class="drift-row" data-drift="1">
+      <blockquote class="rq"><p lang="he">״מקצועי, קשוב ומלא אנרגיה טובה. האימונים מגוונים, מאתגרים והאווירה בסטודיו נעימה ומעודדת.״</p><p lang="en">“Professional, attentive and full of good energy. The workouts are varied and challenging, and the atmosphere is warm and encouraging.” <small>(translated)</small></p><footer>Inbal Strull · ★★★★★</footer></blockquote>
+      <blockquote class="rq"><p lang="he">״סטודיו נהדר, אווירה מהנה, אימונים ברמה גבוהה, מאמן מקצועי ברמה גבוהה ביותר.״</p><p lang="en">“A great studio, a fun atmosphere, high-level workouts and a top-level professional coach.” <small>(translated)</small></p><footer>רמי בן דוד · ★★★★★</footer></blockquote>
+      <blockquote class="rq"><p lang="he">״אימונים בעצימות גבוהה ובאווירה טובה.״</p><p lang="en">“High-intensity workouts in a good atmosphere.” <small>(translated)</small></p><footer>Sagit Van der Linden-Cohen · ★★★★★</footer></blockquote>
+      <blockquote class="rq"><p lang="he">״מרגישים שאכפת לו באמת מהמתאמנים ומההתקדמות שלהם. ממליצה בחום!״</p><p lang="en">“You can feel he truly cares about his trainees and their progress. Warmly recommended!” <small>(translated)</small></p><footer>Inbal Strull · ★★★★★</footer></blockquote>
+    </div>
+  </div>
+
+  <article class="letter" data-reveal>
+    <p class="letter-open" lang="he" data-fill>אין מאמן באיזור שמתקרב לרמת הידע והמקצועיות שיש לאיגור.</p>
+    <p class="letter-open" lang="en" data-fill>No coach in the area comes close to Igor's level of knowledge and professionalism.</p>
+    <p lang="he">כל מתאמן מקבל יחס וליווי אישי כולל תפריט תזונה, שקילה, מדידות ומעקב לאורך כל תקופת האימונים. האימונים בסטודיו מלאי אנרגיה ובאווירה טובה, אבל הכי הכי חשוב שאחרי כל ההשקעה והמאמץ, איגור יודע להביא אותך לתוצאות. מומלץ בחום!</p>
+    <p lang="en">Every trainee gets personal attention and guidance, including a nutrition plan, weigh-ins, measurements and follow-up throughout the training period. The studio sessions are full of energy and good atmosphere, but most important of all, after all the effort, Igor knows how to get you to results. Warmly recommended! <small>(translated from Hebrew)</small></p>
+    <footer><b>rotem amsalem</b><span>★★★★★ · Google</span></footer>
+  </article>
+</section>
+
+<section class="gallery" id="studio">
+  <div class="gal-head">
+    <h2 class="h2" data-reveal><span lang="he">הסטודיו <em>מבפנים</em></span><span lang="en">Inside <em>the studio</em></span></h2>
+    <p class="line" data-reveal><span lang="he">תמונות מהעמוד של B ENERGY בגוגל. אפשר לגרור.</span><span lang="en">Photos from B ENERGY's Google page. Drag to look around.</span></p>
+  </div>
+  <div class="rail" id="rail" tabindex="0" aria-label="גלריה">
+    <figure class="card c-wide"><img src="img/floor-group.jpg" width="1400" height="758" loading="lazy" alt="" data-alt-he="רצפת האימון" data-alt-en="The training floor"><figcaption><span lang="he">רצפת האימון</span><span lang="en">The training floor</span></figcaption></figure>
+    <figure class="card c-tall"><img src="img/rack.jpg" width="500" height="640" loading="lazy" alt="" data-alt-he="מתקן הכוח והמשקולות" data-alt-en="The power rack and plates"><figcaption><span lang="he">מתקן הכוח</span><span lang="en">The power rack</span></figcaption></figure>
+    <figure class="card timer" id="timer">
+      <div class="t-digits" data-t role="timer" aria-live="off" data-ui>0:40</div>
+      <p class="t-title"><span lang="he">טיימר אינטרוולים</span><span lang="en">Interval timer</span></p>
+      <p class="t-phase" data-tp><span lang="he">40 עבודה · 20 מנוחה</span><span lang="en">40 work · 20 rest</span></p>
+      <button type="button" class="t-btn" data-tbtn><span lang="he">להפעיל סבב</span><span lang="en">Start a round</span></button>
+      <p class="t-note"><span lang="he">כמו השעון האדום שעל הקיר בסטודיו</span><span lang="en">Like the red clock on the studio wall</span></p>
+    </figure>
+    <figure class="card c-sq"><img src="img/dumbbells.jpg" width="900" height="640" loading="lazy" alt="" data-alt-he="משקולות יד על רצפת הגומי" data-alt-en="Dumbbells on the rubber floor"><figcaption><span lang="he">משקולות יד</span><span lang="en">Dumbbells</span></figcaption></figure>
+    <figure class="card c-wide"><img src="img/trx-wall.jpg" width="1400" height="784" loading="lazy" alt="" data-alt-he="קיר הרצועות" data-alt-en="The strap wall"><figcaption><span lang="he">קיר הרצועות</span><span lang="en">The strap wall</span></figcaption></figure>
+    <figure class="card c-low"><img src="img/kettlebells.jpg" width="500" height="220" loading="lazy" alt="" data-alt-he="קטלבלים" data-alt-en="Kettlebells"><figcaption><span lang="he">קטלבלים</span><span lang="en">Kettlebells</span></figcaption></figure>
+  </div>
+</section>
+
+<section class="closing" id="closing">
+  <div class="closing-pin">
+    <div class="closing-frame" id="closeFrame"><img src="img/neon-floor.jpg" width="1600" height="1200" loading="lazy" alt="" data-alt-he="הסטודיו בערב" data-alt-en="The studio in the evening"></div>
+    <p class="closing-line"><span lang="he">נתראה על הרצפה.</span><span lang="en">See you on the floor.</span></p>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <h2 class="addr" data-reveal><span lang="he"><span class="row">דרך עכו 61</span><span class="row acc">קריית מוצקין</span></span><span lang="en"><span class="row">61 Derech Akko</span><span class="row acc">Kiryat Motzkin</span></span></h2>
+  <div class="visit-grid">
+    <div class="board">
+      <p class="board-status" data-status></p>
+      <table class="hours" data-hours></table>
+    </div>
+    <form class="composer" id="composer" onsubmit="return false">
+      <h3><span lang="he">לכתוב לאיגור</span><span lang="en">Message Igor</span></h3>
+      <fieldset>
+        <legend><span lang="he">מה מעניין אותך?</span><span lang="en">What are you after?</span></legend>
+        <label class="bar"><input type="radio" name="goal" value="0" checked><span class="rod"></span><span class="t"><span lang="he">אימון פונקציונלי</span><span lang="en">Functional training</span></span></label>
+        <label class="bar"><input type="radio" name="goal" value="1"><span class="rod"></span><span class="t"><span lang="he">בניית כוח</span><span lang="en">Building strength</span></span></label>
+        <label class="bar"><input type="radio" name="goal" value="2"><span class="rod"></span><span class="t"><span lang="he">תפריט תזונה ומעקב</span><span lang="en">Meal plan &amp; follow-up</span></span></label>
+        <label class="bar"><input type="radio" name="goal" value="3"><span class="rod"></span><span class="t"><span lang="he">חזרה לכושר</span><span lang="en">Getting back in shape</span></span></label>
+      </fieldset>
+      <fieldset class="when">
+        <legend><span lang="he">מתי נוח לך?</span><span lang="en">When suits you?</span></legend>
+        <label class="seg"><input type="radio" name="when" value="0"><span><span lang="he">בבוקר</span><span lang="en">Mornings</span></span></label>
+        <label class="seg"><input type="radio" name="when" value="1"><span><span lang="he">בצהריים</span><span lang="en">Midday</span></span></label>
+        <label class="seg"><input type="radio" name="when" value="2" checked><span><span lang="he">בערב</span><span lang="en">Evenings</span></span></label>
+      </fieldset>
+      <p class="preview" data-preview></p>
+      <a class="btn btn-wa wide" href="https://wa.me/972542393775" data-wa data-compose><span lang="he">לשלוח לאיגור בוואטסאפ</span><span lang="en">Send to Igor on WhatsApp</span></a>
+    </form>
+    <div class="map">
+      <iframe title="מפה · B ENERGY, דרך עכו 61 קריית מוצקין" src="https://www.google.com/maps?q=B%20ENERGY%2C%20%D7%93%D7%A8%D7%9A%20%D7%A2%D7%9B%D7%95%2061%2C%20%D7%A7%D7%A8%D7%99%D7%AA%20%D7%9E%D7%95%D7%A6%D7%A7%D7%99%D7%9F&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot" id="foot">
+  <div class="foot-in">
+    <canvas class="logo-dust" id="logoDust" aria-hidden="true"></canvas>
+    <img class="foot-logo" src="img/logo.jpg" width="850" height="188" alt="B ENERGY" loading="lazy">
+    <p class="foot-tag"><span lang="he">מועדון כושר ותזונה · דרך עכו 61, קריית מוצקין</span><span lang="en">Fitness &amp; nutrition club · 61 Derech Akko, Kiryat Motzkin</span></p>
+    <div class="foot-links">
+      <a href="tel:+972542393775" dir="ltr">054-239-3775</a>
+      <a href="https://wa.me/972542393775" data-wa>WhatsApp</a>
+      <button class="motion" type="button" role="switch" aria-checked="true" data-motion><span class="motion-track"><span class="motion-knob"></span></span><span lang="he">תנועה</span><span lang="en">Motion</span></button>
+    </div>
+    <p class="credits"><span lang="he">התמונות: מתוך עמוד B ENERGY במפות Google (תורמי Google Maps). הביקורות: מגוגל, בשמות כותביהן.</span><span lang="en">Photos: from B ENERGY's Google Maps page (Google Maps contributors). Reviews: from Google, under their authors' names; English versions are translations.</span></p>
+    <p class="credits"><span lang="he">קונספט לדוגמה בלבד, אינו האתר הרשמי של העסק.</span><span lang="en">A sample concept only, not the business's official website.</span></p>
+  </div>
+  <svg class="horizon" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true"><path d="M0 120 Q500 -30 1000 120"/></svg>
+</footer>
+
+<div class="dock" aria-label="יצירת קשר">
+  <a class="dock-wa" href="https://wa.me/972542393775" data-wa><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm5.4 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.5-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.5c-.1.2-.3.3-.1.6.2.3.8 1.4 1.8 2.2 1.2 1.1 2.2 1.4 2.5 1.6.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.1.1.6-.1 1.2Z"/></svg><span lang="he">וואטסאפ לאיגור</span><span lang="en">WhatsApp Igor</span></a>
+  <a class="dock-call" href="tel:+972542393775" aria-label="להתקשר לאיגור"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1l-2.3 2.2Z"/></svg></a>
+</div>
+
+<script src="js/site.js" defer></script>
+</body>
+</html>
