@@ -1,0 +1,359 @@
+/* E&S Barbershop · concept demo. Black leather, polished gold, cream walls: the shop's own materials. */
+:root{
+  --bg:#100d0a; --bg-2:#17120e; --card:#211a14; --card-2:#2b2219; --ink:#f2e8d4; --soft:#cbbd9f;
+  --gold:#d9b45e; --gold-hi:#f4dc97; --gold-lo:#8e6a26; --pole-r:#c5432f; --pole-b:#3d6db3; --live:#86d493;
+  --disp:"Secular One","Heebo",system-ui,sans-serif; --acc:"Suez One","Secular One",serif; --text:"Heebo",system-ui,sans-serif;
+  --m:clamp(16px,4vw,56px); --ease:cubic-bezier(.23,1,.32,1); --ease-io:cubic-bezier(.65,0,.35,1);
+  --s-small:14px;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;background:var(--bg)}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--text);-webkit-font-smoothing:antialiased;overflow-x:clip}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer;padding:0}
+a,button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+h1,h2,h3,p,figure,blockquote{margin:0}
+:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px;border-radius:6px}
+::selection{background:var(--gold);color:#16110b}
+.vh{position:absolute;width:0;height:0;overflow:hidden}
+html[lang="he"] [lang="en"]:not(html), html[lang="en"] [lang="he"]:not(html){display:none!important}
+.num{font-variant-numeric:tabular-nums}
+.skip{position:absolute;inset-inline-start:var(--m);top:-60px;z-index:80;background:var(--gold);color:#16110b;padding:10px 16px;border-radius:999px;text-decoration:none}
+.skip:focus{top:50px}
+svg{width:1em;height:1em;fill:currentColor;flex:none}
+em{font-family:var(--acc);font-style:normal;color:var(--gold-hi);font-weight:400}
+
+/* concept bar */
+.concept{position:relative;z-index:41;display:flex;align-items:center;justify-content:center;min-height:34px;padding:6px var(--m);background:#0a0806;color:var(--soft);font-size:var(--s-small);line-height:1.35;text-align:center}
+
+/* nav: bar, then a floating pill */
+.nav{position:fixed;z-index:60;inset-inline:0;top:40px;padding:0 var(--m);transition:top .35s var(--ease)}
+.nav-in{display:flex;align-items:center;gap:18px;max-width:1500px;margin:0 auto;padding:8px 8px 8px 8px;border-radius:999px;transition:background .35s ease,box-shadow .35s ease,padding .35s var(--ease),max-width .45s var(--ease)}
+.nav.pill .nav-in{max-width:980px;background:rgba(23,18,14,.72);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);box-shadow:0 10px 30px rgba(0,0,0,.35),inset 0 0 0 1px rgba(217,180,94,.22);padding-inline:14px} /* taste-skill-ignore: owner reference (SETI/horizonx) floating glass pill */
+.brand{display:flex;align-items:baseline;gap:8px;text-decoration:none;direction:ltr}
+.brand b{font:400 26px/1 var(--disp);color:var(--gold-hi);letter-spacing:-.01em}
+.brand span{font:500 14px/1 var(--text);color:var(--soft);letter-spacing:.02em}
+.links{display:flex;gap:4px;margin-inline-start:auto}
+.links a{padding:10px 12px;border-radius:999px;text-decoration:none;font-size:15px;color:var(--soft);transition:color .2s ease,background .2s ease}
+.tools{display:flex;align-items:center;gap:8px}
+.tgl{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;background:var(--card);color:var(--ink);font-size:15px;transition:transform .14s var(--ease),background .2s ease}
+.tgl .knob{position:relative;width:30px;height:18px;border-radius:999px;background:#4a3d2f;transition:background .2s ease}
+.tgl .knob::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:12px;height:12px;border-radius:50%;background:var(--ink);transition:transform .22s var(--ease)}
+.tgl[aria-checked="true"] .knob{background:var(--gold)}
+.tgl[aria-checked="true"] .knob::after{transform:translateX(12px)}
+html[dir="rtl"] .tgl[aria-checked="true"] .knob::after{transform:translateX(-12px)}
+.tgl.lang{min-width:46px;justify-content:center;font-weight:700}
+.nav-wa{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;background:var(--gold);color:#17110a;font-weight:700;text-decoration:none;font-size:15px;transition:transform .14s var(--ease),background .2s ease}
+.nav-wa svg{font-size:19px}
+@media (hover:hover){
+  .links a:hover{color:var(--ink);background:rgba(217,180,94,.1)}
+  .tgl:hover{background:var(--card-2)} .nav-wa:hover{background:var(--gold-hi)}
+}
+@media (max-width:1100px){ .links{display:none} .tools{margin-inline-start:auto} }
+@media (max-width:560px){
+  .nav-wa{display:none} .tgl{padding:0 11px} .tgl > span[lang]{display:none!important}
+  html[lang="he"] .tgl.lang [lang="he"], html[lang="en"] .tgl.lang [lang="en"]{display:inline!important}
+  .brand span{display:none}
+}
+
+/* buttons, chips */
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 24px;border-radius:999px;font-weight:700;font-size:17px;text-decoration:none;overflow:hidden;transition:transform .14s var(--ease),background .2s ease,color .2s ease}
+.btn svg{font-size:20px}
+.btn.gold{background:var(--gold);color:#17110a}
+.btn.gold::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,248,220,.55) 50%,transparent 70%);transform:translateX(-120%)} /* taste-skill-ignore: a shine travelling over gold */
+html:not(.still) .btn.gold::after{animation:sweep 4.2s var(--ease-io) 2s infinite}
+@keyframes sweep{0%{transform:translateX(-120%)}35%,100%{transform:translateX(120%)}}
+.btn.ghost{background:rgba(242,232,212,.08);color:var(--ink);box-shadow:inset 0 0 0 1.5px rgba(217,180,94,.45)} /* taste-skill-ignore */
+.btn:active,.tgl:active,.nav-wa:active,.chip:active,.tab:active,.notch:active,.arw:active,.kn:active,.gbadge:active,.tile:active{transform:scale(.97)}
+@media (hover:hover){ .btn.gold:hover{background:var(--gold-hi)} .btn.ghost:hover{background:rgba(242,232,212,.14)} }
+.chip{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border-radius:999px;background:rgba(33,26,20,.82);font-size:15px;text-decoration:none;color:var(--ink)}
+.chip .dot{width:9px;height:9px;border-radius:50%;background:#8a7d68}
+.chip.open .dot{background:var(--live)}
+html:not(.still) .chip.open .dot{animation:ping 1.8s ease-out infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(134,212,147,.6)}80%,100%{box-shadow:0 0 0 10px rgba(134,212,147,0)}} /* taste-skill-ignore: owner reference glow / lamplight / scrim */
+.stars{display:inline-flex;gap:2px;color:var(--gold-hi)}
+.stars svg{width:14px;height:14px}
+.stars .part{opacity:.55}
+
+/* ---------------------------------------------------------------- HERO + ROOM */
+.hero{position:relative;background:var(--bg)}
+html.js:not(.still) .hero{height:300svh}
+.stage{position:relative;overflow:hidden;background:var(--bg)}
+html.js:not(.still) .stage{position:sticky;top:0;height:100svh;transform-origin:50% 0}
+.stage::before{content:"";position:absolute;inset:0;background:radial-gradient(70% 60% at 72% 30%,rgba(217,180,94,.12),transparent 70%);pointer-events:none} /* taste-skill-ignore: warm lamplight on the leather */
+html[dir="rtl"] .stage::before{background:radial-gradient(70% 60% at 28% 30%,rgba(217,180,94,.12),transparent 70%)} /* taste-skill-ignore: owner reference glow / lamplight / scrim */
+.hairs{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+.lamps{position:absolute;top:0;inset-inline-end:calc(var(--m) + 2vw);width:min(40vw,520px);height:180px;pointer-events:none;z-index:1;transition:opacity .3s}
+.lamp{position:absolute;top:96px;width:120px;height:34px;border-radius:0 0 60px 60px/0 0 18px 18px;background:#1e1a16;box-shadow:inset 0 -6px 0 #fff7df,0 18px 60px 18px rgba(255,236,180,.22)} /* taste-skill-ignore: their two round ceiling lamps */
+.lamp.l1{inset-inline-start:8%} .lamp.l2{inset-inline-start:62%;width:96px;top:112px;opacity:.85}
+html:not(.still) .lamp{animation:hum 5s ease-in-out infinite alternate}
+html:not(.still) .lamp.l2{animation-delay:-2.2s}
+@keyframes hum{from{box-shadow:inset 0 -6px 0 #fff7df,0 18px 60px 14px rgba(255,236,180,.16)}to{box-shadow:inset 0 -6px 0 #fff7df,0 22px 80px 26px rgba(255,236,180,.3)}} /* taste-skill-ignore: owner reference glow / lamplight / scrim */
+
+.h-copy{position:relative;z-index:4;padding:118px var(--m) 28px;max-width:640px}
+html.js:not(.still) .h-copy{position:absolute;inset-inline-start:max(0px,calc((100% - 1700px)/2));top:50%;transform:translateY(-46%);width:min(780px,52vw);padding-top:0;padding-bottom:0}
+.h-title{font:400 clamp(72px,11vw,220px)/.86 var(--disp);letter-spacing:-.02em;color:var(--ink);direction:ltr;text-align:start}
+html[dir="rtl"] .h-title{text-align:right}
+.h-title .ln{display:block;white-space:nowrap}
+.h-title .acc{font:400 clamp(38px,5vw,92px)/1 var(--acc);color:var(--gold-hi);margin-top:.12em;letter-spacing:0}
+.h-title .ch{display:inline-block}
+html.js:not(.still) .h-title .ch{opacity:0;transform:translateY(.5em) rotate(4deg);filter:blur(10px)}
+html.js:not(.still) .ready .h-title .ch{opacity:1;transform:none;filter:none;transition:opacity .6s var(--ease) calc(var(--i)*38ms),transform .9s var(--ease) calc(var(--i)*38ms),filter .6s var(--ease) calc(var(--i)*38ms)}
+.h-lead{margin-top:22px;font-size:clamp(18px,1.5vw,28px);line-height:1.45;max-width:30ch;color:var(--ink)}
+.h-acts{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.h-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+html.js:not(.still) [data-rise]{opacity:0;transform:translateY(18px)}
+html.js:not(.still) .ready [data-rise]{opacity:1;transform:none;transition:opacity .7s var(--ease) var(--d),transform .7s var(--ease) var(--d)}
+
+/* the mirror: an oval in a gold rim, like the mirrors on their wall */
+.slot{position:absolute;pointer-events:none;visibility:hidden}
+html.js:not(.still) .slot{top:50%;inset-inline-end:max(calc(var(--m) + 3vw),calc((100% - 1700px)/2 + 120px));height:min(78svh,900px);aspect-ratio:.56;transform:translateY(-44%)}
+.mirror{position:relative;z-index:2;margin:0 var(--m) 0;height:min(118vw,620px);border-radius:28px;overflow:hidden;background:#000}
+html.js:not(.still) .mirror{position:absolute;margin:0;left:0;top:0;width:300px;height:500px;border-radius:50%;will-change:width,height,transform}
+.m-in{position:absolute;inset:-3%;transition:transform .5s var(--ease)}
+.m-in img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.lampspot{position:absolute;inset:0;background:radial-gradient(circle at var(--lx,50%) var(--ly,20%),rgba(255,240,200,.32),transparent 34%);mix-blend-mode:soft-light;pointer-events:none} /* taste-skill-ignore: the lamp's light moves over the photo */
+.mirror::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(16,13,10,0) 55%,rgba(16,13,10,.75));opacity:var(--scrim,0);pointer-events:none} /* taste-skill-ignore: owner reference glow / lamplight / scrim */
+.rim{position:absolute;inset:0;z-index:2;border-radius:inherit;box-shadow:inset 0 0 0 6px #b48a32,inset 0 0 0 8px #f4dc97,inset 0 0 0 11px #6e4f16,inset 0 0 40px rgba(0,0,0,.55);opacity:var(--rim,1);pointer-events:none} /* taste-skill-ignore: the mirror's gold rim */
+.mirror figcaption{position:absolute;z-index:3;bottom:12px;inset-inline-end:16px;font-size:13px;color:rgba(242,232,212,.75);opacity:var(--cap,1)}
+.spots{position:absolute;inset:0;z-index:3}
+.spot{position:absolute;display:flex;align-items:center;gap:8px;transform:translate(-9px,-9px);pointer-events:none}
+html[dir="rtl"] .spot{flex-direction:row}
+.spot .pin{width:18px;height:18px;border-radius:50%;background:var(--gold-hi);box-shadow:0 0 0 5px rgba(244,220,151,.25);flex:none;transform:scale(.4);opacity:0;transition:transform .45s var(--ease),opacity .3s} /* taste-skill-ignore: owner reference glow / lamplight / scrim */
+.spot.on .pin{transform:scale(1);opacity:1}
+.spot .tag{font:500 14px/1.2 var(--text);color:#17110a;background:var(--gold-hi);padding:6px 10px;border-radius:8px;white-space:nowrap;opacity:0;transition:opacity .25s}
+.spot.on .tag{opacity:1}
+.spot.flip{flex-direction:row-reverse;transform:translate(calc(-100% + 9px),-9px)}
+html:not(.still) .spot.on .pin{animation:ping2 2.2s ease-out infinite}
+@keyframes ping2{0%{box-shadow:0 0 0 0 rgba(244,220,151,.55)}80%,100%{box-shadow:0 0 0 14px rgba(244,220,151,0)}} /* taste-skill-ignore: owner reference glow / lamplight / scrim */
+.room-copy{position:relative;z-index:4;padding:26px var(--m) 72px;max-width:640px}
+html.js:not(.still) .room-copy{position:absolute;inset-inline-start:max(0px,calc((100% - 1700px)/2));top:50%;transform:translateY(-50%);width:min(560px,44vw);padding:0 var(--m);opacity:0;pointer-events:none}
+.room-copy h2,.c-h,.revs h2,.book h2,.faq h2,.visit h2{font:400 clamp(36px,4.6vw,70px)/1.02 var(--disp);letter-spacing:-.015em}
+.room-copy p{margin-top:16px;font-size:clamp(17px,1.4vw,20px);max-width:34ch}
+@media (max-width:899px){
+  html.js:not(.still) .h-copy{top:auto;bottom:calc(20px + env(safe-area-inset-bottom));transform:none;width:100%}
+  html.js:not(.still) .slot{top:96px;inset-inline-end:50%;height:36svh;transform:translateX(50%)}
+  html[dir="rtl"].js:not(.still) .slot{transform:translateX(-50%)}
+  .h-title{font-size:clamp(60px,19vw,96px)}
+  .h-title .acc{font-size:clamp(32px,9vw,46px)}
+  .h-lead{margin-top:12px;font-size:17px}
+  .h-acts{margin-top:16px} .h-chips{margin-top:10px}
+  .h-chips .chip:first-child{display:none}
+  .room-copy{padding-inline-end:84px}
+  .btn{min-height:48px;padding:0 18px;font-size:16px}
+  .lamps{inset-inline-end:50%;transform:translateX(50%);width:260px}
+  .lamp{top:52px} .lamp.l2{top:64px}
+  html[dir="rtl"] .lamps{transform:translateX(-50%)}
+  html.js:not(.still) .room-copy{top:auto;bottom:calc(28px + env(safe-area-inset-bottom));transform:none;width:100%}
+  .room-copy h2{font-size:clamp(32px,9vw,44px)}
+}
+@media (max-height:700px) and (max-width:899px){
+  html.js:not(.still) .slot{height:30svh;top:86px}
+  .h-title{font-size:58px} .h-title .acc{font-size:30px}
+  .h-chips .chip:first-child{display:none}
+}
+
+/* ---------------------------------------------------------------- THE CHAIR */
+.chair{position:relative;z-index:5;background:var(--bg-2);border-radius:34px 34px 0 0}
+.chair::before{content:"";position:absolute;z-index:2;top:12px;left:28px;right:28px;height:0;border-top:2px dashed rgba(217,180,94,.55)} /* taste-skill-ignore: the leather's gold stitching along the top edge */
+html.js:not(.still) .chair{margin-top:-100svh;height:340svh;box-shadow:0 -30px 60px rgba(0,0,0,.45)} /* taste-skill-ignore: the leather sheet rides over the room */
+.c-stage{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:center;gap:clamp(20px,4vw,72px);padding:clamp(70px,9vw,120px) var(--m) clamp(60px,7vw,100px);max-width:1500px;margin:0 auto}
+html.js:not(.still) .c-stage{position:sticky;top:0;height:100svh;padding-top:88px;padding-bottom:28px}
+.c-draw{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%}
+.chair-svg{width:auto;height:min(70svh,620px);max-width:100%;overflow:visible}
+html[dir="rtl"] .chair-svg{transform:scaleX(-1)}
+.c-note{margin-top:10px;font-size:14px;color:var(--soft)}
+.c-side{display:flex;flex-direction:column;gap:28px}
+.c-row{display:flex;gap:26px;align-items:stretch}
+/* the lever: a gold track with a black knob that jumps between the three jobs */
+.lever{position:relative;display:flex;flex-direction:column;justify-content:space-between;padding:6px 0;min-width:126px}
+.lever .track{position:absolute;inset-block:22px;inset-inline-start:15px;width:8px;border-radius:8px;background:linear-gradient(90deg,#6e4f16,#f4dc97 45%,#a87b25)} /* taste-skill-ignore: gold rod */
+.lever .knob{position:absolute;left:50%;top:0;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#4a4038,#0d0b09 70%);box-shadow:0 0 0 3px var(--gold),0 6px 14px rgba(0,0,0,.5);transition:top .45s var(--ease)} /* taste-skill-ignore */
+.notch{position:relative;display:flex;align-items:center;min-height:52px;padding-inline-start:46px;font:400 22px/1 var(--disp);color:var(--soft);text-align:start;transition:color .25s ease}
+.notch[aria-pressed="true"]{color:var(--gold-hi)}
+@media (hover:hover){ .notch:hover{color:var(--ink)} }
+.c-cards{position:relative;flex:1;min-height:380px}
+.c-card{position:absolute;inset:0;display:flex;flex-direction:column;gap:12px;opacity:0;transform:translateY(24px);transition:opacity .5s var(--ease),transform .6s var(--ease);pointer-events:none}
+.c-card.on{opacity:1;transform:none;pointer-events:auto}
+.c-card figure{position:relative;flex:1;min-height:200px;border-radius:22px;overflow:hidden;background:#000}
+.c-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.c-card figcaption{position:absolute;bottom:8px;inset-inline-end:8px;font-size:13px;line-height:1.2;padding:3px 7px;border-radius:6px;background:rgba(16,13,10,.72);color:var(--ink)}
+.c-card h3{font:400 clamp(30px,2.8vw,44px)/1 var(--acc);color:var(--gold-hi)}
+.c-card p{font-size:18px;max-width:30ch}
+.c-arrows{display:none;gap:10px}
+html.still .c-arrows,html:not(.js) .c-arrows{display:flex}
+.arw{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--card);color:var(--gold-hi);font-size:22px}
+html[dir="rtl"] .arw.next svg{transform:scaleX(-1)}
+html[dir="ltr"] .arw.prev svg{transform:scaleX(-1)}
+html[dir="rtl"] .arw.prev svg{transform:none}
+@media (max-width:899px){
+  .c-stage{grid-template-columns:1fr;gap:6px;align-content:start}
+  html.js:not(.still) .c-stage{padding-top:84px;padding-bottom:calc(16px + env(safe-area-inset-bottom));grid-template-rows:auto 1fr auto;align-items:stretch}
+  .c-side{display:contents}
+  .c-h{order:-1;font-size:clamp(30px,8.4vw,42px)}
+  .c-draw{height:auto;min-height:0}
+  .chair-svg{height:min(36svh,320px)}
+  html.js:not(.still) .chair-svg{height:min(40svh,360px)}
+  .c-note{margin-top:2px;font-size:13px}
+  .c-row{gap:12px;flex-direction:column;padding-inline-end:70px}
+  .lever{flex-direction:row;min-width:0;padding:0;gap:4px}
+  .lever .track{inset-block:auto;top:auto;bottom:0;inset-inline:12px;width:auto;height:6px}
+  .lever .knob{display:none}
+  .notch{flex:1;justify-content:center;padding:0;min-height:46px;font-size:19px;border-radius:12px 12px 0 0}
+  .notch[aria-pressed="true"]{background:rgba(217,180,94,.14)}
+  .c-cards{min-height:164px}
+  .c-card{display:grid;grid-template-columns:118px 1fr;grid-template-rows:auto 1fr;column-gap:14px;row-gap:4px}
+  .c-card figure{grid-row:1/3;min-height:0;height:150px;border-radius:16px}
+  .c-card h3{font-size:30px;align-self:end}
+  .c-card p{font-size:16px}
+  .c-card figcaption{font-size:13px;bottom:4px;inset-inline-end:4px;padding:2px 5px}
+}
+
+/* ---------------------------------------------------------------- REVIEWS */
+.revs{position:relative;z-index:5;overflow:hidden;background:var(--bg);min-height:100svh;display:flex;align-items:center}
+.r-bg{position:absolute;inset:0}
+.r-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 60%;opacity:.42;filter:saturate(1.1)}
+.r-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(16,13,10,.92),rgba(16,13,10,.55) 60%,rgba(16,13,10,.8))} /* taste-skill-ignore: scrim under text on a photo */
+.r-sheen{position:absolute;inset:0;z-index:1;background:radial-gradient(240px 240px at var(--sx,60%) var(--sy,50%),rgba(255,233,170,.28),transparent 70%);mix-blend-mode:screen} /* taste-skill-ignore: the hand's light on the gold */
+.r-in{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,90px);align-items:center;padding:clamp(80px,10vw,150px) var(--m);max-width:1500px;margin:0 auto;width:100%}
+.score{display:flex;flex-direction:column;gap:14px}
+.odo{display:inline-flex;direction:ltr;align-self:flex-start;font:400 clamp(110px,15vw,230px)/.9 var(--disp);color:var(--gold-hi);letter-spacing:-.03em}
+.odo .d{display:inline-block;height:1em;overflow:hidden;vertical-align:top}
+.odo .d > span{display:block;transition:transform 1.8s var(--ease)}
+.odo .d > span > b{display:block;height:1em;line-height:1;font-weight:inherit}
+.odo .d > span > b::before{content:attr(data-n)}
+.stars.big svg{width:28px;height:28px}
+.rv{display:flex;flex-direction:column;gap:18px}
+.rv p{font:400 clamp(24px,2.6vw,36px)/1.32 var(--text);font-weight:500;max-width:26ch}
+.rv .c{color:rgba(242,232,212,.22);transition:color .25s ease}
+.rv .c.on{color:var(--ink)}
+.rv .c.g{color:rgba(244,220,151,.25)}
+.rv .c.g.on{color:var(--gold-hi)}
+html.still .rv .c,html:not(.js) .rv .c{color:var(--ink)}
+html.still .rv .c.g{color:var(--gold-hi)}
+.rv footer{font-size:16px;color:var(--soft)}
+.rv footer bdi{color:var(--ink);font-weight:700}
+.gbadge{grid-column:2;justify-self:start;display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border-radius:999px;background:rgba(33,26,20,.85);text-decoration:none;font-size:16px;transition:transform .14s var(--ease),background .2s}
+.gbadge b{color:var(--gold-hi)}
+html[dir="rtl"] .gbadge svg{transform:scaleX(-1)}
+@media (hover:hover){ .gbadge:hover{background:var(--card-2)} }
+@media (max-width:899px){
+  .r-in{grid-template-columns:1fr} .gbadge{grid-column:1}
+  .odo{font-size:120px}
+}
+
+/* ---------------------------------------------------------------- BOOK */
+.book{position:relative;z-index:5;background:var(--bg-2);padding:clamp(90px,11vw,170px) var(--m)}
+.b-head,.b-grid{max-width:1300px;margin:0 auto}
+.b-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(28px,5vw,80px);margin-top:clamp(30px,4vw,56px);align-items:start}
+.grp{border:0;margin:0 0 26px;padding:0;min-width:0}
+.grp legend{display:flex;align-items:center;gap:12px;padding:0;margin-bottom:12px;font:400 22px/1.2 var(--disp);color:var(--soft);transition:color .3s}
+.grp legend .dot{width:12px;height:12px;border-radius:50%;background:#3b3026;transition:background .3s,box-shadow .3s}
+.grp.lit legend{color:var(--ink)}
+.grp.lit legend .dot{background:var(--gold-hi);box-shadow:0 0 0 5px rgba(244,220,151,.18)} /* taste-skill-ignore: owner reference glow / lamplight / scrim */
+.tabs{display:flex;flex-wrap:wrap;gap:10px}
+/* leather tabs with gold stitching */
+.tab{position:relative;min-height:50px;padding:0 20px;border-radius:14px;background:#2a2119;color:var(--ink);font-size:17px;font-weight:500;transition:transform .14s var(--ease),background .2s,color .2s}
+.tab::after{content:"";position:absolute;inset:5px;border-radius:10px;border:1.5px dashed rgba(217,180,94,.35);pointer-events:none} /* taste-skill-ignore: stitching on leather */
+.tab[aria-pressed="true"]{background:var(--gold);color:#17110a}
+.tab[aria-pressed="true"]::after{border-color:rgba(23,17,10,.35)}
+@media (hover:hover){ .tab:hover{background:#352a20} .tab[aria-pressed="true"]:hover{background:var(--gold-hi)} }
+.plate-wrap{display:flex;flex-direction:column;gap:16px;position:sticky;top:110px}
+/* the engraved gold plate */
+.plate{position:relative;min-height:260px;padding:34px 36px;border-radius:18px;color:#3a2a0d;background:linear-gradient(115deg,#8e6a26 0%,#e3c47a 18%,#f6e2a6 34%,#c79b45 52%,#f1d996 70%,#a87b25 100%);box-shadow:inset 0 1px 0 rgba(255,250,230,.7),inset 0 -2px 0 rgba(80,55,15,.5),0 24px 50px rgba(0,0,0,.45)} /* taste-skill-ignore: brushed gold plate */
+.plate::before{content:"";position:absolute;inset:0;border-radius:inherit;background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 1px,transparent 1px 3px);pointer-events:none} /* taste-skill-ignore: brushing */
+.screw{position:absolute;width:12px;height:12px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff3cc,#8e6a26 70%)} /* taste-skill-ignore */
+.screw::after{content:"";position:absolute;left:2px;right:2px;top:5px;height:2px;background:#5c4111;transform:rotate(35deg)}
+.s1{top:12px;left:12px}.s2{top:12px;right:12px}.s3{bottom:12px;left:12px}.s4{bottom:12px;right:12px}
+.pl-to{font:400 16px/1 var(--disp);letter-spacing:.02em;opacity:.8}
+.pl-msg{margin-top:14px;font:500 clamp(20px,1.9vw,26px)/1.45 var(--text);color:#33240a}
+.caret{display:inline-block;width:2px;height:1.1em;margin-inline-start:2px;vertical-align:-.15em;background:#3a2a0d}
+html:not(.still) .caret{animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.send{align-self:stretch}
+@media (max-width:899px){
+  .b-grid{grid-template-columns:1fr}
+  .plate-wrap{position:relative;top:0}
+  .plate{padding:28px 24px;min-height:200px}
+  .tab{padding:0 16px}
+}
+
+/* ---------------------------------------------------------------- FAQ */
+.faq{position:relative;z-index:5;background:var(--bg);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,90px);padding:clamp(90px,10vw,150px) max(var(--m),calc((100% - 1500px)/2))}
+.qa{display:flex;flex-direction:column;gap:10px}
+.qa details{border-radius:18px;background:var(--card);overflow:hidden}
+.qa summary{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;padding:0 22px;cursor:pointer;list-style:none;font:400 21px/1.25 var(--disp)}
+.qa summary::-webkit-details-marker{display:none}
+.qa summary svg{color:var(--gold-hi);font-size:22px;transition:transform .3s var(--ease)}
+.qa details[open] summary svg{transform:rotate(45deg)}
+.qa details p{padding:0 22px 20px;font-size:17px;color:var(--ink)}
+@media (hover:hover){ .qa summary:hover{background:var(--card-2)} }
+@media (max-width:899px){ .faq{grid-template-columns:1fr} }
+
+/* ---------------------------------------------------------------- VISIT: bento */
+.visit{position:relative;z-index:5;background:var(--bg-2);padding:clamp(90px,10vw,150px) var(--m) clamp(70px,8vw,120px)}
+.visit h2{max-width:1400px;margin:0 auto}
+.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(230px,auto);gap:14px;max-width:1400px;margin:clamp(30px,4vw,54px) auto 0}
+.tile{position:relative;overflow:hidden;border-radius:24px;background:var(--card);padding:24px;text-decoration:none;color:var(--ink);isolation:isolate}
+.tile::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(320px circle at var(--mx,50%) var(--my,0%),rgba(217,180,94,.16),transparent 70%);opacity:0;transition:opacity .3s} /* taste-skill-ignore: the lamp follows the hand */
+@media (hover:hover){ .tile:hover::after{opacity:1} }
+.tile h3{font:400 26px/1.1 var(--disp)}
+.tile p{margin-top:8px;color:var(--soft);font-size:16px}
+.t-photo{grid-column:span 2;grid-row:span 2;padding:0;margin:0}
+.t-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+html:not(.still) .t-photo img{animation:drift 22s ease-in-out infinite alternate}
+@keyframes drift{from{transform:scale(1.04) translate(0,0)}to{transform:scale(1.14) translate(-2%,-2%)}}
+.t-photo figcaption{position:absolute;bottom:14px;inset-inline-start:18px;font-size:13px;padding:6px 10px;border-radius:8px;background:rgba(16,13,10,.7)}
+.t-addr{display:flex;flex-direction:column;justify-content:flex-end}
+.t-addr .ico{position:absolute;top:22px;inset-inline-start:22px;font-size:38px;color:var(--gold-hi)}
+html:not(.still) .t-addr .ico{animation:bob 2.6s var(--ease-io) infinite alternate}
+@keyframes bob{to{transform:translateY(-6px)}}
+.t-hours{display:flex;flex-direction:column;gap:12px}
+.t-hours .chip{align-self:flex-start;background:var(--card-2)}
+.hours{border-collapse:collapse;font-size:15px;width:100%}
+.hours td{padding:3px 0}
+.hours td:last-child{text-align:end;color:var(--soft)}
+.hours tr.today td{color:var(--gold-hi);font-weight:700}
+.t-map{padding:0;min-height:230px}
+.t-map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(.3) contrast(1.05)}
+.t-talk{display:flex;flex-direction:column;gap:10px;justify-content:flex-end}
+.t-talk h3{margin-bottom:auto}
+html.js:not(.still) [data-tile]{opacity:0;transform:translateY(30px) scale(.97);filter:blur(6px)}
+html.js:not(.still) [data-tile].in{opacity:1;transform:none;filter:none;transition:opacity .8s var(--ease) var(--d,0ms),transform .8s var(--ease) var(--d,0ms),filter .8s var(--ease) var(--d,0ms)}
+@media (max-width:1100px){ .bento{grid-template-columns:repeat(2,minmax(0,1fr))} .t-photo{grid-row:span 1;min-height:300px} }
+@media (max-width:620px){ .bento{grid-template-columns:1fr;grid-auto-rows:auto} .t-photo{grid-column:auto;min-height:260px} .tile{min-height:170px} .t-map{min-height:260px} }
+
+/* entrances */
+html.js:not(.still) [data-reveal]{opacity:0;transform:translateY(24px)}
+html.js:not(.still) [data-reveal].in{opacity:1;transform:none;transition:opacity .8s var(--ease) var(--d,0ms),transform .9s var(--ease) var(--d,0ms)}
+
+/* ---------------------------------------------------------------- FOOTER: a curtain under the page */
+.page{position:relative;z-index:2;background:var(--bg);margin-bottom:var(--fh,0px);box-shadow:0 30px 60px rgba(0,0,0,.6)} /* taste-skill-ignore: the page lifts off the footer */
+.foot{position:fixed;z-index:1;left:0;right:0;bottom:0;background:#0a0806;padding:clamp(40px,6vw,80px) var(--m) calc(30px + env(safe-area-inset-bottom));overflow:hidden}
+.f-word{position:relative;font:400 32vw/.8 var(--disp);letter-spacing:-.04em;direction:ltr;text-align:center;color:var(--gold);user-select:none}
+.f-word::after{content:"";position:absolute;inset:0;background:radial-gradient(28vw 60% at var(--fx,50%) 45%,rgba(255,243,204,.75),transparent 70%);mix-blend-mode:soft-light;pointer-events:none} /* taste-skill-ignore: light passing over polished gold */
+.f-cols{display:flex;flex-wrap:wrap;gap:18px 40px;justify-content:space-between;align-items:center;max-width:1400px;margin:clamp(20px,3vw,40px) auto 0;font-size:16px}
+.f-cols a{color:var(--gold-hi)}
+.f-tools{display:flex;gap:8px}
+.f-legal{max-width:min(1400px,95ch);margin:22px auto 0;font-size:15px;line-height:1.55;color:#b9aa8b}
+@media (max-width:899px){ .f-word{font-size:40vw} .foot{padding-bottom:calc(100px + env(safe-area-inset-bottom))} }
+
+/* ---------------------------------------------------------------- phones: the hydraulic lever at the edge */
+.lev{display:none}
+@media (max-width:899px){
+  .lev{position:fixed;z-index:70;display:flex;flex-direction:column;align-items:center;inset-inline-end:12px;bottom:calc(14px + env(safe-area-inset-bottom));transition:transform .45s var(--ease),opacity .3s}
+  .lev.away{transform:translateY(140%);opacity:0}
+  .lev .rod{order:2;width:8px;height:16px;background:linear-gradient(90deg,#6e4f16,#f4dc97 45%,#a87b25)} /* taste-skill-ignore: gold rod */
+  .kn{display:grid;place-items:center;border-radius:50%;text-decoration:none;transition:transform .14s var(--ease)}
+  .kn.wa{order:1;width:60px;height:60px;background:radial-gradient(circle at 35% 30%,#fff0bd,#d9b45e 45%,#8e6a26);color:#17110a;font-size:28px;box-shadow:0 8px 22px rgba(0,0,0,.5)} /* taste-skill-ignore: a gold knob that floats */
+  .kn.call{order:3;width:50px;height:50px;background:radial-gradient(circle at 35% 30%,#4a4038,#0d0b09 70%);color:var(--gold-hi);font-size:22px;box-shadow:0 0 0 2.5px var(--gold),0 8px 22px rgba(0,0,0,.5)} /* taste-skill-ignore */
+}
+
+/* animations off on wide screens: the room sits in a tall frame beside the words */
+@media (min-width:900px){
+  html.still .stage,html:not(.js) .stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,560px);grid-template-rows:auto auto;column-gap:6vw;row-gap:40px;padding:120px var(--m) 90px;max-width:1500px;margin:0 auto}
+  html.still .h-copy,html:not(.js) .h-copy{grid-column:1;grid-row:1;padding:0;align-self:end}
+  html.still .mirror,html:not(.js) .mirror{grid-column:2;grid-row:1/3;height:min(86vh,880px);margin:0}
+  html.still .room-copy,html:not(.js) .room-copy{grid-column:1;grid-row:2;padding:0;align-self:start}
+}
