@@ -1,0 +1,305 @@
+/* Liram Ben Shushan, hair design. Everything comes from the salon itself: the grey wood-grain wall cut by black
+   diagonal lines, the gold-framed mirrors, black leather and chrome chairs, the mauve sign with gold letters,
+   and the gold swirls on the glass door. Graphite and chrome for the men, mauve, gold and swirls for the women. */
+:root{
+  --ground:#1d1b20;
+  --ground-2:#242128;
+  --wall:#2e2b33;            /* the wood-grain wall, unlit */
+  --wall-2:#38343e;
+  --sign:#4b3e4e;            /* the sign's mauve */
+  --sign-d:#2b2330;
+  --ink:#eeebea;
+  --soft:#d3cacb;
+  --gold:#cfac62;            /* the sign's letters and the mirror frames */
+  --gold-2:#ead29a;
+  --gold-d:#8e7136;
+  --chrome:#bcc0c7;
+  --live:#7fd69c;
+  --text:"IBM Plex Sans Hebrew","Arial Hebrew",Arial,sans-serif;
+  --serif:"Bellefair","Times New Roman",serif;
+  --s-small:16px;
+  --s-body:clamp(1.0625rem,1rem + .25vw,1.2rem);
+  --s-lead:clamp(1.15rem,1.02rem + .5vw,1.45rem);
+  --s-head:clamp(2.3rem,1.5rem + 2.9vw,4.4rem);
+  --m:clamp(16px,3vw,44px);
+  --cut:clamp(60px,9vw,150px);
+  --ease:cubic-bezier(.23,1,.32,1);
+  --ease-io:cubic-bezier(.77,0,.175,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--ground);color:var(--ink);font:400 var(--s-body)/1.55 var(--text);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;touch-action:manipulation}
+h1,h2,h3,p,figure,ol,ul,blockquote,fieldset{margin:0}
+fieldset{border:0;padding:0;min-width:0}
+ol,ul{padding:0;list-style:none}
+.vh{position:absolute;width:0;height:0;overflow:hidden}
+.num{font-variant-numeric:lining-nums tabular-nums}
+html[lang="he"] [lang="en"]:not(html), html[lang="en"] [lang="he"]:not(html){display:none!important}
+::selection{background:var(--gold);color:var(--ground)}
+:focus-visible{outline:3px solid var(--gold-2);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;inset-inline-start:var(--m);top:-60px;z-index:60;background:var(--gold);color:var(--ground);padding:10px 16px;border-radius:999px;text-decoration:none}
+.skip:focus{top:44px}
+h2{font:700 var(--s-head)/1.04 var(--text);letter-spacing:-.025em;text-wrap:balance}
+h3{font:700 20px/1.2 var(--text)}
+em{font:400 1.06em/1 var(--serif);font-style:normal;color:var(--gold)}  /* taste-skill-ignore: the SETI serif accent, in the sign's gold */
+section{position:relative}
+.stars{display:inline-flex;gap:2px;vertical-align:middle}
+.stars svg{width:15px;height:15px;fill:var(--gold)}
+.page{position:relative;z-index:2;background:var(--ground)}
+/* the wall's wood grain: fine diagonal streaks */
+.grain{background-image:repeating-linear-gradient(68deg,rgba(255,255,255,.025) 0 2px,transparent 2px 7px,rgba(0,0,0,.05) 7px 8px,transparent 8px 13px)} /* taste-skill-ignore */
+
+.concept{position:relative;z-index:41;display:flex;align-items:center;justify-content:center;min-height:34px;padding:6px var(--m);background:var(--sign-d);color:var(--soft);font-size:var(--s-small);line-height:1.35;text-align:center}
+
+/* ---------------------------------------------------------------- nav */
+.nav{position:sticky;top:0;z-index:40;padding:0 var(--m);transition:padding .45s var(--ease)}
+.nav-in{display:flex;align-items:center;gap:20px;max-width:2000px;margin:0 auto;height:70px;padding:0 4px;border-radius:999px;border:1px solid transparent;transition:max-width .6s var(--ease),height .45s var(--ease),padding .45s var(--ease),background .4s ease,border-color .4s ease} /* taste-skill-ignore: transparent until it becomes the pill */
+.nav.pill{padding-top:12px}
+.nav.pill .nav-in{max-width:1080px;height:60px;padding:0 10px 0 10px;background:rgba(36,33,40,.86);border-color:rgba(207,172,98,.35);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)} /* taste-skill-ignore: the owner's references use a floating frosted pill */
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;min-height:44px}
+.brand .mark{width:30px;height:30px;color:var(--gold)}
+.bname{font:700 18px/1 var(--text);letter-spacing:-.01em;white-space:nowrap}
+.links{display:flex;gap:4px;margin-inline-start:auto}
+.links a{display:flex;align-items:center;min-height:44px;padding:0 12px;border-radius:999px;text-decoration:none;font-size:16px;color:var(--soft);transition:color .2s ease,background .2s ease}
+.tools{display:flex;align-items:center;gap:8px}
+.tgl{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;background:var(--wall);color:var(--ink);font-size:15px;transition:transform .14s var(--ease),background .2s ease}
+.tgl .knob{position:relative;width:30px;height:18px;border-radius:999px;background:#4a4650;transition:background .2s ease}
+.tgl .knob::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:12px;height:12px;border-radius:50%;background:var(--ink);transition:transform .22s var(--ease)}
+.tgl[aria-checked="true"] .knob{background:var(--gold-d)}
+.tgl[aria-checked="true"] .knob::after{transform:translateX(12px)}
+html[dir="rtl"] .tgl[aria-checked="true"] .knob::after{transform:translateX(-12px)}
+.tgl.lang{min-width:46px;justify-content:center;font-weight:700}
+.pill-btn,.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 22px;border-radius:999px;background:var(--gold);color:#221d18;text-decoration:none;font-weight:700;font-size:16px;overflow:hidden;transition:transform .14s var(--ease),background .2s ease}
+.pill-btn{min-height:44px;padding:0 16px}
+.btn.ghost{background:#3a3640;color:var(--ink)}
+.pill-btn svg,.btn svg{width:20px;height:20px;fill:currentColor;flex:none}
+/* a short glint across the gold, like light catching the mirror frames */
+.btn:not(.ghost)::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 30%,rgba(255,255,255,.45) 48%,transparent 66%);transform:translateX(-120%)} /* taste-skill-ignore */
+html:not(.still) .btn:not(.ghost)::after{animation:glint 4.2s var(--ease-io) 1.6s 3}
+@keyframes glint{0%{transform:translateX(-120%)}40%,100%{transform:translateX(120%)}}
+.pill-btn:active,.btn:active,.tgl:active,.cuts button:active,.days button:active,.row:active,.ring:active{transform:scale(.97)}
+@media (hover:hover){
+  .links a:hover{color:var(--ink);background:rgba(255,255,255,.06)}
+  .btn:hover,.pill-btn:hover{background:var(--gold-2)} .btn.ghost:hover{background:rgba(60,56,66,.8)}
+  .tgl:hover{background:var(--wall-2)}
+}
+@media (max-width:1000px){ .links{display:none} .tools{margin-inline-start:auto} }
+@media (max-width:560px){
+  .nav{padding:0 10px} .nav-in{gap:8px}
+  .bname{font-size:16px}
+  .tgl{padding:0 11px} .tgl > span[lang]{display:none!important}
+  html[lang="he"] .tgl.lang [lang="he"], html[lang="en"] .tgl.lang [lang="en"]{display:inline!important}
+  .pill-btn span{display:none} .pill-btn{width:44px;padding:0}
+}
+@media (max-width:380px){ .bname{display:none} }
+
+/* ---------------------------------------------------------------- hero */
+.hero{min-height:calc(100svh - 104px);display:flex;flex-direction:column;justify-content:flex-end;padding:0 var(--m) calc(var(--cut) + 34px);overflow:hidden;background:#0f0e11;isolation:isolate}
+.facets{position:absolute;inset:0;z-index:-3}
+.f-base{position:absolute;inset:0;background:url(../img/salon.jpg) 50% 40%/cover;filter:brightness(.45) saturate(.8)}
+html.js:not(.still) .fc{opacity:0}
+.fc{position:absolute;inset:0;background:url(../img/salon.jpg) 50% 40%/cover;clip-path:var(--cp);will-change:transform}
+.f-lines{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.f-lines path{fill:none;vector-effect:non-scaling-stroke}
+.ln-black path{stroke:#141216;stroke-width:2.2;opacity:.85}
+.ln-gold path{stroke:var(--gold-2);stroke-width:2.5;stroke-dasharray:.12 1;stroke-dashoffset:1.12;opacity:.95;filter:drop-shadow(0 0 6px rgba(234,210,154,.8))} /* taste-skill-ignore: a glint running along the wall's lines */
+html:not(.still) .ready .ln-gold path{animation:run 5.5s var(--ease-io) .9s infinite}
+@keyframes run{0%{stroke-dashoffset:1.12}55%,100%{stroke-dashoffset:-.12}}
+html.still .ln-gold{display:none}
+.snips{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+html.still .snips{display:none}
+.h-scrim{position:absolute;inset:0;z-index:-2;background:linear-gradient(to top,rgba(20,18,23,.96) 0%,rgba(20,18,23,.82) 30%,rgba(20,18,23,.25) 62%,rgba(20,18,23,.1) 100%)} /* taste-skill-ignore: scrim under text on a photo */
+.h-copy{max-width:min(980px,100%)}
+.blades{position:relative;font:700 clamp(3.1rem,1.6rem + 6.4vw,8.4rem)/.98 var(--text);letter-spacing:-.035em;color:var(--ink);padding-bottom:.08em}
+html[lang="en"] .blades{font-size:clamp(2.7rem,1.3rem + 5.6vw,7.2rem)}
+.b-top{display:block;clip-path:inset(-10% -5% 50% -5%)}
+.b-bot{position:absolute;inset:0;clip-path:inset(50% -5% -10% -5%)}
+/* the name closes like a pair of blades: top half and bottom half slide in from opposite sides and lock */
+html.js:not(.still) .blades .b-top{transform:translateX(-14%);opacity:0}
+html.js:not(.still) .blades .b-bot{transform:translateX(14%);opacity:0}
+html.js:not(.still) .ready .blades .b-top,html.js:not(.still) .ready .blades .b-bot{transform:none;opacity:1;transition:transform 1.05s var(--ease) .15s,opacity .5s ease .15s}
+.blades::after{content:"";position:absolute;inset-inline:0;top:46%;height:2px;background:var(--gold-2);transform:scaleX(0);opacity:0} /* taste-skill-ignore: the blade edge, a flash at the moment the halves lock */
+html.js:not(.still) .ready .blades::after{animation:edge 1.1s var(--ease) 1s both}
+@keyframes edge{0%{transform:scaleX(0);opacity:1}55%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
+.h-lead{margin-top:14px;max-width:44ch;font-size:var(--s-lead);line-height:1.4;color:var(--ink)}
+.h-acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.h-meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin-top:22px;font-size:16px}
+.status{display:inline-flex;align-items:center;gap:8px}
+.status .dot{width:9px;height:9px;border-radius:50%;background:#b07a7a}
+.status.open .dot{background:var(--live)}
+html:not(.still) .status.open .dot{animation:ping 2s ease-out 4}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(127,214,156,.6)}100%{box-shadow:0 0 0 10px rgba(127,214,156,0)}} /* taste-skill-ignore */
+.rate{display:inline-flex;align-items:center;gap:8px}
+.rate .odo{font:700 20px/1 var(--text)}
+.h-cap{position:absolute;inset-inline-end:var(--m);top:18px;font-size:15px;color:var(--ink);background:rgba(20,18,23,.62);padding:4px 10px;border-radius:999px}
+html.js:not(.still) [data-rise]{opacity:0;transform:translateY(18px)}
+html.js:not(.still) .ready [data-rise]{opacity:1;transform:none;transition:opacity .7s var(--ease) var(--d),transform .7s var(--ease) var(--d)}
+
+/* odometers */
+.odo,.big{display:inline-flex;direction:ltr}
+.d{display:inline-block;height:1em;overflow:hidden;line-height:1}
+.d > span{display:block;transition:transform 1.3s var(--ease)}
+.d b{display:block;height:1em;font-weight:inherit}
+.d b::before{content:attr(data-n)}
+
+/* ---------------------------------------------------------------- salon: cut out of the hero on a diagonal */
+.salon{margin-top:calc(-1 * var(--cut));z-index:3;clip-path:polygon(0 var(--cut),100% 0,100% 100%,0 100%);background-color:var(--wall)}
+.cut{position:absolute;top:0;left:0;width:100%;height:var(--cut);z-index:4;overflow:visible;pointer-events:none}
+.cut-line{fill:none;stroke:var(--gold);stroke-width:3;vector-effect:non-scaling-stroke;stroke-dasharray:1;stroke-dashoffset:var(--draw,0)}
+.s-stage{display:flex;flex-direction:column;justify-content:center;gap:clamp(18px,3vh,34px);padding:calc(var(--cut) + 34px) 0 60px}
+html.js:not(.still) .salon{height:var(--sh,300vh)}
+html.js:not(.still) .s-stage{position:sticky;top:0;height:100svh;padding:max(84px,var(--cut)) 0 34px}
+.s-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:10px 40px;padding:0 var(--m)}
+.s-head p{max-width:40ch;font-size:var(--s-lead);line-height:1.4}
+.s-view{overflow:hidden;padding:6px 0}
+html.still .s-view,html:not(.js) .s-view{overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.s-track{display:flex;gap:clamp(16px,2.2vw,34px);padding:0 var(--m);width:max-content;will-change:transform}
+.fr{--fh:min(58svh,560px);flex:none;height:var(--fh);aspect-ratio:3/4;scroll-snap-align:center;perspective:900px}
+.fr.wide{aspect-ratio:4/3}
+.fr figure{height:100%;display:flex;flex-direction:column;gap:10px}
+/* a gold moulding like the mirrors' frames */
+.glass{position:relative;flex:1;min-height:0;padding:8px;border-radius:4px;background:linear-gradient(135deg,#8e7136,#ead29a 30%,#b08c45 55%,#e6cb8c 78%,#8e7136);overflow:hidden;transform:rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg));transition:transform .5s var(--ease)} /* taste-skill-ignore: rendered gold moulding */
+.glass img{width:100%;height:100%;object-fit:cover;border-radius:2px}
+.pos-door{object-position:72% 60%}
+/* the light that slides across a mirror when it reaches the middle */
+.glass::after{content:"";position:absolute;inset:8px;background:linear-gradient(115deg,transparent 35%,rgba(255,255,255,.28) 47%,rgba(255,255,255,.05) 53%,transparent 60%);transform:translateX(-110%);pointer-events:none} /* taste-skill-ignore */
+html:not(.still) .fr.lit .glass::after{transform:translateX(110%);transition:transform 1.4s var(--ease-io)}
+.tag{position:absolute;inset-block-end:16px;inset-inline-start:16px;font-size:13px;background:rgba(20,18,23,.72);color:var(--ink);padding:3px 9px;border-radius:999px}
+.fr figcaption{font:400 26px/1.1 var(--serif);color:var(--gold-2);min-height:1.1em}
+.live{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center}
+.live::before{content:"";position:absolute;inset:8px;background:var(--sign);border-radius:2px;z-index:0}
+.live > *{position:relative;z-index:1}
+.live .big{font:400 clamp(5rem,3rem + 6vw,9rem)/1 var(--serif);color:var(--gold-2)}
+.live .stars svg{width:22px;height:22px}
+.live .sub{font-size:18px;color:var(--ink)}
+.s-bar{margin:0 var(--m);height:3px;background:rgba(255,255,255,.08);border-radius:3px;overflow:hidden}
+.s-bar i{display:block;height:100%;width:100%;background:var(--gold);transform:scaleX(var(--p,0));transform-origin:left}
+html[dir="rtl"] .s-bar i{transform-origin:right}
+html.still .s-bar{display:none}
+@media (max-width:700px){ .fr{--fh:min(50svh,440px)} .fr figcaption{font-size:22px} }
+
+/* ---------------------------------------------------------------- the swirl seam */
+.swirl-seam{position:relative;z-index:5;height:0}
+.swirl-seam svg{position:absolute;left:50%;top:0;width:min(78vw,640px);height:auto;transform:translate(-50%,-50%);overflow:visible}
+.swirl-seam svg,.p-swirl,.leaf svg{fill:none;stroke:var(--gold);stroke-width:2.6;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:var(--draw,0)}
+
+/* ---------------------------------------------------------------- book */
+.book{background:var(--sign-d);padding:clamp(110px,11vw,170px) var(--m) clamp(90px,9vw,140px)}
+.b-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:clamp(30px,5vw,80px);align-items:center;max-width:1400px;margin:0 auto}
+.b-line{margin-top:10px;font-size:var(--s-lead);color:var(--ink)}
+.b-set{margin-top:26px}
+.b-set legend{font-size:15px;font-weight:600;color:var(--soft);margin-bottom:10px;padding:0}
+.cuts,.days{display:flex;flex-wrap:wrap;gap:8px}
+/* buttons cut on the slant, like the wall's panels */
+.cuts button,.days button{min-height:48px;padding:0 24px;background:var(--wall-2);color:var(--ink);font-weight:600;font-size:16px;clip-path:polygon(10px 0,100% 0,calc(100% - 10px) 100%,0 100%);transition:background .2s ease,color .2s ease,transform .14s var(--ease)}
+.days button{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:64px;padding:4px 16px;line-height:1.15}
+.days button small{font-size:14px;font-weight:400;color:var(--soft)}
+.cuts button[aria-checked="true"],.days button[aria-checked="true"]{background:var(--gold);color:#221d18}
+.days button[aria-checked="true"] small{color:#3b3226}
+.cuts button:disabled,.days button:disabled{opacity:.42;cursor:not-allowed}
+@media (hover:hover){ .cuts button:not(:disabled):not([aria-checked="true"]):hover,.days button:not(:disabled):not([aria-checked="true"]):hover{background:#4a4552} }
+.plate-wrap{display:flex;flex-direction:column;gap:18px}
+.plate{position:relative;min-height:clamp(300px,34vw,420px);padding:clamp(22px,3vw,40px);border-radius:8px;background:var(--sign);box-shadow:inset 0 0 0 6px #3a2f3d,inset 0 0 0 8px rgba(207,172,98,.5);display:flex;flex-direction:column;overflow:hidden} /* taste-skill-ignore: the sign's frame */
+.p-top{display:flex;align-items:center;justify-content:space-between;gap:12px;color:var(--gold)}
+.p-hd{font:400 20px/1 var(--serif);letter-spacing:.1em;color:var(--soft)}
+.p-top svg{width:34px;height:34px}
+.p-msg{flex:1;margin-top:22px;font:400 clamp(1.6rem,1.1rem + 1.6vw,2.5rem)/1.32 var(--serif);color:var(--gold-2);min-height:4em}
+.p-msg::after{content:"";display:inline-block;width:2px;height:.9em;margin-inline-start:4px;background:var(--gold-2);vertical-align:-.1em;opacity:0}
+html:not(.still) .plate.typing .p-msg::after{opacity:1}
+.p-swirl{width:min(260px,60%);height:auto;margin-top:10px;align-self:flex-end;overflow:visible}
+.p-acts{display:flex;flex-wrap:wrap;gap:12px}
+@media (max-width:900px){ .b-grid{grid-template-columns:1fr} }
+
+/* ---------------------------------------------------------------- reviews */
+.reviews{padding:clamp(100px,10vw,160px) var(--m);background:var(--ground)}
+.r-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:14px 40px;max-width:1400px;margin:0 auto 40px}
+.r-score{display:flex;align-items:center;gap:12px;font-size:16px}
+.r-score .odo{font:400 64px/1 var(--serif);color:var(--gold-2)}
+.r-wall{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 28px;max-width:1400px;margin:0 auto;perspective:1000px}
+.q{position:relative;overflow:hidden;padding:clamp(28px,3vw,44px) clamp(30px,3.6vw,56px);background-color:var(--wall);clip-path:polygon(0 0,calc(100% - 28px) 0,100% 28px,100% 100%,28px 100%,0 calc(100% - 28px));transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s var(--ease)}
+.q:nth-child(even){margin-top:56px}
+.q p{font-size:clamp(1.2rem,1.05rem + .6vw,1.6rem);line-height:1.45;color:var(--ink)}
+.q footer{display:flex;align-items:center;gap:10px;margin-top:18px;color:var(--gold-2);font-size:16px}
+.q::before{content:"";position:absolute;inset-block:0;inset-inline-start:0;width:4px;background:var(--gold)}
+.q::after{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(234,210,154,.22) 48%,transparent 64%);transform:translateX(-110%);pointer-events:none} /* taste-skill-ignore: the glint that lights each quote */
+html.js:not(.still) .q{opacity:0;transform:translateY(40px)}
+html.js:not(.still) .q.in{opacity:1;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:opacity .8s var(--ease) var(--d,0ms),transform .8s var(--ease) var(--d,0ms)}
+html.js:not(.still) .q.in::after{transform:translateX(110%);transition:transform 1.5s var(--ease-io) calc(var(--d,0ms) + 350ms)}
+.r-note{max-width:1400px;margin:30px auto 0;font-size:15px;color:var(--soft)}
+@media (max-width:760px){ .r-wall{grid-template-columns:1fr} .q:nth-child(even){margin-top:0} }
+
+/* ---------------------------------------------------------------- visit: the glass door slides open */
+.visit{padding:clamp(100px,10vw,150px) var(--m) clamp(100px,10vw,150px);background-color:var(--wall)}
+.v-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:10px 40px;max-width:1400px;margin:0 auto 34px}
+.v-head p{max-width:42ch;font-size:var(--s-lead);line-height:1.4}
+.v-room{position:relative;max-width:1400px;margin:0 auto;overflow:hidden;border-radius:24px}
+.bento{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-areas:"map map hours reach" "map map sign faq";gap:14px}
+.tile{position:relative;border-radius:22px;background:var(--ground-2);padding:22px;overflow:hidden}
+.tile::before{content:"";position:absolute;inset:0;background:radial-gradient(260px circle at var(--mx,-300px) var(--my,-300px),rgba(207,172,98,.16),transparent 70%);pointer-events:none} /* taste-skill-ignore: spotlight under the hand */
+.tile > *{position:relative}
+.tile h3{margin-bottom:14px}
+.map{grid-area:map;padding:0;min-height:420px}
+.map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(.35) contrast(1.05)}
+.hours{grid-area:hours} .reach{grid-area:reach} .sign{grid-area:sign} .faq{grid-area:faq}
+.hours .status{margin-bottom:12px;font-size:16px}
+.hours table{width:100%;border-collapse:collapse;font-size:16px}
+.hours td{padding:6px 0}
+.hours td:last-child{text-align:end}
+.hours tr.today td{color:var(--gold-2);font-weight:600}
+.row{display:flex;align-items:center;gap:10px;min-height:46px;padding:0 4px;text-decoration:none;font-size:16px;border-radius:10px;transition:background .2s ease,transform .14s var(--ease)}
+.row svg{width:20px;height:20px;fill:var(--gold);flex:none}
+.row svg use[href="#i-arrow"]{color:var(--gold)}
+html[dir="rtl"] .row svg:has(use[href="#i-arrow"]){transform:scaleX(-1)}
+@media (hover:hover){ .row:hover{background:rgba(255,255,255,.05)} }
+.sign{display:flex;flex-direction:column;gap:12px;justify-content:center}
+.sign img{width:100%;border-radius:10px}
+.sign p{font-size:16px;color:var(--soft)}
+.faq details{padding:10px 12px;margin-top:6px;border-radius:12px;background:var(--wall)}
+.faq summary{cursor:pointer;font-weight:600;font-size:16px;min-height:32px;list-style-position:inside}
+.faq details p{margin-top:6px;font-size:16px;color:var(--soft)}
+.door{position:absolute;inset:0;z-index:5;pointer-events:none}
+.leaf{position:absolute;top:0;bottom:0;width:50.5%;background:rgba(43,35,48,.78);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 0 0 3px #5a4a3a,inset 0 0 0 5px rgba(207,172,98,.45);display:flex;align-items:flex-end;justify-content:center;padding-bottom:12%} /* taste-skill-ignore: tinted glass door with gold edging */
+.l1{left:0;transform:translateX(calc(var(--open,0) * -102%))}
+.l2{right:0;transform:translateX(calc(var(--open,0) * 102%))}
+.leaf svg{width:78%;height:auto;overflow:visible}
+.l2 svg{transform:scaleX(-1)}
+.handle{position:absolute;top:38%;width:8px;height:22%;border-radius:4px;background:var(--gold)}
+.l1 .handle{right:18px} .l2 .handle{left:18px}
+html.still .door,html:not(.js) .door{display:none}
+@media (max-width:1100px){ .bento{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-areas:"map map" "hours reach" "sign faq"} .map{min-height:340px} }
+@media (max-width:640px){ .bento{grid-template-columns:1fr;grid-template-areas:"map" "hours" "reach" "faq" "sign"} .map{min-height:300px} }
+
+/* ---------------------------------------------------------------- footer: a curtain, the sign plate lights up */
+.foot{position:sticky;bottom:0;z-index:1;background:var(--ground);padding:clamp(40px,6vw,80px) var(--m) 30px}
+.f-plate{max-width:1400px;margin:0 auto;padding:clamp(26px,4vw,56px) clamp(18px,3vw,40px);border-radius:10px;background:var(--sign);box-shadow:inset 0 0 0 6px #3a2f3d,inset 0 0 0 8px rgba(207,172,98,.45);text-align:center;overflow:hidden} /* taste-skill-ignore: the sign's frame */
+.f-hd{font:400 20px/1 var(--serif);letter-spacing:.12em;color:var(--soft)}
+.f-name{font:400 120px/1.05 var(--serif);color:var(--gold-2);white-space:nowrap;margin:12px 0 8px}
+.f-name .ch{transition:color .5s ease calc(var(--i)*70ms)}
+html.js:not(.still) .f-name:not(.lit) .ch{color:#6e5f67}
+.f-sub{font-size:var(--s-lead);color:var(--ink)}
+.f-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px 26px;max-width:1400px;margin:26px auto 0;font-size:16px}
+.f-row > a{min-height:44px;display:inline-flex;align-items:center;text-decoration:none;color:var(--gold-2)}
+.f-tools{display:flex;gap:8px}
+.f-legal{max-width:68ch;margin:22px auto 0;font-size:16px;line-height:1.5;color:var(--soft);text-align:center}
+
+/* ---------------------------------------------------------------- reveals */
+html.js:not(.still) [data-reveal],html.js:not(.still) [data-tile]{opacity:0;transform:translateY(24px);filter:blur(6px)}
+html.js:not(.still) [data-reveal].in,html.js:not(.still) [data-tile].in{opacity:1;transform:none;filter:none;transition:opacity .8s var(--ease) var(--d,0ms),transform .8s var(--ease) var(--d,0ms),filter .8s var(--ease) var(--d,0ms)}
+
+/* ---------------------------------------------------------------- phone dock: the scissors' two finger rings */
+.dock{display:none}
+@media (max-width:700px){
+  .dock{position:fixed;z-index:45;bottom:calc(14px + env(safe-area-inset-bottom));inset-inline-end:14px;display:flex;align-items:center}
+  .ring{display:grid;place-items:center;border-radius:50%;background:var(--ground);border:4px solid var(--gold);color:var(--gold-2);transition:transform .14s var(--ease)}
+  .ring.big{width:64px;height:64px} .ring.small{width:50px;height:50px}
+  .ring svg{width:26px;height:26px;fill:currentColor}
+  .ring.small svg{width:21px;height:21px}
+  .pivot{width:18px;height:6px;background:var(--gold);margin:0 -2px;border-radius:3px;position:relative}
+  .pivot::after{content:"";position:absolute;left:50%;top:50%;width:9px;height:9px;margin:-4.5px;border-radius:50%;background:var(--gold-2);border:2px solid var(--ground)}
+  .foot{padding-bottom:100px}
+  .h-cap{display:none}
+}
+@media (prefers-reduced-motion:reduce){ *{scroll-behavior:auto} }
