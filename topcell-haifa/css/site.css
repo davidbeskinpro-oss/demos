@@ -1,0 +1,432 @@
+/* TopCell — built from the real logo: its blue T and P, the black candybar phone, its antenna, the crescent ring
+   under it and the round keypad keys; the 3D logo mockup's chrome edges on carbon weave; the shop's blue mosaic pillar. */
+:root{
+  --bg:#0c0f13;
+  --bg-2:#10151b;
+  --card:#151b22;
+  --card-2:#1c242d;
+  --line:rgba(255,255,255,.08);
+  --line-2:rgba(255,255,255,.14);
+  --ink:#eef4f8;
+  --soft:#bdc8d1;
+  --muted:#8e9ba7;
+  --blue:#29a8e0;            /* the logo's T and P */
+  --blue-d:#1479ad;
+  --blue-ink:#03121b;
+  --ice:#c6e9f7;             /* the backlight of an old phone's screen */
+  --go:#3cc06c;
+  --stop:#e0574d;
+  --amber:#f1b54e;
+  --chrome:linear-gradient(160deg,#f4f6f8 0%,#c9d0d6 38%,#e9edf0 52%,#b4bcc4 78%,#dfe4e8 100%); /* taste-skill-ignore: brushed metal of the sign */
+  --text:"Heebo","Arial Hebrew",Arial,sans-serif;
+  --disp:"Secular One","Heebo",Arial,sans-serif;
+  --wide:"Archivo","Heebo",Arial,sans-serif;
+  --serif-he:"Frank Ruhl Libre",Georgia,serif;
+  --serif-en:"Instrument Serif",Georgia,serif;
+  --s-small:15px;
+  --s-body:clamp(1.0625rem,1rem + .25vw,1.2rem);
+  --s-lead:clamp(1.15rem,1.02rem + .5vw,1.45rem);
+  --s-head:clamp(2.2rem,1.4rem + 3vw,4.4rem);
+  --m:clamp(16px,3vw,44px);
+  --r:24px;
+  --ease:cubic-bezier(.23,1,.32,1);
+  --ease-io:cubic-bezier(.77,0,.175,1);
+  --carbon:repeating-linear-gradient(45deg,rgba(255,255,255,.022) 0 3px,transparent 3px 6px),repeating-linear-gradient(-45deg,rgba(0,0,0,.28) 0 3px,transparent 3px 6px); /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 var(--s-body)/1.55 var(--text);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent;overflow-x:clip}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;touch-action:manipulation}
+h1,h2,h3,p,figure,ol,ul,blockquote{margin:0}
+ol,ul{padding:0;list-style:none}
+.vh{position:absolute;width:0;height:0;overflow:hidden}
+.num{font-variant-numeric:lining-nums tabular-nums}
+html[lang="he"] [lang="en"]:not(html),html[lang="en"] [lang="he"]:not(html){display:none!important}
+::selection{background:var(--blue);color:var(--blue-ink)}
+:focus-visible{outline:3px solid var(--blue);outline-offset:3px;border-radius:8px}
+.skip{position:absolute;inset-inline-start:var(--m);top:-60px;z-index:60;background:var(--blue);color:var(--blue-ink);padding:10px 16px;border-radius:999px;text-decoration:none;font-weight:700}
+.skip:focus{top:44px}
+.wrap{width:min(1240px,100%);margin-inline:auto;padding-inline:var(--m)}
+h2{font:400 var(--s-head)/1.04 var(--disp);letter-spacing:-.01em;text-wrap:balance}
+html[lang="en"] h2{font-family:var(--wide);font-weight:900;font-stretch:112%;letter-spacing:-.02em}
+h2 em,.h-sub em{font-style:normal;font-family:var(--serif-he);font-weight:500;color:var(--blue)}
+html[lang="en"] h2 em,html[lang="en"] .h-sub em{font-family:var(--serif-en);font-style:italic;font-weight:400;letter-spacing:0}
+.sec-head{display:grid;gap:12px;margin-bottom:clamp(26px,4vw,48px);max-width:46rem}
+.sec-head p{color:var(--soft);font-size:var(--s-lead)}
+
+/* concept bar */
+.concept{position:relative;z-index:41;display:flex;align-items:center;justify-content:center;min-height:34px;padding:6px var(--m);background:#07090c;color:var(--soft);font-size:var(--s-small);line-height:1.35;text-align:center}
+
+/* nav: full bar, then a floating pill */
+.nav{position:sticky;top:0;z-index:40;height:68px;display:flex;align-items:flex-start}
+.nav-in{width:100%;margin-inline:auto;display:flex;align-items:center;gap:14px;height:68px;padding-inline:var(--m);background:rgba(12,15,19,.82);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);transition:width .5s var(--ease),margin .5s var(--ease),border-radius .5s var(--ease),height .5s var(--ease),background .4s ease}
+.nav.pill .nav-in{width:min(1080px,calc(100% - 20px));margin-top:8px;height:56px;border-radius:999px;border:1px solid var(--line-2);background:rgba(20,26,33,.72);padding-inline:10px 10px;box-shadow:0 14px 40px -18px rgba(0,0,0,.8)} /* taste-skill-ignore */
+.brand{display:flex;align-items:center;text-decoration:none;flex:none}
+.brand-plate{display:inline-block;background:var(--chrome);border-radius:12px;padding:4px 8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 4px 14px -6px rgba(0,0,0,.7)} /* taste-skill-ignore */
+.brand-plate img{width:62px;mix-blend-mode:multiply}
+.nav.pill .brand-plate{border-radius:999px;padding:3px 12px}
+.links{display:flex;gap:4px;margin-inline:auto}
+.links a{text-decoration:none;color:var(--soft);font-size:16px;padding:8px 12px;border-radius:999px;transition:color .2s ease,background .2s ease}
+@media (hover:hover){.links a:hover{color:var(--ink);background:rgba(255,255,255,.06)}}
+.tools{display:flex;align-items:center;gap:8px;margin-inline-start:auto}
+.bars{display:flex;align-items:flex-end;gap:2px;height:18px;direction:ltr;margin-inline-end:4px}
+.bars i{width:4px;border-radius:1px;background:rgba(255,255,255,.18);transition:background .3s ease}
+.bars i:nth-child(1){height:20%}.bars i:nth-child(2){height:40%}.bars i:nth-child(3){height:60%}.bars i:nth-child(4){height:80%}.bars i:nth-child(5){height:100%}
+.bars i.on{background:var(--blue)}
+.tgl{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 12px;border-radius:999px;border:1px solid var(--line-2);font-size:15px;color:var(--soft);transition:transform .14s var(--ease),border-color .2s ease}
+.tgl:active{transform:scale(.96)}
+.tgl .knob{position:relative;width:28px;height:16px;border-radius:99px;background:rgba(255,255,255,.16);transition:background .2s ease}
+.tgl .knob::after{content:"";position:absolute;top:2px;inset-inline-start:2px;width:12px;height:12px;border-radius:50%;background:#fff;transition:transform .25s var(--ease)}
+.tgl[aria-checked="true"] .knob{background:var(--blue)}
+html[dir="rtl"] .tgl[aria-checked="true"] .knob::after{transform:translateX(-12px)}
+html[dir="ltr"] .tgl[aria-checked="true"] .knob::after{transform:translateX(12px)}
+.tgl.lang{font-weight:700;color:var(--ink);padding:0 13px}
+.nav-call{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 16px;border-radius:999px;background:var(--blue);color:var(--blue-ink);font-weight:700;text-decoration:none;font-size:15px;transition:transform .14s var(--ease)}
+.nav-call:active{transform:scale(.96)}
+.nav-call svg{width:17px;height:17px;fill:currentColor}
+@media (max-width:1000px){.links{display:none}}
+@media (max-width:640px){.nav-call .num{display:none}.nav-call{padding:0;width:40px;justify-content:center}.bars{display:none}.tgl{padding:0 10px}}
+
+/* buttons */
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:10px;min-height:52px;padding:0 22px;border-radius:999px;background:var(--blue);color:var(--blue-ink);font-weight:700;text-decoration:none;transition:transform .14s var(--ease),background .2s ease}
+.btn svg{width:19px;height:19px;fill:currentColor;flex:none}
+.btn .num{opacity:.75;font-weight:500}
+.btn:active{transform:scale(.97)}
+.btn.ghost{background:rgba(255,255,255,.06);color:var(--ink);border:1px solid var(--line-2)}
+@media (hover:hover){.btn:hover{background:#45b8ea}.btn.ghost:hover{background:rgba(255,255,255,.1)}}
+
+/* status chip */
+.status{display:inline-flex;align-items:center;gap:9px;font-size:var(--s-small);color:var(--soft)}
+.status .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);flex:none}
+.status.open .dot{background:var(--go)}
+.chip{padding:7px 14px;border-radius:999px;border:1px solid var(--line-2);background:rgba(12,15,19,.6);width:max-content;max-width:100%}
+html:not(.still) .status.open .dot{animation:ping 2s ease-out infinite}
+@keyframes ping{0%{box-shadow:0 0 0 0 rgba(60,192,108,.6)}80%,100%{box-shadow:0 0 0 9px rgba(60,192,108,0)}} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+
+/* ============================================================ HERO */
+.hero{position:relative;min-height:calc(100svh - 102px);overflow:hidden;background:var(--carbon),radial-gradient(120% 80% at 70% 10%,#16202a 0%,var(--bg) 60%);isolation:isolate} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+.waves{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.horizon{position:absolute;inset-inline:-30%;bottom:-118vw;height:130vw;z-index:0;pointer-events:none}
+.horizon .arc{position:absolute;inset:0;border-radius:50%;border-top:2px solid rgba(120,210,245,.85);box-shadow:0 -30px 90px -10px rgba(41,168,224,.55),inset 0 40px 80px -30px rgba(41,168,224,.4);background:radial-gradient(60% 30% at 50% 0%,rgba(41,168,224,.18),transparent 70%)} /* taste-skill-ignore: the logo's crescent as a horizon */
+.horizon .glow{position:absolute;left:50%;top:-40px;width:60%;height:80px;transform:translateX(-50%);background:radial-gradient(50% 50% at 50% 50%,rgba(140,220,250,.35),transparent 70%);filter:blur(10px)} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+html:not(.still) .horizon .glow{animation:breathe 5s ease-in-out infinite alternate}
+@keyframes breathe{from{opacity:.55}to{opacity:1}}
+.hero-in{position:relative;z-index:2;display:grid;grid-template-columns:1fr;gap:10px;align-items:center;width:min(1280px,100%);margin-inline:auto;padding:18px var(--m) 70px}
+.h-copy{display:grid;gap:16px;justify-items:start;order:2}
+.h-stage{position:relative;order:1;height:clamp(250px,40svh,380px);perspective:1100px}
+.h-title{font:900 clamp(4rem,2rem + 9vw,8.2rem)/.9 var(--wide);font-stretch:125%;letter-spacing:-.035em;color:var(--ink);direction:ltr;unicode-bidi:isolate}
+html[dir="rtl"] .h-title{text-align:right}
+.h-title .w{display:inline-block;white-space:nowrap}
+.h-title .ch{display:inline-block}
+.h-title .ch:nth-child(-n+3){color:var(--blue)}
+.h-sub{font:400 var(--s-lead)/1.3 var(--disp);font-size:clamp(1.35rem,1.1rem + 1.1vw,2.1rem);max-width:28ch}
+html[lang="en"] .h-sub{font-family:var(--wide);font-weight:700;font-stretch:112%}
+.h-line{color:var(--soft);max-width:40ch}
+.h-acts{display:flex;flex-wrap:wrap;gap:10px}
+.h-score{display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;color:var(--soft);font-size:var(--s-small)}
+.stars{display:inline-flex;gap:3px}
+.stars svg{width:16px;height:16px;fill:var(--amber)}
+html.js:not(.still) .h-title .ch{opacity:0;transform:translateY(.3em);filter:blur(10px)}
+html.js:not(.still) .ready .h-title .ch{opacity:1;transform:none;filter:none;transition:opacity .6s var(--ease) calc(var(--i)*55ms + 120ms),transform .8s var(--ease) calc(var(--i)*55ms + 120ms),filter .6s var(--ease) calc(var(--i)*55ms + 120ms)}
+html.js:not(.still) [data-rise]{opacity:0;transform:translateY(16px)}
+html.js:not(.still) .ready [data-rise]{opacity:1;transform:none;transition:opacity .7s var(--ease) var(--d),transform .7s var(--ease) var(--d)}
+
+/* the sign: brushed chrome plate with the real logo printed on it, screws in the corners, a sheen that follows the hand */
+.plate{position:absolute;left:50%;top:50%;width:min(76%,420px);padding:6% 7% 5%;border-radius:22px;background:var(--chrome);transform:translate(-50%,-50%) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));box-shadow:inset 0 1px 0 rgba(255,255,255,.9),inset 0 -2px 0 rgba(0,0,0,.18),0 40px 80px -30px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.12);z-index:5;overflow:hidden} /* taste-skill-ignore */
+.plate::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(255,255,255,.12) 0 1px,rgba(0,0,0,.025) 1px 3px);pointer-events:none} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+.plate img{position:relative;width:100%;mix-blend-mode:multiply}
+.plate .sheen{position:absolute;inset:-40%;background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.65) 50%,transparent 60%);transform:translateX(var(--sx,-30%));pointer-events:none;mix-blend-mode:soft-light} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+.screw{position:absolute;width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#8b949c 70%);box-shadow:0 1px 1px rgba(0,0,0,.4)} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+.screw::after{content:"";position:absolute;left:2px;right:2px;top:4px;height:2px;background:#5d666e;transform:rotate(35deg)}
+.s1{top:10px;left:10px}.s2{top:10px;right:10px}.s3{bottom:10px;left:10px}.s4{bottom:10px;right:10px}
+.fan{position:absolute;left:50%;top:50%;margin:0;border-radius:18px;overflow:hidden;border:1px solid var(--line-2);box-shadow:0 30px 60px -24px rgba(0,0,0,.9);transform:translate(-50%,-50%) translate(var(--fx,0px),var(--fy,0px)) rotate(var(--fr,0deg));transition:transform .9s var(--ease)} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+.fan img{width:100%;height:100%;object-fit:cover}
+.f1{width:min(30%,170px);aspect-ratio:3/4.4;--fr:-11deg;z-index:2}
+.f2{width:min(44%,260px);aspect-ratio:4/3;--fr:8deg;z-index:3}
+.f3{width:min(36%,210px);aspect-ratio:4/3;--fr:-6deg;z-index:4}
+.f1{--fx:-110px;--fy:-10px}.f2{--fx:120px;--fy:-70px}.f3{--fx:110px;--fy:84px}
+html.js:not(.still) .hero:not(.ready) .fan{transform:translate(-50%,-50%) rotate(0deg) scale(.6);opacity:0}
+html.js:not(.still) .hero .fan{transition:transform 1s var(--ease),opacity .5s ease}
+html.js:not(.still) .hero.ready .f1{transition-delay:.15s}html.js:not(.still) .hero.ready .f2{transition-delay:.3s}html.js:not(.still) .hero.ready .f3{transition-delay:.45s}
+html.js:not(.still) .hero:not(.ready) .plate{opacity:0;transform:translate(-50%,-44%) scale(.94)}
+html.js:not(.still) .hero .plate{transition:opacity .7s ease,transform .9s var(--ease)}
+html.js:not(.still) .hero.ready.tilting .plate{transition:none}
+@media (min-width:900px){
+  .hero-in{grid-template-columns:1.05fr 1fr;min-height:calc(100svh - 102px);padding-block:30px 110px}
+  .h-copy{order:1}.h-stage{order:2;height:min(64svh,560px)}
+  .f1{--fx:-190px;--fy:-20px}.f2{--fx:180px;--fy:-150px}.f3{--fx:170px;--fy:150px}
+  .horizon{bottom:-78vw;height:90vw}
+}
+@media (max-width:899px){
+  .h-stage{margin-inline:calc(var(--m) * -1)}
+  .horizon{bottom:auto;top:calc(40svh + 70px);height:150vw}
+}
+
+/* ============================================================ seam 1: signal bars */
+.sigseam{position:relative;height:42svh;display:flex;direction:ltr;background:var(--bg);overflow:hidden;margin-top:-1px}
+.sigseam i{flex:1 1 0;margin-inline-end:-1px;background:var(--bg-2);transform:translateY(calc(var(--p,1) * 100%));border-radius:10px 10px 0 0;box-shadow:0 -1px 0 rgba(120,210,245,.5)} /* taste-skill-ignore */
+html.still .sigseam,html:not(.js) .sigseam{display:none}
+
+/* ============================================================ IRIS: the shop opens out of the logo's ring */
+.iris{position:relative;background:var(--bg-2)}
+html.js:not(.still) .iris{height:240svh}
+.iris-pin{position:relative}
+html.js:not(.still) .iris-pin{position:sticky;top:0;height:100svh;overflow:hidden}
+.iris-head{position:relative;z-index:3;display:grid;gap:12px;padding:calc(68px + 4svh) var(--m) 0;width:min(1240px,100%);margin-inline:auto}
+.iris-head p{color:var(--soft);font-size:var(--s-lead);max-width:34rem}
+.lens{position:relative}
+html.js:not(.still) .lens{position:absolute;inset:0;z-index:2}
+html.still .lens,html:not(.js) .lens{margin:28px var(--m) 70px;height:min(130vw,82svh);border-radius:var(--r);overflow:hidden}
+.lens-img{position:absolute;inset:0;clip-path:circle(var(--cr,100%) at var(--cx,50%) var(--cy,50%))}
+.lens-img img{width:100%;height:100%;object-fit:cover;object-position:50% 28%;transform:scale(var(--ks,1));transform-origin:50% 40%}
+.lens-img::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(16,21,27,.75),transparent 30%,transparent 70%,rgba(16,21,27,.6))} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+.ring{position:absolute;left:var(--cx,50%);top:var(--cy,50%);width:calc(var(--cr,0px) * 2);height:calc(var(--cr,0px) * 2);transform:translate(-50%,-50%);border-radius:50%;border:3px solid var(--blue);box-shadow:0 0 30px rgba(41,168,224,.6),inset 0 0 30px rgba(41,168,224,.4);opacity:var(--ro,0);pointer-events:none} /* taste-skill-ignore */
+.ring::before{content:"";position:absolute;left:62%;top:-34%;width:4px;height:30%;background:var(--blue);border-radius:3px;box-shadow:0 0 14px rgba(41,168,224,.7)} /* the logo's antenna */ /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+html.still .ring,html:not(.js) .ring{display:none}
+.call-out{position:absolute;z-index:4;display:flex;align-items:center;gap:8px;transform:translate(-9px,-9px);cursor:pointer}
+.call-out .dot{width:18px;height:18px;border-radius:50%;background:var(--blue);border:3px solid #fff;box-shadow:0 0 0 6px rgba(41,168,224,.25);flex:none} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+.call-out .tag{font:500 15px/1.2 var(--text);background:rgba(10,13,17,.86);color:var(--ink);padding:6px 10px;border-radius:9px;border:1px solid var(--line-2);white-space:nowrap;opacity:0;transform:translateY(4px);transition:opacity .3s ease,transform .3s var(--ease)}
+.call-out.on .tag{opacity:1;transform:none}
+.call-out.flip{flex-direction:row-reverse;transform:translate(calc(-100% + 9px),-9px)}
+html:not(.still) .call-out.on .dot{animation:ping2 2.2s ease-out infinite}
+@keyframes ping2{0%{box-shadow:0 0 0 0 rgba(41,168,224,.6)}80%,100%{box-shadow:0 0 0 12px rgba(41,168,224,0)}} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+
+/* ============================================================ SERVICES bento */
+.svc{position:relative;padding:clamp(70px,10vw,130px) 0;background:var(--bg-2)}
+.bento{display:grid;grid-template-columns:1fr;gap:14px}
+.tile{position:relative;overflow:hidden;border-radius:var(--r);background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;min-height:280px;isolation:isolate}
+.tile::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(320px circle at var(--mx,-400px) var(--my,-400px),rgba(41,168,224,.16),transparent 60%);z-index:3} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+.tt{position:relative;z-index:2;padding:18px 20px 20px;margin-top:auto;display:grid;gap:4px}
+.tt h3{font:400 1.45rem/1.15 var(--disp)}
+html[lang="en"] .tt h3{font-family:var(--wide);font-weight:700;font-stretch:112%;font-size:1.3rem}
+.tt p{color:var(--soft);font-size:16px}
+.viz{position:relative;flex:1;min-height:150px;display:grid;place-items:center;overflow:hidden}
+.viz svg{width:min(100%,300px);height:auto;overflow:visible}
+html.js:not(.still) [data-tile]{opacity:0;transform:translateY(30px) scale(.97);filter:blur(6px)}
+html.js:not(.still) [data-tile].in{opacity:1;transform:none;filter:none;transition:opacity .8s var(--ease) var(--d,0ms),transform .8s var(--ease) var(--d,0ms),filter .8s var(--ease) var(--d,0ms)}
+/* the room: the real shop in the dark, a light beam picks out its corners */
+.t-room{min-height:420px}
+.room{position:relative;flex:1;min-height:300px;overflow:hidden}
+.room img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.room .beam{position:absolute;inset:0;background:rgba(7,10,14,.74);-webkit-mask-image:radial-gradient(circle at var(--bx,50%) var(--by,50%),transparent 0 70px,#000 150px);mask-image:radial-gradient(circle at var(--bx,50%) var(--by,50%),transparent 0 70px,#000 150px)} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+html.still .room .beam,html:not(.js) .room .beam{background:rgba(7,10,14,.3);-webkit-mask-image:none;mask-image:none}
+.rl{position:absolute;z-index:2;transform:translate(-50%,-50%);font:500 14px/1.2 var(--text);padding:5px 9px;border-radius:8px;background:rgba(10,13,17,.82);border:1px solid rgba(41,168,224,.5);color:var(--ink);white-space:nowrap;opacity:0;transition:opacity .3s ease}
+.rl.on{opacity:1}
+.v-lab img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:saturate(.85) brightness(.82)}
+.v-lab .scan{position:absolute;top:0;bottom:0;width:30%;left:-30%;background:linear-gradient(90deg,transparent,rgba(120,210,245,.35),transparent);mix-blend-mode:screen} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+html:not(.still) .on .v-lab .scan{animation:sweep 3.4s var(--ease-io) infinite}
+@keyframes sweep{to{left:100%}}
+.ill{position:absolute;bottom:10px;inset-inline-end:10px;font-size:13px;background:rgba(10,13,17,.75);padding:3px 8px;border-radius:6px;color:var(--soft)}
+.v-xfer .ph{fill:#222b34;stroke:url(#gl);stroke-width:2.5}
+.v-xfer .scr{fill:#0f1419}
+.v-xfer .fill{fill:var(--blue);opacity:.85;transform-origin:190px 102px;transform:scaleY(var(--fl,1))}
+.v-xfer .flow circle{fill:var(--ice);opacity:0}
+.v-xfer .pct{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);font:700 15px/1 var(--wide);color:var(--ice);direction:ltr}
+.v-port .body{fill:#28313a;stroke:#5b6670;stroke-width:2}
+.v-port .hole{fill:#06080a}.v-port .tongue{fill:#8a96a1}
+.v-port .lint circle{fill:#9a8f80}.v-port .lint path{stroke:#9a8f80;fill:none;stroke-width:1.4}
+.v-port .batt rect:first-child{fill:none;stroke:#5b6670;stroke-width:2}.v-port .cap{fill:#5b6670}
+.v-port .lvl{fill:var(--go);transform-origin:73px 0;transform:scaleX(var(--bl,1))}
+.v-port .bolt{fill:var(--amber);opacity:var(--bo,1)}
+.v-new .row rect{fill:#222b34;stroke:#5b6670;stroke-width:1.5;transform-box:fill-box;transform-origin:50% 100%}
+.v-new .glass{fill:rgba(198,233,247,.12);stroke:rgba(198,233,247,.4)}
+html:not(.still) .on .v-new .row rect{animation:lift 6s var(--ease) infinite}
+.v-new .row rect:nth-child(2){animation-delay:1.5s!important}.v-new .row rect:nth-child(3){animation-delay:3s!important}.v-new .row rect:nth-child(4){animation-delay:4.5s!important}
+@keyframes lift{0%,30%,100%{transform:none;fill:#222b34;stroke:#5b6670}10%,22%{transform:translateY(-18px);fill:#1a4c66;stroke:var(--blue)}}
+.v-acct .shackle{fill:none;stroke:#8a96a1;stroke-width:7;stroke-linecap:round;transform-box:fill-box;transform-origin:100% 100%}
+.v-acct .lockb{fill:#28313a;stroke:#5b6670;stroke-width:2}.v-acct .kh{fill:#0b0e12}
+.v-acct .dots circle{fill:var(--blue)}
+html:not(.still) .on .v-acct .shackle{animation:unlock 4s var(--ease) infinite}
+html:not(.still) .on .v-acct .dots circle{animation:pin 4s ease infinite}
+.v-acct .dots circle:nth-child(2){animation-delay:.15s!important}.v-acct .dots circle:nth-child(3){animation-delay:.3s!important}.v-acct .dots circle:nth-child(4){animation-delay:.45s!important}
+@keyframes unlock{0%,40%{transform:none}55%,85%{transform:translateY(-10px) rotate(-24deg)}100%{transform:none}}
+@keyframes pin{0%,100%{opacity:.25}20%,80%{opacity:1}}
+@media (min-width:700px){
+  .bento{grid-template-columns:1fr 1fr}
+  .t-room,.t-lab{grid-column:span 2}
+}
+@media (min-width:1100px){
+  .bento{grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(270px,auto)}
+  .t-room{grid-column:span 2;grid-row:span 2}
+  .t-lab{grid-column:span 2}
+  .bento .tile:nth-child(5),.bento .tile:nth-child(6){grid-column:span 2}
+}
+
+/* ============================================================ PARTS: the scan */
+.parts{position:relative;background:var(--carbon),var(--bg)}
+html.js:not(.still) .parts{height:220svh}
+html.js:not(.still) .parts-pin{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;grid-template-rows:auto 1fr;align-content:start}
+.parts-head{display:grid;gap:10px;padding:calc(68px + 3svh) var(--m) 18px;width:min(1240px,100%);margin-inline:auto}
+.parts-head p{color:var(--soft);font-size:var(--s-lead)}
+.td{position:relative;margin:0 auto;padding:0 var(--m) 26px;width:min(1240px,100%);perspective:1200px;min-height:0;display:grid;place-items:center}
+html.still .td,html:not(.js) .td{padding-bottom:80px}
+.td-tilt{position:relative;width:min(100%,calc((100svh - 260px) * 4 / 3));aspect-ratio:4/3;border-radius:20px;overflow:hidden;transform:rotateX(var(--tx,0deg)) rotateY(var(--ty,0deg));box-shadow:0 40px 90px -40px rgba(0,0,0,.9),0 0 0 1px var(--line-2);transition:transform .5s var(--ease)} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+html.still .td-tilt,html:not(.js) .td-tilt{width:100%}
+.td-tilt img{width:100%;height:100%;object-fit:cover}
+.td-tilt::before{content:"";position:absolute;inset:0;z-index:1;background:rgba(8,12,16,.62);-webkit-mask-image:linear-gradient(90deg,transparent calc(var(--sp,1) * 100% - 4%),#000 calc(var(--sp,1) * 100% + 4%));mask-image:linear-gradient(90deg,transparent calc(var(--sp,1) * 100% - 4%),#000 calc(var(--sp,1) * 100% + 4%));pointer-events:none} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+html.still .td-tilt::before,html:not(.js) .td-tilt::before{background:rgba(8,12,16,.12);-webkit-mask-image:none;mask-image:none}
+.scanbar{position:absolute;z-index:2;top:0;bottom:0;left:calc(var(--sp,1) * 100%);width:3px;margin-left:-1.5px;background:var(--blue);box-shadow:0 0 22px 6px rgba(41,168,224,.55);opacity:var(--so,0)} /* taste-skill-ignore */
+.pl{position:absolute;z-index:3;transform:translate(-50%,-50%);font:500 15px/1.2 var(--text);padding:6px 11px;border-radius:9px;background:rgba(9,12,16,.88);color:var(--ink);border:1px solid rgba(41,168,224,.6);white-space:nowrap;opacity:0;transition:opacity .35s ease,transform .35s var(--ease)}
+.pl::before{content:"";position:absolute;left:50%;top:100%;width:1px;height:14px;background:rgba(41,168,224,.8)}
+.pl.on{opacity:1}
+.td figcaption{position:absolute;bottom:34px;inset-inline-end:calc(var(--m) + 10px);z-index:4;font-size:13px;color:var(--soft);background:rgba(9,12,16,.8);padding:3px 8px;border-radius:6px}
+html.still .td figcaption,html:not(.js) .td figcaption{bottom:90px}
+@media (max-width:699px){.pl{font-size:13px;padding:4px 8px}html.js:not(.still) .td-tilt{width:100%;aspect-ratio:3/4}.td-tilt img{object-position:42% 50%}}
+
+/* ============================================================ DIAL: the candybar handset from the logo */
+.dial{position:relative;background:var(--bg-2)}
+.dial-card{padding:clamp(70px,10vw,130px) 0 clamp(100px,10vw,120px);transform-origin:50% 0;will-change:transform}
+.dial-grid{display:grid;gap:40px;align-items:center}
+.dial-copy{display:grid;gap:16px;align-content:start}
+.dial-copy > p{color:var(--soft);font-size:var(--s-lead);max-width:30rem}
+.steps{display:grid;gap:10px;margin-top:10px;counter-reset:s}
+.steps li{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:18px;border:1px solid var(--line);color:var(--muted);transition:color .3s ease,border-color .3s ease,background .3s ease}
+.steps li b{display:grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--line-2);font:700 15px/1 var(--wide);flex:none;transition:background .3s ease,color .3s ease}
+.steps li.on{color:var(--ink);border-color:rgba(41,168,224,.45);background:rgba(41,168,224,.07)}
+.steps li.on b{background:var(--blue);color:var(--blue-ink);border-color:var(--blue)}
+.handset{position:relative;justify-self:center;width:min(100%,370px);padding:26px 22px 26px;border-radius:44px 44px 56px 56px;background:linear-gradient(180deg,#1b2128,#0b0e11 60%);border:1px solid rgba(255,255,255,.1);box-shadow:inset 0 2px 0 rgba(255,255,255,.08),0 50px 90px -40px rgba(0,0,0,.95),0 0 0 6px #07090b,0 0 0 7px rgba(255,255,255,.06);margin-top:70px} /* taste-skill-ignore */
+.antenna{position:absolute;bottom:100%;inset-inline-end:28%;width:18px;height:76px;border-radius:9px 9px 0 0;background:linear-gradient(90deg,#0b0e11,#2a323a 50%,#0b0e11);border:1px solid rgba(255,255,255,.1);border-bottom:0} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+html[dir="rtl"] .antenna{inset-inline-end:auto;inset-inline-start:28%}
+.antenna .pulse{position:absolute;left:50%;top:0;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%}
+html:not(.still) .antenna .pulse{animation:emit 2.4s ease-out infinite}
+@keyframes emit{0%{box-shadow:0 0 0 0 rgba(41,168,224,.6),0 0 0 0 rgba(41,168,224,.4)}100%{box-shadow:0 0 0 30px rgba(41,168,224,0),0 0 0 60px rgba(41,168,224,0)}} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+.lcd{border-radius:16px;background:linear-gradient(180deg,#d6f0fa,var(--ice) 60%,#a9d8ec);color:#0b2430;padding:12px 14px 12px;min-height:178px;display:grid;grid-template-rows:auto 1fr auto;gap:8px;box-shadow:inset 0 0 0 2px rgba(0,0,0,.35),inset 0 6px 16px rgba(0,0,0,.18),0 0 26px rgba(120,210,245,.25)} /* taste-skill-ignore: the backlit screen */
+.lcd-top{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700}
+.lbars{display:flex;align-items:flex-end;gap:2px;height:13px;direction:ltr}
+.lbars i{width:3px;background:#0b2430;border-radius:1px}
+.lbars i:nth-child(1){height:20%}.lbars i:nth-child(2){height:40%}.lbars i:nth-child(3){height:60%}.lbars i:nth-child(4){height:80%}.lbars i:nth-child(5){height:100%}
+.lstat{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lmsg{font:500 18px/1.4 var(--text);min-height:3.6em}
+.lmsg::after{content:"";display:inline-block;width:9px;height:1.1em;margin-inline-start:2px;vertical-align:-.15em;background:#0b2430}
+html:not(.still) .lmsg::after{animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.lnum{font:700 20px/1 var(--wide);font-stretch:112%;letter-spacing:.04em;text-align:center}
+.model{display:grid;gap:6px;margin:16px 4px 0;font-size:14px;color:var(--muted)}
+.model input{font:500 16px/1.2 var(--text);color:var(--ink);background:#06080a;border:1px solid var(--line-2);border-radius:12px;padding:11px 14px;width:100%}
+.model input:focus{outline:2px solid var(--blue);outline-offset:1px}
+.keys{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 12px;margin-top:16px}
+.key{position:relative;display:grid;place-items:center;align-content:center;gap:1px;min-height:58px;border-radius:999px;background:#e4e9ed;color:#0b0e11;border-bottom:3px solid #6b747c;filter:drop-shadow(0 5px 6px rgba(0,0,0,.45));transition:transform .12s var(--ease),border-width .12s var(--ease),background .2s ease;text-decoration:none} /* taste-skill-ignore: the logo keypad pills */
+.key b{font:900 17px/1 var(--wide)}
+.key span{font-size:13.5px;line-height:1.1;font-weight:500;text-align:center}
+.key:active{transform:translateY(2px);border-bottom-width:1px}
+.key[aria-pressed="true"]{background:var(--blue);color:var(--blue-ink);border-bottom-color:#0e5f88;filter:drop-shadow(0 0 12px rgba(41,168,224,.6))} /* taste-skill-ignore */
+.key.zero{opacity:.35}
+.key.green{background:var(--go);border-bottom-color:#1f7c43}
+.key.red{background:var(--stop);color:#fff;border-bottom-color:#8f2b24}
+.key svg{width:22px;height:22px;fill:currentColor}
+.key.red svg{fill:none}
+html:not(.still) .key.green.ready{animation:nudge 2.6s var(--ease) 1}
+@keyframes nudge{0%,100%{transform:none}20%{transform:translateY(-3px) scale(1.05)}40%{transform:none}}
+@media (min-width:900px){.dial-grid{grid-template-columns:1fr 400px;gap:70px}}
+
+/* ============================================================ REVIEWS: lands over the phone */
+.revs{position:relative;z-index:2;margin-top:-56px;background:#131a21;border-radius:36px 36px 0 0;box-shadow:0 -30px 60px -20px rgba(0,0,0,.7);padding:clamp(60px,8vw,100px) 0 clamp(60px,8vw,100px)} /* taste-skill-ignore */
+.rev-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 30px;margin-bottom:34px}
+.rev-score{display:flex;align-items:center;gap:14px;color:var(--soft)}
+.odo{display:inline-flex;direction:ltr;font:900 1em/1 var(--wide);font-variant-numeric:tabular-nums}
+.odo.big{font-size:clamp(2.4rem,1.6rem + 3vw,4rem);color:var(--ink);font-stretch:112%}
+.odo .d{display:inline-block;height:1em;overflow:hidden}
+.odo .d > span{display:block;transition:transform 1.4s var(--ease)}
+.odo .d b{display:block;height:1em;font-weight:inherit}
+.odo .d b::before{content:attr(data-n)}
+.drift{overflow:hidden;padding:10px 0 20px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+.drow{display:flex;gap:16px;width:max-content;direction:ltr}
+html:not(.still) .drow{animation:drift 70s linear infinite}
+@media (hover:hover){html:not(.still) .drift:hover .drow{animation-play-state:paused}}
+@keyframes drift{to{transform:translateX(-50%)}}
+html.still .drift,html:not(.js) .drift{overflow-x:auto;-webkit-mask-image:none;mask-image:none;scroll-snap-type:x mandatory;padding-inline:var(--m)}
+html.still .drow,html:not(.js) .drow{direction:inherit}
+.rv{flex:none;width:min(82vw,360px);margin:0;padding:22px 22px 20px;border-radius:22px;background:var(--card);border:1px solid var(--line);display:grid;gap:12px;align-content:start;scroll-snap-align:center;direction:rtl}
+html[lang="en"] .rv{direction:ltr}
+.rv p{font-size:16.5px;line-height:1.55;color:var(--ink)}
+.rv footer{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline;color:var(--soft);font-size:15px;font-weight:700}
+.rv .tr{font-weight:400;font-size:13px;color:var(--muted)}
+.faq{margin-top:clamp(50px,7vw,90px);display:grid;gap:10px;max-width:860px}
+.faq h2{margin-bottom:14px}
+.faq details{border-radius:18px;border:1px solid var(--line);background:rgba(255,255,255,.02)}
+.faq summary{list-style:none;cursor:pointer;padding:18px 20px;font-weight:700;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:400 26px/1 var(--wide);color:var(--blue);transition:transform .25s var(--ease)}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 20px 18px;color:var(--soft)}
+
+/* ============================================================ VISIT */
+.visit{position:relative;background:#131a21;padding:0 0 clamp(70px,9vw,120px)}
+.cbento{display:grid;gap:14px;grid-template-columns:1fr}
+.cb{position:relative;border-radius:var(--r);background:var(--card);border:1px solid var(--line);padding:20px 22px;display:grid;gap:8px;align-content:start;text-decoration:none;overflow:hidden}
+.cb::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(260px circle at var(--mx,-400px) var(--my,-400px),rgba(41,168,224,.14),transparent 60%)} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+.cb .k{font-size:14px;color:var(--muted)}
+.cb .v{font:400 1.5rem/1.2 var(--disp)}
+html[lang="en"] .cb .v{font-family:var(--wide);font-weight:700;font-size:1.3rem}
+.cb .s{color:var(--soft);font-size:16px}
+.cb.map{padding:0;min-height:300px}
+.cb.map iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:invert(.9) hue-rotate(180deg) saturate(.7) brightness(.95)}
+.cb.call{background:linear-gradient(160deg,#1a4c66,#123447);border-color:rgba(41,168,224,.4)} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+.cb.call .v{font:900 clamp(1.7rem,1.3rem + 1.4vw,2.4rem)/1 var(--wide);font-stretch:112%}
+html[dir="rtl"] .cb.call .v{text-align:right}
+.cb .go{display:inline-flex;align-items:center;gap:8px;margin-top:8px;width:max-content;padding:9px 16px;border-radius:999px;background:var(--blue);color:var(--blue-ink);font-weight:700}
+.cb .go svg{width:16px;height:16px;fill:currentColor}
+.cb table{border-collapse:collapse;width:100%;font-size:16px}
+.cb td{padding:6px 0;border-bottom:1px solid var(--line);color:var(--soft)}
+.cb td:last-child{text-align:end;color:var(--ink)}
+.cb tr.today td{color:var(--blue);font-weight:700}
+.cb.ig{grid-auto-flow:column;justify-content:start;align-items:center;gap:12px}
+.cb.ig svg{width:28px;height:28px;color:var(--blue)}
+@media (hover:hover){.cb.call:hover,.cb.addr:hover,.cb.ig:hover{border-color:rgba(41,168,224,.5)}}
+@media (min-width:800px){
+  .cbento{grid-template-columns:repeat(4,1fr)}
+  .cb.map{grid-column:span 2;grid-row:span 2;min-height:380px}
+  .cb.hrs{grid-row:span 2}
+  .cb.ig{grid-column:span 4}
+}
+
+/* ============================================================ FOOTER: the logo's crescent rises as a horizon */
+.foot{position:relative;overflow:hidden;background:#07090c;padding:clamp(90px,12vw,150px) 0 calc(40px + env(safe-area-inset-bottom))}
+.foot-horizon{position:absolute;inset-inline:-25%;top:0;height:100%;pointer-events:none}
+.foot-horizon i{position:absolute;left:0;right:0;top:calc(60px + var(--rise,0px));height:200vw;border-radius:50%;border-top:2px solid rgba(120,210,245,.7);box-shadow:0 -24px 80px -10px rgba(41,168,224,.45);background:radial-gradient(50% 12% at 50% 0%,rgba(41,168,224,.14),transparent 70%)} /* taste-skill-ignore */
+.foot-in{position:relative;display:grid;gap:16px;justify-items:center;text-align:center}
+.brand-plate.big{border-radius:20px;padding:12px 20px}
+.brand-plate.big img{width:min(46vw,220px)}
+.f-line{color:var(--soft)}
+.credits{color:var(--muted);font-size:14px;max-width:62rem}
+.credits a{color:var(--soft)}
+
+/* ============================================================ sticky handset on phones */
+.sticky{display:none}
+@media (max-width:899px){
+  body{padding-bottom:calc(84px + env(safe-area-inset-bottom))}
+  .sticky{position:fixed;z-index:45;left:50%;bottom:calc(12px + env(safe-area-inset-bottom));transform:translateX(-50%);display:flex;align-items:center;gap:12px;padding:10px 20px 10px 16px;min-height:58px;border-radius:22px 22px 26px 26px;background:#12171c;border:1px solid rgba(255,255,255,.14);filter:drop-shadow(0 12px 18px rgba(0,0,0,.7));color:var(--ink);text-decoration:none;white-space:nowrap;transition:transform .14s var(--ease)} /* taste-skill-ignore */
+  .sticky:active{transform:translateX(-50%) scale(.97)}
+  .s-ant{position:absolute;bottom:calc(100% + 1px);inset-inline-end:26px;width:9px;height:18px;border-radius:5px 5px 0 0;background:#1d242b;border:1px solid rgba(255,255,255,.12);border-bottom:0}
+  .s-bars{display:flex;align-items:flex-end;gap:2px;height:16px;direction:ltr}
+  .s-bars i{width:4px;border-radius:1px;background:var(--blue)}
+  .s-bars i:nth-child(1){height:25%}.s-bars i:nth-child(2){height:50%}.s-bars i:nth-child(3){height:75%}.s-bars i:nth-child(4){height:100%}
+  html:not(.still) .s-bars i{animation:bar 2.4s ease-in-out 3}
+  .s-bars i:nth-child(2){animation-delay:.15s!important}.s-bars i:nth-child(3){animation-delay:.3s!important}.s-bars i:nth-child(4){animation-delay:.45s!important}
+  .s-txt{font-weight:700}
+  .sticky .num{color:var(--ice);font-weight:500}
+}
+@keyframes bar{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ---- round 2 fixes */
+.sigseam{height:34svh}
+.sigseam i{background:linear-gradient(180deg,#1b2733,var(--bg-2) 70%);box-shadow:0 -2px 0 rgba(120,210,245,.75),0 -18px 40px -12px rgba(41,168,224,.45)} /* taste-skill-ignore */
+html.js:not(.still) .call-out:not(.on){opacity:0;pointer-events:none}
+.call-out{transition:opacity .3s ease}
+.keys{direction:ltr}
+html[dir="rtl"] .key span{direction:rtl}
+.drift{direction:ltr}
+.cb.call .v{white-space:nowrap;font-size:clamp(1.5rem,1.1rem + 1.2vw,2.1rem)}
+@media (min-width:900px){
+  html.js:not(.still) .iris-pin{display:grid;grid-template-columns:1fr 1fr;align-items:center;width:min(1240px,100%);margin-inline:auto}
+  html.js:not(.still) .iris-head{padding:0 var(--m);align-self:center}
+  html.js:not(.still) .lens{position:relative;inset:auto;height:calc(100svh - 120px);margin:90px var(--m) 30px 0;border-radius:var(--r);overflow:hidden;box-shadow:0 0 0 1px var(--line-2)} /* taste-skill-ignore: owner reference (SETI / horizonx glow, the sign's chrome) */
+  html.js:not(.still)[dir="rtl"] .lens{margin:90px 0 30px var(--m)}
+  html.still .iris-pin,html:not(.js) .iris-pin{display:grid;grid-template-columns:1fr 1fr;align-items:center;width:min(1240px,100%);margin-inline:auto;padding-block:80px}
+  html.still .iris-head,html:not(.js) .iris-head{padding-top:0}
+  html.still .lens,html:not(.js) .lens{height:80svh;margin:0 var(--m)}
+}
+
+@media (max-width:899px){.sticky{transition:transform .35s var(--ease),opacity .25s ease}.sticky.away{opacity:0;transform:translateX(-50%) translateY(20px);pointer-events:none}}
